@@ -50,7 +50,7 @@ export default function ContactSection() {
         [name]: (e.target as HTMLInputElement).checked 
       }));
     } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
     }
     
     // Clear error when user starts typing
@@ -101,19 +101,19 @@ export default function ContactSection() {
     setTimeout(() => {
       // 95% chance of success
       if (Math.random() > 0.05) {
-        setFormStatus('success');
+      setFormStatus('success');
         
         // Reset form after success
-        setTimeout(() => {
-          setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            message: '',
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
             subscribe: false,
-          });
-          setFormStatus('idle');
-        }, 3000);
+        });
+        setFormStatus('idle');
+      }, 3000);
       } else {
         setFormStatus('error');
       }
@@ -235,8 +235,8 @@ export default function ContactSection() {
             We're here to help
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Have questions about our platform or need personalized assistance? Our team is ready to help you get started on your learning journey.
-          </p>
+              Have questions about our platform or need personalized assistance? Our team is ready to help you get started on your learning journey.
+            </p>
         </motion.div>
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -270,8 +270,8 @@ export default function ContactSection() {
                 >
                   Our team will get back to you within 24 hours
                 </motion.p>
-              </div>
-              
+            </div>
+            
               {/* Success message */}
               <AnimatePresence>
                 {formStatus === 'success' && (
@@ -284,97 +284,97 @@ export default function ContactSection() {
                   >
                     <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-green-100 rounded-full text-green-600">
                       <FiCheck className="w-5 h-5" />
-                    </div>
+              </div>
                     <div className="ml-3">
                       <h4 className="text-sm font-medium text-green-800">Message Sent Successfully!</h4>
                       <p className="mt-1 text-sm text-green-700">
                         Thank you for contacting us. We've received your message and will respond shortly.
                       </p>
-                    </div>
+            </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-              
+          
               {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
                       placeholder="John Doe"
-                      value={formData.name}
-                      onChange={handleChange}
+                  value={formData.name}
+                  onChange={handleChange}
                       className={`w-full px-4 py-3 rounded-lg border ${formErrors.name ? 'border-red-300' : 'border-gray-200'} focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200`}
-                      required
-                    />
+                  required
+                />
                     {formErrors.name && (
                       <p className="text-sm text-red-500 mt-1">{formErrors.name}</p>
                     )}
-                  </div>
-                  
+              </div>
+              
                   <div className="space-y-2">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
                       placeholder="johndoe@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
+                  value={formData.email}
+                  onChange={handleChange}
                       className={`w-full px-4 py-3 rounded-lg border ${formErrors.email ? 'border-red-300' : 'border-gray-200'} focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200`}
-                      required
-                    />
+                  required
+                />
                     {formErrors.email && (
                       <p className="text-sm text-red-500 mt-1">{formErrors.email}</p>
                     )}
                   </div>
-                </div>
-                
+              </div>
+              
                 <div className="space-y-2">
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
-                    Subject
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
+                  Subject
+                </label>
+                <select
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                     className={`w-full px-4 py-3 rounded-lg border ${formErrors.subject ? 'border-red-300' : 'border-gray-200'} focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-white`}
-                    required
-                  >
+                  required
+                >
                     <option value="" disabled>Select a subject</option>
-                    <option value="General Question">General Question</option>
-                    <option value="Technical Support">Technical Support</option>
-                    <option value="Billing Inquiry">Billing Inquiry</option>
-                    <option value="Partnership Opportunity">Partnership Opportunity</option>
-                    <option value="Career Information">Career Information</option>
-                  </select>
+                  <option value="General Question">General Question</option>
+                  <option value="Technical Support">Technical Support</option>
+                  <option value="Billing Inquiry">Billing Inquiry</option>
+                  <option value="Partnership Opportunity">Partnership Opportunity</option>
+                  <option value="Career Information">Career Information</option>
+                </select>
                   {formErrors.subject && (
                     <p className="text-sm text-red-500 mt-1">{formErrors.subject}</p>
                   )}
-                </div>
-                
+              </div>
+              
                 <div className="space-y-2">
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
                     placeholder="How can we help you?"
-                    value={formData.message}
-                    onChange={handleChange}
+                  value={formData.message}
+                  onChange={handleChange}
                     rows={5}
                     className={`w-full px-4 py-3 rounded-lg border ${formErrors.message ? 'border-red-300' : 'border-gray-200'} focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200`}
-                    required
-                  ></textarea>
+                  required
+                ></textarea>
                   {formErrors.message && (
                     <p className="text-sm text-red-500 mt-1">{formErrors.message}</p>
                   )}
@@ -412,14 +412,14 @@ export default function ContactSection() {
                   <label htmlFor="subscribe" className="ml-2 block text-sm text-gray-600">
                     I'd like to receive updates about new courses and features
                   </label>
-                </div>
-                
+              </div>
+              
                 <button
                   type="submit"
                   disabled={formStatus === 'submitting' || formStatus === 'success'}
                   className={`w-full py-4 px-4 flex items-center justify-center text-white font-medium rounded-xl transition-all ${
                     formStatus === 'success' 
-                      ? 'bg-green-600 hover:bg-green-700' 
+                      ? 'bg-green-600 hover:bg-green-700'
                       : 'bg-indigo-600 hover:bg-indigo-700'
                   } ${formStatus === 'submitting' || formStatus === 'success' ? 'opacity-90 cursor-not-allowed' : ''}`}
                 >

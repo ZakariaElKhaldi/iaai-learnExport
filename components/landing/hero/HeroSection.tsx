@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, ReactNode } from 'react';
+import React, { useState, useEffect, useRef, ReactNode, lazy, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } from 'framer-motion'; // Added useReducedMotion
@@ -9,7 +9,9 @@ import { FaRocket, FaBookOpen, FaStar, FaChevronLeft, FaChevronRight, FaApple, F
 import { SiMeta, SiOracle, SiTesla, SiAdobe, SiNetflix, SiShopify } from 'react-icons/si';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplineScene } from '@/components/ui/splite';
+// Lazy load the SplineScene component
+const SplineScene = lazy(() => import('@/components/ui/splite').then(module => ({ default: module.SplineScene })));
+import type { Application as SplineApplication } from '@splinetool/runtime';
 
 // Register the ScrollTrigger plugin (assuming it's used elsewhere or for future advanced scroll effects)
 gsap.registerPlugin(ScrollTrigger);
@@ -276,7 +278,7 @@ export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false); // For initial mount animation
   const shouldReduceMotion = useReducedMotion();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const splineRef = useRef(null);
+  const splineRef = useRef<SplineApplication | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -288,90 +290,60 @@ export default function HeroSection() {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", shouldReduceMotion ? "0%" : "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]); // Fade out a bit later
 
-  // Handle mouse movement for the 3D model - make it more subtle
-  const handleSplineMouseMove = (e: MouseEvent) => {
-    if (shouldReduceMotion) return;
-    
-    const { clientX, clientY } = e;
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-    
-    // Calculate normalized coordinates (-1 to 1) with reduced sensitivity
-    const x = ((clientX / windowWidth) * 2 - 1) * 0.3; // Reduced by factor of 0.3
-    const y = (-((clientY / windowHeight) * 2 - 1)) * 0.3; // Reduced by factor of 0.3
-    
-    setMousePosition({ x, y });
-    
-    // If we have access to the Spline API, we can directly control it
-    if (splineRef.current) {
-      try {
-        // @ts-ignore - Spline API methods
-        // For a cube model, rotating would be more appropriate than lookAt
-        if (splineRef.current.rotate) {
-          // Rotate the cube based on mouse position with more subtle movement
-          splineRef.current.rotate(0, y * 0.2, -x * 0.2); // Reduced rotation factor
-        } else if (splineRef.current.lookAt) {
-          // Fallback to lookAt if rotate isn't available, with more subtle movement
-          splineRef.current.lookAt(x * 2, y * 2, 10); // Increased z-value and reduced x,y factors
-        }
-      } catch (error) {
-        // Silent fail if the method isn't available
-      }
-    }
-  };
-
-  // Add easing to mouse tracking for 3D model
+  // Add a direct mouse tracking implementation
   useEffect(() => {
     if (shouldReduceMotion) return;
     
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
-    let requestId: number | null = null;
-    const easing = 0.05; // Lower value for smoother, slower movement
-    
-    const smoothMouseMove = (e: MouseEvent) => {
+    // Direct mouse tracking that manually updates the 3D object
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!splineRef.current) return;
+      
       const { clientX, clientY } = e;
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
       
-      // Calculate normalized coordinates with reduced intensity
-      targetX = ((clientX / windowWidth) * 2 - 1) * 0.3;
-      targetY = (-((clientY / windowHeight) * 2 - 1)) * 0.3;
-    };
-    
-    const updateSplinePosition = () => {
-      // Apply easing to create smoother movement
-      currentX += (targetX - currentX) * easing;
-      currentY += (targetY - currentY) * easing;
+      // Calculate normalized coordinates (-1 to 1)
+      const x = (clientX / windowWidth) * 2 - 1;
+      const y = -((clientY / windowHeight) * 2 - 1);
       
-      if (splineRef.current) {
-        try {
-          // @ts-ignore
-          if (splineRef.current.rotate) {
-            splineRef.current.rotate(0, currentY * 0.2, -currentX * 0.2);
-          } else if (splineRef.current.lookAt) {
-            splineRef.current.lookAt(currentX * 2, currentY * 2, 10);
-          }
-        } catch (error) {
-          // Silent fail
+      try {
+        // Direct method: use emitEvent to trigger the lookAt event with x,y coordinates
+        const splineApp = splineRef.current;
+        
+        // The ID of the 3D text object from the Spline scene
+        const objectId = '71b6b01c-ebeb-4a22-833b-95bc50c1e036';
+        
+        // Option 1: Try setting a custom event that includes mouse coordinates
+        if (splineApp.setVariable) {
+          splineApp.setVariable('mouseX', x);
+          splineApp.setVariable('mouseY', y);
         }
+        
+        // Option 2: Try to emit a lookAt event with coordinates
+        if (splineApp.emitEvent) {
+          splineApp.emitEvent('lookAt', objectId);
+        }
+        
+        // Option 3: Try direct property manipulation if available
+        const object = splineApp.findObjectById && splineApp.findObjectById(objectId);
+        if (object && object.rotation) {
+          // Adjust rotation based on mouse position
+          object.rotation.y = x * 0.5;
+          object.rotation.x = y * 0.5;
+        }
+      } catch (error) {
+        // Silent fail - don't log errors to avoid console spam
       }
-      
-      requestId = requestAnimationFrame(updateSplinePosition);
     };
     
-    window.addEventListener('mousemove', smoothMouseMove);
-    requestId = requestAnimationFrame(updateSplinePosition);
+    // Add event listener for mouse movement
+    window.addEventListener('mousemove', handleMouseMove);
     
     return () => {
-      window.removeEventListener('mousemove', smoothMouseMove);
-      if (requestId) cancelAnimationFrame(requestId);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [shouldReduceMotion]);
-  
-  // Remove the old mouse tracking code since we replaced it with the smooth version
+  }, [shouldReduceMotion, splineRef.current]);
+
   useEffect(() => {
     setIsVisible(true); // Trigger entrance animations
 
@@ -425,27 +397,45 @@ export default function HeroSection() {
       className="relative w-full bg-gradient-to-br from-gray-900 via-indigo-950 to-purple-900 py-24 md:py-32 overflow-x-clip" // overflow-x-clip to prevent horizontal scroll from intense blurs
       aria-labelledby="hero-headline" // For better screen reader context
     >
-      {/* 3D Model Background */}
-      <div className="absolute inset-0 w-full h-full z-0 opacity-60" aria-hidden="true">
-        <SplineScene 
-          scene="https://prod.spline.design/R0R85zmHiTGs2qls/scene.splinecode" 
-          className="w-full h-full"
-          // @ts-ignore - Passing ref and custom props to control the model
-          onLoad={(spline) => {
-            splineRef.current = spline;
-            console.log("Spline scene loaded", spline);
-            // Initial orientation
-            try {
-              if (spline.rotate) {
-                spline.rotate(0, 0, 0);
-              } else if (spline.lookAt) {
-                spline.lookAt(0, 0, 5);
-              }
-            } catch (error) {
-              console.error("Could not initialize 3D model orientation", error);
-            }
-          }}
-        />
+      {/* 3D Model Background - make it bigger, raised up, and centered */}
+      <div className="absolute inset-0 w-full h-full z-0 opacity-55 flex items-center justify-center" 
+           style={{ transform: 'translateY(-300px) translateX(200px)' }} 
+           aria-hidden="true">
+        <div className="w-full h-[140%] scale-150">
+          <Suspense fallback={
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="w-20 h-20 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"></div>
+            </div>
+          }>
+            <SplineScene 
+              scene="https://prod.spline.design/R0R85zmHiTGs2qls/scene.splinecode" 
+              className="w-full h-full"
+              // @ts-ignore - We need to ignore TypeScript for the onLoad prop
+              onLoad={(splineApp) => {
+                // Store the spline application reference
+                splineRef.current = splineApp;
+                console.log("Spline scene loaded successfully!");
+                
+                // Log available methods to help with debugging
+                try {
+                  console.log("Available methods:", Object.keys(splineApp || {}));
+                  
+                  // Try to find and log the 3D text object
+                  const textObject = splineApp.findObjectById && 
+                    splineApp.findObjectById('71b6b01c-ebeb-4a22-833b-95bc50c1e036');
+                  
+                  if (textObject) {
+                    console.log("Found text object:", textObject);
+                  } else {
+                    console.log("Text object not found");
+                  }
+                } catch (error) {
+                  console.error("Error inspecting Spline object:", error);
+                }
+              }}
+            />
+          </Suspense>
+        </div>
       </div>
 
       {/* Background elements */}
