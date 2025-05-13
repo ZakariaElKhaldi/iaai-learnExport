@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedText } from '@/components/landing/animations';
-import { Tooltip, Button, Badge } from '@nextui-org/react';
-import { FiCheck, FiX, FiInfo, FiArrowRight } from 'react-icons/fi';
+import { Button, Badge } from '@nextui-org/react';
+import { FiCheck, FiX, FiArrowRight } from 'react-icons/fi';
 
 // Define price plan type
 interface PricePlan {
@@ -17,7 +17,6 @@ interface PricePlan {
   features: {
     text: string;
     included: boolean;
-    tooltip?: string;
   }[];
   popular: boolean;
   ctaText: string;
@@ -63,43 +62,35 @@ export default function PricingSection() {
       features: [
         { 
           text: "Access to 50+ courses", 
-          included: true,
-          tooltip: "Includes fundamental courses across multiple tech disciplines"
+          included: true
         },
         { 
           text: "Interactive coding exercises", 
-          included: true,
-          tooltip: "Hands-on practice with instant feedback"
+          included: true
         },
         { 
           text: "Basic practice projects", 
-          included: true,
-          tooltip: "Build simple portfolio projects with guided instructions"
+          included: true
         },
         { 
           text: "Community forum access", 
-          included: true,
-          tooltip: "Connect with fellow learners and get help"
+          included: true
         },
         { 
           text: "1-on-1 Expert consultations", 
-          included: false,
-          tooltip: "Available with Pro and Enterprise plans"
+          included: false
         },
         { 
           text: "Career coaching sessions", 
-          included: false,
-          tooltip: "Available with Pro and Enterprise plans"
+          included: false
         },
         { 
           text: "Advanced project reviews", 
-          included: false,
-          tooltip: "Available with Pro and Enterprise plans"
+          included: false
         },
         { 
           text: "Personalized learning paths", 
-          included: false,
-          tooltip: "Available with Enterprise plan"
+          included: false
         },
       ],
       popular: false,
@@ -122,43 +113,35 @@ export default function PricingSection() {
       features: [
         { 
           text: "Access to all 200+ courses", 
-          included: true,
-          tooltip: "Full access to our entire course library"
+          included: true
         },
         { 
           text: "Interactive coding exercises", 
-          included: true,
-          tooltip: "Hands-on practice with instant feedback"
+          included: true
         },
         { 
           text: "Advanced practice projects", 
-          included: true,
-          tooltip: "Build complex portfolio-ready projects"
+          included: true
         },
         { 
           text: "Community forum access", 
-          included: true,
-          tooltip: "Premium status in our community forums"
+          included: true
         },
         { 
           text: "3 monthly 1-on-1 consultations", 
-          included: true,
-          tooltip: "Schedule sessions with experts of your choice"
+          included: true
         },
         { 
           text: "Monthly career coaching", 
-          included: true,
-          tooltip: "One session per month with a career advisor"
+          included: true
         },
         { 
           text: "Project code reviews", 
-          included: true,
-          tooltip: "Get professional feedback on your work"
+          included: true
         },
         { 
           text: "Personalized learning paths", 
-          included: false,
-          tooltip: "Available with Enterprise plan"
+          included: false
         },
       ],
       popular: true,
@@ -181,43 +164,35 @@ export default function PricingSection() {
       features: [
         { 
           text: "Access to all 200+ courses", 
-          included: true,
-          tooltip: "Full access for all team members"
+          included: true
         },
         { 
           text: "Interactive coding exercises", 
-          included: true,
-          tooltip: "Enhanced team exercises and challenges"
+          included: true
         },
         { 
           text: "Advanced practice projects", 
-          included: true,
-          tooltip: "Team collaboration on complex projects"
+          included: true
         },
         { 
           text: "Priority community support", 
-          included: true,
-          tooltip: "Dedicated community managers for your team"
+          included: true
         },
         { 
           text: "Unlimited 1-on-1 consultations", 
-          included: true,
-          tooltip: "Book as many expert sessions as needed"
+          included: true
         },
         { 
           text: "Weekly career coaching", 
-          included: true,
-          tooltip: "Regular career development for team members"
+          included: true
         },
         { 
           text: "Comprehensive code reviews", 
-          included: true,
-          tooltip: "Detailed reviews with actionable feedback"
+          included: true
         },
         { 
           text: "Custom learning paths", 
-          included: true,
-          tooltip: "Tailored learning journeys for each team member"
+          included: true
         },
       ],
       popular: false,
@@ -355,18 +330,18 @@ export default function PricingSection() {
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
               className={`
                 bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-300
-                ${plan.popular ? `border-2 border-${plan.color}-500 relative md:scale-105 md:-translate-y-1` : 'border border-gray-100'}
-                hover:shadow-2xl hover:shadow-${plan.color}-100
+                ${plan.popular ? 'border-2 border-indigo-500 relative md:scale-105 md:-translate-y-1' : 'border border-gray-100'}
+                hover:shadow-2xl hover:shadow-indigo-200
               `}
             >
               {plan.popular && (
-                <div className={`absolute top-0 right-0 bg-${plan.color}-500 text-white text-xs font-bold px-3 py-1.5 uppercase`}>
+                <div className="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 uppercase">
                   Most Popular
                 </div>
               )}
               
               <div className="p-6 md:p-8">
-                <div className={`w-12 h-12 rounded-lg bg-${plan.color}-100 text-${plan.color}-600 flex items-center justify-center mb-4`}>
+                <div className="w-12 h-12 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
                   {plan.icon}
                 </div>
                 
@@ -375,8 +350,8 @@ export default function PricingSection() {
                 
                 <div className="mt-6 mb-8">
                   <div className="flex items-end">
-                    <span className={`text-4xl font-bold text-${plan.color}-600`}>$</span>
-                    <span className={`text-5xl font-bold text-${plan.color}-600 ml-1`}>
+                    <span className="text-4xl font-bold text-indigo-600">$</span>
+                    <span className="text-5xl font-bold text-indigo-600 ml-1">
                       {animatePrice ? (
                         <AnimatedPrice value={isYearly ? plan.price.yearly : plan.price.monthly} />
                       ) : (
@@ -399,7 +374,7 @@ export default function PricingSection() {
                   {plan.features.map((feature, fIdx) => (
                     <li key={fIdx} className="flex items-start">
                       {feature.included ? (
-                        <div className={`mt-0.5 w-5 h-5 rounded-full bg-${plan.color}-100 text-${plan.color}-600 flex-shrink-0 flex items-center justify-center`}>
+                        <div className="mt-0.5 w-5 h-5 rounded-full bg-indigo-100 text-indigo-600 flex-shrink-0 flex items-center justify-center">
                           <FiCheck className="w-3 h-3" />
                         </div>
                       ) : (
@@ -410,13 +385,6 @@ export default function PricingSection() {
                       <span className={`ml-2 ${feature.included ? 'text-gray-700' : 'text-gray-400'}`}>
                         {feature.text}
                       </span>
-                      {feature.tooltip && (
-                        <Tooltip content={feature.tooltip} placement="right">
-                          <button className="ml-1.5 text-gray-400 hover:text-gray-600">
-                            <FiInfo className="w-3.5 h-3.5" />
-                          </button>
-                        </Tooltip>
-                      )}
                     </li>
                   ))}
                 </ul>
@@ -427,7 +395,7 @@ export default function PricingSection() {
                   className={`
                     w-full py-6 rounded-xl font-medium text-md shadow-md
                     ${plan.popular 
-                      ? `bg-gradient-to-r from-${plan.color}-500 to-${plan.color}-600 text-white hover:shadow-lg hover:shadow-${plan.color}-200` 
+                      ? 'bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:shadow-lg hover:shadow-indigo-200' 
                       : 'bg-gray-100 hover:bg-gray-200 text-gray-800'
                     }
                   `}

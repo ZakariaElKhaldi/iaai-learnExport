@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Tooltip } from '@nextui-org/react';
 import { FiTrendingUp, FiUsers, FiAward, FiDollarSign } from 'react-icons/fi';
 
 interface Statistic {
@@ -160,41 +159,39 @@ export default function StatsSection() {
                 variants={itemVariants}
                 className="relative bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group transform hover:-translate-y-1 hover:shadow-lg border border-white/10"
               >
-                <Tooltip content={stat.description} placement="top" className="max-w-xs">
-                  <div className="text-center sm:text-left">
-                    {/* Icon with gradient background */}
-                    <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br to-white/10 from-white/5 group-hover:from-white/10 group-hover:to-white/5 transition-all duration-300">
-                      <div className={`w-8 h-8 rounded-md flex items-center justify-center bg-gradient-to-r ${stat.gradient}`}>
-                        {stat.icon}
-                      </div>
-                    </div>
-                    
-                    {/* Value with animated counter */}
-                    <h3 className={`text-4xl sm:text-5xl font-bold mb-1 ${stat.color} flex justify-center sm:justify-start items-baseline`}>
-                      {stat.value}
-                      <motion.span
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={countUp ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ duration: 0.5, delay: 0.1 * index }}
-                        className="ml-2 text-sm font-normal text-blue-300/70"
-                      >
-                        {stat.growth && <span className="flex items-center gap-1"><FiTrendingUp /> {stat.growth}</span>}
-                      </motion.span>
-                    </h3>
-                    
-                    <p className="text-gray-300 text-sm mb-2">{stat.label}</p>
-                    
-                    {/* Animated progress bar */}
-                    <div className="w-full bg-gray-700/30 h-1 rounded-full overflow-hidden mt-4">
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        animate={countUp ? { width: "100%" } : { width: 0 }}
-                        transition={{ duration: 1.5, delay: 0.2 * index, ease: "easeOut" }}
-                        className={`h-full bg-gradient-to-r ${stat.gradient}`}
-                      />
+                <div className="text-center sm:text-left">
+                  {/* Icon with gradient background */}
+                  <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br to-white/10 from-white/5 group-hover:from-white/10 group-hover:to-white/5 transition-all duration-300">
+                    <div className={`w-8 h-8 rounded-md flex items-center justify-center bg-gradient-to-r ${stat.gradient}`}>
+                      {stat.icon}
                     </div>
                   </div>
-                </Tooltip>
+                  
+                  {/* Value with animated counter */}
+                  <h3 className={`text-4xl sm:text-5xl font-bold mb-1 ${stat.color} flex justify-center sm:justify-start items-baseline`}>
+                    {stat.value}
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={countUp ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.5, delay: 0.1 * index }}
+                      className="ml-2 text-sm font-normal text-blue-300/70"
+                    >
+                      {stat.growth && <span className="flex items-center gap-1"><FiTrendingUp /> {stat.growth}</span>}
+                    </motion.span>
+                  </h3>
+                  
+                  <p className="text-gray-300 text-sm mb-2">{stat.label}</p>
+                  
+                  {/* Animated progress bar */}
+                  <div className="w-full bg-gray-700/30 h-1 rounded-full overflow-hidden mt-4">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={countUp ? { width: "100%" } : { width: 0 }}
+                      transition={{ duration: 1.5, delay: 0.2 * index, ease: "easeOut" }}
+                      className={`h-full bg-gradient-to-r ${stat.gradient}`}
+                    />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>

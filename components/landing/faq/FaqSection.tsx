@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Input, Chip, Button, Tooltip } from '@nextui-org/react';
+import { Input, Chip, Button } from '@nextui-org/react';
 import { FiSearch, FiHelpCircle, FiMessageCircle, FiArrowRight, FiCheck } from 'react-icons/fi';
 
 interface FaqItem {
@@ -593,19 +593,17 @@ export default function FaqSection() {
               >
                 Contact Support
               </Button>
-              <Tooltip content="Get an instant response from our help center">
-                <Button 
-                  as="a"
-                  href="/help" 
-                  variant="bordered"
-                  color="secondary"
-                  className="font-medium"
-                  endContent={<FiHelpCircle />}
-                  size="lg"
-                >
-                  Browse Help Center
-                </Button>
-              </Tooltip>
+              <Button 
+                as="a"
+                href="/help" 
+                variant="bordered"
+                color="secondary"
+                className="font-medium"
+                endContent={<FiHelpCircle />}
+                size="lg"
+              >
+                Browse Help Center
+              </Button>
             </div>
           </motion.div>
         </motion.div>
