@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } from 'framer-motion'; // Added useReducedMotion
 import { Button } from '@nextui-org/react';
-import { FaRocket, FaBookOpen, FaStar, FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Added Chevron icons
+import { FaRocket, FaBookOpen, FaStar, FaChevronLeft, FaChevronRight, FaApple, FaAmazon, FaWindows, FaGoogle, FaSpotify, FaLinkedin } from 'react-icons/fa';
+import { SiMeta, SiOracle, SiTesla, SiAdobe, SiNetflix, SiShopify } from 'react-icons/si';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -375,18 +376,19 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            <AnimatedText
-              text="Accelerate Your Tech Career Through Expert-Led Learning"
-              as="h1" // Changed to h1 for semantic correctness (main page heading)
-              id="hero-headline" // For aria-labelledby
-              className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-sky-300 to-indigo-300 leading-tight"
-              animationType="slide-up"
-              duration={shouldReduceMotion ? 0 : DURATION_NORMAL}
-              delay={shouldReduceMotion ? 0 : 0.2} // Slightly adjusted delay
-              staggerChildren={0.04}
-              words
-              ease="circOut"
-            />
+            <div id="hero-headline">
+              <AnimatedText
+                text="Accelerate Your Tech Career Through Expert-Led Learning"
+                as="h1" // Changed to h1 for semantic correctness (main page heading)
+                className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-sky-300 to-indigo-300 leading-tight"
+                animationType="slide-up"
+                duration={shouldReduceMotion ? 0 : DURATION_NORMAL}
+                delay={shouldReduceMotion ? 0 : 0.2} // Slightly adjusted delay
+                staggerChildren={0.04}
+                words
+                ease="circOut"
+              />
+            </div>
 
             <motion.p
               {...initialAnimProps(1)}
@@ -579,65 +581,126 @@ export default function HeroSection() {
 
         {/* Trusted companies section */}
         <motion.div
-          className="mt-28 md:mt-36 text-center pb-12" // Adjusted spacing
-          {...initialAnimProps(5)} // Staggered animation for this section
+          className="mt-28 md:mt-36 text-center relative overflow-hidden"
+          {...initialAnimProps(5)}
           aria-labelledby="trusted-by-heading"
         >
-          <h3 id="trusted-by-heading" className="text-gray-400 mb-8 text-lg font-medium">
+          {/* Subtle dividers */}
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+          
+          <h3 id="trusted-by-heading" className="text-gray-400 mb-12 text-xl font-medium">
             Trusted by professionals from global tech leaders
           </h3>
 
-          <div className="relative h-auto py-4 mx-auto max-w-6xl overflow-hidden"> {/* Increased max-width */}
+          <div className="mx-auto max-w-6xl px-4 pb-16 relative">
             {shouldReduceMotion ? (
-                // Static display for reduced motion
-                <div className="flex flex-wrap justify-center gap-x-16 gap-y-6">
-                    {['Google', 'Microsoft', 'Amazon', 'Meta', 'IBM', 'Oracle', 'Apple', 'Tesla', 'Spotify', 'Adobe', 'Netflix', 'Shopify'].map(company => (
-                        <div key={company} className="text-gray-400 text-lg font-semibold opacity-80">{company}</div>
-                    ))}
-                </div>
-            ) : (
-                // Marquee animation
-                <>
+              // Static grid for reduced motion preference
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 md:gap-12 items-center justify-items-center">
                 {[
-                    { id: 'marquee1', items: ['Google', 'Microsoft', 'Amazon', 'Meta', 'IBM', 'Oracle', 'Apple'], direction: 'left', offset: 0 },
-                    { id: 'marquee2', items: ['Tesla', 'Spotify', 'Adobe', 'Netflix', 'Shopify', 'Slack', 'Intel'], direction: 'right', offset: 'top-10 md:top-12' } // Adjusted offset
-                ].map(marquee => (
-                    <motion.div
-                        key={marquee.id}
-                        className={`flex absolute left-0 whitespace-nowrap ${marquee.offset || ''}`}
-                        animate={{ x: marquee.direction === 'left' ? [0, '-50%'] : ['-50%', 0] }}
-                        transition={{
-                            x: { duration: 30, repeat: Infinity, repeatType: "loop", ease: "linear" }
-                        }}
-                        aria-hidden="true" // Marquee is decorative, content repeated
-                    >
-                        {[...Array(3)].map((_, setIndex) => ( // Increased repetition for smoother loop with wider marquee
-                            <div key={`set-${marquee.id}-${setIndex}`} className="flex items-center">
-                                {marquee.items.map((company, index) => (
-                                    <div
-                                        key={`${marquee.id}-${setIndex}-${index}`}
-                                        className="mx-10 md:mx-14 text-gray-400/80 text-xl font-semibold opacity-70 hover:opacity-100 transition-opacity"
-                                    >
-                                        {company}
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
-                    </motion.div>
+                  { name: "Google", icon: <FaGoogle className="text-[#4285F4]" /> },
+                  { name: "Microsoft", icon: <FaWindows className="text-[#00A4EF]" /> },
+                  { name: "Amazon", icon: <FaAmazon className="text-[#FF9900]" /> },
+                  { name: "Meta", icon: <SiMeta className="text-[#0668E1]" /> },
+                  { name: "LinkedIn", icon: <FaLinkedin className="text-[#0077B5]" /> },
+                  { name: "Oracle", icon: <SiOracle className="text-[#F80000]" /> },
+                  { name: "Apple", icon: <FaApple className="text-white" /> },
+                  { name: "Tesla", icon: <SiTesla className="text-[#E82127]" /> },
+                  { name: "Spotify", icon: <FaSpotify className="text-[#1DB954]" /> },
+                  { name: "Adobe", icon: <SiAdobe className="text-[#FF0000]" /> },
+                  { name: "Netflix", icon: <SiNetflix className="text-[#E50914]" /> },
+                  { name: "Shopify", icon: <SiShopify className="text-[#7AB55C]" /> }
+                ].map((company, index) => (
+                  <div
+                    key={company.name}
+                    className="flex flex-col items-center justify-center w-full group"
+                  >
+                    <div className="text-4xl mb-2.5 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 transform">
+                      {company.icon}
+                    </div>
+                    <span className="text-gray-500 text-xs font-medium opacity-70 group-hover:opacity-100 group-hover:text-gray-300 transition-all duration-300">
+                      {company.name}
+                    </span>
+                  </div>
                 ))}
-                 {/* Visible list for screen readers, hidden visually when marquee is active */}
-                <div className="sr-only">
-                    Trusted by: Google, Microsoft, Amazon, Meta, IBM, Oracle, Apple, Tesla, Spotify, Adobe, Netflix, Shopify, Slack, Intel.
-                </div>
-                </>
+              </div>
+            ) : (
+              // Animated continuous carousel
+              <div className="w-full inline-flex flex-nowrap overflow-hidden">
+                {/* First set of items */}
+                <motion.div
+                  className="flex items-center space-x-16 md:space-x-24"
+                  animate={{ x: ["0%", "-100%"] }}
+                  transition={{
+                    x: { duration: 30, repeat: Infinity, ease: "linear", repeatType: "loop" }
+                  }}
+                  aria-hidden="true"
+                >
+                  {[
+                    { name: "Google", icon: <FaGoogle className="text-[#4285F4]" /> },
+                    { name: "Microsoft", icon: <FaWindows className="text-[#00A4EF]" /> },
+                    { name: "Amazon", icon: <FaAmazon className="text-[#FF9900]" /> },
+                    { name: "Meta", icon: <SiMeta className="text-[#0668E1]" /> },
+                    { name: "LinkedIn", icon: <FaLinkedin className="text-[#0077B5]" /> },
+                    { name: "Oracle", icon: <SiOracle className="text-[#F80000]" /> },
+                    { name: "Apple", icon: <FaApple className="text-white" /> },
+                    { name: "Tesla", icon: <SiTesla className="text-[#E82127]" /> },
+                    { name: "Spotify", icon: <FaSpotify className="text-[#1DB954]" /> },
+                    { name: "Adobe", icon: <SiAdobe className="text-[#FF0000]" /> },
+                    { name: "Netflix", icon: <SiNetflix className="text-[#E50914]" /> },
+                    { name: "Shopify", icon: <SiShopify className="text-[#7AB55C]" /> },
+                  ].map((company) => (
+                    <div key={company.name} className="flex flex-col items-center justify-center group flex-shrink-0">
+                      <div className="text-4xl mb-2.5 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 transform">
+                        {company.icon}
+                      </div>
+                      <span className="text-gray-400 text-xs font-medium whitespace-nowrap">
+                        {company.name}
+                      </span>
+                    </div>
+                  ))}
+                </motion.div>
+                
+                {/* Duplicate set of items for seamless looping */}
+                <motion.div
+                  className="flex items-center space-x-16 md:space-x-24"
+                  animate={{ x: ["0%", "-100%"] }}
+                  transition={{
+                    x: { duration: 30, repeat: Infinity, ease: "linear", repeatType: "loop" }
+                  }}
+                  aria-hidden="true"
+                >
+                  {[
+                    { name: "Google", icon: <FaGoogle className="text-[#4285F4]" /> },
+                    { name: "Microsoft", icon: <FaWindows className="text-[#00A4EF]" /> },
+                    { name: "Amazon", icon: <FaAmazon className="text-[#FF9900]" /> },
+                    { name: "Meta", icon: <SiMeta className="text-[#0668E1]" /> },
+                    { name: "LinkedIn", icon: <FaLinkedin className="text-[#0077B5]" /> },
+                    { name: "Oracle", icon: <SiOracle className="text-[#F80000]" /> },
+                    { name: "Apple", icon: <FaApple className="text-white" /> },
+                    { name: "Tesla", icon: <SiTesla className="text-[#E82127]" /> },
+                    { name: "Spotify", icon: <FaSpotify className="text-[#1DB954]" /> },
+                    { name: "Adobe", icon: <SiAdobe className="text-[#FF0000]" /> },
+                    { name: "Netflix", icon: <SiNetflix className="text-[#E50914]" /> },
+                    { name: "Shopify", icon: <SiShopify className="text-[#7AB55C]" /> },
+                  ].map((company) => (
+                    <div key={company.name} className="flex flex-col items-center justify-center group flex-shrink-0">
+                      <div className="text-4xl mb-2.5 opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 transform">
+                        {company.icon}
+                      </div>
+                      <span className="text-gray-400 text-xs font-medium whitespace-nowrap">
+                        {company.name}
+                      </span>
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
             )}
-            {/* Gradient fade edges - only if marquee is active */}
-            {!shouldReduceMotion && (
-              <>
-                <div className="absolute left-0 top-0 h-full w-20 md:w-32 bg-gradient-to-r from-gray-900 via-gray-900 to-transparent z-10"></div>
-                <div className="absolute right-0 top-0 h-full w-20 md:w-32 bg-gradient-to-l from-gray-900 via-gray-900 to-transparent z-10"></div>
-              </>
-            )}
+            
+            {/* Fallback for text content (SR only) */}
+            <div className="sr-only">
+              Our platform is trusted by professionals from companies such as Google, Microsoft, Amazon, Meta, LinkedIn, Oracle, Apple, Tesla, Spotify, Adobe, Netflix, and Shopify.
+            </div>
           </div>
         </motion.div>
       </div>
