@@ -287,23 +287,7 @@ const TechTracksSection = () => {
           </div>
         </motion.div>
 
-        {/* Metrics and Stats Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5, ease: "circOut" }}
-          className="relative max-w-4xl mx-auto mb-16 bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-2xl shadow-xl text-white overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-grid-white/[0.03] pointer-events-none" aria-hidden="true" />
-          <div className="absolute right-0 top-0 -mt-6 -mr-20 w-40 h-40 bg-indigo-600/15 rounded-full blur-3xl" aria-hidden="true" />
-          <h3 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300">
-            LearnExpert Platform Impact
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[ { value: "100K+", label: "Active Learners" }, { value: "94%", label: "Completion Rate" }, { value: "87%", label: "Career Advancement" }, { value: "+45%", label: "Avg. Salary Hike" } ].map(stat => ( <div key={stat.label}> <p className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300">{stat.value}</p> <p className="text-xs sm:text-sm text-gray-300/90 mt-1">{stat.label}</p> </div> ))}
-          </div>
-          <div className="mt-8 flex justify-center"> <Badge color="primary" variant="flat" className="px-3 py-1.5 text-xs bg-white/10 text-indigo-300 border border-indigo-400/30"> Data verified - Updated May 2025 </Badge> </div>
-        </motion.div>
+
 
         {/* --- Platform Features Carousel - ENHANCED --- */}
         <motion.div

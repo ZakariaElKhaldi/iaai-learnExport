@@ -23,9 +23,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow">{children}</main>
-            <Footer />
+            {/* The Header and Footer are now handled by individual layouts */}
+            {children}
             {process.env.NODE_ENV === 'development' && <DevNavigation />}
           </div>
         </Providers>

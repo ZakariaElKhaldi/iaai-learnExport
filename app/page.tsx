@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import LandingPageNavBar from '@/components/landing/LandingPageNavBar';
 import HeroSection from '@/components/landing/hero/HeroSection';
 import FeaturesSection from '@/components/landing/features/FeaturesSection';
 import TestimonialsSection from '@/components/landing/testimonials/TestimonialsSection';
@@ -16,6 +17,7 @@ export default function LandingPage() {
   
   return (
     <>
+      <LandingPageNavBar />
       <main>
         <HeroSection />
         <FeaturesSection key={`features-section-${timestamp}`} />
