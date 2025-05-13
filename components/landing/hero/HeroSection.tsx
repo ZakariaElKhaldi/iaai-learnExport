@@ -9,6 +9,7 @@ import { FaRocket, FaBookOpen, FaStar, FaChevronLeft, FaChevronRight, FaApple, F
 import { SiMeta, SiOracle, SiTesla, SiAdobe, SiNetflix, SiShopify } from 'react-icons/si';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplineScene } from '@/components/ui/splite';
 
 // Register the ScrollTrigger plugin (assuming it's used elsewhere or for future advanced scroll effects)
 gsap.registerPlugin(ScrollTrigger);
@@ -274,6 +275,8 @@ export default function HeroSection() {
   const imageRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false); // For initial mount animation
   const shouldReduceMotion = useReducedMotion();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const splineRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -285,6 +288,90 @@ export default function HeroSection() {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", shouldReduceMotion ? "0%" : "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]); // Fade out a bit later
 
+  // Handle mouse movement for the 3D model - make it more subtle
+  const handleSplineMouseMove = (e: MouseEvent) => {
+    if (shouldReduceMotion) return;
+    
+    const { clientX, clientY } = e;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    
+    // Calculate normalized coordinates (-1 to 1) with reduced sensitivity
+    const x = ((clientX / windowWidth) * 2 - 1) * 0.3; // Reduced by factor of 0.3
+    const y = (-((clientY / windowHeight) * 2 - 1)) * 0.3; // Reduced by factor of 0.3
+    
+    setMousePosition({ x, y });
+    
+    // If we have access to the Spline API, we can directly control it
+    if (splineRef.current) {
+      try {
+        // @ts-ignore - Spline API methods
+        // For a cube model, rotating would be more appropriate than lookAt
+        if (splineRef.current.rotate) {
+          // Rotate the cube based on mouse position with more subtle movement
+          splineRef.current.rotate(0, y * 0.2, -x * 0.2); // Reduced rotation factor
+        } else if (splineRef.current.lookAt) {
+          // Fallback to lookAt if rotate isn't available, with more subtle movement
+          splineRef.current.lookAt(x * 2, y * 2, 10); // Increased z-value and reduced x,y factors
+        }
+      } catch (error) {
+        // Silent fail if the method isn't available
+      }
+    }
+  };
+
+  // Add easing to mouse tracking for 3D model
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let requestId: number | null = null;
+    const easing = 0.05; // Lower value for smoother, slower movement
+    
+    const smoothMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      
+      // Calculate normalized coordinates with reduced intensity
+      targetX = ((clientX / windowWidth) * 2 - 1) * 0.3;
+      targetY = (-((clientY / windowHeight) * 2 - 1)) * 0.3;
+    };
+    
+    const updateSplinePosition = () => {
+      // Apply easing to create smoother movement
+      currentX += (targetX - currentX) * easing;
+      currentY += (targetY - currentY) * easing;
+      
+      if (splineRef.current) {
+        try {
+          // @ts-ignore
+          if (splineRef.current.rotate) {
+            splineRef.current.rotate(0, currentY * 0.2, -currentX * 0.2);
+          } else if (splineRef.current.lookAt) {
+            splineRef.current.lookAt(currentX * 2, currentY * 2, 10);
+          }
+        } catch (error) {
+          // Silent fail
+        }
+      }
+      
+      requestId = requestAnimationFrame(updateSplinePosition);
+    };
+    
+    window.addEventListener('mousemove', smoothMouseMove);
+    requestId = requestAnimationFrame(updateSplinePosition);
+    
+    return () => {
+      window.removeEventListener('mousemove', smoothMouseMove);
+      if (requestId) cancelAnimationFrame(requestId);
+    };
+  }, [shouldReduceMotion]);
+  
+  // Remove the old mouse tracking code since we replaced it with the smooth version
   useEffect(() => {
     setIsVisible(true); // Trigger entrance animations
 
@@ -338,6 +425,29 @@ export default function HeroSection() {
       className="relative w-full bg-gradient-to-br from-gray-900 via-indigo-950 to-purple-900 py-24 md:py-32 overflow-x-clip" // overflow-x-clip to prevent horizontal scroll from intense blurs
       aria-labelledby="hero-headline" // For better screen reader context
     >
+      {/* 3D Model Background */}
+      <div className="absolute inset-0 w-full h-full z-0 opacity-60" aria-hidden="true">
+        <SplineScene 
+          scene="https://prod.spline.design/R0R85zmHiTGs2qls/scene.splinecode" 
+          className="w-full h-full"
+          // @ts-ignore - Passing ref and custom props to control the model
+          onLoad={(spline) => {
+            splineRef.current = spline;
+            console.log("Spline scene loaded", spline);
+            // Initial orientation
+            try {
+              if (spline.rotate) {
+                spline.rotate(0, 0, 0);
+              } else if (spline.lookAt) {
+                spline.lookAt(0, 0, 5);
+              }
+            } catch (error) {
+              console.error("Could not initialize 3D model orientation", error);
+            }
+          }}
+        />
+      </div>
+
       {/* Background elements */}
       <motion.div
         className="absolute inset-0 opacity-10" // Reduced opacity for more subtlety
@@ -366,7 +476,7 @@ export default function HeroSection() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-24"> {/* Increased gap */}
           {/* Text content */}
           <motion.div
-            className="flex flex-col w-full md:w-[55%] text-center md:text-left" // Slightly more space for text
+            className="flex flex-col w-full md:w-[60%] text-center md:text-left" // Adjusted to take more width since we removed the right side content
             style={{ opacity: shouldReduceMotion ? 1 : opacity, y: textY }} // Apply shouldReduceMotion to scroll effects
           >
             <motion.div {...initialAnimProps(0)}>
@@ -463,119 +573,6 @@ export default function HeroSection() {
             >
               <ReviewsCarousel />
             </motion.div>
-          </motion.div>
-
-          {/* Hero image - improved dashboard display */}
-          <motion.div
-            className="w-full md:w-[45%] relative mt-10 md:mt-0" // Adjusted width
-            initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 20 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: shouldReduceMotion ? 0 : DURATION_SLOW, delay: shouldReduceMotion ? 0 : 0.3, ease: "circOut" }}
-          >
-            <div
-              ref={imageRef}
-              className="relative w-full aspect-[16/11] max-w-xl mx-auto transition-transform duration-500 ease-out group" // Added group for badge hover effects, adjusted aspect ratio slightly for more realistic dashboard feel
-            >
-              {/* Dashboard frame glow effect */}
-              <motion.div
-                className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-600 blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500" // Wider glow, hover effect
-                animate={shouldReduceMotion ? {} : {
-                  opacity: [0.2, 0.35, 0.2],
-                  scale: [1, 1.015, 1],
-                }}
-                transition={shouldReduceMotion ? {duration: 0} : {
-                  duration: 10,
-                  repeat: Infinity,
-                  repeatType: "mirror" // mirror is often smoother than reverse
-                }}
-                aria-hidden="true"
-              />
-
-              <div className="relative z-10 w-full h-full rounded-xl overflow-hidden border border-white/15 bg-gray-900/70 backdrop-blur-md shadow-2xl transform transition-all duration-500 group-hover:scale-[1.015] group-hover:shadow-purple-500/30"> {/* Slightly less roundness, increased blur, subtle group hover */}
-                <div className="bg-gray-800/80 h-9 flex items-center px-4 border-b border-white/10"> {/* Slightly taller header */}
-                  <div className="flex space-x-2 items-center">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                  </div>
-                  <div className="mx-auto text-white/70 text-xs font-medium tracking-wide"> {/* Added tracking */}
-                    LearnExpert Dashboard
-                  </div>
-                </div>
-
-                <div className="relative h-[calc(100%-2.25rem)]"> {/* Adjusted height for new header */}
-                  <Image
-                    src="/assets/hero-image.jpg" // Ensure this path is correct and image is optimized
-                    alt="LearnExpert Platform Interactive Dashboard"
-                    fill
-                    className="object-cover object-center"
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Example sizes prop
-                  />
-                </div>
-
-                {/* Badges: Enhanced styling and hover effects */}
-                {[
-                  {
-                    id: 'live-mentoring',
-                    position: "top-12 right-5",
-                    icon: <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse mr-2"></div>,
-                    text: "Live Mentoring",
-                    colorClasses: "bg-black/70 border-green-500/30 shadow-green-500/20",
-                    delayIndex: 5
-                  },
-                  {
-                    id: 'progress-badge',
-                    position: "top-12 left-5",
-                    content: (
-                      <>
-                        <div className="text-xs text-indigo-200 mb-1">Progress</div>
-                        <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden">
-                          <motion.div
-                            className="h-full bg-gradient-to-r from-sky-500 to-indigo-400 rounded-full"
-                            initial={shouldReduceMotion ? { width: '75%' } : { width: 0 }}
-                            animate={isVisible ? { width: '75%' } : {}}
-                            transition={{ duration: shouldReduceMotion ? 0 : 1.5, delay: shouldReduceMotion ? 0 : 1.2 + (0 * DELAY_INCREMENT), ease: "easeOut" }}
-                          />
-                        </div>
-                        <div className="text-white text-xs mt-1.5 font-medium">75% Complete</div>
-                      </>
-                    ),
-                    colorClasses: "bg-indigo-900/80 border-indigo-500/40 shadow-indigo-500/20",
-                    delayIndex: 6
-                  },
-                  {
-                    id: 'new-lessons',
-                    position: "bottom-5 right-5",
-                    icon: (
-                        <div className="relative mr-2">
-                            <div className="w-2 h-2 rounded-full bg-red-500 absolute -top-0.5 -right-0.5 ring-1 ring-black/50"></div>
-                            <svg className="w-4 h-4 text-purple-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
-                        </div>
-                    ),
-                    text: "New Lessons",
-                    colorClasses: "bg-purple-900/80 border-purple-500/30 shadow-purple-500/20",
-                    delayIndex: 7
-                  },
-                  // Removed one badge for less clutter, can be added back if needed
-                ].map(badge => (
-                  <motion.div
-                    key={badge.id}
-                    className={`absolute ${badge.position} backdrop-blur-sm rounded-lg p-2.5 border shadow-lg text-white text-xs font-medium
-                                transition-all duration-300 group-hover:opacity-90 hover:!opacity-100 hover:scale-105 hover:shadow-2xl ${badge.colorClasses}`}
-                    initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.8, y: shouldReduceMotion ? 0 : 10 }}
-                    animate={isVisible ? { opacity: 1, scale: 1, y: 0 } : {}}
-                    transition={{ duration: shouldReduceMotion ? 0 : DURATION_FAST, delay: shouldReduceMotion ? 0: 0.6 + badge.delayIndex * (DELAY_INCREMENT / 2), ease: "backOut" }}
-                  >
-                    <div className="flex items-center">
-                      {badge.icon}
-                      {badge.text && <span className="leading-tight">{badge.text}</span>}
-                      {badge.content}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
           </motion.div>
         </div>
 
