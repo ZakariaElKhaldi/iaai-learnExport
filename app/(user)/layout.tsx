@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import MainLayout from '@/components/layouts/MainLayout';
 
 export default function UserLayout({
   children,
@@ -8,11 +9,11 @@ export default function UserLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="container mx-auto py-6 px-4">
-      {/* User specific layout wrapper */}
-      <div className="min-h-screen">
+    <MainLayout>
+      <div className="p-1">
+        <h1 className="text-2xl font-bold mb-6">User Dashboard</h1>
         {children}
       </div>
-    </div>
+    </MainLayout>
   );
-} 
+}
