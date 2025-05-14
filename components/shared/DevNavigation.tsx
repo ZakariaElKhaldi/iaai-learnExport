@@ -334,8 +334,11 @@ const DevNavigation = () => {
                         className={`py-1 px-2 hover:bg-gray-600 text-xs rounded flex items-center group transition-colors
                           ${isActive ? 'bg-blue-500/20 text-blue-400' : 'text-gray-300'}`}
                         onClick={() => {
-                          // Just log the navigation attempt to help with debugging
                           console.log('Navigating to:', route.path);
+                          // Close the navigation if not pinned
+                          if (!isPinned) {
+                            setIsVisible(false);
+                          }
                         }}
                       >
                         <span className="truncate">{route.name}</span>

@@ -10,6 +10,7 @@ import CtaSection from '@/components/landing/cta/CtaSection';
 import FaqSection from '@/components/landing/faq/FaqSection';
 import ContactSection from '@/components/landing/contact/ContactSection';
 import Footer from '@/components/landing/Footer';
+import LearningHubSection from '@/components/landing/learning-hub/LearningHubSection';
 
 export default function LandingPage() {
   // Use a timestamp as a key to force re-rendering
@@ -21,6 +22,8 @@ export default function LandingPage() {
       <main>
         <HeroSection />
         <FeaturesSection key={`features-section-${timestamp}`} />
+        <LearningHubSection />
+        <TestimonialsSection />
         <PricingSection />
         <CtaSection />
         <FaqSection />

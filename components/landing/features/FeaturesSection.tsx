@@ -381,7 +381,8 @@ export default function FeaturesSection() {
           </div>
 
           {/* Decorative floating elements */}
-          
+          <div className="absolute -top-10 -right-10 w-24 h-24 bg-indigo-100 rounded-full opacity-70 blur-xl animate-pulse" style={{ animationDuration: '8s' }}></div>
+          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-100 rounded-full opacity-70 blur-xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }}></div>
         </motion.div>
 
         {/* Feature cards - Using Framer Motion stagger */}

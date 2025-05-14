@@ -64,6 +64,10 @@ const data = {
           url: "/user-courses",
         },
         {
+          title: "Explore Courses",
+          url: "/user-explore",
+        },
+        {
           title: "Certificates",
           url: "/user-certificates",
         },

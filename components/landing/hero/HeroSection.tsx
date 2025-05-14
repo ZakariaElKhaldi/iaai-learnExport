@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } from 'framer-motion'; // Added useReducedMotion
 import { Button } from '@nextui-org/react';
-import { FaRocket, FaBookOpen, FaStar, FaChevronLeft, FaChevronRight, FaApple, FaAmazon, FaWindows, FaGoogle, FaSpotify, FaLinkedin } from 'react-icons/fa';
+import { FaRocket, FaBookOpen, FaStar, FaChevronLeft, FaChevronRight, FaApple, FaAmazon, FaWindows, FaGoogle, FaSpotify, FaLinkedin, FaGraduationCap } from 'react-icons/fa';
 import { SiMeta, SiOracle, SiTesla, SiAdobe, SiNetflix, SiShopify } from 'react-icons/si';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -522,6 +522,17 @@ export default function HeroSection() {
                 className="text-white border-white/40 font-medium hover:bg-white/10 hover:border-white/60 transition-all duration-300 transform hover:scale-[1.03] active:scale-95" // Enhanced hover, added active state
               >
                 Browse Courses
+              </Button>
+
+              <Button
+                as={Link}
+                href="/learn"
+                variant="bordered"
+                size="lg"
+                startContent={<FaGraduationCap className="text-xl" />}
+                className="text-white border-white/40 font-medium hover:bg-white/10 hover:border-white/60 transition-all duration-300 transform hover:scale-[1.03] active:scale-95"
+              >
+                Explore Learning Hub
               </Button>
             </motion.div>
 
