@@ -370,7 +370,7 @@ export default function HeroSection() {
       currentY += (targetY - currentY) * easing;
 
       if (imageRef.current) {
-        imageRef.current.style.transform = `perspective(1200px) rotateY(${currentX * 0.2}deg) rotateX(${-currentY * 0.2}deg) scale(1.01)`; // Slightly smaller rotation, added subtle scale
+        imageRef.current.style.transform = `perspective(2000px) rotateY(${currentX * 0.2}deg) rotateX(${-currentY * 0.2}deg) scale(1.01)`; // Slightly smaller rotation, added subtle scale
       }
       requestId = requestAnimationFrame(updatePosition);
     };

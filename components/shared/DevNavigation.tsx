@@ -37,10 +37,11 @@ const devRoutes: RouteGroupType[] = [
     routes: [
       { path: '/user-dashboard', name: 'Dashboard' },
       { path: '/user-courses', name: 'My Courses' },
-      { path: '/user-courses/123', name: 'Course Detail' },
-      { path: '/user-courses/123/learn/456', name: 'Lesson Viewer' },
-      { path: '/user-courses/123/quiz/789', name: 'Quiz Page' },
-      { path: '/user-courses/123/quiz-results/789', name: 'Quiz Results' },
+      // Remove dynamic routes that don't exist yet
+      // { path: '/user-courses/123', name: 'Course Detail' },
+      // { path: '/user-courses/123/learn/456', name: 'Lesson Viewer' },
+      // { path: '/user-courses/123/quiz/789', name: 'Quiz Page' },
+      // { path: '/user-courses/123/quiz-results/789', name: 'Quiz Results' },
       { path: '/user-consultations', name: 'Consultations' },
       { path: '/user-consultations/request', name: 'Request Consultation' },
       { path: '/user-certificates', name: 'Certificates' },
@@ -332,13 +333,9 @@ const DevNavigation = () => {
                         href={route.path} 
                         className={`py-1 px-2 hover:bg-gray-600 text-xs rounded flex items-center group transition-colors
                           ${isActive ? 'bg-blue-500/20 text-blue-400' : 'text-gray-300'}`}
-                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                          // Prevent default behavior and handle navigation manually
-                          e.preventDefault();
-                          // Log the navigation attempt to help with debugging
+                        onClick={() => {
+                          // Just log the navigation attempt to help with debugging
                           console.log('Navigating to:', route.path);
-                          // Use window.location for navigation to ensure it works
-                          window.location.href = route.path;
                         }}
                       >
                         <span className="truncate">{route.name}</span>
