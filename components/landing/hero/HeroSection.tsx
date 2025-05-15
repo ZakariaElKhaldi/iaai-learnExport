@@ -515,7 +515,7 @@ export default function HeroSection() {
 
               <Button
                 as={Link}
-                href="/courses"
+                href="/learn"
                 variant="bordered"
                 size="lg"
                 startContent={<FaBookOpen className="text-xl" />} // Slightly larger icon
@@ -524,16 +524,6 @@ export default function HeroSection() {
                 Browse Courses
               </Button>
 
-              <Button
-                as={Link}
-                href="/learn"
-                variant="bordered"
-                size="lg"
-                startContent={<FaGraduationCap className="text-xl" />}
-                className="text-white border-white/40 font-medium hover:bg-white/10 hover:border-white/60 transition-all duration-300 transform hover:scale-[1.03] active:scale-95"
-              >
-                Explore Learning Hub
-              </Button>
             </motion.div>
 
             <motion.div
