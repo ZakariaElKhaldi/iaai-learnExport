@@ -26,14 +26,14 @@ const DELAY_INCREMENT = 0.15; // Base delay increment for staggered animations
 interface AnimatedTextProps {
   text: string;
   className?: string;
-  as?: keyof JSX.IntrinsicElements; // Allow specifying the HTML tag
+  as?: React.ElementType; // Correct type for the 'as' prop
   words?: boolean;
   letters?: boolean;
   staggerChildren?: number;
   delay?: number;
   duration?: number;
   animationType?: "fade" | "slide-up" | "slide-down" | "scale-in";
-  ease?: any; // Framer Motion ease type
+  ease?: any; // Framer Motion ease type - can be refined if needed
 }
 
 // Animated text component with improved animation options
@@ -103,7 +103,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
             <motion.span
               key={i}
               className="inline-block" // Keep words on the same line if possible
-              variants={variants}
+              variants={variants} as={motion.span} // Explicitly set as prop for motion.span
               transition={{duration, ease}} // Individual word transition
             >
               {word}{' '}
@@ -127,7 +127,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
           <motion.span
             key={i}
             className="inline-block"
-            variants={variants}
+            variants={variants} as={motion.span} // Explicitly set as prop for motion.span
             transition={{duration, ease}}
           >
             {letter === ' ' ? '\u00A0' : letter}
@@ -142,12 +142,10 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
     <motion.div // Using div for simple text container, Component tag passed via 'as' prop
         initial="initial"
         animate="animate"
-        variants={variants}
+        variants={variants} as={Component} // Explicitly set as prop for the main motion element
         transition={commonTransition}
     >
-        <Component className={className}>
             {text}
-        </Component>
     </motion.div>
   );
 };
@@ -398,9 +396,14 @@ export default function HeroSection() {
       aria-labelledby="hero-headline" // For better screen reader context
     >
       {/* 3D Model Background - make it bigger, raised up, and centered */}
-      <div className="absolute inset-0 w-full h-full z-0 opacity-55 flex items-center justify-center" 
-           style={{ transform: 'translateY(-300px) translateX(200px)' }} 
-           aria-hidden="true">
+      <motion.div
+        className="absolute inset-0 w-full h-full z-0 flex items-center justify-center"
+        style={{ transform: 'translateY(-300px) translateX(200px)' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.55 }}
+        transition={{ duration: 2, ease: "easeInOut" }}
+        aria-hidden="true"
+      >
         <div className="w-full h-[140%] scale-150">
           <Suspense fallback={
             <div className="w-full h-full flex items-center justify-center">
@@ -436,7 +439,7 @@ export default function HeroSection() {
             />
           </Suspense>
         </div>
-      </div>
+      </motion.div>
 
       {/* Background elements */}
       <motion.div
