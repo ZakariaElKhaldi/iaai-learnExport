@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Code, Database, PenTool, LineChart, Layers, 
-  Server, BookOpen, Globe, CheckCircle, ExternalLink, Search } from 'lucide-react';
+  Server, BookOpen, Globe, CheckCircle, ExternalLink, Search, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,54 +12,86 @@ import { Badge } from "@/components/ui/badge";
 import { LearningProgress } from "@/components/learning-progress";
 import { useLearningProgress } from "@/hooks/use-learning-progress";
 
-// Define tutorial categories
-const categories = [
-  {
-    id: "html-css",
-    name: "HTML & CSS",
-    color: "#E44D26",
-    tutorials: [
-      { id: "html", name: "HTML", icon: Code, description: "The language for building web pages", level: "beginner", popular: true },
-      { id: "css", name: "CSS", icon: PenTool, description: "The language for styling web pages", level: "beginner", popular: true },
-      { id: "rwd", name: "Responsive Web Design", icon: Globe, description: "Make your websites look good on all devices", level: "intermediate" },
-      { id: "bootstrap", name: "Bootstrap", icon: Layers, description: "Popular CSS framework for responsive websites", level: "intermediate" },
-      { id: "sass", name: "Sass", icon: PenTool, description: "CSS preprocessor for more powerful styling", level: "intermediate" },
-    ]
-  },
+import { useLearningContent } from '@/hooks/use-learning-content';
+
+// Define types for our data structure
+type Tutorial = {
+  id: string;
+  name: string;
+  slug: string;
+  icon: string;
+  description: string;
+  level: string;
+  popular: boolean;
+  category: string;
+};
+
+type MainTopic = {
+  id: string;
+  name: string;
+  color?: string;
+  icon: string;
+  description: string;
+  tutorialCount: number;
+  tutorials: Tutorial[];
+  difficulty: string;
+};
+
+// Icon mapping for dynamic icons
+const IconMap: { [key: string]: React.ComponentType<any> } = {
+  Code,
+  PenTool,
+  Globe,
+  Layers,
+  Server,
+  BookOpen,
+  Database,
+  LineChart
+};
+
+// Use our new hook for dynamic data
+const initialCategories = [
   {
     id: "javascript",
     name: "JavaScript",
     color: "#F7DF1E",
+    icon: "Code",
+    difficulty: "beginner",
     tutorials: [
-      { id: "javascript", name: "JavaScript", icon: Code, description: "The language for programming web pages", level: "beginner", popular: true },
-      { id: "react", name: "React", icon: Layers, description: "A JavaScript library for building user interfaces", level: "intermediate", popular: true },
-      { id: "nodejs", name: "Node.js", icon: Server, description: "JavaScript runtime for server-side programming", level: "intermediate" },
-      { id: "typescript", name: "TypeScript", icon: Code, description: "JavaScript with added type safety", level: "intermediate" },
-      { id: "jquery", name: "jQuery", icon: Code, description: "Fast and feature-rich JavaScript library", level: "beginner" },
+      { id: "javascript", name: "JavaScript", slug: "javascript", icon: "Code", description: "The language for programming web pages", level: "beginner", popular: true, category: "javascript" },
+      { id: "react", name: "React", slug: "react", icon: "Layers", description: "A JavaScript library for building user interfaces", level: "intermediate", popular: true, category: "javascript" },
+      { id: "nodejs", name: "Node.js", slug: "nodejs", icon: "Server", description: "JavaScript runtime for server-side programming", level: "intermediate", popular: false, category: "javascript" },
+      { id: "typescript", name: "TypeScript", slug: "typescript", icon: "Code", description: "JavaScript with added type safety", level: "intermediate", popular: false, category: "javascript" },
+      { id: "jquery", name: "jQuery", slug: "jquery", icon: "Code", description: "Fast and feature-rich JavaScript library", level: "beginner", popular: false, category: "javascript" },
     ]
   },
   {
     id: "backend",
     name: "Backend",
     color: "#3776AB",
+    icon: "Database",
+    difficulty: "intermediate",
     tutorials: [
-      { id: "python", name: "Python", icon: Code, description: "A popular programming language", level: "beginner", popular: true },
-      { id: "sql", name: "SQL", icon: Database, description: "Language for managing databases", level: "beginner", popular: true },
-      { id: "php", name: "PHP", icon: Code, description: "Server scripting language for web development", level: "intermediate" },
-      { id: "java", name: "Java", icon: Code, description: "Object-oriented programming language", level: "intermediate" },
-      { id: "csharp", name: "C#", icon: Code, description: "Language for building Windows applications", level: "intermediate" },
+      { id: "python", name: "Python", slug: "python", icon: "Code", description: "A popular programming language", level: "beginner", popular: true, category: "backend" },
+      { id: "sql", name: "SQL", slug: "sql", icon: "Database", description: "Language for managing databases", level: "beginner", popular: true, category: "backend" },
+      { id: "php", name: "PHP", slug: "php", icon: "Code", description: "Server scripting language for web development", level: "intermediate", popular: false, category: "backend" },
+      { id: "phpdelete", name: "PHP Delete", slug: "phpdelete", icon: "Code", description: "Removing records from a database with PHP", level: "intermediate", popular: false, category: "backend" },
+      { id: "java", name: "Java", slug: "java", icon: "Code", description: "Object-oriented programming language", level: "intermediate", popular: false, category: "backend" },
+      { id: "csharp", name: "C#", slug: "csharp", icon: "Code", description: "Language for building Windows applications", level: "intermediate", popular: false, category: "backend" },
     ]
   },
   {
     id: "data-analytics",
     name: "Data Analytics",
     color: "#4CAF50",
+    icon: "LineChart",
+    difficulty: "intermediate",
     tutorials: [
-      { id: "data-science", name: "Data Science", icon: LineChart, description: "Extracting knowledge from data", level: "intermediate" },
-      { id: "machine-learning", name: "Machine Learning", icon: BookOpen, description: "Making computers learn from data", level: "advanced" },
-      { id: "numpy", name: "NumPy", icon: LineChart, description: "Library for scientific computing in Python", level: "intermediate" },
-      { id: "pandas", name: "Pandas", icon: LineChart, description: "Data analysis library for Python", level: "intermediate" },
-      { id: "statistics", name: "Statistics", icon: LineChart, description: "Collection and analysis of data", level: "beginner" },
+      { id: "data-science", name: "Data Science", slug: "data-science", icon: "LineChart", description: "Extracting knowledge from data", level: "intermediate", popular: false, category: "data-analytics" },
+      { id: "machine-learning", name: "Machine Learning", slug: "machine-learning", icon: "BookOpen", description: "Making computers learn from data", level: "advanced", popular: false, category: "data-analytics" },
+      { id: "numpy", name: "NumPy", slug: "numpy", icon: "LineChart", description: "Library for scientific computing in Python", level: "intermediate", popular: false, category: "data-analytics" },
+      { id: "pandas", name: "Pandas", slug: "pandas", icon: "LineChart", description: "Data analysis library for Python", level: "intermediate", popular: false, category: "data-analytics" },
+      { id: "statistics", name: "Statistics", slug: "statistics", icon: "LineChart", description: "Collection and analysis of data", level: "beginner", popular: false, category: "data-analytics" },
     ]
   }
 ];
@@ -78,23 +110,49 @@ const getLevelBadge = (level: string) => {
   );
 };
 
-// Calculate total tutorials
-const totalTutorials = categories.reduce((total, category) => total + category.tutorials.length, 0);
-
 export default function LearnPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(categories[0].id);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [mainTopics, setMainTopics] = useState<MainTopic[]>([]);
+  const [selectedTopic, setSelectedTopic] = useState('');
   const { setLastVisited } = useLearningProgress();
 
-  // Filter tutorials based on search term
-  const filteredTutorials = searchTerm 
-    ? categories.flatMap(category => 
-        category.tutorials.filter(tutorial => 
-          tutorial.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-          tutorial.description.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      )
-    : [];
+  useEffect(() => {
+    const fetchMainTopics = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch('/api/learn');
+        if (!response.ok) {
+          throw new Error('Failed to fetch main topics');
+        }
+        const data = await response.json();
+        setMainTopics(data);
+        if (data.length > 0 && !selectedTopic) {
+          setSelectedTopic(data[0].id);
+        }
+        setIsLoading(false);
+      } catch (err) {
+        setError('Failed to load learning content. Please try again later.');
+        setIsLoading(false);
+        console.error('Error fetching main topics:', err);
+      }
+    };
+
+    fetchMainTopics();
+  }, [selectedTopic]);
+
+  // Calculate total tutorials
+  const totalTutorials = mainTopics.reduce((total, topic) => total + topic.tutorials.length, 0);
+
+  // Filter main topics based on search term
+  const filteredTopics = mainTopics.filter((topic) => {
+    const matchesSearch = topic.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const hasTutorialsMatchingSearch = topic.tutorials.some((tutorial) =>
+      tutorial.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    return matchesSearch || hasTutorialsMatchingSearch;
+  });
 
   // Handle scroll to section
   const scrollToSection = (sectionId: string) => {
@@ -108,6 +166,30 @@ export default function LearnPage() {
   const handleTutorialClick = (tutorialId: string) => {
     setLastVisited(tutorialId);
   };
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-primary"></div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Oops! Something went wrong.</h1>
+          <p className="text-slate-600 dark:text-slate-400 mb-6">{error}</p>
+          <Button variant="outline" onClick={() => window.location.reload()}>
+            Retry
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="flex min-h-screen">
@@ -123,14 +205,6 @@ export default function LearnPage() {
               className="flex items-center gap-1"
             >
               <CheckCircle className="h-4 w-4" /> Popular
-            </Button>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              onClick={() => scrollToSection('categories')}
-              className="flex items-center gap-1"
-            >
-              <Layers className="h-4 w-4" /> Categories
             </Button>
             <Button 
               variant="outline" 
@@ -177,20 +251,21 @@ export default function LearnPage() {
               {/* Search results */}
               {searchTerm && (
                 <div className="absolute z-10 mt-2 w-full bg-white dark:bg-slate-800 shadow-lg rounded-md border">
-                  {filteredTutorials.length > 0 ? (
+                  {filteredTopics.length > 0 ? (
                     <ul className="py-2 max-h-[250px] overflow-y-auto">
-                      {filteredTutorials.map((tutorial) => (
-                        <li key={tutorial.id} className="px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700">
+                      {filteredTopics.map((topic) => (
+                        <li key={topic.id} className="px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700">
                           <Link 
-                            href={`/learn/${tutorial.id}`} 
+                            href={`/learn/${topic.id}`} 
                             className="flex items-center justify-between"
-                            onClick={() => handleTutorialClick(tutorial.id)}
+                            onClick={() => handleTutorialClick(topic.id)}
                           >
                             <div className="flex items-center">
-                              <tutorial.icon className="h-4 w-4 mr-2 text-primary" />
-                              <span>{tutorial.name}</span>
+                              {/* Fixed: Assuming topic.icon is a React component */}
+                              {React.createElement(IconMap[topic.icon as keyof typeof IconMap], { className: "h-4 w-4 mr-2 text-primary" })}
+                              <span>{topic.name}</span>
                             </div>
-                            {getLevelBadge(tutorial.level)}
+                            <Badge variant="outline" className="mr-2">{topic.tutorialCount} tutorials</Badge>
                           </Link>
                         </li>
                       ))}
@@ -233,82 +308,230 @@ export default function LearnPage() {
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                {categories.flatMap(category => 
-                  category.tutorials.filter(tutorial => tutorial.popular)
-                ).map((tutorial) => (
+                {mainTopics.flatMap((topic) => topic.tutorials).filter((tutorial) => tutorial.popular).slice(0, 6).map((tutorial, index) => (
                   <Link 
-                    href={`/learn/${tutorial.id}`} 
-                    key={tutorial.id}
+                    href={`/learn/${tutorial.slug}`} 
+                    key={`popular-${tutorial.id}-${index}`} 
                     onClick={() => handleTutorialClick(tutorial.id)}
+                  >
+                    <div className="flex items-center">
+                      {typeof tutorial.icon === 'string' && IconMap[tutorial.icon as keyof typeof IconMap] ? (
+                        React.createElement(IconMap[tutorial.icon as keyof typeof IconMap], {
+                          className: "h-4 w-4 mr-2 text-primary"
+                        })
+                      ) : typeof tutorial.icon !== 'string' ? (
+                        React.createElement(tutorial.icon, {
+                          className: "h-4 w-4 mr-2 text-primary"
+                        })
+                      ) : (
+                        <Code className="h-4 w-4 mr-2 text-primary" />
+                      )}
+                      <span>{tutorial.name}</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            {/* Categories section - Commented out as it's similar to Main Topics Grid and might be redundant */}
+            {/*
+            <section id="categories" className="mb-16 scroll-mt-20">
+              <div className="flex items-center mb-6">
+                <Layers className="h-5 w-5 text-primary mr-2" />
+                <h2 className="text-2xl font-bold">Categories</h2>
+              </div>
+              <p className="text-slate-600 dark:text-slate-400 mb-6">
+                Click on a topic to see all related tutorials and exercises.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                {mainTopics.map((topic, index) => (
+                  <Link 
+                    href={`/learn/${topic.id}`} 
+                    key={`category-${topic.id}-${index}`} 
+                    // onClick={() => handleTutorialClick(topic.id)} // This onClick seems incorrect for a main topic link
                   >
                     <Card className="h-full hover:border-primary hover:shadow-md transition-all">
                       <CardContent className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center">
                             <div className="bg-slate-100 dark:bg-slate-800 p-2 rounded-lg mr-3">
-                              <tutorial.icon className="h-6 w-6 text-primary" />
+                              {IconMap[topic.icon as keyof typeof IconMap] ? 
+                                React.createElement(IconMap[topic.icon as keyof typeof IconMap], { className: "h-6 w-6 text-primary" }) : 
+                                <Code className="h-6 w-6 text-primary" />
+                              }
                             </div>
-                            <h3 className="font-bold">{tutorial.name}</h3>
+                            <h3 className="font-bold">{topic.name}</h3>
                           </div>
-                          <div>
-                            {getLevelBadge(tutorial.level)}
-                          </div>
+                          <Badge variant="outline">{topic.tutorialCount} tutorials</Badge>
                         </div>
-                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-                          {tutorial.description}
-                        </p>
-                        <div className="flex items-center text-sm font-medium text-primary">
-                          Start Learning <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                        </div>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">{topic.description}</p>
                       </CardContent>
                     </Card>
                   </Link>
                 ))}
               </div>
             </section>
+            */}
 
-            {/* Tabs for different categories */}
-            <section id="categories" className="mb-16 scroll-mt-20">
-              <div className="flex items-center mb-6">
-                <Layers className="h-5 w-5 text-primary mr-2" />
-                <h2 className="text-2xl font-bold">Browse by Category</h2>
+            {/* Main Topics Grid */}
+            <section id="topics" className="mb-16 scroll-mt-20">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center">
+                  <Layers className="h-5 w-5 text-primary mr-2" />
+                  <h2 className="text-2xl font-bold">All Topics</h2>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-sm text-slate-500 dark:text-slate-400 mr-2">
+                    {filteredTopics.length} {filteredTopics.length === 1 ? 'topic' : 'topics'} available
+                  </span>
+                </div>
               </div>
               
-              <Tabs defaultValue={categories[0].id} value={selectedCategory} onValueChange={setSelectedCategory}>
-                <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-6">
-                  {categories.map((category) => (
-                    <TabsTrigger key={category.id} value={category.id}>{category.name}</TabsTrigger>
-                  ))}
-                </TabsList>
-                {categories.map((category) => (
-                  <TabsContent key={category.id} value={category.id}>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {category.tutorials.map((tutorial) => (
-                        <Link 
-                          href={`/learn/${tutorial.id}`} 
-                          key={tutorial.id} 
-                          className="block"
-                          onClick={() => handleTutorialClick(tutorial.id)}
-                        >
-                          <div className="p-4 border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                            <div className="flex items-center mb-3">
-                              <tutorial.icon className="h-5 w-5 mr-2 text-primary" />
-                              <h3 className="font-medium">{tutorial.name}</h3>
+              {filteredTopics.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
+                  {filteredTopics.map((topic, index) => (
+                    <div key={`maintopic-${topic.id}-${index}`} className="group relative h-full">
+                      <div className="border dark:border-slate-700 rounded-xl overflow-hidden hover:shadow-lg hover:scale-[1.01] hover:border-primary/40 dark:hover:shadow-primary/20 transition-all duration-300 h-full flex flex-col bg-white dark:bg-slate-800">
+                        {/* Colorful top border */}
+                        <div className="relative">
+                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/80 to-primary/20"></div>
+                        </div>
+                        
+                        {/* Card content */}
+                        <div className="p-3 sm:p-4 md:p-5 flex-grow">
+                          <div className="flex flex-wrap items-start justify-between mb-2.5 sm:mb-3 md:mb-4">
+                            <div className="flex items-start flex-shrink mr-2">
+                              <div className="bg-slate-100 dark:bg-slate-700 p-1.5 sm:p-2 md:p-2.5 rounded-lg mr-2 sm:mr-2.5 shadow-sm transform group-hover:bg-primary/10 transition-colors duration-300">
+                                {IconMap[topic.icon as keyof typeof IconMap] ? (
+                                  React.createElement(IconMap[topic.icon as keyof typeof IconMap], {
+                                    className: "h-5 w-5 sm:h-6 sm:w-6 md:h-6 md:w-6 text-primary"
+                                  })
+                                ) : (
+                                  <Layers className="h-5 w-5 sm:h-6 sm:w-6 md:h-6 md:w-6 text-primary" /> 
+                                )}
+                              </div>
+                              <div className="pt-1">
+                                <h3 className="text-sm sm:text-base font-semibold leading-tight group-hover:text-primary transition-colors duration-200">{topic.name}</h3>
+                                <div className="flex items-center mt-1">
+                                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${ 
+                                    topic.difficulty === 'beginner' ? 'bg-green-100 text-green-700 dark:bg-green-700/30 dark:text-green-300' : 
+                                    topic.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-700/30 dark:text-yellow-300' :
+                                    'bg-red-100 text-red-700 dark:bg-red-700/30 dark:text-red-300'
+                                  }`}>
+                                    {topic.difficulty.charAt(0).toUpperCase() + topic.difficulty.slice(1)}
+                                  </span>
+                                </div>
+                              </div>
                             </div>
-                            <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-                              {tutorial.description}
-                            </p>
-                            <div className="flex justify-between items-center">
-                              {getLevelBadge(tutorial.level)}
-                              <span className="text-sm text-primary">Learn →</span>
+                            <div className="mt-1 sm:mt-0.5">
+                              <span className="bg-primary/10 text-primary text-xs font-medium px-2 py-1 rounded-full whitespace-nowrap flex-shrink-0">
+                                {topic.tutorialCount} {topic.tutorialCount === 1 ? 'item' : 'items'}
+                              </span>
                             </div>
                           </div>
-                        </Link>
-                      ))}
+                          
+                          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-3 sm:mb-4 line-clamp-2 min-h-[2.5rem] overflow-hidden">
+                            {topic.description}
+                          </p>
+                          
+                          {topic.tutorials && topic.tutorials.length > 0 && (
+                            <div className="space-y-1.5 sm:space-y-2 mb-3 sm:mb-4">
+                              <p className="text-xs uppercase text-slate-500 dark:text-slate-400 font-semibold tracking-wider">Key Tutorials:</p>
+                              <ul className="space-y-1 sm:space-y-1.5 bg-slate-50 dark:bg-slate-700/20 rounded-lg p-1.5 sm:p-2">
+                                {topic.tutorials.slice(0, 2).map((tutorial, subIndex) => (
+                                  <li key={`keytutorial-${topic.id}-${tutorial.id}-${subIndex}`} className="truncate">
+                                    <Link 
+                                      href={`/learn/${tutorial.slug}`} 
+                                      onClick={() => handleTutorialClick(tutorial.id)} 
+                                      className="text-xs text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors duration-150 flex items-center group rounded-md py-1 px-1.5 hover:bg-slate-100 dark:hover:bg-slate-700/40"
+                                    >
+                                      {IconMap[tutorial.icon as keyof typeof IconMap] ? (
+                                        React.createElement(IconMap[tutorial.icon as keyof typeof IconMap], { className: "h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1.5 flex-shrink-0 text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors duration-150" })
+                                      ) : (
+                                        <Code className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1.5 flex-shrink-0 text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors duration-150" />
+                                      )}
+                                      <span className="truncate">{tutorial.name}</span>
+                                    </Link>
+                                  </li>
+                                ))}
+                                {topic.tutorials.length > 2 && (
+                                   <li className="text-xs text-slate-400 dark:text-slate-500 px-1.5 pt-0.5">+ {topic.tutorials.length - 2} more</li>
+                                )}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Card footer */}
+                        <div className="p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/50 border-t dark:border-slate-700/50 flex justify-center items-center">
+                          <Link 
+                            href={`/learn?topic=${topic.id}`}
+                            onClick={() => {
+                              // Potentially set selectedTopic here
+                            }}
+                            className="text-primary text-xs sm:text-sm font-medium flex items-center hover:underline w-full justify-center"
+                          >
+                            View Topic <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-1 transition-transform group-hover:translate-x-1.5 duration-300" />
+                          </Link>
+                        </div>
+                      </div>
+                      
+                      {/* Make the entire card clickable with an overlay, but exclude the links inside */}
+                      <div 
+                        onClick={() => {
+                          window.location.href = `/learn?topic=${topic.id}`;
+                        }}
+                        className="absolute inset-0 z-10 cursor-pointer"
+                        aria-hidden="true"
+                        style={{ pointerEvents: 'auto' }}
+                      ></div>
+                      
+                      {/* Restore pointer events for links inside the card */}
+                      <div className="absolute inset-0 z-20 pointer-events-none">
+                        <div className="p-2 sm:p-3 md:p-4 lg:p-5 h-full flex flex-col">
+                          <div className="mt-auto">
+                            <div className="pt-3 sm:pt-4 md:pt-4 opacity-0">
+                              {/* This keeps the spacing correct for the overlay */}
+                              <span className="text-xs">Placeholder</span> 
+                            </div>
+                            
+                            {/* Key tutorials area - make links clickable */}
+                            {topic.tutorials && topic.tutorials.length > 0 && (
+                              <div className="relative mt-auto">
+                                <div style={{ marginBottom: '3rem' }} className="space-y-1.5 sm:space-y-2 mb-3 sm:mb-4">
+                                  <div className="h-5 opacity-0">Placeholder</div>
+                                  <ul className="space-y-1 sm:space-y-2 rounded-lg p-1.5 sm:p-2 md:p-2.5">
+                                    {topic.tutorials.slice(0, 2).map((tutorial, subIndex) => (
+                                      <li key={`clickable-tutorial-${topic.id}-${tutorial.id}`} className="pointer-events-auto relative z-30">
+                                        <div className="h-7 opacity-0">Placeholder</div>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Restore pointer events for the View Topic link */}
+                      <div className="absolute bottom-0 right-0 z-30 pointer-events-auto p-2 sm:p-3 md:p-4">
+                        <div className="opacity-0 text-xs sm:text-sm">
+                          View Topic <ArrowRight className="inline h-3 w-3 sm:h-4 sm:w-4 ml-1" />
+                        </div>
+                      </div>
                     </div>
-                  </TabsContent>
-                ))}
-              </Tabs>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <Layers className="h-12 w-12 mx-auto text-slate-400 mb-4" />
+                  <h3 className="text-xl font-semibold text-slate-700 dark:text-slate-300 mb-2">No Topics Found</h3>
+                  <p className="text-slate-500 dark:text-slate-400">
+                    {searchTerm ? `No topics match your search for "${searchTerm}". Try a different term.` : 'There are currently no topics available.'}
+                  </p>
+                </div>
+              )}
             </section>
 
             {/* Learning path section */}
@@ -398,6 +621,12 @@ export default function LearnPage() {
                     </Button>
                     <Button asChild variant="outline" size="sm">
                       <Link href="/learn/quizzes">All Quizzes</Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm">
+                      <Link href="/learn/resources">Learning Resources</Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm">
+                      <Link href="/learn/community">Join Community</Link>
                     </Button>
                   </div>
                 </div>
@@ -492,4 +721,4 @@ export default function LearnPage() {
       </div>
     </main>
   );
-} 
+}
