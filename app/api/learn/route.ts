@@ -11,7 +11,16 @@ type Tutorial = {
     level: string;
     popular: boolean;
     category: string;
+    subcategoryId?: string;
 };
+
+type SubCategory = {
+    id: string;
+    name: string;
+    icon: string;
+    tutorials: Tutorial[];
+    tutorialCount?: number;
+}
 
 type MainTopicResponse = {
     id: string;
@@ -22,6 +31,7 @@ type MainTopicResponse = {
     tutorials: Tutorial[];
     difficulty: string;
     color?: string;
+    subCategories: SubCategory[];
 };
 
 // Configuration for Main Topics and keyword mapping
@@ -36,23 +46,39 @@ const mainTopicConfigurations = [
                    "learnreact", "learnsvg", "learntypescript", "learnvue", "learnicons", "learncolors", "asp", "learnasp"],
         description: "Learn everything about building modern websites and web applications, from HTML basics to advanced JavaScript frameworks.",
         icon: "Globe",
-        difficulty: "Beginner to Advanced"
+        difficulty: "Beginner to Advanced",
+        subCategories: [
+            { id: "html-css-basics", name: "HTML & CSS Basics", icon: "Code" },
+            { id: "javascript", name: "JavaScript", icon: "FileCode" },
+            { id: "frontend-frameworks", name: "Frontend Frameworks", icon: "Layers" },
+            { id: "web-design", name: "Web Design", icon: "PenTool" }
+        ]
     },
     {
         id: "c-programming-family",
         name: "C Programming Family",
         keywords: ["c", "c++", "c#", "objective-c", "objective c", "learnc"],
         description: "Master the C-family of languages, from fundamental C programming to object-oriented C++ and C#.",
-        icon: "Code",
-        difficulty: "Beginner to Advanced"
+        icon: "Terminal",
+        difficulty: "Beginner to Advanced",
+        subCategories: [
+            { id: "c-basics", name: "C Basics", icon: "Code" },
+            { id: "cpp", name: "C++", icon: "GitBranch" },
+            { id: "csharp", name: "C#", icon: "Hash" }
+        ]
     },
     {
         id: "cyber-security",
         name: "Cyber Security",
         keywords: ["cyber security", "cybersecurity", "ethical hacking", "network security", "cyber_security"],
         description: "Understand the principles of cyber security, protect systems, and learn about ethical hacking techniques.",
-        icon: "Server",
-        difficulty: "Intermediate to Advanced"
+        icon: "Shield",
+        difficulty: "Intermediate to Advanced",
+        subCategories: [
+            { id: "security-basics", name: "Security Basics", icon: "Lock" },
+            { id: "ethical-hacking", name: "Ethical Hacking", icon: "Zap" },
+            { id: "network-security", name: "Network Security", icon: "Network" }
+        ]
     },
     {
         id: "python-programming",
@@ -60,16 +86,27 @@ const mainTopicConfigurations = [
         keywords: ["python", "django", "flask", "pandas", "numpy", "matplotlib", "scipy", "learnpython", 
                   "learnnumpy", "learnmatplotlib", "learnpandas", "learnscipy", "learndjango"],
         description: "Explore Python for web development, data science, machine learning, and more.",
-        icon: "Code",
-        difficulty: "Beginner to Advanced"
+        icon: "FileCode",
+        difficulty: "Beginner to Advanced",
+        subCategories: [
+            { id: "python-basics", name: "Python Basics", icon: "Code" },
+            { id: "python-data-science", name: "Python for Data Science", icon: "BarChart" },
+            { id: "python-web", name: "Web Development with Python", icon: "Globe" },
+            { id: "python-automation", name: "Automation with Python", icon: "Workflow" }
+        ]
     },
     {
         id: "java-programming",
         name: "Java Programming",
         keywords: ["java", "spring", "jsp", "learnjava"],
         description: "Dive into Java for enterprise applications, Android development, and large-scale systems.",
-        icon: "Code",
-        difficulty: "Beginner to Advanced"
+        icon: "Coffee",
+        difficulty: "Beginner to Advanced",
+        subCategories: [
+            { id: "java-basics", name: "Java Basics", icon: "Code" },
+            { id: "java-enterprise", name: "Java Enterprise", icon: "Building" },
+            { id: "android-dev", name: "Android Development", icon: "Smartphone" }
+        ]
     },
     {
         id: "data-science-ml",
@@ -79,8 +116,14 @@ const mainTopicConfigurations = [
                    "learnmachine_learning", "learnr", "learnchatgpt", "learngenerative_ai", "learngoogle_bard",
                    "learnstatistics"],
         description: "Unlock insights from data and build intelligent systems with machine learning and AI techniques.",
-        icon: "LineChart",
-        difficulty: "Intermediate to Advanced"
+        icon: "Brain",
+        difficulty: "Intermediate to Advanced",
+        subCategories: [
+            { id: "statistics-fundamentals", name: "Statistical Fundamentals", icon: "PieChart" },
+            { id: "ml-basics", name: "Machine Learning Basics", icon: "Network" },
+            { id: "deep-learning", name: "Deep Learning", icon: "Layers" },
+            { id: "generative-ai", name: "Generative AI", icon: "Sparkles" }
+        ]
     },
     {
         id: "databases",
@@ -89,15 +132,25 @@ const mainTopicConfigurations = [
                    "learnpostgresql", "learnmongodb"],
         description: "Learn to design, manage, and query various types of databases, both SQL and NoSQL.",
         icon: "Database",
-        difficulty: "Beginner to Intermediate"
+        difficulty: "Beginner to Intermediate",
+        subCategories: [
+            { id: "sql-databases", name: "SQL Databases", icon: "Table" },
+            { id: "nosql-databases", name: "NoSQL Databases", icon: "FileJson" },
+            { id: "database-design", name: "Database Design", icon: "Workflow" }
+        ]
     },
     {
         id: "php-programming",
         name: "PHP Programming",
         keywords: ["php", "laravel", "symfony", "wordpress", "learnphp"],
         description: "Develop dynamic websites and web applications using PHP and popular frameworks like Laravel.",
-        icon: "Code",
-        difficulty: "Beginner to Intermediate"
+        icon: "FileCode",
+        difficulty: "Beginner to Intermediate",
+        subCategories: [
+            { id: "php-basics", name: "PHP Basics", icon: "Code" },
+            { id: "php-frameworks", name: "PHP Frameworks", icon: "Layers" },
+            { id: "wordpress-dev", name: "WordPress Development", icon: "Edit" }
+        ]
     },
     {
         id: "backend-and-tools",
@@ -106,7 +159,12 @@ const mainTopicConfigurations = [
                    "create_a_server", "code_editor", "learnapp"],
         description: "Master backend technologies and essential development tools for modern applications.",
         icon: "Server",
-        difficulty: "Beginner to Advanced"
+        difficulty: "Beginner to Advanced",
+        subCategories: [
+            { id: "nodejs", name: "Node.js", icon: "FileJson" },
+            { id: "version-control", name: "Version Control", icon: "GitBranch" },
+            { id: "devops", name: "DevOps & Deployment", icon: "Rocket" }
+        ]
     },
     {
         id: "other-languages",
@@ -114,7 +172,12 @@ const mainTopicConfigurations = [
         keywords: ["go", "rust", "kotlin", "learngo", "learnrust", "learnkotlin", "learndsa", "json", "learnjson"],
         description: "Explore other modern programming languages used in various development scenarios.",
         icon: "Code",
-        difficulty: "Beginner to Advanced"
+        difficulty: "Beginner to Advanced",
+        subCategories: [
+            { id: "go", name: "Go Programming", icon: "FileCode" },
+            { id: "rust", name: "Rust Programming", icon: "FileCode" },
+            { id: "mobile-dev", name: "Mobile Development", icon: "Smartphone" }
+        ]
     },
     {
         id: "productivity-tools",
@@ -122,7 +185,12 @@ const mainTopicConfigurations = [
         keywords: ["excel", "google sheets", "learnexcel", "learngoogle_sheets", "learnraspberry_pi"],
         description: "Learn essential productivity tools for business and data analysis.",
         icon: "FileSpreadsheet",
-        difficulty: "Beginner to Intermediate"
+        difficulty: "Beginner to Intermediate",
+        subCategories: [
+            { id: "spreadsheets", name: "Spreadsheets", icon: "Table" },
+            { id: "office-suite", name: "Office Suite", icon: "FileText" },
+            { id: "productivity-apps", name: "Productivity Apps", icon: "Calendar" }
+        ]
     },
     {
         id: "learning-resources",
@@ -131,12 +199,42 @@ const mainTopicConfigurations = [
                   "study_plan", "introduction", "newsletter", "join_our_newsletter"],
         description: "Various learning resources, tutorials, and skill development tools.",
         icon: "GraduationCap",
-        difficulty: "All Levels"
+        difficulty: "All Levels",
+        subCategories: [
+            { id: "exercises", name: "Practice Exercises", icon: "Dumbbell" },
+            { id: "quizzes", name: "Quizzes", icon: "CheckCircle" },
+            { id: "certification", name: "Certifications", icon: "Award" },
+            { id: "learning-paths", name: "Learning Paths", icon: "Route" }
+        ]
     }
 ];
 
 // Cache for categories to reduce repeated log messages
 const mappedCategories = new Set<string>();
+
+// Helper function to assign a tutorial to a subcategory based on keywords
+function assignToSubcategory(tutorialTitle: string, categoryName: string, mainTopic: MainTopicResponse) {
+    // Default to the first subcategory if no match is found
+    let targetSubcategory = mainTopic.subCategories[0];
+    
+    const titleLower = tutorialTitle.toLowerCase();
+    const categoryLower = categoryName.toLowerCase();
+    
+    for (const subcat of mainTopic.subCategories) {
+        // Create a simple keyword mapping for subcategories based on their names
+        const subcatKeywords = subcat.name.toLowerCase().split(/[^\w]+/);
+        
+        // Check if title or category contains any of the subcategory keywords
+        if (subcatKeywords.some(keyword => 
+            titleLower.includes(keyword) || 
+            categoryLower.includes(keyword))) {
+            targetSubcategory = subcat;
+            break;
+        }
+    }
+    
+    return targetSubcategory.id;
+}
 
 export async function GET() {
     try {
@@ -152,6 +250,10 @@ export async function GET() {
                 tutorialCount: 0,
                 tutorials: [],
                 color: getColorForCategory(config.name),
+                subCategories: config.subCategories.map(sc => ({
+                    ...sc,
+                    tutorials: []
+                }))
             });
         });
 
@@ -180,17 +282,32 @@ export async function GET() {
                                 return;
                             }
                             
-                            if (!mainTopic.tutorials.find(t => t.id === course.id)) {
-                                mainTopic.tutorials.push({
+                            // Choose appropriate subcategory for this course
+                            const subcategoryId = assignToSubcategory(course.title, category, mainTopic);
+                            
+                            // Find the subcategory object
+                            const subcategory = mainTopic.subCategories.find((sc: SubCategory) => sc.id === subcategoryId);
+                            
+                            if (subcategory && !subcategory.tutorials.find((t: Tutorial) => t.id === course.id)) {
+                                const tutorialObject: Tutorial = {
                                     id: course.id,
                                     name: course.title || `Unnamed Course`,
                                     slug: course.slug || course.id,
                                     icon: getIconForCategory(category),
                                     description: course.description || `Learn ${course.title || 'this topic'}.`,
                                     level: course.difficulty || 'beginner',
-                                    popular: false, // We could determine this based on certain criteria
+                                    popular: false,
                                     category: category,
-                                });
+                                    subcategoryId: subcategoryId
+                                };
+                                
+                                // Add to subcategory
+                                subcategory.tutorials.push(tutorialObject);
+                                
+                                // Also add to main category (for backward compatibility)
+                                if (!mainTopic.tutorials.find((t: Tutorial) => t.id === course.id)) {
+                                    mainTopic.tutorials.push(tutorialObject);
+                                }
                             }
                         });
                         matched = true;
@@ -218,20 +335,30 @@ export async function GET() {
                         mappedCategories.add(category);
                     }
                     
+                    // Choose a default subcategory for this fallback
+                    const defaultSubcategory = fallbackTopic.subCategories[0];
+                    
                     courses.forEach(course => {
                         if (!course || !course.id || !course.title) return;
                         
-                        if (!fallbackTopic.tutorials.find(t => t.id === course.id)) {
-                            fallbackTopic.tutorials.push({
-                                id: course.id,
-                                name: course.title,
-                                slug: course.slug || course.id,
-                                icon: getIconForCategory(category),
-                                description: course.description || `Learn ${course.title}.`,
-                                level: course.difficulty || 'beginner',
-                                popular: false,
-                                category: category,
-                            });
+                        const tutorialObject: Tutorial = {
+                            id: course.id,
+                            name: course.title,
+                            slug: course.slug || course.id,
+                            icon: getIconForCategory(category),
+                            description: course.description || `Learn ${course.title}.`,
+                            level: course.difficulty || 'beginner',
+                            popular: false,
+                            category: category,
+                            subcategoryId: defaultSubcategory.id
+                        };
+                        
+                        // Add to default subcategory
+                        defaultSubcategory.tutorials.push(tutorialObject);
+                        
+                        // Also add to main category (for backward compatibility)
+                        if (!fallbackTopic.tutorials.find((t: Tutorial) => t.id === course.id)) {
+                            fallbackTopic.tutorials.push(tutorialObject);
                         }
                     });
                 }
@@ -243,19 +370,24 @@ export async function GET() {
         groupedTopics.forEach(topic => {
             if (topic.tutorials.length > 0) {
                 topic.tutorialCount = topic.tutorials.length;
+                
+                // Update subcategory counts
+                topic.subCategories = topic.subCategories.map((sc: SubCategory) => ({
+                    ...sc,
+                    tutorialCount: sc.tutorials ? sc.tutorials.length : 0
+                }));
+                
                 responseTopics.push(topic);
             }
         });
 
         responseTopics.sort((a, b) => a.name.localeCompare(b.name));
 
+        // Return the topics as JSON
         return NextResponse.json(responseTopics);
     } catch (error) {
-        console.error('Failed to fetch main topics:', error);
-        return NextResponse.json(
-            { message: 'Failed to fetch main topics', error: (error as Error).message },
-            { status: 500 }
-        );
+        console.error('Error generating topics:', error);
+        return NextResponse.json({ error: 'Failed to generate topics' }, { status: 500 });
     }
 }
 

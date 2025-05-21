@@ -11,7 +11,40 @@ import {
   Boxes,
   BarChart,
   Link as LinkIcon,
-  GraduationCap
+  GraduationCap,
+  PenTool,
+  Globe,
+  BookOpen,
+  LineChart,
+  Coffee,
+  Terminal,
+  Shield,
+  Lock,
+  Zap,
+  Network,
+  FileCode,
+  Brain,
+  PieChart,
+  Sparkles,
+  Table,
+  FileJson,
+  Workflow,
+  Edit,
+  FileSpreadsheet,
+  GitBranch,
+  Rocket,
+  Smartphone,
+  Calendar,
+  HashIcon as Hash,
+  Building,
+  Dumbbell,
+  CheckCircle,
+  Award,
+  Route,
+  Clock,
+  Star,
+  History,
+  type LucideIcon
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -24,10 +57,11 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { usePathname } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
+import { useLearningProgress } from "@/hooks/use-learning-progress"
 
-// Learning sidebar data
-const data = {
+// User data - this could be fetched from an API in the future
+const userData = {
   user: {
     name: "User Name",
     email: "user@example.com",
@@ -40,222 +74,299 @@ const data = {
       plan: "Free",
     }
   ],
-  navMain: [
-    {
-      title: "Learning",
-      url: "/learn",
-      icon: Home,
-      isActive: true,
-      items: [],
-    },
-    {
-      title: "HTML & CSS",
-      url: "/learn/html-css",
-      icon: Code,
-      items: [
-        {
-          title: "HTML",
-          url: "/learn/html",
-        },
-        {
-          title: "CSS",
-          url: "/learn/css",
-        },
-        {
-          title: "Bootstrap",
-          url: "/learn/bootstrap",
-        },
-        {
-          title: "Responsive Web Design",
-          url: "/learn/responsive",
-        }
-      ],
-    },
-    {
-      title: "JavaScript",
-      url: "/learn/javascript-category",
-      icon: FileText,
-      items: [
-        {
-          title: "JavaScript Basics",
-          url: "/learn/javascript",
-        },
-        {
-          title: "JavaScript Advanced",
-          url: "/learn/javascript-advanced",
-        },
-        {
-          title: "DOM Manipulation",
-          url: "/learn/dom",
-        },
-        {
-          title: "ES6+",
-          url: "/learn/es6",
-        },
-        {
-          title: "TypeScript",
-          url: "/learn/typescript",
-        },
-      ],
-    },
-    {
-      title: "Frontend Frameworks",
-      url: "/learn/frontend",
-      icon: Layers,
-      items: [
-        {
-          title: "React",
-          url: "/learn/react",
-        },
-        {
-          title: "Angular",
-          url: "/learn/angular",
-        },
-        {
-          title: "Vue",
-          url: "/learn/vue",
-        },
-        {
-          title: "Next.js",
-          url: "/learn/nextjs",
-        },
-      ],
-    },
-    {
-      title: "Backend",
-      url: "/learn/backend",
-      icon: Server,
-      items: [
-        {
-          title: "Node.js",
-          url: "/learn/nodejs",
-        },
-        {
-          title: "Express.js",
-          url: "/learn/express",
-        },
-        {
-          title: "PHP",
-          url: "/learn/php",
-        },
-        {
-          title: "Django",
-          url: "/learn/django",
-        },
-      ],
-    },
-    {
-      title: "Databases",
-      url: "/learn/databases",
-      icon: Database,
-      items: [
-        {
-          title: "SQL",
-          url: "/learn/sql",
-        },
-        {
-          title: "MongoDB",
-          url: "/learn/mongodb",
-        },
-        {
-          title: "Firebase",
-          url: "/learn/firebase",
-        },
-      ],
-    },
-    {
-      title: "DevOps",
-      url: "/learn/devops",
-      icon: Boxes,
-      items: [
-        {
-          title: "Git & GitHub",
-          url: "/learn/git",
-        },
-        {
-          title: "Docker",
-          url: "/learn/docker",
-        },
-        {
-          title: "CI/CD",
-          url: "/learn/cicd",
-        },
-      ],
-    },
-    {
-      title: "Data Science",
-      url: "/learn/data-science",
-      icon: BarChart,
-      items: [
-        {
-          title: "Python",
-          url: "/learn/python",
-        },
-        {
-          title: "Data Analysis",
-          url: "/learn/data-analysis",
-        },
-        {
-          title: "Machine Learning",
-          url: "/learn/machine-learning",
-        },
-      ],
-    },
-    {
-      title: "Quick Links",
-      url: "/learn/quick-links",
-      icon: LinkIcon,
-      items: [
-        {
-          title: "Exercises",
-          url: "/learn/exercises",
-        },
-        {
-          title: "Examples",
-          url: "/learn/examples",
-        },
-        {
-          title: "Settings",
-          url: "/user-settings",
-        },
-      ],
-    },
-  ],
 }
+
+// Icon mapping for dynamic icons
+const IconMap: { [key: string]: LucideIcon } = {
+  Code, 
+  PenTool, 
+  Globe, 
+  Layers, 
+  Server, 
+  BookOpen, 
+  Database, 
+  LineChart,
+  FileText,
+  Home,
+  Boxes,
+  BarChart,
+  LinkIcon,
+  GraduationCap,
+  Coffee,
+  Terminal,
+  Shield,
+  Lock,
+  Zap,
+  Network,
+  FileCode,
+  Brain,
+  PieChart,
+  Sparkles,
+  Table,
+  FileJson,
+  Workflow,
+  Edit,
+  FileSpreadsheet,
+  GitBranch,
+  Rocket,
+  Smartphone,
+  Calendar,
+  Hash,
+  Building,
+  Dumbbell,
+  CheckCircle,
+  Award,
+  Route,
+  Clock,
+  Star,
+  History,
+};
+
+// Define types based on API response
+type Tutorial = {
+  id: string;
+  name: string;
+  slug: string;
+  icon: string;
+  description: string;
+  level: string;
+  popular: boolean;
+  category: string;
+  subcategoryId: string;
+};
+
+type SubCategory = {
+  id: string;
+  name: string;
+  icon: string;
+  tutorialCount: number;
+  tutorials: Tutorial[];
+};
+
+type MainTopic = {
+  id: string;
+  name: string;
+  color?: string;
+  icon: string;
+  description: string;
+  tutorialCount: number;
+  tutorials: Tutorial[];
+  subCategories: SubCategory[];
+  difficulty: string;
+};
+
+// NavItem type to match what NavMain expects
+type NavItem = {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  badge?: string;
+  items?: {
+    title: string;
+    url: string;
+    isActive?: boolean;
+    badge?: string;
+    items?: {
+      title: string;
+      url: string;
+      isActive?: boolean;
+      badge?: string;
+    }[];
+  }[];
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [mainTopics, setMainTopics] = React.useState<MainTopic[]>([]);
+  const { progress } = useLearningProgress();
+  const [recentlyViewed, setRecentlyViewed] = React.useState<Tutorial[]>([]);
+  const [favorites, setFavorites] = React.useState<MainTopic[]>([]);
+  
+  // Fetch topics data
+  React.useEffect(() => {
+    const fetchMainTopics = async () => {
+      try {
+        const response = await fetch('/api/learn');
+        if (!response.ok) {
+          throw new Error('Failed to fetch main topics');
+        }
+        const data = await response.json();
+        setMainTopics(data);
+      } catch (err) {
+        console.error('Error fetching main topics:', err);
+      }
+    };
+
+    fetchMainTopics();
+  }, []);
+
+  // Get recently viewed tutorials
+  React.useEffect(() => {
+    if (mainTopics.length > 0 && progress.lastVisited) {
+      // Create a flat array of all tutorials
+      const allTutorials = mainTopics.flatMap(topic => topic.tutorials);
+      
+      // Find and set the recently viewed tutorial
+      const lastViewed = allTutorials.filter(
+        tutorial => progress.completedTutorials.includes(tutorial.id)
+      ).slice(0, 5);
+      
+      setRecentlyViewed(lastViewed);
+    }
+  }, [mainTopics, progress]);
+
+  // Get favorite topics
+  React.useEffect(() => {
+    if (mainTopics.length > 0 && progress.favoriteTopics?.length > 0) {
+      const userFavorites = mainTopics.filter(
+        topic => progress.favoriteTopics.includes(topic.id)
+      );
+      setFavorites(userFavorites);
+    }
+  }, [mainTopics, progress]);
   
   // Simple function to check if a URL is part of the current path
   const isActive = (url: string): boolean => {
     if (!pathname) return false;
-    if (url === "/learn" && pathname === "/learn") return true;
-    if (url !== "/learn" && pathname.startsWith(url)) return true;
+    
+    // Check for exact match (learning home)
+    if (url === "/learn" && pathname === "/learn" && !searchParams.has('topic')) return true;
+    
+    // Check for tutorial page
+    if (url.startsWith("/learn/") && pathname.startsWith(url)) return true;
+    
+    // Check for topic query parameter
+    if (url.includes('?topic=')) {
+      const topicMatch = url.match(/\?topic=([^&]+)/);
+      if (topicMatch && topicMatch[1]) {
+        return searchParams.get('topic') === topicMatch[1];
+      }
+    }
+    
+    // Check for subcategory query parameter
+    if (url.includes('?subcategory=')) {
+      const subcategoryMatch = url.match(/\?subcategory=([^&]+)/);
+      if (subcategoryMatch && subcategoryMatch[1]) {
+        return searchParams.get('subcategory') === subcategoryMatch[1];
+      }
+    }
+    
     return false;
   };
 
-  // Set active items based on current path
-  const getNavItems = () => {
-    return data.navMain.map(item => ({
-      ...item,
-      isActive: item.url ? isActive(item.url) : item.items?.some(subItem => isActive(subItem.url)) || false,
-      items: item.items?.map(subItem => ({
-        ...subItem,
-        isActive: isActive(subItem.url)
-      }))
-    }));
+  // Convert API data to sidebar-compatible format
+  const getNavItems = (): NavItem[] => {
+    const navItems: NavItem[] = [
+      {
+        title: "Learning Home",
+        url: "/learn",
+        icon: Home,
+        isActive: isActive("/learn"),
+      }
+    ];
+
+    // Add recently viewed section if available
+    if (recentlyViewed.length > 0) {
+      navItems.push({
+        title: "Recently Viewed",
+        url: "#recent",
+        icon: History,
+        isActive: false,
+        items: recentlyViewed.map(tutorial => ({
+          title: tutorial.name,
+          url: `/learn/${tutorial.slug}`,
+          isActive: isActive(`/learn/${tutorial.slug}`),
+        }))
+      });
+    }
+
+    // Add favorite topics if available
+    if (favorites.length > 0) {
+      navItems.push({
+        title: "Favorites",
+        url: "#favorites",
+        icon: Star,
+        isActive: false,
+        items: favorites.map(topic => ({
+          title: topic.name,
+          url: `/learn?topic=${topic.id}`,
+          isActive: isActive(`/learn?topic=${topic.id}`),
+        }))
+      });
+    }
+
+    // Add "Continue Learning" if there's a last visited tutorial
+    if (progress.lastVisited) {
+      const lastVisitedTutorial = mainTopics
+        .flatMap(topic => topic.tutorials)
+        .find(tutorial => tutorial.id === progress.lastVisited);
+
+      if (lastVisitedTutorial) {
+        navItems.push({
+          title: "Continue Learning",
+          url: `/learn/${lastVisitedTutorial.slug}`,
+          icon: Clock,
+          isActive: isActive(`/learn/${lastVisitedTutorial.slug}`),
+          badge: "Resume",
+        });
+      }
+    }
+
+    // Add a section delimiter
+    navItems.push({
+      title: "All Topics",
+      url: "#all-topics",
+      icon: Layers,
+      isActive: false,
+    });
+
+    // Map the main topics from API to sidebar format with subcategories
+    const topicsFromApi: NavItem[] = mainTopics.map(topic => {
+      // Group tutorials by subcategory
+      const subCategoryItems = topic.subCategories.map(subcat => {
+        // Only show subcategories with tutorials
+        if (!subcat.tutorialCount) return null;
+        
+        return {
+          title: subcat.name,
+          url: `/learn?topic=${topic.id}&subcategory=${subcat.id}`,
+          isActive: isActive(`/learn?topic=${topic.id}&subcategory=${subcat.id}`),
+          badge: subcat.tutorialCount.toString(),
+          icon: IconMap[subcat.icon] || BookOpen,
+          items: subcat.tutorials.map(tutorial => ({
+            title: tutorial.name,
+            url: `/learn/${tutorial.slug}`,
+            isActive: isActive(`/learn/${tutorial.slug}`),
+            badge: progress.completedTutorials.includes(tutorial.id) ? "✓" : undefined,
+          }))
+        };
+      }).filter(Boolean) as NavItem[];
+
+      return {
+        title: topic.name,
+        url: `/learn?topic=${topic.id}`,
+        icon: IconMap[topic.icon] || BookOpen,
+        isActive: isActive(`/learn?topic=${topic.id}`),
+        badge: topic.tutorialCount.toString(),
+        items: subCategoryItems
+      };
+    });
+
+    return [...navItems, ...topicsFromApi];
   };
 
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher teams={userData.teams} />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={getNavItems()} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={userData.user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
