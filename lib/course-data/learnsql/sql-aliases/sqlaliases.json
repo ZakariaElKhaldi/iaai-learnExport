@@ -1,0 +1,205 @@
+{
+  "id": "591c3402-9455-43fd-ac2e-22cd285f3f00",
+  "title": "SQLAliases",
+  "slug": "sqlaliases",
+  "metadata": {
+    "description": "Learn about SQLAliases with clear explanations and practical examples.",
+    "keywords": [
+      "sql",
+      "customers",
+      "aliases",
+      "select",
+      "example",
+      "customerid",
+      "alias",
+      "customername",
+      "orders",
+      "address",
+      "table"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Sql Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnSQL",
+    "subcategory": "SQL Aliases"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "SQL\nAliases",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "SQL Aliases\nSQL aliases are used to give a table, or a column in a table, a temporary name.\nAliases are often used to make column names more readable.\nAn alias only exists for the duration of that query.\nAn alias is created with the\nAS\nkeyword.\nExample\nSELECT CustomerID AS ID\nFROM Customers;\n\nAS is Optional\nActually, in most database languages, you can skip the AS keyword and get the same result:\nExample\nSELECT CustomerID ID\nFROM Customers;\n\nSyntax\nWhen alias is used on column:\nSELECT\ncolumn_name\nAS\nalias_name\nFROM\ntable_name;\nWhen alias is used on table:\nSELECT\ncolumn_name(s)\nFROM\ntable_name\nAS\nalias_name;\nDemo Database\nBelow is a selection from the\nCustomers\nand\nOrders\ntables used in the examples:\nCustomers\nCustomerID\nCustomerName\nContactName\nAddress\nCity\nPostalCode\nCountry\n1\nAlfreds Futterkiste\nMaria Anders\nObere Str. 57\nBerlin\n12209\nGermany\n2\nAna Trujillo Emparedados y helados\nAna Trujillo\nAvda. de la Constituci\u00f3n 2222\nM\u00e9xico D.F.\n05021\nMexico\n3\nAntonio Moreno Taquer\u00eda\nAntonio Moreno\nMataderos 2312\nM\u00e9xico D.F.\n05023\nMexico\nOrders\nOrderID\nCustomerID\nEmployeeID\nOrderDate\nShipperID\n10248\n90\n5\n7/4/1996\n3\n10249\n81\n6\n7/5/1996\n1\n10250\n34\n4\n7/8/1996\n2\nAlias for Columns\nThe following SQL statement creates two aliases, one for the CustomerID \ncolumn and one for the CustomerName column:\nExample\nSELECT CustomerID AS ID, CustomerName AS Customer\nFROM Customers;\n\nUsing Aliases With a Space Character\nIf you want your alias to contain one or more spaces, like \"\nMy Great Products\n\",\nsurround your alias with square brackets or double quotes.\nExample\nUsing [square brackets] for aliases with space characters:\nSELECT ProductName AS [My Great Products]\nFROM Products;\n\nExample\nUsing \"double quotes\" for aliases with space characters:\nSELECT ProductName AS \"My Great Products\"\nFROM Products;\n\nNote:\nSome database systems allows both [] and \"\", and some only allows one of them.\nConcatenate Columns\nThe following SQL statement creates an alias named \"Address\" that combine four columns (Address, PostalCode, \nCity and Country):\nExample\nSELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country \n  AS Address\nFROM Customers;\n\nNote:\nTo get the SQL statement above to work in MySQL use the following:\nMySQL Example\nSELECT CustomerName, CONCAT(Address,', ',PostalCode,', ',City,', ',Country) AS Address\nFROM Customers;\n\nNote:\nTo get the SQL statement above to work in Oracle use the following:\nOracle Example\nSELECT CustomerName, (Address || ', ' || PostalCode || ' ' || City || ', ' || \n  Country) AS Address\nFROM Customers;\nAlias for Tables\nThe same rules applies when you want to use an alias for a table.\nExample\nRefer to the Customers table as Persons instead:\nSELECT * FROM Customers AS Persons;\n\nIt might seem useless to use aliases on tables, but when you are using more than one table in your queries,\nit can make the SQL statements shorter.\nThe following SQL statement selects all the orders from the customer with \nCustomerID=4 (Around the Horn). We use the \"Customers\" and \"Orders\" tables, and \ngive them the table aliases of \"c\" and \"o\" respectively (Here we use \naliases to make the SQL shorter):\nExample\nSELECT o.OrderID, o.OrderDate, c.CustomerName\nFROM Customers AS c, Orders AS o\nWHERE c.CustomerName='Around the Horn' AND c.CustomerID=o.CustomerID;\n\nThe following SQL statement is the same as above, but without aliases:\nExample\nSELECT Orders.OrderID, Orders.OrderDate, Customers.CustomerName\nFROM Customers, Orders\nWHERE Customers.CustomerName='Around the Horn' AND Customers.CustomerID=Orders.CustomerID;\n\nAliases can be useful when:\nThere are more than one table involved in a query\nFunctions are used in the query\nColumn names are big or not very readable\nTwo or more columns are combined together\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "SELECT CustomerID AS ID\nFROM Customers;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "SELECT CustomerID ID\nFROM Customers;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "SELECT CustomerID AS ID, CustomerName AS Customer\nFROM Customers;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "SELECT ProductName AS [My Great Products]\nFROM Products;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "SELECT ProductName AS \"My Great Products\"\nFROM Products;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "SELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country \n  AS Address\nFROM Customers;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "MySQL Example",
+      "content": "",
+      "order": 9,
+      "code": "SELECT CustomerName, CONCAT(Address,', ',PostalCode,', ',City,', ',Country) AS Address\nFROM Customers;",
+      "language": "sql",
+      "explanation": "Example of mysql example"
+    },
+    {
+      "type": "code_example",
+      "title": "Oracle Example",
+      "content": "",
+      "order": 10,
+      "code": "SELECT CustomerName, (Address || ', ' || PostalCode || ' ' || City || ', ' || \n  Country) AS Address\nFROM Customers;",
+      "language": "sql",
+      "explanation": "Example of oracle example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "SELECT * FROM Customers AS Persons;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "SELECT o.OrderID, o.OrderDate, c.CustomerName\nFROM Customers AS c, Orders AS o\nWHERE c.CustomerName='Around the Horn' AND c.CustomerID=o.CustomerID;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "SELECT Orders.OrderID, Orders.OrderDate, Customers.CustomerName\nFROM Customers, Orders\nWHERE Customers.CustomerName='Around the Horn' AND Customers.CustomerID=Orders.CustomerID;",
+      "language": "sql",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your sql code here",
+      "solution": "SELECT CustomerID AS ID\nFROM Customers;"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your sql code here",
+      "solution": "SELECT CustomerID ID\nFROM Customers;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "61354d82-2416-4df2-afdd-41c95c39ab6e",
+      "title": "Sql Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "b2ed80e1-8eb6-44ac-af85-b9b35007a7b0",
+      "title": "Sql Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "dc285298-4946-46d0-99cf-504483d269ff",
+      "title": "Sql Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is SQL\nAliases\n\nSQL Aliases\nSQL aliases?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "used to give a table",
+        "often used to make column names more readable"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of SQL\nAliases\n\nSQL Aliases\nSQL aliases is 'used to give a table'."
+    },
+    {
+      "question": "What is Aliases?",
+      "options": [
+        "None of the above.",
+        "used to give a table",
+        "often used to make column names more readable",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Aliases is 'often used to make column names more readable'."
+    }
+  ],
+  "summary": "This tutorial covers SQLAliases concepts and techniques. You'll learn how to use SQLAliases effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of SQLAliases and how to apply it in your projects."
+}

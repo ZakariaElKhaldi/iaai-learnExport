@@ -1,0 +1,98 @@
+{
+  "id": "51a62792-2cd4-42b1-9824-a8952d6b52df",
+  "title": "Vue v-model Directive",
+  "slug": "vue-v-model-directive",
+  "metadata": {
+    "description": "Learn about Vue v-model Directive with clear explanations and practical examples.",
+    "keywords": [
+      "model",
+      "input",
+      "text",
+      "example",
+      "component",
+      "property",
+      "template",
+      "value",
+      "script",
+      "update"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 8,
+    "category": "LearnVue",
+    "subcategory": "v-model"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue v-model Directive",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Vue Directives Reference\n\nExample\nUsing the\nv-model\ndirective to create a two-way binding between an\n<input>\nelement and a data property.\n<template>\n  <h1>v-model Example</h1>\n  <p>Write something, and see the 'inputValue' data property update automatically.</p>\n  <input type=\"text\" v-model=\"inputValue\"> \n  <p>inputValue property: \"{{ inputValue }}\"</p>\n</template>\nRun Example \u00bb\nSee more examples below.\nDefinition and Usage\nThe\nv-model\ndirective is used to create a two-way binding between a form input element, or between a Vue instance property and a component.\nForm Input Elements with\nv-model\nForm input elements that can be used with\nv-model\nare\n<input>\n,\n<select>\nand\n<textarea>\n.\nTwo-way binding\nwith\nv-model\non form input elements works like this:\nWhen Vue detects a change in the input value, it will update the corresponding data property accordingly. (HTML -> JavaScript)\nWhen Vue detects a change in a Vue instance property, it will update the corresponding input value accordingly. (JavaScript -> HTML)\n(See Example above, and Example 1 below.)\nComponents with\nv-model\nWhen\nv-model\nis used on a component, the component interface must be set up properly with\nprops\nand\nemits\nto achieve the two-way binding.\nTwo-way binding\nwith\nv-model\non components works like this:\nWhen Vue detects a change in the parent instance property, the new value is sent as a prop to the component.\nWhen Vue detects a change in the child component, the new value is sent up to the parent as an emit event.\nWhen\nv-model\nis used on a component, the default prop name is 'modelValue', and the default emit event name is 'update:modelValue'. (See\nExample 2\nand\nExample 3\n.)\nWhen\nv-model\nis used on a component, instead of using a Vue instance data property we can use a computed property with the\nget()\nand\nset()\nmethods. (\nSee Example 4\n)\nDifferent names for props and emits than the default 'modelValue' and 'update:modelValue' can be set using\nv-model:\n. (\nSee Example 5\n)\nTo have more than one value connected as two-way bindings to a component, we must define each such value with its own\nv-model\n. (\nSee Example 6\n)\nModifiers\nModifiers\nDetails\n.lazy\nThe\nchange\nevent is used by Vue instead of the\ninput\nevent for when to synchronize. This means that the user must first modify the input, and then switch focus away from the input element before the instance property value gets updated. (\nSee Example 7\n)\n.number\nTypecasts the input to number. This is done automatically when using\n<input type=\"number\">\n.\n.trim\nRemoves white spaces at the start and end of the input. (\nSee Example 8\n)\ncustom\nTo create a custom modifier for\nv-model\n, we first need to define a prop 'modelModifiers' to store the new modifier. The modifier functionality is written in a method. If the modifier is set, the appropriate code runs in the method before emitting the value back up to the parent component. (\nSee Example 9\n)\nMore Examples\nExample 1\nUsing a slider (\n<input type=\"range\">\n) to change the 'inputValue' property value. The\n<input type=\"text\">\nelement automatically updates because it is bound to the 'inputValue' property with\nv-model\n.\n<template>\n  <h1>v-model Example</h1>\n  <p>Drag the slider to change the 'inputValue' data property, and see the input text field update automatically because of the two-way binding from v-model.</p>\n  <input type=\"range\" min=\"-50\" max=\"50\" v-on:input=\"sliderChange\" value=\"4\">\n  <p>inputValue property: \"{{ inputValue }}\"</p>\n  <input type=\"text\" v-model=\"inputValue\"> \n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      inputValue: null\n    };\n  },\n  methods: {\n    sliderChange(evt) {\n      this.inputValue = evt.target.value\n    }\n  }\n}\n</script>\nRun Example \u00bb\nExample 2\nUsing\nv-model\non the component with\nprops\nand\nemits\nso that changes in the\n<input>\nelement updates the parent's 'text' property.\nApp.vue\n:\n<template>\n  <h2>Example v-model Directive</h2>\n  <p>App.vue 'text' property: \"{{ text }}\"</p>\n  <comp-one v-model=\"text\"/>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      text: 'Say Cheese'\n    }\n  }\n}\n</script>\nCompOne.vue\n:\n<template>\n  <div>\n    <h3>Component</h3>\n    <p>Write something in the text input field below to see that changes here are emitted from the component, and the parent 'text' property gets updated by the use of v-model.</p>\n    <input\n      :value=\"modelValue\"\n      @input=\"$emit('update:modelValue', $event.target.value)\"\n    />\n  </div>\n</template>\n\n<script>\n  export default {\n    props: ['modelValue'],\n    emits: ['update:modelValue']\n  }\n</script>\n\n<style scoped>\ndiv {\n  border: solid black 1px;\n  padding: 10px;\n  margin: 20px 0;\n  max-width: 500px;\n}\n</style>\nRun Example \u00bb\nExample 3\nUsing\nv-model\non the component to demonstrate the two-way binding more clearly. The component can update the parent 'text' property, and the component gets updated when the parent 'text' property is changed.\nApp.vue\n:\n<template>\n  <h2>Example v-model Directive</h2>\n  <p>App.vue 'text' property: \"<pre>{{ text }}</pre>\"</p>\n  <button v-on:click=\"this.text = 'Hello!'\">text='Hello!'</button>\n  <comp-one v-model=\"text\"/>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      text: 'Say Cheese'\n    }\n  }\n}\n</script>\n\n<style>\npre {\n  display: inline;\n  background-color: yellow;\n}\n</style>\nCompOne.vue\n:\n<template>\n  <div>\n    <h3>Component</h3>\n    <p>Two-way binding on component with v-model:</p>\n    <ol>\n      <li>The component can update the 'text' property (using text field).</li>\n      <li>The component gets updated when the 'text' property is changed (using button).</li>\n    </ol>\n    <input\n      :value=\"modelValue\"\n      @input=\"$emit('update:modelValue', $event.target.value)\"\n    />\n  </div>\n</template>\n\n<script>\n  export default {\n    props: ['modelValue'],\n    emits: ['update:modelValue']\n  }\n</script>\n\n<style scoped>\ndiv {\n  border: solid black 1px;\n  padding: 10px;\n  margin: 20px 0;\n  max-width: 600px;\n}\n</style>\nRun Example \u00bb\nExample 4\nUsing\nv-model\nwith a computed value with\nget()\nand\nset()\nfunctions inside the component.\nCompOne.vue\n:\n<template>\n  <div>\n    <h3>Component</h3>\n    <p>Two-way binding on component with v-model:</p>\n    <ol>\n      <li>The component can update the 'text' property (using text field).</li>\n      <li>The component gets updated when the 'text' property is changed (using button).</li>\n    </ol>\n    <input v-model=\"inpVal\"/>\n  </div>\n</template>\n\n<script>\n  export default {\n    props: ['modelValue'],\n    emits: ['update:modelValue'],\n    computed: {\n      inpVal: {\n        get() {\n          return this.modelValue;\n        },\n        set(inpVal) {\n          this.$emit('update:modelValue',inpVal)\n        }\n      }\n    }\n  }\n</script>\n\n<style scoped>\ndiv {\n  border: solid black 1px;\n  padding: 10px;\n  margin: 20px 0;\n  max-width: 600px;\n}\n</style>\nRun Example \u00bb\nExample 5\nUsing\nv-model:message\non the component to rename the default prop name 'modelValue' to 'message'.\nApp.vue\n:\n<template>\n  <h2>Example v-model Directive</h2>\n  <p>App.vue 'text' property: \"<pre>{{ text }}</pre>\"</p>\n  <button v-on:click=\"this.text = 'Hello!'\">text='Hello!'</button>\n  <comp-one v-model:message=\"text\"/>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      text: 'Say Cheese'\n    }\n  }\n}\n</script>\n\n<style>\npre {\n  display: inline;\n  background-color: yellow;\n}\n</style>\nCompOne.vue\n:\n<template>\n  <div>\n    <h3>Component</h3>\n    <p>Two-way binding on component with v-model:</p>\n    <ol>\n      <li>The component can update the 'text' property (using text field).</li>\n      <li>The component gets updated when the 'text' property is changed (using button).</li>\n    </ol>\n    <input\n      :value=\"message\"\n      @input=\"$emit('update:message', $event.target.value)\"\n    />\n  </div>\n</template>\n\n<script>\n  export default {\n    props: ['message'],\n    emits: ['update:message']\n  }\n</script>\n\n<style scoped>\ndiv {\n  border: solid black 1px;\n  padding: 10px;\n  margin: 20px 0;\n  max-width: 600px;\n}\n</style>\nRun Example \u00bb\nExample 6\nUsing\nv-model\ntwo times on the component to create a two-way binding with two values.\nApp.vue\n:\n<template>\n  <h2>Example v-model Directive</h2>\n  <p>Name: \"<pre>{{ name }}</pre>\"</p>\n  <p>Height: <pre>{{ height }}</pre> cm</p>\n  <comp-one \n    v-model:name=\"name\"\n    v-model:height=\"height\"\n  />\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      name: 'Olaf',\n      height: 120\n    }\n  }\n}\n</script>\n\n<style>\npre {\n  display: inline;\n  background-color: yellow;\n}\n</style>\nCompOne.vue\n:\n<template>\n  <div>\n    <h3>Component</h3>\n    <p>Two inputs are bound to the component with v-model through props and emits.</p>\n    <p>\n      <label>\n        Name: \n        <input\n          type=\"text\"\n          :value=\"name\"\n          @input=\"$emit('update:name', $event.target.value)\"\n        />\n      </label>\n    </p>\n    <p>\n      <label>\n        Height:\n        <input\n          type=\"range\"\n          :value=\"height\"\n          @input=\"$emit('update:height', $event.target.value)\"\n          min=\"50\"\n          max=\"200\"\n        />\n        {{ this.$props.height }} cm\n      </label>\n    </p>\n  </div>\n</template>\n\n<script>\n  export default {\n    props: ['name','height'],\n    emits: ['update:name','update:height']\n  }\n</script>\n\n<style scoped>\ndiv {\n  border: solid black 1px;\n  padding: 10px;\n  margin: 20px 0;\n  max-width: 300px;\n}\n</style>\nRun Example \u00bb\nExample 7\nUsing the\n.lazy\nso that the user must first modify the input element, then change focus away from the input element before the property gets updated with\nv-model\n.\n<template>\n  <h1>v-model Example</h1>\n  <p>Using the '.lazy' modifier, you must first write something, then click somewhere else, or use the tab key to switch focus away from the input element, before the property get updated.</p>\n  <input type=\"text\" v-model.lazy=\"inputValue\"> \n  <p>inputValue property: \"{{ inputValue }}\"</p>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      inputValue: null\n    };\n  }\n}\n</script>\nRun Example \u00bb\nExample 8\nUsing the\n.lazy\nso that the user must first modify the input element, then change focus away from the input element before the property gets updated with\nv-model\n.\n<template>\n  <h1>v-model Example</h1>\n  <p>Using the '.trim' modifier will remove any white spaces at the start and end of the input.</p>\n  <p>Add white spaces at the start and end in the input fields below to see the difference with or with out '.trim'.</p>\n  <p>No '.trim': <input type=\"text\" v-model=\"inputVal1\"> \"<pre>{{ inputVal1 }}</pre>\"</p> \n  <p>With '.trim': <input type=\"text\" v-model.trim=\"inputVal2\"> \"<pre>{{ inputVal2 }}</pre>\"</p>\n\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      inputVal1: 'Hello',\n      inputVal2: 'Hi'\n    };\n  }\n}\n</script>\n\n<style>\npre {\n  display: inline;\n  background-color: lightgreen;\n\n}\n</style>\nRun Example \u00bb\nExample 9\nUsing the custom\n.allCapital\nmodifier to convert all characters in the input to upper case if the\n.allCapital\nmodifier is set.\nApp.vue\n:\n<template>\n  <h2>Example v-model Directive</h2>\n  <p>App.vue 'text' property: \"{{ text }}\"</p>\n  <comp-one v-model.allCapital=\"text\"/>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      text: ''\n    }\n  }\n}\n</script>\nCompOne.vue\n:\n<template>\n  <div>\n    <h3>Component</h3>\n    <p>Write something in the text input field below. Click somewhere else or use the tab key to shift focus away from the input element to see the effect of the custom 'allCapital' modifier.</p>\n    <input \n      :value=\"modelValue\" \n      @change=\"this.emitVal\" \n    />\n  </div>\n</template>\n\n<script>\nexport default {\n  props: {\n    modelValue: String,\n    modelModifiers: {\n      // modelModifiers is an empty object initially.\n      // Modifiers set on the component will be stored here.\n      default: () => ({}) \n    }\n  },\n  emits: ['update:modelValue'],\n  methods: {\n    emitVal(e) {\n      let value = e.target.value\n      if (this.modelModifiers.allCapital) {\n        value = value.toUpperCase()\n      }\n      this.$emit('update:modelValue', value)\n    }\n  }\n}\n</script>\n\n<style scoped>\ndiv {\n  border: solid black 1px;\n  padding: 10px;\n  margin: 20px 0;\n  max-width: 500px;\n}\n</style>\nRun Example \u00bb\nRelated Pages\nVue Tutorial:\nVue Components\nVue Tutorial:\nVue Props\nVue Tutorial:\nVue $emit() Method\nVue Tutorial:\nVue Computed Properties\nVue Reference:\nVue $emit() Method\nVue Reference:\nVue $props Object\nJavaScript Tutorial:\nJavaScript Object Accessors\n\nVue Directives Reference\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "035404a0-39d2-4727-a4f6-ff4f0ff727ec",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "202ec364-502d-4492-85e2-f2ce005cb7d9",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f56329bb-a68a-49b2-bd3c-87f7b3ca4582",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is model\ndirective?",
+      "options": [
+        "None of the above.",
+        "used to create a two-way binding between a form input element",
+        "<input>",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of model\ndirective is 'used to create a two-way binding between a form input element'."
+    },
+    {
+      "question": "What is model?",
+      "options": [
+        "None of the above.",
+        "<input>",
+        "None of the above.",
+        "used to create a two-way binding between a form input element"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of model is '<input>'."
+    }
+  ],
+  "summary": "This tutorial covers Vue v-model Directive concepts and techniques. You'll learn how to use Vue v-model Directive effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue v-model Directive and how to apply it in your projects."
+}

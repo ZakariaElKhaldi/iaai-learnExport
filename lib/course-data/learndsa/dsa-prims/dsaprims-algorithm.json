@@ -1,0 +1,98 @@
+{
+  "id": "cdb43935-3c74-452d-a361-266c55315be8",
+  "title": "DSAPrim's Algorithm",
+  "slug": "dsaprims-algorithm",
+  "metadata": {
+    "description": "Learn about DSAPrim's Algorithm with clear explanations and practical examples.",
+    "keywords": [
+      "vertex",
+      "self",
+      "algorithm",
+      "size",
+      "prim",
+      "weight",
+      "edge",
+      "graph",
+      "vertices",
+      "parents"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 10,
+    "category": "LearnDSA",
+    "subcategory": "DSA Prim's"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "DSA\nPrim's Algorithm",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Prim's algorithm was invented in 1930 by the Czech mathematician Vojt\u011bch Jarn\u00edk.\nThe algorithm was then rediscovered by Robert C. Prim in 1957, and also rediscovered by Edsger W. Dijkstra in 1959. Therefore, the algorithm is also sometimes called \"Jarn\u00edk's algorithm\", or the \"Prim-Jarn\u00edk algorithm\".\nPrim's Algorithm\nPrim's algorithm finds the Minimum Spanning Tree (MST) in a connected and undirected graph.\n{{ buttonText }}\n{{ msgDone }}\nThe MST found by Prim's algorithm is the collection of edges in a graph, that connects all vertices, with a minimum sum of edge weights.\nPrim's algorithm finds the MST by first including a random vertex to the MST. The algorithm then finds the vertex with the lowest edge weight from the current MST, and includes that to the MST. Prim's algorithm keeps doing this until all nodes are included in the MST.\nPrim's algorithm is greedy, and has a straightforward way to create a minimum spanning tree.\nFor Prim's algorithm to work, all the nodes must be connected. To find the MST's in an unconnected graph,\nKruskal's algorithm\ncan be used instead. You can read about Kruskal's algorithm on the \nHow it works:\nChoose a random vertex as the starting point, and include it as the first vertex in the MST.\nCompare the edges going out from the MST. Choose the edge with the lowest weight that connects a vertex among the MST vertices to a vertex outside the MST.\nAdd that edge and vertex to the MST.\nKeep doing step 2 and 3 until all vertices belong to the MST.\nNOTE:\nSince the starting vertex is chosen at random, it is possible to have different edges included in the MST for the same graph, but the total edge weight of the MST will still have the same minimum value.\nManual Run Through\nLet's run through Prim's algorithm manually on the graph below, so that we understand the detailed step-by-step operations before we try to program it.\nPrim's algorithm starts growing the Minimum Spanning Tree (MST) from a random vertex, but for this demonstration vertex A is chosen as the starting vertex.\n{{ edge.weight }}\n{{el.name}}\nFrom vertex A, the MST grows along the edge with the lowest weight. So vertices A and D now belong to the group of vertices that belong to the Minimum Spanning Tree.\n{{ edge.weight }}\n{{el.name}}\nA\nparents\narray is central to how Prim's algorithm grows the edges in the MST.\nAt this point, the\nparents\narray looks like this:\nparents = [-1,  0, -1,  0,  3,  3, -1, -1]\n#vertices [ A,  B,  C,  D,  E,  F,  G,  H]\nVertex A, the starting vertex, has no parent, and has therefore value\n-1\n. Vertex D's parent is A, that is why D's parent value is\n0\n(vertex A is located at index 0). B's parent is also A, and D is the parent of E and F.\nThe\nparents\narray helps us to keep the MST tree structure (a vertex can only have one parent).\nAlso, to avoid cycles and to keep track of which vertices are currently in the MST, the\nin_mst\narray is used.\nThe\nin_mst\narray currently looks like this:\nin_mst = [ true, false, false,  true, false, false, false, false]\n#vertices [    A,     B,     C,     D,     E,     F,     G,     H]\nThe \nSince both A-B and D-F have the same lowest edge weight\n4\n, either B or F can be chosen as the \n{{ edge.weight }}\n{{el.name}}\nAs you can see, the MST edge to E came from vertex D before, now it comes from vertex B, because B-E with weight\n6\nis lower than D-E with weight\n7\n. Vertex E can only have one parent in the MST tree structure (and in the\nparents\narray), so B-E and D-E cannot both be MST edges to E.\nThe \n3\nis the shortest edge weight from the current MST vertices.\n{{ edge.weight }}\n{{el.name}}\nAs vertex C is included in the MST, edges out from C are checked to see if there are edges with a lower weight from this MST vertex to vertices outside the MST. Edge C-E has a lower weight (\n3\n) than the \n6\n), and the C-H edge gets included in the MST with edge weight\n2\n.\nVertex H is the \n6\n, and vertex H becomes the parent of vertex G in the\nparents\narray.\n{{ edge.weight }}\n{{el.name}}\nThe \n4\n.\nWe choose vertex E as the \n{{ edge.weight }}\n{{el.name}}\nThe \nRun the simulation below to see Prim's algorithm doing the manual steps that we have just done.\n{{ edge.weight }}\n{{el.name}}\n{{ buttonText }}\n{{ msgDone }}\nImplementation of Prim's Algorithm\nFor Prim's algorithm to find a Minimum Spanning Tree (MST), we create a\nGraph\nclass. We will use the methods inside this\nGraph\nclass later to create the graph from the example above, and to run Prim's algorithm on it.\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n\ndef add_edge(self, u, v, weight):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.adj_matrix[u][v] = weight\n            self.adj_matrix[v][u] = weight  # For undirected graph\n\ndef add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\nLine 3-5:\nAt first, the adjacency matrix is empty, meaning there are no edges in the graph. Also, the vertices have no names to start with.\nLine 7-10:\nThe\nadd_edge\nmethod is for adding an edge, with an edge weight value, to the undirected graph.\nLine 12-14:\nThe\nadd_vertex_data\nmethod is used for giving names to the vertices, like for example 'A' or 'B'.\nNow that the structure for creating a graph is in place, we can implement Prim's algorithm as a method inside the\nGraph\nclass:\ndef prims_algorithm(self):\n        in_mst = [False] * self.size\n        key_values = [float('inf')] * self.size\n        parents = [-1] * self.size\n\nkey_values[0] = 0  # Starting vertex\n\nprint(\"Edge \\tWeight\")\n        for _ in range(self.size):\n            u = min((v for v in range(self.size) if not in_mst[v]), key=lambda v: key_values[v])\n\nin_mst[u] = True\n\nif parents[u] != -1:  # Skip printing for the first vertex since it has no parent\n                print(f\"{self.vertex_data[parents[u]]}-{self.vertex_data[u]} \\t{self.adj_matrix[u][parents[u]]}\")\n\nfor v in range(self.size):\n                if 0 < self.adj_matrix[u][v] < key_values[v] and not in_mst[v]:\n                    key_values[v] = self.adj_matrix[u][v]\n                    parents[v] = u\nLine 17:\nThe\nin_mst\narray holds the status of which vertices are currently in the MST. Initially, none of the vertices are part of the MST.\nLine 18:\nThe\nkey_values\narray holds the current shortest distance from the MST vertices to each vertex outside the MST.\nLine 19:\nThe MST edges are stored in the\nparents\narray. Each MST edge is stored by storing the parent index for each vertex.\nLine 21:\nTo keep it simple, and to make this code run like in the \"Manual Run Through\" animation/example above, the first vertex (vertex A at index\n0\n) is set as the staring vertex. Changing the index to\n4\nwill run Prim's algorithm from vertex E, and that works just as well.\nLine 25:\nThe index is found for the vertex with the lowest key value that is not yet part of the MST. Check out these explanations for\nmin\nand\nlambda\nto better understand this Python code line.\nLine 32-35:\nAfter a new vertex is added to the MST (line 27), this part of the code checks to see if there are now edges from this newly added MST vertex that can lower the key values to other vertices outside the MST. If that is the case, the\nkey_values\nand\nparents\narrays are updated accordingly. This can be seen clearly in the animation when a new vertex is added to the MST and becomes the active (current) vertex.\nNow let's create the graph from the \"Manual Run Through\" above and run Prim's algorithm on it:\nExample\nPython:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n\ndef add_edge(self, u, v, weight):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.adj_matrix[u][v] = weight\n            self.adj_matrix[v][u] = weight  # For undirected graph\n\ndef add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\n\ndef prims_algorithm(self):\n        in_mst = [False] * self.size\n        key_values = [float('inf')] * self.size\n        parents = [-1] * self.size\n\nkey_values[0] = 0  # Starting vertex\n\nprint(\"Edge \\tWeight\")\n        for _ in range(self.size):\n            u = min((v for v in range(self.size) if not in_mst[v]), key=lambda v: key_values[v])\n\nin_mst[u] = True\n\nif parents[u] != -1:  # Skip printing for the first vertex since it has no parent\n                print(f\"{self.vertex_data[parents[u]]}-{self.vertex_data[u]} \\t{self.adj_matrix[u][parents[u]]}\")\n\nfor v in range(self.size):\n                if 0 < self.adj_matrix[u][v] < key_values[v] and not in_mst[v]:\n                    key_values[v] = self.adj_matrix[u][v]\n                    parents[v] = u\n\ng = Graph(8)\n\ng.add_vertex_data(0, 'A')\ng.add_vertex_data(1, 'B')\ng.add_vertex_data(2, 'C')\ng.add_vertex_data(3, 'D')\ng.add_vertex_data(4, 'E')\ng.add_vertex_data(5, 'F')\ng.add_vertex_data(6, 'G')\ng.add_vertex_data(7, 'H')\n\ng.add_edge(0, 1, 4)  # A - B\ng.add_edge(0, 3, 3)  # A - D\ng.add_edge(1, 2, 3)  # B - C\ng.add_edge(1, 3, 5)  # B - D\ng.add_edge(1, 4, 6)  # B - E\ng.add_edge(2, 4, 4)  # C - E\ng.add_edge(2, 7, 2)  # C - H\ng.add_edge(3, 4, 7)  # D - E\ng.add_edge(3, 5, 4)  # D - F\ng.add_edge(4, 5, 5)  # E - F\ng.add_edge(4, 6, 3)  # E - G\ng.add_edge(5, 6, 7)  # F - G\ng.add_edge(6, 7, 5)  # G - H\n\nprint(\"Prim's Algorithm MST:\")\ng.prims_algorithm()\nRun Example \u00bb\nLine 32:\nWe can actually avoid the last loop in Prim's algorithm by changing this line to\nfor _ in range(self.size - 1):\n. This is because when there is just one vertex not yet in the MST, the parent vertex for that vertex is already set correctly in the\nparents\narray, so the MST is actually already found at this point.\nTime Complexity for Prim's Algorithm\nFor a general explanation of what time complexity is, visit\nthis page\n.\nWith \\(V\\) as the number of vertices in our graph, the time complexity for Prim's algorithm is\n\\[ O( V^2 ) \\]\nThe reason why we get this time complexity is because of the nested loops inside the Prim's algorithm (one for-loop with two other for-loops inside it).\nThe first for-loop (line 24) goes through all the vertices in the graph. This has time complexity \\(O(V)\\).\nThe second for-loop (line 25) goes through all the adjacent vertices in the graph to find the vertex with the lowest key value that is outside the MST, so that it can be the \nAfter a new vertex is included in the MST, a third for-loop (line 32) checks all other vertices to see if there are outgoing edges from the newly added MST vertex to vertices outside the MST that can lead to lower key values and updated parent relations. This also has time complexity \\(O(V)\\).\nPutting the time complexities together we get:\n\\[\n\\begin{equation}\n\\begin{aligned}\nO(V)\\cdot (O(V)+O(V))  & = O(V)\\cdot (2\\cdot O(V)) \\\\\n              & = O(V\\cdot 2\\cdot V) \\\\\n              & = O(2\\cdot V^2) \\\\\\\\\n              & = O(V^2)\n\\end{aligned}\n\\end{equation}\n\\]\nBy using a priority queue data structure to manage key values, instead of using an array like we do here, the time complexity for Prim's algorithm can be reduced to:\n\\[ O( E \\cdot \\log{V}) \\]\nWhere \\(E\\) is the number of edges in the graph, and \\(V\\) is the number of vertices.\nSuch an implementation of Prim's algorithm using a priority queue is best for sparse graphs. A graph is sparse when the each vertex is just connected to a few of the other vertices.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "9d38baf6-cac8-4ec0-9e60-7d5d6478632c",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "4d69cb18-211f-462e-9d72-92e8bfe70475",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "9b3c12f2-53bc-4326-9389-3aa39239c3ae",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is the algorithm?",
+      "options": [
+        "the collection of edges in a graph",
+        "None of the above.",
+        "also sometimes called \"Jarn\u00edk's algorithm\"",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of the algorithm is 'also sometimes called \"Jarn\u00edk's algorithm\"'."
+    },
+    {
+      "question": "What is s algorithm?",
+      "options": [
+        "None of the above.",
+        "the collection of edges in a graph",
+        "also sometimes called \"Jarn\u00edk's algorithm\"",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of s algorithm is 'the collection of edges in a graph'."
+    }
+  ],
+  "summary": "This tutorial covers DSAPrim's Algorithm concepts and techniques. You'll learn how to use DSAPrim's Algorithm effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSAPrim's Algorithm and how to apply it in your projects."
+}

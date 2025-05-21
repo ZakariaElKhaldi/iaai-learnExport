@@ -1,0 +1,160 @@
+{
+  "id": "bb5273e8-a43b-44d3-893f-4a6662dad7bd",
+  "title": "Preprocessing - Categorical Data",
+  "slug": "preprocessing-categorical-data",
+  "metadata": {
+    "description": "Learn about Preprocessing - Categorical Data with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "pandas",
+      "data",
+      "column",
+      "example",
+      "cars",
+      "import",
+      "colors",
+      "volume",
+      "weight",
+      "predict"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 8,
+    "category": "LearnPython",
+    "subcategory": "Categorical Data"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Preprocessing - Categorical Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "On this page, .com collaborates with\nNYC Data Science Academy\n, to deliver digital training content to our students.\nCategorical Data\nWhen your data has categories represented by strings, it will be difficult to use them to train machine learning models which often only accepts numeric data.\nInstead of ignoring the categorical data and excluding the information from our model, you can tranform the data so it can be used in your models.\nTake a look at the table below, it is the same data set that we used in the\nmultiple regression\nchapter.\nExample\nimport pandas as pd\ncars = pd.read_csv('data.csv')\nprint(cars.to_string())\nResult\nCar       Model  Volume  Weight  CO2\n  0       Toyoty        Aygo    1000     790   99\n  1   Mitsubishi  Space Star    1200    1160   95\n  2        Skoda      Citigo    1000     929   95\n  3         Fiat         500     900     865   90\n  4         Mini      Cooper    1500    1140  105\n  5           VW         Up!    1000     929  105\n  6        Skoda       Fabia    1400    1109   90\n  7     Mercedes     A-Class    1500    1365   92\n  8         Ford      Fiesta    1500    1112   98\n  9         Audi          A1    1600    1150   99\n  10     Hyundai         I20    1100     980   99\n  11      Suzuki       Swift    1300     990  101\n  12        Ford      Fiesta    1000    1112   99\n  13       Honda       Civic    1600    1252   94\n  14      Hundai         I30    1600    1326   97\n  15        Opel       Astra    1600    1330   97\n  16         BMW           1    1600    1365   99\n  17       Mazda           3    2200    1280  104\n  18       Skoda       Rapid    1600    1119  104\n  19        Ford       Focus    2000    1328  105\n  20        Ford      Mondeo    1600    1584   94\n  21        Opel    Insignia    2000    1428   99\n  22    Mercedes     C-Class    2100    1365   99\n  23       Skoda     Octavia    1600    1415   99\n  24       Volvo         S60    2000    1415   99\n  25    Mercedes         CLA    1500    1465  102\n  26        Audi          A4    2000    1490  104\n  27        Audi          A6    2000    1725  114\n  28       Volvo         V70    1600    1523  109\n  29         BMW           5    2000    1705  114\n  30    Mercedes     E-Class    2100    1605  115\n  31       Volvo        XC70    2000    1746  117\n  32        Ford       B-Max    1600    1235  104\n  33         BMW         216    1600    1390  108\n  34        Opel      Zafira    1600    1405  109\n  35    Mercedes         SLK    2500    1395  120\nRun example \u00bb\nIn the multiple regression chapter, we tried to predict the CO2 emitted based on the volume of the engine and the weight of the car but we excluded information about the car brand and model.\nThe information about the car brand or the car model might help us make a better prediction of the CO2 emitted.\nADVERTISEMENT\nOne Hot Encoding\nWe cannot make use of the Car or Model column in our data since they are not numeric. A linear relationship between a categorical variable, Car or Model, and a numeric variable, CO2, cannot be determined.\nTo fix this issue, we must have a numeric representation of the categorical variable. One way to do this is to have a column representing each group in the category.\nFor each column, the values will be 1 or 0 where 1 represents the inclusion of the group and 0 represents the exclusion. This transformation is called one hot encoding.\nYou do not have to do this manually, the Python Pandas module has a function that called\nget_dummies()\nwhich does one hot encoding.\nLearn about the Pandas module in our\nPandas Tutorial\n.\nExample\nOne Hot Encode the Car column:\nimport pandas as pd\ncars = pd.read_csv('data.csv')\nohe_cars = \n  pd.get_dummies(cars[['Car']])\nprint(ohe_cars.to_string())\nResult\nCar_Audi  Car_BMW  Car_Fiat  Car_Ford  Car_Honda  Car_Hundai  Car_Hyundai  Car_Mazda  Car_Mercedes  Car_Mini  Car_Mitsubishi  Car_Opel  Car_Skoda  Car_Suzuki  Car_Toyoty  Car_VW  Car_Volvo\n  0          0        0         0         0          0           0            0          0             0         0               0         0          0           0           1       0          0\n  1          0        0         0         0          0           0            0          0             0         0               1         0          0           0           0       0          0\n  2          0        0         0         0          0           0            0          0             0         0               0         0          1           0           0       0          0\n  3          0        0         1         0          0           0            0          0             0         0               0         0          0           0           0       0          0\n  4          0        0         0         0          0           0            0          0             0         1               0         0          0           0           0       0          0\n  5          0        0         0         0          0           0            0          0             0         0               0         0          0           0           0       1          0\n  6          0        0         0         0          0           0            0          0             0         0               0         0          1           0           0       0          0\n  7          0        0         0         0          0           0            0          0             1         0               0         0          0           0           0       0          0\n  8          0        0         0         1          0           0            0          0             0         0               0         0          0           0           0       0          0\n  9          1        0         0         0          0           0            0          0             0         0               0         0          0           0           0       0          0\n  10         0        0         0         0          0           0            1          0             0         0               0         0          0           0           0       0          0\n  11         0        0         0         0          0           0            0          0             0         0               0         0          0           1           0       0          0\n  12         0        0         0         1          0           0            0          0             0         0               0         0          0           0           0       0          0\n  13         0        0         0         0          1           0            0          0             0         0               0         0          0           0           0       0          0\n  14         0        0         0         0          0           1            0          0             0         0               0         0          0           0           0       0          0\n  15         0        0         0         0          0           0            0          0             0         0               0         1          0           0           0       0          0\n  16         0        1         0         0          0           0            0          0             0         0               0         0          0           0           0       0          0\n  17         0        0         0         0          0           0            0          1             0         0               0         0          0           0           0       0          0\n  18         0        0         0         0          0           0            0          0             0         0               0         0          1           0           0       0          0\n  19         0        0         0         1          0           0            0          0             0         0               0         0          0           0           0       0          0\n  20         0        0         0         1          0           0            0          0             0         0               0         0          0           0           0       0          0\n  21         0        0         0         0          0           0            0          0             0         0               0         1          0           0           0       0          0\n  22         0        0         0         0          0           0            0          0             1         0               0         0          0           0           0       0          0\n  23         0        0         0         0          0           0            0          0             0         0               0         0          1           0           0       0          0\n  24         0        0         0         0          0           0            0          0             0         0               0         0          0           0           0       0          1\n  25         0        0         0         0          0           0            0          0             1         0               0         0          0           0           0       0          0\n  26         1        0         0         0          0           0            0          0             0         0               0         0          0           0           0       0          0\n  27         1        0         0         0          0           0            0          0             0         0               0         0          0           0           0       0          0\n  28         0        0         0         0          0           0            0          0             0         0               0         0          0           0           0       0          1\n  29         0        1         0         0          0           0            0          0             0         0               0         0          0           0           0       0          0\n  30         0        0         0         0          0           0            0          0             1         0               0         0          0           0           0       0          0\n  31         0        0         0         0          0           0            0          0             0         0               0         0          0           0           0       0          1\n  32         0        0         0         1          0           0            0          0             0         0               0         0          0           0           0       0          0\n  33         0        1         0         0          0           0            0          0             0         0               0         0          0           0           0       0          0\n  34         0        0         0         0          0           0            0          0             0         0               0         1          0           0           0       0          0\n  35         0        0         0         0          0           0            0          0             1         0               0         0          0           0           0       0          0\nRun example \u00bb\nResults\nA column was created for every car brand in the Car column.\nPredict CO2\nWe can use this additional information alongside the volume and weight to predict CO2\nTo combine the information, we can use the\nconcat()\nfunction from pandas.\nFirst we will need to import a couple modules.\nWe will start with importing the Pandas.\nimport pandas\nThe pandas module allows us to read csv files and manipulate DataFrame objects:\ncars = pandas.read_csv(\"data.csv\")\nIt also allows us to create the dummy variables:\nohe_cars = pandas.get_dummies(cars[['Car']])\nThen we must select the independent variables (X) and add the dummy variables columnwise.\nAlso store the dependent variable in y.\nX = pandas.concat([cars[['Volume', 'Weight']], ohe_cars], axis=1)\ny = cars['CO2']\nWe also need to import a method from sklearn to create a linear model\nLearn about\nlinear regression\n.\nfrom sklearn import linear_model\nNow we can fit the data to a linear regression:\nregr = linear_model.LinearRegression()\nregr.fit(X,y)\nFinally we can predict the CO2 emissions based on the car's weight, volume, and manufacturer.\n##predict the CO2 emission of a VW where the weight is 2300kg, and the volume is 1300cm3:\npredictedCO2 = regr.predict([[2300, 1300,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0]])\nExample\nimport pandas\nfrom sklearn import linear_model\ncars = pandas.read_csv(\"data.csv\")\nohe_cars = pandas.get_dummies(cars[['Car']])\nX = pandas.concat([cars[['Volume', 'Weight']], ohe_cars], axis=1)\ny = cars['CO2']\nregr = linear_model.LinearRegression()\nregr.fit(X,y)\n##predict the CO2 emission of a VW where the weight is 2300kg, and the volume is 1300cm3:\npredictedCO2 = regr.predict([[2300, 1300,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0]])\nprint(predictedCO2)\nResult\n[122.45153299]\nRun example \u00bb\nWe now have a coefficient for the volume, the weight, and each car brand in the data set\nDummifying\nIt is not necessary to create one column for each group in your category. The information can be retained using 1 column less than the number of groups you have.\nFor example, you have a column representing colors and in that column, you have two colors, red and blue.\nExample\nimport pandas as pd\ncolors = pd.DataFrame({'color': ['blue', 'red']})\nprint(colors)\nResult\ncolor\n  0  blue\n  1   red\nRun example \u00bb\nYou can create 1 column called red where 1 represents red and 0 represents not red, which means it is blue.\nTo do this, we can use the same function that we used for one hot encoding, get_dummies, and then drop one of the columns. There is an argument, drop_first, which allows us to exclude the first column from the resulting table.\nExample\nimport pandas as pd\ncolors = pd.DataFrame({'color': ['blue', 'red']})\ndummies = pd.get_dummies(colors, drop_first=True)\nprint(dummies)\nResult\ncolor_red\n  0          0\n  1          1\nRun example \u00bb\nWhat if you have more than 2 groups? How can the multiple groups be represented by 1 less column?\nLet's say we have three colors this time, red, blue and green. When we get_dummies while dropping the first column, we get the following table.\nExample\nimport pandas as pd\ncolors = pd.DataFrame({'color': ['blue', 'red', \n  'green']})\ndummies = pd.get_dummies(colors, drop_first=True)\ndummies['color'] = colors['color']\nprint(dummies)\nResult\ncolor_green  color_red  color\n  0            0          0   blue\n  1            0          1    red\n  2            1          0  green\nRun example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import pandas as pd\ncars = pd.read_csv('data.csv')\nprint(cars.to_string())",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import pandas as pd\ncars = pd.read_csv('data.csv')\nohe_cars = \n  pd.get_dummies(cars[['Car']])\nprint(ohe_cars.to_string())",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import pandas\nfrom sklearn import linear_model\ncars = pandas.read_csv(\"data.csv\")\nohe_cars = pandas.get_dummies(cars[['Car']])\nX = pandas.concat([cars[['Volume', 'Weight']], ohe_cars], axis=1)\ny = cars['CO2']\nregr = linear_model.LinearRegression()\nregr.fit(X,y)\n##predict the CO2 emission of a VW where the weight is 2300kg, and the volume is 1300cm3:\npredictedCO2 = regr.predict([[2300, 1300,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0]])\nprint(predictedCO2)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import pandas as pd\ncolors = pd.DataFrame({'color': ['blue', 'red']})\nprint(colors)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import pandas as pd\ncolors = pd.DataFrame({'color': ['blue', 'red']})\ndummies = pd.get_dummies(colors, drop_first=True)\nprint(dummies)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "import pandas as pd\ncolors = pd.DataFrame({'color': ['blue', 'red', \n  'green']})\ndummies = pd.get_dummies(colors, drop_first=True)\ndummies['color'] = colors['color']\nprint(dummies)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas as pd\n# TODO: Complete this line\nprint(cars.to_string())",
+      "solution": "import pandas as pd\ncars = pd.read_csv('data.csv')\nprint(cars.to_string())"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas as pd\ncars = pd.read_csv('data.csv')\n# TODO: Complete this line\n  pd.get_dummies(cars[['Car']])\nprint(ohe_cars.to_string())",
+      "solution": "import pandas as pd\ncars = pd.read_csv('data.csv')\nohe_cars = \n  pd.get_dummies(cars[['Car']])\nprint(ohe_cars.to_string())"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "97a803ff-d221-4491-a737-511ccb527138",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "f76d88df-7dd7-44ed-9388-cdb7f5ce7e0c",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "132875cc-fe2d-485f-9bf7-431b2ebd9300",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is it?",
+      "options": [
+        "None of the above.",
+        "not numeric",
+        "the same data set that we used in the\nmultiple regression\nchapter",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of it is 'the same data set that we used in the\nmultiple regression\nchapter'."
+    },
+    {
+      "question": "What is ADVERTISEMENT\nOne Hot Encoding\nWe cannot make use of the Car or Model column in our data since they?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "not numeric",
+        "the same data set that we used in the\nmultiple regression\nchapter"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of ADVERTISEMENT\nOne Hot Encoding\nWe cannot make use of the Car or Model column in our data since they is 'not numeric'."
+    }
+  ],
+  "summary": "This tutorial covers Preprocessing - Categorical Data concepts and techniques. You'll learn how to use Preprocessing - Categorical Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Preprocessing - Categorical Data and how to apply it in your projects."
+}

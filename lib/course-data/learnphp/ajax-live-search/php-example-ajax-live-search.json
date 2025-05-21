@@ -1,0 +1,124 @@
+{
+  "id": "368c8d59-c13e-4678-ae7c-f95d00175349",
+  "title": "PHP Example -AJAX Live Search",
+  "slug": "php-example-ajax-live-search",
+  "metadata": {
+    "description": "Learn about PHP Example -AJAX Live Search with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "item",
+      "livesearch",
+      "search",
+      "function",
+      "hint",
+      "file",
+      "response",
+      "results",
+      "input",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "AJAX Live Search"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP Example -\nAJAX Live Search",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AJAX can be used to create more user-friendly and interactive searches.\nAJAX Live Search\nThe following example will demonstrate a live search, where you get search results while you type.\nLive search has many benefits compared to traditional searching:\nResults are shown as you type\nResults narrow as you continue typing\nIf results become too narrow, remove characters to see a broader result\nSearch for a  page in the input field below:\nThe results in the example above are found in an XML file\n(\nlinks.xml\n). To make this \nexample small and simple, only six results are available.\nExample Explained - The HTML Page\nWhen a user types a character in the input field above, the function \"showResult()\" is executed. The function is triggered by the \"onkeyup\" \nevent:\n<html>\n<head>\n<script>\nfunction showResult(str)\n{\nif (str.length==0) {\ndocument.getElementById(\"livesearch\").innerHTML=\"\";\ndocument.getElementById(\"livesearch\").style.border=\"0px\";\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\nxmlhttp.onreadystatechange=function() {\nif (this.readyState==4 && this.status==200) {\ndocument.getElementById(\"livesearch\").innerHTML=this.responseText;\ndocument.getElementById(\"livesearch\").style.border=\"1px solid #A5ACB2\";\n}\n}\nxmlhttp.open(\"GET\",\"livesearch.php?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head>\n<body>\n<form>\n<input type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\">\n<div id=\"livesearch\"></div>\n</form>\n</body>\n</html>\nSource code explanation:\nIf the input field is empty (str.length==0), the function clears the \ncontent of the livesearch placeholder and exits the function.\nIf the input field is not empty, the showResult() function executes the following:\nCreate an XMLHttpRequest object\nCreate the function to be executed when the server response is ready\nSend the request off to a file on the server\nNotice that a parameter (q) is added to the URL (with the content of the input field)\nThe PHP File\nThe page on the server called by the JavaScript above is a PHP file called \"livesearch.php\".\nThe source code in \"livesearch.php\" searches an XML file for titles matching the search string and returns the result:\n<?php\n$xmlDoc=new DOMDocument();\n$xmlDoc->load(\"links.xml\");\n$x=$xmlDoc->getElementsByTagName('link');\n//get the q parameter from URL\n$q=$_GET[\"q\"];\n//lookup all links from the xml file if length of q>0\nif (strlen($q)>0)\n{\n$hint=\"\";\nfor($i=0; $i<($x->length); $i++)\u00a0{\n$y=$x->item($i)->getElementsByTagName('title');\n$z=$x->item($i)->getElementsByTagName('url');\nif ($y->item(0)->nodeType==1)\u00a0{\n//find a link matching the search text\nif (stristr($y->item(0)->childNodes->item(0)->nodeValue,$q))\u00a0{\nif ($hint==\"\")\u00a0{\n$hint=\"<a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\u00a0else\u00a0{\n$hint=$hint . \"<br /><a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\n}\n}\n}\n}\n// Set output to \"no suggestion\" if no hint was found\n// or to the correct values\nif ($hint==\"\")\u00a0{\n$response=\"no suggestion\";\n}\nelse\u00a0{\n$response=$hint;\n}\n//output the response\necho $response;\n?>\nIf there is any text sent from the JavaScript (strlen($q) > 0), the following happens:\nLoad an XML file into a new XML DOM object\nLoop through all\u00a0<title> elements to find matches from the text sent from the JavaScript\nSets the correct url and title in the \"$response\" variable.\n If more than one match is found, all matches are added to the variable\nIf no matches are found, the $response variable is set to \"no suggestion\"\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<html>\n<head>\n<script>\nfunction showResult(str)\n{\nif (str.length==0) {\ndocument.getElementById(\"livesearch\").innerHTML=\"\";\ndocument.getElementById(\"livesearch\").style.border=\"0px\";\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\nxmlhttp.onreadystatechange=function() {\nif (this.readyState==4 && this.status==200) {\ndocument.getElementById(\"livesearch\").innerHTML=this.responseText;\ndocument.getElementById(\"livesearch\").style.border=\"1px solid #A5ACB2\";\n}\n}\nxmlhttp.open(\"GET\",\"livesearch.php?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head>\n<body>\n<form>\n<input type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\">\n<div id=\"livesearch\"></div>\n</form>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$xmlDoc=new DOMDocument();\n$xmlDoc->load(\"links.xml\");\n$x=$xmlDoc->getElementsByTagName('link');\n//get the q parameter from URL\n$q=$_GET[\"q\"];\n//lookup all links from the xml file if length of q>0\nif (strlen($q)>0)\n{\n$hint=\"\";\nfor($i=0; $i<($x->length); $i++)\u00a0{\n$y=$x->item($i)->getElementsByTagName('title');\n$z=$x->item($i)->getElementsByTagName('url');\nif ($y->item(0)->nodeType==1)\u00a0{\n//find a link matching the search text\nif (stristr($y->item(0)->childNodes->item(0)->nodeValue,$q))\u00a0{\nif ($hint==\"\")\u00a0{\n$hint=\"<a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\u00a0else\u00a0{\n$hint=$hint . \"<br /><a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\n}\n}\n}\n}\n// Set output to \"no suggestion\" if no hint was found\n// or to the correct values\nif ($hint==\"\")\u00a0{\n$response=\"no suggestion\";\n}\nelse\u00a0{\n$response=$hint;\n}\n//output the response\necho $response;\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n<head>\n<script>\nfunction showResult(str)\n{\nif (str.length==0) {\ndocument.getElementById(\"livesearch\").innerHTML=\"\";\ndocument.getElementById(\"livesearch\").style.border=\"0px\";\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\nxmlhttp.onreadystatechange=function() {\nif (this.readyState==4 && this.status==200) {\ndocument.getElementById(\"livesearch\").innerHTML=this.responseText;\n# TODO: Complete this line\n}\n}\nxmlhttp.open(\"GET\",\"livesearch.php?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head>\n<body>\n<form>\n<input type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\">\n<div id=\"livesearch\"></div>\n</form>\n</body>\n</html>",
+      "solution": "<html>\n<head>\n<script>\nfunction showResult(str)\n{\nif (str.length==0) {\ndocument.getElementById(\"livesearch\").innerHTML=\"\";\ndocument.getElementById(\"livesearch\").style.border=\"0px\";\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\nxmlhttp.onreadystatechange=function() {\nif (this.readyState==4 && this.status==200) {\ndocument.getElementById(\"livesearch\").innerHTML=this.responseText;\ndocument.getElementById(\"livesearch\").style.border=\"1px solid #A5ACB2\";\n}\n}\nxmlhttp.open(\"GET\",\"livesearch.php?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head>\n<body>\n<form>\n<input type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\">\n<div id=\"livesearch\"></div>\n</form>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$xmlDoc=new DOMDocument();\n$xmlDoc->load(\"links.xml\");\n$x=$xmlDoc->getElementsByTagName('link');\n//get the q parameter from URL\n$q=$_GET[\"q\"];\n//lookup all links from the xml file if length of q>0\nif (strlen($q)>0)\n{\n$hint=\"\";\nfor($i=0; $i<($x->length); $i++)\u00a0{\n$y=$x->item($i)->getElementsByTagName('title');\n$z=$x->item($i)->getElementsByTagName('url');\nif ($y->item(0)->nodeType==1)\u00a0{\n//find a link matching the search text\nif (stristr($y->item(0)->childNodes->item(0)->nodeValue,$q))\u00a0{\nif ($hint==\"\")\u00a0{\n$hint=\"<a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\u00a0else\u00a0{\n$hint=$hint . \"<br /><a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\n}\n}\n}\n}\n// Set output to \"no suggestion\" if no hint was found\n// or to the correct values\n# TODO: Complete this line\n$response=\"no suggestion\";\n}\nelse\u00a0{\n$response=$hint;\n}\n//output the response\necho $response;\n?>",
+      "solution": "<?php\n$xmlDoc=new DOMDocument();\n$xmlDoc->load(\"links.xml\");\n$x=$xmlDoc->getElementsByTagName('link');\n//get the q parameter from URL\n$q=$_GET[\"q\"];\n//lookup all links from the xml file if length of q>0\nif (strlen($q)>0)\n{\n$hint=\"\";\nfor($i=0; $i<($x->length); $i++)\u00a0{\n$y=$x->item($i)->getElementsByTagName('title');\n$z=$x->item($i)->getElementsByTagName('url');\nif ($y->item(0)->nodeType==1)\u00a0{\n//find a link matching the search text\nif (stristr($y->item(0)->childNodes->item(0)->nodeValue,$q))\u00a0{\nif ($hint==\"\")\u00a0{\n$hint=\"<a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\u00a0else\u00a0{\n$hint=$hint . \"<br /><a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\n}\n}\n}\n}\n// Set output to \"no suggestion\" if no hint was found\n// or to the correct values\nif ($hint==\"\")\u00a0{\n$response=\"no suggestion\";\n}\nelse\u00a0{\n$response=$hint;\n}\n//output the response\necho $response;\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "e36bd640-8ee2-40a3-b7b0-21ce443f0f85",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e2bff2b2-065d-4513-a614-0c65eeae2faa",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "5297aae7-e0d6-48c8-85e1-f1ff4f9b1106",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Results?",
+      "options": [
+        "None of the above.",
+        "available",
+        "None of the above.",
+        "shown as you type\nResults narrow as you continue typing\nIf results become too narrow"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Results is 'shown as you type\nResults narrow as you continue typing\nIf results become too narrow'."
+    },
+    {
+      "question": "What is only six results?",
+      "options": [
+        "shown as you type\nResults narrow as you continue typing\nIf results become too narrow",
+        "None of the above.",
+        "None of the above.",
+        "available"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of only six results is 'available'."
+    }
+  ],
+  "summary": "This tutorial covers PHP Example -AJAX Live Search concepts and techniques. You'll learn how to use PHP Example -AJAX Live Search effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHP Example -AJAX Live Search and how to apply it in your projects."
+}

@@ -1,0 +1,148 @@
+{
+  "id": "3efd5b8e-a1af-40c4-b5e4-1c0f3266e508",
+  "title": "Example 1 Data",
+  "slug": "example-1-data",
+  "metadata": {
+    "description": "Learn about Example 1 Data with clear explanations and practical examples.",
+    "keywords": [
+      "data",
+      "function",
+      "values",
+      "horsepower",
+      "remove",
+      "errors",
+      "json",
+      "filter",
+      "null",
+      "example"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnAI",
+    "subcategory": "Ex1 Data"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Example 1 Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "TensorFlow Data Collection\nThe data used in Example 1, is a list of car objects like this:\n{\n\"Name\": \"chevrolet chevelle malibu\",\n\"Miles_per_Gallon\": 18,\n\"Cylinders\": 8,\n\"Displacement\": 307,\n\"Horsepower\": 130,\n\"Weight_in_lbs\": 3504,\n\"Acceleration\": 12,\n\"Year\": \"1970-01-01\",\n\"Origin\": \"USA\"\n},\n{\n\"Name\": \"buick skylark 320\",\n\"Miles_per_Gallon\": 15,\n\"Cylinders\": 8,\n\"Displacement\": 350,\n\"Horsepower\": 165,\n\"Weight_in_lbs\": 3693,\n\"Acceleration\": 11.5,\n\"Year\": \"1970-01-01\",\n\"Origin\": \"USA\"\n},\nThe dataset is a JSON file stored at:\nhttps://storage.googleapis.com/tfjs-tutorials/carsData.json\nCleaning Data\nWhen preparing for machine learning, it is always important to:\nRemove the data you don't need\nClean the data from errors\nRemove Data\nA smart way to remove unnecessary data, is to extract\nonly the data you need\n.\nThis can be done by iterating (looping over) your data with a\nmap function\n.\nThe function below takes an object and returns\nonly x and y\nfrom the object's\nHorsepower and Miles_per_Gallon properties:\nfunction extractData(obj) {\nreturn {x:obj.Horsepower, y:obj.Miles_per_Gallon};\n}\nRemove Errors\nMost datasets contain some type of errors.\nA smart way to remove errors is to use a\nfilter function\nto filter out the errors.\nThe code below returns false if one of the properties (x or y) contains a null value:\nfunction removeErrors(obj) {\nreturn obj.x != null && obj.y != null;\n}\nFetching Data\nWhen you have your map and filter functions ready, you can write a function to fetch the data.\nasync function runTF() {\nconst jsonData = await fetch(\"cardata.json\");\nlet values = await jsonData.json();\nvalues = values.map(extractData).filter(removeErrors);\n}\n\nPlotting the Data\nHere is some code you can use to plot the data:\nfunction tfPlot(values, surface) {\ntfvis.render.scatterplot(surface,\n{values:values, series:['Original','Predicted']},\n{xLabel:'Horsepower', yLabel:'MPG'});\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "{\n\"Name\": \"chevrolet chevelle malibu\",\n\"Miles_per_Gallon\": 18,\n\"Cylinders\": 8,\n\"Displacement\": 307,\n\"Horsepower\": 130,\n\"Weight_in_lbs\": 3504,\n\"Acceleration\": 12,\n\"Year\": \"1970-01-01\",\n\"Origin\": \"USA\"\n},\n{\n\"Name\": \"buick skylark 320\",\n\"Miles_per_Gallon\": 15,\n\"Cylinders\": 8,\n\"Displacement\": 350,\n\"Horsepower\": 165,\n\"Weight_in_lbs\": 3693,\n\"Acceleration\": 11.5,\n\"Year\": \"1970-01-01\",\n\"Origin\": \"USA\"\n},",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "function extractData(obj) {\nreturn {x:obj.Horsepower, y:obj.Miles_per_Gallon};\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "function removeErrors(obj) {\nreturn obj.x != null && obj.y != null;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "async function runTF() {\nconst jsonData = await fetch(\"cardata.json\");\nlet values = await jsonData.json();\nvalues = values.map(extractData).filter(removeErrors);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "function tfPlot(values, surface) {\ntfvis.render.scatterplot(surface,\n{values:values, series:['Original','Predicted']},\n{xLabel:'Horsepower', yLabel:'MPG'});\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "{\n\"Name\": \"chevrolet chevelle malibu\",\n\"Miles_per_Gallon\": 18,\n\"Cylinders\": 8,\n\"Displacement\": 307,\n\"Horsepower\": 130,\n\"Weight_in_lbs\": 3504,\n\"Acceleration\": 12,\n\"Year\": \"1970-01-01\",\n\"Origin\": \"USA\"\n},\n{\n\"Name\": \"buick skylark 320\",\n\"Miles_per_Gallon\": 15,\n\"Cylinders\": 8,\n\"Displacement\": 350,\n\"Horsepower\": 165,\n\"Weight_in_lbs\": 3693,\n# TODO: Complete this line\n\"Year\": \"1970-01-01\",\n\"Origin\": \"USA\"\n},",
+      "solution": "{\n\"Name\": \"chevrolet chevelle malibu\",\n\"Miles_per_Gallon\": 18,\n\"Cylinders\": 8,\n\"Displacement\": 307,\n\"Horsepower\": 130,\n\"Weight_in_lbs\": 3504,\n\"Acceleration\": 12,\n\"Year\": \"1970-01-01\",\n\"Origin\": \"USA\"\n},\n{\n\"Name\": \"buick skylark 320\",\n\"Miles_per_Gallon\": 15,\n\"Cylinders\": 8,\n\"Displacement\": 350,\n\"Horsepower\": 165,\n\"Weight_in_lbs\": 3693,\n\"Acceleration\": 11.5,\n\"Year\": \"1970-01-01\",\n\"Origin\": \"USA\"\n},"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function extractData(obj) {\nreturn {x:obj.Horsepower, y:obj.Miles_per_Gallon};\n# TODO: Complete this line",
+      "solution": "function extractData(obj) {\nreturn {x:obj.Horsepower, y:obj.Miles_per_Gallon};\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "e71a43ae-da60-4141-aa36-26d0f25d9154",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9b1e2046-8b77-4383-8b94-aebe47991781",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "7bd3ce85-b5fa-4726-8019-78d47f4bbdb5",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The dataset?",
+      "options": [
+        "None of the above.",
+        "Not a The dataset.",
+        "None of the above.",
+        "a JSON file stored at:\nhttps://storage"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of The dataset is 'a JSON file stored at:\nhttps://storage'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers Example 1 Data concepts and techniques. You'll learn how to use Example 1 Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Example 1 Data and how to apply it in your projects."
+}

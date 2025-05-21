@@ -1,0 +1,96 @@
+{
+  "id": "3a55a51e-fc94-4af3-8088-786ac67915c5",
+  "title": "DSAInsertion Sort",
+  "slug": "dsainsertion-sort",
+  "metadata": {
+    "description": "Learn about DSAInsertion Sort with clear explanations and practical examples.",
+    "keywords": [
+      "array",
+      "value",
+      "sort",
+      "insertion",
+      "sorted",
+      "part",
+      "values",
+      "algorithm",
+      "must",
+      "time"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 6,
+    "category": "LearnDSA",
+    "subcategory": "DSA Insertion Sort"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "DSA\nInsertion Sort",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Insertion Sort\nThe Insertion Sort algorithm uses one part of the array to hold the sorted values, and the other part of the array to hold values that are not sorted yet.\nSpeed:\n{{ buttonText }}\n{{ msgDone }}\nThe algorithm takes one value at a time from the unsorted part of the array and puts it into the right place in the sorted part of the array, until the array is sorted.\nHow it works:\nTake the first value from the unsorted part of the array.\nMove the value into the correct place in the sorted part of the array.\nGo through the unsorted part of the array again as many times as there are values.\nContinue reading to fully understand the Insertion Sort algorithm and how to implement it yourself.\nManual Run Through\nBefore we implement the Insertion Sort algorithm in a programming language, let's manually run through a short array, just to get the idea.\nStep 1:\nWe start with an unsorted array.\n[ 7, 12, 9, 11, 3]\nStep 2:\nWe can consider the first value as the initial sorted part of the array. If it is just one value, it must be sorted, right?\n[\n7\n, 12, 9, 11, 3]\nStep 3:\nThe \n[ 7,\n12\n, 9, 11, 3]\nStep 4:\nConsider the \n[ 7, 12,\n9\n, 11, 3]\nStep 5:\nThe value 9 must now be moved into the correct position inside the sorted part of the array, so we move 9 in between 7 and 12.\n[ 7,\n9\n, 12, 11, 3]\nStep 6:\nThe \n[ 7, 9, 12, > 11, 3]\nStep 7:\nWe move it in between 9 and 12 in the sorted part of the array.\n[ 7, 9,\n11\n, 12, 3]\nStep 8:\nThe last value to insert into the correct position is 3.\n[ 7, 9, 11, 12,\n3\n]\nStep 9:\nWe insert 3 in front of all other values because it is the lowest value.\n[\n3\n,7, 9, 11, 12]\nFinally, the array is sorted.\nRun the simulation below to see the steps above animated:\n{{ buttonText }}\n{{ msgDone }}\n[\n{{ x.dieNmbr }}\n]\nManual Run Through: What Happened?\nWe must understand what happened above to fully understand the algorithm, so that we can implement the algorithm in a programming language.\nThe first value is considered to be the initial sorted part of the array.\nEvery value after the first value must be compared to the values in the sorted part of the algorithm so that it can be inserted into the correct position.\nThe Insertion Sort Algorithm must run through the array 4 times, to sort the array of 5 values because we do not have to sort the first value.\nAnd each time the algorithm runs through the array, the remaining unsorted part of the array becomes shorter.\nWe will now use what we have learned to implement the Insertion Sort algorithm in a programming language.\nInsertion Sort Implementation\nTo implement the Insertion Sort algorithm in a programming language, we need:\nAn array with values to sort.\nAn outer loop that picks a value to be sorted. For an array with \\(n\\) values, this outer loop skips the first value, and must run \\(n-1\\) times.\nAn inner loop that goes through the sorted part of the array, to find where to insert the value. If the value to be sorted is at index \\(i\\), the sorted part of the array starts at index \\(0\\) and ends at index \\(i-1\\).\nThe resulting code looks like this:\nExample\nmy_array = [64, 34, 25, 12, 22, 11, 90, 5]\n\nn = len(my_array)\nfor i in range(1,n):\n    insert_index = i\n    current_value = my_array.pop(i)\n    for j in range(i-1, -1, -1):\n        if my_array[j] > current_value:\n            insert_index = j\n    my_array.insert(insert_index, current_value)\n\nprint(\"Sorted array:\", my_array)\nRun Example \u00bb\nInsertion Sort Improvement\nInsertion Sort can be improved a little bit more.\nThe way the code above first removes a value and then inserts it somewhere else is intuitive. It is how you would do Insertion Sort physically with a hand of cards for example. If low value cards are sorted to the left, you pick up a new unsorted card, and insert it in the correct place between the other already sorted cards.\nThe problem with this way of programming it is that when removing a value from the array, all elements above must be shifted one index place down:\nAnd when inserting the removed value into the array again, there are also many shift operations that must be done: all following elements must shift one position up to make place for the inserted value:\nThese shifting operations can take a lot of time, especially for an array with many elements.\nHidden memory shifts:\nYou will not see these shifting operations happening in the code if you are using a high-level programming language such as Python or JavaScript, but the shifting operations are still happening in the background. Such shifting operations require extra time for the computer to do, which can be a problem.\nYou can read more about how arrays are stored in memory\nhere\n.\nC and Java code examples above and below are the same:\nThe issue of memory shifts happening behind the scenes is only relevant for high-level programming languages like Python or JavaScript, where arrays are dynamic, which means you can easily remove and insert elements. In lower-level programming languages like C and Java, where arrays have a fixed length, elements cannot be removed or inserted. As a result, there are no such memory shifts happening, and therefore the example codes above and below for C and Java remain the same.\nImproved Solution\nWe can avoid most of these shift operations by only shifting the values necessary:\nIn the image above, first value 7 is copied, then values 11 and 12 are shifted one place up in the array, and at last value 7 is put where value 11 was before.\nThe number of shifting operations is reduced from 12 to 2 in this case.\nThis improvement is implemented in the example below:\nExample\nmy_array = [64, 34, 25, 12, 22, 11, 90, 5]\n\nn = len(my_array)\nfor i in range(1,n):\n    insert_index = i\n    current_value = my_array[i]\n    for j in range(i-1, -1, -1):\n        if my_array[j] > current_value:\n            my_array[j+1] = my_array[j]\n            insert_index = j\n        else:\n            break\n    my_array[insert_index] = current_value\n\nprint(\"Sorted array:\", my_array)\nRun Example \u00bb\nWhat is also done in the code above is to break out of the inner loop. That is because there is no need to continue comparing values when we have already found the correct place for the current value.\nInsertion Sort Time Complexity\nFor a general explanation of what time complexity is, visit\nthis page\n.\nFor a more thorough and detailed explanation of Insertion Sort time complexity, visit\nthis page\n.\nInsertion Sort sorts an array of \\(n\\) values.\nOn average, each value must be compared to about \\(\\frac{n}{2}\\) other values to find the correct place to insert it.\nInsertion Sort must run the loop to insert a value in its correct place approximately \\(n\\) times.\nWe get time complexity for Insertion Sort:\n\\[ O( \\frac{n}{2} \\cdot n) = \\underline{\\underline{O(n^2)}} \\]\nThe time complexity for Insertion Sort can be displayed like this:\nUse the simulation below to see how the theoretical time complexity \\(O(n^2)\\) (red line) compares with the number of operations of actual Insertion Sorts.\nSet values:\n{{ this.userX }}\nRandom\nWorst Case\nBest Case\n10 Random\nOperations: {{ operations }}\n{{runBtnText}}\nClear\nFor Insertion Sort, there is a big difference between best, average and worst case scenarios. You can see that by running the different simulations above.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your python function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "0be73a4f-d807-4f9c-9ea7-40654c43b06d",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "abf6abf4-d40b-45b2-9d52-6cbcc8c6cefd",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e6a46590-5f4e-49b3-a897-e13b6ae66ce2",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is and the other part of the array to hold values that?",
+      "options": [
+        "sorted",
+        "None of the above.",
+        "not sorted yet",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of and the other part of the array to hold values that is 'not sorted yet'."
+    },
+    {
+      "question": "What is until the array?",
+      "options": [
+        "not sorted yet",
+        "sorted",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of until the array is 'sorted'."
+    }
+  ],
+  "summary": "This tutorial covers DSAInsertion Sort concepts and techniques. You'll learn how to use DSAInsertion Sort effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSAInsertion Sort and how to apply it in your projects."
+}

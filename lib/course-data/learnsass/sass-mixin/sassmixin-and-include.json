@@ -1,0 +1,214 @@
+{
+  "id": "ab76fc6e-9abe-4d71-a7bd-a124829dc889",
+  "title": "Sass@mixin and @include",
+  "slug": "sassmixin-and-include",
+  "metadata": {
+    "description": "Learn about Sass@mixin and @include with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "mixin",
+      "include",
+      "color",
+      "syntax",
+      "transform",
+      "border",
+      "property",
+      "text",
+      "scss",
+      "sass"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnSass",
+    "subcategory": "Sass @mixin"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Sass\n@mixin and @include",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Sass Mixins\nThe\n@mixin\ndirective lets you create CSS \ncode that is to be reused throughout the website.\nThe\n@include\ndirective is created to let you \nuse (include) the mixin.\nDefining a Mixin\nA mixin is defined with the\n@mixin\ndirective.\nSass @mixin Syntax:\n@mixin\nname\n{\nproperty\n:\nvalue\n;\nproperty\n:\nvalue\n;\n...\n}\nThe following example creates a mixin named \"important-text\":\nSCSS Syntax:\n@mixin \n  important-text {\ncolor: \n  red;\nfont-size: 25px;\nfont-weight: bold;\nborder: 1px solid blue;\n}\nTip:\nA tip on hyphens and underscore in Sass: Hyphens and underscores are considered to be the same.\nThis means that @mixin important-text { } and @mixin important_text { } are considered \nas the same mixin!\nUsing a Mixin\nThe\n@include\ndirective is used to include a mixin.\nSass @include mixin Syntax:\nselector\n{\n@include\nmixin-name\n;\n}\nSo, to include the important-text mixin created above:\nSCSS Syntax:\n.danger {\n@include \n  important-text;\nbackground-color: green;\n}\nThe Sass transpiler will convert the above to normal CSS:\nCSS output:\n.danger {\ncolor: \n  red;\nfont-size: 25px;\nfont-weight: bold;\nborder: 1px solid blue;\nbackground-color: green;\n}\nRun Example \u00bb\nA mixin can also include other mixins:\nSCSS Syntax:\n@mixin special-text {\n@include \n  important-text;\n@include \n  link;\n@include \n  special-border;\n}\nPassing Variables to a Mixin\nMixins accept arguments. This way you can pass variables to a mixin.\nHere is how to define a mixin with arguments:\nSCSS Syntax:\n/* Define mixin with two arguments */\n@mixin bordered($color, $width) {\nborder: \n  $width solid $color;\n}\n.myArticle {\n@include bordered(blue, 1px);\u00a0 \n  // Call mixin with two values\n}\n.myNotes {\n@include bordered(red, 2px); // Call mixin with two values\n}\nNotice that the arguments are set as variables and then used as the values \n(color and width) of the border property.\nAfter compilation, the CSS will look like this:\nCSS Output:\n.myArticle {\nborder: 1px solid blue;\n}\n.myNotes {\nborder: 2px solid red;\n}\nRun Example \u00bb\nDefault Values for a Mixin\nIt is also possible to define default values for mixin variables:\nSCSS Syntax:\n@mixin bordered($color: blue, $width: \n  1px) {\nborder: \n  $width solid $color;\n}\nThen, you only need to specify the values that change when you include the \nmixin:\nSCSS Syntax:\n.myTips {\n@include bordered($color: orange);\n}\nUsing a Mixin For Vendor Prefixes\nAnother good use of a mixin is for vendor \nprefixes.\nHere is an example for transform:\nSCSS Syntax:\n@mixin transform($property) {\n-webkit-transform: $property;\n-ms-transform: $property;\ntransform: $property;\n}\n.myBox {\n@include transform(rotate(20deg));\n}\nAfter compilation, the CSS will look like this:\nCSS Output:\n.myBox {\n-webkit-transform: rotate(20deg);\n-ms-transform: \n  rotate(20deg);\ntransform: rotate(20deg);\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "@mixin\nname\n{\nproperty\n:\nvalue\n;\nproperty\n:\nvalue\n;\n...\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "@mixin \n  important-text {\ncolor: \n  red;\nfont-size: 25px;\nfont-weight: bold;\nborder: 1px solid blue;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "selector\n{\n@include\nmixin-name\n;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": ".danger {\n@include \n  important-text;\nbackground-color: green;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": ".danger {\ncolor: \n  red;\nfont-size: 25px;\nfont-weight: bold;\nborder: 1px solid blue;\nbackground-color: green;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "@mixin special-text {\n@include \n  important-text;\n@include \n  link;\n@include \n  special-border;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "/* Define mixin with two arguments */\n@mixin bordered($color, $width) {\nborder: \n  $width solid $color;\n}\n.myArticle {\n@include bordered(blue, 1px);\u00a0 \n  // Call mixin with two values\n}\n.myNotes {\n@include bordered(red, 2px); // Call mixin with two values\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": ".myArticle {\nborder: 1px solid blue;\n}\n.myNotes {\nborder: 2px solid red;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "@mixin bordered($color: blue, $width: \n  1px) {\nborder: \n  $width solid $color;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": ".myTips {\n@include bordered($color: orange);\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "@mixin transform($property) {\n-webkit-transform: $property;\n-ms-transform: $property;\ntransform: $property;\n}\n.myBox {\n@include transform(rotate(20deg));\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": ".myBox {\n-webkit-transform: rotate(20deg);\n-ms-transform: \n  rotate(20deg);\ntransform: rotate(20deg);\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "@mixin\nname\n{\nproperty\n:\nvalue\n;\n# TODO: Complete this line\n:\nvalue\n;\n...\n}",
+      "solution": "@mixin\nname\n{\nproperty\n:\nvalue\n;\nproperty\n:\nvalue\n;\n...\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "@mixin \n# TODO: Complete this line\ncolor: \n  red;\nfont-size: 25px;\nfont-weight: bold;\nborder: 1px solid blue;\n}",
+      "solution": "@mixin \n  important-text {\ncolor: \n  red;\nfont-size: 25px;\nfont-weight: bold;\nborder: 1px solid blue;\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b4803ebc-73d6-490e-99be-31a3d3fab62f",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "8f1e7cab-08e6-4de7-8c92-a33c920556fb",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "cc5a089c-85d0-4855-8a36-be0e43c50128",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is mixin\ndirective lets you create CSS \ncode that?",
+      "options": [
+        "to be reused throughout the website",
+        "None of the above.",
+        "None of the above.",
+        "created to let you \nuse (include) the mixin"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of mixin\ndirective lets you create CSS \ncode that is 'to be reused throughout the website'."
+    },
+    {
+      "question": "What is include\ndirective?",
+      "options": [
+        "to be reused throughout the website",
+        "None of the above.",
+        "None of the above.",
+        "created to let you \nuse (include) the mixin"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of include\ndirective is 'created to let you \nuse (include) the mixin'."
+    }
+  ],
+  "summary": "This tutorial covers Sass@mixin and @include concepts and techniques. You'll learn how to use Sass@mixin and @include effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Sass@mixin and @include and how to apply it in your projects."
+}

@@ -1,0 +1,142 @@
+{
+  "id": "f98bb337-710d-45e3-af65-6430be477e39",
+  "title": "SQLINNER JOIN",
+  "slug": "sqlinner-join",
+  "metadata": {
+    "description": "Learn about SQLINNER JOIN with clear explanations and practical examples.",
+    "keywords": [
+      "sql",
+      "join",
+      "inner",
+      "products",
+      "categoryid",
+      "categories",
+      "table",
+      "tables",
+      "select",
+      "example",
+      "orders"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Sql Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnSQL",
+    "subcategory": "SQL Inner Join"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "SQL\nINNER JOIN",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "INNER JOIN\nThe\nINNER JOIN\nkeyword selects records that have matching values in \nboth tables.\nLet's look at a selection of the\nProducts\ntable:\nProductID\nProductName\nCategoryID\nPrice\n1\nChais\n1\n18\n2\nChang\n1\n19\n3\nAniseed Syrup\n2\n10\nAnd a selection of the\nCategories\ntable:\nCategoryID\nCategoryName\nDescription\n1\nBeverages\nSoft drinks, coffees, teas, beers, and ales\n2\nCondiments\nSweet and savory sauces, relishes, spreads, and seasonings\n3\nConfections\nDesserts, candies, and sweet breads\nWe will join the Products table with the Categories table, by using the\nCategoryID\nfield from both tables:\nExample\nJoin Products and Categories with the INNER JOIN keyword:\nSELECT ProductID, ProductName, CategoryName\nFROM Products\nINNER JOIN \n  Categories ON Products.CategoryID = Categories.CategoryID;\n\nNote:\nThe\nINNER JOIN\nkeyword returns only rows with a match in both tables.\nWhich means that if you have a product with no CategoryID, or with a CategoryID that is not present in the Categories table, that record would not be returned in the result.\nSyntax\nSELECT\ncolumn_name(s)\nFROM\ntable1\nINNER JOIN\ntable2\nON\ntable1.column_name\n=\ntable2.column_name\n;\nNaming the Columns\nIt is a good practice to include the table name when specifying columns in the SQL statement.\nExample\nSpecify the table names:\nSELECT Products.ProductID, Products.ProductName, Categories.CategoryName\nFROM Products\nINNER JOIN Categories ON Products.CategoryID = Categories.CategoryID;\n\nThe example above works without specifying table names, because none of the \nspecified column names are present in both tables.\nIf you try to include\nCategoryID\nin the\nSELECT\nstatement, you will get an error if you do not specify the table name \n(because\nCategoryID\nis present in both tables).\nJOIN or INNER JOIN\nJOIN\nand\nINNER JOIN\nwill return the same result.\nINNER\nis the default join type for\nJOIN\n,\nso when you write\nJOIN\nthe parser actually writes\nINNER JOIN\n.\nExample\nJOIN is the same as INNER JOIN:\nSELECT Products.ProductID, Products.ProductName, Categories.CategoryName\nFROM Products\nJOIN Categories ON Products.CategoryID = Categories.CategoryID;\n\nJOIN Three Tables\nThe following SQL statement selects all orders with customer and shipper information:\nHere is the\nShippers\ntable:\nShipperID\nShipperName\nPhone\n1\nSpeedy Express\n(503) 555-9831\n2\nUnited Package\n(503) 555-3199\n3\nFederal Shipping\n(503) 555-9931\nExample\nSELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName\nFROM \n  ((Orders\nINNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)\nINNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "SELECT ProductID, ProductName, CategoryName\nFROM Products\nINNER JOIN \n  Categories ON Products.CategoryID = Categories.CategoryID;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "SELECT Products.ProductID, Products.ProductName, Categories.CategoryName\nFROM Products\nINNER JOIN Categories ON Products.CategoryID = Categories.CategoryID;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "SELECT Products.ProductID, Products.ProductName, Categories.CategoryName\nFROM Products\nJOIN Categories ON Products.CategoryID = Categories.CategoryID;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName\nFROM \n  ((Orders\nINNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)\nINNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);",
+      "language": "sql",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "SELECT ProductID, ProductName, CategoryName\nFROM Products\nINNER JOIN \n# TODO: Complete this line",
+      "solution": "SELECT ProductID, ProductName, CategoryName\nFROM Products\nINNER JOIN \n  Categories ON Products.CategoryID = Categories.CategoryID;"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "SELECT Products.ProductID, Products.ProductName, Categories.CategoryName\n# TODO: Complete this line\nINNER JOIN Categories ON Products.CategoryID = Categories.CategoryID;",
+      "solution": "SELECT Products.ProductID, Products.ProductName, Categories.CategoryName\nFROM Products\nINNER JOIN Categories ON Products.CategoryID = Categories.CategoryID;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d77edded-12cc-4b0c-8e62-770f70b62709",
+      "title": "Sql Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "3cb0886f-2ee3-446f-80ae-ce6bedded1d1",
+      "title": "Sql Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "635709d8-1e1a-4d2e-9b92-4dcdd26fa495",
+      "title": "Sql Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Which?",
+      "options": [
+        "that if you have a product with no CategoryID",
+        "a good practice to include the table name when specifying columns in the SQL statement",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Which is 'that if you have a product with no CategoryID'."
+    },
+    {
+      "question": "What is Naming the Columns\nIt?",
+      "options": [
+        "None of the above.",
+        "that if you have a product with no CategoryID",
+        "a good practice to include the table name when specifying columns in the SQL statement",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Naming the Columns\nIt is 'a good practice to include the table name when specifying columns in the SQL statement'."
+    }
+  ],
+  "summary": "This tutorial covers SQLINNER JOIN concepts and techniques. You'll learn how to use SQLINNER JOIN effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of SQLINNER JOIN and how to apply it in your projects."
+}

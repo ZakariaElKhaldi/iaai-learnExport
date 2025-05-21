@@ -1,0 +1,169 @@
+{
+  "id": "b7597308-f169-484c-aab2-b5c42c6bf1c8",
+  "title": "JSON.parse()",
+  "slug": "jsonparse",
+  "metadata": {
+    "description": "Learn about JSON.parse() with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "json",
+      "parse",
+      "text",
+      "name",
+      "function",
+      "const",
+      "convert",
+      "date",
+      "birth",
+      "string"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnJSON",
+    "subcategory": "JSON Parse"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "JSON\n.parse()",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A common use of JSON is to exchange data to/from a web server.\nWhen receiving data from a web server, the data is always a string.\nParse the data with\nJSON.parse()\n, and the data becomes a JavaScript object.\nExample - Parsing JSON\nImagine we received this text from a web server:\n'{\"name\":\"John\", \"age\":30, \"city\":\"New York\"}'\nUse the JavaScript function\nJSON.parse()\nto convert text into a JavaScript object:\nconst obj = JSON.parse('{\"name\":\"John\", \"age\":30, \"city\":\"New \n  York\"}');\nMake sure the text is in JSON format, or else you will get a syntax error.\nUse the JavaScript object in your page:\nExample\n<p id=\"demo\"></p>\n<script>\ndocument.getElementById(\"demo\").innerHTML = obj.name;\n</script>\n\nArray as JSON\nWhen using the\nJSON.parse()\non a JSON derived from an array, the method will \nreturn a JavaScript array, instead of a JavaScript object.\nExample\nconst text = '[\"Ford\", \"BMW\", \"Audi\", \"Fiat\"]';\nconst myArr = JSON.parse(text);\n\nExceptions\nParsing Dates\nDate objects are not allowed in JSON.\nIf you need to include a date, write it as a string.\nYou can convert it back into a date object later:\nExample\nConvert a string into a date:\nconst text =\n  '{\"name\":\"John\", \"birth\":\"1986-12-14\", \"city\":\"New York\"}';\nconst obj = JSON.parse(text);\nobj.birth = new Date(obj.birth);\ndocument.getElementById(\"demo\").innerHTML = obj.name + \", \" + obj.birth;\n\nOr, you can use the second parameter, of the\nJSON.parse()\nfunction, called\nreviver\n.\nThe\nreviver\nparameter is a function that checks each property, \nbefore returning the value.\nExample\nConvert a string into a date, using the\nreviver\nfunction:\nconst text =\n  '{\"name\":\"John\", \"birth\":\"1986-12-14\", \"city\":\"New York\"}';\nconst obj = JSON.parse(text, function (key, value) {\nif \n  (key == \"birth\") {\nreturn new \n  Date(value);\n} else {\nreturn value;\n}\n});\ndocument.getElementById(\"demo\").innerHTML = obj.name + \", \" + obj.birth;\n\nParsing Functions\nFunctions are not allowed in JSON.\nIf you need to include a function, write it as a string.\nYou can convert it back into a function later:\nExample\nConvert a string into a function:\nconst text =\n  '{\"name\":\"John\", \"age\":\"function () {return \n  30;}\", \"city\":\"New York\"}';\nconst obj = JSON.parse(text);\nobj.age = eval(\"(\" + obj.age + \")\");\ndocument.getElementById(\"demo\").innerHTML = obj.name + \", \" + \n  obj.age();\n\nYou should avoid using functions in JSON, the functions will lose their scope, \nand you would have to use\neval()\nto convert them back into functions.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "'{\"name\":\"John\", \"age\":30, \"city\":\"New York\"}'",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "const obj = JSON.parse('{\"name\":\"John\", \"age\":30, \"city\":\"New \n  York\"}');",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<p id=\"demo\"></p>\n<script>\ndocument.getElementById(\"demo\").innerHTML = obj.name;\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "const text = '[\"Ford\", \"BMW\", \"Audi\", \"Fiat\"]';\nconst myArr = JSON.parse(text);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "const text =\n  '{\"name\":\"John\", \"birth\":\"1986-12-14\", \"city\":\"New York\"}';\nconst obj = JSON.parse(text);\nobj.birth = new Date(obj.birth);\ndocument.getElementById(\"demo\").innerHTML = obj.name + \", \" + obj.birth;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "const text =\n  '{\"name\":\"John\", \"birth\":\"1986-12-14\", \"city\":\"New York\"}';\nconst obj = JSON.parse(text, function (key, value) {\nif \n  (key == \"birth\") {\nreturn new \n  Date(value);\n} else {\nreturn value;\n}\n});\ndocument.getElementById(\"demo\").innerHTML = obj.name + \", \" + obj.birth;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "const text =\n  '{\"name\":\"John\", \"age\":\"function () {return \n  30;}\", \"city\":\"New York\"}';\nconst obj = JSON.parse(text);\nobj.age = eval(\"(\" + obj.age + \")\");\ndocument.getElementById(\"demo\").innerHTML = obj.name + \", \" + \n  obj.age();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "'{\"name\":\"John\", \"age\":30, \"city\":\"New York\"}'"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "const obj = JSON.parse('{\"name\":\"John\", \"age\":30, \"city\":\"New \n  York\"}');"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "ff3fa7e5-52d4-4a20-8114-4b4e0b9db196",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "c506dc12-85ab-4442-845e-7dcd4e67e82b",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "fa155cf4-98a6-45fa-8b9d-85d099d8b724",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is A common use of JSON?",
+      "options": [
+        "None of the above.",
+        "to exchange data to/from a web server",
+        "None of the above.",
+        "always a string"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of A common use of JSON is 'to exchange data to/from a web server'."
+    },
+    {
+      "question": "What is the data?",
+      "options": [
+        "always a string",
+        "None of the above.",
+        "None of the above.",
+        "to exchange data to/from a web server"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of the data is 'always a string'."
+    }
+  ],
+  "summary": "This tutorial covers JSON.parse() concepts and techniques. You'll learn how to use JSON.parse() effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JSON.parse() and how to apply it in your projects."
+}

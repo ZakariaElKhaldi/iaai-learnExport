@@ -1,0 +1,96 @@
+{
+  "id": "63d83118-9f9c-41ce-893f-ce4ba236bbd2",
+  "title": "Vue <slot> Element",
+  "slug": "vue-slot-element",
+  "metadata": {
+    "description": "Learn about Vue <slot> Element with clear explanations and practical examples.",
+    "keywords": [
+      "slot",
+      "example",
+      "comp",
+      "content",
+      "component",
+      "template",
+      "name",
+      "slots",
+      "parent",
+      "slotcomp"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "<slot>"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue <slot> Element",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Vue Built-in Elements Reference\n\nExample\nUsing the built-in\n<slot>\nelement to place content from the parent component in the\n<template>\nof the child component.\n<template>\n  <div>  \n    <p>SlotComp.vue</p>\n    <slot></slot>\n  </div>\n</template>\nRun Example \u00bb\nSee more examples below.\nDefinition and Usage\nThe built-in\n<slot>\nelement is used to place content received from the parent component.\nWhen a child component is called, content provided between the start- and end-tag will end up where the\n<slot>\nelement is inside that child component.\nA component can hold more than one\n<slot>\n, and the slots can be named with the\nname\nprop. With such components with different named slots, we can use the\nv-slot\ndirective to send content to specific slots. (\nExample 3\n)\nContent between the start- and end-tag of the\n<slot>\nelement will be used as fallback content if no content is provided by the parent. (\nExample 5\n)\nInformation can be provided up to the parent element through\n<slot>\nprops. (\nExample 8\n)\nThe\n<slot>\nelement is just a placeholder for content, the\n<slot>\nelement itself is not rendered into a DOM element.\nProps\nProp\nDescription\n[any]\nProps defined in slots create 'scoped slots' and such props are sent to the parent.\nRun Example \u00bb\nname\nNames a slot so that the parent can direct content into a specific slot with the\nv-slot\ndirective.\nRun Example \u00bb\nMore examples\nExample 1\nUsing slots to wrap around larger chunks of dynamic HTML content to get a card-like appearance.\nApp.vue\n:\n<template>\n\u00a0 <h3>Slots in Vue</h3>  \n\u00a0 <p>We create card-like div boxes from the foods array.</p>\n\u00a0 <div id=\"wrapper\">\n\u00a0 \u00a0 <slot-comp v-for=\"x in foods\">\n\u00a0 \u00a0 \u00a0 <img v-bind:src=\"x.url\">\n\u00a0 \u00a0 \u00a0 <h4>{{x.name}}</h4>\n\u00a0 \u00a0 \u00a0 <p>{{x.desc}}</p>\n\u00a0 \u00a0 </slot-comp>\n\u00a0 </div>\n</template>\nAs the content enters the component where the\n<slot>\nis, we use a div around the\n<slot>\nand style the\n<div>\nlocally to create a card-like appearance around the content without affecting other divs in our application.\nSlotComp.vue\n:\n<template>\n\u00a0 <div> <!-- This div makes the card-like appearance -->\n\u00a0 \u00a0 <slot></slot>\n\u00a0 </div>\n</template>\n\n<script></script>\n\n<style scoped>\n\u00a0 div {\n\u00a0 \u00a0 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);\n\u00a0 \u00a0 border-radius: 10px;\n\u00a0 \u00a0 margin: 10px;\n\u00a0 }\n</style>\nRun Example \u00bb\nExample 2\nUsing a slot to create a footer.\nApp.vue\n:\n<template>\n\u00a0 <h3>Reusable Slot Cards</h3>\n\u00a0 <p>We create card-like div boxes from the foods array.</p>\n\u00a0 <p>We also create a card-like footer by reusing the same component.</p>\n\u00a0 <div id=\"wrapper\">\n\u00a0 \u00a0 <slot-comp v-for=\"x in foods\">\n\u00a0 \u00a0 \u00a0 <img v-bind:src=\"x.url\">\n\u00a0 \u00a0 \u00a0 <h4>{{x.name}}</h4>\n\u00a0 \u00a0 </slot-comp>\n\u00a0 </div>\n<footer>\n\u00a0 \u00a0 <slot-comp>\n\u00a0 \u00a0 \u00a0 <h4>Footer</h4>\n\u00a0 \u00a0 </slot-comp>\n\u00a0 </footer>\n</template>\nRun Example \u00bb\nExample 3\nUsing slot names, content can be sent to a specific slot.\nSlotComp.vue\n:\n<h3>Component</h3>\n<div>\n\u00a0 <slot\nname=\"topSlot\"\n></slot>\n</div>\n<div>\n\u00a0 <slot\nname=\"bottomSlot\"\n></slot>\n</div>\nApp.vue\n:\n<h1>App.vue</h1>\n<p>The component has two div tags with one slot in each.</p>\n<slot-comp\nv-slot:bottomSlot\n>'Hello!'</slot-comp>\nRun Example \u00bb\nExample 4\nWith two slots in a component, content sent to the component will end up in both slots.\nApp.vue\n:\n<h1>App.vue</h1>\n<p>The component has two div tags with one slot in each.</p>\n<slot-comp>'Hello!'</slot-comp>\nSlotComp.vue\n:\n<h3>Component</h3>\n<div>\n\u00a0 <slot></slot>\n</div>\n<div>\n\u00a0 <slot></slot>\n</div>\nRun Example \u00bb\nExample 5\nUsing fallback content in a slot so that something is rendered when no content is provided from the parent.\nApp.vue\n:\n<template>\n\u00a0 <h3>Slots Fallback Content</h3>\n\u00a0 <p>A component without content provided can have fallback content in the slot tag.</p>\n\u00a0 <slot-comp>\n<!-- Empty -->\n</slot-comp>\n\u00a0 <slot-comp>\n\u00a0 \u00a0 <h4>This content is provided from App.vue</h4>\n\u00a0 </slot-comp>\n</template>\nSlotComp.vue\n:\n<template>\n\u00a0 <div>\n\u00a0 \u00a0 <slot>\n\u00a0 \u00a0 \u00a0 <h4>This is fallback content</h4>\n\u00a0 \u00a0 </slot>\n\u00a0 </div>\n</template>\nRun Example \u00bb\nExample 6\nThe slot without a name will be the default slot for content from the parent.\nSlotComp.vue\n:\n<h3>Component</h3>\n<div>\n\u00a0 <slot></slot>\n</div>\n<div>\n\u00a0 <slot name=\"bottomSlot\"></slot>\n</div>\nApp.vue\n:\n<h1>App.vue</h1>\n<p>The component has two div tags with one slot in each.</p>\n<slot-comp>'Hello!'</slot-comp>\nRun Example \u00bb\nExample 7\nUsing\nv-slot:default\nto explicitly define a slot as the default slot.\nSlotComp.vue\n:\n<h3>Component</h3>\n<div>\n\u00a0 <slot></slot>\n</div>\n<div>\n\u00a0 <slot name=\"bottomSlot\"></slot>\n</div>\nApp.vue\n:\n<h1>App.vue</h1>\n<p>The component has two div tags with one slot in each.</p>\n<slot-comp\nv-slot:default\n>'Default slot'</slot-comp>\nRun Example \u00bb\nExample 8\nScoped slot: Using the 'foodName' prop in the slot to communicate the food name to the parent.\nSlotComp.vue\n:\n<template>\n\u00a0 <slot\n\u00a0 \u00a0 v-for=\"x in foods\"\n\u00a0 \u00a0 :key=\"x\"\n:foodName=\"x\"\n></slot>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 foods: ['Apple','Pizza','Rice','Fish','Cake']\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nApp.vue\n:\n<slot-comp\nv-slot=\"food\"\n>\n\u00a0 <h2>{{ food.foodName }}</h2>\n</slot-comp>\nRun Example \u00bb\nExample 9\nScoped slot: Using props in the slot to communicate the several things to the parent, based on an array with objects.\nSlotComp.vue\n:\n<template>\n\u00a0 <slot\n\u00a0 \u00a0 v-for=\"x in foods\"\n\u00a0 \u00a0 :key=\"x.name\"\n:foodName=\"x.name\"\n:foodDesc=\"x.desc\"\n:foodUrl=\"x.url\"\n></slot>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 foods: [\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Apple', desc: 'Apples are a type of fruit that grow on trees.', url: 'img_apple.svg' },\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Pizza', desc: 'Pizza has a bread base with tomato sauce, cheese, and toppings on top.', url: 'img_pizza.svg' },\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Rice', desc: 'Rice is a type of grain that people like to eat.', url: 'img_rice.svg' },\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Fish', desc: 'Fish is an animal that lives in water.', url: 'img_fish.svg' },\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Cake', desc: 'Cake is something sweet that tastes good but is not considered healthy.', url: 'img_cake.svg' }\n\u00a0 \u00a0 \u00a0 \u00a0]\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nApp.vue\n:\n<slot-comp v-slot=\"food\">\n\u00a0 <hr>\n\u00a0 <h2>{{\nfood.foodName\n}}<img :src=\nfood.foodUrl\n></h2>\n\u00a0 <p>{{\nfood.foodDesc\n}}</p>\n</slot-comp>\nRun Example \u00bb\nExample 10\nUsing named scoped slots to put one text into the \"leftSlot\", and another text into the \"rightSlot\".\nSlotComp.vue\n:\n<template>\n\u00a0 <slot\n\u00a0 \u00a0 name=\"leftSlot\"\n\u00a0 \u00a0 :text=\"leftText\"\n\u00a0 ></slot>\n\u00a0 <slot\n\u00a0 \u00a0 name=\"rightSlot\"\n\u00a0 \u00a0 :text=\"rightText\"\n\u00a0 ></slot>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 leftText: 'This text belongs to the LEFT slot.',\n\u00a0 \u00a0 \u00a0 \u00a0 rightText: 'This text belongs to the RIGHT slot.'\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nApp.vue\n:\n<slot-comp #leftSlot=\"leftProps\">\n\u00a0 <div>{{ leftProps.text }}</div>\n</slot-comp>\n<slot-comp #rightSlot=\"rightProps\">\n\u00a0 <div>{{ rightProps.text }}</div>\n</slot-comp>\nRun Example \u00bb\nRelated Pages\nVue Tutorial:\nVue Slots\nVue Tutorial:\nVue v-slot\nVue Tutorial:\nScoped Slots\nVue Tutorial:\nComponents\nVue Reference:\nVue v-slot directive\nVue Reference:\nVue $slots Object\n\nVue Built-in Elements Reference\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Create a Layout",
+      "description": "Build a simple layout using the techniques from this tutorial.",
+      "difficulty": "easy",
+      "starter_code": "<!-- Add your code here -->",
+      "solution": "<!-- Example solution would go here -->"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "059947b9-3ec9-4ba6-a2f0-d1de5ec51d41",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "11e81e9b-590f-4489-a1ae-ebf2d451e04d",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "1e65fd9c-1f4d-4b8b-936f-770eeb4ea5e2",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is element?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "used to place content received from the parent component",
+        "called"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of element is 'used to place content received from the parent component'."
+    },
+    {
+      "question": "What is When a child component?",
+      "options": [
+        "None of the above.",
+        "used to place content received from the parent component",
+        "None of the above.",
+        "called"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of When a child component is 'called'."
+    }
+  ],
+  "summary": "This tutorial covers Vue <slot> Element concepts and techniques. You'll learn how to use Vue <slot> Element effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue <slot> Element and how to apply it in your projects."
+}

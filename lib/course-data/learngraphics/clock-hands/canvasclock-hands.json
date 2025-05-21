@@ -1,0 +1,133 @@
+{
+  "id": "5fa2d1ce-3a8f-49a7-ad62-905e7575ff97",
+  "title": "CanvasClock Hands",
+  "slug": "canvasclock-hands",
+  "metadata": {
+    "description": "Learn about CanvasClock Hands with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "hour",
+      "radius",
+      "second",
+      "minute",
+      "math",
+      "drawhand",
+      "clock",
+      "hands",
+      "function",
+      "length"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnGraphics",
+    "subcategory": "Clock Hands"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Canvas\nClock Hands",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Part IV - Draw Clock Hands\nThe clock needs hands. Create a JavaScript function to draw clock hands:\nJavaScript:\nfunction drawClock() {\ndrawFace(ctx, radius);\ndrawNumbers(ctx, radius);\ndrawTime(ctx, radius);\n}\nfunction drawTime(ctx, radius)\n{\nconst now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\nlet second = now.getSeconds();\n//hour\nhour = hour%12;\nhour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));\ndrawHand(ctx, hour, radius*0.5, radius*0.07);\n//minute\nminute = (minute*Math.PI/30)+(second*Math.PI/(30*60));\ndrawHand(ctx, minute, radius*0.8, radius*0.07);\n// second\nsecond = (second*Math.PI/30);\ndrawHand(ctx, second, \n radius*0.9, radius*0.02);\n}\nfunction drawHand(ctx, \n pos, length, width) {\nctx.beginPath();\nctx.lineWidth = width;\nctx.lineCap = \"round\";\nctx.moveTo(0,0);\nctx.rotate(pos);\nctx.lineTo(0, -length);\nctx.stroke();\nctx.rotate(-pos);\n}\n\nExample Explained\nCreate a Date object to get hour, minute, second:\nconst now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\nlet second = now.getSeconds();\nCalculate the angle of the hour hand, and draw it a length (50% of radius), \nand a width (7% of radius):\nhour = hour%12;\nhour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));\ndrawHand(ctx, hour, radius*0.5, radius*0.07);\nUse the same technique for minutes and seconds.\nThe drawHand() routine does not need an explanation. It just draws a line \nwith a given length and width.\nSee Also:\n' Full Canvas Reference\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "JavaScript:",
+      "content": "",
+      "order": 3,
+      "code": "function drawClock() {\ndrawFace(ctx, radius);\ndrawNumbers(ctx, radius);\ndrawTime(ctx, radius);\n}\nfunction drawTime(ctx, radius)\n{\nconst now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\nlet second = now.getSeconds();\n//hour\nhour = hour%12;\nhour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));\ndrawHand(ctx, hour, radius*0.5, radius*0.07);\n//minute\nminute = (minute*Math.PI/30)+(second*Math.PI/(30*60));\ndrawHand(ctx, minute, radius*0.8, radius*0.07);\n// second\nsecond = (second*Math.PI/30);\ndrawHand(ctx, second, \n radius*0.9, radius*0.02);\n}\nfunction drawHand(ctx, \n pos, length, width) {\nctx.beginPath();\nctx.lineWidth = width;\nctx.lineCap = \"round\";\nctx.moveTo(0,0);\nctx.rotate(pos);\nctx.lineTo(0, -length);\nctx.stroke();\nctx.rotate(-pos);\n}",
+      "language": "javascript",
+      "explanation": "Example of javascript:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "const now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\nlet second = now.getSeconds();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "hour = hour%12;\nhour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));\ndrawHand(ctx, hour, radius*0.5, radius*0.07);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function drawClock() {\ndrawFace(ctx, radius);\ndrawNumbers(ctx, radius);\ndrawTime(ctx, radius);\n}\nfunction drawTime(ctx, radius)\n{\nconst now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\n# TODO: Complete this line\n//hour\nhour = hour%12;\nhour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));\ndrawHand(ctx, hour, radius*0.5, radius*0.07);\n//minute\nminute = (minute*Math.PI/30)+(second*Math.PI/(30*60));\ndrawHand(ctx, minute, radius*0.8, radius*0.07);\n// second\nsecond = (second*Math.PI/30);\ndrawHand(ctx, second, \n radius*0.9, radius*0.02);\n}\nfunction drawHand(ctx, \n pos, length, width) {\nctx.beginPath();\nctx.lineWidth = width;\nctx.lineCap = \"round\";\nctx.moveTo(0,0);\nctx.rotate(pos);\nctx.lineTo(0, -length);\nctx.stroke();\nctx.rotate(-pos);\n}",
+      "solution": "function drawClock() {\ndrawFace(ctx, radius);\ndrawNumbers(ctx, radius);\ndrawTime(ctx, radius);\n}\nfunction drawTime(ctx, radius)\n{\nconst now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\nlet second = now.getSeconds();\n//hour\nhour = hour%12;\nhour = (hour*Math.PI/6)+(minute*Math.PI/(6*60))+(second*Math.PI/(360*60));\ndrawHand(ctx, hour, radius*0.5, radius*0.07);\n//minute\nminute = (minute*Math.PI/30)+(second*Math.PI/(30*60));\ndrawHand(ctx, minute, radius*0.8, radius*0.07);\n// second\nsecond = (second*Math.PI/30);\ndrawHand(ctx, second, \n radius*0.9, radius*0.02);\n}\nfunction drawHand(ctx, \n pos, length, width) {\nctx.beginPath();\nctx.lineWidth = width;\nctx.lineCap = \"round\";\nctx.moveTo(0,0);\nctx.rotate(pos);\nctx.lineTo(0, -length);\nctx.stroke();\nctx.rotate(-pos);\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "const now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\n# TODO: Complete this line",
+      "solution": "const now = new Date();\nlet hour = now.getHours();\nlet minute = now.getMinutes();\nlet second = now.getSeconds();"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "7ce390f2-f2a8-44b9-a52f-e5ca72a66e99",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "82c5b33b-1051-4e7b-adfe-fae626bef375",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "8718ecae-1f7f-494f-af6e-299ee2c18164",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers CanvasClock Hands concepts and techniques. You'll learn how to use CanvasClock Hands effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of CanvasClock Hands and how to apply it in your projects."
+}

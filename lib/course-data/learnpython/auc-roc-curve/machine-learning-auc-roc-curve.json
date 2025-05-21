@@ -1,0 +1,169 @@
+{
+  "id": "16bbf157-b111-43c3-abad-2622f74a9879",
+  "title": "Machine Learning - AUC - ROC Curve",
+  "slug": "machine-learning-auc-roc-curve",
+  "metadata": {
+    "description": "Learn about Machine Learning - AUC - ROC Curve with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "model",
+      "accuracy",
+      "print",
+      "score",
+      "example",
+      "class",
+      "probabilities",
+      "data",
+      "random",
+      "uniform"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPython",
+    "subcategory": "AUC - ROC Curve"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Machine Learning - AUC - ROC Curve",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "On this page, .com collaborates with\nNYC Data Science Academy\n, to deliver digital training content to our students.\nAUC - ROC Curve\nIn classification, there are many different evaluation metrics. The most popular is\naccuracy\n, which measures how often the model is correct. This is a great metric because it is easy to understand and getting the most correct guesses is often desired. There are some cases where you might consider using another evaluation metric.\nAnother common metric is\nAUC\n, area under the receiver operating characteristic (\nROC\n) curve.\nThe Reciever operating characteristic curve plots the true positive (\nTP\n) rate versus the false positive (\nFP\n) rate at different classification thresholds. The thresholds are different probability cutoffs that separate the two classes in binary classification. It uses probability to tell us how well a model separates the classes.\nImbalanced Data\nSuppose we have an imbalanced data set where the majority of our data is of one value. We can obtain high accuracy for the model by predicting the majority class.\nExample\nimport numpy as np\nfrom sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve\nn = 10000\nratio = .95\nn_0 = int((1-ratio) * n)\nn_1 = int(ratio * n)\ny = np.array([0] * n_0 + [1] * n_1)\n# below are the probabilities obtained from a hypothetical model that always predicts the majority class\n# probability of predicting class 1 is going to be 100%\ny_proba = np.array([1]*n)\ny_pred = y_proba > .5\nprint(f'accuracy score: {accuracy_score(y, y_pred)}')\ncf_mat = confusion_matrix(y, y_pred)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')\nRun example \u00bb\nADVERTISEMENT\nAlthough we obtain a very high accuracy, the model provided no information about the data so it's not useful. We accurately predict class 1 100% of the time while inaccurately predict class 0 0% of the time. At the expense of accuracy, it might be better to have a model that can somewhat separate the two classes.\nExample\n# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode\ny_proba_2 = np.array(\nnp.random.uniform(0, .7, n_0).tolist() +\nnp.random.uniform(.3, 1,  n_1).tolist()\n)\ny_pred_2 = y_proba_2 > .5\nprint(f'accuracy score: {accuracy_score(y, y_pred_2)}')\ncf_mat = confusion_matrix(y, y_pred_2)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')\nRun example \u00bb\nFor the second set of predictions, we do not have as high of an accuracy score as the first but the accuracy for each class is more balanced. Using accuracy as an evaluation metric we would rate the first model higher than the second even though it doesn't tell us anything about the data.\nIn cases like this, using another evaluation metric like AUC would be preferred.\nimport matplotlib.pyplot as plt\ndef plot_roc_curve(true_y, y_prob):\n\"\"\"\nplots the roc curve based of the probabilities\n\"\"\"\nfpr, tpr, thresholds = roc_curve(true_y, y_prob)\nplt.plot(fpr, tpr)\nplt.xlabel('False Positive Rate')\nplt.ylabel('True Positive Rate')\nExample\nModel 1:\nplot_roc_curve(y, y_proba)\nprint(f'model 1 AUC score: {roc_auc_score(y, y_proba)}')\nResult\nmodel 1 AUC score: 0.5\nRun example \u00bb\nExample\nModel 2:\nplot_roc_curve(y, y_proba_2)\nprint(f'model 2 AUC score: {roc_auc_score(y, y_proba_2)}')\nResult\nmodel 2 AUC score: 0.8270551578947367\nRun example \u00bb\nAn AUC score of around .5 would mean that the model is unable to make a distinction between the two classes and the curve would look like a line with a slope of 1. An AUC score closer to 1 means that the model has the ability to separate the two classes and the curve would come closer to the top left corner of the graph.\nProbabilities\nBecause AUC is a metric that utilizes probabilities of the class predictions, we can be more confident in a model that has a higher AUC score than one with a lower score even if they have similar accuracies.\nIn the data below, we have two sets of probabilites from hypothetical models. The first has probabilities that are not as \"confident\" when predicting the two classes (the probabilities are close to .5). The second has probabilities that are more \"confident\" when predicting the two classes (the probabilities are close to the extremes of 0 or 1).\nExample\nimport numpy as np\nn = 10000\ny = np.array([0] * n + [1] * n)\n#\ny_prob_1 = np.array(\nnp.random.uniform(.25, .5, n//2).tolist() +\nnp.random.uniform(.3, .7, n).tolist() +\nnp.random.uniform(.5, .75, n//2).tolist()\n)\ny_prob_2 = np.array(\nnp.random.uniform(0, .4, n//2).tolist() +\nnp.random.uniform(.3, .7, n).tolist() +\nnp.random.uniform(.6, 1, n//2).tolist()\n)\nprint(f'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}')\nprint(f'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}')\nprint(f'model 1 AUC score: {roc_auc_score(y, y_prob_1)}')\nprint(f'model 2 AUC score: {roc_auc_score(y, y_prob_2)}')\nRun example \u00bb\nExample\nPlot model 1:\nplot_roc_curve(y, y_prob_1)\nResult\nRun example \u00bb\nExample\nPlot model 2:\nfpr, tpr, thresholds = roc_curve(y, y_prob_2)\nplt.plot(fpr, tpr)\nResult\nRun example \u00bb\nEven though the accuracies for the two models are similar, the model with the higher AUC score will be more reliable because it takes into account the predicted probability. It is more likely to give you higher accuracy when predicting future data.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import numpy as np\nfrom sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve\nn = 10000\nratio = .95\nn_0 = int((1-ratio) * n)\nn_1 = int(ratio * n)\ny = np.array([0] * n_0 + [1] * n_1)\n# below are the probabilities obtained from a hypothetical model that always predicts the majority class\n# probability of predicting class 1 is going to be 100%\ny_proba = np.array([1]*n)\ny_pred = y_proba > .5\nprint(f'accuracy score: {accuracy_score(y, y_pred)}')\ncf_mat = confusion_matrix(y, y_pred)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode\ny_proba_2 = np.array(\nnp.random.uniform(0, .7, n_0).tolist() +\nnp.random.uniform(.3, 1,  n_1).tolist()\n)\ny_pred_2 = y_proba_2 > .5\nprint(f'accuracy score: {accuracy_score(y, y_pred_2)}')\ncf_mat = confusion_matrix(y, y_pred_2)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "plot_roc_curve(y, y_proba)\nprint(f'model 1 AUC score: {roc_auc_score(y, y_proba)}')",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "plot_roc_curve(y, y_proba_2)\nprint(f'model 2 AUC score: {roc_auc_score(y, y_proba_2)}')",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import numpy as np\nn = 10000\ny = np.array([0] * n + [1] * n)\n#\ny_prob_1 = np.array(\nnp.random.uniform(.25, .5, n//2).tolist() +\nnp.random.uniform(.3, .7, n).tolist() +\nnp.random.uniform(.5, .75, n//2).tolist()\n)\ny_prob_2 = np.array(\nnp.random.uniform(0, .4, n//2).tolist() +\nnp.random.uniform(.3, .7, n).tolist() +\nnp.random.uniform(.6, 1, n//2).tolist()\n)\nprint(f'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}')\nprint(f'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}')\nprint(f'model 1 AUC score: {roc_auc_score(y, y_prob_1)}')\nprint(f'model 2 AUC score: {roc_auc_score(y, y_prob_2)}')",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "plot_roc_curve(y, y_prob_1)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "fpr, tpr, thresholds = roc_curve(y, y_prob_2)\nplt.plot(fpr, tpr)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\nfrom sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve\nn = 10000\nratio = .95\nn_0 = int((1-ratio) * n)\nn_1 = int(ratio * n)\ny = np.array([0] * n_0 + [1] * n_1)\n# below are the probabilities obtained from a hypothetical model that always predicts the majority class\n# probability of predicting class 1 is going to be 100%\ny_proba = np.array([1]*n)\ny_pred = y_proba > .5\nprint(f'accuracy score: {accuracy_score(y, y_pred)}')\ncf_mat = confusion_matrix(y, y_pred)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\n# TODO: Complete this line",
+      "solution": "import numpy as np\nfrom sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve\nn = 10000\nratio = .95\nn_0 = int((1-ratio) * n)\nn_1 = int(ratio * n)\ny = np.array([0] * n_0 + [1] * n_1)\n# below are the probabilities obtained from a hypothetical model that always predicts the majority class\n# probability of predicting class 1 is going to be 100%\ny_proba = np.array([1]*n)\ny_pred = y_proba > .5\nprint(f'accuracy score: {accuracy_score(y, y_pred)}')\ncf_mat = confusion_matrix(y, y_pred)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode\ny_proba_2 = np.array(\nnp.random.uniform(0, .7, n_0).tolist() +\nnp.random.uniform(.3, 1,  n_1).tolist()\n)\ny_pred_2 = y_proba_2 > .5\nprint(f'accuracy score: {accuracy_score(y, y_pred_2)}')\ncf_mat = confusion_matrix(y, y_pred_2)\nprint('Confusion matrix')\nprint(cf_mat)\n# TODO: Complete this line\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')",
+      "solution": "# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode\ny_proba_2 = np.array(\nnp.random.uniform(0, .7, n_0).tolist() +\nnp.random.uniform(.3, 1,  n_1).tolist()\n)\ny_pred_2 = y_proba_2 > .5\nprint(f'accuracy score: {accuracy_score(y, y_pred_2)}')\ncf_mat = confusion_matrix(y, y_pred_2)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "43d5b32c-14d3-47d3-bcc9-982ab4bb6f9e",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ce2bb4e2-a206-49a8-93ea-84c4772eb869",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "c6f9b3bc-279f-4d12-a5c5-2d31c9fbc2ed",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is there?",
+      "options": [
+        "many different evaluation metrics",
+        "None of the above.",
+        "accuracy",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of there is 'many different evaluation metrics'."
+    },
+    {
+      "question": "What is The most popular?",
+      "options": [
+        "None of the above.",
+        "many different evaluation metrics",
+        "None of the above.",
+        "accuracy"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of The most popular is 'accuracy'."
+    }
+  ],
+  "summary": "This tutorial covers Machine Learning - AUC - ROC Curve concepts and techniques. You'll learn how to use Machine Learning - AUC - ROC Curve effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Machine Learning - AUC - ROC Curve and how to apply it in your projects."
+}

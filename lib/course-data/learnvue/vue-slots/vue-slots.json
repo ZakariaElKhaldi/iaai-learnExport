@@ -1,0 +1,98 @@
+{
+  "id": "2dd45b23-a083-4e40-9603-c6ece245a8bf",
+  "title": "Vue Slots",
+  "slug": "vue-slots",
+  "metadata": {
+    "description": "Learn about Vue Slots with clear explanations and practical examples.",
+    "keywords": [
+      "slot",
+      "content",
+      "template",
+      "comp",
+      "like",
+      "component",
+      "example",
+      "slots",
+      "card",
+      "create"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Typescript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue Slots"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue Slots",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Slots\nare a powerful feature in Vue that allow for more flexible and reusable components.\nWe use\nslots\nin Vue to send content from the parent into the\n<template>\nof a child component.\nSlots\nSo far we have just used components inside\n<template>\nas self-closing tags like this:\nApp.vue\n:\n<template>\n\u00a0 <slot-comp />\n</template>\nInstead, we can use opening and closing tags, and put some content inside, like for example a text:\nApp.vue\n:\n<template>\n<slot-comp>Hello World!</slot-comp>\n</template>\nBut to receive 'Hello World!' inside the component and display it on our page, we need to use the\n<slot>\ntag inside the component. The\n<slot>\ntag acts as a placeholder for the content, so that after the application is built the\n<slot>\nwill be replaced by the content sent to it.\nExample\nSlotComp.vue\n:\n<template>\n\u00a0 <div>  \n\u00a0 \u00a0 <p>SlotComp.vue</p>\n<slot></slot>\n</div>\n</template>\nRun Example \u00bb\nSlots as Cards\nSlots can also be used to wrap around larger chunks of dynamic html content to get a card-like appearance.\nEarlier we have sent data as props to create content inside components, now we can just send the HTML content directly inside the\n<slot>\ntag as it is.\nExample\nApp.vue\n:\n<template>\n\u00a0 <h3>Slots in Vue</h3>  \n\u00a0 <p>We create card-like div boxes from the foods array.</p>\n\u00a0 <div id=\"wrapper\">\n\u00a0 \u00a0 <slot-comp v-for=\"x in foods\">\n\u00a0 \u00a0 \u00a0 <img v-bind:src=\"x.url\">\n\u00a0 \u00a0 \u00a0 <h4>{{x.name}}</h4>\n\u00a0 \u00a0 \u00a0 <p>{{x.desc}}</p>\n\u00a0 \u00a0 </slot-comp>\n\u00a0 </div>\n</template>\nAs the content enters the component where the\n<slot>\nis, we use a div around the\n<slot>\nand style the\n<div>\nlocally to create a card-like appearance around the content without affecting other divs in our application.\nSlotComp.vue\n:\n<template>\n\u00a0 <div> <!-- This div makes the card-like appearance -->\n\u00a0 \u00a0 <slot></slot>\n\u00a0 </div>\n</template>\n\n<script></script>\n\n<style scoped>\n\u00a0 div {\n\u00a0 \u00a0 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);\n\u00a0 \u00a0 border-radius: 10px;\n\u00a0 \u00a0 margin: 10px;\n\u00a0 }\n</style>\nRun Example \u00bb\nComponents that produce a card-like frame around content can be reused to create different elements, but with the same card-like frame around.\nIn this example we use the same component as for the food items to create a footer.\nExample\nApp.vue\n:\n<template>\n\u00a0 <h3>Reusable Slot Cards</h3>\n\u00a0 <p>We create card-like div boxes from the foods array.</p>\n\u00a0 <p>We also create a card-like footer by reusing the same component.</p>\n\u00a0 <div id=\"wrapper\">\n\u00a0 \u00a0 <slot-comp v-for=\"x in foods\">\n\u00a0 \u00a0 \u00a0 <img v-bind:src=\"x.url\">\n\u00a0 \u00a0 \u00a0 <h4>{{x.name}}</h4>\n\u00a0 \u00a0 </slot-comp>\n\u00a0 </div>\n<footer>\n\u00a0 \u00a0 <slot-comp>\n\u00a0 \u00a0 \u00a0 <h4>Footer</h4>\n\u00a0 \u00a0 </slot-comp>\n\u00a0 </footer>\n</template>\nRun Example \u00bb\nFallback Content\nIf a component is created without content we can have fallback content in the\n<slot>\n.\nExample\nThe first component in this application has no content provided, so the fallback content is rendered.\nApp.vue\n:\n<template>\n\u00a0 <h3>Slots Fallback Content</h3>\n\u00a0 <p>A component without content provided can have fallback content in the slot tag.</p>\n\u00a0 <slot-comp>\n<!-- Empty -->\n</slot-comp>\n\u00a0 <slot-comp>\n\u00a0 \u00a0 <h4>This content is provided from App.vue</h4>\n\u00a0 </slot-comp>\n</template>\nSlotComp.vue\n:\n<template>\n\u00a0 <div>\n\u00a0 \u00a0 <slot>\n\u00a0 \u00a0 \u00a0 <h4>This is fallback content</h4>\n\u00a0 \u00a0 </slot>\n\u00a0 </div>\n</template>\nRun Example \u00bb\nVue Exercises\nTest Yourself With Exercises\nExercise:\nWhen a text is provided between the start tag and end tag of a component like this:\n<comp-one>Hello World!</comp-one>\nThe text provided can be received in the component using slots, like this:\n<template>\n  <div>  \n    <p>CompOne.vue</p>\n</div>\n</template>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "dfd702f4-4b29-4afe-9143-2cb983302065",
+      "title": "Typescript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "277b948b-e997-44a7-8f2b-61adb3a9f1f8",
+      "title": "Typescript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4d481030-94f2-4ae8-ac2c-e29ace6e4883",
+      "title": "Typescript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Vue Slots\n\nSlots?",
+      "options": [
+        "a powerful feature in Vue that allow for more flexible and reusable components",
+        "None of the above.",
+        "built the\n<slot>\nwill be replaced by the content sent to it",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Vue Slots\n\nSlots is 'a powerful feature in Vue that allow for more flexible and reusable components'."
+    },
+    {
+      "question": "What is so that after the application?",
+      "options": [
+        "a powerful feature in Vue that allow for more flexible and reusable components",
+        "None of the above.",
+        "built the\n<slot>\nwill be replaced by the content sent to it",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of so that after the application is 'built the\n<slot>\nwill be replaced by the content sent to it'."
+    }
+  ],
+  "summary": "This tutorial covers Vue Slots concepts and techniques. You'll learn how to use Vue Slots effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue Slots and how to apply it in your projects."
+}

@@ -1,0 +1,166 @@
+{
+  "id": "0731c6fc-893f-4493-bb2a-9a2735367add",
+  "title": "AppML .NET",
+  "slug": "appml-net",
+  "metadata": {
+    "description": "Learn about AppML .NET with clear explanations and practical examples.",
+    "keywords": [
+      "city",
+      "country",
+      "customername",
+      "customers",
+      "appml",
+      "html",
+      "database",
+      "create",
+      "table",
+      "script"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnAppML",
+    "subcategory": "AppML ASP"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AppML .NET",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "If you have access to a .NET server, follow the instructions below to create \nan AppML server application.\nCreate a Test Page\nCreate a test page and save on your PHP server as customers.htm (or anything \nyou like):\ncustomers.htm\n<!DOCTYPE html>\n<html lang=\"en\">\n<title>Customers</title>\n<link rel=\"stylesheet\" href=\"https://www..com/w3css/4/w3.css\">\n<script src=\"https://www..com/appml/2.0.3/appml.js\"></script>\n<body>\n<div class=\"w3-container\" appml-data=\"customers\">\n<h1>Customers</h1>\n<table class=\"w3-table-all\">\n<tr>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr appml-repeat=\"records\">\n<td>{{CustomerName}}</td>\n<td>{{City}} </td>\n<td>{{Country}} </td>\n</tr>\n</table>\n</div>\n<script>\nvar customers = {\n\"records\":[\n{\"CustomerName\":\"Alfreds Futterkiste\",\"City\":\"Berlin\",\"Country\":\"Germany\"},\n{\"CustomerName\":\"Ana Trujillo Emparedados y helados\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Antonio Moreno Taquer\u00eda\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Around the Horn\",\"City\":\"London\",\"Country\":\"UK\"},\n{\"CustomerName\":\"B's \n    Beverages\",\"City\":\"London\",\"Country\":\"UK\"},\n{\"CustomerName\":\"Berglunds \n    snabbk\u00f6p\",\"City\":\"Lule\u00e5\",\"Country\":\"Sweden\"},\n{\"CustomerName\":\"Blauer See \n    Delikatessen\",\"City\":\"Mannheim\",\"Country\":\"Germany\"},\n{\"CustomerName\":\"Blondel \n    p\u00e8re et fils\",\"City\":\"Strasbourg\",\"Country\":\"France\"},\n{\"CustomerName\":\"B\u00f3lido \n    Comidas preparadas\",\"City\":\"Madrid\",\"Country\":\"Spain\"},\n{\"CustomerName\":\"Bon \n    app'\",\"City\":\"Marseille\",\"Country\":\"France\"},\n{\"CustomerName\":\"Bottom-Dollar \n    Marketse\",\"City\":\"Tsawassen\",\"Country\":\"Canada\"},\n{\"CustomerName\":\"Cactus \n    Comidas para llevar\",\"City\":\"Buenos Aires\",\"Country\":\"Argentina\"},\n{\"CustomerName\":\"Centro \n    comercial Moctezuma\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Chop-suey \n    Chinese\",\"City\":\"Bern\",\"Country\":\"Switzerland\"},\n{\"CustomerName\":\"Com\u00e9rcio \n    Mineiro\",\"City\":\"S\u00e3o Paulo\",\"Country\":\"Brazil\"}\n]};\n</script>\n</body>\n</html>\n\nTest the web page in your browser.\nCreate a Database Connection\nIf you have access to an SQL Server database, or any other OLEDB databases \n(like MS Acess) define the database connections, and save it on the server as\nappml_config.aspx\n:\nappml_config.aspx (SQL Server Example)\n<%\nResponse.write(\"Access Forbidden\")\nResponse.end\n%>\n{\n\"dateformat\" \n : \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"mydatabase\",\n\"provider\"\u00a0\u00a0 : \"SQLOLEDB\",\n\"host\"\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 : \"myserver\",\n\"dbname\"\u00a0\u00a0\u00a0\u00a0 \n : \"DemoDB\",\n\"username\"\u00a0\u00a0 : \"DemoDBUkbn5\",\n\"password\"\u00a0\u00a0 \n : \"\nl6|U6=V(*T+P\n\"\n}]\n}\nappml_config.aspx (MS Access Example)\n<%\nResponse.write(\"Access Forbidden\")\nResponse.end\n%>\n{\n\"dateformat\" \n : \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"mydatabase\",\n\"connectionstring\" \n :\n\"Provider=Microsoft.Jet.OLEDB.4.0;data source=C:\\\\database\\\\Northwind.mdb\"\n}]\n}\nThe connection above is not real. Names and passwords are examples.\nConfiguration File\nExplained:\nProperty\nDescription\ndateformat\nThe date format you will use in your models\nconnection\nThe connection name you will use in your models\nconnectionstring\nTypically used in for OLEDB drivers like MS Access\nprovider\nThe driver/provider of db software\nhost\nThe IP or hostname for the database\ndbname\nThe database name\nusername\nThe database user name\npassword\nThe database password\nCopy AppML\nDownload the file:\nhttps://www..com/appml/2.0.3/appml.aspx.txt\n.\nCopy the file to your web site. Rename it to\nappml.aspx\n.\nCreate a Database Table\nCreate a\nmodel\nfor creating a Customers table in the \ndatabase.\ncreate_customers.js\n{\n\"database\" : {\n\"connection\" : \"mydatabase\",\n\"execute\" : [\n\"DROP \n TABLE IF EXISTS Customers\",\n\"CREATE TABLE IF NOT EXISTS Customers (CustomerID \n INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,(CustomerID),CustomerName NVARCHAR(255),ContactName NVARCHAR(255),Address NVARCHAR(255),City \n NVARCHAR(255),PostalCode NVARCHAR(255),Country NVARCHAR(255))\",\n\"INSERT INTO Customers(CustomerName,ContactName,Address,City,PostalCode,Country)VALUES (\\\"Alfreds Futterkiste\\\",\\\"Maria Anders\\\",\\\"Obere Str. \n 57\\\",\\\"Berlin\\\",\\\"12209\\\",\\\"Germany\\\")\",\n\"INSERT INTO Customers(CustomerName,ContactName,Address,City,PostalCode,Country)VALUES (\\\"Around the Horn\\\",\\\"Thomas Hardy\\\",\\\"120 Hanover \n Sq.\\\",\\\"London\\\",\\\"WA1 1DP\\\",\\\"UK\\\")\",\n\"INSERT INTO Customers(CustomerName,ContactName,Address,City,PostalCode,Country)VALUES (\\\"Blauer See Delikatessen\\\",\\\"Hanna Moos\\\",\\\"Forsterstr. \n 57\\\",\\\"Mannheim\\\",\\\"68306\\\",\\\"Germany\\\")\"\n]\n}}\nCreate an\nHTML page\nfor running the create_customers.js model:\ncreate_customers.htm\n<!DOCTYPE html>\n<html>\n<script src=\"https://www..com/appml/2.0.3/appml.js\"></script>\n<body>\n<div appml-data=\"appml.aspx?model=create_customers\"></div>\n</body>\n</html>\nRun the HTML page in your browser.\nCreate an Application\nCreate a\nmodel\nfor the customers application. Save it as\ncustomers.js\n:\ncustomers.js\n{\n\"rowsperpage\" : 10,\n\"database\" : {\n\"connection\" : \"mydatabase\",\n\"sql\" : \"SELECT * FROM Customers\",\n\"orderby\" : \"CustomerName\"\n}\n}\nCreate an\nHTML page\nfor running the customers application:\ncustomers.htm\n<!DOCTYPE html>\n<html lang=\"en\">\n<title>Customers</title>\n<link rel=\"stylesheet\" href=\"https://www..com/w3css/4/w3.css\">\n<script src=\"https://www..com/appml/2.0.3/appml.js\"></script>\n<body>\n<div class=\"w3-container\" appml-data=\"appml.aspx?model=model_customers\">\n<h1>Customers</h1>\n<table class=\"w3-table-all\">\n<tr>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr appml-repeat=\"records\">\n<td>{{CustomerName}}</td>\n<td>{{City}}</td>\n<td>{{Country}}</td>\n</tr>\n</table>\n</div>\n</body>\n</html>\n\nRun the HTML in your browser.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "customers.htm",
+      "content": "",
+      "order": 3,
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<title>Customers</title>\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://www.w3schools.com/appml/2.0.3/appml.js\"></script>\n<body>\n<div class=\"w3-container\" appml-data=\"customers\">\n<h1>Customers</h1>\n<table class=\"w3-table-all\">\n<tr>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr appml-repeat=\"records\">\n<td>{{CustomerName}}</td>\n<td>{{City}} </td>\n<td>{{Country}} </td>\n</tr>\n</table>\n</div>\n<script>\nvar customers = {\n\"records\":[\n{\"CustomerName\":\"Alfreds Futterkiste\",\"City\":\"Berlin\",\"Country\":\"Germany\"},\n{\"CustomerName\":\"Ana Trujillo Emparedados y helados\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Antonio Moreno Taquer\u00eda\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Around the Horn\",\"City\":\"London\",\"Country\":\"UK\"},\n{\"CustomerName\":\"B's \n    Beverages\",\"City\":\"London\",\"Country\":\"UK\"},\n{\"CustomerName\":\"Berglunds \n    snabbk\u00f6p\",\"City\":\"Lule\u00e5\",\"Country\":\"Sweden\"},\n{\"CustomerName\":\"Blauer See \n    Delikatessen\",\"City\":\"Mannheim\",\"Country\":\"Germany\"},\n{\"CustomerName\":\"Blondel \n    p\u00e8re et fils\",\"City\":\"Strasbourg\",\"Country\":\"France\"},\n{\"CustomerName\":\"B\u00f3lido \n    Comidas preparadas\",\"City\":\"Madrid\",\"Country\":\"Spain\"},\n{\"CustomerName\":\"Bon \n    app'\",\"City\":\"Marseille\",\"Country\":\"France\"},\n{\"CustomerName\":\"Bottom-Dollar \n    Marketse\",\"City\":\"Tsawassen\",\"Country\":\"Canada\"},\n{\"CustomerName\":\"Cactus \n    Comidas para llevar\",\"City\":\"Buenos Aires\",\"Country\":\"Argentina\"},\n{\"CustomerName\":\"Centro \n    comercial Moctezuma\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Chop-suey \n    Chinese\",\"City\":\"Bern\",\"Country\":\"Switzerland\"},\n{\"CustomerName\":\"Com\u00e9rcio \n    Mineiro\",\"City\":\"S\u00e3o Paulo\",\"Country\":\"Brazil\"}\n]};\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of customers.htm"
+    },
+    {
+      "type": "code_example",
+      "title": "appml_config.aspx (SQL Server Example)",
+      "content": "",
+      "order": 4,
+      "code": "<%\nResponse.write(\"Access Forbidden\")\nResponse.end\n%>\n{\n\"dateformat\" \n : \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"mydatabase\",\n\"provider\"\u00a0\u00a0 : \"SQLOLEDB\",\n\"host\"\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 : \"myserver\",\n\"dbname\"\u00a0\u00a0\u00a0\u00a0 \n : \"DemoDB\",\n\"username\"\u00a0\u00a0 : \"DemoDBUkbn5\",\n\"password\"\u00a0\u00a0 \n : \"\nl6|U6=V(*T+P\n\"\n}]\n}",
+      "language": "unknown",
+      "explanation": "Example of appml_config.aspx (sql server example)"
+    },
+    {
+      "type": "code_example",
+      "title": "appml_config.aspx (MS Access Example)",
+      "content": "",
+      "order": 5,
+      "code": "<%\nResponse.write(\"Access Forbidden\")\nResponse.end\n%>\n{\n\"dateformat\" \n : \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"mydatabase\",\n\"connectionstring\" \n :\n\"Provider=Microsoft.Jet.OLEDB.4.0;data source=C:\\\\database\\\\Northwind.mdb\"\n}]\n}",
+      "language": "unknown",
+      "explanation": "Example of appml_config.aspx (ms access example)"
+    },
+    {
+      "type": "code_example",
+      "title": "create_customers.js",
+      "content": "",
+      "order": 6,
+      "code": "{\n\"database\" : {\n\"connection\" : \"mydatabase\",\n\"execute\" : [\n\"DROP \n TABLE IF EXISTS Customers\",\n\"CREATE TABLE IF NOT EXISTS Customers (CustomerID \n INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,(CustomerID),CustomerName NVARCHAR(255),ContactName NVARCHAR(255),Address NVARCHAR(255),City \n NVARCHAR(255),PostalCode NVARCHAR(255),Country NVARCHAR(255))\",\n\"INSERT INTO Customers(CustomerName,ContactName,Address,City,PostalCode,Country)VALUES (\\\"Alfreds Futterkiste\\\",\\\"Maria Anders\\\",\\\"Obere Str. \n 57\\\",\\\"Berlin\\\",\\\"12209\\\",\\\"Germany\\\")\",\n\"INSERT INTO Customers(CustomerName,ContactName,Address,City,PostalCode,Country)VALUES (\\\"Around the Horn\\\",\\\"Thomas Hardy\\\",\\\"120 Hanover \n Sq.\\\",\\\"London\\\",\\\"WA1 1DP\\\",\\\"UK\\\")\",\n\"INSERT INTO Customers(CustomerName,ContactName,Address,City,PostalCode,Country)VALUES (\\\"Blauer See Delikatessen\\\",\\\"Hanna Moos\\\",\\\"Forsterstr. \n 57\\\",\\\"Mannheim\\\",\\\"68306\\\",\\\"Germany\\\")\"\n]\n}}",
+      "language": "unknown",
+      "explanation": "Example of create_customers.js"
+    },
+    {
+      "type": "code_example",
+      "title": "create_customers.htm",
+      "content": "",
+      "order": 7,
+      "code": "<!DOCTYPE html>\n<html>\n<script src=\"https://www.w3schools.com/appml/2.0.3/appml.js\"></script>\n<body>\n<div appml-data=\"appml.aspx?model=create_customers\"></div>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of create_customers.htm"
+    },
+    {
+      "type": "code_example",
+      "title": "customers.js",
+      "content": "",
+      "order": 8,
+      "code": "{\n\"rowsperpage\" : 10,\n\"database\" : {\n\"connection\" : \"mydatabase\",\n\"sql\" : \"SELECT * FROM Customers\",\n\"orderby\" : \"CustomerName\"\n}\n}",
+      "language": "unknown",
+      "explanation": "Example of customers.js"
+    },
+    {
+      "type": "code_example",
+      "title": "customers.htm",
+      "content": "",
+      "order": 9,
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<title>Customers</title>\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://www.w3schools.com/appml/2.0.3/appml.js\"></script>\n<body>\n<div class=\"w3-container\" appml-data=\"appml.aspx?model=model_customers\">\n<h1>Customers</h1>\n<table class=\"w3-table-all\">\n<tr>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr appml-repeat=\"records\">\n<td>{{CustomerName}}</td>\n<td>{{City}}</td>\n<td>{{Country}}</td>\n</tr>\n</table>\n</div>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of customers.htm"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<html lang=\"en\">\n# TODO: Complete this line\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://www.w3schools.com/appml/2.0.3/appml.js\"></script>\n<body>\n<div class=\"w3-container\" appml-data=\"customers\">\n<h1>Customers</h1>\n<table class=\"w3-table-all\">\n<tr>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr appml-repeat=\"records\">\n<td>{{CustomerName}}</td>\n<td>{{City}} </td>\n<td>{{Country}} </td>\n</tr>\n</table>\n</div>\n<script>\nvar customers = {\n\"records\":[\n{\"CustomerName\":\"Alfreds Futterkiste\",\"City\":\"Berlin\",\"Country\":\"Germany\"},\n{\"CustomerName\":\"Ana Trujillo Emparedados y helados\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Antonio Moreno Taquer\u00eda\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Around the Horn\",\"City\":\"London\",\"Country\":\"UK\"},\n{\"CustomerName\":\"B's \n    Beverages\",\"City\":\"London\",\"Country\":\"UK\"},\n{\"CustomerName\":\"Berglunds \n    snabbk\u00f6p\",\"City\":\"Lule\u00e5\",\"Country\":\"Sweden\"},\n{\"CustomerName\":\"Blauer See \n    Delikatessen\",\"City\":\"Mannheim\",\"Country\":\"Germany\"},\n{\"CustomerName\":\"Blondel \n    p\u00e8re et fils\",\"City\":\"Strasbourg\",\"Country\":\"France\"},\n{\"CustomerName\":\"B\u00f3lido \n    Comidas preparadas\",\"City\":\"Madrid\",\"Country\":\"Spain\"},\n{\"CustomerName\":\"Bon \n    app'\",\"City\":\"Marseille\",\"Country\":\"France\"},\n{\"CustomerName\":\"Bottom-Dollar \n    Marketse\",\"City\":\"Tsawassen\",\"Country\":\"Canada\"},\n{\"CustomerName\":\"Cactus \n    Comidas para llevar\",\"City\":\"Buenos Aires\",\"Country\":\"Argentina\"},\n{\"CustomerName\":\"Centro \n    comercial Moctezuma\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Chop-suey \n    Chinese\",\"City\":\"Bern\",\"Country\":\"Switzerland\"},\n{\"CustomerName\":\"Com\u00e9rcio \n    Mineiro\",\"City\":\"S\u00e3o Paulo\",\"Country\":\"Brazil\"}\n]};\n</script>\n</body>\n</html>",
+      "solution": "<!DOCTYPE html>\n<html lang=\"en\">\n<title>Customers</title>\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://www.w3schools.com/appml/2.0.3/appml.js\"></script>\n<body>\n<div class=\"w3-container\" appml-data=\"customers\">\n<h1>Customers</h1>\n<table class=\"w3-table-all\">\n<tr>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr appml-repeat=\"records\">\n<td>{{CustomerName}}</td>\n<td>{{City}} </td>\n<td>{{Country}} </td>\n</tr>\n</table>\n</div>\n<script>\nvar customers = {\n\"records\":[\n{\"CustomerName\":\"Alfreds Futterkiste\",\"City\":\"Berlin\",\"Country\":\"Germany\"},\n{\"CustomerName\":\"Ana Trujillo Emparedados y helados\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Antonio Moreno Taquer\u00eda\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Around the Horn\",\"City\":\"London\",\"Country\":\"UK\"},\n{\"CustomerName\":\"B's \n    Beverages\",\"City\":\"London\",\"Country\":\"UK\"},\n{\"CustomerName\":\"Berglunds \n    snabbk\u00f6p\",\"City\":\"Lule\u00e5\",\"Country\":\"Sweden\"},\n{\"CustomerName\":\"Blauer See \n    Delikatessen\",\"City\":\"Mannheim\",\"Country\":\"Germany\"},\n{\"CustomerName\":\"Blondel \n    p\u00e8re et fils\",\"City\":\"Strasbourg\",\"Country\":\"France\"},\n{\"CustomerName\":\"B\u00f3lido \n    Comidas preparadas\",\"City\":\"Madrid\",\"Country\":\"Spain\"},\n{\"CustomerName\":\"Bon \n    app'\",\"City\":\"Marseille\",\"Country\":\"France\"},\n{\"CustomerName\":\"Bottom-Dollar \n    Marketse\",\"City\":\"Tsawassen\",\"Country\":\"Canada\"},\n{\"CustomerName\":\"Cactus \n    Comidas para llevar\",\"City\":\"Buenos Aires\",\"Country\":\"Argentina\"},\n{\"CustomerName\":\"Centro \n    comercial Moctezuma\",\"City\":\"M\u00e9xico D.F.\",\"Country\":\"Mexico\"},\n{\"CustomerName\":\"Chop-suey \n    Chinese\",\"City\":\"Bern\",\"Country\":\"Switzerland\"},\n{\"CustomerName\":\"Com\u00e9rcio \n    Mineiro\",\"City\":\"S\u00e3o Paulo\",\"Country\":\"Brazil\"}\n]};\n</script>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<%\nResponse.write(\"Access Forbidden\")\nResponse.end\n%>\n{\n\"dateformat\" \n : \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"mydatabase\",\n# TODO: Complete this line\n\"host\"\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 : \"myserver\",\n\"dbname\"\u00a0\u00a0\u00a0\u00a0 \n : \"DemoDB\",\n\"username\"\u00a0\u00a0 : \"DemoDBUkbn5\",\n\"password\"\u00a0\u00a0 \n : \"\nl6|U6=V(*T+P\n\"\n}]\n}",
+      "solution": "<%\nResponse.write(\"Access Forbidden\")\nResponse.end\n%>\n{\n\"dateformat\" \n : \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"mydatabase\",\n\"provider\"\u00a0\u00a0 : \"SQLOLEDB\",\n\"host\"\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 : \"myserver\",\n\"dbname\"\u00a0\u00a0\u00a0\u00a0 \n : \"DemoDB\",\n\"username\"\u00a0\u00a0 : \"DemoDBUkbn5\",\n\"password\"\u00a0\u00a0 \n : \"\nl6|U6=V(*T+P\n\"\n}]\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "664ee744-5abc-4c92-acee-40a9c219000a",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9f2180ae-4cae-4a86-a69d-b4b9977ffdc9",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f59ba14c-2133-41e3-84c6-c5647fe34340",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The connection above?",
+      "options": [
+        "None of the above.",
+        "not real",
+        "None of the above.",
+        "examples"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The connection above is 'not real'."
+    },
+    {
+      "question": "What is Names and passwords?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "examples",
+        "not real"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Names and passwords is 'examples'."
+    }
+  ],
+  "summary": "This tutorial covers AppML .NET concepts and techniques. You'll learn how to use AppML .NET effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AppML .NET and how to apply it in your projects."
+}

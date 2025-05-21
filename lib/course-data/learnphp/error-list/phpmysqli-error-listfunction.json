@@ -1,0 +1,124 @@
+{
+  "id": "a905f28a-6c99-439a-bba1-c4ca6e58d014",
+  "title": "PHPmysqli error_list()Function",
+  "slug": "phpmysqli-error-listfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli error_list()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "mysqli",
+      "style",
+      "error",
+      "list",
+      "errors",
+      "example",
+      "return",
+      "last",
+      "executed",
+      "command"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "error_list"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli error_list()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nReturn a list of errors from the last executed command, if any:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n// Perform a query, check for error\nif (!$mysqli -> query(\"INSERT INTO Persons (FirstName)\nVALUES ('Glenn')\")) {\nprint_r($mysqli -> error_list);\n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe error_list / mysqli_error_list() function returns a list of errors from \nthe last executed command, if any.\nSyntax\nObject oriented style:\n$mysqli -> error_list\nProcedural style:\nmysqli_error_list(\nconnection\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nTechnical Details\nReturn Value:\nReturns a list of errors as an associative array; with errno (error code), error (error text), and sqlstate\nPHP Version:\n5.4+\nExample - Procedural style\nReturn a list of errors from the last executed command, if any:\n<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Perform a query, check for error\nif (!mysqli_query($con,\"INSERT INTO Persons (FirstName)\nVALUES ('Glenn')\")) {\nprint_r(mysqli_error_list($con));\n}\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n// Perform a query, check for error\nif (!$mysqli -> query(\"INSERT INTO Persons (FirstName)\nVALUES ('Glenn')\")) {\nprint_r($mysqli -> error_list);\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Perform a query, check for error\nif (!mysqli_query($con,\"INSERT INTO Persons (FirstName)\nVALUES ('Glenn')\")) {\nprint_r(mysqli_error_list($con));\n}\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n// Perform a query, check for error\n# TODO: Complete this line\nVALUES ('Glenn')\")) {\nprint_r($mysqli -> error_list);\n}\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n// Perform a query, check for error\nif (!$mysqli -> query(\"INSERT INTO Persons (FirstName)\nVALUES ('Glenn')\")) {\nprint_r($mysqli -> error_list);\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\n# TODO: Complete this line\nexit();\n}\n// Perform a query, check for error\nif (!mysqli_query($con,\"INSERT INTO Persons (FirstName)\nVALUES ('Glenn')\")) {\nprint_r(mysqli_error_list($con));\n}\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Perform a query, check for error\nif (!mysqli_query($con,\"INSERT INTO Persons (FirstName)\nVALUES ('Glenn')\")) {\nprint_r(mysqli_error_list($con));\n}\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "ac9fb549-6838-46b6-a08c-6eef26b93131",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "5a3ab5e8-1bd5-4245-9526-708ea7ae8659",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "6931ac42-84ad-491b-8662-b2b8fcfc8de8",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli error_list()Function concepts and techniques. You'll learn how to use PHPmysqli error_list()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli error_list()Function and how to apply it in your projects."
+}

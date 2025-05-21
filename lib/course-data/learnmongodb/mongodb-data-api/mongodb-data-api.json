@@ -1,0 +1,98 @@
+{
+  "id": "d777a381-ef50-4ca8-be01-9e45848d9296",
+  "title": "MongoDB Data API",
+  "slug": "mongodb-data-api",
+  "metadata": {
+    "description": "Learn about MongoDB Data API with clear explanations and practical examples.",
+    "keywords": [
+      "data",
+      "name",
+      "database",
+      "collection",
+      "endpoint",
+      "request",
+      "mongodb",
+      "filter",
+      "example",
+      "source"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMongoDB",
+    "subcategory": "MongoDB Data API"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "MongoDB Data API",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "MongoDB Data API\nThe\nMongoDB Data API\ncan be used to query and update data in a MongoDB database without the need for language specific drivers.\nLanguage drivers should be used when possible,\nbut the MongoDB Data API comes in handy when drivers are not available or drivers are overkill for the application.\nRead & Write with the MongoDB Data API\nThe MongoDB Data API is a pre-configured set of HTTPS endpoints that can be used to read and write data to a MongoDB Atlas database.\nWith the MongoDB Data API, you can create, read, update, delete, or aggregate documents in a MongoDB Atlas database.\nCluster Configuration\nIn order to use the Data API, you must first enable the functionality from the Atlas UI.\nFrom the MongoDB Atlas dashboard, navigate to\nData API\nin the left menu.\nSelect the data source(s) you would like to enable the API on and click\nEnable the Data API\n.\nAccess Level\nBy default, no access is granted. Select the access level you'd like to grant the Data API. The choices are: No Access, Read Only, Read and Write, or Custom Access.\nData API Key\nIn order to authenticate with the Data API, you must first create a Data API key.\nClick\nCreate API Key\n, enter a name for the key, then click\nGenerate API Key\n.\nBe sure to copy the API key and save it somewhere safe.\nYou will not get another chance to see this key again.\nSending a Data API Request\nWe can now use the Data API to send a request to the database.\nIn the \nmovies\ncollection of our\nsample_mflix\ndatabase.\nWe loaded this sample data in the\nIntro to Aggregations\nsection.\nTo run this example, you'll need your App Id, API Key, and Cluster name.\nYou can find your App Id in the\nURL Endpoint\nfield of the Data API page in the MongoDB Atlas UI.\nExample\ncurl --location --request POST '<DATA API APP ID>/endpoint/data/v1/action/findOne' \\\n--header 'Content-Type: application/json' \\\n--header 'Access-Control-Request-Headers: *' \\\n--header 'api-key: <DATA API KEY>' \\\n--data-raw '{\n    \"dataSource\":\"<CLUSTER NAME>\",\n    \"database\":\"sample_mflix\",\n    \"collection\":\"movies\",\n    \"projection\": {\"title\": 1}\n}'\n\nData API Endpoints\nIn the \nfindOne\nendpoint in our URL.\nThere are several endpoints available for use with the Data API.\nAll endpoints start with the Base URL:\n<Data API App ID>/endpoint/data/v1/action/\nFind a Single Document\nEndpoint\nPOST Base_URL/findOne\nThe\nfindOne\nendpoint is used to find a single document in a collection.\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"filter\": <query filter>,\n  \"projection\": <projection>\n}\nFind Multiple Documents\nEndpoint\nPOST Base_URL/find\nThe\nfind\nendpoint is used to find multiple documents in a collection.\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"filter\": <query filter>,\n  \"projection\": <projection>,\n  \"sort\": <sort expression>,\n  \"limit\": <number>,\n  \"skip\": <number>\n}\nInsert a Single Document\nEndpoint\nPOST Base_URL/insertOne\nThe\ninsertOne\nendpoint is used to insert a single document into a collection.\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"document\": <document>\n}\nInsert Multiple Documents\nEndpoint\nPOST Base_URL/insertMany\nThe\ninsertMany\nendpoint is used to insert multiple documents into a collection.\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"documents\": [<document>, <document>, ...]\n}\nUpdate a Single Document\nEndpoint\nPOST Base_URL/updateOne\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"filter\": <query filter>,\n  \"update\": <update expression>,\n  \"upsert\": true|false\n}\nUpdate Multiple Documents\nEndpoint\nPOST Base_URL/updateMany\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"filter\": <query filter>,\n  \"update\": <update expression>,\n  \"upsert\": true|false\n}\nDelete a Single Document\nEndpoint\nPOST Base_URL/deleteOne\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"filter\": <query filter>\n}\nDelete Multiple Documents\nEndpoint\nPOST Base_URL/deleteMany\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"filter\": <query filter>\n}\nAggregate Documents\nEndpoint\nPOST Base_URL/aggregate\nRequest Body\nExample\n{\n  \"dataSource\": \"<data source name>\",\n  \"database\": \"<database name>\",\n  \"collection\": \"<collection name>\",\n  \"pipeline\": [<pipeline expression>, ...]\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "f9655060-b557-42cd-a1a7-29ef5dcf7d8b",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "8b6d0a69-0a2b-426f-8d06-3f9608184913",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "c35ac3ed-9c53-4fb9-b61a-537875535479",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is but the MongoDB Data API comes in handy when drivers are not available or drivers?",
+      "options": [
+        "None of the above.",
+        "overkill for the application",
+        "a pre-configured set of HTTPS endpoints that can be used to read and write data to a MongoDB Atlas database",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of but the MongoDB Data API comes in handy when drivers are not available or drivers is 'overkill for the application'."
+    },
+    {
+      "question": "What is Write with the MongoDB Data API\nThe MongoDB Data API?",
+      "options": [
+        "overkill for the application",
+        "None of the above.",
+        "a pre-configured set of HTTPS endpoints that can be used to read and write data to a MongoDB Atlas database",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Write with the MongoDB Data API\nThe MongoDB Data API is 'a pre-configured set of HTTPS endpoints that can be used to read and write data to a MongoDB Atlas database'."
+    }
+  ],
+  "summary": "This tutorial covers MongoDB Data API concepts and techniques. You'll learn how to use MongoDB Data API effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of MongoDB Data API and how to apply it in your projects."
+}

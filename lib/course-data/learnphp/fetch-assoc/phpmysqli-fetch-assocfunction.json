@@ -1,0 +1,124 @@
+{
+  "id": "96ddba4e-3bd1-42a7-882d-81eb62b7f1df",
+  "title": "PHPmysqli fetch_assoc()Function",
+  "slug": "phpmysqli-fetch-assocfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli fetch_assoc()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "result",
+      "mysqli",
+      "associative",
+      "array",
+      "lastname",
+      "style",
+      "function",
+      "example",
+      "procedural",
+      "object"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "fetch_assoc"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli fetch_assoc()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nFetch a result row as an associative array:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = $mysqli -> query($sql);\n// Associative array\n$row = $result \n  -> fetch_assoc();\nprintf (\"%s (%s)\\n\", $row[\"Lastname\"], $row[\"Age\"]);\n// Free result set\n$result \n  -> free_result();\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe fetch_assoc() / mysqli_fetch_assoc() function fetches a result row as an associative array.\nNote:\nFieldnames returned from this function are case-sensitive.\nSyntax\nObject oriented style:\n$mysqli_result -> fetch_assoc()\nProcedural style:\nmysqli_fetch_assoc(\nresult\n)\nParameter Values\nParameter\nDescription\nresult\nRequired. Specifies a result set identifier returned by mysqli_query(), mysqli_store_result() or mysqli_use_result()\nTechnical Details\nReturn Value:\nReturns an associative array of strings representing the fetched row. NULL if there are no more rows in result-set\nPHP Version:\n5+\nExample - Procedural style\nFetch a result row as an associative array:\n<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = mysqli_query($con, $sql);\n// Associative array\n$row = mysqli_fetch_assoc($result);\nprintf (\"%s (%s)\\n\", $row[\"Lastname\"], $row[\"Age\"]);\n// Free result set\nmysqli_free_result($result);\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = $mysqli -> query($sql);\n// Associative array\n$row = $result \n  -> fetch_assoc();\nprintf (\"%s (%s)\\n\", $row[\"Lastname\"], $row[\"Age\"]);\n// Free result set\n$result \n  -> free_result();\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = mysqli_query($con, $sql);\n// Associative array\n$row = mysqli_fetch_assoc($result);\nprintf (\"%s (%s)\\n\", $row[\"Lastname\"], $row[\"Age\"]);\n// Free result set\nmysqli_free_result($result);\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = $mysqli -> query($sql);\n// Associative array\n$row = $result \n  -> fetch_assoc();\nprintf (\"%s (%s)\\n\", $row[\"Lastname\"], $row[\"Age\"]);\n// Free result set\n$result \n# TODO: Complete this line\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = $mysqli -> query($sql);\n// Associative array\n$row = $result \n  -> fetch_assoc();\nprintf (\"%s (%s)\\n\", $row[\"Lastname\"], $row[\"Age\"]);\n// Free result set\n$result \n  -> free_result();\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n# TODO: Complete this line\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = mysqli_query($con, $sql);\n// Associative array\n$row = mysqli_fetch_assoc($result);\nprintf (\"%s (%s)\\n\", $row[\"Lastname\"], $row[\"Age\"]);\n// Free result set\nmysqli_free_result($result);\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = mysqli_query($con, $sql);\n// Associative array\n$row = mysqli_fetch_assoc($result);\nprintf (\"%s (%s)\\n\", $row[\"Lastname\"], $row[\"Age\"]);\n// Free result set\nmysqli_free_result($result);\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "a0f7845d-9f59-4683-b65b-147b2b3806e6",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "67db08f7-a7b0-4764-bf17-64057d1ae320",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "7d02f351-026f-4a38-a109-a268ecd4af7d",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Fieldnames returned from this function?",
+      "options": [
+        "None of the above.",
+        "case-sensitive",
+        "None of the above.",
+        "no more rows in result-set\nPHP Version:\n5+\nExample - Procedural style\nFetch a result row as an associative array:\n<"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Fieldnames returned from this function is 'case-sensitive'."
+    },
+    {
+      "question": "What is NULL if there?",
+      "options": [
+        "None of the above.",
+        "no more rows in result-set\nPHP Version:\n5+\nExample - Procedural style\nFetch a result row as an associative array:\n<",
+        "None of the above.",
+        "case-sensitive"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of NULL if there is 'no more rows in result-set\nPHP Version:\n5+\nExample - Procedural style\nFetch a result row as an associative array:\n<'."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli fetch_assoc()Function concepts and techniques. You'll learn how to use PHPmysqli fetch_assoc()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli fetch_assoc()Function and how to apply it in your projects."
+}

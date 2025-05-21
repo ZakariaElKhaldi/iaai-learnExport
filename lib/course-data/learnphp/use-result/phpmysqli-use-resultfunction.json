@@ -1,0 +1,124 @@
+{
+  "id": "49e5491a-25d5-4b9a-b862-493eec686c64",
+  "title": "PHPmysqli use_result()Function",
+  "slug": "phpmysqli-use-resultfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli use_result()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "result",
+      "mysqli",
+      "style",
+      "query",
+      "select",
+      "lastname",
+      "printf",
+      "example",
+      "object",
+      "initiates"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "use_result"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli use_result()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nInitiates the retrieval of a result-set from the last query executed:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname FROM Persons ORDER BY LastName;\";\n$sql .= \"SELECT Country FROM Customers\";\n// Execute multi query\nif ($mysqli \n  -> multi_query($sql)) {\ndo {\n// Store first result set\nif ($result = \n  $mysqli -> use_result()) {\nwhile ($row = \n  $result -> fetch_row()) {\nprintf(\"%s\\n\", $row[0]);\n}\n$result \n  -> close();\n}\n// if there are more result-sets, the print a \n  divider\nif ($mysqli -> more_results()) {\nprintf(\"-------------\\n\");\n}\n//Prepare \n} while ($mysqli \n  -> \n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe use_result() / mysqli_use_result() function initiates the retrieval of a \nresult-set from the last query executed.\nSyntax\nObject oriented style:\n$mysqli -> use_result()\nProcedural style:\nmysqli_use_result(\nconnection\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nTechnical Details\nReturn Value:\nReturns an unbuffered result object. FALSE on error\nPHP Version:\n5+\nExample - Procedural style\nInitiates the retrieval of a result-set from the last query executed:\n<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname FROM Persons ORDER BY LastName;\";\n$sql .= \"SELECT Country FROM Customers\";\n// Execute multi query\nif (mysqli_multi_query($con, $sql)) {\ndo {\n// Store first result set\nif ($result = mysqli_use_result($con)) {\nwhile ($row = mysqli_fetch_row($result)) {\nprintf(\"%s\\n\", $row[0]);\n}\nmysqli_free_result($result);\n}\n// if there are more result-sets, the print a \n  divider\nif (mysqli_more_results($con)) {\nprintf(\"-------------\\n\");\n}\n//Prepare \n} while (mysqli_\n}\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname FROM Persons ORDER BY LastName;\";\n$sql .= \"SELECT Country FROM Customers\";\n// Execute multi query\nif ($mysqli \n  -> multi_query($sql)) {\ndo {\n// Store first result set\nif ($result = \n  $mysqli -> use_result()) {\nwhile ($row = \n  $result -> fetch_row()) {\nprintf(\"%s\\n\", $row[0]);\n}\n$result \n  -> close();\n}\n// if there are more result-sets, the print a \n  divider\nif ($mysqli -> more_results()) {\nprintf(\"-------------\\n\");\n}\n//Prepare next result set\n} while ($mysqli \n  -> next_result());\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname FROM Persons ORDER BY LastName;\";\n$sql .= \"SELECT Country FROM Customers\";\n// Execute multi query\nif (mysqli_multi_query($con, $sql)) {\ndo {\n// Store first result set\nif ($result = mysqli_use_result($con)) {\nwhile ($row = mysqli_fetch_row($result)) {\nprintf(\"%s\\n\", $row[0]);\n}\nmysqli_free_result($result);\n}\n// if there are more result-sets, the print a \n  divider\nif (mysqli_more_results($con)) {\nprintf(\"-------------\\n\");\n}\n//Prepare next result set\n} while (mysqli_next_result($con));\n}\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname FROM Persons ORDER BY LastName;\";\n$sql .= \"SELECT Country FROM Customers\";\n// Execute multi query\nif ($mysqli \n  -> multi_query($sql)) {\ndo {\n// Store first result set\nif ($result = \n  $mysqli -> use_result()) {\nwhile ($row = \n  $result -> fetch_row()) {\nprintf(\"%s\\n\", $row[0]);\n}\n$result \n  -> close();\n}\n// if there are more result-sets, the print a \n  divider\nif ($mysqli -> more_results()) {\nprintf(\"-------------\\n\");\n# TODO: Complete this line\n//Prepare next result set\n} while ($mysqli \n  -> next_result());\n}\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname FROM Persons ORDER BY LastName;\";\n$sql .= \"SELECT Country FROM Customers\";\n// Execute multi query\nif ($mysqli \n  -> multi_query($sql)) {\ndo {\n// Store first result set\nif ($result = \n  $mysqli -> use_result()) {\nwhile ($row = \n  $result -> fetch_row()) {\nprintf(\"%s\\n\", $row[0]);\n}\n$result \n  -> close();\n}\n// if there are more result-sets, the print a \n  divider\nif ($mysqli -> more_results()) {\nprintf(\"-------------\\n\");\n}\n//Prepare next result set\n} while ($mysqli \n  -> next_result());\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n# TODO: Complete this line\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname FROM Persons ORDER BY LastName;\";\n$sql .= \"SELECT Country FROM Customers\";\n// Execute multi query\nif (mysqli_multi_query($con, $sql)) {\ndo {\n// Store first result set\nif ($result = mysqli_use_result($con)) {\nwhile ($row = mysqli_fetch_row($result)) {\nprintf(\"%s\\n\", $row[0]);\n}\nmysqli_free_result($result);\n}\n// if there are more result-sets, the print a \n  divider\nif (mysqli_more_results($con)) {\nprintf(\"-------------\\n\");\n}\n//Prepare next result set\n} while (mysqli_next_result($con));\n}\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname FROM Persons ORDER BY LastName;\";\n$sql .= \"SELECT Country FROM Customers\";\n// Execute multi query\nif (mysqli_multi_query($con, $sql)) {\ndo {\n// Store first result set\nif ($result = mysqli_use_result($con)) {\nwhile ($row = mysqli_fetch_row($result)) {\nprintf(\"%s\\n\", $row[0]);\n}\nmysqli_free_result($result);\n}\n// if there are more result-sets, the print a \n  divider\nif (mysqli_more_results($con)) {\nprintf(\"-------------\\n\");\n}\n//Prepare next result set\n} while (mysqli_next_result($con));\n}\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "57ab6215-5b90-443e-99bf-1b037203d396",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "fdf637a1-2ce2-4101-92f7-6fd6ad1ade5b",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "73282a1e-600f-4421-bb8e-6e3deb773678",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is if there?",
+      "options": [
+        "more result-sets",
+        "None of the above.",
+        "more result-sets",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of if there is 'more result-sets'."
+    },
+    {
+      "question": "What is if there?",
+      "options": [
+        "None of the above.",
+        "more result-sets",
+        "None of the above.",
+        "more result-sets"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of if there is 'more result-sets'."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli use_result()Function concepts and techniques. You'll learn how to use PHPmysqli use_result()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli use_result()Function and how to apply it in your projects."
+}

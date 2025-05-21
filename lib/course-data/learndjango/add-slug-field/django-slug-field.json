@@ -1,0 +1,142 @@
+{
+  "id": "bf87f5d3-a15f-4dd4-8fa7-7b0d86c291a1",
+  "title": "Django Slug Field",
+  "slug": "django-slug-field",
+  "metadata": {
+    "description": "Learn about Django Slug Field with clear explanations and practical examples.",
+    "keywords": [
+      "go",
+      "slug",
+      "members",
+      "field",
+      "models",
+      "django",
+      "template",
+      "details",
+      "member",
+      "import",
+      "request"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Add Slug Field"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Django Slug Field",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Django Slug Field\n\nWhat is Slug",
+      "content": "?\nHave you ever seen url's that look like this:\n.com/django/learn-about-slug-field\nThe \"\nlearn-about-slug-field\n\" part is a slug.\nIt is a description containing only letters, hyphens, numbers or underscores.\nIt is often used in url's to make them easier to read, but also to make them more search engine friendly.\nUrl Without Slug\nIf you have followed our\nDjango Project\ncreated in this tutorial, you will have a small Django project looking like this:\nAnd if you click the first member, you will jump to this page:\nCheck out the address bar:\n127.0.0.1:8000/members/details/1\nThe number \"1\" refers to the ID of that particular record in the database.\nMakes sense to the developer, but probably not to anyone else.\nUrl With Slug\nIt would have made more sense if the url looked like this:\nCheck out the address bar:\n127.0.0.1:8000/members/details/emil-refsnes\nThat is a more user friendly url, and Django can help you create such url's in your project.\nModify the models.py File\nStart by adding a new field in the database.\nOpen the\nmodels.py\nfile and add a field called\nslug\nwith the data type\nSlugField\n:\nmy_tennis_club/members/models.py\n:\nfrom django.db import models\n\nclass Member(models.Model):\n  firstname = models.CharField(max_length=255)\n  lastname = models.CharField(max_length=255)\n  phone = models.IntegerField(null=True)\n  joined_date = models.DateField(null=True)\n  slug = models.SlugField(default=\"\", null=False)\n\n  def __str__(self):\n    return f\"{self.firstname} {self.lastname}\"\nThis is a change in the Model's structure, and therefor we have to make a migration\nto tell Django that it has to update the database:\npython manage.py makemigrations\nAnd the migrate command:\npython manage.py migrate\nChange Admin\nNow we have a new field in the database, but we also want this field to be updated automatically\nwhen we set the firstname or lastname of a member.\nThis can be done with a built-in Django feature called\nprepopulated_fields\nwhere you specify the field you want to pre-populate, and a tuple with the \nfield(s) you want to populate it with.\nThis is done in the\nadmin.py\nfile:\nmy_tennis_club/members/admin.py\n:\nfrom django.contrib import admin\nfrom .models import Member",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 2",
+      "content": "# Register your models here.\n\nclass MemberAdmin(admin.ModelAdmin):\n  list_display = (\"firstname\", \"lastname\", \"joined_date\",)\n  prepopulated_fields = {\"slug\": (\"firstname\", \"lastname\")}\n  \nadmin.site.register(Member, MemberAdmin)\nEnter the Admin interface and open a record for editing:\nClick \"SAVE\" and the \"slug\" field will be auto populated with the firstname and the lastname,\nand since the \"slug\" field is of type SlugField, it will \"slugify\" the value, meaning it will\nput a hyphen between each word.\n\nNote:\nSince the new field is empty by default,\nyou have to do this save operation for each member.\nModify Template\nNow we can replace the ID field with the slug field throughout the project.\nStart with the\nall_members.html\ntemplate,\nwhere we have a link to the details page:\nmy_tennis_club/members/templates/all_members.html\n:\n{% extends \"master.html\" %}\n\n{% block title %}\n  My Tennis Club - List of all members\n{% endblock %}\n\n{% block content %}\n  <div class=\"mycard\">\n    <h1>Members</h1>\n    <ul>\n      {% for x in mymembers %}\n        <li onclick=\"window.location = 'details/{{ x.slug }}'\">{{ x.firstname }} {{ x.lastname }}</li>\n      {% endfor %}\n    </ul>\n  </div>\n{% endblock %}\nModify URL\nWe also have to make some changes in the\nurls.py\nfile.\nChange from\n<int:id>\nto\n<slug:slug>\n:\nmy_tennis_club/members/urls.py\n:\nfrom django.urls import path\nfrom . import views\n\nurlpatterns = [\n    path('', views.main, name='main'),\n    path('members/', views.members, name='members'),\n    path('members/details/<slug:slug>', views.details, name='details'),\n    path('testing/', views.testing, name='testing'),\n]\nModify View\nFinally, change the\ndetails\nview to handle \nincoming request\nas slug instead of ID:\nmy_tennis_club/members/views.py\n:\nfrom django.http import HttpResponse\nfrom django.template import loader\nfrom .models import Member\n\ndef members(request):\n  mymembers = Member.objects.all().values()\n  template = loader.get_template('all_members.html')\n  context = {\n    'mymembers': mymembers,\n  }\n  return HttpResponse(template.render(context, request))\n  \ndef details(request, slug):\n  mymember = Member.objects.get(slug=slug)\n  template = loader.get_template('details.html')\n  context = {\n    'mymember': mymember,\n  }\n  return HttpResponse(template.render(context, request))\n  \ndef main(request):\n  template = loader.get_template('main.html')\n  return HttpResponse(template.render())\n\ndef testing(request):\n  template = loader.get_template('template.html')\n  context = {\n    'fruits': ['Apple', 'Banana', 'Cherry'],   \n  }\n  return HttpResponse(template.render(context, request))\nNow the link to details works with the new slugified url:\nIf you have followed all the steps on your own computer, you can see the result in your own browser:\n127.0.0.1:8000/members/\n.\nIf the server is down, you have to start it again with the\nrunserver\ncommand:\npython manage.py runserver\n\n\u2605\n+1",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "python manage.py makemigrations",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "python manage.py migrate",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "python manage.py runserver",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "python manage.py makemigrations"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "python manage.py migrate"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d2e3b14b-2845-47fc-aff2-9b601690ad75",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "d39d9391-5a44-400e-84e9-2082f7b88ab0",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ed48c6a8-a71b-463a-a69d-fe39da0b4bf0",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Django Slug Field\n\nWhat?",
+      "options": [
+        "a slug",
+        "Slug",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Django Slug Field\n\nWhat is 'Slug'."
+    },
+    {
+      "question": "What is part?",
+      "options": [
+        "Slug",
+        "None of the above.",
+        "a slug",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of part is 'a slug'."
+    }
+  ],
+  "summary": "This tutorial covers Django Slug Field concepts and techniques. You'll learn how to use Django Slug Field effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django Slug Field and how to apply it in your projects."
+}

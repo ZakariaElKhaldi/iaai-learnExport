@@ -1,0 +1,98 @@
+{
+  "id": "59358ed9-18e9-4b2c-953b-af18e3c50fcf",
+  "title": "Django Template Variables",
+  "slug": "django-template-variables",
+  "metadata": {
+    "description": "Learn about Django Template Variables with clear explanations and practical examples.",
+    "keywords": [
+      "template",
+      "example",
+      "django",
+      "variables",
+      "firstname",
+      "import",
+      "data",
+      "html",
+      "create",
+      "context"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Django Variables"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Django Template Variables",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Template Variables\nIn Django templates, you can render variables by putting them inside\n{{ }}\nbrackets:\nExample\ntemplates/template.html\n:\n<h1>Hello {{ firstname }}, how are you?</h1>\nRun Example \u00bb\nCreate Variable in View\nThe variable\nfirstname\nin the example above was sent to the template via a view:\nviews.py\n:\nfrom django.http import HttpResponse\nfrom django.template import loader\n\ndef testing(request):\n  template = loader.get_template('template.html')\n  context = {\n    'firstname': 'Linus',\n  }\n  return HttpResponse(template.render(context, request))\nRun Example \u00bb\nAs you can see in the view above, we create an object named context and fill it with data, and send it as the first parameter in the\ntemplate.render()\nfunction.\nCreate Variables in Template\nYou can also create variables directly in the template, by using the\n{% with %}\ntemplate tag.\nThe variable is available until the\n{% endwith %}\ntag appears:\nExample\ntemplates/template.html\n:\n{% with firstname=\"Tobias\" %}\n<h1>Hello {{ firstname }}, how are you?</h1>\n{% endwith %}\nRun Example \u00bb\nYou will learn more about\ntemplate tags\nin \nthe \nData From a Model\nThe example above showed a easy approach on how to create and use variables in a template.\nNormally, most of the external data you want to use in a template, comes from a model.\nWe have created a model in the \nMember\n,\nwhich we will use in many examples in the \nTo get data from the\nMember\nmodel,\nwe will have to import it in the\nviews.py\nfile,\nand extract data from it in the view:\nmembers/views.py\n:\nfrom django.http import HttpResponse, HttpResponseRedirect\nfrom django.template import loader\nfrom .models import Member\n\ndef testing(request):\n  mymembers = Member.objects.all().values()\n  template = loader.get_template('template.html')\n  context = {\n    'mymembers': mymembers,\n  }\n  return HttpResponse(template.render(context, request))\nNow we can use the data in the template:\ntemplates/template.html\n:\n<ul>\n  {% for x in mymembers %}\n    <li>{{ x.firstname }}</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\nWe use the Django template tag\n{% for %}\nto loop through the \nmembers.\nYou will learn more about\ntemplate tags\nin the\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "7afce18f-3f55-4f91-abe1-b4efc9c37221",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "7dff5740-e637-4b97-ad9a-549b2abac0aa",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "0cd92deb-8165-4a69-b64d-464c8a319f6e",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is how?",
+      "options": [
+        "None of the above.",
+        "available until the\n{% endwith %}\ntag appears:\nExample\ntemplates/template",
+        "None of the above.",
+        "you"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of how is 'you'."
+    },
+    {
+      "question": "What is The variable?",
+      "options": [
+        "None of the above.",
+        "available until the\n{% endwith %}\ntag appears:\nExample\ntemplates/template",
+        "you",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The variable is 'available until the\n{% endwith %}\ntag appears:\nExample\ntemplates/template'."
+    }
+  ],
+  "summary": "This tutorial covers Django Template Variables concepts and techniques. You'll learn how to use Django Template Variables effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django Template Variables and how to apply it in your projects."
+}

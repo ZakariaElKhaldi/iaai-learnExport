@@ -1,0 +1,115 @@
+{
+  "id": "208beb2e-1118-439b-b724-2bc04cc2b9ac",
+  "title": "PHPxml_set_external_entity_ref_handler()Function",
+  "slug": "phpxml-set-external-entity-ref-handlerfunction",
+  "metadata": {
+    "description": "Learn about PHPxml_set_external_entity_ref_handler()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "parser",
+      "handler",
+      "function",
+      "data",
+      "entity",
+      "external",
+      "echo",
+      "reference",
+      "base",
+      "specifies"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "xml_set_external_entity_ref_handler()"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nxml_set_external_entity_ref_handler()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nCreate an XML parser, set character data handler, set external entity \nreference handler, and parse an XML document:\n<?php\n// Create an XML parser\n$parser=xml_parser_create();\nfunction char($parser,$data) {\necho $data;\n}\nfunction ext_ent_handler($parser,$ent,$base,$sysID,$pubID)\u00a0 \n  {\necho \"$ent<br>\";\necho \"$sysID<br>\";\necho \"$pubID<br>\";\n}\n// Set the \n  character data handler\nxml_set_character_data_handler($parser,\"char\");\n// Set the \n  external entity reference handler\nxml_set_external_entity_ref_handler($parser, \"ext_ent_handler\");\n$fp=fopen(\"note_entity.xml\",\"r\");\nwhile ($data=fread($fp,4096)) {\n// Parse XML data\nxml_parse($parser,$data,feof($fp)) or\ndie (sprintf(\"XML Error: %s \n  at line %d\",\nxml_error_string(xml_get_error_code($parser)),\nxml_get_current_line_number($parser)));\n}\nxml_parser_free($parser);\nfclose($fp);\n?>\nDefinition and Usage\nThe xml_set_external_entity_ref_handler() function specifies a function to be called when the parser finds an external entity in the XML document.\nNote:\nThe handler parameter can also be an array containing an object reference and a method name.\nSyntax\nxml_set_external_entity_ref_handler(\nparser\n,\nhandler\n)\nParameter Values\nParameter\nDescription\nparser\nRequired. Specifies the XML parser to use\nhandler\nRequired. Specifies a function to be used as an event handler. The function must \n    accept five parameters:\n$parser - A variable containing the XML parser calling the handler\n$name - A variable containing the name of the external entity\n$base - The base for resolving the system identifier (system_id) of the external entity. Currently, this is always \n      an empty string\n$system_id - The system identifier as specified in the entity declaration\n$public_id - The public identifier as specified in the entity declaration\nTechnical Details\nReturn Value:\nTRUE on \n success. FALSE on failure\nPHP Version:\n4.0+\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n// Create an XML parser\n$parser=xml_parser_create();\nfunction char($parser,$data) {\necho $data;\n}\nfunction ext_ent_handler($parser,$ent,$base,$sysID,$pubID)\u00a0 \n  {\necho \"$ent<br>\";\necho \"$sysID<br>\";\necho \"$pubID<br>\";\n}\n// Set the \n  character data handler\nxml_set_character_data_handler($parser,\"char\");\n// Set the \n  external entity reference handler\nxml_set_external_entity_ref_handler($parser, \"ext_ent_handler\");\n$fp=fopen(\"note_entity.xml\",\"r\");\nwhile ($data=fread($fp,4096)) {\n// Parse XML data\nxml_parse($parser,$data,feof($fp)) or\ndie (sprintf(\"XML Error: %s \n  at line %d\",\nxml_error_string(xml_get_error_code($parser)),\nxml_get_current_line_number($parser)));\n}\nxml_parser_free($parser);\nfclose($fp);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n// Create an XML parser\n$parser=xml_parser_create();\nfunction char($parser,$data) {\necho $data;\n}\nfunction ext_ent_handler($parser,$ent,$base,$sysID,$pubID)\u00a0 \n  {\necho \"$ent<br>\";\necho \"$sysID<br>\";\necho \"$pubID<br>\";\n}\n// Set the \n  character data handler\nxml_set_character_data_handler($parser,\"char\");\n// Set the \n  external entity reference handler\nxml_set_external_entity_ref_handler($parser, \"ext_ent_handler\");\n$fp=fopen(\"note_entity.xml\",\"r\");\nwhile ($data=fread($fp,4096)) {\n// Parse XML data\nxml_parse($parser,$data,feof($fp)) or\ndie (sprintf(\"XML Error: %s \n  at line %d\",\nxml_error_string(xml_get_error_code($parser)),\nxml_get_current_line_number($parser)));\n# TODO: Complete this line\nxml_parser_free($parser);\nfclose($fp);\n?>",
+      "solution": "<?php\n// Create an XML parser\n$parser=xml_parser_create();\nfunction char($parser,$data) {\necho $data;\n}\nfunction ext_ent_handler($parser,$ent,$base,$sysID,$pubID)\u00a0 \n  {\necho \"$ent<br>\";\necho \"$sysID<br>\";\necho \"$pubID<br>\";\n}\n// Set the \n  character data handler\nxml_set_character_data_handler($parser,\"char\");\n// Set the \n  external entity reference handler\nxml_set_external_entity_ref_handler($parser, \"ext_ent_handler\");\n$fp=fopen(\"note_entity.xml\",\"r\");\nwhile ($data=fread($fp,4096)) {\n// Parse XML data\nxml_parse($parser,$data,feof($fp)) or\ndie (sprintf(\"XML Error: %s \n  at line %d\",\nxml_error_string(xml_get_error_code($parser)),\nxml_get_current_line_number($parser)));\n}\nxml_parser_free($parser);\nfclose($fp);\n?>"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "afa35060-0322-4c63-82b2-d606ea4aa734",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "fe91c081-6fbd-499b-a51a-e85d0117cb89",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "c69a1179-0705-454a-bea7-3af5c8bc86d8",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is this?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "None of the above.",
+        "always \n      an empty string\n$system_id - The system identifier as specified in the entity declaration\n$public_id - The public identifier as specified in the entity declaration\nTechnical Details\nReturn Value:\nTRUE on \n success"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of this is 'always \n      an empty string\n$system_id - The system identifier as specified in the entity declaration\n$public_id - The public identifier as specified in the entity declaration\nTechnical Details\nReturn Value:\nTRUE on \n success'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "PHP\nxml_set_external_entity_ref_handler()\nFunction"
+}

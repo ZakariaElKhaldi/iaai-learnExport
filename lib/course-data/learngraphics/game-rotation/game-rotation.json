@@ -1,0 +1,112 @@
+{
+  "id": "cb06db98-dc69-4393-b439-e1b88df7a46a",
+  "title": "Game Rotation",
+  "slug": "game-rotation",
+  "metadata": {
+    "description": "Learn about Game Rotation with clear explanations and practical examples.",
+    "keywords": [
+      "component",
+      "rotate",
+      "canvas",
+      "width",
+      "height",
+      "method",
+      "angle",
+      "draw",
+      "update",
+      "restore"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnGraphics",
+    "subcategory": "Game Rotation"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Game Rotation",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The red square can rotate:\nRotate\nRotating Components\nEarlier in this tutorial, the red square was able to move around on the gamearea, but it could not turn or rotate.\nTo rotate components, we have to change the way we draw components.\nThe only rotation method available for the canvas element will rotate the entire canvas:\nEverything else you draw on the canvas will also be rotated, not only the specific component.\nThat is why we have to make some changes in the\nupdate()\nmethod:\nFirst, we save the current canvas context object:\nctx.save();\nThen we move the entire canvas to the center of the specific component, using the translate method:\nctx.translate(x, y);\nThen we perform the wanted rotation using the rotate() method:\nctx.rotate(\nangle\n);\nNow we are ready to draw the component onto the canvas, but now we will draw it with its center position at position 0,0 on the translated (and rotated) canvas:\nctx.fillRect(width / -2, height / -2, width, height);\nWhen we are finished, we must restore the context object back to its saved position, using the restore method:\nctx.restore();\nThe component is the only thing that is rotated:\nThe Component Constructor\nThe\ncomponent\nconstructor has a new property called\nangle\n, \nwhich is radian number that represents the angle of the component.\nThe\nupdate\nmethod of the\ncomponent\nconstructor is \nwere we draw the component, and here you can see the changes that will allow the \ncomponent to rotate:\nExample\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.angle += 1 * Math.PI / 180;\nmyGamePiece.update();\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "function component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.angle += 1 * Math.PI / 180;\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.x = x;\nthis.y = y;\n# TODO: Complete this line\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.angle += 1 * Math.PI / 180;\nmyGamePiece.update();\n}",
+      "solution": "function component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.angle += 1 * Math.PI / 180;\nmyGamePiece.update();\n}"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b9e741bb-8204-4328-9e32-e5001aa6673a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "4125e587-9ffc-4c6a-96d7-afd8fbe7f6d2",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ba5233f8-125b-4eac-a7f1-b3062ac39b8e",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is That?",
+      "options": [
+        "None of the above.",
+        "why we have to make some changes in the\nupdate()\nmethod:\nFirst",
+        "None of the above.",
+        "ready to draw the component onto the canvas"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of That is 'why we have to make some changes in the\nupdate()\nmethod:\nFirst'."
+    },
+    {
+      "question": "What is Now we?",
+      "options": [
+        "why we have to make some changes in the\nupdate()\nmethod:\nFirst",
+        "ready to draw the component onto the canvas",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Now we is 'ready to draw the component onto the canvas'."
+    }
+  ],
+  "summary": "This tutorial covers Game Rotation concepts and techniques. You'll learn how to use Game Rotation effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Game Rotation and how to apply it in your projects."
+}

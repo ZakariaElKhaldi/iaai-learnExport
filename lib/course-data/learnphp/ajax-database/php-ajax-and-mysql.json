@@ -1,0 +1,98 @@
+{
+  "id": "e5c77667-bfd5-4f9b-87fc-3ef0136fdf3b",
+  "title": "PHP -AJAX and MySQL",
+  "slug": "php-ajax-and-mysql",
+  "metadata": {
+    "description": "Learn about PHP -AJAX and MySQL with clear explanations and practical examples.",
+    "keywords": [
+      "option",
+      "example",
+      "person",
+      "echo",
+      "database",
+      "griffin",
+      "function",
+      "value",
+      "select",
+      "table"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "AJAX Database"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP -\nAJAX and MySQL",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AJAX can be used for interactive communication with a database.\nAJAX Database Example\nThe following example will demonstrate how a web page can fetch information from a database with AJAX:\nExample\nSelect a person:\nPeter Griffin\nLois Griffin\nJoseph Swanson\nGlenn Quagmire\nPerson info will be listed here...\nExample Explained - The MySQL Database\nThe database table we use in the example above looks like this:\nid\nFirstName\nLastName\nAge\nHometown\nJob\n1\nPeter\nGriffin\n41\nQuahog\nBrewery\n2\nLois\nGriffin\n40\nNewport\nPiano Teacher\n3\nJoseph\nSwanson\n39\nQuahog\nPolice Officer\n4\nGlenn\nQuagmire\n41\nQuahog\nPilot\nExample Explained\nIn the example above, when a user selects a person in the dropdown list \nabove, a function called\nshowUser()\nis executed.\nThe function is triggered by the\nonchange\nevent.\nHere is the HTML code:\nExample\n<html>\n<head>\n<script>\nfunction showUser(str) {\n  if (str == \"\") {\n    document.getElementById(\"txtHint\").innerHTML = \"\";\n    return;\n  } else {\n    var xmlhttp = new XMLHttpRequest();\n    xmlhttp.onreadystatechange = function() {\n      if (this.readyState == 4 && this.status == 200) {\n        document.getElementById(\"txtHint\").innerHTML = this.responseText;\n      }\n    };\n    xmlhttp.open(\"GET\",\"family.php?q=\"+str,true);\n    xmlhttp.send();\n  }\n}\n</script>\n</head>\n<body>\n\n<form>\n<select name=\"users\" onchange=\"showUser(this.value)\">\n  <option value=\"\">Select a person:</option>\n  <option value=\"1\">Peter Griffin</option>\n  \u00a0 <option value=\"2\">Lois Griffin</option>\n  \u00a0 <option value=\"3\">Joseph Swanson</option>\n  \u00a0 <option value=\"4\">Glenn Quagmire</option>\n  \u00a0 </select>\n</form>\n<br>\n<div id=\"txtHint\"><b>Person info will be listed here...</b></div>\n\n</body>\n</html>\nRun example \u00bb\nCode explanation:\nFirst, check if person is selected. If no person is selected (str == \"\"), clear the \ncontent of\ntxtHint\nand exit the function. If a person is selected, do the following:\nCreate an\nXMLHttpRequest\nobject\nCreate the function to be executed when the server response is ready\nSend the request off to a file on the server\nNotice that a parameter\nq\nis added to the URL (with the content of the dropdown list)\nThe PHP File\nThe page on the server called by the JavaScript above is a PHP file called\nfamily.php\n.\nThe source code in\nfamily.php\nruns a query against a MySQL database, and returns the result in an HTML \ntable:\n$q = intval($_GET['q']);\n\n$con = mysqli_connect('localhost','peter','abc123');\nif (!$con)\u00a0{\n  die('Could not connect: ' . mysqli_error($con));\n}\n\nmysqli_select_db($con,\"ajax_demo\");\n$sql=\"SELECT * FROM user WHERE id = '\".$q.\"'\";\n$result = mysqli_query($con,$sql);\n\necho \"<table>\n<tr>\n<th>Firstname</th>\n<th>Lastname</th>\n<th>Age</th>\n<th>Hometown</th>\n<th>Job</th>\n</tr>\";\nwhile($row = mysqli_fetch_array($result)) {\n  echo \"<tr>\";\n  echo \"<td>\" . $row['FirstName'] . \"</td>\";\n  echo \"<td>\" . $row['LastName'] . \"</td>\";\n  echo \"<td>\" . $row['Age'] . \"</td>\";\n  echo \"<td>\" . $row['Hometown'] . \"</td>\";\n  echo \"<td>\" . $row['Job'] . \"</td>\";\n  echo \"</tr>\";\n}\necho \"</table>\";\n\nmysqli_close($con);\nExplanation: When the query is sent from the JavaScript to the PHP file, the following happens:\nPHP opens a connection to a MySQL server\nThe correct person is found\nAn HTML table is created, filled with data, and sent back to the\ntxtHint\nplaceholder\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "fc84bc14-bf6c-4ad0-920c-fdc41df26eb1",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "78597351-2279-44b5-bfd2-43acb68bd410",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e8fc6e6a-0661-430f-a441-26d4b85091e5",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The function?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "triggered by the\nonchange\nevent",
+        "Not a The function."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The function is 'triggered by the\nonchange\nevent'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHP -AJAX and MySQL concepts and techniques. You'll learn how to use PHP -AJAX and MySQL effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHP -AJAX and MySQL and how to apply it in your projects."
+}

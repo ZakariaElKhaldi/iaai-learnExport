@@ -1,0 +1,98 @@
+{
+  "id": "6b5176bd-bf1d-491d-ab8b-3910ce5d4156",
+  "title": "Dynamic Programming",
+  "slug": "dynamic-programming",
+  "metadata": {
+    "description": "Learn about Dynamic Programming with clear explanations and practical examples.",
+    "keywords": [
+      "subproblems",
+      "fibonacci",
+      "algorithm",
+      "number",
+      "programming",
+      "dynamic",
+      "problem",
+      "solutions",
+      "solution",
+      "first"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 8,
+    "category": "LearnDSA",
+    "subcategory": "DSA Dynamic Programming"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Dynamic Programming",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Dynamic Programming\nDynamic Programming is a method for designing algorithms.\nAn algorithm designed with Dynamic Programming divides the problem into subproblems, finds solutions to the subproblems, and puts them together to form a complete solution to the problem we want to solve.\nTo design an algorithm for a problem using Dynamic Programming, the problem we want to solve must have these two properties:\nOverlapping Subproblems:\nMeans that the problem can be broken down into smaller subproblems, where the solutions to the subproblems are overlapping. Having subproblems that are overlapping means that the solution to one subproblem is part of the solution to another subproblem.\nOptimal Substructure:\nMeans that the complete solution to a problem can be constructed from the solutions of its smaller subproblems. So not only must the problem have overlapping subproblems, the substructure must also be optimal so that there is a way to piece the solutions to the subproblems together to form the complete solution.\nWe have already seen Dynamic Programming in this tutorial, in the\nmemoization\nand\ntabulation\ntechniques, and for solving problems like the\n0/1 Knapsack Problem\n, or to find\nthe shortest path\nwith\nthe Bellman-Ford algorithm\n.\nNote:\nAnother way of designing an algorithm is using a\ngreedy\napproach.\nUsing Dynamic Programming To Find The \\(n\\)th Fibonacci Number\nLet's say we want an algorithm that finds the \\(n\\)th Fibonacci number. We don't know how to find the \\(n\\)th Fibonacci number yet, except that we want to use Dynamic Programming to design the algorithm.\nThe Fibonacci numbers\nis a sequence of numbers starting with \\(0\\) and \\(1\\), and the \nThe 8 first Fibonacci numbers are: \\(0,\\; 1,\\; 1,\\; 2,\\; 3,\\; 5,\\; 8,\\; 13\\).\nAnd counting from 0, the \\(4\\)th Fibonacci number \\(F(4)\\) is \\(3\\).\nIn general, this is how a Fibonacci number is created based on the two \n\\[\n  F(n)=F(n-1)+F(n-2) \n  \\]\nSo how can we use Dynamic Programming to design an algorithm that finds the \\(n\\)th Fibonacci number?\nThere is no exact rule for how to design an algorithm using Dynamic Programming, but here is a suggestion that should work in most cases:\nCheck if the the problem has \"overlapping subproblems\" and an \"optimal substructure\".\nSolve the most basic subproblems.\nFind a way to put the subproblem solutions together to form solutions to new subproblems.\nWrite the algorithm (the step-by-step procedure).\nImplement the algorithm (test if it works).\nLet's do it.\nStep 1: Check if the problem has \"overlapping subproblems\" and an \"optimal substructure\".\nBefore trying to find an algorithm using Dynimaic Programming, we must first check if the problem has the two properties \"overlapping subproblems\" and \"optimal substructure\".\nOverlapping subproblems?\nYes. The \\(6\\)th Fibonacci number is a combination of the \\(5\\)th and \\(4\\)th Fibonacci number: \\(8=5+3\\). And this rule holds for all other Fibonacci numbers as well. This shows that the problem of finding the \\(n\\)th Fibonacci number can be broken into subproblems.\nAlso, the subproblems overlap because \\(F(5)\\) is based on \\(F(4)\\) and \\(F(3)\\), and \\(F(6)\\) is based on \\(F(5)\\) and \\(F(4)\\).\n\\[\n  \\begin{equation}\n  \\begin{aligned}\nF(5) {} & =\\underline{F(4)}+F(3) \\\\\n5       & =\\underline{3}+2 \\\\\\\\\n        & and \\\\\\\\\nF(6)    & =F(5)+\\underline{F(4)} \\\\\n8       & =5+\\underline{3}\n\\end{aligned}\n\\end{equation}\n\\]\nYou see? Both solutions to subproblems \\(F(5)\\) and \\(F(6)\\) are created using the solution to \\(F(4)\\), and there are many cases like that, so the subproblems overlap as well.\nOptimal substructure?\nYes, the Fibonacci number sequence has a very clear structure, because the two \nhow\nto put together a solution by combining the solutions to the subproblems.\nWe can conclude that the problem of finding the \\(n\\)th Fibonacci number satisfies the two requirements, which means that we can use Dynamic Programming to find an algorithm that solves the problem.\nStep 2: Solve the most basic subproblems.\nWe can now start trying to find an algorithm using Dynamic Programming.\nSolving the most basic subproblems first is a good place to start to get an idea of how the algorithm should run.\nIn our problem of finding the \\(n\\)th Fibonacci number, finding the most basic subproblems is not that hard, because we already know that\n\\[\nF(0)=0 \\\\\nF(1)=1 \\\\ \nF(2)=1 \\\\ \nF(3)=2 \\\\ \nF(4)=3 \\\\ \nF(5)=5 \\\\ \nF(6)=8 \\\\\n...\n\\]\nStep 3: Find a way to put the subproblem solutions together to form solutions to new subproblems.\nIn this step, for our problem, how the subproblems are put together is quite straightforward, we just need to add the two \nSo for example, the \\(2\\)nd Fibonacci number is created by adding the two \nNote:\nIn other problems, combining solutions to subproblems to form new solutions usually involves making decisions like \"should we choose this way, or this way?\", or \"should we include this item, or not?\".\nStep 4: Write the algorithm (the step-by-step procedure).\nInstead of writing the text for the algorithm straight away, it might be wise to try to write a procedure to solve a specific problem first, like finding the \\(6\\)th Fibonacci number.\nFor reference, the 8 first Fibonacci numbers are: \\(0,\\; 1,\\; 1,\\; 2,\\; 3,\\; 5,\\; \\underline{8},\\; 13\\).\nFinding the \\(6\\)th Fibonacci number, we could start with the two first numbers \\(0\\) and \\(1\\), which appear in place 0 and 1 in the sequence, and put them in an array, at index 0 and 1. Then we could add the two first numbers in the array to generate the \nF[6]\n. That would work, right?\nAfter solving the specific problem above, it is now easier to write the actual algorithm.\nThe algorithm for finding the \\(n\\)th Fibonacci number, using Dynamic Programming as a design method, can be described like this:\nHow it works:\nCreate an array\nF\n, with \\(n+1\\) elements.\nStore the two first Fibonacci numbers\nF[0]=0\nand\nF[1]=1\n.\nStore the \nF[2]=F[1]+F[0]\n, and continue to create new Fibonacci numbers like that until the value in\nF[n]\nis created.\nReturn\nF[n]\n.\nStep 5: Implement the algorithm (test if it works).\nTo implement the algorithm above, we assume that the argument\nn\nto the function is a positive number (the \\(n\\)th Fibonacci number), we use a\nfor\nloop to create new Fibonacci numbers, and we return the base cases\nF[0]\nand\nF[1]\nstraight away if the function is called with\n0\nor\n1\nas an argument.\nImplementing the algorithm also means that we can check if it works.\nExample\nFinding the 6th Fibonacci number with our new algorithm:\ndef nth_fibo(n):\n    if n==0: return 0\n    if n==1: return 1\n\nF = [None] * (n + 1)\n    F[0] = 0\n    F[1] = 1\n\nfor i in range(2, n + 1):\n        F[i] = F[i - 1] + F[i - 2]\n\nreturn F[n]\n\nn = 6\nresult = nth_fibo(n)\nprint(f\"The {n}th Fibonacci number is {result}\")\nRun Example \u00bb\nThere it is!\nWe have used Dynamic Programming as a design method to create an algorithm that finds the \\(n\\)th Fibonacci number.\nWe have also implemented the algorithm to demonstrate that it works, and in doing so we have unintentionally used a well established technique within Dynamic Programming called\ntabulation\n, where the solution is found by solving subproblems bottom-up, using some kind of table.\nFurthermore, we have avoided calculating the same overlapping subproblems many times, like\nF[3]\nfor example, that we could potentially have ended up doing otherwise, with a\nbrute force recursive approach\nfor example.\nAnother technique used in Dynamic Programming is called\nmemoization\n. In this case, using memoization essentially solves the problem recursively with brute force, but stores the subproblem solutions for later as the algorithm runs to avoid doing the same calculations more than once.\nTechniques Used in Dynamic Programming\nIt might be difficult to design an algorithm using Dynamic Programming, but the concept of Dynamic Programming is actually not that hard: Solve the problem, but since the subproblems are overlapping, do it in a smart way so that a specific subproblem only needs to be solved once.\nTo be able to use solutions to \nmemoization\nor\ntabulation\n.\nMemoization\nis a technique used in Dynamic Programming, where the solution is found recursively. As the algorithm runs, solutions to subproblems are stored, and before trying to compute the solution to a subproblem, it checks first to see if that solution has already been computed, to avoid doing the same computation more than once.\nThe memoization technique is called \"top-down\" because the initial function call is for the main problem, and it results in new function calls for solving smaller and smaller subproblems.\nTabulation\nis a technique used in Dynamic Programming, where solutions to the overlapping subproblems are stored in a table (array), starting with the most basic subproblems.\nThe tabulation technique is not recursive, and it is called \"bottom-up\" because of the way the final solution is built up by solving the most basic subproblems first. Since the most basic subproblem solutions are stored in the table first, when solving a subproblem later that relies on \nTo get a better sense of how memoization works, and is considered \"top-down\", and how tabulation works, and is \"bottom-up\", take a look at the two images below.\nF(10)\nF(9)\n.\n.\n.\n.\nF(2)\nF(1)\nF(0)\nThe bottom-up tabulation approach to finding the 10th Fibonacci number.\nF(10)\nF(8)\nF(6)\nF(7)\nF(9)\nF(7)\nF(8)\nThe top-down memoization approach to finding the 10th Fibonacci number.\nAs you can see in the images above, the tabulation approach starts at the bottom by solving\nF(0)\nfirst, while the memoization approach start at the top with\nF(10)\nand breaking it into smaller and smaller subproblems from there.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "0ab2ad3b-6b53-4fe5-b058-a9552f73f033",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "5803a787-9ee0-4cb2-8c6b-57d4ad4b2721",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ed559fcb-f68c-4da1-a2ce-d138f3466d7e",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Dynamic Programming\n\nDynamic Programming\nDynamic Programming?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "a method for designing algorithms",
+        "overlapping"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Dynamic Programming\n\nDynamic Programming\nDynamic Programming is 'a method for designing algorithms'."
+    },
+    {
+      "question": "What is where the solutions to the subproblems?",
+      "options": [
+        "overlapping",
+        "a method for designing algorithms",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of where the solutions to the subproblems is 'overlapping'."
+    }
+  ],
+  "summary": "This tutorial covers Dynamic Programming concepts and techniques. You'll learn how to use Dynamic Programming effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Dynamic Programming and how to apply it in your projects."
+}

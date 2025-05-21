@@ -1,0 +1,139 @@
+{
+  "id": "3df8786b-5c38-4108-8068-78bf8204bd7d",
+  "title": "SVGDrop Shadow 2",
+  "slug": "svgdrop-shadow-2",
+  "metadata": {
+    "description": "Learn about SVGDrop Shadow 2 with clear explanations and practical examples.",
+    "keywords": [
+      "filter",
+      "width",
+      "height",
+      "element",
+      "feoffset",
+      "attribute",
+      "code",
+      "defs",
+      "sourcegraphic",
+      "stroke"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnSVG",
+    "subcategory": "SVG Drop Shadow 2"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "SVG\nDrop Shadow 2",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "SVG <feOffset>\nThe\n<feOffset>\nfilter is also used to create a drop shadow effects The idea \nis to take an SVG graphic, and move it a little bit in the xy plane.\n<feOffset> and <feBlend>\nThe first example offsets a rectangle (with\n<feOffset>\n), \nthen blend the original on top of the offset image (with\n<feBlend>\n):\nSorry, your browser does not support inline SVG.\nHere is the SVG code:\nExample\n<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f1\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceGraphic\" dx=\"20\" \ndy=\"20\" />\n<feBlend in=\"SourceGraphic\" in2=\"offOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\" fill=\"yellow\" filter=\"url(#f1)\" />\n</svg>\n\nCode explanation:\nThe\nid\nattribute of the\n<filter>\nelement defines a unique name for the filter\nThe offset effect is defined with the\n<feOffset>\nelement\nThe\nin=\"SourceGraphic\"\ndefines that the effect is created for the entire element\nThe\ndx\nattribute indicates the shift \n  along the x axis\nThe\ndy\nattribute indicates the shift \n  along the x axis\nThe\n<feBlend>\nelement combines two \n  graphics together by a certain blending mode\nThe\nin2\nattribute defines the second \n  image to the blending operation\nThe\nfilter\nattribute of the\n<rect>\nelement points the element to the \"f1\" filter\nBlur Image with <feGaussianBlur>\nNow, the offset image can be blurred (with\n<feGaussianBlur>\n):\n\ufffd\n\ufffd\ufffd\ufffd\n\ufffd\ufffd\ufffd\ufffd\ufffd\n\ufffd\ufffd\ufffd\ufffd\ufffd\n\ufffd\ufffd\ufffd\ufffd\ufffd\n\ufffd\ufffd\ufffd\n\ufffd\n\ufffd\nSorry, your browser does not support inline SVG.\nHere is the SVG code:\nExample\n<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f2\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceGraphic\" dx=\"20\" \ndy=\"20\" />\n<feGaussianBlur stdDeviation=\"10\" />\n<feBlend in=\"SourceGraphic\" in2=\"blurOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\"\u00a0 fill=\"yellow\" filter=\"url(#f2)\" />\n</svg>\n\nCode explanation:\nThe\nstdDeviation\nattribute of the\n<feGaussianBlur>\nelement defines the amount of the blur\nMake the Shadow Black\nNow, make the shadow black:\n\ufffd\n\ufffd\ufffd\ufffd\nSorry, your browser does not support inline SVG.\nHere is the SVG code:\nExample\n<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f3\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceAlpha\" dx=\"20\" dy=\"20\" />\n<feGaussianBlur stdDeviation=\"10\" />\n<feBlend \n  in=\"SourceGraphic\" in2=\"blurOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\" \n  fill=\"yellow\" filter=\"url(#f3)\" />\n</svg>\n\nCode explanation:\nThe\nin\nattribute of the\n<feOffset>\nelement is changed to\n\"SourceAlpha\"\nwhich uses the Alpha channel for the blur instead of the entire RGBA pixel\nTreat the Shadow as a Color Matrix\nNow, treat the shadow as a color matrix with the\n<feColorMatrix>\nelement:\n\ufffd\n\ufffd\ufffd\ufffd\nSorry, your browser does not support inline SVG.\nHere is the SVG code:\nExample\n<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f4\" width=\"120\" height=\"120\">\n<feOffset \n  in=\"SourceGraphic\" dx=\"20\" dy=\"20\" />\n<feColorMatrix \n  type=\"matrix\" values = \"0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0\"/>\n<feGaussianBlur stdDeviation=\"10\" />\n<feBlend \n  in=\"SourceGraphic\" in2=\"blurOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\" \n  fill=\"yellow\" filter=\"url(#f4)\" />\n</svg>\n\nCode explanation:\nThe\n<feColorMatrix>\nelement is used \n  to change colors based on a transformation matrix\nThe\ntype\nattribute of the\n<feColorMatrix>\nelement indicates the type of matrix operation. The keyword\nmatrix\nindicates that a full 5x4 matrix of \n  values will be defined\nThe\nvalue\nattribute of the\n<feColorMatrix>\nelement defines the values for the matrix type\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f1\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceGraphic\" dx=\"20\" \ndy=\"20\" />\n<feBlend in=\"SourceGraphic\" in2=\"offOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\" fill=\"yellow\" filter=\"url(#f1)\" />\n</svg>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f2\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceGraphic\" dx=\"20\" \ndy=\"20\" />\n<feGaussianBlur stdDeviation=\"10\" />\n<feBlend in=\"SourceGraphic\" in2=\"blurOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\"\u00a0 fill=\"yellow\" filter=\"url(#f2)\" />\n</svg>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f3\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceAlpha\" dx=\"20\" dy=\"20\" />\n<feGaussianBlur stdDeviation=\"10\" />\n<feBlend \n  in=\"SourceGraphic\" in2=\"blurOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\" \n  fill=\"yellow\" filter=\"url(#f3)\" />\n</svg>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f4\" width=\"120\" height=\"120\">\n<feOffset \n  in=\"SourceGraphic\" dx=\"20\" dy=\"20\" />\n<feColorMatrix \n  type=\"matrix\" values = \"0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0\"/>\n<feGaussianBlur stdDeviation=\"10\" />\n<feBlend \n  in=\"SourceGraphic\" in2=\"blurOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\" \n  fill=\"yellow\" filter=\"url(#f4)\" />\n</svg>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f1\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceGraphic\" dx=\"20\" \ndy=\"20\" />\n<feBlend in=\"SourceGraphic\" in2=\"offOut\" />\n</filter>\n# TODO: Complete this line\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\" fill=\"yellow\" filter=\"url(#f1)\" />\n</svg>",
+      "solution": "<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f1\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceGraphic\" dx=\"20\" \ndy=\"20\" />\n<feBlend in=\"SourceGraphic\" in2=\"offOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\" fill=\"yellow\" filter=\"url(#f1)\" />\n</svg>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f2\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceGraphic\" dx=\"20\" \ndy=\"20\" />\n<feGaussianBlur stdDeviation=\"10\" />\n<feBlend in=\"SourceGraphic\" in2=\"blurOut\" />\n</filter>\n# TODO: Complete this line\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\"\u00a0 fill=\"yellow\" filter=\"url(#f2)\" />\n</svg>",
+      "solution": "<svg height=\"150\" width=\"150\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs>\n<filter id=\"f2\" width=\"120\" height=\"120\">\n<feOffset in=\"SourceGraphic\" dx=\"20\" \ndy=\"20\" />\n<feGaussianBlur stdDeviation=\"10\" />\n<feBlend in=\"SourceGraphic\" in2=\"blurOut\" />\n</filter>\n</defs>\n<rect width=\"90\" height=\"90\" stroke=\"green\" stroke-width=\"3\"\u00a0 fill=\"yellow\" filter=\"url(#f2)\" />\n</svg>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "15d74948-7b3c-49a9-807d-e5d351558aaa",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "697b912a-41b2-4774-89ab-865fa4c34b0f",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "6f5fed51-2907-4027-a9c2-5e8a130b2ed9",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is filter is also used to create a drop shadow effects The idea?",
+      "options": [
+        "None of the above.",
+        "the SVG code:\nExample\n<svg height=\"150\" width=\"150\" xmlns=\"http://www",
+        "to take an SVG graphic",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of filter is also used to create a drop shadow effects The idea is 'to take an SVG graphic'."
+    },
+    {
+      "question": "What is Here?",
+      "options": [
+        "the SVG code:\nExample\n<svg height=\"150\" width=\"150\" xmlns=\"http://www",
+        "to take an SVG graphic",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Here is 'the SVG code:\nExample\n<svg height=\"150\" width=\"150\" xmlns=\"http://www'."
+    }
+  ],
+  "summary": "This tutorial covers SVGDrop Shadow 2 concepts and techniques. You'll learn how to use SVGDrop Shadow 2 effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of SVGDrop Shadow 2 and how to apply it in your projects."
+}

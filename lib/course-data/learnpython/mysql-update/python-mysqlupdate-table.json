@@ -1,0 +1,124 @@
+{
+  "id": "95bc113d-98e4-4d24-8c69-8d02d32c1440",
+  "title": "Python MySQLUpdate Table",
+  "slug": "python-mysqlupdate-table",
+  "metadata": {
+    "description": "Learn about Python MySQLUpdate Table with clear explanations and practical examples.",
+    "keywords": [
+      "python",
+      "update",
+      "mydb",
+      "mysql",
+      "mycursor",
+      "address",
+      "connector",
+      "table",
+      "example",
+      "records",
+      "statement"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Python Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPython",
+    "subcategory": "MySQL Update"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Python MySQL\nUpdate Table",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Update Table\nYou can update existing records in a table by using \nthe \"UPDATE\" statement:\nExample\nOverwrite the address column from \"Valley 345\" to \"Canyon 123\":\nimport mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = \n  mydb.cursor()\nsql = \"UPDATE customers SET address = 'Canyon 123' \n  WHERE address = 'Valley 345'\"\nmycursor.execute(sql)\nmydb.commit()\nprint(mycursor.rowcount, \"record(s) affected\")\nRun example \u00bb\nImportant!:\nNotice the statement:\nmydb.commit()\n. It is required to make the \n  changes, otherwise no \n  changes are made to the table.\nNotice the WHERE clause in the UPDATE syntax:\nThe WHERE clause \nspecifies which record or records that should be updated. If you omit the WHERE \nclause, all records will be updated!\nPrevent SQL Injection\nIt is considered a good practice to escape the values of any query, also in \nupdate statements.\nThis is to prevent SQL injections, which is a common web hacking technique to  \ndestroy or misuse your database.\nThe mysql.connector module uses the placeholder\n%s\nto escape values in the \nupdate statement:\nExample\nEscape values by using the placeholder\n%s\nmethod:\nimport mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = mydb.cursor()\nsql = \"UPDATE customers SET address = %s \n  WHERE address = %s\"\nval = (\"Valley 345\", \"Canyon 123\")\nmycursor.execute(sql, \n  val)\nmydb.commit()\nprint(mycursor.rowcount, \"record(s) \n  affected\")\nRun example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = \n  mydb.cursor()\nsql = \"UPDATE customers SET address = 'Canyon 123' \n  WHERE address = 'Valley 345'\"\nmycursor.execute(sql)\nmydb.commit()\nprint(mycursor.rowcount, \"record(s) affected\")",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = mydb.cursor()\nsql = \"UPDATE customers SET address = %s \n  WHERE address = %s\"\nval = (\"Valley 345\", \"Canyon 123\")\nmycursor.execute(sql, \n  val)\nmydb.commit()\nprint(mycursor.rowcount, \"record(s) \n  affected\")",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = \n  mydb.cursor()\nsql = \"UPDATE customers SET address = 'Canyon 123' \n  WHERE address = 'Valley 345'\"\nmycursor.execute(sql)\n# TODO: Complete this line\nprint(mycursor.rowcount, \"record(s) affected\")",
+      "solution": "import mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = \n  mydb.cursor()\nsql = \"UPDATE customers SET address = 'Canyon 123' \n  WHERE address = 'Valley 345'\"\nmycursor.execute(sql)\nmydb.commit()\nprint(mycursor.rowcount, \"record(s) affected\")"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n# TODO: Complete this line\nmycursor = mydb.cursor()\nsql = \"UPDATE customers SET address = %s \n  WHERE address = %s\"\nval = (\"Valley 345\", \"Canyon 123\")\nmycursor.execute(sql, \n  val)\nmydb.commit()\nprint(mycursor.rowcount, \"record(s) \n  affected\")",
+      "solution": "import mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = mydb.cursor()\nsql = \"UPDATE customers SET address = %s \n  WHERE address = %s\"\nval = (\"Valley 345\", \"Canyon 123\")\nmycursor.execute(sql, \n  val)\nmydb.commit()\nprint(mycursor.rowcount, \"record(s) \n  affected\")"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "de1c1492-3b29-408a-ae7e-7bd3d0daef54",
+      "title": "Python Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "767d159a-f16d-48c5-aa3b-91c3251fe40f",
+      "title": "Python Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "0cb662a8-e09e-4da9-b751-249dc81444f6",
+      "title": "Python Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is It?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "required to make the \n  changes",
+        "considered a good practice to escape the values of any query"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of It is 'required to make the \n  changes'."
+    },
+    {
+      "question": "What is Prevent SQL Injection\nIt?",
+      "options": [
+        "required to make the \n  changes",
+        "None of the above.",
+        "considered a good practice to escape the values of any query",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Prevent SQL Injection\nIt is 'considered a good practice to escape the values of any query'."
+    }
+  ],
+  "summary": "This tutorial covers Python MySQLUpdate Table concepts and techniques. You'll learn how to use Python MySQLUpdate Table effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Python MySQLUpdate Table and how to apply it in your projects."
+}

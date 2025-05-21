@@ -1,0 +1,187 @@
+{
+  "id": "c9a9f77a-8489-44a6-805c-01e836ae3807",
+  "title": "Node.jsMySQLWhere",
+  "slug": "nodejsmysqlwhere",
+  "metadata": {
+    "description": "Learn about Node.jsMySQLWhere with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "result",
+      "query",
+      "mysql",
+      "example",
+      "address",
+      "select",
+      "name",
+      "values",
+      "function",
+      "throw"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnNode.js",
+    "subcategory": "MySQL Where"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nMySQL\nWhere",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Select With a Filter\nWhen selecting records from a table, you can filter the selection by using \nthe \"WHERE\" statement:\nExample\nSelect record(s) with the address \"Park Lane 38\":\nvar mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"yourusername\",\npassword: \"yourpassword\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\ncon.query(\"SELECT * FROM customers\nWHERE address = 'Park Lane 38'\n\", function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_db_where.js\" and run the file:\nRun \"demo_db_where.js\"\nC:\\Users\\\nYour Name\n>node demo_db_where.js\nWhich will give you this result:\n[\n{ id: 11, name: 'Ben', address: 'Park Lane 38'}\n]\nWildcard Characters\nYou can also select the records that starts, includes, or ends with a given letter \nor phrase.\nUse the '%' wildcard to represent zero, one or multiple characters:\nExample\nSelect records where the address starts with the letter 'S':\nvar mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"yourusername\",\npassword: \"yourpassword\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\ncon.query(\"SELECT * FROM customers WHERE address\nLIKE 'S%'\n\", function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_db_where_s.js\" and run the file:\nRun \"demo_db_where_s.js\"\nC:\\Users\\\nYour Name\n>node demo_db_where_s.js\nWhich will give you this result:\n[\n{ id: 8, name: 'Richard', \n  address: 'Sky st 331'},\n{ id: 14, name: 'Viola', address: 'Sideway \n  1633'}\n]\nEscaping Query Values\nWhen query values are variables provided by the user, you should escape the values.\nThis is to prevent SQL injections, which is a common web hacking technique to  \ndestroy or misuse your database.\nThe MySQL module has methods to escape query values:\nExample\nEscape query values by using the\nmysql.escape()\nmethod:\nvar adr = 'Mountain 21';\nvar sql = 'SELECT * FROM customers WHERE address = \n  ' + mysql.escape(adr);\ncon.query(sql, function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});\nRun example \u00bb\nYou can also use a\n?\nas a placeholder for \nthe values you want to escape.\nIn this case, the variable is sent as the second parameter in the query() \nmethod:\nExample\nEscape query values by using the placeholder\n?\nmethod:\nvar adr = 'Mountain 21';\nvar sql = 'SELECT * FROM customers WHERE address = \n  ?';\ncon.query(sql,\n[adr]\n, function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});\nRun example \u00bb\nIf you have multiple placeholders, the array contains multiple values, in \nthat order:\nExample\nMultiple placeholders:\nvar name = 'Amy';\nvar adr = 'Mountain 21';\nvar sql = 'SELECT * FROM \n  customers WHERE name = ? OR address = ?';\ncon.query(sql,\n[name, adr]\n, function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});\nRun example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"yourusername\",\npassword: \"yourpassword\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\ncon.query(\"SELECT * FROM customers\nWHERE address = 'Park Lane 38'\n\", function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "C:\\Users\\\nYour Name\n>node demo_db_where.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "[\n{ id: 11, name: 'Ben', address: 'Park Lane 38'}\n]",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"yourusername\",\npassword: \"yourpassword\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\ncon.query(\"SELECT * FROM customers WHERE address\nLIKE 'S%'\n\", function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "C:\\Users\\\nYour Name\n>node demo_db_where_s.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "[\n{ id: 8, name: 'Richard', \n  address: 'Sky st 331'},\n{ id: 14, name: 'Viola', address: 'Sideway \n  1633'}\n]",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "var adr = 'Mountain 21';\nvar sql = 'SELECT * FROM customers WHERE address = \n  ' + mysql.escape(adr);\ncon.query(sql, function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "var adr = 'Mountain 21';\nvar sql = 'SELECT * FROM customers WHERE address = \n  ?';\ncon.query(sql,\n[adr]\n, function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "var name = 'Amy';\nvar adr = 'Mountain 21';\nvar sql = 'SELECT * FROM \n  customers WHERE name = ? OR address = ?';\ncon.query(sql,\n[name, adr]\n, function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"yourusername\",\npassword: \"yourpassword\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\ncon.query(\"SELECT * FROM customers\nWHERE address = 'Park Lane 38'\n\", function (err, result) {\n# TODO: Complete this line\nconsole.log(result);\n});\n});",
+      "solution": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"yourusername\",\npassword: \"yourpassword\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\ncon.query(\"SELECT * FROM customers\nWHERE address = 'Park Lane 38'\n\", function (err, result) {\nif (err) throw err;\nconsole.log(result);\n});\n});"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "C:\\Users\\\nYour Name\n# TODO: Complete this line",
+      "solution": "C:\\Users\\\nYour Name\n>node demo_db_where.js"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "7617e4a0-a6a4-4da8-952d-18c55fc3d3e2",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "20a6c0af-2db8-4365-b701-e50aeef0a313",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e4e1b1f7-6fa0-489f-876e-5a8f78e189bc",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Escaping Query Values\nWhen query values?",
+      "options": [
+        "variables provided by the user",
+        "None of the above.",
+        "None of the above.",
+        "to prevent SQL injections"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Escaping Query Values\nWhen query values is 'variables provided by the user'."
+    },
+    {
+      "question": "What is This?",
+      "options": [
+        "to prevent SQL injections",
+        "None of the above.",
+        "variables provided by the user",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of This is 'to prevent SQL injections'."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsMySQLWhere concepts and techniques. You'll learn how to use Node.jsMySQLWhere effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsMySQLWhere and how to apply it in your projects."
+}

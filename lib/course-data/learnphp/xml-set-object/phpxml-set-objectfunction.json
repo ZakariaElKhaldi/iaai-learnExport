@@ -1,0 +1,115 @@
+{
+  "id": "b27e9908-5b43-4418-8af7-1eca1286cd9f",
+  "title": "PHPxml_set_object()Function",
+  "slug": "phpxml-set-objectfunction",
+  "metadata": {
+    "description": "Learn about PHPxml_set_object()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "parser",
+      "function",
+      "object",
+      "cdata",
+      "example",
+      "within",
+      "xmlparser",
+      "parse",
+      "data",
+      "attributes"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "xml_set_object()"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nxml_set_object()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nUse XML parser within an object:\n<?php\nclass XMLParser\n{\nprivate $parser;\nfunction \n  __construct() {\n$this->parser = xml_parser_create();\nxml_set_object($this->parser, $this);\nxml_set_element_handler($this->parser, \n  \"start_tag\", \"end_tag\");\nxml_set_character_data_handler($this->parser, \n  \"cdata\");\n}\nfunction __destruct() {\nxml_parser_free($this->parser);\nunset($this->parser);\n}\nfunction parse($data) {\nxml_parse($this->parser, $data);\n}\nfunction start_tag($parser, $tag, $attributes) {\nvar_dump($tag, \n  $attributes);\n}\nfunction cdata($parser, $cdata) {\nvar_dump($cdata);\n}\nfunction end_tag($parser, $tag) {\nvar_dump($tag);\n}\n}\n$xml_parser = new XMLParser();\n$xml_parser->parse(\"<p \n  id='test'>Hello World!</p>\");\n?>\nRun Example \u00bb\nDefinition and Usage\nThe xml_set_object() function allows a XML parser to be used within an object.\nSyntax\nxml_set_object(\nparser\n,\nobject\n)\nParameter Values\nParameter\nDescription\nparser\nRequired. Specifies the XML parser to use\nobject\nRequired. Specifies the object where to use the XML parser\nTechnical Details\nReturn Value:\nTRUE on \n success. FALSE on failure\nPHP Version:\n4.0+\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\nclass XMLParser\n{\nprivate $parser;\nfunction \n  __construct() {\n$this->parser = xml_parser_create();\nxml_set_object($this->parser, $this);\nxml_set_element_handler($this->parser, \n  \"start_tag\", \"end_tag\");\nxml_set_character_data_handler($this->parser, \n  \"cdata\");\n}\nfunction __destruct() {\nxml_parser_free($this->parser);\nunset($this->parser);\n}\nfunction parse($data) {\nxml_parse($this->parser, $data);\n}\nfunction start_tag($parser, $tag, $attributes) {\nvar_dump($tag, \n  $attributes);\n}\nfunction cdata($parser, $cdata) {\nvar_dump($cdata);\n}\nfunction end_tag($parser, $tag) {\nvar_dump($tag);\n}\n}\n$xml_parser = new XMLParser();\n$xml_parser->parse(\"<p \n  id='test'>Hello World!</p>\");\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nclass XMLParser\n{\nprivate $parser;\nfunction \n  __construct() {\n$this->parser = xml_parser_create();\nxml_set_object($this->parser, $this);\nxml_set_element_handler($this->parser, \n  \"start_tag\", \"end_tag\");\nxml_set_character_data_handler($this->parser, \n  \"cdata\");\n}\n# TODO: Complete this line\nxml_parser_free($this->parser);\nunset($this->parser);\n}\nfunction parse($data) {\nxml_parse($this->parser, $data);\n}\nfunction start_tag($parser, $tag, $attributes) {\nvar_dump($tag, \n  $attributes);\n}\nfunction cdata($parser, $cdata) {\nvar_dump($cdata);\n}\nfunction end_tag($parser, $tag) {\nvar_dump($tag);\n}\n}\n$xml_parser = new XMLParser();\n$xml_parser->parse(\"<p \n  id='test'>Hello World!</p>\");\n?>",
+      "solution": "<?php\nclass XMLParser\n{\nprivate $parser;\nfunction \n  __construct() {\n$this->parser = xml_parser_create();\nxml_set_object($this->parser, $this);\nxml_set_element_handler($this->parser, \n  \"start_tag\", \"end_tag\");\nxml_set_character_data_handler($this->parser, \n  \"cdata\");\n}\nfunction __destruct() {\nxml_parser_free($this->parser);\nunset($this->parser);\n}\nfunction parse($data) {\nxml_parse($this->parser, $data);\n}\nfunction start_tag($parser, $tag, $attributes) {\nvar_dump($tag, \n  $attributes);\n}\nfunction cdata($parser, $cdata) {\nvar_dump($cdata);\n}\nfunction end_tag($parser, $tag) {\nvar_dump($tag);\n}\n}\n$xml_parser = new XMLParser();\n$xml_parser->parse(\"<p \n  id='test'>Hello World!</p>\");\n?>"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "6f96c7f7-e17d-4a07-bfbe-947c7a7fad49",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "13e59f0d-c4b6-4c15-8d66-ae3d2afd3bd6",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "b90dc96b-2de3-478f-a223-3f049f606a2c",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPxml_set_object()Function concepts and techniques. You'll learn how to use PHPxml_set_object()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPxml_set_object()Function and how to apply it in your projects."
+}

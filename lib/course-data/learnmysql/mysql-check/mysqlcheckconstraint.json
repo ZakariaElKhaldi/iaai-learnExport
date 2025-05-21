@@ -1,0 +1,151 @@
+{
+  "id": "ded92b96-c59d-4350-9aa5-c5c703acc927",
+  "title": "MySQLCHECKConstraint",
+  "slug": "mysqlcheckconstraint",
+  "metadata": {
+    "description": "Learn about MySQLCHECKConstraint with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "check",
+      "constraint",
+      "table",
+      "persons",
+      "column",
+      "following",
+      "varchar",
+      "columns",
+      "create",
+      "null"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMySQL",
+    "subcategory": "MySQL Check"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "MySQL\nCHECK\nConstraint",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "MySQL CHECK Constraint\nThe\nCHECK\nconstraint is used to limit the value range that can be placed in a column.\nIf you define a\nCHECK\nconstraint on a column it \nwill allow only certain values for this column.\nIf you define a\nCHECK\nconstraint on a table it can limit the values in certain columns based on values in other columns in the row.\nCHECK on CREATE TABLE\nThe following SQL creates a\nCHECK\nconstraint on the \"Age\" column when the \"Persons\" table is created.\nThe\nCHECK\nconstraint ensures that the age of a person must be 18, or older:\nCREATE TABLE Persons\n(\nID int NOT NULL,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nCHECK (Age>=18)\n);\nTo allow naming of a\nCHECK\nconstraint, and for defining a\nCHECK\nconstraint on multiple columns, use the following SQL syntax:\nCREATE TABLE Persons\n(\nID int NOT NULL,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nCity varchar(255),\nCONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')\n);\nCHECK on ALTER TABLE\nTo create a\nCHECK\nconstraint on the \"Age\" column when the table is already created, use the following SQL:\nALTER TABLE Persons\nADD CHECK (Age>=18);\nTo allow naming of a\nCHECK\nconstraint, and for defining a\nCHECK\nconstraint on multiple columns, use the following SQL syntax:\nALTER TABLE Persons\nADD CONSTRAINT CHK_PersonAge CHECK (Age>=18 AND City='Sandnes');\nDROP a CHECK Constraint\nTo drop a\nCHECK\nconstraint, use the following SQL:\nALTER TABLE Persons\nDROP CHECK CHK_PersonAge;\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "CREATE TABLE Persons\n(\nID int NOT NULL,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nCHECK (Age>=18)\n);",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "CREATE TABLE Persons\n(\nID int NOT NULL,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nCity varchar(255),\nCONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')\n);",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "ALTER TABLE Persons\nADD CHECK (Age>=18);",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "ALTER TABLE Persons\nADD CONSTRAINT CHK_PersonAge CHECK (Age>=18 AND City='Sandnes');",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "ALTER TABLE Persons\nDROP CHECK CHK_PersonAge;",
+      "language": "sql",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "CREATE TABLE Persons\n(\n# TODO: Complete this line\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nCHECK (Age>=18)\n);",
+      "solution": "CREATE TABLE Persons\n(\nID int NOT NULL,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nCHECK (Age>=18)\n);"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "CREATE TABLE Persons\n(\nID int NOT NULL,\n# TODO: Complete this line\nFirstName varchar(255),\nAge int,\nCity varchar(255),\nCONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')\n);",
+      "solution": "CREATE TABLE Persons\n(\nID int NOT NULL,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nCity varchar(255),\nCONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')\n);"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d370089c-3bea-4357-a3aa-83dad5c52084",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "28526c38-c515-4714-97c7-1a39758a9932",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "a81e6fe4-db71-4a16-8cec-fbebb660f181",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is MySQL\nCHECK\nConstraint\n\nMySQL CHECK Constraint\nThe\nCHECK\nconstraint?",
+      "options": [
+        "created",
+        "None of the above.",
+        "used to limit the value range that can be placed in a column",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of MySQL\nCHECK\nConstraint\n\nMySQL CHECK Constraint\nThe\nCHECK\nconstraint is 'used to limit the value range that can be placed in a column'."
+    },
+    {
+      "question": "What is table?",
+      "options": [
+        "None of the above.",
+        "used to limit the value range that can be placed in a column",
+        "None of the above.",
+        "created"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of table is 'created'."
+    }
+  ],
+  "summary": "This tutorial covers MySQLCHECKConstraint concepts and techniques. You'll learn how to use MySQLCHECKConstraint effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of MySQLCHECKConstraint and how to apply it in your projects."
+}

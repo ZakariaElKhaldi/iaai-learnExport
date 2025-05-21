@@ -1,0 +1,133 @@
+{
+  "id": "580f5a1a-d3ad-441c-9137-2769ebd36c89",
+  "title": "Connect to Database",
+  "slug": "connect-to-database",
+  "metadata": {
+    "description": "Learn about Connect to Database with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "applying",
+      "auth",
+      "database",
+      "settings",
+      "members",
+      "name",
+      "project",
+      "django",
+      "port",
+      "postgresql"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Connect to Database"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Connect to Database",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Modify Settings\nTo make Django able to connect to your database, you have to specify it in the\nDATABASES\ntuple in the\nsettings.py\nfile.\nBefore, it looked like this:\nSQLite\nmy_tennis_club/my_tennis_club/settings.py\n:\n.\n.\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n.\nNow, you should change it to look like this:\nPostgreSQL\nmy_tennis_club/my_tennis_club/settings.py\n:\n.\n.\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql',\n        'NAME': 'postgres',\n        'USER': 'masteruser',\n        'PASSWORD': '12345678',\n        'HOST': 'w3-django-project.cdxmgq9zqqlr.us-east-1.rds.amazonaws.com',\n        'PORT': '5432'\n    }\n}\n.\nNote:\nThe values will be different for your project.\nEngine?\nAs you can see in the\nsettings.py\nfile,\nwe insert\npostgresql\ninstead of\nsqlite\n.\nName?\nThe database does not have a name, but you have to assign one in order to \naccess the database.\nIf no name is given, the provider accepts\n'postgres'\nas the name of the database.\nUsername and Password?\nInsert the username and password that you specified when you created the database.\nHost? Port?\nAs you can see in the\nsettings.py\nfile,\nwe insert\npostgresql\ninstead of\nsqlite\n,\nand insert the username and password that we specified when we created the database.\nThe\nHOST\nand\nPORT\ncan be found under the \"Connectivity & security\" section in the RDS instance.\nThey are described as \"Endpoint\" and \"Port\":\nWhich for my project is this:\n'HOST': 'w3-django-project.cdxmgq9zqqlr.us-east-1.rds.amazonaws.com'\n'PORT': '5432'\nMigrate\nOnce we have done the changes in\nsettings.py\n,\nwe must run a migration in our virtual environment, before the changes will take place:\npython manage.py migrate\nWhich will give you this result:\nOperations to perform:\nApply all migrations: admin, auth, contenttypes, members, sessions\nRunning migrations:\nApplying contenttypes.0001_initial... OK\nApplying auth.0001_initial... OK\nApplying admin.0001_initial... OK\nApplying admin.0002_logentry_remove_auto_add... OK\nApplying admin.0003_logentry_add_action_flag_choices... OK\nApplying contenttypes.0002_remove_content_type_name... OK\nApplying auth.0002_alter_permission_name_max_length... OK\nApplying auth.0003_alter_user_email_max_length... OK\nApplying auth.0004_alter_user_username_opts... OK\nApplying auth.0005_alter_user_last_login_null... OK\nApplying auth.0006_require_contenttypes_0002... OK\nApplying auth.0007_alter_validators_add_error_messages... OK\nApplying auth.0008_alter_user_username_max_length... OK\nApplying auth.0009_alter_user_last_name_max_length... OK\nApplying auth.0010_alter_group_name_max_length... OK\nApplying auth.0011_update_proxy_permissions... OK\nApplying auth.0012_alter_user_first_name_max_length... OK\nApplying members.0001_initial... OK\nApplying members.0002_members_delete_member... OK\nApplying members.0003_rename_members_member... OK\nApplying sessions.0001_initial... OK\nNow, if you run the project:\npython manage.py runserver\nAnd view it in your browser:\n127.0.0.1:8000/\n.\nYou will get the home page of the project, but if you click on the \"members\" link, you will see that\nthere are no members.\nThat is because the database is empty.\nIn the\n\nwe will fill the database with members.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "python manage.py migrate",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "Operations to perform:\nApply all migrations: admin, auth, contenttypes, members, sessions\nRunning migrations:\nApplying contenttypes.0001_initial... OK\nApplying auth.0001_initial... OK\nApplying admin.0001_initial... OK\nApplying admin.0002_logentry_remove_auto_add... OK\nApplying admin.0003_logentry_add_action_flag_choices... OK\nApplying contenttypes.0002_remove_content_type_name... OK\nApplying auth.0002_alter_permission_name_max_length... OK\nApplying auth.0003_alter_user_email_max_length... OK\nApplying auth.0004_alter_user_username_opts... OK\nApplying auth.0005_alter_user_last_login_null... OK\nApplying auth.0006_require_contenttypes_0002... OK\nApplying auth.0007_alter_validators_add_error_messages... OK\nApplying auth.0008_alter_user_username_max_length... OK\nApplying auth.0009_alter_user_last_name_max_length... OK\nApplying auth.0010_alter_group_name_max_length... OK\nApplying auth.0011_update_proxy_permissions... OK\nApplying auth.0012_alter_user_first_name_max_length... OK\nApplying members.0001_initial... OK\nApplying members.0002_members_delete_member... OK\nApplying members.0003_rename_members_member... OK\nApplying sessions.0001_initial... OK",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "python manage.py runserver",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "python manage.py migrate"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "Operations to perform:\nApply all migrations: admin, auth, contenttypes, members, sessions\nRunning migrations:\nApplying contenttypes.0001_initial... OK\nApplying auth.0001_initial... OK\nApplying admin.0001_initial... OK\n# TODO: Complete this line\nApplying admin.0003_logentry_add_action_flag_choices... OK\nApplying contenttypes.0002_remove_content_type_name... OK\nApplying auth.0002_alter_permission_name_max_length... OK\nApplying auth.0003_alter_user_email_max_length... OK\nApplying auth.0004_alter_user_username_opts... OK\nApplying auth.0005_alter_user_last_login_null... OK\nApplying auth.0006_require_contenttypes_0002... OK\nApplying auth.0007_alter_validators_add_error_messages... OK\nApplying auth.0008_alter_user_username_max_length... OK\nApplying auth.0009_alter_user_last_name_max_length... OK\nApplying auth.0010_alter_group_name_max_length... OK\nApplying auth.0011_update_proxy_permissions... OK\nApplying auth.0012_alter_user_first_name_max_length... OK\nApplying members.0001_initial... OK\nApplying members.0002_members_delete_member... OK\nApplying members.0003_rename_members_member... OK\nApplying sessions.0001_initial... OK",
+      "solution": "Operations to perform:\nApply all migrations: admin, auth, contenttypes, members, sessions\nRunning migrations:\nApplying contenttypes.0001_initial... OK\nApplying auth.0001_initial... OK\nApplying admin.0001_initial... OK\nApplying admin.0002_logentry_remove_auto_add... OK\nApplying admin.0003_logentry_add_action_flag_choices... OK\nApplying contenttypes.0002_remove_content_type_name... OK\nApplying auth.0002_alter_permission_name_max_length... OK\nApplying auth.0003_alter_user_email_max_length... OK\nApplying auth.0004_alter_user_username_opts... OK\nApplying auth.0005_alter_user_last_login_null... OK\nApplying auth.0006_require_contenttypes_0002... OK\nApplying auth.0007_alter_validators_add_error_messages... OK\nApplying auth.0008_alter_user_username_max_length... OK\nApplying auth.0009_alter_user_last_name_max_length... OK\nApplying auth.0010_alter_group_name_max_length... OK\nApplying auth.0011_update_proxy_permissions... OK\nApplying auth.0012_alter_user_first_name_max_length... OK\nApplying members.0001_initial... OK\nApplying members.0002_members_delete_member... OK\nApplying members.0003_rename_members_member... OK\nApplying sessions.0001_initial... OK"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "747286a7-e2f8-4656-a745-604a4631a00a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "78bb42c0-dd5b-45c3-a3be-2afe50036e2d",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "d12c6b05-18f1-4701-9f6e-3739a56eb004",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is If no name?",
+      "options": [
+        "described as \"Endpoint\" and \"Port\":\nWhich for my project is this:\n'HOST': 'w3-django-project",
+        "given",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of If no name is 'given'."
+    },
+    {
+      "question": "What is They?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "given",
+        "described as \"Endpoint\" and \"Port\":\nWhich for my project is this:\n'HOST': 'w3-django-project"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of They is 'described as \"Endpoint\" and \"Port\":\nWhich for my project is this:\n'HOST': 'w3-django-project'."
+    }
+  ],
+  "summary": "This tutorial covers Connect to Database concepts and techniques. You'll learn how to use Connect to Database effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Connect to Database and how to apply it in your projects."
+}

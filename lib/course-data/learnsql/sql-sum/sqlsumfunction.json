@@ -1,0 +1,160 @@
+{
+  "id": "2e03833e-7239-43c8-9bc0-fb55292a70d4",
+  "title": "SQLSUM()Function",
+  "slug": "sqlsumfunction",
+  "metadata": {
+    "description": "Learn about SQLSUM()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "orderdetails",
+      "quantity",
+      "select",
+      "function",
+      "total",
+      "example",
+      "table",
+      "productid",
+      "column",
+      "orderid"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnSQL",
+    "subcategory": "SQL Sum"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "SQL\nSUM()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The SQL SUM() Function\nThe\nSUM()\nfunction returns the total sum of a numeric column.\nExample\nReturn the sum of all\nQuantity\nfields in the\nOrderDetails\ntable:\nSELECT SUM(Quantity)\nFROM OrderDetails;\n\nSyntax\nSELECT SUM(\ncolumn_name\n)\nFROM\ntable_name\nWHERE\ncondition\n;\nDemo Database\nBelow is a selection from the\nOrderDetails\ntable used in the examples:\nOrderDetailID\nOrderID\nProductID\nQuantity\n1\n10248\n11\n12\n2\n10248\n42\n10\n3\n10248\n72\n5\n4\n10249\n14\n9\n5\n10249\n51\n40\nAdd a WHERE Clause\nYou can add a\nWHERE\nclause to specify conditions:\nExample\nReturn the sum of the\nQuantity\nfield for the product with\nProductID\n11:\nSELECT SUM(Quantity)\nFROM OrderDetails\nWHERE ProductId = 11;\n\nUse an Alias\nGive the summarized column a name by using the\nAS\nkeyword.\nExample\nName the column \"total\":\nSELECT SUM(Quantity) AS total\nFROM OrderDetails;\n\nUse SUM() with GROUP BY\nHere we use the\nSUM()\nfunction and the\nGROUP BY\nclause, to return the\nQuantity\nfor each\nOrderID\nin the OrderDetails table:\nExample\nSELECT OrderID, SUM(Quantity) AS [Total Quantity]\nFROM OrderDetails\nGROUP BY OrderID;\n\nYou will learn more about the\nGROUP BY\nclause later in this tutorial.\nSUM() With an Expression\nThe parameter inside the\nSUM()\nfunction can also be an expression.\nIf we assume that each product in the\nOrderDetails\ncolumn costs 10 dollars, we can find the total earnings in dollars by \nmultiply each quantity with 10:\nExample\nUse an expression inside the\nSUM()\nfunction:\nSELECT SUM(Quantity * 10)\nFROM OrderDetails;\n\nWe can also join the\nOrderDetails\ntable to the\nProducts\ntable to find the actual amount, instead of assuming it is 10 dollars:\nExample\nJoin\nOrderDetails\nwith\nProducts\n, and use\nSUM()\nto find the total amount:\nSELECT SUM(Price * Quantity)\nFROM OrderDetails\nLEFT JOIN Products ON OrderDetails.ProductID = Products.ProductID;\n\nYou will learn more about\nJoins\nlater in this tutorial.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "SELECT SUM(Quantity)\nFROM OrderDetails;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "SELECT SUM(Quantity)\nFROM OrderDetails\nWHERE ProductId = 11;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "SELECT SUM(Quantity) AS total\nFROM OrderDetails;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "SELECT OrderID, SUM(Quantity) AS [Total Quantity]\nFROM OrderDetails\nGROUP BY OrderID;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "SELECT SUM(Quantity * 10)\nFROM OrderDetails;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "SELECT SUM(Price * Quantity)\nFROM OrderDetails\nLEFT JOIN Products ON OrderDetails.ProductID = Products.ProductID;",
+      "language": "sql",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your sql code here",
+      "solution": "SELECT SUM(Quantity)\nFROM OrderDetails;"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "SELECT SUM(Quantity)\nFROM OrderDetails\n# TODO: Complete this line",
+      "solution": "SELECT SUM(Quantity)\nFROM OrderDetails\nWHERE ProductId = 11;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "be322e75-c688-44d7-acba-30418ee23f6a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "a67c6b90-e61f-4601-af33-363ff37ee5a6",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "83944cf2-4f7c-4863-ad55-2e4aa5520c3d",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Demo Database\nBelow?",
+      "options": [
+        "None of the above.",
+        "10 dollars:\nExample\nJoin\nOrderDetails\nwith\nProducts",
+        "a selection from the\nOrderDetails\ntable used in the examples:\nOrderDetailID\nOrderID\nProductID\nQuantity\n1\n10248\n11\n12\n2\n10248\n42\n10\n3\n10248\n72\n5\n4\n10249\n14\n9\n5\n10249\n51\n40\nAdd a WHERE Clause\nYou can add a\nWHERE\nclause to specify conditions:\nExample\nReturn the sum of the\nQuantity\nfield for the product with\nProductID\n11:\nSELECT SUM(Quantity)\nFROM OrderDetails\nWHERE ProductId = 11;\n\nUse an Alias\nGive the summarized column a name by using the\nAS\nkeyword",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Demo Database\nBelow is 'a selection from the\nOrderDetails\ntable used in the examples:\nOrderDetailID\nOrderID\nProductID\nQuantity\n1\n10248\n11\n12\n2\n10248\n42\n10\n3\n10248\n72\n5\n4\n10249\n14\n9\n5\n10249\n51\n40\nAdd a WHERE Clause\nYou can add a\nWHERE\nclause to specify conditions:\nExample\nReturn the sum of the\nQuantity\nfield for the product with\nProductID\n11:\nSELECT SUM(Quantity)\nFROM OrderDetails\nWHERE ProductId = 11;\n\nUse an Alias\nGive the summarized column a name by using the\nAS\nkeyword'."
+    },
+    {
+      "question": "What is instead of assuming it?",
+      "options": [
+        "10 dollars:\nExample\nJoin\nOrderDetails\nwith\nProducts",
+        "None of the above.",
+        "a selection from the\nOrderDetails\ntable used in the examples:\nOrderDetailID\nOrderID\nProductID\nQuantity\n1\n10248\n11\n12\n2\n10248\n42\n10\n3\n10248\n72\n5\n4\n10249\n14\n9\n5\n10249\n51\n40\nAdd a WHERE Clause\nYou can add a\nWHERE\nclause to specify conditions:\nExample\nReturn the sum of the\nQuantity\nfield for the product with\nProductID\n11:\nSELECT SUM(Quantity)\nFROM OrderDetails\nWHERE ProductId = 11;\n\nUse an Alias\nGive the summarized column a name by using the\nAS\nkeyword",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of instead of assuming it is '10 dollars:\nExample\nJoin\nOrderDetails\nwith\nProducts'."
+    }
+  ],
+  "summary": "This tutorial covers SQLSUM()Function concepts and techniques. You'll learn how to use SQLSUM()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of SQLSUM()Function and how to apply it in your projects."
+}

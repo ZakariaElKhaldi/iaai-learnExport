@@ -1,0 +1,151 @@
+{
+  "id": "fd38ca2c-206a-4107-a01f-c188dac2aadb",
+  "title": "Node.jsMongoDBJoin",
+  "slug": "nodejsmongodbjoin",
+  "metadata": {
+    "description": "Learn about Node.jsMongoDBJoin with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "collection",
+      "join",
+      "orders",
+      "products",
+      "name",
+      "mongodb",
+      "lookup",
+      "mongoclient",
+      "node",
+      "stage"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnRaspberry Pi",
+    "subcategory": "MongoDB Join"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nMongoDB\nJoin",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Join Collections\nMongoDB is not a relational database, but you can perform a left outer join \nby using the\n$lookup\nstage.\nThe\n$lookup\nstage lets you specify which \ncollection you want to join with the current collection, and which \nfields that should match.\nConsider you have a \"orders\" collection and a \"products\" collection:\norders\n[\n{ _id: 1, product_id: \n  154, status: 1 }\n]\nproducts\n[\n{ _id: 154, name: \n  'Chocolate Heaven' },\n{ _id: 155, name: 'Tasty Lemons' },\n{ \n  _id: 156, name: 'Vanilla Dreams' }\n]\nExample\nJoin the matching \"products\" document(s) to the \"orders\" collection:\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\ndbo.collection('orders').aggregate([\n{ $lookup:\n{\nfrom: 'products',\nlocalField: 'product_id',\nforeignField: '_id',\nas: 'orderdetails'\n}\n}\n]).toArray(function(err, \n  res) {\nif (err) throw err;\nconsole.log(JSON.stringify(res));\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_mongodb_join.js\" and run the file:\nRun \"demo_mongodb_join.js\"\nC:\\Users\\\nYour Name\n>node demo_mongodb_join.js\nWhich will give you this result:\n[\n{ \"_id\": 1, \"product_id\": \n  154, \"status\": 1, \"orderdetails\": [\n{ \"_id\": 154, \"name\": \n  \"Chocolate Heaven\" } ]\n}\n]\nAs you can see from the result above, the matching document from the products \ncollection is included in the orders collection as an array.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "orders",
+      "content": "",
+      "order": 3,
+      "code": "[\n{ _id: 1, product_id: \n  154, status: 1 }\n]",
+      "language": "unknown",
+      "explanation": "Example of orders"
+    },
+    {
+      "type": "code_example",
+      "title": "products",
+      "content": "",
+      "order": 4,
+      "code": "[\n{ _id: 154, name: \n  'Chocolate Heaven' },\n{ _id: 155, name: 'Tasty Lemons' },\n{ \n  _id: 156, name: 'Vanilla Dreams' }\n]",
+      "language": "unknown",
+      "explanation": "Example of products"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\ndbo.collection('orders').aggregate([\n{ $lookup:\n{\nfrom: 'products',\nlocalField: 'product_id',\nforeignField: '_id',\nas: 'orderdetails'\n}\n}\n]).toArray(function(err, \n  res) {\nif (err) throw err;\nconsole.log(JSON.stringify(res));\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "C:\\Users\\\nYour Name\n>node demo_mongodb_join.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "[\n{ \"_id\": 1, \"product_id\": \n  154, \"status\": 1, \"orderdetails\": [\n{ \"_id\": 154, \"name\": \n  \"Chocolate Heaven\" } ]\n}\n]",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "[\n{ _id: 1, product_id: \n# TODO: Complete this line\n]",
+      "solution": "[\n{ _id: 1, product_id: \n  154, status: 1 }\n]"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "[\n{ _id: 154, name: \n# TODO: Complete this line\n{ _id: 155, name: 'Tasty Lemons' },\n{ \n  _id: 156, name: 'Vanilla Dreams' }\n]",
+      "solution": "[\n{ _id: 154, name: \n  'Chocolate Heaven' },\n{ _id: 155, name: 'Tasty Lemons' },\n{ \n  _id: 156, name: 'Vanilla Dreams' }\n]"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "9a39801d-0e07-4e00-8548-334366d1b348",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9c8581e9-f12d-4c7d-b3ea-6461a7b4ae6e",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "2d814af1-24c2-4c60-ae4f-2e89acfd98ff",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is js\nMongoDB\nJoin\n\nJoin Collections\nMongoDB?",
+      "options": [
+        "included in the orders collection as an array",
+        "None of the above.",
+        "not a relational database",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of js\nMongoDB\nJoin\n\nJoin Collections\nMongoDB is 'not a relational database'."
+    },
+    {
+      "question": "What is the matching document from the products \ncollection?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "included in the orders collection as an array",
+        "not a relational database"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of the matching document from the products \ncollection is 'included in the orders collection as an array'."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsMongoDBJoin concepts and techniques. You'll learn how to use Node.jsMongoDBJoin effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsMongoDBJoin and how to apply it in your projects."
+}

@@ -1,0 +1,96 @@
+{
+  "id": "2f5d36fe-8e3c-4b9e-8a0f-760abcdd21aa",
+  "title": "GitHooks",
+  "slug": "githooks",
+  "metadata": {
+    "description": "Learn about GitHooks with clear explanations and practical examples.",
+    "keywords": [
+      "hooks",
+      "commit",
+      "hook",
+      "example",
+      "exit",
+      "code",
+      "push",
+      "make",
+      "tests",
+      "block"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnGit",
+    "subcategory": "Git Hooks"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Git\nHooks",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "What are Git Hooks?\nGit hooks\nare scripts that run automatically when certain Git events happen, like making a commit or pushing code.\nWhy Use Hooks?\nHooks help you automate repetitive tasks, enforce coding standards, and catch problems early.\nFor example, you can:\nRun tests before every commit or push\nCheck code style automatically\nBlock bad commit messages\nEnforce rules for everyone on your team\nWhere Do Hooks Live?\nHooks are stored in\n.git/hooks\ninside your repository.\nBy default, you'll see sample scripts ending with\n.sample\n.\nExample: List Available Hooks\nls .git/hooks\nHow to Enable a Hook\nTo enable a hook, remove the\n.sample\nextension and make the script executable.\nFor example, to enable\npre-commit\n:\nExample: Enable pre-commit Hook (Linux/macOS)\nmv .git/hooks/pre-commit.sample .git/hooks/pre-commit\nchmod +x .git/hooks/pre-commit\nOn Windows, just rename the file to\npre-commit\nand make sure it can be run by your shell (e.g. use\n.bat\nor\n.ps1\nif needed).\nTypes of Hooks\nThere are many types of hooks, but the most common are:\npre-commit\ncommit-msg\npre-push\npre-receive\npost-receive\npre-commit Hook\nThe\npre-commit\nhook runs before you make a commit.\nYou can use it to check code style, run tests, or stop a commit if something is wrong.\nExample: Simple pre-commit Hook\n#!/bin/sh\n# Stop commit if any .js file has \"console.log\"\ngrep -r 'console.log' *.js && {\n  echo \"Remove console.log before committing!\"\n  exit 1\n}\ncommit-msg Hook\nThe\ncommit-msg\nhook checks or edits the commit message.\nFor example, it can block commits without a ticket number.\nExample: commit-msg Hook\n#!/bin/sh\n# Block commit if message does not contain a ticket number\nif ! grep -qE 'JIRA-[0-9]+' \"$1\"; then\n  echo \"Commit message must have a ticket number (e.g. JIRA-123)\"\n  exit 1\nfi\npre-push Hook\nThe\npre-push\nhook runs before you push code to a remote.\nYou can use it to run tests or checks before sharing code.\nExample: pre-push Hook\n#!/bin/sh\nnpm test || exit 1\nServer-side Hooks\nSome hooks (like\npre-receive\n) run on the Git server, not your computer.\nThese can enforce rules for everyone who pushes to the repository.\nExample: pre-receive Hook\n#!/bin/sh\n# Block pushes to main branch\ngrep refs/heads/main || exit 1\nCustom Hooks\nYou can write any custom script as a hook.\nJust put it in\n.git/hooks\nand make it executable.\nExample: Custom Hook\n#!/bin/sh\necho \"Hello from my custom hook!\"\nDebugging and Best Practices\nMake sure your hook script is executable (\nchmod +x scriptname\n).\nAdd\necho\nstatements to see what your script is doing.\nCheck the exit code:\nexit 0\nmeans success,\nexit 1\nmeans fail.\nOn Windows, use\n.bat\nor\n.ps1\nscripts if needed.\nKeep hooks simple and fast\u2014slow hooks slow down your workflow.\nShare useful hooks with your team (but remember: hooks are not versioned by default).\nNote:\nHooks are powerful for automating checks (like linting or tests) and enforcing team standards. Client-side hooks run on your computer. Server-side hooks run on the Git server.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "99752108-47af-41f7-9c12-c421913a42e7",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "80c4beac-e0c5-4e6e-a7d2-12b9f86278cc",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "3cad5eb3-ec63-4e10-b56f-66b582bf946c",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Git\nHooks\n\nWhat?",
+      "options": [
+        "Git Hooks",
+        "None of the above.",
+        "scripts that run automatically when certain Git events happen",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Git\nHooks\n\nWhat is 'Git Hooks'."
+    },
+    {
+      "question": "What is Git hooks?",
+      "options": [
+        "scripts that run automatically when certain Git events happen",
+        "None of the above.",
+        "None of the above.",
+        "Git Hooks"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Git hooks is 'scripts that run automatically when certain Git events happen'."
+    }
+  ],
+  "summary": "This tutorial covers GitHooks concepts and techniques. You'll learn how to use GitHooks effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of GitHooks and how to apply it in your projects."
+}

@@ -1,0 +1,187 @@
+{
+  "id": "b84983ee-1073-4c5f-a9f6-2090725e5ab9",
+  "title": "SQLAUTO INCREMENTField",
+  "slug": "sqlauto-incrementfield",
+  "metadata": {
+    "description": "Learn about SQLAUTO INCREMENTField with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "column",
+      "persons",
+      "increment",
+      "would",
+      "personid",
+      "table",
+      "value",
+      "record",
+      "insert",
+      "lastname"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnSQL",
+    "subcategory": "SQL Auto Increment"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "SQL\nAUTO INCREMENT\nField",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AUTO INCREMENT Field\nAuto-increment allows a unique number to be generated automatically when a new record is inserted into a table.\nOften this is the primary key field that we would like to be created automatically every time a new record is inserted.\nSyntax for MySQL\nThe following SQL statement defines the \"Personid\" column to be an auto-increment primary key field in the \"Persons\" table:\nCREATE TABLE Persons\n(\nPersonid int NOT NULL AUTO_INCREMENT,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nPRIMARY KEY (Personid)\n);\nMySQL uses the\nAUTO_INCREMENT\nkeyword to perform an auto-increment feature.\nBy default, the starting value for\nAUTO_INCREMENT\nis 1, and it will increment by 1 for each new record.\nTo let the\nAUTO_INCREMENT\nsequence start with another value, use the following SQL statement:\nALTER TABLE Persons AUTO_INCREMENT=100;\nTo insert a new record into the \"Persons\" table, we will NOT have to specify a value for the \"Personid\"\ncolumn (a unique value will be added automatically):\nINSERT INTO Persons (FirstName,LastName)\nVALUES ('Lars','Monsen');\nThe SQL statement above would insert a new record into the \"Persons\" table. The \n\"Personid\" column would be assigned a unique value. The \"FirstName\" column would be set to \n\"Lars\" and the \"LastName\" column would be set to \"Monsen\".\nSyntax for SQL Server\nThe following SQL statement defines the \"Personid\" column to be an auto-increment primary key field in the \"Persons\" table:\nCREATE TABLE Persons\n(\nPersonid int IDENTITY(1,1) PRIMARY KEY,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int\n);\nThe MS SQL Server uses the\nIDENTITY\nkeyword to perform an auto-increment feature.\nIn the example above, the starting value for\nIDENTITY\nis 1, and it will increment by 1 for each new record.\nTip:\nTo specify that the \"Personid\" column should start at value 10 and increment by 5, change \nit to\nIDENTITY(10,5)\n.\nTo insert a new record into the \"Persons\" table, we will NOT have to specify a value for the \"Personid\" column (a unique value will be added automatically):\nINSERT INTO Persons (FirstName,LastName)\nVALUES ('Lars','Monsen');\nThe SQL statement above would insert a new record into the \"Persons\" table. The \n\"Personid\" column would be assigned a unique value. The \"FirstName\" column would be set to \n\"Lars\" and the \"LastName\" column would be set to \"Monsen\".\nSyntax for Access\nThe following SQL statement defines the \"Personid\" column to be an auto-increment primary key field in the \"Persons\" table:\nCREATE TABLE Persons\n(\nPersonid AUTOINCREMENT PRIMARY KEY,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int\n);\nThe MS Access uses the\nAUTOINCREMENT\nkeyword to perform an auto-increment feature.\nBy default, the starting value for\nAUTOINCREMENT\nis 1, and it will increment by 1 for each new record.\nTip:\nTo specify that the \"Personid\" column should start at value 10 and increment by 5, change the autoincrement to\nAUTOINCREMENT(10,5)\n.\nTo insert a new record into the \"Persons\" table, we will NOT have to specify a value for the \"Personid\" column (a unique value will be added \nautomatically):\nINSERT INTO Persons (FirstName,LastName)\nVALUES ('Lars','Monsen');\nThe SQL statement above would insert a new record into the \"Persons\" table. The \n\"Personid\" column would be assigned a unique value. The \"FirstName\" column would be set to \n\"Lars\" and the \"LastName\" column would be set to \"Monsen\".\nSyntax for Oracle\nIn Oracle the code is a little bit more tricky.\nYou will have to create an auto-increment field with the sequence object (this object generates a number sequence).\nUse the following\nCREATE SEQUENCE\nsyntax:\nCREATE SEQUENCE seq_person\nMINVALUE 1\nSTART WITH 1\nINCREMENT BY 1\nCACHE 10;\nThe code above creates a sequence object called seq_person, that starts with 1 and will increment by 1.\nIt will also cache up to 10 values for performance. The cache option specifies how many sequence values will be stored in memory for faster access.\nTo insert a new record into the \"Persons\" table, we will have to use the \nsequence):\nINSERT INTO Persons (Personid,FirstName,LastName)\nVALUES (seq_person.\nThe SQL statement above would insert a new record into the \"Persons\" table. The \"Personid\" column would be assigned the \nsequence. The \"FirstName\" column would be set to \"Lars\" and the \"LastName\" column would be set to \"Monsen\".\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "CREATE TABLE Persons\n(\nPersonid int NOT NULL AUTO_INCREMENT,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nPRIMARY KEY (Personid)\n);",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "ALTER TABLE Persons AUTO_INCREMENT=100;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "INSERT INTO Persons (FirstName,LastName)\nVALUES ('Lars','Monsen');",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "CREATE TABLE Persons\n(\nPersonid int IDENTITY(1,1) PRIMARY KEY,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int\n);",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "INSERT INTO Persons (FirstName,LastName)\nVALUES ('Lars','Monsen');",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "CREATE TABLE Persons\n(\nPersonid AUTOINCREMENT PRIMARY KEY,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int\n);",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "INSERT INTO Persons (FirstName,LastName)\nVALUES ('Lars','Monsen');",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "CREATE SEQUENCE seq_person\nMINVALUE 1\nSTART WITH 1\nINCREMENT BY 1\nCACHE 10;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "INSERT INTO Persons (Personid,FirstName,LastName)\nVALUES (seq_person.nextval,'Lars','Monsen');",
+      "language": "sql",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "CREATE TABLE Persons\n(\nPersonid int NOT NULL AUTO_INCREMENT,\nLastName varchar(255) NOT NULL,\n# TODO: Complete this line\nAge int,\nPRIMARY KEY (Personid)\n);",
+      "solution": "CREATE TABLE Persons\n(\nPersonid int NOT NULL AUTO_INCREMENT,\nLastName varchar(255) NOT NULL,\nFirstName varchar(255),\nAge int,\nPRIMARY KEY (Personid)\n);"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your sql code here",
+      "solution": "ALTER TABLE Persons AUTO_INCREMENT=100;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "26558dea-23c2-49ae-beb6-c906e51663bd",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ed3a6939-64ba-4002-95e4-f7b1c871f293",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "5b4b52fe-4c39-4585-9e49-b8c69b79d414",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is increment allows a unique number to be generated automatically when a new record?",
+      "options": [
+        "inserted",
+        "inserted into a table",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of increment allows a unique number to be generated automatically when a new record is 'inserted into a table'."
+    },
+    {
+      "question": "What is Often this is the primary key field that we would like to be created automatically every time a new record?",
+      "options": [
+        "inserted",
+        "None of the above.",
+        "inserted into a table",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Often this is the primary key field that we would like to be created automatically every time a new record is 'inserted'."
+    }
+  ],
+  "summary": "This tutorial covers SQLAUTO INCREMENTField concepts and techniques. You'll learn how to use SQLAUTO INCREMENTField effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of SQLAUTO INCREMENTField and how to apply it in your projects."
+}

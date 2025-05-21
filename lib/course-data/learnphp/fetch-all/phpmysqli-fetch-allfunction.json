@@ -1,0 +1,124 @@
+{
+  "id": "878e50ee-0a21-4fb4-9a3c-f3b3200771f6",
+  "title": "PHPmysqli fetch_all()Function",
+  "slug": "phpmysqli-fetch-allfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli fetch_all()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "result",
+      "mysqli",
+      "array",
+      "style",
+      "fetch",
+      "rows",
+      "associative",
+      "lastname",
+      "function",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "fetch_all"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli fetch_all()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nFetch all rows and return the result-set as an associative array:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result \n  = \n  $mysqli -> query($sql);\n// Fetch all\n$result -> fetch_all(MYSQLI_ASSOC);\n// Free result set\n$result \n  -> free_result();\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe fetch_all() / mysqli_fetch_all() function fetches all result rows and returns the \nresult-set as an associative array, a numeric array, or both.\nNote:\nThis function is available only with MySQL Native Driver.\nSyntax\nObject oriented style:\n$mysqli_result -> \n  fetch_all(\nresulttype\n)\nProcedural style:\nmysqli_fetch_all(\nresult, resulttype\n)\nParameter Values\nParameter\nDescription\nresult\nRequired. Specifies a result set identifier returned by mysqli_query(), mysqli_store_result() or mysqli_use_result()\nresulttype\nOptional. Specifies what type of array that should be produced. Can be one of the following values:\nMYSQLI_ASSOC\nMYSQLI_NUM (this is default)\nMYSQLI_BOTH\nTechnical Details\nReturn Value:\nReturns an array of associative or numeric arrays holding the result rows\nPHP Version:\n5.3+\nExample - Procedural style\nFetch all rows and return the result-set as an associative array:\n<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = mysqli_query($con, $sql);\n// Fetch all\nmysqli_fetch_all($result, MYSQLI_ASSOC);\n// Free result set\nmysqli_free_result($result);\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result \n  = \n  $mysqli -> query($sql);\n// Fetch all\n$result -> fetch_all(MYSQLI_ASSOC);\n// Free result set\n$result \n  -> free_result();\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = mysqli_query($con, $sql);\n// Fetch all\nmysqli_fetch_all($result, MYSQLI_ASSOC);\n// Free result set\nmysqli_free_result($result);\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n# TODO: Complete this line\n  = \n  $mysqli -> query($sql);\n// Fetch all\n$result -> fetch_all(MYSQLI_ASSOC);\n// Free result set\n$result \n  -> free_result();\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result \n  = \n  $mysqli -> query($sql);\n// Fetch all\n$result -> fetch_all(MYSQLI_ASSOC);\n// Free result set\n$result \n  -> free_result();\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n# TODO: Complete this line\n// Fetch all\nmysqli_fetch_all($result, MYSQLI_ASSOC);\n// Free result set\nmysqli_free_result($result);\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\n$result = mysqli_query($con, $sql);\n// Fetch all\nmysqli_fetch_all($result, MYSQLI_ASSOC);\n// Free result set\nmysqli_free_result($result);\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c2ea8bb4-6181-47fc-b59b-554e357a5447",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "f15d7f42-77ef-4374-9a41-13e572f5bac0",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "2b193b7f-d8d7-469a-a63b-dce9750b3b44",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is This function?",
+      "options": [
+        "available only with MySQL Native Driver",
+        "None of the above.",
+        "default)\nMYSQLI_BOTH\nTechnical Details\nReturn Value:\nReturns an array of associative or numeric arrays holding the result rows\nPHP Version:\n5",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of This function is 'available only with MySQL Native Driver'."
+    },
+    {
+      "question": "What is this?",
+      "options": [
+        "default)\nMYSQLI_BOTH\nTechnical Details\nReturn Value:\nReturns an array of associative or numeric arrays holding the result rows\nPHP Version:\n5",
+        "None of the above.",
+        "None of the above.",
+        "available only with MySQL Native Driver"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of this is 'default)\nMYSQLI_BOTH\nTechnical Details\nReturn Value:\nReturns an array of associative or numeric arrays holding the result rows\nPHP Version:\n5'."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli fetch_all()Function concepts and techniques. You'll learn how to use PHPmysqli fetch_all()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli fetch_all()Function and how to apply it in your projects."
+}

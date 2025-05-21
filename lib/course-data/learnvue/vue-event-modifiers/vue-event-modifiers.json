@@ -1,0 +1,193 @@
+{
+  "id": "f0a1923b-491b-49c1-b954-da8440ee1d9f",
+  "title": "Vue Event Modifiers",
+  "slug": "vue-event-modifiers",
+  "metadata": {
+    "description": "Learn about Vue Event Modifiers with clear explanations and practical examples.",
+    "keywords": [
+      "script",
+      "event",
+      "click",
+      "button",
+      "right",
+      "modifiers",
+      "mouse",
+      "modifier",
+      "bgcolor",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 6,
+    "category": "LearnVue",
+    "subcategory": "Vue Event Modifiers"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue Event Modifiers",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Event modifiers\nin Vue modify how events trigger the running of methods and help us handle events in a more efficient and straightforward way.\nEvent modifiers are used together with the Vue\nv-on\ndirective, to for example:\nPrevent the default submit behavior of HTML forms (\nv-on:submit.prevent\n)\nMake sure that an event can only run once after the page is loaded (\nv-on:click.once\n)\nSpecify what keyboard key to use as an event to run a method (\nv-on:keyup.enter\n)\nHow To Modify The\nv-on\nDirective\nEvent modifiers are used to define how to react on an event in more detail.\nWe use event modifiers by first connecting a tag to an event like we have seen before:\n<button v-on:click=\"createAlert\">Create alert</button>\nNow, to define more specifically that the button click event should only fire one time after the page loads, we can add the\n.once\nmodifier, like this:\n<button v-on:click\n.once\n=\"createAlert\">Create alert</button>\nHere is an example with the\n.once\nmodifier:\nExample\nThe\n.once\nmodifier is used on the\n<button>\ntag to only run the method the first time the 'click' event happens.\n<div id=\"app\">\n<p>Click the button to create an alert:</p>\n<button v-on:click.once=\"creteAlert\">Create Alert</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\nmethods: {\ncreateAlert() {\nalert(\"Alert created from button click\")\n}\n}\n})\napp.mount('#app')\n</script>\n\nNote:\nIt is also possible to handle an event inside the method instead of using event modifiers, but event modifiers make it a lot easier.\nDifferent\nv-on\nModifiers\nEvent modifiers are used in different situations. We can use event modifiers when we listen to keyboard events, mouse click events, and we can even use event modifiers in combination with each other.\nThe event modifier\n.once\ncan be used after both keyboard and mouse click events.\nKeyboard Key Event Modifiers\nWe have three different keyboard event types\nkeydown\n,\nkeypress\n, and\nkeyup\n.\nWith each key event type, we can specify exactly what key to listen to after a key event occurs. We have\n.space\n,\n.enter\n,\n.w\nand\n.up\nto name a few.\nYou can write the key event to the web page, or to the console with\nconsole.log(event.key)\n, to find the value of a certain key yourself:\nExample\nThe\nkeydown\nkeyboard event triggers the 'getKey' method, and the value 'key' from the event object is written to the console and to the web page.\n<input v-on:keydown=\"getKey\">\n<p> {{ keyValue }} </p>\ndata() {\nreturn {\nkeyValue = ''\n}\n},\nmethods: {\ngetKey(evt) {\nthis.keyValue = evt.key\nconsole.log(evt.key)\n}\n}\n\nWe can also choose to limit the event to happen only when a mouse click or a key press happens in combination with system modifier keys\n.alt\n,\n.ctrl\n,\n.shift\nor\n.meta\n. The system modifier key\n.meta\nrepresents the Windows key on Windows computers, or command key on Apple computers.\nKey Modifier\nDetails\n.[\nVue key alias\n]\nThe most common keys have their own aliases in Vue:\n.enter\n.tab\n.delete\n.esc\n.space\n.up\n.down\n.left\n.right\n.[\nletter\n]\nSpecify the letter that comes when you press the key. As an example: use the\n.s\nkey modifier to listen to the 'S' key.\n.[\nsystem modifier key\n]\n.alt\n,\n.ctrl\n,\n.shift\nor\n.meta\n. These keys can be used in combination with other keys, or in combination with mouse clicks.\nExample\nUse the\n.s\nmodifier to create an alert when the user writes an 's' inside the <textarea> tag.\n<div id=\"app\">\n<p>Try pressing the 's' key:</p>\n<textarea v-on:keyup.s=\"createAlert\"></textarea>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\nmethods: {\ncreateAlert() {\nalert(\"You pressed the 'S' key!\")\n}\n}\n})\napp.mount('#app')\n</script>\n\nCombine Keyboard Event Modifiers\nEvent modifiers can also be used in combination with each other so that more than one thing must happen simultaneous for the method to be called.\nExample\nUse the\n.s\nand\n.ctrl\nmodifiers in combination to create an alert when 's' and 'ctrl' are pressed simultaneously inside the\n<textarea>\ntag.\n<div id=\"app\">\n<p>Try pressing the 's' key:</p>\n<textarea v-on:keydown.ctrl.s=\"createAlert\"></textarea>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\nmethods: {\ncreateAlert() {\nalert(\"You pressed the 'S' and 'Ctrl' keys, in combination!\")\n}\n}\n})\napp.mount('#app')\n</script>\n\nMouse Button Modifiers\nTo react on a mouse click, we can write\nv-on:click\n, but to specify which mouse button that was clicked, we can use\n.left\n,\n.center\nor\n.right\nmodifiers.\nTrackpad users:\nYou might need to click with two fingers, or in the lower right hand side of the trackpad on your computer to create a right click.\nExample\nChange the background color when a user right-clicks in the\n<div>\nelement:\n<div id=\"app\">\n<div\nv-on:click.right=\"changeColor\"\nv-bind:style=\"{backgroundColor:'hsl('+bgColor+',80%,80%)'}\">\n<p>Press right mouse button here.</p>\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nbgColor: 0\n}\n},\nmethods: {\nchangeColor() {\nthis.bgColor+=50\n}\n}\n})\napp.mount('#app')\n</script>\n\nMouse button events can also work in combination with a system modifier key.\nExample\nChange the background color when a user right-clicks in the\n<div>\nelement in combination with the 'ctrl' key:\n<div id=\"app\">\n<div\nv-on:click.right.ctrl=\"changeColor\"\nv-bind:style=\"{backgroundColor:'hsl('+bgColor+',80%,80%)'}\">\n<p>Press right mouse button here.</p>\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nbgColor: 0\n}\n},\nmethods: {\nchangeColor() {\nthis.bgColor+=50\n}\n}\n})\napp.mount('#app')\n</script>\n\nThe event modifier\n.prevent\ncan be used in addition to the\n.right\nmodifier to prevent the default drop-down menu to appear when we right click.\nExample\nThe drop-down menu is prevented from appearing when you right click to change the background color of the\n<div>\nelement:\n<div id=\"app\">\n<div\nv-on:click.right.prevent=\"changeColor\"\nv-bind:style=\"{backgroundColor:'hsl('+bgColor+',80%,80%)'}\">\n<p>Press right mouse button here.</p>\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nbgColor: 0\n}\n},\nmethods: {\nchangeColor() {\nthis.bgColor+=50\n}\n}\n})\napp.mount('#app')\n</script>\n\nIt would be possible to prevent the drop-down menu from appearing after right click by using\nevent.preventDefault()\ninside the method, but with the Vue\n.prevent\nmodifier the code becomes more readable and easier to maintain.\nYou can also react on left button mouse clicks in combination with other modifiers, like\nclick.left.shift\n:\nExample\nHold the 'shift' keyboard key and press left mouse button on the\n<img>\ntag to change image.\n<div id=\"app\">\n<p>Hold 'Shift' key and press left mouse button:</p>\n<img\nv-on:click.left.shift=\"changeImg\"\nv-bind:src=\"imgUrl\">\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nimgUrlIndex: 0,\nimgUrl: 'img_tiger_square.jpeg',\nimgages: [\n'img_tiger_square.jpeg',\n'img_moose_square.jpeg',\n'img_kangaroo_square.jpeg'\n]\n}\n},\nmethods: {\nchangeImg() {\nthis.imgUrlIndex++\nif(this.imgUrlIndex>=3){\nthis.imgUrlIndex=0\n}\nthis.imgUrl = this.images[this.imgUrlIndex]\n}\n}\n})\napp.mount('#app')\n</script>\n\nVue Exercises\nTest Yourself With Exercises\nExercise:\nProvide the correct code so that the <div> element changes color when right clicked.\nALSO, add code so that the default drop down menu that appears when you right click a web page, is not shown.\n<div id=\"app\">\n  <div v-on:click.\n=\"changeColor\"\n      v-bind:style=\"{backgroundColor:'hsl('+bgColor+',80%,80%)'}\">\n    <p>Press right mouse button here.</p>\n  </div>\n</div>\n\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\n  const app = Vue.createApp({\n    data() {\n      return {\n        bgColor: 0\n      }\n    },\n    methods: {\n      changeColor() {\n        this.bgColor+=50\n      }\n    }\n  })\n  app.mount('#app')\n</script>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<button v-on:click=\"createAlert\">Create alert</button>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<button v-on:click\n.once\n=\"createAlert\">Create alert</button>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<div id=\"app\">\n<p>Click the button to create an alert:</p>\n<button v-on:click.once=\"creteAlert\">Create Alert</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\nmethods: {\ncreateAlert() {\nalert(\"Alert created from button click\")\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<input v-on:keydown=\"getKey\">\n<p> {{ keyValue }} </p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<div id=\"app\">\n<p>Try pressing the 's' key:</p>\n<textarea v-on:keyup.s=\"createAlert\"></textarea>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\nmethods: {\ncreateAlert() {\nalert(\"You pressed the 'S' key!\")\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<div id=\"app\">\n<p>Try pressing the 's' key:</p>\n<textarea v-on:keydown.ctrl.s=\"createAlert\"></textarea>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\nmethods: {\ncreateAlert() {\nalert(\"You pressed the 'S' and 'Ctrl' keys, in combination!\")\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<div id=\"app\">\n<div\nv-on:click.right=\"changeColor\"\nv-bind:style=\"{backgroundColor:'hsl('+bgColor+',80%,80%)'}\">\n<p>Press right mouse button here.</p>\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nbgColor: 0\n}\n},\nmethods: {\nchangeColor() {\nthis.bgColor+=50\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "<div id=\"app\">\n<div\nv-on:click.right.ctrl=\"changeColor\"\nv-bind:style=\"{backgroundColor:'hsl('+bgColor+',80%,80%)'}\">\n<p>Press right mouse button here.</p>\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nbgColor: 0\n}\n},\nmethods: {\nchangeColor() {\nthis.bgColor+=50\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<div id=\"app\">\n<div\nv-on:click.right.prevent=\"changeColor\"\nv-bind:style=\"{backgroundColor:'hsl('+bgColor+',80%,80%)'}\">\n<p>Press right mouse button here.</p>\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nbgColor: 0\n}\n},\nmethods: {\nchangeColor() {\nthis.bgColor+=50\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "<div id=\"app\">\n<p>Hold 'Shift' key and press left mouse button:</p>\n<img\nv-on:click.left.shift=\"changeImg\"\nv-bind:src=\"imgUrl\">\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nimgUrlIndex: 0,\nimgUrl: 'img_tiger_square.jpeg',\nimgages: [\n'img_tiger_square.jpeg',\n'img_moose_square.jpeg',\n'img_kangaroo_square.jpeg'\n]\n}\n},\nmethods: {\nchangeImg() {\nthis.imgUrlIndex++\nif(this.imgUrlIndex>=3){\nthis.imgUrlIndex=0\n}\nthis.imgUrl = this.images[this.imgUrlIndex]\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "<button v-on:click=\"createAlert\">Create alert</button>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<button v-on:click\n.once\n# TODO: Complete this line",
+      "solution": "<button v-on:click\n.once\n=\"createAlert\">Create alert</button>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "51016c7e-6bd9-44ac-b4b3-04058b1be4f7",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "3cd4f39d-0f99-4dfc-ae73-6814f3930262",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "bca0702d-34e8-46c1-aed9-9a6b1c1231ce",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Event modifiers?",
+      "options": [
+        "loaded (\nv-on:click",
+        "None of the above.",
+        "None of the above.",
+        "used together with the Vue\nv-on\ndirective"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Event modifiers is 'used together with the Vue\nv-on\ndirective'."
+    },
+    {
+      "question": "What is Make sure that an event can only run once after the page?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "loaded (\nv-on:click",
+        "used together with the Vue\nv-on\ndirective"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Make sure that an event can only run once after the page is 'loaded (\nv-on:click'."
+    }
+  ],
+  "summary": "This tutorial covers Vue Event Modifiers concepts and techniques. You'll learn how to use Vue Event Modifiers effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue Event Modifiers and how to apply it in your projects."
+}

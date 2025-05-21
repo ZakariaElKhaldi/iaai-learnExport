@@ -1,0 +1,98 @@
+{
+  "id": "318837cb-daad-4911-9f58-31d546395469",
+  "title": "Dynamic Components",
+  "slug": "dynamic-components",
+  "metadata": {
+    "description": "Learn about Dynamic Components with clear explanations and practical examples.",
+    "keywords": [
+      "component",
+      "components",
+      "keepalive",
+      "example",
+      "template",
+      "comp",
+      "button",
+      "dynamic",
+      "togglevalue",
+      "compone"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue Dynamic Components"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Dynamic Components",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Dynamic Components\ncan be used to flip through pages within your page, like tabs in your browser, with the use of the 'is' attribute.\nThe Component Tag and The 'is' Attribute\nTo make a dynamic component we use the\n<component>\ntag to represent the active component. The 'is' attribute is tied to a value with\nv-bind\n, and we change that value to the name of the component we want to have active.\nExample\nIn this example we have a\n<component>\ntag that acts as a placeholder for either the\ncomp-one\ncomponent or the\ncomp-two\ncomponent. The 'is' attribute is set on the\n<component>\ntag and listens to the computed value 'activeComp' that holds either 'comp-one' or 'comp-two' as value. And we have a button that toggles a data property between 'true' and 'false' to make the computed value switch between the active components.\nApp.vue\n:\n<template>\n\u00a0 <h1>Dynamic Components</h1>\n\u00a0 <p>App.vue switches between which component to show.</p>\n\u00a0 <button @click=\"toggleValue = !toggleValue\">\n\u00a0 \u00a0 Switch component\n\u00a0 </button>\n\u00a0 <component :is=\"activeComp\"></component>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 toggleValue: true\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 },\n\u00a0 \u00a0 computed: {\n\u00a0 \u00a0 \u00a0 activeComp() {\n\u00a0 \u00a0 \u00a0 \u00a0 if(this.toggleValue) {\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 return 'comp-one'\n\u00a0 \u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 \u00a0 \u00a0 else {\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 return 'comp-two'\n\u00a0 \u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nRun Example \u00bb\n<KeepAlive>\nRun the example below. You will notice that changes you make in one component is forgotten when you switch back to it. That is because the component is unmounted and mounted again, reloading the component.\nExample\nThis example is the same as the \ncomp-one\nyou can choose between 'Apple' and 'Cake', and in\ncomp-two\nyou can write a message. Your inputs will be gone when you return to a component.\nRun Example \u00bb\nTo keep the state, your \n<KeepAlive>\ntag around the\n<component>\ntag.\nExample\nThe components now remember the user inputs.\nApp.vue\n:\n<template>\n\u00a0 <h1>Dynamic Components</h1>\n\u00a0 <p>App.vue switches between which component to show.</p>\n\u00a0 <button @click=\"toggleValue = !toggleValue\">\n\u00a0 \u00a0 Switch component\n\u00a0 </button>\n<KeepAlive>\n<component :is=\"activeComp\"></component>\n</KeepAlive>\n</template>\nRun Example \u00bb\nThe 'include' and 'exclude' Attributes\nAll components inside the\n<KeepAlive>\ntag will be kept alive by default.\nBut we can also define only some components to be kept alive by using 'include' or 'exclude' attributes on the\n<KeepAlive>\ntag.\nIf we use the 'include' or 'exclude' attributes on the\n<KeepAlive>\ntag we also need to give the components names with the 'name' option:\nCompOne.vue\n:\n<script>\n\u00a0 export default {\nname: 'CompOne'\n,\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 imgSrc: 'img_question.svg'\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nExample\nWith\n<KeepAlive include=\"CompOne\">\n, only the 'CompOne' component will remember its state, the \nApp.vue\n:\n<template>\n\u00a0 <h1>Dynamic Components</h1>\n\u00a0 <p>App.vue switches between which component to show.</p>\n\u00a0 <button @click=\"toggleValue = !toggleValue\">\n\u00a0 \u00a0 Switch component\n\u00a0 </button>\n<KeepAlive include=\"CompOne\">\n<component :is=\"activeComp\"></component>\n</KeepAlive>\n</template>\nRun Example \u00bb\nWe can also use 'exclude' to choose which components to keep alive or not.\nExample\nWith\n<KeepAlive exclude=\"CompOne\">\n, only the 'CompTwo' component will remember its state.\nApp.vue\n:\n<template>\n\u00a0 <h1>Dynamic Components</h1>\n\u00a0 <p>App.vue switches between which component to show.</p>\n\u00a0 <button @click=\"toggleValue = !toggleValue\">\n\u00a0 \u00a0 Switch component\n\u00a0 </button>\n<KeepAlive exclude=\"CompOne\">\n<component :is=\"activeComp\"></component>\n</KeepAlive>\n</template>\nRun Example \u00bb\nBoth 'include' and 'exclude' can be used with multiple components by using comma separation.\nTo show this we will add one more component so that we get three components in total.\nExample\nWith\n<KeepAlive include=\"CompOne, CompThree\">\n, both the 'CompOne' and the 'CompThree' components will remember their state.\nApp.vue\n:\n<template>\n\u00a0 <h1>Dynamic Components</h1>\n\u00a0 <button @click=\"compNbr++\">\n\n</button>\n<KeepAlive include=\"CompOne,CompThree\">\n<component :is=\"activeComp\"></component>\n</KeepAlive>\n</template>\nRun Example \u00bb\nThe 'max' Attribute\nWe can use 'max' as an attribute to the\n<KeepAlive>\ntag to limit the number of components the browser needs to remember the state of.\nExample\nWith\n<KeepAlive :max=\"2\">\n, the browser will only remember the user input of the last two visited components.\nApp.vue\n:\n<template>\n\u00a0 <h1>Dynamic Components</h1>\n\u00a0 <label><input type=\"radio\" name=\"rbgComp\" v-model=\"compName\" :value=\"'comp-one'\"> One</label>\n\u00a0 <label><input type=\"radio\" name=\"rbgComp\" v-model=\"compName\" :value=\"'comp-two'\"> Two</label>\n\u00a0 <label><input type=\"radio\" name=\"rbgComp\" v-model=\"compName\" :value=\"'comp-three'\"> Three</label>\n<KeepAlive :max=\"2\">\n<component :is=\"activeComp\"></component>\n</KeepAlive>\n</template>\nRun Example \u00bb\nVue Exercises\nTest Yourself With Exercises\nExercise:\nWhat attribute is used when making dynamic components?\n<component :\n=\"activeComp\"></component>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b49d1e1c-3460-498b-a28d-433c8266cefc",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "289f0c8e-4acd-4777-958c-f4373a8149fb",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f29ed5c6-3743-458e-97e9-dff17c025792",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers Dynamic Components concepts and techniques. You'll learn how to use Dynamic Components effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Dynamic Components and how to apply it in your projects."
+}

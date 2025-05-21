@@ -1,0 +1,196 @@
+{
+  "id": "dc2bb0d2-b8bd-4431-8a62-fc01a67fe311",
+  "title": "Game Components",
+  "slug": "game-components",
+  "metadata": {
+    "description": "Learn about Game Components with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "function",
+      "component",
+      "mygamearea",
+      "update",
+      "mygamepiece",
+      "width",
+      "height",
+      "clear",
+      "game",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnGraphics",
+    "subcategory": "Game Components"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Game Components",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Add a red square onto the game area:\nAdd a Component\nMake a component constructor, which lets you add components onto the gamearea.\nThe object constructor is called\ncomponent\n, and we make our first component, called\nmyGamePiece\n:\nExample\nvar myGamePiece;\nfunction startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30, \"red\", 10, 120);\n}\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\n\nThe components have  properties and methods to control their appearances and movements.\nFrames\nTo make the game ready for action, we will update the display 50 times per second, \nwhich is much like frames in a movie.\nFirst, create a new function called\nupdateGameArea()\n.\nIn the\nmyGameArea\nobject, add an interval which will run the\nupdateGameArea()\nfunction every \n20th \nmillisecond (50 times per second). Also add a function called\nclear()\n, \nthat clears the entire canvas.\nIn the\ncomponent\nconstructor, add a function called\nupdate()\n, to handle the drawing of the component.\nThe\nupdateGameArea()\nfunction calls the\nclear()\nand \nthe\nupdate()\nmethod.\nThe result is that the component is drawn and cleared 50 times per second:\nExample\nvar myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\n},\nclear : function() {\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nthis.update = function(){\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.update();\n}\n\nMake it Move\nTo prove that the red square is being drawn 50 times per second, we will change the x position (horizontal)\nby one pixel every time we update the game area:\nExample\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.x += 1;\nmyGamePiece.update();\n}\n\nWhy Clear The Game Area?\nIt might seem unnecessary to clear the game area at every update. However, if we leave out the\nclear()\nmethod,\nall movements of the component will leave a trail of where it was positioned in the last frame:\nExample\nfunction updateGameArea() {\n// myGameArea.clear();\nmyGamePiece.x += 1;\nmyGamePiece.update();\n}\n\nChange the Size\nYou can \ncontrol the width and height of the component:\nExample\nCreate a 10x140 pixels rectangle:\nfunction startGame() {\nmyGameArea.start();\nmyGamePiece = new component(\n140\n,\n10\n, \"red\", 10, 120);\n}\n\nChange the Color\nYou can \ncontrol the color of the component:\nExample\nfunction startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30,\n\"blue\"\n, 10, 120);\n}\n\nYou can also use other colorvalues like hex, rgb, or rgba:\nExample\nfunction startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30,\n\"rgba(0, 0, 255, 0.5)\"\n, 10, 120);\n}\n\nChange the Position\nWe use x- and y-coordinates to position components onto the game area.\nThe upper-left corner of the canvas has the coordinates (0,0)\nMouse over the game area below to see its x and y coordinates:\nX\nY\nYou can position the components wherever you like on the game area:\nExample\nfunction startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30, \"red\",\n2\n,\n2\n);\n}\n\nMany Components\nYou can put as many components as you like on the game area:\nExample\nvar redGamePiece, blueGamePiece, yellowGamePiece;\nfunction startGame() {\nredGamePiece = new component(75, 75, \"red\", 10, 10);\nyellowGamePiece = new component(75, 75, \"yellow\", 50, 60);\nblueGamePiece = new component(75, 75, \"blue\", 10, 110);\nmyGameArea.start();\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nredGamePiece.update();\nyellowGamePiece.update();\nblueGamePiece.update();\n}\n\nMoving Components\nMake all three components move in different directions:\nExample\nfunction updateGameArea() {\nmyGameArea.clear();\nredGamePiece.x += 1;\nyellowGamePiece.x += 1;\nyellowGamePiece.y += 1;\nblueGamePiece.x += 1;\nblueGamePiece.y -= 1;\nredGamePiece.update();\nyellowGamePiece.update();\nblueGamePiece.update();\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var myGamePiece;\nfunction startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30, \"red\", 10, 120);\n}\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "var myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\n},\nclear : function() {\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nthis.update = function(){\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "function updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.x += 1;\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "function updateGameArea() {\n// myGameArea.clear();\nmyGamePiece.x += 1;\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "function startGame() {\nmyGameArea.start();\nmyGamePiece = new component(\n140\n,\n10\n, \"red\", 10, 120);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "function startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30,\n\"blue\"\n, 10, 120);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "function startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30,\n\"rgba(0, 0, 255, 0.5)\"\n, 10, 120);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "function startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30, \"red\",\n2\n,\n2\n);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "var redGamePiece, blueGamePiece, yellowGamePiece;\nfunction startGame() {\nredGamePiece = new component(75, 75, \"red\", 10, 10);\nyellowGamePiece = new component(75, 75, \"yellow\", 50, 60);\nblueGamePiece = new component(75, 75, \"blue\", 10, 110);\nmyGameArea.start();\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nredGamePiece.update();\nyellowGamePiece.update();\nblueGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "function updateGameArea() {\nmyGameArea.clear();\nredGamePiece.x += 1;\nyellowGamePiece.x += 1;\nyellowGamePiece.y += 1;\nblueGamePiece.x += 1;\nblueGamePiece.y -= 1;\nredGamePiece.update();\nyellowGamePiece.update();\nblueGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var myGamePiece;\nfunction startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30, \"red\", 10, 120);\n# TODO: Complete this line\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}",
+      "solution": "var myGamePiece;\nfunction startGame() {\nmyGameArea.start();\nmyGamePiece = new component(30, 30, \"red\", 10, 120);\n}\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\n},\nclear : function() {\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nthis.update = function(){\nctx = myGameArea.context;\n# TODO: Complete this line\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.update();\n}",
+      "solution": "var myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\n},\nclear : function() {\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nthis.update = function(){\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.update();\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "360d4d03-8eed-445d-88c6-3356e925f022",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "cd945362-d773-4c04-89af-987a939aa1e5",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "57e990e7-8a81-42be-8fb8-02ad54052d0c",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The object constructor?",
+      "options": [
+        "None of the above.",
+        "much like frames in a movie",
+        "called\ncomponent",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The object constructor is 'called\ncomponent'."
+    },
+    {
+      "question": "What is which?",
+      "options": [
+        "None of the above.",
+        "much like frames in a movie",
+        "called\ncomponent",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of which is 'much like frames in a movie'."
+    }
+  ],
+  "summary": "This tutorial covers Game Components concepts and techniques. You'll learn how to use Game Components effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Game Components and how to apply it in your projects."
+}

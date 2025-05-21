@@ -1,0 +1,98 @@
+{
+  "id": "6e024943-ea1c-45ef-97fe-3c6ccfec9c73",
+  "title": "DSAFord-Fulkerson Algorithm",
+  "slug": "dsaford-fulkerson-algorithm",
+  "metadata": {
+    "description": "Learn about DSAFord-Fulkerson Algorithm with clear explanations and practical examples.",
+    "keywords": [
+      "flow",
+      "path",
+      "edge",
+      "self",
+      "vertex",
+      "algorithm",
+      "ford",
+      "fulkerson",
+      "capacity",
+      "augmented"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 12,
+    "category": "LearnDSA",
+    "subcategory": "DSA Ford-Fulkerson"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "DSA\nFord-Fulkerson Algorithm",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The Ford-Fulkerson algorithm solves the maximum flow problem.\nFinding the maximum flow can be helpful in many areas: for optimizing network traffic, for manufacturing, for supply chain and logistics, or for airline scheduling.\nThe Ford-Fulkerson Algorithm\nThe Ford-Fulkerson algorithm solves\nthe maximum flow problem\nfor a directed graph.\nThe flow comes from a source vertex (\\(s\\)) and ends up in a sink vertex (\\(t\\)), and each edge in the graph allows a flow, limited by a capacity.\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nMax flow: {{maxFlow}}\n{{btnText}}\n{{statusText}}\nThe Ford-Fulkerson algorithm works by looking for a path with available capacity from the source to the sink (called an\naugmented path\n), and then sends as much flow as possible through that path.\nThe Ford-Fulkerson algorithm continues to find new paths to send more flow through until the maximum flow is reached.\nIn the simulation above, the Ford-Fulkerson algorithm solves the maximum flow problem: It finds out how much flow can be sent from the source vertex \\(s\\), to the sink vertex \\(t\\), and that maximum flow is 8.\nThe numbers in the simulation above are written in fractions, where the first number is the flow, and the second number is the capacity (maximum possible flow in that edge). So for example,\n0/7\non edge \\(s \\rightarrow v_2\\), means there is\n0\nflow, with a capacity of\n7\non that edge.\nNote:\nThe Ford-Fulkerson algorithm is often described as a\nmethod\ninstead of as an\nalgorithm\n, because it does not specify how to find a path where flow can be increased. This means it can be implemented in different ways, resulting in different time complexities. But for this tutorial we will call it an algorithm, and use Depth-First-Search to find the paths.\nYou can see the basic step-by-step description of how the Ford-Fulkerson algorithm works below, but we need to go into more detail later to actually understand it.\nHow it works:\nStart with zero flow on all edges.\nFind an\naugmented path\nwhere more flow can be sent.\nDo a\nbottleneck calculation\nto find out how much flow can be sent through that augmented path.\nIncrease the flow found from the bottleneck calculation for each edge in the augmented path.\nRepeat steps 2-4 until max flow is found. This happens when a new augmented path can no longer be found.\nResidual Network in Ford-Fulkerson\nThe Ford-Fulkerson algorithm actually works by creating and using something called a\nresidual network\n, which is a representation of the original graph.\nIn the residual network, every edge has a\nresidual capacity\n, which is the original capacity of the edge, minus the the flow in that edge. The residual capacity can be seen as the leftover capacity in an edge with some flow.\nFor example, if there is a flow of 2 in the \\( v_3 \\rightarrow v_4 \\) edge, and the capacity is 3, the residual flow is 1 in that edge, because there is room for sending 1 more unit of flow through that edge.\nReversed Edges in Ford-Fulkerson\nThe Ford-Fulkerson algorithm also uses something called\nreversed edges\nto send flow back. This is useful to increase the total flow.\nFor example, the last augmented path \\(s \\rightarrow v_2 \\rightarrow v_4 \\rightarrow v_3 \\rightarrow t\\) in the animation above and in the manual run through below shows how the total flow is increased by one more unit, by actually sending flow back on edge \\( v_4 \\rightarrow v_3 \\), sending the flow in the reverse direction.\nSending flow back in the reverse direction on edge \\( v_3 \\rightarrow v_4 \\) in our example meas that this 1 unit of flow going out of vertex \\( v_3 \\), now leaves \\( v_3 \\) on edge \\( v_3 \\rightarrow t \\) instead of \\( v_3 \\rightarrow v_4 \\).\nTo send flow back, in the opposite direction of the edge, a reverse edge is created for each original edge in the network. The Ford-Fulkerson algorithm can then use these reverse edges to send flow in the reverse direction.\nA reversed edge has no flow or capacity, just residual capacity. The residual capacity for a reversed edge is always the same as the flow in the corresponding original edge. In our example, the edge \\( v_3 \\rightarrow v_4 \\) has a flow of 2, which means there is a residual capacity of 2 on the corresponding reversed edge \\( v_4 \\rightarrow v_3 \\).\nThis just means that when there is a flow of 2 on the original edge \\( v_3 \\rightarrow v_4 \\), there is a possibility of sending that same amount of flow back on that edge, but in the reversed direction. Using a reversed edge to push back flow can also be seen as undoing a part of the flow that is already created.\nThe idea of a residual network with residual capacity on edges, and the idea of reversed edges, are central to how the Ford-Fulkerson algorithm works, and we will go into more detail about this when we implement the algorithm further down on this page.\nManual Run Through\nThere is no flow in the graph to start with.\nTo find the maximum flow, the Ford-Fulkerson algorithm must increase flow, but first it needs to find out where the flow can be increased: it must find an augmented path.\nThe Ford-Fulkerson algorithm actually does not specify how such an augmented path is found (that is why it is often described as a method instead of an algorithm), but we will use\nDepth First Search (DFS)\nto find the augmented paths for the Ford-Fulkerson algorithm in this tutorial.\nThe first augmented path Ford-Fulkerson finds using DFS is \\(s \\rightarrow v_1 \\rightarrow v_3 \\rightarrow v_4 \\rightarrow t\\).\nAnd using the bottleneck calculation, Ford-Fulkerson finds that 3 is the highest flow that can be sent through the augmented path, so the flow is increased by 3 for all the edges in this path.\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nThe \nFind a new augmented path\nFind how much the flow in that path can be increased\nIncrease the flow along the edges in that path accordingly\nThe \n\\(v_4 \\rightarrow v_3\\)\n, where flow is sent back.\nThe Ford-Fulkerson concept of reversed edges comes in handy because it allows the path finding part of the algorithm to find an augmented path where reversed edges can also be included.\nIn this specific case that means that a flow of 2 can be sent back on edge \\(v_3 \\rightarrow v_4\\), going into \\(v_3 \\rightarrow t\\) instead.\nThe flow can only be increased by 2 in this path because that is the capacity in the \\( v_3 \\rightarrow t \\) edge.\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nThe \nThe flow can be increased by 2 in this path. The bottleneck (limiting edge) is \\( v_1 \\rightarrow v_4 \\) because there is only room for sending two more units of flow in that edge.\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nThe \nThe flow can only be increased by 1 in this path because of edge \\( v_4 \\rightarrow t \\) being the bottleneck in this path with only space for one more unit of flow (\\(capacity-flow=1\\)).\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nAt this point, a new augmenting path cannot be found (it is not possible to find a path where more flow can be sent through from \\(s\\) to \\(t\\)), which means the max flow has been found, and the Ford-Fulkerson algorithm is finished.\nThe maximum flow is 8. As you can see in the image above, the flow (8) is the same going out of the source vertex \\(s\\), as the flow going into the sink vertex \\(t\\).\nAlso, if you take any other vertex than \\(s\\) or \\(t\\), you can see that the amount of flow going into a vertex, is the same as the flow going out of it. This is what we call\nconservation of flow\n, and this must hold for all such flow networks (directed graphs where each edge has a flow and a capacity).\nImplementation of The Ford-Fulkerson Algorithm\nTo implement the Ford-Fulkerson algorithm, we create a\nGraph\nclass. The\nGraph\nrepresents the graph with its vertices and edges:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n\ndef add_edge(self, u, v, c):\n        self.adj_matrix[u][v] = c\n\ndef add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\nLine 3:\nWe create the\nadj_matrix\nto hold all the edges and edge capacities. Initial values are set to\n0\n.\nLine 4:\nsize\nis the number of vertices in the graph.\nLine 5:\nThe\nvertex_data\nholds the names of all the vertices.\nLine 7-8:\nThe\nadd_edge\nmethod is used to add an edge from vertex\nu\nto vertex\nv\n, with capacity\nc\n.\nLine 10-12:\nThe\nadd_vertex_data\nmethod is used to add a vertex name to the graph. The index of the vertex is given with the\nvertex\nargument, and\ndata\nis the name of the vertex.\nThe\nGraph\nclass also contains the\ndfs\nmethod to find augmented paths, using Depth-First-Search:\ndef dfs(self, s, t, visited=None, path=None):\n        if visited is None:\n            visited = [False] * self.size\n        if path is None:\n            path = []\n\nvisited[s] = True\n        path.append(s)\n\nif s == t:\n            return path\n\nfor ind, val in enumerate(self.adj_matrix[s]):\n            if not visited[ind] and val > 0:\n                result_path = self.dfs(ind, t, visited, path.copy())\n                if result_path:\n                    return result_path\n\nreturn None\nLine 15-18:\nThe\nvisited\narray helps to avoid revisiting the same vertices during the search for an augmented path. Vertices that belong to the augmented path are stored in the\npath\narray.\nLine 20-21:\nThe current vertex is marked as visited, and then added to the path.\nLine 23-24:\nIf the current vertex is the sink node, we have found an augmented path from the source vertex to the sink vertex, so that path can be returned.\nLine 26-30:\nLooping through all edges in the adjacency matrix starting from the current vertex\ns\n,\nind\nrepresents an adjacent node, and\nval\nis the residual capacity on the edge to that vertex. If the adjacent vertex is not visited, and has residual capacity on the edge to it, go to that node and continue searching for a path from that vertex.\nLine 32:\nNone\nis returned if no path is found.\nThe\nfordFulkerson\nmethod is the last method we add to the\nGraph\nclass:\ndef fordFulkerson(self, source, sink):\n        max_flow = 0\n\npath = self.dfs(source, sink)\n        while path:\n            path_flow = float(\"Inf\")\n            for i in range(len(path) - 1):\n                u, v = path[i], path[i + 1]\n                path_flow = min(path_flow, self.adj_matrix[u][v])\n\nfor i in range(len(path) - 1):\n                u, v = path[i], path[i + 1]\n                self.adj_matrix[u][v] -= path_flow\n                self.adj_matrix[v][u] += path_flow\n\nmax_flow += path_flow\n\npath_names = [self.vertex_data[node] for node in path]\n            print(\"Path:\", \" -> \".join(path_names), \", Flow:\", path_flow)\n\npath = self.dfs(source, sink)\n\nreturn max_flow\nInitially, the\nmax_flow\nis\n0\n, and the\nwhile\nloop keeps increasing the\nmax_flow\nas long as there is an augmented path to increase flow in.\nLine 37:\nThe augmented path is found.\nLine 39-42:\nEvery edge in the augmented path is checked to find out how much flow can be sent through that path.\nLine 44-46:\nThe residual capacity (capacity minus flow) for every forward edge is reduced as a result of increased flow.\nLine 47:\nThis represents the reversed edge, used by the Ford-Fulkerson algorithm so that flow can be sent back (undone) on the the original forward edges. It is important to understand that these reversed edges are not in the original graph, they are fictitious edges introduced by Ford-Fulkerson to make the algorithm work.\nLine 49:\nEvery time flow is increased over an augmented path,\nmax_flow\nis increased by the same value.\nLine 51-52:\nThis is just for printing the augmented path before the algorithm starts the \nAfter defining the\nGraph\nclass, the vertices and edges must be defined to initialize the specific graph, and the complete code for the Ford-Fulkerson algorithm example looks like this:\nExample\nPython:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n\ndef add_edge(self, u, v, c):\n        self.adj_matrix[u][v] = c\n\ndef add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\n\ndef dfs(self, s, t, visited=None, path=None):\n        if visited is None:\n            visited = [False] * self.size\n        if path is None:\n            path = []\n\nvisited[s] = True\n        path.append(s)\n\nif s == t:\n            return path\n\nfor ind, val in enumerate(self.adj_matrix[s]):\n            if not visited[ind] and val > 0:\n                result_path = self.dfs(ind, t, visited, path.copy())\n                if result_path:\n                    return result_path\n\nreturn None\n\ndef fordFulkerson(self, source, sink):\n        max_flow = 0\n\npath = self.dfs(source, sink)\n        while path:\n            path_flow = float(\"Inf\")\n            for i in range(len(path) - 1):\n                u, v = path[i], path[i + 1]\n                path_flow = min(path_flow, self.adj_matrix[u][v])\n\nfor i in range(len(path) - 1):\n                u, v = path[i], path[i + 1]\n                self.adj_matrix[u][v] -= path_flow\n                self.adj_matrix[v][u] += path_flow\n\nmax_flow += path_flow\n\npath_names = [self.vertex_data[node] for node in path]\n            print(\"Path:\", \" -> \".join(path_names), \", Flow:\", path_flow)\n\npath = self.dfs(source, sink)\n\nreturn max_flow\n\ng = Graph(6)\nvertex_names = ['s', 'v1', 'v2', 'v3', 'v4', 't']\nfor i, name in enumerate(vertex_names):\n    g.add_vertex_data(i, name)\n\ng.add_edge(0, 1, 3)  # s  -> v1, cap: 3\ng.add_edge(0, 2, 7)  # s  -> v2, cap: 7\ng.add_edge(1, 3, 3)  # v1 -> v3, cap: 3\ng.add_edge(1, 4, 4)  # v1 -> v4, cap: 4\ng.add_edge(2, 1, 5)  # v2 -> v1, cap: 5\ng.add_edge(2, 4, 3)  # v2 -> v4, cap: 3\ng.add_edge(3, 4, 3)  # v3 -> v4, cap: 3\ng.add_edge(3, 5, 2)  # v3 -> t,  cap: 2\ng.add_edge(4, 5, 6)  # v4 -> t,  cap: 6\n\nsource = 0; sink = 5\n\nprint(\"The maximum possible flow is %d \" % g.fordFulkerson(source, sink))\nRun Example \u00bb\nTime Complexity for The Ford-Fulkerson Algorithm\nThe time complexity for the Ford-Fulkerson varies with the number of vertices \\(V\\), the number of edges \\(E\\), and it actually varies with the maximum flow \\(f\\) in the graph as well.\nThe reason why the time complexity varies with the maximum flow \\(f\\) in the graph, is because in a graph with a high throughput, there will be more augmented paths that increase flow, and that means the DFS method that finds these augmented paths will have to run more times.\nDepth-first search (DFS) has time complexity \\(O(V+E)\\).\nDFS runs once for every new augmented path. If we assume that each augmented graph increase flow by 1 unit, DFS must run \\(f\\) times, as many times as the value of maximum flow.\nThis means that time complexity for the Ford-Fulkerson algorithm, using DFS, is\n\\[ O( (V+E) \\cdot f ) \\]\nFor\ndense graphs\n, where \\( E > V \\), time complexity for DFS can be simplified to \\(O(E)\\), which means that the time complexity for the Ford-Fulkerson algorithm also can be simplified to\n\\[ O( E \\cdot f ) \\]\nA dense graph does not have an accurate definition, but it is a graph with many edges.\nThe \nthe Edmonds-Karp algorithm\n.\nThe Edmonds-Karp algorithm is very similar to Ford-Fulkerson, but it uses BFS instead of DFS to find augmented paths, which leads to fewer iterations to find maximum flow.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "3cd1f646-7a0e-4777-85cf-003663f4089e",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "4a0141d6-deca-4214-a43c-f029fb4127c1",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "51df3756-88b3-4a48-801c-70367cab4e64",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Fulkerson algorithm continues to find new paths to send more flow through until the maximum flow?",
+      "options": [
+        "reached",
+        "8",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Fulkerson algorithm continues to find new paths to send more flow through until the maximum flow is 'reached'."
+    },
+    {
+      "question": "What is and that maximum flow?",
+      "options": [
+        "8",
+        "reached",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of and that maximum flow is '8'."
+    }
+  ],
+  "summary": "This tutorial covers DSAFord-Fulkerson Algorithm concepts and techniques. You'll learn how to use DSAFord-Fulkerson Algorithm effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSAFord-Fulkerson Algorithm and how to apply it in your projects."
+}

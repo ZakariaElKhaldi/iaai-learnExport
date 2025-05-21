@@ -1,0 +1,133 @@
+{
+  "id": "2bed5868-2880-4b02-a749-94344bae7ccc",
+  "title": "PHP Iterables",
+  "slug": "php-iterables",
+  "metadata": {
+    "description": "Learn about PHP Iterables with clear explanations and practical examples.",
+    "keywords": [
+      "php",
+      "function",
+      "iterable",
+      "pointer",
+      "iterator",
+      "return",
+      "item",
+      "items",
+      "list",
+      "myiterable",
+      "public"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "PHP Iterables"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP Iterables",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "PHP - What is an Iterable?\nAn iterable is any value which can be looped through with a\nforeach()\nloop.\nThe\niterable\npseudo-type was introduced in PHP 7.1, and it can be used as a data type for function arguments and function\nreturn values.\nPHP - Using Iterables\nThe\niterable\nkeyword can be used as a data type of a function argument or as the return\ntype of a function:\nExample\nUse an iterable function argument:\n<?php\nfunction printIterable(iterable $myIterable) {\nforeach($myIterable as $item) {\necho $item;\n}\n}\n$arr = [\"a\", \n  \"b\", \"c\"];\nprintIterable($arr);\n?>\n\nExample\nReturn an iterable:\n<?php\nfunction getIterable():iterable {\nreturn [\"a\", \"b\", \"c\"];\n}\n$myIterable = getIterable();\nforeach($myIterable as $item) {\necho $item;\n}\n?>\n\nPHP - Creating Iterables\nArrays\nAll arrays are iterables, so any array can be used as an argument of a function that requires an iterable.\nIterators\nAny object that implements the\nIterator\ninterface can be used as an argument of a function\nthat requires an iterable.\nAn iterator contains a list of items and provides methods to loop through them. It keeps a\npointer to one of the elements in the list. Each item in the list should have a key which can\nbe used to find the item.\nAn iterator must have these methods:\ncurrent()\n- Returns the element that the pointer is currently pointing to. It can be any\ndata type\nkey()\nReturns the key associated with the current element in the list. It can only be\nan integer, float, boolean or string\n\nMoves the pointer to the \nrewind()\nMoves the pointer to the first element in the list\nvalid()\nIf the internal pointer is not pointing to any element (for example, if \nwas called at the end of the list), this should return false. It returns true in any\nother case\nExample\nImplement the Iterator interface and use it as an iterable:\n<?php\n// Create an Iterator\nclass MyIterator implements Iterator {\nprivate $items = [];\nprivate $pointer = 0;\npublic \n  function __construct($items) {\n// array_values() makes \n  sure that the keys are numbers\n$this->items = \n  array_values($items);\n}\npublic function current() {\nreturn $this->items[$this->pointer];\n}\npublic function \n  key() {\nreturn $this->pointer;\n}\npublic function \n$this->pointer++;\n}\npublic function rewind() {\n$this->pointer = \n  0;\n}\npublic function valid() {\n// count() indicates how many items are in the list\nreturn $this->pointer < count($this->items);\n}\n}\n// A \n  function that uses iterables\nfunction printIterable(iterable $myIterable) {\nforeach($myIterable as $item) {\necho $item;\n}\n}\n// Use the iterator as an iterable\n$iterator = new MyIterator([\"a\", \"b\", \"c\"]);\nprintIterable($iterator);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\nfunction printIterable(iterable $myIterable) {\nforeach($myIterable as $item) {\necho $item;\n}\n}\n$arr = [\"a\", \n  \"b\", \"c\"];\nprintIterable($arr);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\nfunction getIterable():iterable {\nreturn [\"a\", \"b\", \"c\"];\n}\n$myIterable = getIterable();\nforeach($myIterable as $item) {\necho $item;\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n// Create an Iterator\nclass MyIterator implements Iterator {\nprivate $items = [];\nprivate $pointer = 0;\npublic \n  function __construct($items) {\n// array_values() makes \n  sure that the keys are numbers\n$this->items = \n  array_values($items);\n}\npublic function current() {\nreturn $this->items[$this->pointer];\n}\npublic function \n  key() {\nreturn $this->pointer;\n}\npublic function next() {\n$this->pointer++;\n}\npublic function rewind() {\n$this->pointer = \n  0;\n}\npublic function valid() {\n// count() indicates how many items are in the list\nreturn $this->pointer < count($this->items);\n}\n}\n// A \n  function that uses iterables\nfunction printIterable(iterable $myIterable) {\nforeach($myIterable as $item) {\necho $item;\n}\n}\n// Use the iterator as an iterable\n$iterator = new MyIterator([\"a\", \"b\", \"c\"]);\nprintIterable($iterator);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nfunction printIterable(iterable $myIterable) {\nforeach($myIterable as $item) {\necho $item;\n}\n}\n$arr = [\"a\", \n  \"b\", \"c\"];\n# TODO: Complete this line\n?>",
+      "solution": "<?php\nfunction printIterable(iterable $myIterable) {\nforeach($myIterable as $item) {\necho $item;\n}\n}\n$arr = [\"a\", \n  \"b\", \"c\"];\nprintIterable($arr);\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nfunction getIterable():iterable {\nreturn [\"a\", \"b\", \"c\"];\n# TODO: Complete this line\n$myIterable = getIterable();\nforeach($myIterable as $item) {\necho $item;\n}\n?>",
+      "solution": "<?php\nfunction getIterable():iterable {\nreturn [\"a\", \"b\", \"c\"];\n}\n$myIterable = getIterable();\nforeach($myIterable as $item) {\necho $item;\n}\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "5bf2079a-210c-4378-a77b-42f222deb2cc",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "34ea6d9f-a47f-4050-8eac-9a542d6bfa5d",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "2060af37-dab0-41a8-9205-33ae51f93b7e",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is What?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "an Iterable",
+        "any value which can be looped through with a\nforeach()\nloop"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of What is 'an Iterable'."
+    },
+    {
+      "question": "What is An iterable?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "an Iterable",
+        "any value which can be looped through with a\nforeach()\nloop"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of An iterable is 'any value which can be looped through with a\nforeach()\nloop'."
+    }
+  ],
+  "summary": "This tutorial covers PHP Iterables concepts and techniques. You'll learn how to use PHP Iterables effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHP Iterables and how to apply it in your projects."
+}

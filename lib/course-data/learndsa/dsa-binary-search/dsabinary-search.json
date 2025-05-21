@@ -1,0 +1,98 @@
+{
+  "id": "dd173750-5972-4383-94c2-a6f23594244b",
+  "title": "DSABinary Search",
+  "slug": "dsabinary-search",
+  "metadata": {
+    "description": "Learn about DSABinary Search with clear explanations and practical examples.",
+    "keywords": [
+      "value",
+      "search",
+      "index",
+      "target",
+      "binary",
+      "array",
+      "found",
+      "left",
+      "right",
+      "area"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDSA",
+    "subcategory": "DSA Binary Search"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "DSA\nBinary Search",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Binary Search\nThe Binary Search algorithm searches through an array and returns the index of the value it searches for.\nSpeed:\nFind value:\nCurrent value: {{ currVal }}\n{{ buttonText }}\n{{ msgDone }}\n{{ index }}\nRun the simulation to see how the Binary Search algorithm works.\nToo see what happens when a value is not found, try to find value 5.\nBinary Search is much faster than Linear Search, but requires a sorted array to work.\nThe Binary Search algorithm works by checking the value in the center of the array. If the target value is lower, the \nThis process of halving the search area happens until the target value is found, or until the search area of the array is empty.\nHow it works:\nCheck the value in the center of the array.\nIf the target value is lower, search the left half of the array. If the target value is higher, search the right half.\nContinue step 1 and 2 for the new reduced part of the array until the target value is found or until the search area is empty.\nIf the value is found, return the target value index. If the target value is not found, return -1.\nManual Run Through\nLet's try to do the searching manually, just to get an even better understanding of how Binary Search works before actually implementing it in a programming language. We will search for value 11.\nStep 1:\nWe start with an array.\n[ 2, 3, 7, 7, 11, 15, 25]\nStep 2:\nThe value in the middle of the array at index 3, is it equal to 11?\n[ 2, 3, 7,\n7\n, 11, 15, 25]\nStep 3:\n7 is less than 11, so we must search for 11 to the right of index 3. The values to the right of index 3 are [ 11, 15, 25]. The \n[ 2, 3, 7, 7, 11,\n15\n, 25]\nStep 4:\n15 is higher than 11, so we must search to the left of index 5. We have already checked index 0-3, so index 4 is only value left to check.\n[ 2, 3, 7, 7,\n11\n, 15, 25]\nWe have found it!\nValue 11 is found at index 4.\nReturning index position 4.\nBinary Search is finished.\nRun the simulation below to see the steps above animated:\n{{ buttonText }}\n{{ msgDone }}\n[\n{{ x.dieNmbr }}\n]\nManual Run Through: What Happened?\nTo start with, the algorithm has two variables \"left\" and \"right\".\n\"left\" is 0 and represents the index of the first value in the array, and \"right\" is 6 and represents the index of the last value in the array.\n\\((left+right)/2=(0+6)/2=3\\) is the first index used to check if the middle value (7) is equal to the target value (11).\n7 is lower than the target value 11, so in the \nTo limit the search area and find a new middle value, \"left\" is updated to index 4, \"right\" is still 6. 4 and 6 are the indexes for the first and last values in the new search area, the right side of the \nThe new middle value on index 5 is checked: 15 is higher than 11, so if the target value 11 exists in the array it must be on the left side of index 5. The new search area is created by updating \"right\" from 6 to 4. Now both \"left\" and \"right\" is 4, \\((left+right)/2=(4+4)/2=4\\), so there is only index 4 left to check. The target value 11 is found at index 4, so index 4 is returned.\nIn general, this is the way the Binary Search algorithm continues to halve the array search area until the target value is found.\nWhen the target value is found, the index of the target value is returned. If the target value is not found, -1 is returned.\nBinary Search Implementation\nTo implement the Binary Search algorithm we need:\nAn array with values to search through.\nA target value to search for.\nA loop that runs as long as left index is less than, or equal to, the right index.\nAn if-statement that compares the middle value with the target value, and returns the index if the target value is found.\nAn if-statement that checks if the target value is less than, or larger than, the middle value, and updates the \"left\" or \"right\" variables to narrow down the search area.\nAfter the loop, return -1, because at this point we know the target value has not been found.\nThe resulting code for Binary Search looks like this:\nExample\ndef binarySearch(arr, targetVal):\n    left = 0\n    right = len(arr) - 1\n\nwhile left <= right:\n        mid = (left + right) // 2\n\nif arr[mid] == targetVal:\n            return mid\n\nif arr[mid] < targetVal:\n            left = mid + 1\n        else:\n            right = mid - 1\n\nreturn -1\n\nmyArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nmyTarget = 15\n\nresult = binarySearch(myArray, myTarget)\n\nif result != -1:\n    print(\"Value\",myTarget,\"found at index\", result)\nelse:\n    print(\"Target not found in array.\")\nRun Example \u00bb\nBinary Search Time Complexity\nFor a general explanation of what time complexity is, visit\nthis page\n.\nFor a more thorough and detailed explanation of Insertion Sort time complexity, visit\nthis page\n.\nEach time Binary Search checks a new value to see if it is the target value, the search area is halved.\nThis means that even in the worst case scenario where Binary Search cannot find the target value, it still only needs \\( \\log_{2}n \\) comparisons to look through a sorted array of \\(n\\) values.\nTime complexity for Binary Search is\n\\[ O( \\log_{2} n ) \\]\nNote:\nWhen writing time complexity using Big O notation we could also just have written \\( O( \\log n ) \\), but \\( O( \\log_{2} n ) \\) reminds us that the array search area is halved for every new comparison, which is the basic concept of Binary Search, so we will just keep the base 2 indication in this case.\nIf we draw how much time Binary Search needs to find a value in an array of \\(n\\) values, compared to Linear Search, we get this graph:\nRun the Binary Search simulation below for different number of values \\(n\\) in an array, and see how many compares are needed for Binary Search to find the target value:\nSet values:\n{{ this.userX }}\nAscending\n10 Ascending\nRandom\nDescending\nOperations: {{ operations }}\nNot found!\n{{runBtnText}}\nClear\nAs you can see when running simulations of Binary Search, the search requires very few compares, even if the the array is big and the value we are looking for is not found.\nDSA Exercises\nTest Yourself With Exercises\nExercise:\nWhat kind of array?\nFor the Binary Search algorithm to work,\nthe array must already be\n.\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "59e7f0da-398e-44fc-8bc0-4dea2e8d6af1",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "93f45872-2fcf-476b-b6a8-78d22b97f01c",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "9d370f97-2668-42f5-a013-cb9355a78b1c",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Too see what happens when a value?",
+      "options": [
+        "not found",
+        "None of the above.",
+        "None of the above.",
+        "much faster than Linear Search"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Too see what happens when a value is 'not found'."
+    },
+    {
+      "question": "What is Binary Search?",
+      "options": [
+        "not found",
+        "None of the above.",
+        "much faster than Linear Search",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Binary Search is 'much faster than Linear Search'."
+    }
+  ],
+  "summary": "This tutorial covers DSABinary Search concepts and techniques. You'll learn how to use DSABinary Search effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSABinary Search and how to apply it in your projects."
+}

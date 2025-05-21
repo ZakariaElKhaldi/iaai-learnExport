@@ -1,0 +1,169 @@
+{
+  "id": "0e3757ee-a944-4a62-9144-716e08c1c302",
+  "title": "AngularJS Form Validation",
+  "slug": "angularjs-form-validation",
+  "metadata": {
+    "description": "Learn about AngularJS Form Validation with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "input",
+      "form",
+      "valid",
+      "field",
+      "myform",
+      "required",
+      "email",
+      "user",
+      "invalid",
+      "validation"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAngularJS",
+    "subcategory": "AngularJS Validation"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AngularJS Form Validation",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AngularJS can validate input data.\nForm Validation\nAngularJS offers client-side form validation.\nAngularJS monitors the state of the form and input fields (input, textarea, \nselect), and lets you notify the user about the current state.\nAngularJS also holds information about whether they have been touched, or \nmodified, or not.\nYou can use standard HTML5 attributes to validate input, or you can make your own validation functions.\nClient-side validation cannot alone secure user input. Server side \nvalidation is also necessary.\nRequired\nUse \nthe HTML5 attribute\nrequired\nto specify that the input field must \nbe filled out:\nExample\nThe input field is required:\n<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    required>\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm.myInput.$valid}}</h1>\n\nE-mail\nUse the HTML5 type\nemail\nto specify that the value must be an e-mail:\nExample\nThe input field has to be an e-mail:\n<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    type=\"email\">\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm.myInput.$valid}}</h1>\n\nForm State and Input State\nAngularJS is constantly updating the state of both the form and the input fields.\nInput fields have the following states:\n$untouched\nThe field has not been touched yet\n$touched\nThe field has been touched\n$pristine\nThe field has not been modified yet\n$dirty\nThe field has been modified\n$invalid\nThe field content is not valid\n$valid\nThe field content is valid\nThey are all properties of the input field, and are either\ntrue\nor\nfalse\n.\nForms have the following states:\n$pristine\nNo fields have been modified yet\n$dirty\nOne or more have been modified\n$invalid\nThe form content is not valid\n$valid\nThe form content is valid\n$submitted\nThe form is submitted\nThey are all properties of the form, and are either\ntrue\nor\nfalse\n.\nYou can use these states to show meaningful messages to the user. Example, if \na field is required, and the user leaves it blank, you should give the user a \nwarning:\nExample\nShow an error message if the field has been touched AND is empty:\n<input name=\"myName\" ng-model=\"myName\" required>\n<span ng-show=\"myForm.myName.$touched \n    && myForm.myName.$invalid\">The name is required.</span>\n\nCSS Classes\nAngularJS adds CSS classes to forms and input fields depending on their states.\nThe following classes are added to, or removed from, input fields:\nng-untouched\nThe field has not been touched yet\nng-touched\nThe field has been touched\nng-pristine\nThe field has not been\u00a0 modified yet\nng-dirty\nThe field has been modified\nng-valid\nThe field content is valid\nng-invalid\nThe field content is not valid\nng-valid-\nkey\nOne\nkey\nfor each validation. \n    Example:\nng-valid-required\n, useful when there are more than one \n    thing that must be validated\nng-invalid-\nkey\nExample:\nng-invalid-required\nThe following classes are added to, or removed from, forms:\nng-pristine\nNo fields has not been modified yet\nng-dirty\nOne or more fields has been modified\nng-valid\nThe form content is valid\nng-invalid\nThe form content is not valid\nng-valid-\nkey\nOne\nkey\nfor each validation. \n    Example:\nng-valid-required\n, useful when there are more than one \n    thing that must be validated\nng-invalid-\nkey\nExample:\nng-invalid-required\nThe classes are removed if the value they represent is\nfalse\n.\nAdd styles for these classes to give your application a \nbetter and more intuitive user interface.\nExample\nApply styles, using standard CSS:\n<style>\ninput.ng-invalid {\nbackground-color: pink;\n}\ninput.ng-valid {\nbackground-color: lightgreen;\n}\n</style>\n\nForms can also be styled:\nExample\nApply styles for unmodified (pristine) forms, and for modified forms:\n<style>\nform.ng-pristine {\nbackground-color: lightblue;\n}\nform.ng-dirty {\nbackground-color: pink;\n}\n</style>\n\nCustom Validation\nTo create your own validation function is a bit more tricky; You have to add a \nnew directive to your application, and deal with the validation inside a \nfunction with certain specified arguments.\nExample\nCreate your own directive, containing a custom validation function, and refer \nto it by using\nmy-directive\n.\nThe field will only be valid if the value contains the character \"e\":\n<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" required \n    my-directive>\n</form>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.directive('myDirective', function() {\nreturn {\nrequire: 'ngModel',\nlink: function(scope, element, \n    attr, mCtrl) {\nfunction myValidation(value) \n    {\nif (value.indexOf(\"e\") > -1) \n    {\nmCtrl.$setValidity('charE', \n    true);\n} else {\nmCtrl.$setValidity('charE', false);\n}\nreturn value;\n}\nmCtrl.$parsers.push(myValidation);\n}\n};\n});\n</script>\n\nExample Explained:\nIn HTML, the new directive will be referred to by using the attribute\nmy-directive\n.\nIn the JavaScript we start by adding a new directive named\nmyDirective\n.\nRemember, when naming a directive, you must use a camel case name,\nmyDirective\n, but when invoking it, you must use\n-\nseparated name,\nmy-directive\n.\nThen, return an object where you specify that we require\nngModel\n, \nwhich is the ngModelController.\nMake a linking function which takes some arguments, where the fourth \nargument,\nmCtrl\n, is the\nngModelController\n,\nThen specify a function, in this case named\nmyValidation\n, which \ntakes one argument, this argument is the value of the input element.\nTest if the value contains the letter \"e\", and set the validity of the model \ncontroller to either\ntrue\nor\nfalse\n.\nAt last,\nmCtrl.$parsers.push(myValidation);\nwill add the\nmyValidation\nfunction to an array of other functions, which will be \nexecuted every time the input value changes.\nValidation Example\n<!DOCTYPE html>\n<html>\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js\"></script>\n<body>\n<h2>Validation Example</h2>\n<form\u00a0 ng-app=\"myApp\"\u00a0 \n    ng-controller=\"validateCtrl\"\nname=\"myForm\" novalidate>\n<p>Username:<br>\n<input type=\"text\" name=\"user\" ng-model=\"user\" \n    required>\n<span style=\"color:red\" ng-show=\"myForm.user.$dirty && \n    myForm.user.$invalid\">\n<span ng-show=\"myForm.user.$error.required\">Username \n    is required.</span>\n</span>\n</p>\n<p>Email:<br>\n<input type=\"email\" name=\"email\" ng-model=\"email\" required>\n<span \n    style=\"color:red\" ng-show=\"myForm.email.$dirty && myForm.email.$invalid\">\n<span ng-show=\"myForm.email.$error.required\">Email is required.</span>\n<span ng-show=\"myForm.email.$error.email\">Invalid email address.</span>\n</span>\n</p>\n<p>\n<input type=\"submit\"\nng-disabled=\"myForm.user.$dirty && myForm.user.$invalid ||\nmyForm.email.$dirty && myForm.email.$invalid\">\n</p>\n</form>\n<script>\nvar app = angular.module('myApp', []);\napp.controller('validateCtrl', \n    function($scope) {\n$scope.user = 'John Doe';\n$scope.email = 'john.doe@gmail.com';\n});\n</script>\n</body>\n</html>\n\nThe HTML form attribute\nnovalidate\nis used to disable default \nbrowser validation.\nExample Explained\nThe AngularJS directive\nng-model\nbinds the input elements to the model.\nThe model object has two properties:\nuser\nand\nemail\n.\nBecause of\nng-show\n, the spans with color:red are displayed only \nwhen user or email is\n$dirty\nand\n$invalid\n.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    required>\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm.myInput.$valid}}</h1>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    type=\"email\">\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm.myInput.$valid}}</h1>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<input name=\"myName\" ng-model=\"myName\" required>\n<span ng-show=\"myForm.myName.$touched \n    && myForm.myName.$invalid\">The name is required.</span>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<style>\ninput.ng-invalid {\nbackground-color: pink;\n}\ninput.ng-valid {\nbackground-color: lightgreen;\n}\n</style>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<style>\nform.ng-pristine {\nbackground-color: lightblue;\n}\nform.ng-dirty {\nbackground-color: pink;\n}\n</style>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" required \n    my-directive>\n</form>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.directive('myDirective', function() {\nreturn {\nrequire: 'ngModel',\nlink: function(scope, element, \n    attr, mCtrl) {\nfunction myValidation(value) \n    {\nif (value.indexOf(\"e\") > -1) \n    {\nmCtrl.$setValidity('charE', \n    true);\n} else {\nmCtrl.$setValidity('charE', false);\n}\nreturn value;\n}\nmCtrl.$parsers.push(myValidation);\n}\n};\n});\n</script>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<!DOCTYPE html>\n<html>\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js\"></script>\n<body>\n<h2>Validation Example</h2>\n<form\u00a0 ng-app=\"myApp\"\u00a0 \n    ng-controller=\"validateCtrl\"\nname=\"myForm\" novalidate>\n<p>Username:<br>\n<input type=\"text\" name=\"user\" ng-model=\"user\" \n    required>\n<span style=\"color:red\" ng-show=\"myForm.user.$dirty && \n    myForm.user.$invalid\">\n<span ng-show=\"myForm.user.$error.required\">Username \n    is required.</span>\n</span>\n</p>\n<p>Email:<br>\n<input type=\"email\" name=\"email\" ng-model=\"email\" required>\n<span \n    style=\"color:red\" ng-show=\"myForm.email.$dirty && myForm.email.$invalid\">\n<span ng-show=\"myForm.email.$error.required\">Email is required.</span>\n<span ng-show=\"myForm.email.$error.email\">Invalid email address.</span>\n</span>\n</p>\n<p>\n<input type=\"submit\"\nng-disabled=\"myForm.user.$dirty && myForm.user.$invalid ||\nmyForm.email.$dirty && myForm.email.$invalid\">\n</p>\n</form>\n<script>\nvar app = angular.module('myApp', []);\napp.controller('validateCtrl', \n    function($scope) {\n$scope.user = 'John Doe';\n$scope.email = 'john.doe@gmail.com';\n});\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    required>\n</form>\n# TODO: Complete this line\n<h1>{{myForm.myInput.$valid}}</h1>",
+      "solution": "<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    required>\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm.myInput.$valid}}</h1>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    type=\"email\">\n</form>\n<p>The input's valid state is:</p>\n# TODO: Complete this line",
+      "solution": "<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    type=\"email\">\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm.myInput.$valid}}</h1>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c109cafa-3905-4f85-a9f7-444114ea71f4",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "d5992582-4ebf-488c-8bb0-01fcc2b40b8d",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "175ed29a-f201-4cc4-b970-51b6549721ba",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Server side \nvalidation?",
+      "options": [
+        "None of the above.",
+        "required:\n<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    required>\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm",
+        "None of the above.",
+        "also necessary"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Server side \nvalidation is 'also necessary'."
+    },
+    {
+      "question": "What is Example\nThe input field?",
+      "options": [
+        "None of the above.",
+        "also necessary",
+        "None of the above.",
+        "required:\n<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    required>\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Example\nThe input field is 'required:\n<form name=\"myForm\">\n<input name=\"myInput\" ng-model=\"myInput\" \n    required>\n</form>\n<p>The input's valid state is:</p>\n<h1>{{myForm'."
+    }
+  ],
+  "summary": "This tutorial covers AngularJS Form Validation concepts and techniques. You'll learn how to use AngularJS Form Validation effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AngularJS Form Validation and how to apply it in your projects."
+}

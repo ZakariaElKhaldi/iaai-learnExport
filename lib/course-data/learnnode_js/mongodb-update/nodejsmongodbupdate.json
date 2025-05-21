@@ -1,0 +1,196 @@
+{
+  "id": "234fa907-0c4d-4240-aac5-bfcd93fe7b60",
+  "title": "Node.jsMongoDBUpdate",
+  "slug": "nodejsmongodbupdate",
+  "metadata": {
+    "description": "Learn about Node.jsMongoDBUpdate with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "update",
+      "document",
+      "object",
+      "updated",
+      "address",
+      "result",
+      "example",
+      "mongodb",
+      "name",
+      "mongoclient"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnNode.js",
+    "subcategory": "MongoDB Update"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nMongoDB\nUpdate",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Update Document\nYou can update a record, or document as it is called in MongoDB, by using \nthe\nupdateOne()\nmethod.\nThe first parameter of the\nupdateOne()\nmethod \nis a query object defining which document to update.\nNote:\nIf the query finds more than one record, only the first \noccurrence is updated.\nThe second parameter  \nis an object defining the new values of the document.\nExample\nUpdate the document with the address \"Valley 345\" to name=\"Mickey\" and \naddress=\"Canyon 123\":\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: \"Valley 345\" };\nvar newvalues = { \n  $set: {name: \n  \"Mickey\", address: \"Canyon 123\" } };\ndbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\nif (err) throw err;\nconsole.log(\"1 document updated\");\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_update_one.js\" and run the file:\nRun \"demo_update_one.js\"\nC:\\Users\\\nYour Name\n>node demo_update_one.js\nWhich will give you this result:\n1 document updated\nUpdate Only Specific Fields\nWhen using the\n$set\noperator, only the \nspecified fields are updated:\nExample\nUpdate the address from \"Valley 345\" to \"Canyon 123\":\n...\nvar myquery = { address: \"Valley 345\" };\nvar newvalues \n  = {\n$set: { address: \"Canyon 123\" }\n};\ndbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\n...\nRun example \u00bb\nUpdate Many Documents\nTo update\nall\ndocuments that meets the criteria of the query, use \nthe\nupdateMany()\nmethod.\nExample\nUpdate all documents where the name starts with the letter \"S\":\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: /^S/ };\nvar newvalues = {$set: {name: \n  \"Minnie\"} };\ndbo.collection(\"customers\").updateMany(myquery, newvalues, function(err, \n  res) {\nif (err) throw err;\nconsole.log(res.result.nModified + \" document(s) updated\");\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_update_many.js\" and run the file:\nRun \"demo_update_many.js\"\nC:\\Users\\\nYour Name\n>node demo_update_many.js\nWhich will give you this result:\n2 document(s) updated\nThe Result Object\nThe\nupdateOne()\nand the\nupdateMany()\nmethods return an object which contains information about how \nthe execution affected the database.\nMost of the information is not important to understand, but one object inside \nthe object is called \"result\" which tells us if the execution went OK, and how \nmany documents were affected.\nThe result object looks like this:\n{ n: 1, nModified: 2, ok: 1 }\nYou can use this object to return the number of updated documents:\nExample\nReturn the number of updated documents:\nconsole.log(res.result.nModified);\nWhich will produce this result:\n2\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: \"Valley 345\" };\nvar newvalues = { \n  $set: {name: \n  \"Mickey\", address: \"Canyon 123\" } };\ndbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\nif (err) throw err;\nconsole.log(\"1 document updated\");\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "C:\\Users\\\nYour Name\n>node demo_update_one.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "1 document updated",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "...\nvar myquery = { address: \"Valley 345\" };\nvar newvalues \n  = {\n$set: { address: \"Canyon 123\" }\n};\ndbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\n...",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: /^S/ };\nvar newvalues = {$set: {name: \n  \"Minnie\"} };\ndbo.collection(\"customers\").updateMany(myquery, newvalues, function(err, \n  res) {\nif (err) throw err;\nconsole.log(res.result.nModified + \" document(s) updated\");\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "C:\\Users\\\nYour Name\n>node demo_update_many.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "2 document(s) updated",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "{ n: 1, nModified: 2, ok: 1 }",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "console.log(res.result.nModified);",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "2",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\n# TODO: Complete this line\nvar newvalues = { \n  $set: {name: \n  \"Mickey\", address: \"Canyon 123\" } };\ndbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\nif (err) throw err;\nconsole.log(\"1 document updated\");\ndb.close();\n});\n});",
+      "solution": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: \"Valley 345\" };\nvar newvalues = { \n  $set: {name: \n  \"Mickey\", address: \"Canyon 123\" } };\ndbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\nif (err) throw err;\nconsole.log(\"1 document updated\");\ndb.close();\n});\n});"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "C:\\Users\\\nYour Name\n# TODO: Complete this line",
+      "solution": "C:\\Users\\\nYour Name\n>node demo_update_one.js"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "dc6485be-9b1b-49f5-b9d1-b70ba7f51079",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "75e69fc2-4dd0-4b0c-b492-71772fecd351",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "b8be0af8-dcdf-4b4e-a56d-e403b28be474",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is or document as it?",
+      "options": [
+        "a query object defining which document to update",
+        "called in MongoDB",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of or document as it is 'called in MongoDB'."
+    },
+    {
+      "question": "What is method?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "called in MongoDB",
+        "a query object defining which document to update"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of method is 'a query object defining which document to update'."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsMongoDBUpdate concepts and techniques. You'll learn how to use Node.jsMongoDBUpdate effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsMongoDBUpdate and how to apply it in your projects."
+}

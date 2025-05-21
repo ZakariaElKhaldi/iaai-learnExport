@@ -1,0 +1,178 @@
+{
+  "id": "8044f7bc-d018-4659-bd1b-a09c0d3a1062",
+  "title": "AngularJS Services",
+  "slug": "angularjs-services",
+  "metadata": {
+    "description": "Learn about AngularJS Services with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "service",
+      "function",
+      "angularjs",
+      "scope",
+      "location",
+      "controller",
+      "hexafy",
+      "http",
+      "services",
+      "filter"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAngularJS",
+    "subcategory": "AngularJS Services"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AngularJS Services",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "In AngularJS you can make your own service, or use one of the \nmany built-in services.\nWhat is a Service?\nIn AngularJS, a service is a function, or object, that is available for, \nand limited to, your AngularJS application.\nAngularJS has about 30 built-in services. One of them is the\n$location\nservice.\nThe\n$location\nservice has methods which return information \nabout the location of the current web page:\nExample\nUse the\n$location\nservice in a controller:\nvar app = angular.module('myApp', []);\napp.controller('customersCtrl', \n    function($scope, $location) {\n$scope.myUrl = $location.absUrl();\n});\n\nNote that the\n$location\nservice is passed in to the controller \nas an argument. In order to use the service in the controller, it must be \ndefined as a dependency.\nWhy use Services?\nFor many services, like the\n$location\nservice, it seems like you \ncould use objects that are already in the DOM, like the\nwindow.location\nobject, and you could, but it would have some limitations, at least for your \nAngularJS application.\nAngularJS constantly supervises your application, and for it to handle changes \nand events properly, AngularJS prefers that you use the\n$location\nservice instead of the\nwindow.location\nobject.\nThe $http Service\nThe\n$http\nservice is one of the most common used services in AngularJS \napplications. The service makes a request to the server, and lets your \napplication handle the response.\nExample\nUse the\n$http\nservice to request data from the server:\nvar app = angular.module('myApp', []);\napp.controller('myCtrl', \n    function($scope, $http) {\n$http.get(\"welcome.htm\").then(function \n    (response) {\n$scope.myWelcome \n    = response.data;\n});\n});\n\nThis example demonstrates a very simple use of the\n$http\nservice. Learn more \nabout the\n$http\nservice in the\nAngularJS Http \nTutorial\n.\nThe $timeout Service\nThe\n$timeout\nservice is AngularJS' version of the\nwindow.setTimeout\nfunction.\nExample\nDisplay a new message after two seconds:\nvar app = angular.module('myApp', []);\napp.controller('myCtrl', \n    function($scope, $timeout) {\n$scope.myHeader = \"Hello \n    World!\";\n$timeout(function () {\n$scope.myHeader = \"How are you today?\";\n}, 2000);\n});\n\nThe $interval Service\nThe\n$interval\nservice is AngularJS' version of the\nwindow.setInterval\nfunction.\nExample\nDisplay the time every second:\nvar app = angular.module('myApp', []);\napp.controller('myCtrl', \n    function($scope, $interval) {\n$scope.theTime = new \n    Date().toLocaleTimeString();\n$interval(function () {\n$scope.theTime = new Date().toLocaleTimeString();\n}, \n    1000);\n});\n\nCreate Your Own Service\nTo create your own service, connect your service to the module:\nCreate a service named\nhexafy\n:\napp.service('hexafy', function() {\nthis.myFunc = function (x) {\nreturn x.toString(16);\n}\n});\nTo use your custom made service, add it as a dependency when defining the controller:\nExample\nUse the custom made service named\nhexafy\nto convert a number \n    into a hexadecimal number:\napp.controller('myCtrl', function($scope,\nhexafy\n) {\n$scope.hex \n    =\nhexafy\n.myFunc(255);\n});\n\nUse a Custom Service Inside a Filter\nOnce you have created a service, and connected it to your application, you can use the service in any controller, directive, filter, or even inside other services.\nTo use the service inside a filter, add it as a dependency when defining the \nfilter:\nThe service\nhexafy\nused in the filter\nmyFormat\n:\napp.filter('myFormat',[\n'hexafy'\n, function(\nhexafy\n) {\nreturn function(x) {\nreturn\nhexafy\n.myFunc(x);\n};\n}]);\n\nYou can use the filter when displaying values from an object, or an array:\n<ul>\n<li ng-repeat=\"x in counts\">{{x | myFormat}}</li>\n</ul>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var app = angular.module('myApp', []);\napp.controller('customersCtrl', \n    function($scope, $location) {\n$scope.myUrl = $location.absUrl();\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "var app = angular.module('myApp', []);\napp.controller('myCtrl', \n    function($scope, $http) {\n$http.get(\"welcome.htm\").then(function \n    (response) {\n$scope.myWelcome \n    = response.data;\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "var app = angular.module('myApp', []);\napp.controller('myCtrl', \n    function($scope, $timeout) {\n$scope.myHeader = \"Hello \n    World!\";\n$timeout(function () {\n$scope.myHeader = \"How are you today?\";\n}, 2000);\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "var app = angular.module('myApp', []);\napp.controller('myCtrl', \n    function($scope, $interval) {\n$scope.theTime = new \n    Date().toLocaleTimeString();\n$interval(function () {\n$scope.theTime = new Date().toLocaleTimeString();\n}, \n    1000);\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "app.service('hexafy', function() {\nthis.myFunc = function (x) {\nreturn x.toString(16);\n}\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "app.controller('myCtrl', function($scope,\nhexafy\n) {\n$scope.hex \n    =\nhexafy\n.myFunc(255);\n});",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "app.filter('myFormat',[\n'hexafy'\n, function(\nhexafy\n) {\nreturn function(x) {\nreturn\nhexafy\n.myFunc(x);\n};\n}]);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "<ul>\n<li ng-repeat=\"x in counts\">{{x | myFormat}}</li>\n</ul>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var app = angular.module('myApp', []);\n# TODO: Complete this line\n    function($scope, $location) {\n$scope.myUrl = $location.absUrl();\n});",
+      "solution": "var app = angular.module('myApp', []);\napp.controller('customersCtrl', \n    function($scope, $location) {\n$scope.myUrl = $location.absUrl();\n});"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var app = angular.module('myApp', []);\napp.controller('myCtrl', \n    function($scope, $http) {\n$http.get(\"welcome.htm\").then(function \n# TODO: Complete this line\n$scope.myWelcome \n    = response.data;\n});\n});",
+      "solution": "var app = angular.module('myApp', []);\napp.controller('myCtrl', \n    function($scope, $http) {\n$http.get(\"welcome.htm\").then(function \n    (response) {\n$scope.myWelcome \n    = response.data;\n});\n});"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d484c221-e7bc-469c-a349-1c0c16fca2f4",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "dc62d9d2-5899-4361-a240-e85cb0c949c8",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "2dccf870-e27f-492e-8cfe-a3ab88a30ea0",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is What?",
+      "options": [
+        "None of the above.",
+        "a function",
+        "None of the above.",
+        "a Service"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of What is 'a Service'."
+    },
+    {
+      "question": "What is a service?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "a function",
+        "a Service"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of a service is 'a function'."
+    }
+  ],
+  "summary": "This tutorial covers AngularJS Services concepts and techniques. You'll learn how to use AngularJS Services effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AngularJS Services and how to apply it in your projects."
+}

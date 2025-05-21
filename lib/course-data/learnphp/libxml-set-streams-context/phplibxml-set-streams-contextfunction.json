@@ -1,0 +1,115 @@
+{
+  "id": "e4563551-4137-4661-b1dc-54cfd31f2e91",
+  "title": "PHPlibxml_set_streams_context()Function",
+  "slug": "phplibxml-set-streams-contextfunction",
+  "metadata": {
+    "description": "Learn about PHPlibxml_set_streams_context()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "function",
+      "public",
+      "context",
+      "system",
+      "return",
+      "example",
+      "parameter",
+      "resource",
+      "change",
+      "default"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "libxml_set_streams_context()"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nlibxml_set_streams_context()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nChange the default external entity loader:\n<?php\n$xml = <<<XML\n<!DOCTYPE foo PUBLIC \"-//FOO/BAR\" \"http://example.com/foobar\">\n<foo>bar</foo>\nXML;\n$dtd = <<<DTD\n<!ELEMENT foo (#PCDATA)>\nDTD;\nlibxml_set_external_entity_loader(\nfunction ($public, \n  $system, $context) use($dtd) {\nvar_dump($public);\nvar_dump($system);\nvar_dump($context);\n$f = fopen(\"php://temp\", \"r+\");\nfwrite($f, $dtd);\nrewind($f);\nreturn $f;\n}\n);\n$dd = \n  new DOMDocument;\n$r = $dd->loadXML($xml);\nvar_dump($dd->validate());\n?>\nDefinition and Usage\nThe libxml_set_streams_context() function sets the streams context for the \nSyntax\nlibxml_set_streams_context(\nfunction\n)\nParameter Values\nParameter\nDescription\nfunction\nRequired. A function that takes three arguments. Two strings, a public \n    id and system id, and a context (an array with four keys) as the third \n    argument. This callback should return a resource, a string from which a \n    resource can be opened, or NULL.\nTechnical Details\nReturn Value:\nNothing\nPHP Version:\n5+\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$xml = <<<XML\n<!DOCTYPE foo PUBLIC \"-//FOO/BAR\" \"http://example.com/foobar\">\n<foo>bar</foo>\nXML;\n$dtd = <<<DTD\n<!ELEMENT foo (#PCDATA)>\nDTD;\nlibxml_set_external_entity_loader(\nfunction ($public, \n  $system, $context) use($dtd) {\nvar_dump($public);\nvar_dump($system);\nvar_dump($context);\n$f = fopen(\"php://temp\", \"r+\");\nfwrite($f, $dtd);\nrewind($f);\nreturn $f;\n}\n);\n$dd = \n  new DOMDocument;\n$r = $dd->loadXML($xml);\nvar_dump($dd->validate());\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$xml = <<<XML\n<!DOCTYPE foo PUBLIC \"-//FOO/BAR\" \"http://example.com/foobar\">\n<foo>bar</foo>\nXML;\n$dtd = <<<DTD\n<!ELEMENT foo (#PCDATA)>\nDTD;\n# TODO: Complete this line\nfunction ($public, \n  $system, $context) use($dtd) {\nvar_dump($public);\nvar_dump($system);\nvar_dump($context);\n$f = fopen(\"php://temp\", \"r+\");\nfwrite($f, $dtd);\nrewind($f);\nreturn $f;\n}\n);\n$dd = \n  new DOMDocument;\n$r = $dd->loadXML($xml);\nvar_dump($dd->validate());\n?>",
+      "solution": "<?php\n$xml = <<<XML\n<!DOCTYPE foo PUBLIC \"-//FOO/BAR\" \"http://example.com/foobar\">\n<foo>bar</foo>\nXML;\n$dtd = <<<DTD\n<!ELEMENT foo (#PCDATA)>\nDTD;\nlibxml_set_external_entity_loader(\nfunction ($public, \n  $system, $context) use($dtd) {\nvar_dump($public);\nvar_dump($system);\nvar_dump($context);\n$f = fopen(\"php://temp\", \"r+\");\nfwrite($f, $dtd);\nrewind($f);\nreturn $f;\n}\n);\n$dd = \n  new DOMDocument;\n$r = $dd->loadXML($xml);\nvar_dump($dd->validate());\n?>"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d55e40e1-5d15-4083-9791-98866f4abb05",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "123fb39d-a377-47fe-8a00-b1380ade4bcf",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ae3eb583-bc06-4540-a0ff-1e49d4f2ee8b",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPlibxml_set_streams_context()Function concepts and techniques. You'll learn how to use PHPlibxml_set_streams_context()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPlibxml_set_streams_context()Function and how to apply it in your projects."
+}

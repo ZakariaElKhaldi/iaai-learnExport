@@ -1,0 +1,98 @@
+{
+  "id": "d5f4e934-90e6-4f43-af78-2c157d230b51",
+  "title": "ReactuseMemoHook",
+  "slug": "reactusememohook",
+  "metadata": {
+    "description": "Learn about ReactuseMemoHook with clear explanations and practical examples.",
+    "keywords": [
+      "const",
+      "usememo",
+      "count",
+      "todo",
+      "function",
+      "button",
+      "hook",
+      "expensive",
+      "example",
+      "react"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnReact",
+    "subcategory": "useMemo"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "React\nuseMemo\nHook",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The React\nuseMemo\nHook returns a memoized value.\nThink of memoization as caching a value so that it does not need to be recalculated.\nThe\nuseMemo\nHook only runs when one of its dependencies update.\nThis can improve performance.\nThe\nuseMemo\nand\nuseCallback\nHooks are similar.\nThe main difference is that\nuseMemo\nreturns a memoized value and\nuseCallback\nreturns a memoized function.\nYou can learn more about\nuseCallback\nin the\nuseCallback chapter\n.\nPerformance\nThe\nuseMemo\nHook can be used to keep expensive, resource intensive functions from needlessly running.\nIn this example, we have an expensive function that runs on every render.\nWhen changing the count or adding a todo, you will notice a delay in execution.\nExample:\nA poor performing function. The\nexpensiveCalculation\nfunction runs on every render:\nimport { useState } from \"react\";\nimport ReactDOM from \"react-dom/client\";\n\nconst App = () => {\n  const [count, setCount] = useState(0);\n  const [todos, setTodos] = useState([]);\n  const calculation = expensiveCalculation(count);\n\nconst increment = () => {\n    setCount((c) => c + 1);\n  };\n  const addTodo = () => {\n    setTodos((t) => [...t, \"New Todo\"]);\n  };\n\nreturn (\n    <div>\n      <div>\n        <h2>My Todos</h2>\n        {todos.map((todo, index) => {\n          return <p key={index}>{todo}</p>;\n        })}\n        <button onClick={addTodo}>Add Todo</button>\n      </div>\n      <hr />\n      <div>\n        Count: {count}\n        <button onClick={increment}>+</button>\n        <h2>Expensive Calculation</h2>\n        {calculation}\n      </div>\n    </div>\n  );\n};\n\nconst expensiveCalculation = (num) => {\n  console.log(\"Calculating...\");\n  for (let i = 0; i < 1000000000; i++) {\n    num += 1;\n  }\n  return num;\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<App />);\nRun \nExample \u00bb\nUse\nuseMemo\nTo fix this performance issue, we can use the\nuseMemo\nHook to memoize the\nexpensiveCalculation\nfunction. This will cause the function to only run when needed.\nWe can wrap the expensive function call with\nuseMemo\n.\nThe\nuseMemo\nHook accepts a second parameter to declare \ndependencies. The expensive function will only run when its dependencies have changed.\nIn the following example, the expensive function will only run when\ncount\nis changed and not when todo's are added.\nExample:\nPerformance example using the\nuseMemo\nHook:\nimport { useState, useMemo } from \"react\";\nimport ReactDOM from \"react-dom/client\";\n\nconst App = () => {\n  const [count, setCount] = useState(0);\n  const [todos, setTodos] = useState([]);\n  const calculation = useMemo(() => expensiveCalculation(count), [count]);\n\nconst increment = () => {\n    setCount((c) => c + 1);\n  };\n  const addTodo = () => {\n    setTodos((t) => [...t, \"New Todo\"]);\n  };\n\nreturn (\n    <div>\n      <div>\n        <h2>My Todos</h2>\n        {todos.map((todo, index) => {\n          return <p key={index}>{todo}</p>;\n        })}\n        <button onClick={addTodo}>Add Todo</button>\n      </div>\n      <hr />\n      <div>\n        Count: {count}\n        <button onClick={increment}>+</button>\n        <h2>Expensive Calculation</h2>\n        {calculation}\n      </div>\n    </div>\n  );\n};\n\nconst expensiveCalculation = (num) => {\n  console.log(\"Calculating...\");\n  for (let i = 0; i < 1000000000; i++) {\n    num += 1;\n  }\n  return num;\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<App />);\nRun \nExample \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "574e9dd8-7b45-4bb6-a79d-336c2697e913",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "43174382-0a97-4260-8120-bfb5a6f0868e",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "1e14a39f-6382-49ac-b1ec-02ce8118da22",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The\nuseMemo\nand\nuseCallback\nHooks?",
+      "options": [
+        "None of the above.",
+        "similar",
+        "None of the above.",
+        "that\nuseMemo\nreturns a memoized value and\nuseCallback\nreturns a memoized function"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The\nuseMemo\nand\nuseCallback\nHooks is 'similar'."
+    },
+    {
+      "question": "What is The main difference?",
+      "options": [
+        "that\nuseMemo\nreturns a memoized value and\nuseCallback\nreturns a memoized function",
+        "similar",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of The main difference is 'that\nuseMemo\nreturns a memoized value and\nuseCallback\nreturns a memoized function'."
+    }
+  ],
+  "summary": "This tutorial covers ReactuseMemoHook concepts and techniques. You'll learn how to use ReactuseMemoHook effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ReactuseMemoHook and how to apply it in your projects."
+}

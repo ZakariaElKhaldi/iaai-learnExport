@@ -1,0 +1,98 @@
+{
+  "id": "f478cd55-b3ae-4348-a2db-2aff1ad8a749",
+  "title": "MongoDBmongoshUpdate",
+  "slug": "mongodbmongoshupdate",
+  "metadata": {
+    "description": "Learn about MongoDBmongoshUpdate with clear explanations and practical examples.",
+    "keywords": [
+      "title",
+      "post",
+      "update",
+      "document",
+      "likes",
+      "updateone",
+      "example",
+      "posts",
+      "updatemany",
+      "documents"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMongoDB",
+    "subcategory": "MongoDB Update"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "MongoDB\nmongosh\nUpdate",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Update Document\nTo update an existing document we can use the\nupdateOne()\nor\nupdateMany()\nmethods.\nThe first parameter is a query object to define which document or documents should be updated.\nThe second parameter is an object defining the updated data.\nupdateOne()\nThe\nupdateOne()\nmethod will update the first document that is found matching the provided query.\nLet's see what the \"like\" count for the post with the title of \"Post Title 1\":\nExample\ndb.posts.find( { title: \"Post Title 1\" } )\n\nNow let's update the \"likes\" on this post to 2. To do this, we need to use the\n$set\noperator.\nExample\ndb.posts.updateOne( { title: \"Post Title 1\" }, { $set: { likes: 2 } } )\n\nCheck the document again and you'll see that the \"like\" have been updated.\nExample\ndb.posts.find( { title: \"Post Title 1\" } )\n\nInsert if not found\nIf you would like to insert the document if it is not found, you can use the\nupsert\noption.\nExample\nUpdate the document, but if not found insert it:\ndb.posts.updateOne( \n  { title: \"Post Title 5\" }, \n  {\n    $set: \n      {\n        title: \"Post Title 5\",\n        body: \"Body of post.\",\n        category: \"Event\",\n        likes: 5,\n        tags: [\"news\", \"events\"],\n        date: Date()\n      }\n  }, \n  { upsert: true }\n)\n\nupdateMany()\nThe\nupdateMany()\nmethod will update all documents that match the provided query.\nExample\nUpdate\nlikes\non all documents by 1. For this we will use the\n$inc\n(increment) operator:\ndb.posts.updateMany({}, { $inc: { likes: 1 } })\n\nNow check the likes in all of the documents and you will see that they have all been incremented by 1.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "5b366146-4df1-4346-b413-3682b195572e",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "afa4cabb-b191-4460-a0f0-f4f2ac8bea35",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "7e722564-7293-4244-b445-06ac7dc69f39",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The first parameter?",
+      "options": [
+        "a query object to define which document or documents should be updated",
+        "None of the above.",
+        "None of the above.",
+        "an object defining the updated data"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of The first parameter is 'a query object to define which document or documents should be updated'."
+    },
+    {
+      "question": "What is The second parameter?",
+      "options": [
+        "a query object to define which document or documents should be updated",
+        "an object defining the updated data",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The second parameter is 'an object defining the updated data'."
+    }
+  ],
+  "summary": "This tutorial covers MongoDBmongoshUpdate concepts and techniques. You'll learn how to use MongoDBmongoshUpdate effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of MongoDBmongoshUpdate and how to apply it in your projects."
+}

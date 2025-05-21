@@ -1,0 +1,151 @@
+{
+  "id": "2a73c06e-5aef-47bc-9aaa-c18081564e52",
+  "title": "Node.jsUpload Files",
+  "slug": "nodejsupload-files",
+  "metadata": {
+    "description": "Learn about Node.jsUpload Files with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "file",
+      "form",
+      "formidable",
+      "write",
+      "http",
+      "type",
+      "files",
+      "module",
+      "require",
+      "function"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnRaspberry Pi",
+    "subcategory": "Node.js Upload Files"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nUpload Files",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The Formidable Module\nThere is a very good module for working with file uploads, called \"Formidable\".\nThe Formidable module can be downloaded and installed using NPM:\nC:\\Users\\\nYour Name\n>npm install formidable\nAfter you have downloaded the Formidable module, you can include the module \nin any application:\nvar formidable = require('formidable');\nUpload Files\nNow you are ready to make a web page in Node.js that lets the user upload \nfiles to your computer:\nStep 1: Create an Upload Form\nCreate a Node.js file that writes an HTML form, with an upload field:\nExample\nThis code will produce an HTML form:\nvar http = require('http');\nhttp.createServer(function \n  (req, res) {\nres.writeHead(200, {'Content-Type': 'text/html'});\nres.write('<form \n  action=\"fileupload\" method=\"post\" enctype=\"multipart/form-data\">');\nres.write('<input \n  type=\"file\" name=\"filetoupload\"><br>');\nres.write('<input \n  type=\"submit\">');\nres.write('</form>');\nreturn res.end();\n}).listen(8080);\nStep 2: Parse the Uploaded File\nInclude the Formidable module to be able to parse the uploaded file once it \nreaches the server.\nWhen the file is uploaded and parsed, it gets placed on a temporary folder on your computer.\nExample\nThe file will be uploaded, and placed on a temporary folder:\nvar http = require('http');\nvar formidable = require('formidable');\nhttp.createServer(function \n  (req, res) {\nif (req.url == '/fileupload') {\nvar form = new formidable.IncomingForm();\nform.parse(req, \n  function (err, fields, files) {\nres.write('File \n  uploaded');\nres.end();\n});\n} else {\nres.writeHead(200, {'Content-Type': 'text/html'});\nres.write('<form \n  action=\"fileupload\" method=\"post\" enctype=\"multipart/form-data\">');\nres.write('<input \n  type=\"file\" name=\"filetoupload\"><br>');\nres.write('<input \n  type=\"submit\">');\nres.write('</form>');\nreturn res.end();\n}\n}).listen(8080);\nStep 3: Save the File\nWhen a file is successfully uploaded to the server, it is placed on a \ntemporary folder.\nThe path to this directory can be found in the \"files\" object, passed as the \nthird argument in the\nparse()\nmethod's callback function.\nTo move the file to the folder of your choice, use the File System module, \nand rename the file:\nExample\nInclude the fs module, and move the file to the current folder:\nvar http = require('http');\nvar formidable = require('formidable');\nvar fs = require('fs');\nhttp.createServer(function \n  (req, res) {\nif (req.url == '/fileupload') {\nvar form = new formidable.IncomingForm();\nform.parse(req, \n  function (err, fields, files) {\nvar \n  oldpath = files.filetoupload.filepath;\nvar \n  newpath = 'C:/Users/\nYour Name\n/' + files.filetoupload.originalFilename;\nfs.rename(oldpath, newpath, function (err) {\nif (err) throw \n  err;\nres.write('File uploaded \n  and moved!');\nres.end();\n});\n});\n} else {\nres.writeHead(200, {'Content-Type': 'text/html'});\nres.write('<form \n  action=\"fileupload\" method=\"post\" enctype=\"multipart/form-data\">');\nres.write('<input \n  type=\"file\" name=\"filetoupload\"><br>');\nres.write('<input \n  type=\"submit\">');\nres.write('</form>');\nreturn res.end();\n}\n}).listen(8080);\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "C:\\Users\\\nYour Name\n>npm install formidable",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "var formidable = require('formidable');",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "var http = require('http');\nhttp.createServer(function \n  (req, res) {\nres.writeHead(200, {'Content-Type': 'text/html'});\nres.write('<form \n  action=\"fileupload\" method=\"post\" enctype=\"multipart/form-data\">');\nres.write('<input \n  type=\"file\" name=\"filetoupload\"><br>');\nres.write('<input \n  type=\"submit\">');\nres.write('</form>');\nreturn res.end();\n}).listen(8080);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "var http = require('http');\nvar formidable = require('formidable');\nhttp.createServer(function \n  (req, res) {\nif (req.url == '/fileupload') {\nvar form = new formidable.IncomingForm();\nform.parse(req, \n  function (err, fields, files) {\nres.write('File \n  uploaded');\nres.end();\n});\n} else {\nres.writeHead(200, {'Content-Type': 'text/html'});\nres.write('<form \n  action=\"fileupload\" method=\"post\" enctype=\"multipart/form-data\">');\nres.write('<input \n  type=\"file\" name=\"filetoupload\"><br>');\nres.write('<input \n  type=\"submit\">');\nres.write('</form>');\nreturn res.end();\n}\n}).listen(8080);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "var http = require('http');\nvar formidable = require('formidable');\nvar fs = require('fs');\nhttp.createServer(function \n  (req, res) {\nif (req.url == '/fileupload') {\nvar form = new formidable.IncomingForm();\nform.parse(req, \n  function (err, fields, files) {\nvar \n  oldpath = files.filetoupload.filepath;\nvar \n  newpath = 'C:/Users/\nYour Name\n/' + files.filetoupload.originalFilename;\nfs.rename(oldpath, newpath, function (err) {\nif (err) throw \n  err;\nres.write('File uploaded \n  and moved!');\nres.end();\n});\n});\n} else {\nres.writeHead(200, {'Content-Type': 'text/html'});\nres.write('<form \n  action=\"fileupload\" method=\"post\" enctype=\"multipart/form-data\">');\nres.write('<input \n  type=\"file\" name=\"filetoupload\"><br>');\nres.write('<input \n  type=\"submit\">');\nres.write('</form>');\nreturn res.end();\n}\n}).listen(8080);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "C:\\Users\\\nYour Name\n# TODO: Complete this line",
+      "solution": "C:\\Users\\\nYour Name\n>npm install formidable"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "var formidable = require('formidable');"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "f6ad1b72-c6e8-4af1-9f2e-462358712fdb",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2f4b3e79-67df-46e8-973e-aab7fc606c87",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "213e7e5c-0aea-47f1-a556-31d432dc04df",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is js\nUpload Files\n\nThe Formidable Module\nThere?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "ready to make a web page in Node",
+        "a very good module for working with file uploads"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of js\nUpload Files\n\nThe Formidable Module\nThere is 'a very good module for working with file uploads'."
+    },
+    {
+      "question": "What is Upload Files\nNow you?",
+      "options": [
+        "None of the above.",
+        "a very good module for working with file uploads",
+        "None of the above.",
+        "ready to make a web page in Node"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Upload Files\nNow you is 'ready to make a web page in Node'."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsUpload Files concepts and techniques. You'll learn how to use Node.jsUpload Files effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsUpload Files and how to apply it in your projects."
+}

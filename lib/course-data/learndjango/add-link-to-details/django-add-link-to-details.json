@@ -1,0 +1,115 @@
+{
+  "id": "68c210a0-0146-42ef-9213-7cd395c3e8e4",
+  "title": "Django Add Link to Details",
+  "slug": "django-add-link-to-details",
+  "metadata": {
+    "description": "Learn about Django Add Link to Details with clear explanations and practical examples.",
+    "keywords": [
+      "go",
+      "details",
+      "html",
+      "members",
+      "template",
+      "mymember",
+      "member",
+      "view",
+      "views",
+      "import",
+      "django"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Add Link to Details"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Django Add Link to Details",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Details Template\nThe \nStart by creating a new template called\ndetails.html\n:\nmy_tennis_club/members/templates/details.html\n:\n<!DOCTYPE html>\n<html>\n\n<body>\n\n<h1>{{ mymember.firstname }} {{ mymember.lastname }}</h1>\n\n<p>Phone: {{ mymember.phone }}</p>\n<p>Member since: {{ mymember.joined_date }}</p>\n\n<p>Back to <a href=\"/members\">Members</a></p>\n\n</body>\n</html>\nAdd Link in all-members Template\nThe list in\nall_members.html\nshould be clickable,\nand take you to the details page with the ID of the member you clicked on:\nmy_tennis_club/members/templates/all_members.html\n:\n<!DOCTYPE html>\n<html>\n<body>\n\n<h1>Members</h1>\n\n<ul>\n  {% for x in mymembers %}\n    <li><a href=\"details/{{ x.id }}\">{{ x.firstname }} {{ x.lastname }}</a></li>\n  {% endfor %}\n</ul>\n\n</body>\n</html>\nCreate new View\nThen create a new view in the\nviews.py\nfile, that will deal with incoming requests to the\n/details/\nurl:\nmy_tennis_club/members/views.py\n:\nfrom django.http import HttpResponse\nfrom django.template import loader\nfrom .models import Member\n\ndef members(request):\n  mymembers = Member.objects.all().values()\n  template = loader.get_template('all_members.html')\n  context = {\n    'mymembers': mymembers,\n  }\n  return HttpResponse(template.render(context, request))\n\ndef details(request, id):\n  mymember = Member.objects.get(id=id)\n  template = loader.get_template('details.html')\n  context = {\n    'mymember': mymember,\n  }\n  return HttpResponse(template.render(context, request))\nThe\ndetails\nview does the following:\nGets the\nid\nas an argument.\nUses the\nid\nto locate the correct record \n  in the Member table.\nloads the\ndetails.html\ntemplate.\nCreates an object containing the member.\nSends the object to the template.\nOutputs the HTML that is rendered by the template.\nAdd URLs\nNow we need to make sure that the\n/details/\nurl points to the correct view, with\nid\nas a parameter.\nOpen the\nurls.py\nfile and add the details view to the\nurlpatterns\nlist:\nmy_tennis_club/members/urls.py\n:\nfrom django.urls import path\nfrom . import views\n\nurlpatterns = [\n    path('members/', views.members, name='members'),\n    path('members/details/<int:id>', views.details, name='details'),\n]\nRun Example \u00bb\nIf you have followed all the steps on your own computer, you can see the result in your own browser:\n127.0.0.1:8000/members/\n.\nIf the server is down, you have to start it again with the\nrunserver\ncommand:\npython manage.py runserver\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "python manage.py runserver",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "python manage.py runserver"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "eb2fb813-e4f0-46c5-b122-f73d8626351f",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "41df6aba-0196-4a8e-87a3-b723fb206537",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "3af9bfc2-da90-4d3e-8e93-2658c7332b41",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Outputs the HTML that?",
+      "options": [
+        "rendered by the template",
+        "None of the above.",
+        "down",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Outputs the HTML that is 'rendered by the template'."
+    },
+    {
+      "question": "What is If the server?",
+      "options": [
+        "down",
+        "None of the above.",
+        "rendered by the template",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of If the server is 'down'."
+    }
+  ],
+  "summary": "This tutorial covers Django Add Link to Details concepts and techniques. You'll learn how to use Django Add Link to Details effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django Add Link to Details and how to apply it in your projects."
+}

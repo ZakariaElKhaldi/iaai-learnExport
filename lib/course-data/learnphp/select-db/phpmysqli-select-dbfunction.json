@@ -1,0 +1,124 @@
+{
+  "id": "3d4df56a-6a16-49d6-9b6e-bb2d1c5a12ba",
+  "title": "PHPmysqli select_db()Function",
+  "slug": "phpmysqli-select-dbfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli select_db()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "database",
+      "result",
+      "default",
+      "mysqli",
+      "name",
+      "connection",
+      "echo",
+      "style",
+      "change",
+      "return"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "select_db"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli select_db()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nChange the default database for the connection:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Return name of current default database\nif ($result = $mysqli \n  -> query(\"SELECT DATABASE()\")) {\n$row = $result -> fetch_row();\necho \"Default database is \" . $row[0];\n$result -> close();\n}\n// Change db \n  to \"test\" db\n$mysqli -> select_db(\"test\");\n// Return name of current \n  default database\nif ($result = $mysqli -> query(\"SELECT DATABASE()\")) {\n$row = $result -> fetch_row();\necho \"Default database is \" . \n  $row[0];\n$result -> close();\n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe select_db() / mysqli_select_db() function is used to change the default database for the connection.\nSyntax\nObject oriented style:\n$mysqli -> \n  select_db(\nname\n)\nProcedural style:\nmysqli_select_db(\nconnection, name\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nname\nRequired. Specifies the database name\nTechnical Details\nReturn Value:\nTRUE on success. FALSE on failure\nPHP Version:\n5+\nExample - Procedural style\nChange the default database for the connection:\n<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Return name of current default database\nif ($result = mysqli_query($con, \"SELECT DATABASE()\")) {\n$row = mysqli_fetch_row($result);\necho \"Default database is \" . $row[0];\nmysqli_free_result($result);\n}\n// Change db \n  to \"test\" db\nmysqli_select_db($con, \"test\");\n// Return name of current default database\nif ($result = mysqli_query($con, \"SELECT DATABASE()\")) {\n$row = mysqli_fetch_row($result);\necho \"Default database is \" . $row[0];\nmysqli_free_result($result);\n}\n// Close connection\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Return name of current default database\nif ($result = $mysqli \n  -> query(\"SELECT DATABASE()\")) {\n$row = $result -> fetch_row();\necho \"Default database is \" . $row[0];\n$result -> close();\n}\n// Change db \n  to \"test\" db\n$mysqli -> select_db(\"test\");\n// Return name of current \n  default database\nif ($result = $mysqli -> query(\"SELECT DATABASE()\")) {\n$row = $result -> fetch_row();\necho \"Default database is \" . \n  $row[0];\n$result -> close();\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Return name of current default database\nif ($result = mysqli_query($con, \"SELECT DATABASE()\")) {\n$row = mysqli_fetch_row($result);\necho \"Default database is \" . $row[0];\nmysqli_free_result($result);\n}\n// Change db \n  to \"test\" db\nmysqli_select_db($con, \"test\");\n// Return name of current default database\nif ($result = mysqli_query($con, \"SELECT DATABASE()\")) {\n$row = mysqli_fetch_row($result);\necho \"Default database is \" . $row[0];\nmysqli_free_result($result);\n}\n// Close connection\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Return name of current default database\nif ($result = $mysqli \n  -> query(\"SELECT DATABASE()\")) {\n$row = $result -> fetch_row();\necho \"Default database is \" . $row[0];\n$result -> close();\n}\n// Change db \n  to \"test\" db\n$mysqli -> select_db(\"test\");\n// Return name of current \n  default database\nif ($result = $mysqli -> query(\"SELECT DATABASE()\")) {\n$row = $result -> fetch_row();\necho \"Default database is \" . \n  $row[0];\n$result -> close();\n# TODO: Complete this line\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Return name of current default database\nif ($result = $mysqli \n  -> query(\"SELECT DATABASE()\")) {\n$row = $result -> fetch_row();\necho \"Default database is \" . $row[0];\n$result -> close();\n}\n// Change db \n  to \"test\" db\n$mysqli -> select_db(\"test\");\n// Return name of current \n  default database\nif ($result = $mysqli -> query(\"SELECT DATABASE()\")) {\n$row = $result -> fetch_row();\necho \"Default database is \" . \n  $row[0];\n$result -> close();\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Return name of current default database\nif ($result = mysqli_query($con, \"SELECT DATABASE()\")) {\n$row = mysqli_fetch_row($result);\necho \"Default database is \" . $row[0];\nmysqli_free_result($result);\n}\n// Change db \n  to \"test\" db\n# TODO: Complete this line\n// Return name of current default database\nif ($result = mysqli_query($con, \"SELECT DATABASE()\")) {\n$row = mysqli_fetch_row($result);\necho \"Default database is \" . $row[0];\nmysqli_free_result($result);\n}\n// Close connection\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Return name of current default database\nif ($result = mysqli_query($con, \"SELECT DATABASE()\")) {\n$row = mysqli_fetch_row($result);\necho \"Default database is \" . $row[0];\nmysqli_free_result($result);\n}\n// Change db \n  to \"test\" db\nmysqli_select_db($con, \"test\");\n// Return name of current default database\nif ($result = mysqli_query($con, \"SELECT DATABASE()\")) {\n$row = mysqli_fetch_row($result);\necho \"Default database is \" . $row[0];\nmysqli_free_result($result);\n}\n// Close connection\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d494f363-7cc9-476d-870c-f90b1fefeabe",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "3c9d0043-c6f5-4d50-9d9d-8f1a2b9ddc7c",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "d182ce55-d8df-47de-a704-24fb6d29987f",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Default database?",
+      "options": [
+        "\"",
+        "None of the above.",
+        "\"",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Default database is '\"'."
+    },
+    {
+      "question": "What is Default database?",
+      "options": [
+        "\"",
+        "None of the above.",
+        "\"",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Default database is '\"'."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli select_db()Function concepts and techniques. You'll learn how to use PHPmysqli select_db()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli select_db()Function and how to apply it in your projects."
+}

@@ -1,0 +1,214 @@
+{
+  "id": "9f5e9556-1536-43a9-881b-4fc6d70f2b0d",
+  "title": "W3.CSSSlideshow",
+  "slug": "w3cssslideshow",
+  "metadata": {
+    "description": "Learn about W3.CSSSlideshow with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "class",
+      "myslides",
+      "button",
+      "style",
+      "display",
+      "slideindex",
+      "width",
+      "example",
+      "onclick",
+      "animate"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnW3.CSS",
+    "subcategory": "W3.CSS Slideshow"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "W3.CSS\nSlideshow",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Caption text\nCaption text\nCaption text\n\n\u276f\nManual Slideshow\nDisplaying a manual slideshow with W3.CSS is very easy.\nJust create many elements with the same class name:\nExample\n<img class=\"mySlides\" src=\"img_snowtops.jpg\">\n<img class=\"mySlides\" src=\"img_lights.jpg\">\n<img class=\"mySlides\" src=\"img_mountains.jpg\">\n<img class=\"mySlides\" src=\"img_forest.jpg\">\nAnd two buttons to scroll the images:\nExample\n<button class=\"w3-button w3-display-left\"\u00a0onclick=\"plusDivs(-1)\">&#10094;</button>\n<button class=\"w3-button w3-display-right\"\u00a0onclick=\"plusDivs(+1)\">&#10095;</button>\nAnd add a JavaScript to select images:\nExample\nvar slideIndex = 1;\nshowDivs(slideIndex);\nfunction plusDivs(n) {\nshowDivs(slideIndex \n += n);\n}\nfunction showDivs(n) {\nvar i;\nvar x = document.getElementsByClassName(\"mySlides\");\nif \n (n > x.length) {slideIndex = 1}\nif (n < 1) {slideIndex = \n x.length} ;\nfor (i = 0; i < x.length; i++) {\nx[i].style.display = \"none\";\n}\nx[slideIndex-1].style.display = \"block\";\n}\n\nJavaScript Explained\nFirst, set the\nslideIndex\nto 1. (First picture)\nThen call\nshowDivs()\nto display the first image.\nWhen the user clicks one of the buttons call\nplusDivs()\n.\nThe plusDivs() function\nsubtracts\none or\nadds\none to the slideIndex.\nThe\nshowDiv()\nfunction hides (\ndisplay=\"none\"\n) \nall elements with the class name \"mySlides\", and displays (\ndisplay=\"block\"\n) \nthe element with the given slideIndex.\nIf the slideIndex is\nhigher than\nthe number of elements (x.length), \nthe slideIndex is set to zero.\nIf the slideIndex is\nless than\n1 it is set to number of elements \n(x.length).\nAutomatic Slideshow\nTo display an automatic slideshow is even simpler.\nYou only need a little different \nJavaScript:\nExample\nvar slideIndex = 0;\ncarousel();\nfunction carousel() {\nvar i;\nvar x = document.getElementsByClassName(\"mySlides\");\nfor (i = 0; i < x.length; i++) {\nx[i].style.display \n = \"none\";\n}\nslideIndex++;\nif (slideIndex > x.length) {slideIndex = 1}\nx[slideIndex-1].style.display = \"block\";\nsetTimeout(carousel, \n 2000); // Change image every 2 seconds\n}\n\nHTML Slides\nThe slides do not have to be images.\nThey can be any HTML content:\nSlide 1\nLorem ipsum\nSlide 2\nLorem ipsum\nSlide 3\nLorem ipsum\nExample\n<div class=\"mySlides\">\n<div class=\"w3-container w3-red\">\n<h1><b>Did You Know?</b></h1>\n<h1><i>We plan to sell trips to the \n moon in the 2020s</i></h1>\n</div>\n</div>\n\nSlideshow Caption\nSnow, Norway\nNorthern Lights, Norway\nBeautiful Mountains\nThe Rain Forest\nMountains!\n\n\u276f\nAdd a caption text for each image slide with the\nw3-display-*\nclasses (topleft, topmiddle, topright, bottomleft, bottommiddle, bottomright, \nleft, right or middle):\nExample\n<div class=\"w3-display-container mySlides\">\n<img src=\"img_snowtops.jpg\" \nstyle=\"width:100%\">\n<div class=\"w3-display-bottomleft w3-container \nw3-padding-16 w3-black\">\nFrench Alps\n</div>\n</div>\n\nSlideshow Indicators\nAn example of using buttons to indicate how many slides there are in the slideshow, and which slide the user is currently viewing.\n\n1\n2\n3\nExample\n<div class=\"w3-center\">\n<button class=\"w3-button\" onclick=\"plusDivs(-1)\">&#10094; \nPrev</button>\n<button class=\"w3-button\" onclick=\"plusDivs(1)\">\n&#10095;</button>\n<button class=\"w3-button demo\" onclick=\"currentDiv(1)\">1</button>\n<button class=\"w3-button demo\" onclick=\"currentDiv(2)\">2</button>\n<button class=\"w3-button demo\" onclick=\"currentDiv(3)\">3</button>\n</div>\n\nAnother example:\n\n\u276f\nExample\n<div class=\"w3-content w3-display-container\">\n<img class=\"mySlides\" \nsrc=\"img_nature.jpg\">\n<img class=\"mySlides\" src=\"img_snowtops.jpg\">\n<img class=\"mySlides\" src=\"img_mountains.jpg\">\n<div \nclass=\"w3-center w3-display-bottommiddle\" style=\"width:100%\">\n<div class=\"w3-left\" onclick=\"plusDivs(-1)\">&#10094;</div>\n<div class=\"w3-right\" onclick=\"plusDivs(1)\">&#10095;</div>\n<span class=\"w3-badge demo w3-border\" onclick=\"currentDiv(1)\"></span>\n<span class=\"w3-badge demo w3-border\" onclick=\"currentDiv(2)\"></span>\n<span class=\"w3-badge demo w3-border\" onclick=\"currentDiv(3)\"></span>\n</div>\n</div>\n\nImages as Indicators\nAn example of using images as indicators:\nExample\n<div class=\"w3-content\" style=\"max-width:1200px\">\n<img class=\"mySlides\" \nsrc=\"img_nature_wide.jpg\" style=\"width:100%\">\n<img class=\"mySlides\" \nsrc=\"img_snow_wide.jpg\" style=\"width:100%\">\n<img class=\"mySlides\" \nsrc=\"img_mountains_wide.jpg\" style=\"width:100%\">\n<div \nclass=\"w3-row-padding w3-section\">\n<div class=\"w3-col \ns4\">\n<img class=\"demo w3-opacity\" src=\"img_nature_wide.jpg\"\nstyle=\"width:100%\" onclick=\"currentDiv(1)\">\n</div>\n<div class=\"w3-col s4\">\n<img class=\"demo \nw3-opacity\" src=\"img_snow_wide.jpg\"\nstyle=\"width:100%;display:none\" \nonclick=\"currentDiv(2)\">\n</div>\n<div class=\"w3-col s4\">\n<img class=\"demo \nw3-opacity\" src=\"img_mountains_wide.jpg\"\nstyle=\"width:100%;display:none\" onclick=\"currentDiv(3)\">\n</div>\n</div>\n</div>\n\nMultiple Slideshows on the Same Page\nTo operate multiple slideshows on one page, you must class the members of \neach slideshow group with different classes:\nExample\n<div class=\"w3-content\">\n<img class=\"mySlides1\" src=\"img_snowtops.jpg\" \n  style=\"width:100%\">\n<img class=\"mySlides1\" src=\"img_lights.jpg\" \n  style=\"width:100%\">\n<img class=\"mySlides1\" src=\"img_mountains.jpg\" \n  style=\"width:100%\">\n<img class=\"mySlides1\" src=\"img_forest.jpg\" \n  style=\"width:100%\">\n</div>\n<div class=\"w3-content\">\n<img \n  class=\"mySlides2\" src=\"img_la.jpg\" style=\"width:100%\">\n<img \n  class=\"mySlides2\" src=\"img_ny.jpg\" style=\"width:100%\">\n<img \n  class=\"mySlides2\" src=\"img_chicago.jpg\" style=\"width:100%\">\n</div>\n\nAnimated Slides\nSlide or fade in an element from the top, bottom, left or right of the screen with the w3-animate-* classes.\nExample\n<img class=\"mySlides w3-animate-top\"\u00a0\u00a0\u00a0 src=\"img_01.jpg\">\n<img class=\"mySlides \n w3-animate-bottom\" src=\"img_02.jpg\">\n<img class=\"mySlides w3-animate-top\"\u00a0\u00a0\u00a0 src=\"img_03.jpg\">\n<img class=\"mySlides w3-animate-bottom\" src=\"img_04.jpg\">\n\nFaded Animation\nThe\nw3-animate-fading\nclass fades an element in and out (takes about 10 seconds).\nExample\n<img class=\"mySlides w3-animate-fading\" src=\"img_01.jpg\">\n<img class=\"mySlides \n w3-animate-fading\" src=\"img_02.jpg\">\n<img class=\"mySlides \n w3-animate-fading\" src=\"img_03.jpg\">\n<img class=\"mySlides \n w3-animate-fading\" src=\"img_04.jpg\">\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<img class=\"mySlides\" src=\"img_snowtops.jpg\">\n<img class=\"mySlides\" src=\"img_lights.jpg\">\n<img class=\"mySlides\" src=\"img_mountains.jpg\">\n<img class=\"mySlides\" src=\"img_forest.jpg\">",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<button class=\"w3-button w3-display-left\"\u00a0onclick=\"plusDivs(-1)\">&#10094;</button>\n<button class=\"w3-button w3-display-right\"\u00a0onclick=\"plusDivs(+1)\">&#10095;</button>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "var slideIndex = 1;\nshowDivs(slideIndex);\nfunction plusDivs(n) {\nshowDivs(slideIndex \n += n);\n}\nfunction showDivs(n) {\nvar i;\nvar x = document.getElementsByClassName(\"mySlides\");\nif \n (n > x.length) {slideIndex = 1}\nif (n < 1) {slideIndex = \n x.length} ;\nfor (i = 0; i < x.length; i++) {\nx[i].style.display = \"none\";\n}\nx[slideIndex-1].style.display = \"block\";\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "var slideIndex = 0;\ncarousel();\nfunction carousel() {\nvar i;\nvar x = document.getElementsByClassName(\"mySlides\");\nfor (i = 0; i < x.length; i++) {\nx[i].style.display \n = \"none\";\n}\nslideIndex++;\nif (slideIndex > x.length) {slideIndex = 1}\nx[slideIndex-1].style.display = \"block\";\nsetTimeout(carousel, \n 2000); // Change image every 2 seconds\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<div class=\"mySlides\">\n<div class=\"w3-container w3-red\">\n<h1><b>Did You Know?</b></h1>\n<h1><i>We plan to sell trips to the \n moon in the 2020s</i></h1>\n</div>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<div class=\"w3-display-container mySlides\">\n<img src=\"img_snowtops.jpg\" \nstyle=\"width:100%\">\n<div class=\"w3-display-bottomleft w3-container \nw3-padding-16 w3-black\">\nFrench Alps\n</div>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<div class=\"w3-center\">\n<button class=\"w3-button\" onclick=\"plusDivs(-1)\">&#10094; \nPrev</button>\n<button class=\"w3-button\" onclick=\"plusDivs(1)\">Next \n&#10095;</button>\n<button class=\"w3-button demo\" onclick=\"currentDiv(1)\">1</button>\n<button class=\"w3-button demo\" onclick=\"currentDiv(2)\">2</button>\n<button class=\"w3-button demo\" onclick=\"currentDiv(3)\">3</button>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "<div class=\"w3-content w3-display-container\">\n<img class=\"mySlides\" \nsrc=\"img_nature.jpg\">\n<img class=\"mySlides\" src=\"img_snowtops.jpg\">\n<img class=\"mySlides\" src=\"img_mountains.jpg\">\n<div \nclass=\"w3-center w3-display-bottommiddle\" style=\"width:100%\">\n<div class=\"w3-left\" onclick=\"plusDivs(-1)\">&#10094;</div>\n<div class=\"w3-right\" onclick=\"plusDivs(1)\">&#10095;</div>\n<span class=\"w3-badge demo w3-border\" onclick=\"currentDiv(1)\"></span>\n<span class=\"w3-badge demo w3-border\" onclick=\"currentDiv(2)\"></span>\n<span class=\"w3-badge demo w3-border\" onclick=\"currentDiv(3)\"></span>\n</div>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<div class=\"w3-content\" style=\"max-width:1200px\">\n<img class=\"mySlides\" \nsrc=\"img_nature_wide.jpg\" style=\"width:100%\">\n<img class=\"mySlides\" \nsrc=\"img_snow_wide.jpg\" style=\"width:100%\">\n<img class=\"mySlides\" \nsrc=\"img_mountains_wide.jpg\" style=\"width:100%\">\n<div \nclass=\"w3-row-padding w3-section\">\n<div class=\"w3-col \ns4\">\n<img class=\"demo w3-opacity\" src=\"img_nature_wide.jpg\"\nstyle=\"width:100%\" onclick=\"currentDiv(1)\">\n</div>\n<div class=\"w3-col s4\">\n<img class=\"demo \nw3-opacity\" src=\"img_snow_wide.jpg\"\nstyle=\"width:100%;display:none\" \nonclick=\"currentDiv(2)\">\n</div>\n<div class=\"w3-col s4\">\n<img class=\"demo \nw3-opacity\" src=\"img_mountains_wide.jpg\"\nstyle=\"width:100%;display:none\" onclick=\"currentDiv(3)\">\n</div>\n</div>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "<div class=\"w3-content\">\n<img class=\"mySlides1\" src=\"img_snowtops.jpg\" \n  style=\"width:100%\">\n<img class=\"mySlides1\" src=\"img_lights.jpg\" \n  style=\"width:100%\">\n<img class=\"mySlides1\" src=\"img_mountains.jpg\" \n  style=\"width:100%\">\n<img class=\"mySlides1\" src=\"img_forest.jpg\" \n  style=\"width:100%\">\n</div>\n<div class=\"w3-content\">\n<img \n  class=\"mySlides2\" src=\"img_la.jpg\" style=\"width:100%\">\n<img \n  class=\"mySlides2\" src=\"img_ny.jpg\" style=\"width:100%\">\n<img \n  class=\"mySlides2\" src=\"img_chicago.jpg\" style=\"width:100%\">\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "<img class=\"mySlides w3-animate-top\"\u00a0\u00a0\u00a0 src=\"img_01.jpg\">\n<img class=\"mySlides \n w3-animate-bottom\" src=\"img_02.jpg\">\n<img class=\"mySlides w3-animate-top\"\u00a0\u00a0\u00a0 src=\"img_03.jpg\">\n<img class=\"mySlides w3-animate-bottom\" src=\"img_04.jpg\">",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "<img class=\"mySlides w3-animate-fading\" src=\"img_01.jpg\">\n<img class=\"mySlides \n w3-animate-fading\" src=\"img_02.jpg\">\n<img class=\"mySlides \n w3-animate-fading\" src=\"img_03.jpg\">\n<img class=\"mySlides \n w3-animate-fading\" src=\"img_04.jpg\">",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<img class=\"mySlides\" src=\"img_snowtops.jpg\">\n<img class=\"mySlides\" src=\"img_lights.jpg\">\n<img class=\"mySlides\" src=\"img_mountains.jpg\">\n# TODO: Complete this line",
+      "solution": "<img class=\"mySlides\" src=\"img_snowtops.jpg\">\n<img class=\"mySlides\" src=\"img_lights.jpg\">\n<img class=\"mySlides\" src=\"img_mountains.jpg\">\n<img class=\"mySlides\" src=\"img_forest.jpg\">"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "<button class=\"w3-button w3-display-left\"\u00a0onclick=\"plusDivs(-1)\">&#10094;</button>\n<button class=\"w3-button w3-display-right\"\u00a0onclick=\"plusDivs(+1)\">&#10095;</button>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "266819fe-bb5b-4ad5-a4db-31495ff08274",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "511fca31-fd84-47dd-8513-70b36b32e2e5",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "5d15d571-3319-4f56-9c09-80f93b10a7fb",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is CSS?",
+      "options": [
+        "None of the above.",
+        "very easy",
+        "higher than\nthe number of elements (x",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of CSS is 'very easy'."
+    },
+    {
+      "question": "What is If the slideIndex?",
+      "options": [
+        "None of the above.",
+        "higher than\nthe number of elements (x",
+        "very easy",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of If the slideIndex is 'higher than\nthe number of elements (x'."
+    }
+  ],
+  "summary": "This tutorial covers W3.CSSSlideshow concepts and techniques. You'll learn how to use W3.CSSSlideshow effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of W3.CSSSlideshow and how to apply it in your projects."
+}

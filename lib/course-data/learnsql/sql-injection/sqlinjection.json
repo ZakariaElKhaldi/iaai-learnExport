@@ -1,0 +1,232 @@
+{
+  "id": "c269fb2f-519a-4b93-90a9-fbba29ccec37",
+  "title": "SQLInjection",
+  "slug": "sqlinjection",
+  "metadata": {
+    "description": "Learn about SQLInjection with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "select",
+      "user",
+      "users",
+      "userid",
+      "statement",
+      "getrequeststring",
+      "injection",
+      "example",
+      "txtuserid",
+      "input"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnSQL",
+    "subcategory": "SQL Injection"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "SQL\nInjection",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "SQL Injection\nSQL injection is a code injection technique that might destroy your database.\nSQL injection is one of the most common web hacking techniques.\nSQL injection is the placement of malicious code in SQL statements, via web page input.\nSQL in Web Pages\nSQL injection usually occurs when you ask a user for input, like their \nusername/userid, and instead of a name/id, the user gives you an SQL statement \nthat you will\nunknowingly\nrun on your database.\nLook at the following example which creates a\nSELECT\nstatement by adding a variable \n(txtUserId) to a select string. The variable is fetched from user input \n(getRequestString):\nExample\ntxtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;\nThe rest of this chapter describes the potential dangers of using user input in SQL statements.\nSQL Injection Based on 1=1 is Always True\nLook at the example above again. The original purpose of the code was to create an SQL statement to select a \nuser, with a given user id.\nIf there is nothing to prevent a user from entering \"wrong\" input, the user \ncan enter some \"smart\" input like this:\nUserId:\nThen, the SQL statement will look like this:\nSELECT * FROM Users WHERE UserId = 105 OR 1=1;\nThe SQL above is valid and will return ALL rows from the \"Users\" table, since\nOR 1=1\nis always TRUE.\nDoes the example above look dangerous? What if the \"Users\" table contains names and passwords?\nThe SQL statement above is much the same as this:\nSELECT UserId, Name, Password\nFROM Users WHERE UserId = 105 or 1=1;\nA hacker might get access to all the user names and passwords in a database, by \nsimply inserting \n105 OR 1=1 into the input field.\nSQL Injection Based on\u00a0\"\"=\"\" is Always True\nHere is an example of a user login on a web site:\nUsername:\nPassword:\nExample\nuName = getRequestString(\"username\");\nuPass = getRequestString(\"userpassword\");\nsql = 'SELECT * FROM Users WHERE Name =\"' + uName + '\" AND Pass =\"' + uPass + \n '\"'\nResult\nSELECT * FROM Users WHERE Name =\"John Doe\" AND Pass =\"myPass\"\nA hacker might get access to user names and passwords\u00a0in a database by \nsimply inserting \" OR \"\"=\" into the user name or password text box:\nUser Name:\nPassword:\nThe code at the server will create a valid SQL statement like this:\nResult\nSELECT * FROM Users WHERE Name =\"\" or \"\"=\"\" AND Pass =\"\" or \"\"=\"\"\nThe SQL above is valid and will return all rows from the \"Users\" table, \nsince\nOR \"\"=\"\"\nis always TRUE.\nSQL Injection Based on Batched SQL Statements\nMost databases support batched SQL statement.\nA batch of SQL statements is a group of two or more SQL statements, separated by semicolons.\nThe SQL statement below will return all rows from the \"Users\" table, then delete the \n\"Suppliers\" table.\nExample\nSELECT * FROM Users; DROP TABLE Suppliers\nLook at the following example:\nExample\ntxtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;\nAnd the following input:\nUser id:\nThe valid SQL statement would look like this:\nResult\nSELECT * FROM Users WHERE \nUserId = 105; DROP TABLE Suppliers;\nUse SQL Parameters for Protection\nTo protect a web site from SQL injection, you can use SQL parameters.\nSQL parameters are values that are added to an SQL query at execution time, in a controlled manner.\nASP.NET Razor Example\ntxtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = @0\";\ndb.Execute(txtSQL,txtUserId);\nNote that parameters are represented in the SQL statement by a @ marker.\nThe SQL engine checks each parameter to ensure that it is correct for its column\nand are treated literally, and not as part of the SQL to be executed.\nAnother Example\ntxtNam = getRequestString(\"CustomerName\");\ntxtAdd = getRequestString(\"Address\");\ntxtCit = getRequestString(\"City\");\ntxtSQL = \"INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2)\";\ndb.Execute(txtSQL,txtNam,txtAdd,txtCit);\nExamples\nThe following examples shows how to build parameterized queries in some common web languages.\nSELECT STATEMENT IN ASP.NET:\ntxtUserId = getRequestString(\"UserId\");\nsql = \"SELECT * FROM Customers WHERE CustomerId = @0\";\ncommand = new SqlCommand(sql);\ncommand.Parameters.AddWithValue(\"@0\",txtUserId);\ncommand.ExecuteReader();\nINSERT INTO STATEMENT IN ASP.NET:\ntxtNam = getRequestString(\"CustomerName\");\ntxtAdd = getRequestString(\"Address\");\ntxtCit = getRequestString(\"City\");\ntxtSQL = \"INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2)\";\ncommand = new SqlCommand(txtSQL);\ncommand.Parameters.AddWithValue(\"@0\",txtNam);\ncommand.Parameters.AddWithValue(\"@1\",txtAdd);\ncommand.Parameters.AddWithValue(\"@2\",txtCit);\ncommand.ExecuteNonQuery();\nINSERT INTO STATEMENT IN PHP:\n$stmt = $dbh->prepare(\"INSERT INTO Customers (CustomerName,Address,City)\nVALUES (:nam, :add, :cit)\");\n$stmt->bindParam(':nam', $txtNam);\n$stmt->bindParam(':add', $txtAdd);\n$stmt->bindParam(':cit', $txtCit);\n$stmt->execute();\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "txtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "SELECT * FROM Users WHERE UserId = 105 OR 1=1;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "SELECT UserId, Name, Password\nFROM Users WHERE UserId = 105 or 1=1;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "uName = getRequestString(\"username\");\nuPass = getRequestString(\"userpassword\");\nsql = 'SELECT * FROM Users WHERE Name =\"' + uName + '\" AND Pass =\"' + uPass + \n '\"'",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Result",
+      "content": "",
+      "order": 7,
+      "code": "SELECT * FROM Users WHERE Name =\"John Doe\" AND Pass =\"myPass\"",
+      "language": "sql",
+      "explanation": "Example of result"
+    },
+    {
+      "type": "code_example",
+      "title": "Result",
+      "content": "",
+      "order": 8,
+      "code": "SELECT * FROM Users WHERE Name =\"\" or \"\"=\"\" AND Pass =\"\" or \"\"=\"\"",
+      "language": "sql",
+      "explanation": "Example of result"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "SELECT * FROM Users; DROP TABLE Suppliers",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "txtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Result",
+      "content": "",
+      "order": 11,
+      "code": "SELECT * FROM Users WHERE \nUserId = 105; DROP TABLE Suppliers;",
+      "language": "sql",
+      "explanation": "Example of result"
+    },
+    {
+      "type": "code_example",
+      "title": "ASP.NET Razor Example",
+      "content": "",
+      "order": 12,
+      "code": "txtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = @0\";\ndb.Execute(txtSQL,txtUserId);",
+      "language": "unknown",
+      "explanation": "Example of asp.net razor example"
+    },
+    {
+      "type": "code_example",
+      "title": "Another Example",
+      "content": "",
+      "order": 13,
+      "code": "txtNam = getRequestString(\"CustomerName\");\ntxtAdd = getRequestString(\"Address\");\ntxtCit = getRequestString(\"City\");\ntxtSQL = \"INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2)\";\ndb.Execute(txtSQL,txtNam,txtAdd,txtCit);",
+      "language": "unknown",
+      "explanation": "Example of another example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "txtUserId = getRequestString(\"UserId\");\nsql = \"SELECT * FROM Customers WHERE CustomerId = @0\";\ncommand = new SqlCommand(sql);\ncommand.Parameters.AddWithValue(\"@0\",txtUserId);\ncommand.ExecuteReader();",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 15,
+      "code": "txtNam = getRequestString(\"CustomerName\");\ntxtAdd = getRequestString(\"Address\");\ntxtCit = getRequestString(\"City\");\ntxtSQL = \"INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2)\";\ncommand = new SqlCommand(txtSQL);\ncommand.Parameters.AddWithValue(\"@0\",txtNam);\ncommand.Parameters.AddWithValue(\"@1\",txtAdd);\ncommand.Parameters.AddWithValue(\"@2\",txtCit);\ncommand.ExecuteNonQuery();",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 16,
+      "code": "$stmt = $dbh->prepare(\"INSERT INTO Customers (CustomerName,Address,City)\nVALUES (:nam, :add, :cit)\");\n$stmt->bindParam(':nam', $txtNam);\n$stmt->bindParam(':add', $txtAdd);\n$stmt->bindParam(':cit', $txtCit);\n$stmt->execute();",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "txtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\n# TODO: Complete this line",
+      "solution": "txtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your sql code here",
+      "solution": "SELECT * FROM Users WHERE UserId = 105 OR 1=1;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "ee8f86fe-5256-4ea9-ac6a-ec48f64369f8",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "dce5cd31-9f0d-4f63-94b7-f061227363a5",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4be319e1-5e46-438e-a037-3008e4ce28ed",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is SQL\nInjection\n\nSQL Injection\nSQL injection?",
+      "options": [
+        "None of the above.",
+        "a code injection technique that might destroy your database",
+        "one of the most common web hacking techniques",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of SQL\nInjection\n\nSQL Injection\nSQL injection is 'a code injection technique that might destroy your database'."
+    },
+    {
+      "question": "What is SQL injection?",
+      "options": [
+        "None of the above.",
+        "one of the most common web hacking techniques",
+        "a code injection technique that might destroy your database",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of SQL injection is 'one of the most common web hacking techniques'."
+    }
+  ],
+  "summary": "This tutorial covers SQLInjection concepts and techniques. You'll learn how to use SQLInjection effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of SQLInjection and how to apply it in your projects."
+}

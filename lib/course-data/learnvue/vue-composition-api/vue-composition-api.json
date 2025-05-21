@@ -1,0 +1,98 @@
+{
+  "id": "b5adf6cc-6cd6-40c8-92aa-48d12b136473",
+  "title": "Vue Composition API",
+  "slug": "vue-composition-api",
+  "metadata": {
+    "description": "Learn about Vue Composition API with clear explanations and practical examples.",
+    "keywords": [
+      "typewriters",
+      "example",
+      "options",
+      "left",
+      "computed",
+      "composition",
+      "used",
+      "remove",
+      "value",
+      "return"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue Composition API"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue Composition API",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The\nComposition API\nis an alternative way of writing Vue applications to the Options API that is used elsewhere in this tutorial.\nIn Composition API we can write code more freely, but it requires a deeper understanding, and it is considered to be less beginner-friendly.\nThe Composition API\nWith Composition API, logic is written using imported Vue functions instead of using the Vue instance structure that we are used to from Options API.\nThis is how Composition API can be used to write a Vue application that decreases the number of typewriters in storage with a button:\nExample\nApp.vue\n:\n<template>\n  <h1>Example</h1>\n  <img src=\"/img_typewriter.jpeg\" alt=\"Typewriter\">\n  <p>Typewriters left in storage: {{ typeWriters }}</p>\n  <button @click=\"remove\">Remove one</button>\n  <p style=\"font-style: italic;\">\"{{ storageComment }}\"</p>\n</template>\n\n<script setup>\n  import { ref, computed } from 'vue'\n\nconst typeWriters = ref(10);\n\nfunction remove(){\n    if(typeWriters.value>0){\n      typeWriters.value--;\n    }\n  }\n\nconst storageComment = computed(\n    function(){\n      if(typeWriters.value > 5) {\n        return \"Many left\"\n      }\n      else if(typeWriters.value > 0){\n        return \"Very few left\"\n      }\n      else {\n        return \"No typewriters left\"\n      }\n    }\n  )\n</script>\nRun Example \u00bb\nOn line 9\nin the example above, the\nsetup\nattribute makes it easier to use Composition API. For example, by using the\nsetup\nattribute, variables and functions can be used directly inside the\n<template>\n.\nOn line 10\n,\nref\nand\ncomputed\nmust be imported before they can be used. In Options API, we do not need to import anything to declare reactive variables or to use computed properties.\nOn line 12\n,\nref\nis used to declare the 'typewriters' property as reactive with '10' as the initial value.\nTo declare the 'typewriters' property as reactive means that the line\n{{ typewriters }}\nin the\n<template>\nwill be re-rendered automatically to show the updated value when the 'typewriters' property value is changed. With Option API, data properties become reactive if they need to be when the application is built, they do not need to be declared explicitly as reactive.\nThe 'remove()' function declared\non line 14\nwould be declared under the Vue property 'methods' if the example was written in Options API.\nThe 'storageComment' computed property\non line 20\nwould be declared under the Vue property 'computed' if the example was written in Options API.\nThe Options API\nThe Options API is what is used elsewhere in this tutorial.\nThe Options API is chosen for this tutorial because it has a recognizable structure and is considered easier to start with for beginners.\nAs an example, the structure in the Options API has the data properties, methods and computed properties all placed in different parts of the Vue instance, clearly separated.\nHere is the example above written with Options API:\nExample\nApp.vue\n:\n<template>\n  <h1>Example</h1>\n  <img src=\"/img_typewriter.jpeg\" alt=\"Typewriter\">\n  <p>Typewriters left in storage: {{ typeWriters }}</p>\n  <button @click=\"remove\">Remove one</button>\n  <p style=\"font-style: italic;\">\"{{ storageComment }}\"</p>\n</template>\n\n<script>\nexport default {\n  data() { \n    return {\n      typeWriters: 10\n    };\n  },\n  methods: {\n    remove(){\n      if(this.typeWriters>0){\n        this.typeWriters--;\n      }\n    }\n  },\n  computed: {\n    storageComment(){\n      if(this.typeWriters > 5) {\n        return \"Many left\"\n      }\n      else if(this.typeWriters > 0){\n        return \"Very few left\"\n      }\n      else {\n        return \"No typewriters left\"\n      }\n    }\n  }\n}\n</script>\nRun Example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "9095162e-7b9b-42fa-9ec6-00385c50c3b1",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "8669f2ce-9e10-4032-b695-454781facdc3",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "711da367-77dc-4528-a849-fbbfd57ed886",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Vue Composition API\n\nThe\nComposition API\nis an alternative way of writing Vue applications to the Options API that?",
+      "options": [
+        "None of the above.",
+        "considered to be less beginner-friendly",
+        "None of the above.",
+        "used elsewhere in this tutorial"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Vue Composition API\n\nThe\nComposition API\nis an alternative way of writing Vue applications to the Options API that is 'used elsewhere in this tutorial'."
+    },
+    {
+      "question": "What is and it?",
+      "options": [
+        "None of the above.",
+        "considered to be less beginner-friendly",
+        "used elsewhere in this tutorial",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of and it is 'considered to be less beginner-friendly'."
+    }
+  ],
+  "summary": "This tutorial covers Vue Composition API concepts and techniques. You'll learn how to use Vue Composition API effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue Composition API and how to apply it in your projects."
+}

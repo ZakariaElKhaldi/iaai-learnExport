@@ -1,0 +1,151 @@
+{
+  "id": "37054f09-5280-4d10-bec4-a55f11342984",
+  "title": "PHPExceptions",
+  "slug": "phpexceptions",
+  "metadata": {
+    "description": "Learn about PHPExceptions with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "exception",
+      "divisor",
+      "code",
+      "catch",
+      "divide",
+      "thrown",
+      "throw",
+      "dividend",
+      "echo",
+      "exceptions"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "PHP Exceptions"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nExceptions",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "What is an Exception?\nAn exception is an object that describes an error or unexpected behaviour of a PHP script.\nExceptions are thrown by many PHP functions and classes.\nUser defined functions and classes can also throw exceptions.\nExceptions are a good way to stop a function when it comes across data that it cannot\nuse.\nThrowing an Exception\nThe\nthrow\nstatement allows a user defined \nfunction or method to throw an exception. When an exception is thrown, the code \nfollowing it will not be executed.\nIf an exception is not caught, a fatal error will occur with an \"Uncaught \nException\" message.\nLets try to throw an exception without catching it:\nExample\n<?php\nfunction divide($dividend, $divisor) {\nif($divisor == 0) \n  {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\necho divide(5, 0);\n?>\n\nThe result will look something like this:\nFatal error\n:\nUncaught Exception\n: Division by zero in \n  C:\\webfolder\\test.php:4\nStack trace: #0 C:\\webfolder\\test.php(9):\ndivide(5, 0) #1 {main} thrown in\nC:\\webfolder\\test.php\non line\n4\nThe try...catch Statement\nTo avoid the error from the example above, we can use the\ntry...catch\nstatement to catch exceptions and continue the process.\nSyntax\ntry {\ncode that can throw exceptions\n} catch(Exception $e) {\ncode that runs when an exception is caught\n}\nExample\nShow a message when an exception is thrown:\n<?php\nfunction divide($dividend, $divisor) {\nif($divisor == \n  0) {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\ntry {\necho \n  divide(5, 0);\n} catch(Exception $e) {\necho \"Unable to divide.\";\n}\n?>\n\nThe catch block indicates what type of exception should be caught and the name of the\nvariable which can be used to access the exception. In the example above, the type of\nexception is\nException\nand the variable name is\n$e\n.\nThe try...catch...finally Statement\nThe\ntry...catch...finally\nstatement can be used to catch exceptions. Code in the\nfinally\nblock will always run regardless of whether an exception was caught. If\nfinally\nis present, the\ncatch\nblock is optional.\nSyntax\ntry {\ncode that can throw exceptions\n} catch(Exception $e) {\ncode that runs when an exception is caught\n} finally {\ncode that \n  always runs regardless of whether an exception was caught\n}\nExample\nShow a message when an exception is thrown and then indicate that the process \nhas ended:\n<?php\nfunction divide($dividend, $divisor) {\nif($divisor \n  == 0) {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\ntry {\necho \n  divide(5, 0);\n} catch(Exception $e) {\necho \"Unable to \n  divide. \";\n} finally {\necho \"Process complete.\";\n}\n?>\n\nExample\nOutput a string even if an exception was not caught:\n<?php\nfunction divide($dividend, $divisor) {\nif($divisor == 0) \n  {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\ntry {\necho divide(5, 0);\n} finally {\necho \n  \"Process complete.\";\n}\n?>\n\nThe Exception Object\nThe Exception Object contains information about the error or unexpected behaviour that\nthe function encountered.\nSyntax\nnew Exception(message, code, \nParameter Values\nParameter\nDescription\nmessage\nOptional. A string describing why the exception was thrown\ncode\nOptional. An integer that can be used to easily distinguish this exception from others of the same type\n\nOptional. If this exception was thrown in a catch block of another exception, it is recommended to pass that exception into this parameter\nMethods\nWhen catching an exception, the following table shows some of the methods that can be used to\nget information about the exception:\nMethod\nDescription\ngetMessage()\nReturns a string describing why the exception was thrown\nget\nIf this exception was triggered by another one, this method returns the \nnull\ngetCode()\nReturns the exception code\ngetFile()\nReturns the full path of the file in which the exception was thrown\ngetLine()\nReturns the line number of the line of code which threw the exception\nExample\nOutput information about an exception that was thrown:\n<?php\nfunction divide($dividend, $divisor) {\nif($divisor == 0) \n  {\nthrow new Exception(\"Division by zero\", 1);\n}\nreturn $dividend / $divisor;\n}\ntry {\necho \n  divide(5, 0);\n} catch(Exception $ex) {\n$code = $ex->getCode();\n$message = $ex->getMessage();\n$file = $ex->getFile();\n$line = $ex->getLine();\necho \"Exception thrown in $file on line \n  $line: [Code $code]\n$message\";\n}\n?>\n\nComplete Exception Reference\nFor a complete reference, go to our\nComplete PHP Exception Reference\n.\nThe reference contains descriptions and examples of all Exception methods.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\nfunction divide($dividend, $divisor) {\nif($divisor == 0) \n  {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\necho divide(5, 0);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\nfunction divide($dividend, $divisor) {\nif($divisor == \n  0) {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\ntry {\necho \n  divide(5, 0);\n} catch(Exception $e) {\necho \"Unable to divide.\";\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<?php\nfunction divide($dividend, $divisor) {\nif($divisor \n  == 0) {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\ntry {\necho \n  divide(5, 0);\n} catch(Exception $e) {\necho \"Unable to \n  divide. \";\n} finally {\necho \"Process complete.\";\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<?php\nfunction divide($dividend, $divisor) {\nif($divisor == 0) \n  {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\ntry {\necho divide(5, 0);\n} finally {\necho \n  \"Process complete.\";\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<?php\nfunction divide($dividend, $divisor) {\nif($divisor == 0) \n  {\nthrow new Exception(\"Division by zero\", 1);\n}\nreturn $dividend / $divisor;\n}\ntry {\necho \n  divide(5, 0);\n} catch(Exception $ex) {\n$code = $ex->getCode();\n$message = $ex->getMessage();\n$file = $ex->getFile();\n$line = $ex->getLine();\necho \"Exception thrown in $file on line \n  $line: [Code $code]\n$message\";\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nfunction divide($dividend, $divisor) {\n# TODO: Complete this line\n  {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\necho divide(5, 0);\n?>",
+      "solution": "<?php\nfunction divide($dividend, $divisor) {\nif($divisor == 0) \n  {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\necho divide(5, 0);\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nfunction divide($dividend, $divisor) {\nif($divisor == \n  0) {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\ntry {\necho \n  divide(5, 0);\n} catch(Exception $e) {\necho \"Unable to divide.\";\n# TODO: Complete this line\n?>",
+      "solution": "<?php\nfunction divide($dividend, $divisor) {\nif($divisor == \n  0) {\nthrow new Exception(\"Division by zero\");\n}\nreturn $dividend / $divisor;\n}\ntry {\necho \n  divide(5, 0);\n} catch(Exception $e) {\necho \"Unable to divide.\";\n}\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "dd102d23-d01a-496a-a8b2-ec43c7c29cf7",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "10b2bd32-f4df-46c5-8f25-75b3d833a6e3",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "01bc8c7a-fb58-4433-8131-2c437ed9881f",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is PHP\nExceptions\n\nWhat?",
+      "options": [
+        "an Exception",
+        "None of the above.",
+        "None of the above.",
+        "an object that describes an error or unexpected behaviour of a PHP script"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of PHP\nExceptions\n\nWhat is 'an Exception'."
+    },
+    {
+      "question": "What is An exception?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "an Exception",
+        "an object that describes an error or unexpected behaviour of a PHP script"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of An exception is 'an object that describes an error or unexpected behaviour of a PHP script'."
+    }
+  ],
+  "summary": "This tutorial covers PHPExceptions concepts and techniques. You'll learn how to use PHPExceptions effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPExceptions and how to apply it in your projects."
+}

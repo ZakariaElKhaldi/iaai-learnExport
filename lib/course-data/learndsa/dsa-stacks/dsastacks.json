@@ -1,0 +1,143 @@
+{
+  "id": "6cfebf0b-660b-4336-9990-6f4e0fd0ac6b",
+  "title": "DSAStacks",
+  "slug": "dsastacks",
+  "metadata": {
+    "description": "Learn about DSAStacks with clear explanations and practical examples.",
+    "keywords": [
+      "stack",
+      "self",
+      "isempty",
+      "mystack",
+      "size",
+      "stacks",
+      "print",
+      "using",
+      "push",
+      "peek"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDSA",
+    "subcategory": "DSA Stacks"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "DSA\nStacks\n\nStacks\nA stack is a data structure that can hold many elements",
+      "content": ".\n{{ x.dieNmbr }}\n{{ resultText }}: {{ currVal }}\npush()\npop()\npeek()\nisEmpty()\nsize()\nThink of a stack like a pile of pancakes.\nIn a pile of pancakes, the pancakes are both added and removed from the top. So when removing a pancake, it will always be the last pancake you added. This way of organizing elements is called LIFO: Last In First Out.\nBasic operations we can do on a stack are:\nPush:\nAdds a new element on the stack.\nPop:\nRemoves and returns the top element from the stack.\nPeek:\nReturns the top element on the stack.\nisEmpty:\nChecks if the stack is empty.\nSize:\nFinds the number of elements in the stack.\nExperiment with these basic operations in the stack animation above.\nStacks can be implemented by using arrays or linked lists.\nStacks can be used to implement undo mechanisms, to revert to \nStacks are often mentioned together with Queues, which is a similar data structure described on the \nStack Implementation using Arrays\nTo better understand the benefits with using arrays or linked lists to implement stacks, you should check out\nthis page\nthat explains how arrays and linked lists are stored in memory.\nThis is how it looks like when we use an array as a stack:\n[\n{{ x.dieNmbr }}\n]\n{{ resultText }}: {{ currVal }}\npush()\npop()\npeek()\nisEmpty()\nsize()\nReasons to implement stacks using arrays:\nMemory Efficient:\nArray elements do not hold the \nEasier to implement and understand:\nUsing arrays to implement stacks require less code than using linked lists, and for this reason it is typically easier to understand as well.\nA reason for\nnot\nusing arrays to implement stacks:\nFixed size:\nAn array occupies a fixed part of the memory. This means that it could take up more memory than needed, or if the array fills up, it cannot hold more elements.\nNote:\nWhen using arrays in Python for this tutorial, we are really using the Python 'list' data type, but for the scope of this tutorial the 'list' data type can be used in the same way as an array. Learn more about Python lists\nhere\n.\nSince Python lists has good support for functionality needed to implement stacks, we start with creating a stack and do stack operations with just a few lines like this:\nExample\nPython:\nstack = []",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 2",
+      "content": "# Push\nstack.append('A')\nstack.append('B')\nstack.append('C')\nprint(\"Stack: \", stack)",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 3",
+      "content": "# Pop\nelement = stack.pop()\nprint(\"Pop: \", element)",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 4",
+      "content": "# Peek\ntopElement = stack[-1]\nprint(\"Peek: \", topElement)",
+      "order": 4,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 5",
+      "content": "# isEmpty\nisEmpty = not bool(stack)\nprint(\"isEmpty: \", isEmpty)",
+      "order": 5,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 6",
+      "content": "# Size\nprint(\"Size: \",len(stack))\nRun Example \u00bb\nBut to explicitly create a data structure for stacks, with basic operations, we should create a stack class instead. This way of creating stacks in Python is also more similar to how stacks can be created in other programming languages like C and Java.\nExample\nPython:\nclass Stack:\n    def __init__(self):\n        self.stack = []\n    \n    def push(self, element):\n        self.stack.append(element)\n    \n    def pop(self):\n        if self.isEmpty():\n            return \"Stack is empty\"\n        return self.stack.pop()\n    \n    def peek(self):\n        if self.isEmpty():\n            return \"Stack is empty\"\n        return self.stack[-1]\n    \n    def isEmpty(self):\n        return len(self.stack) == 0\n    \n    def size(self):\n        return len(self.stack)",
+      "order": 6,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 7",
+      "content": "# Create a stack\nmyStack = Stack()\n\nmyStack.push('A')\nmyStack.push('B')\nmyStack.push('C')\nprint(\"Stack: \", myStack.stack)\n\nprint(\"Pop: \", myStack.pop())\n\nprint(\"Peek: \", myStack.peek())\n\nprint(\"isEmpty: \", myStack.isEmpty())\n\nprint(\"Size: \", myStack.size())\nRun Example \u00bb\nStack Implementation using Linked Lists\nA reason for using linked lists to implement stacks:\nDynamic size:\nThe stack can grow and shrink dynamically, unlike with arrays.\nReasons for\nnot\nusing linked lists to implement stacks:\nExtra memory:\nEach stack element must contain the address to the \nReadability:\nThe code might be harder to read and write for some because it is longer and more complex.\nThis is how a stack can be implemented using a linked list.\nExample\nPython:\nclass Node:\n    def __init__(self, value):\n        self.value = value\n        self.\n\nclass Stack:\n    def __init__(self):\n        self.head = None\n        self.size = 0\n    \n    def push(self, value):\n        new_node = Node(value)\n        if self.head:\n            new_node.\n        self.head = new_node\n        self.size += 1\n    \n    def pop(self):\n        if self.isEmpty():\n            return \"Stack is empty\"\n        popped_node = self.head\n        self.head = self.head.\n        self.size -= 1\n        return popped_node.value\n    \n    def peek(self):\n        if self.isEmpty():\n            return \"Stack is empty\"\n        return self.head.value\n    \n    def isEmpty(self):\n        return self.size == 0\n    \n    def stackSize(self):\n        return self.size\n\nmyStack = Stack()\nmyStack.push('A')\nmyStack.push('B')\nmyStack.push('C')\n\nprint(\"Pop: \", myStack.pop())\nprint(\"Peek: \", myStack.peek())\nprint(\"isEmpty: \", myStack.isEmpty())\nprint(\"Size: \", myStack.stackSize())\nRun Example \u00bb\nDSA Exercises\nTest Yourself With Exercises\nExercise:\nThe image below represents a \"Stack\" data structure.\nRunning the\npeek()\nmethod on the Stack above, what is returned?\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 7,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "1f6f097f-2373-40aa-8aea-c644a9777614",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "c06e29a4-9584-4ed9-a7ec-fd2ee64fd5ee",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "249beebd-9757-4c8e-af7d-cd9285660949",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is DSA\nStacks\n\nStacks\nA stack?",
+      "options": [
+        "a data structure that can hold many elements",
+        "None of the above.",
+        "both added and removed from the top",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of DSA\nStacks\n\nStacks\nA stack is 'a data structure that can hold many elements'."
+    },
+    {
+      "question": "What is the pancakes?",
+      "options": [
+        "a data structure that can hold many elements",
+        "None of the above.",
+        "both added and removed from the top",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of the pancakes is 'both added and removed from the top'."
+    }
+  ],
+  "summary": "This tutorial covers DSAStacks concepts and techniques. You'll learn how to use DSAStacks effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSAStacks and how to apply it in your projects."
+}

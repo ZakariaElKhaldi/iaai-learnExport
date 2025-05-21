@@ -1,0 +1,98 @@
+{
+  "id": "70dd31ad-6208-4dc3-a3f3-9528f55469e0",
+  "title": "DSAKruskal's Algorithm",
+  "slug": "dsakruskals-algorithm",
+  "metadata": {
+    "description": "Learn about DSAKruskal's Algorithm with clear explanations and practical examples.",
+    "keywords": [
+      "self",
+      "edges",
+      "parent",
+      "weight",
+      "edge",
+      "algorithm",
+      "kruskal",
+      "find",
+      "rank",
+      "graph"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 9,
+    "category": "LearnDSA",
+    "subcategory": "DSA Kruskal's"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "DSA\nKruskal's Algorithm",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Kruskal's Algorithm\nKruskal's algorithm finds the Minimum Spanning Tree (MST), or Minimum Spanning Forest, in an undirected graph.\nConnected\n{{ buttonText }}\n{{ msgDone }}\nThe MST (or MSTs) found by Kruskal's algorithm is the collection of edges that connect all vertices (or as many as possible) with the minimum total edge weight.\nKruskal's algorithm adds edges to the MST (or Minimum Spanning Forest), starting with the edges with the lowest edge weights.\nEdges that would create a cycle are not added to the MST. These are the red blinking lines in the animation above.\nKruskal's algorithm checks all edges in the graph, but the animation above is made to stop when the MST or Minimum Spanning forest is completed, so that you don't have to wait for the longest edges to be checked.\nMinimum Spanning Forest\nis what it is called when a graph has more than one Minimum Spanning Tree. This happens when a graph is not connected. \nUnlike Prim's algorithm, Kruskal's algorithm can be used for such graphs that are not connected, which means that it can find more than one MST, and that is what we call a Minimum Spanning Forest.\nTo find out if an edge will create a cycle, we will use\nUnion-Find cycle detection\ninside Kruskal's algorithm.\nHow it works:\nSort the edges in the graph from the lowest to the highest edge weight.\nFor each edge, starting with the one with the lowest edge weight:\nWill this edge create a cycle in the current MST?\nIf no: Add the edge as an MST edge.\nManual Run Through\nLet's run through Kruskal's algorithm manually on the graph below, so that we understand the detailed step-by-step operations before we try to program it.\nThe first three edges are added to the MST. These three edges have the lowest edge weights and do not create any cycles:\nC-E, weight 2\nD-E, weight 3\nA-B, weight 4\nAfter that, edge C-D (indicated in red) cannot be added as it would lead to a cycle.\n{{ edge.weight }}\n{{el.name}}\nThe \nE-G, weight 6\nC-G, weight 7 (not added)\nD-F, weight 7\nB-C, weight 8\nEdge C-G (indicated in red) cannot be added to the MST because it would create a cycle.\n{{ edge.weight }}\n{{el.name}}\nAs you can see, the MST is already created at this point, but Kruskal's algorithm will continue to run until all edges are tested to see if they can be added to the MST.\nThe last three edges Kruskal's algorithm tries to add to the MST are the ones with the highest edge weights:\nA-C, weight 9 (not added)\nA-G, weight 10 (not added)\nF-G, weight 11 (not added)\nEach of these edges would create a cycle in the MST, so they cannot be added.\n{{ edge.weight }}\n{{el.name}}\nKruskal's algorithm is now finished.\nRun the simulation below to see Kruskal's algorithm doing the manual steps that we have just done.\n{{ edge.weight }}\n{{el.name}}\n{{ buttonText }}\n{{ msgDone }}\nNote:\nAlthough Kruskal's algorithm checks all edges in the graph, the animation at the top of this page stops right after the last edge is added to the MST or Minimum Spanning Forest so that we don't have to look at all the red edges that can't be added.\nThis is possible because for a connected graph, there is just one MST, and the search can stop when the number of edges in the MST is one less than there are vertices in the graph (\\(V-1\\)). For the unconnected graph, there are two MSTs in our animation, and the algorithm stops when the MSTs have reached a size of \\(V-2\\) edges in total.\nImplementation of Kruskal's Algorithm\nFor Kruskal's algorithm to find a Minimum Spanning Tree (MST), or a Minimum Spanning Forest, we create a\nGraph\nclass. We will use the methods inside this\nGraph\nclass later to create the graph from the example above, and to run Kruskal's algorithm on it.\nclass Graph:\n    def __init__(self, size):\n        self.size = size\n        self.edges = []  # For storing edges as (weight, u, v)\n        self.vertex_data = [''] * size  # Store vertex names\n\ndef add_edge(self, u, v, weight):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.edges.append((weight, u, v))  # Add edge with weight\n\ndef add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\nLine 8 and 12:\nChecks if the input arguments\nu\n,\nv\n, and\nvertex\n, are within the possible range of index values.\nTo do Union-Find cycle detection in Kruskal's algorithm, these two methods\nfind\nand\nunion\nare also defined inside the\nGraph\nclass:\ndef find(self, parent, i):\n        if parent[i] == i:\n            return i\n        return self.find(parent, parent[i])\n\ndef union(self, parent, rank, x, y):\n        xroot = self.find(parent, x)\n        yroot = self.find(parent, y)\n        if rank[xroot] < rank[yroot]:\n            parent[xroot] = yroot\n        elif rank[xroot] > rank[yroot]:\n            parent[yroot] = xroot\n        else:\n            parent[yroot] = xroot\n            rank[xroot] += 1\nLine 15-18:\nThe\nfind\nmethod uses the\nparent\narray to recursively find the root of a vertex. For each vertex, the\nparent\narray holds a pointer (index) to the parent of that vertex. The root vertex is found when the\nfind\nmethod comes to a vertex in the\nparent\narray that points to itself. Keep reading to see how the\nfind\nmethod and the\nparent\narray are used inside the\nkruskals_algorithm\nmethod.\nLine 20-29:\nWhen an edge is added to the MST, the\nunion\nmethod uses the\nparent\narray to merge (union) two trees. The\nrank\narray holds a rough estimate of the tree height for every root vertex. When merging two trees, the root with a lesser rank becomes a child of the other tree's root vertex.\nHere is how Kruskal's algorithm is implemented as a method inside the\nGraph\nclass:\ndef kruskals_algorithm(self):\n        result = []  # MST\n        i = 0 # edge counter\n\nself.edges = sorted(self.edges, key=lambda item: item[2])\n\nparent, rank = [], []\n\nfor node in range(self.size):\n            parent.append(node)\n            rank.append(0)\n\nwhile i < len(self.edges):\n            u, v, weight = self.edges[i]\n            i += 1\n\nx = self.find(parent, u)\n            y = self.find(parent, v)\n            if x != y:\n                result.append((u, v, weight))\n                self.union(parent, rank, x, y)\n\nprint(\"Edge \\tWeight\")\n        for u, v, weight in result:\n            print(f\"{self.vertex_data[u]}-{self.vertex_data[v]} \\t{weight}\")\nLine 35:\nThe edges must be sorted before Kruskal's algorithm starts trying to add the edges to the MST.\nLine 40-41:\nThe\nparent\nand\nrank\narrays are initialized. To start with, every vertex is its own root (every element in the\nparent\narray points to itself), and every vertex has no height (\n0\nvalues in the\nrank\narray).\nLine 44-45:\nPick the smallest edge, and increment\ni\nso that the correct edge is picked in the \nLine 47-51:\nIf the vertices\nu\nand\nv\nat each end of the current edge have different roots\nx\nand\ny\n, it means there will be no cycle for the new edge and the trees are merged. To merge the trees, the current edge is added to the\nresult\narray, and we run the\nunion\nmethod to make sure the trees are merged correctly, so that there is only one root vertex in the resulting merged tree.\nNow let's create the graph from the \"Manual Run Through\" above and run Kruskal's algorithm on it:\nExample\nPython:\nclass Graph:\n    def __init__(self, size):\n        self.size = size\n        self.edges = []  # For storing edges as (weight, u, v)\n        self.vertex_data = [''] * size  # Store vertex names\n\ndef add_edge(self, u, v, weight):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.edges.append((u, v, weight))  # Add edge with weight\n\ndef add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\n\ndef find(self, parent, i):\n        if parent[i] == i:\n            return i\n        return self.find(parent, parent[i])\n\ndef union(self, parent, rank, x, y):\n        xroot = self.find(parent, x)\n        yroot = self.find(parent, y)\n        if rank[xroot] < rank[yroot]:\n            parent[xroot] = yroot\n        elif rank[xroot] > rank[yroot]:\n            parent[yroot] = xroot\n        else:\n            parent[yroot] = xroot\n            rank[xroot] += 1\n\ndef kruskals_algorithm(self):\n        result = []  # MST\n        i = 0  # edge counter\n\nself.edges = sorted(self.edges, key=lambda item: item[2])\n\nparent, rank = [], []\n\nfor node in range(self.size):\n            parent.append(node)\n            rank.append(0)\n\nwhile i < len(self.edges):\n            u, v, weight = self.edges[i]\n            i += 1\n\nx = self.find(parent, u)\n            y = self.find(parent, v)\n            if x != y:\n                result.append((u, v, weight))\n                self.union(parent, rank, x, y)\n\nprint(\"Edge \\tWeight\")\n        for u, v, weight in result:\n            print(f\"{self.vertex_data[u]}-{self.vertex_data[v]} \\t{weight}\")\n\ng = Graph(7)\ng.add_vertex_data(0, 'A')\ng.add_vertex_data(1, 'B')\ng.add_vertex_data(2, 'C')\ng.add_vertex_data(3, 'D')\ng.add_vertex_data(4, 'E')\ng.add_vertex_data(5, 'F')\ng.add_vertex_data(6, 'G')\n\ng.add_edge(0, 1, 4)  #A-B,  4\ng.add_edge(0, 6, 10) #A-G, 10\ng.add_edge(0, 2, 9)  #A-C,  9\ng.add_edge(1, 2, 8)  #B-C,  8\ng.add_edge(2, 3, 5)  #C-D,  5\ng.add_edge(2, 4, 2)  #C-E,  2\ng.add_edge(2, 6, 7)  #C-G,  7\ng.add_edge(3, 4, 3)  #D-E,  3\ng.add_edge(3, 5, 7)  #D-F,  7\ng.add_edge(4, 6, 6)  #E-G,  6\ng.add_edge(5, 6, 11) #F-G, 11\n\nprint(\"Kruskal's Algorithm MST:\")\ng.kruskals_algorithm()\nRun Example \u00bb\nTime Complexity for Kruskal's Algorithm\nFor a general explanation of what time complexity is, visit\nthis page\n.\nWith \\(E\\) as the number of edges in our graph, the time complexity for Kruskal's algorithm is\n\\[ O( E \\cdot log{E} ) \\]\nWe get this time complexity because the edges must be sorted before Kruskal's can start adding edges to the MST. Using a fast algorithm like\nQuick Sort\nor\nMerge Sort\ngives us a time complexity of \\( O( E \\cdot log{E} ) \\) for this sorting alone.\nAfter the edges are sorted, they are all checked one by one, to see if they will create a cycle, and if not, they are added to the MST.\nAlthough it looks like a lot of work to check if a cycle will be created using the\nfind\nmethod, and then to include an edge to the MST using the\nunion\nmethod, this can still be viewed as one operation. The reason we can see this as just one operation is that it takes approximately constant time. That means that the time this operation takes grows very little as the graph grows, and so it does actually not contribute to the overall time complexity.\nSince the time complexity for Kruskal's algorithm only varies with the number of edges \\(E\\), it is especially fast for sparse graphs where the ratio between the number of edges \\(E\\) and the number of vertices \\(V\\) is relatively low.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "6eb953fe-670b-47ca-ba3c-91ae23810dba",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "74bccf83-271a-40ad-8c9d-04c478da2326",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "cb3e5ec3-9091-4e6c-8834-652026aa744f",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is s algorithm?",
+      "options": [
+        "the collection of edges that connect all vertices (or as many as possible) with the minimum total edge weight",
+        "None of the above.",
+        "None of the above.",
+        "not added to the MST"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of s algorithm is 'the collection of edges that connect all vertices (or as many as possible) with the minimum total edge weight'."
+    },
+    {
+      "question": "What is Edges that would create a cycle?",
+      "options": [
+        "not added to the MST",
+        "None of the above.",
+        "the collection of edges that connect all vertices (or as many as possible) with the minimum total edge weight",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Edges that would create a cycle is 'not added to the MST'."
+    }
+  ],
+  "summary": "This tutorial covers DSAKruskal's Algorithm concepts and techniques. You'll learn how to use DSAKruskal's Algorithm effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSAKruskal's Algorithm and how to apply it in your projects."
+}

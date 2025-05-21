@@ -1,0 +1,98 @@
+{
+  "id": "8a11c339-0140-4897-a02b-63f01777062c",
+  "title": "PHP - $_POST",
+  "slug": "php-post",
+  "metadata": {
+    "description": "Learn about PHP - $_POST with clear explanations and practical examples.",
+    "keywords": [
+      "html",
+      "http",
+      "form",
+      "post",
+      "name",
+      "xhttp",
+      "function",
+      "fname",
+      "request",
+      "method"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "$_POST"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP - $_POST",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "PHP $_POST\n$_POST contains an array of variables received via the HTTP POST method.\nThere are two main ways to send variables via the HTTP Post method:\nHTML forms\nJavaScript HTTP requests\n$_POST in HTML Forms\nA HTML form submits information via the HTTP POST method if\nthe form's\nmethod\nattribute is set to\n\"POST\"\n.\nTo demonstrate this, we start by creating a simple HTML form:\nHTML Form\n<html>\n<body>\n\n<form method=\"POST\" action=\"demo_request.php\">\n  Name: <input type=\"text\" name=\"fname\">\n  <input type=\"submit\">\n</form>\n\n</body>\n</html>\nWhen a user clicks the submit button, the form data is sent to a PHP file specified in the\naction\nattribute of the\n<form>\ntag.\nIn the action file we can use the\n$_POST\nvariable\nto collect the value of the input field.\nPHP file\n$name = $_POST['fname'];\necho $name;\nIn the example below we have put the HTML form and PHP code in the same PHP file.\nWe have also added some extra lines for security.\nExample\n<html>\n<body>\n\n<form method=\"POST\" action=\"<?php echo $_SERVER['PHP_SELF'];?>\">\n  Name: <input type=\"text\" name=\"fname\">\n  <input type=\"submit\">\n</form>\n\n<?php\nif ($_SERVER[\"REQUEST_METHOD\"] == \"POST\") {\n  $name = htmlspecialchars($_POST['fname']);\n  if (empty($name)) {\n    echo \"Name is empty\";\n  } else {\n    echo $name;\n  }\n}\n?>\n\n</body>\n</html>\n\n$_POST in JavaScript HTTP Requests\nWhen sending a HTTP request in JavaScript, you can specify that the HTTP method is POST.\nTo demonstrate this we start by creating a JavaScript function containing a HTTP request:\nJavaScript function\nfunction myfunction() {\n  const xhttp = new XMLHttpRequest();\n  xhttp.open(\"POST\", \"demo_phpfile.php\");\n  xhttp.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded\");\n  xhttp.onload = function() {\n    document.getElementById(\"demo\").innerHTML = this.responseText;\n  }\n  xhttp.send(\"fname=Mary\");\n  }\n}\nThe code above will:\nIntiate a HTTP request\nSet the HTTP method to POST\nSet a valid request header\nCreate a function to execute when the request is done\nSend the HTTP request with a variable\nfname\nset to\nMary\nLook at the function that will be executed when the request is done:\nxhttp.onload = function() {\n    document.getElementById(\"demo\").innerHTML = this.responseText;\n  }\nIt will try to write a response from the operation in a HTML element with\nid=\"demo\"\n.\nLet us make a HTML page with such element, and also a button that executes the function.\nIf we also add the the JavaScript, the page looks like this:\nExample\nHow to post and receive data from a HTTP request:\n<html>\n<script>\nfunction myfunction() {\n  const xhttp = new XMLHttpRequest();\n  xhttp.open(\"POST\", \"demo_ajax.php\");\n  xhttp.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded\");\n  xhttp.onload = function() {\n    document.getElementById(\"demo\").innerHTML = this.responseText;\n  }\n  xhttp.send(\"fname=Mary\");\n  }\n}\n</script>\n<body>\n\n<button onclick=\"myfunction()\">Click me!</button>\n\n<h1 id=\"demo\"></h1>\n\n</body>\n</html>\n\nIn the PHP file that receive this HTTP request (\ndemo_ajax.php\n), we simply use the\n$_POST\nvariable\nto retrieve the\nfname\nvariable, and writes it as a response.\nPHP file\n$name = $_POST['fname'];\necho $name;\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "5e57f91c-8224-4d8d-b071-d7748c40adbe",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "d74f5409-dcc7-478e-8286-8076af0d2409",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "fbd2c85f-b0ca-4ca7-8a84-50af80f66d7f",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is There?",
+      "options": [
+        "two main ways to send variables via the HTTP Post method:\nHTML forms\nJavaScript HTTP requests\n$_POST in HTML Forms\nA HTML form submits information via the HTTP POST method if\nthe form's\nmethod\nattribute is set to\n\"POST\"",
+        "sent to a PHP file specified in the\naction\nattribute of the\n<form>\ntag",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of There is 'two main ways to send variables via the HTTP Post method:\nHTML forms\nJavaScript HTTP requests\n$_POST in HTML Forms\nA HTML form submits information via the HTTP POST method if\nthe form's\nmethod\nattribute is set to\n\"POST\"'."
+    },
+    {
+      "question": "What is the form data?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "two main ways to send variables via the HTTP Post method:\nHTML forms\nJavaScript HTTP requests\n$_POST in HTML Forms\nA HTML form submits information via the HTTP POST method if\nthe form's\nmethod\nattribute is set to\n\"POST\"",
+        "sent to a PHP file specified in the\naction\nattribute of the\n<form>\ntag"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of the form data is 'sent to a PHP file specified in the\naction\nattribute of the\n<form>\ntag'."
+    }
+  ],
+  "summary": "This tutorial covers PHP - $_POST concepts and techniques. You'll learn how to use PHP - $_POST effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHP - $_POST and how to apply it in your projects."
+}

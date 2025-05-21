@@ -1,0 +1,96 @@
+{
+  "id": "cbf35793-ecd2-45ea-acb5-4e53873e0975",
+  "title": "ADOQuery Data",
+  "slug": "adoquery-data",
+  "metadata": {
+    "description": "Learn about ADOQuery Data with clear explanations and practical examples.",
+    "keywords": [
+      "conn",
+      "country",
+      "response",
+      "write",
+      "fields",
+      "customers",
+      "table",
+      "companyname",
+      "server",
+      "createobject"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "ADO Query"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ADO\nQuery Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "We may use SQL to create queries to specify only a selection of records \n(and fields) to view.\nDisplay Selected Data\nDisplay companies that starts with \"A\"\nHere we want to display only the records from the \"Customers\" table that have a \"Companyname\" \nthat starts with \"A\" (remember to save the file with an .asp extension):\n<html>\n<body>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\nset rs=Server.CreateObject(\"ADODB.recordset\")\nsql=\"SELECT Companyname, Contactname FROM Customers WHERE CompanyName LIKE 'A%'\"\nrs.Open sql, conn\n%>\n<table border=\"1\" width=\"100%\">\n<tr>\n<%for each x in rs.Fields\nresponse.write(\"<th>\" & x.name & \"</th>\")\n\n</tr>\n<%do until rs.EOF%>\n<tr>\n<%for each x in rs.Fields%>\n<td><%Response.Write(x.value)%></td>\n<%\nrs.Move\n</tr>\n<%loop\nrs.close\nconn.close%>\n</table>\n</body>\n</html>\nDisplay customers from Spain\nHere we want to display only the customers from Spain (remember to save the file with an .asp extension):\n<html>\n<body>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\nset rs=Server.CreateObject(\"ADODB.recordset\")\nsql=\"SELECT Companyname, Contactname FROM Customers WHERE Country='Spain'\"\nrs.Open sql, conn\n%>\n<table border=\"1\" width=\"100%\">\n<tr>\n<%for each x in rs.Fields\nresponse.write(\"<th>\" & x.name & \"</th>\")\n\n</tr>\n<%do until \n  rs.EOF%>\n<tr>\n<%for each x in rs.Fields%>\n<td><%Response.Write(x.value)%> </td>\n<%\nrs.Move\n</tr>\n<%loop\nrs.close\nconn.close\n%>\n</table>\n</body>\n</html>\nCreate a filter for the user\nHere we want to create a filter and let the user choose which country to show customers from (remember to save the file with an .asp extension):\n<html>\n<body>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\nset rs=Server.CreateObject(\"ADODB.recordset\")\nsql=\"SELECT DISTINCT Country FROM Customers ORDER BY Country\"\nrs.Open sql, conn\ncountry=request.form(\"country\")\n%>\n<form method=\"post\">\nChoose Country <select name=\"country\">\n<% do \n  until rs.EOF\nresponse.write(\"<option\")\nif rs.fields(\"country\")=country \n  then\nresponse.write(\" selected\")\nend if\nresponse.write(\">\")\nresponse.write(rs.fields(\"Country\"))\nrs.Move\nloop\nrs.Close\nset \n  rs=Nothing %>\n</select>\n<input type=\"submit\" value=\"Show customers\">\n</form>\n<%\nif country<>\"\" then\nsql=\"SELECT \n  Companyname,Contactname,Country FROM Customers WHERE country='\" & country & \n  \"'\"\nset rs=Server.CreateObject(\"ADODB.Recordset\")\nrs.Open \n  sql,conn\n%>\n<table width=\"100%\" cellspacing=\"0\" cellpadding=\"2\" \n  border=\"1\">\n<tr>\n<th>Companyname</th>\n<th>Contactname</th>\n<th>Country</th>\n</tr>\n<%\ndo until rs.EOF\nresponse.write(\"<tr>\")\nresponse.write(\"<td>\" & rs.fields(\"companyname\") \n  & \"</td>\")\nresponse.write(\"<td>\" & rs.fields(\"contactname\") & \n  \"</td>\")\nresponse.write(\"<td>\" & rs.fields(\"country\") & \"</td>\")\nresponse.write(\"</tr>\")\nrs.Move\nloop\nrs.close\nconn.Close\nset rs=Nothing\nset conn=Nothing%>\n</table>\n<% end if %>\n</body>\n</html>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b0e99540-a79b-4fa6-b0a8-04754947f757",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "983998ba-56d7-4b43-99df-f1271d851a80",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4299209c-93d4-41e1-9826-034035c8bc8a",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers ADOQuery Data concepts and techniques. You'll learn how to use ADOQuery Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ADOQuery Data and how to apply it in your projects."
+}

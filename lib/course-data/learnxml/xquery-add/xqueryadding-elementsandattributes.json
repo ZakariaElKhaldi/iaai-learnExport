@@ -1,0 +1,160 @@
+{
+  "id": "2505e373-da90-4b25-8c0d-68cc1705c8da",
+  "title": "XQueryAdding ElementsandAttributes",
+  "slug": "xqueryadding-elementsandattributes",
+  "metadata": {
+    "description": "Learn about XQueryAdding ElementsandAttributes with clear explanations and practical examples.",
+    "keywords": [
+      "typescript",
+      "title",
+      "html",
+      "xquery",
+      "body",
+      "elements",
+      "result",
+      "bookstore",
+      "category",
+      "books",
+      "lang"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Typescript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnXML",
+    "subcategory": "XQuery Add"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "XQuery\nAdding Elements\nand\nAttributes",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The XML Example Document\nWe will use the \"books.xml\" document in the examples below (same XML file as in the \nView the \"books.xml\" file in your browser\n.\nAdding Elements and Attributes to the Result\nAs we have seen in a \nfor $x in doc(\"books.xml\")/bookstore/book/title\norder by $x\nreturn $x\nThe XQuery expression above will include both the title element and the lang attribute in the result, like this:\n<title lang=\"en\">Everyday Italian</title>\n<title lang=\"en\">Harry Potter</title>\n<title lang=\"en\">Learning XML</title>\n<title lang=\"en\">XQuery Kick Start</title>\nThe XQuery expression above returns the title elements the exact same way as they are described in the input document.\nWe now want to add our own elements and attributes to the result!\nAdd HTML Elements and Text\nNow, we want to add some HTML elements to the result. We will put the result in an HTML list - together with some text:\n<html>\n<body>\n<h1>Bookstore</h1>\n<ul>\n{\nfor $x in doc(\"books.xml\")/bookstore/book\norder by $x/title\nreturn <li>{data($x/title)}. Category: {data($x/@category)}</li>\n}\n</ul>\n</body>\n</html>\nThe XQuery expression above will generate the following result:\n<html>\n<body>\n<h1>Bookstore</h1>\n<ul>\n<li>Everyday Italian. Category: COOKING</li>\n<li>Harry Potter. Category: CHILDREN</li>\n<li>Learning XML. Category: WEB</li>\n<li>XQuery Kick Start. Category: WEB</li>\n</ul>\n</body>\n</html>\nAdd Attributes to HTML Elements\n\n<html>\n<body>\n<h1>Bookstore</h1>\n<ul>\n{\nfor $x in doc(\"books.xml\")/bookstore/book\norder by $x/title\nreturn <li class=\"{data($x/@category)}\">{data($x/title)}</li>\n}\n</ul>\n</body>\n</html>\nThe XQuery expression above will generate the following result:\n<html>\n<body>\n<h1>Bookstore</h1>\n<ul>\n<li class=\"COOKING\">Everyday Italian</li>\n<li class=\"CHILDREN\">Harry Potter</li>\n<li class=\"WEB\">Learning XML</li>\n<li class=\"WEB\">XQuery Kick Start</li>\n</ul>\n</body>\n</html>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "for $x in doc(\"books.xml\")/bookstore/book/title\norder by $x\nreturn $x",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<title lang=\"en\">Everyday Italian</title>\n<title lang=\"en\">Harry Potter</title>\n<title lang=\"en\">Learning XML</title>\n<title lang=\"en\">XQuery Kick Start</title>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<html>\n<body>\n<h1>Bookstore</h1>\n<ul>\n{\nfor $x in doc(\"books.xml\")/bookstore/book\norder by $x/title\nreturn <li>{data($x/title)}. Category: {data($x/@category)}</li>\n}\n</ul>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<html>\n<body>\n<h1>Bookstore</h1>\n<ul>\n<li>Everyday Italian. Category: COOKING</li>\n<li>Harry Potter. Category: CHILDREN</li>\n<li>Learning XML. Category: WEB</li>\n<li>XQuery Kick Start. Category: WEB</li>\n</ul>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<html>\n<body>\n<h1>Bookstore</h1>\n<ul>\n{\nfor $x in doc(\"books.xml\")/bookstore/book\norder by $x/title\nreturn <li class=\"{data($x/@category)}\">{data($x/title)}</li>\n}\n</ul>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<html>\n<body>\n<h1>Bookstore</h1>\n<ul>\n<li class=\"COOKING\">Everyday Italian</li>\n<li class=\"CHILDREN\">Harry Potter</li>\n<li class=\"WEB\">Learning XML</li>\n<li class=\"WEB\">XQuery Kick Start</li>\n</ul>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "for $x in doc(\"books.xml\")/bookstore/book/title\norder by $x\n# TODO: Complete this line",
+      "solution": "for $x in doc(\"books.xml\")/bookstore/book/title\norder by $x\nreturn $x"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<title lang=\"en\">Everyday Italian</title>\n# TODO: Complete this line\n<title lang=\"en\">Learning XML</title>\n<title lang=\"en\">XQuery Kick Start</title>",
+      "solution": "<title lang=\"en\">Everyday Italian</title>\n<title lang=\"en\">Harry Potter</title>\n<title lang=\"en\">Learning XML</title>\n<title lang=\"en\">XQuery Kick Start</title>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "09d98faa-2a5c-49fb-8a5a-24d4105639d1",
+      "title": "Typescript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "0a1b58ad-d2d1-46a4-a3fe-1b5a57560d5e",
+      "title": "Typescript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "9220b62d-54fd-4e5c-a63d-0f6bd7864f31",
+      "title": "Typescript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The XQuery expression above returns the title elements the exact same way as they?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "described in the input document",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The XQuery expression above returns the title elements the exact same way as they is 'described in the input document'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers XQueryAdding ElementsandAttributes concepts and techniques. You'll learn how to use XQueryAdding ElementsandAttributes effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of XQueryAdding ElementsandAttributes and how to apply it in your projects."
+}

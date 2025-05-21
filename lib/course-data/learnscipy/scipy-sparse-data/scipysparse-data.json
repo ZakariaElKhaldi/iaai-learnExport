@@ -1,0 +1,178 @@
+{
+  "id": "22977474-79b6-4466-a4d4-9b7a6066ee9f",
+  "title": "SciPySparse Data",
+  "slug": "scipysparse-data",
+  "metadata": {
+    "description": "Learn about SciPySparse Data with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "sparse",
+      "data",
+      "import",
+      "scipy",
+      "array",
+      "matrix",
+      "example",
+      "numpy",
+      "print",
+      "item"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnSciPy",
+    "subcategory": "SciPy Sparse Data"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "SciPy\nSparse Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "SciPy\nSparse Data\n\nWhat is Sparse Data\nSparse data is data that has mostly unused elements",
+      "content": "(elements that don't carry any information ).\nIt can be an array like this one:\n[1, 0, 2, 0, 0, 3, 0, 0, 0, 0, 0, 0]\nSparse Data:\nis a data set where most of the item values are zero.\nDense Array:\nis the opposite of a sparse array: most of the values are\nnot\nzero.\nIn scientific computing, when we are dealing with partial derivatives in linear algebra we will come across sparse data.\nHow to Work With Sparse Data\nSciPy has a module,\nscipy.sparse\nthat provides functions to deal with sparse data.\nThere are primarily two types of sparse matrices that we use:",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "CSC",
+      "content": "- Compressed Sparse Column. For efficient arithmetic, \nfast column slicing.",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "CSR",
+      "content": "- Compressed Sparse Row. For fast row slicing, faster \nmatrix vector products\nWe will use the\nCSR\nmatrix in this tutorial.\nCSR Matrix\nWe can create CSR matrix by passing an arrray into function\nscipy.sparse.csr_matrix()\n.\nExample\nCreate a CSR matrix from an array:\nimport numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([0, 0, 0, 0, 0, 1, 1, 0, 2])\nprint(csr_matrix(arr))\n\nThe example above returns:\n(0, 5)\t1\n  (0, 6)\t1\n  (0, 8)\t2\nFrom the result we can see that there are 3 items with value.\nThe 1. item is in row\n0\nposition\n5\nand has the value\n1\n.\nThe 2. item is in row\n0\nposition\n6\nand has the value\n1\n.\nThe 3. item is in row\n0\nposition\n8\nand has the value\n2\n.\nSparse Matrix Methods\nViewing stored data (not the zero items) with the\ndata\nproperty:\nExample\nimport numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nprint(csr_matrix(arr).data)\n\nCounting nonzeros with the\ncount_nonzero()\nmethod:\nExample\nimport numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nprint(csr_matrix(arr).count_nonzero())\n\nRemoving zero-entries from the matrix with the\neliminate_zeros()\nmethod:\nExample\nimport numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nmat = csr_matrix(arr)\nmat.eliminate_zeros()\nprint(mat)\n\nEliminating duplicate entries with the\nsum_duplicates()\nmethod:\nExample\nEliminating duplicates by adding them:\nimport numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nmat = csr_matrix(arr)\nmat.sum_duplicates()\nprint(mat)\n\nConverting from csr to csc with the\ntocsc()\nmethod:\nExample\nimport numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nnewarr = csr_matrix(arr).tocsc()\nprint(newarr)\n\nNote:\nApart from the mentioned sparse specific operations, sparse matrices support all of the operations that normal matrices support e.g. reshaping, summing, arithemetic, broadcasting etc.\n\n\u2605\n+1",
+      "order": 4,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([0, 0, 0, 0, 0, 1, 1, 0, 2])\nprint(csr_matrix(arr))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nprint(csr_matrix(arr).data)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nprint(csr_matrix(arr).count_nonzero())",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "import numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nmat = csr_matrix(arr)\nmat.eliminate_zeros()\nprint(mat)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "import numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nmat = csr_matrix(arr)\nmat.sum_duplicates()\nprint(mat)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "import numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nnewarr = csr_matrix(arr).tocsc()\nprint(newarr)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\n# TODO: Complete this line\narr = np.array([0, 0, 0, 0, 0, 1, 1, 0, 2])\nprint(csr_matrix(arr))",
+      "solution": "import numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([0, 0, 0, 0, 0, 1, 1, 0, 2])\nprint(csr_matrix(arr))"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\n# TODO: Complete this line\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nprint(csr_matrix(arr).data)",
+      "solution": "import numpy as np\nfrom scipy.sparse import csr_matrix\narr = np.array([[0, 0, 0], [0, 0, 1], [1, 0, 2]])\nprint(csr_matrix(arr).data)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "05a40449-c63f-4123-bf3c-e261dddd31c3",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "670dd171-771e-45a7-8aa2-b6dd25e55d1c",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "d3532b70-31ec-447d-afd8-1087963ae996",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is SciPy\nSparse Data\n\nWhat is Sparse Data\nSparse data?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "zero",
+        "data that has mostly unused elements (elements that don't carry any information )"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of SciPy\nSparse Data\n\nWhat is Sparse Data\nSparse data is 'data that has mostly unused elements (elements that don't carry any information )'."
+    },
+    {
+      "question": "What is is a data set where most of the item values?",
+      "options": [
+        "data that has mostly unused elements (elements that don't carry any information )",
+        "None of the above.",
+        "zero",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of is a data set where most of the item values is 'zero'."
+    }
+  ],
+  "summary": "This tutorial covers SciPySparse Data concepts and techniques. You'll learn how to use SciPySparse Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of SciPySparse Data and how to apply it in your projects."
+}

@@ -1,0 +1,142 @@
+{
+  "id": "22c128fb-8661-4d8c-b2ca-ddf2239dc8c4",
+  "title": "AngularJS Scope",
+  "slug": "angularjs-scope",
+  "metadata": {
+    "description": "Learn about AngularJS Scope with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "scope",
+      "controller",
+      "view",
+      "color",
+      "myapp",
+      "myctrl",
+      "script",
+      "rootscope",
+      "object",
+      "function"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAngularJS",
+    "subcategory": "AngularJS Scopes"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AngularJS Scope",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The scope is the binding part between the HTML (view) and the JavaScript (controller).\nThe scope is an object with the available properties and \nmethods.\nThe scope is available for both the view and the controller.\nHow to Use the Scope?\nWhen you make a controller in AngularJS, you pass the\n$scope\nobject as an \nargument:\nExample\nProperties made in the controller, can be referred to in the view:\n<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<h1>{{carname}}</h1>\n</div>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.carname \n    = \"Volvo\";\n});\n</script>\n\nWhen adding properties to the\n$scope\nobject in the controller, the view (HTML) gets access to these properties.\nIn the view, you do not use the prefix\n$scope\n, you just \nrefer to a property name, like\n{{carname}}\n.\nUnderstanding the Scope\nIf we consider an AngularJS application to consist of:\nView, which is the HTML.\nModel, which is the data available for the current view.\nController, which is the JavaScript function that \n    makes/changes/removes/controls the data.\nThen the scope is the Model.\nThe scope is a JavaScript object with properties and methods, which are \navailable for both the view and the controller.\nExample\nIf you make changes in the view, the model and the controller \n    will be updated:\n<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<input ng-model=\"name\">\n<h1>My name is {{name}}</h1>\n</div>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.name \n    = \"John Doe\";\n});\n</script>\n\nKnow Your Scope\nIt is important to know which scope you are dealing with, at any time.\nIn the two examples above there is only one scope, so knowing your scope is \nnot an issue, but for larger applications there can be sections in the HTML DOM \nwhich can only access certain scopes.\nExample\nWhen dealing with the\nng-repeat\ndirective, each repetition has  \naccess to the current repetition object:\n<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<ul>\n<li ng-repeat=\"x in names\">{{x}}</li>\n</ul>\n</div>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.names \n    = [\"Emil\", \"Tobias\", \"Linus\"];\n});\n</script>\n\nEach\n<li>\nelement has access to the current repetition object, \nin this case a string, which is referred to by using\nx\n.\nRoot Scope\nAll applications have a\n$rootScope\nwhich is the scope created on \nthe HTML element that contains the\nng-app\ndirective.\nThe rootScope is available in the entire application.\nIf a variable has the same name in both the current scope and in the \nrootScope, the application uses the one in the current scope.\nExample\nA variable named \"color\" exists in both the controller's scope and in the \nrootScope:\n<body ng-app=\"myApp\">\n<p>The rootScope's favorite color:</p>\n<h1>{{color}}</h1>\n<div ng-controller=\"myCtrl\">\n<p>The scope of the controller's favorite color:</p>\n<h1>{{color}}</h1>\n</div>\n<p>The rootScope's favorite color is \n    still:</p>\n<h1>{{color}}</h1>\n<script>\nvar app = angular.module('myApp', []);\napp.run(function($rootScope) {\n$rootScope.color = 'blue';\n});\napp.controller('myCtrl', \n    function($scope) {\n$scope.color = \"red\";\n});\n</script>\n</body>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<h1>{{carname}}</h1>\n</div>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.carname \n    = \"Volvo\";\n});\n</script>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<input ng-model=\"name\">\n<h1>My name is {{name}}</h1>\n</div>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.name \n    = \"John Doe\";\n});\n</script>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<ul>\n<li ng-repeat=\"x in names\">{{x}}</li>\n</ul>\n</div>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.names \n    = [\"Emil\", \"Tobias\", \"Linus\"];\n});\n</script>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<body ng-app=\"myApp\">\n<p>The rootScope's favorite color:</p>\n<h1>{{color}}</h1>\n<div ng-controller=\"myCtrl\">\n<p>The scope of the controller's favorite color:</p>\n<h1>{{color}}</h1>\n</div>\n<p>The rootScope's favorite color is \n    still:</p>\n<h1>{{color}}</h1>\n<script>\nvar app = angular.module('myApp', []);\napp.run(function($rootScope) {\n$rootScope.color = 'blue';\n});\napp.controller('myCtrl', \n    function($scope) {\n$scope.color = \"red\";\n});\n</script>\n</body>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<h1>{{carname}}</h1>\n</div>\n# TODO: Complete this line\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.carname \n    = \"Volvo\";\n});\n</script>",
+      "solution": "<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<h1>{{carname}}</h1>\n</div>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.carname \n    = \"Volvo\";\n});\n</script>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<input ng-model=\"name\">\n<h1>My name is {{name}}</h1>\n</div>\n# TODO: Complete this line\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.name \n    = \"John Doe\";\n});\n</script>",
+      "solution": "<div ng-app=\"myApp\" ng-controller=\"myCtrl\">\n<input ng-model=\"name\">\n<h1>My name is {{name}}</h1>\n</div>\n<script>\nvar app = angular.module('myApp', \n    []);\napp.controller('myCtrl', function($scope) {\n$scope.name \n    = \"John Doe\";\n});\n</script>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "287983b5-bb43-4131-8758-219ac425c571",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "128539ed-d29b-4a2c-a1ee-ffb0ed5f7104",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "76a13600-bb0e-49e9-b7d8-3df882088ed7",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is AngularJS Scope\n\nThe scope?",
+      "options": [
+        "None of the above.",
+        "the binding part between the HTML (view) and the JavaScript (controller)",
+        "None of the above.",
+        "an object with the available properties and \nmethods"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of AngularJS Scope\n\nThe scope is 'the binding part between the HTML (view) and the JavaScript (controller)'."
+    },
+    {
+      "question": "What is The scope?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "the binding part between the HTML (view) and the JavaScript (controller)",
+        "an object with the available properties and \nmethods"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of The scope is 'an object with the available properties and \nmethods'."
+    }
+  ],
+  "summary": "This tutorial covers AngularJS Scope concepts and techniques. You'll learn how to use AngularJS Scope effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AngularJS Scope and how to apply it in your projects."
+}

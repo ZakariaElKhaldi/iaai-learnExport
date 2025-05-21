@@ -1,0 +1,166 @@
+{
+  "id": "b58d194d-eda8-44d1-9d0a-85a08e882729",
+  "title": "AJAX - ServerResponse",
+  "slug": "ajax-serverresponse",
+  "metadata": {
+    "description": "Learn about AJAX - ServerResponse with clear explanations and practical examples.",
+    "keywords": [
+      "xhttp",
+      "function",
+      "response",
+      "property",
+      "readystate",
+      "status",
+      "server",
+      "onreadystatechange",
+      "xmlhttprequest",
+      "ajax"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnXML",
+    "subcategory": "AJAX Response"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AJAX - Server\nResponse",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The onreadystatechange Property\nThe\nreadyState\nproperty holds the status of the XMLHttpRequest.\nThe\nonreadystatechange\nproperty defines a function to be executed when the readyState changes.\nThe\nstatus\nproperty and the\nstatusText\nproperty holds the status of the XMLHttpRequest object.\nProperty\nDescription\nonreadystatechange\nDefines a function to be called when the readyState property changes\nreadyState\nHolds the status of the XMLHttpRequest.\n0: request not initialized\n1: server connection established\n2: request received\n3: processing request\n4: request finished and response is ready\nstatus\n200: \"OK\"\n403: \"Forbidden\"\n404: \"Page not found\"\nFor a complete list go to the\nHttp Messages Reference\nstatusText\nReturns the status-text (e.g. \"OK\" or \"Not Found\")\nThe onreadystatechange function is called every time the readyState changes.\nWhen readyState is 4 and status is 200, the response is ready:\nExample\nfunction loadDoc() {\nvar xhttp = new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML =\nthis.responseText;\n}\n};\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();\n}\n\nThe \"ajax_info.txt\" file used in the example above, is a simple text file and looks like this:\n<h1>AJAX</h1>\n<p>AJAX is not a programming language.</p>\n<p>AJAX is a \n  technique for accessing web servers from a web page.</p>\n<p>AJAX stands for \n  Asynchronous JavaScript And XML.</p>\nThe onreadystatechange event is triggered four times (1-4), one time for each change in the readyState.\nUsing a Callback Function\nA callback function is a function passed as a parameter to another function.\nIf you have more than one AJAX task in a website, you should create one function for \nexecuting the XMLHttpRequest object, and one callback function for each \nAJAX task.\nThe function call should contain the URL and what function to call when the \nresponse is ready.\nExample\nloadDoc(\"\nurl-1\n\", myFunction1);\nloadDoc(\"\nurl-2\n\", myFunction2);\nfunction loadDoc(url, cFunction) {\nvar xhttp;\nxhttp=new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ncFunction(this);\n}\n};\nxhttp.open(\"GET\", url, true);\nxhttp.send();\n}\nfunction myFunction1(xhttp) {\n// action goes here\n}\nfunction myFunction2(xhttp) {\n// action goes here\n}\n\nServer Response Properties\nProperty\nDescription\nresponseText\nget the response data as a string\nresponseXML\nget the response data as XML data\nServer Response Methods\nMethod\nDescription\ngetResponseHeader()\nReturns specific header information from the server resource\ngetAllResponseHeaders()\nReturns all the header information from the server resource\nThe responseText Property\nThe\nresponseText\nproperty returns the server response as a \nJavaScript string, and you can use it accordingly:\nExample\ndocument.getElementById(\"demo\").innerHTML = xhttp.responseText;\n\nThe responseXML Property\nThe XML HttpRequest object has an in-built XML parser.\nThe\nresponseXML\nproperty returns the server response as an XML DOM object.\nUsing this property you can parse the response as an XML DOM object:\nExample\nRequest the file\ncd_catalog.xml\nand parse the response:\nxmlDoc = xhttp.responseXML;\ntxt = \"\";\nx = xmlDoc.getElementsByTagName(\"ARTIST\");\nfor (i = 0; i < x.length; i++) {\ntxt += x[i].childNodes[0].nodeValue + \"<br>\";\n}\ndocument.getElementById(\"demo\").innerHTML = txt;\nxhttp.open(\"GET\", \n \"cd_catalog.xml\", true);\nxhttp.send();\n\nYou will learn a lot more about XML DOM in the DOM chapters of this tutorial.\nThe getAllResponseHeaders() Method\nThe\ngetAllResponseHeaders()\nmethod returns all header information from the server response.\nExample\nvar xhttp = new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML =\nthis.getAllResponseHeaders();\n}\n};\n\nThe getResponseHeader() Method\nThe\ngetResponseHeader()\nmethod returns specific header information from the server response.\nExample\nvar xhttp = new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML =\nthis.getResponseHeader(\"Last-Modified\");\n}\n};\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "function loadDoc() {\nvar xhttp = new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML =\nthis.responseText;\n}\n};\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<h1>AJAX</h1>\n<p>AJAX is not a programming language.</p>\n<p>AJAX is a \n  technique for accessing web servers from a web page.</p>\n<p>AJAX stands for \n  Asynchronous JavaScript And XML.</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "loadDoc(\"\nurl-1\n\", myFunction1);\nloadDoc(\"\nurl-2\n\", myFunction2);\nfunction loadDoc(url, cFunction) {\nvar xhttp;\nxhttp=new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ncFunction(this);\n}\n};\nxhttp.open(\"GET\", url, true);\nxhttp.send();\n}\nfunction myFunction1(xhttp) {\n// action goes here\n}\nfunction myFunction2(xhttp) {\n// action goes here\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "document.getElementById(\"demo\").innerHTML = xhttp.responseText;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "xmlDoc = xhttp.responseXML;\ntxt = \"\";\nx = xmlDoc.getElementsByTagName(\"ARTIST\");\nfor (i = 0; i < x.length; i++) {\ntxt += x[i].childNodes[0].nodeValue + \"<br>\";\n}\ndocument.getElementById(\"demo\").innerHTML = txt;\nxhttp.open(\"GET\", \n \"cd_catalog.xml\", true);\nxhttp.send();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "var xhttp = new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML =\nthis.getAllResponseHeaders();\n}\n};",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "var xhttp = new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML =\nthis.getResponseHeader(\"Last-Modified\");\n}\n};\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function loadDoc() {\n# TODO: Complete this line\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML =\nthis.responseText;\n}\n};\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();\n}",
+      "solution": "function loadDoc() {\nvar xhttp = new XMLHttpRequest();\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML =\nthis.responseText;\n}\n};\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<h1>AJAX</h1>\n<p>AJAX is not a programming language.</p>\n<p>AJAX is a \n# TODO: Complete this line\n<p>AJAX stands for \n  Asynchronous JavaScript And XML.</p>",
+      "solution": "<h1>AJAX</h1>\n<p>AJAX is not a programming language.</p>\n<p>AJAX is a \n  technique for accessing web servers from a web page.</p>\n<p>AJAX stands for \n  Asynchronous JavaScript And XML.</p>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "13fd49fc-c912-4630-a1b8-99c1552d8210",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "25aad75b-f37f-43f1-8ebe-9b3d36a040f9",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "95971f44-203d-4bc4-9428-c4b58e90df9d",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is request finished and response?",
+      "options": [
+        "ready\nstatus\n200: \"OK\"\n403: \"Forbidden\"\n404: \"Page not found\"\nFor a complete list go to the\nHttp Messages Reference\nstatusText\nReturns the status-text (e",
+        "called every time the readyState changes",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of request finished and response is 'ready\nstatus\n200: \"OK\"\n403: \"Forbidden\"\n404: \"Page not found\"\nFor a complete list go to the\nHttp Messages Reference\nstatusText\nReturns the status-text (e'."
+    },
+    {
+      "question": "What is The onreadystatechange function?",
+      "options": [
+        "None of the above.",
+        "called every time the readyState changes",
+        "ready\nstatus\n200: \"OK\"\n403: \"Forbidden\"\n404: \"Page not found\"\nFor a complete list go to the\nHttp Messages Reference\nstatusText\nReturns the status-text (e",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The onreadystatechange function is 'called every time the readyState changes'."
+    }
+  ],
+  "summary": "This tutorial covers AJAX - ServerResponse concepts and techniques. You'll learn how to use AJAX - ServerResponse effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AJAX - ServerResponse and how to apply it in your projects."
+}

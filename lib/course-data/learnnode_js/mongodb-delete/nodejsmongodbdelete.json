@@ -1,0 +1,187 @@
+{
+  "id": "a97247f9-9770-4735-9b2e-08808f654145",
+  "title": "Node.jsMongoDBDelete",
+  "slug": "nodejsmongodbdelete",
+  "metadata": {
+    "description": "Learn about Node.jsMongoDBDelete with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "document",
+      "delete",
+      "object",
+      "result",
+      "deleted",
+      "mongodb",
+      "mongoclient",
+      "method",
+      "example",
+      "documents"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnNode.js",
+    "subcategory": "MongoDB Delete"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nMongoDB\nDelete",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Delete Document\nTo delete a record, or document as it is called in MongoDB, we use the\ndeleteOne()\nmethod.\nThe first parameter of the\ndeleteOne()\nmethod \nis a query object defining which document to delete.\nNote:\nIf the query finds more than one document, only the first \noccurrence is deleted.\nExample\nDelete the document with the address \"Mountain 21\":\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: 'Mountain 21' };\ndbo.collection(\"customers\").deleteOne(myquery, function(err, obj) {\nif (err) throw err;\nconsole.log(\"1 \n  document deleted\");\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_delete.js\" and run the file:\nRun \"demo_delete.js\"\nC:\\Users\\\nYour Name\n>node demo_delete.js\nWhich will give you this result:\n1 document deleted\nDelete Many\nTo delete more than one document, use the\ndeleteMany()\nmethod.\nThe first parameter of the\ndeleteMany()\nmethod \nis a query object defining which documents to delete.\nExample\nDelete all documents were the address starts with the letter \"O\":\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: /^O/ };\ndbo.collection(\"customers\").deleteMany(myquery, function(err, obj) {\nif (err) throw err;\nconsole.log(obj.result.n + \" \n  document(s) deleted\");\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_delete_many.js\" and run the file:\nRun \"demo_delete_many.js\"\nC:\\Users\\\nYour Name\n>node demo_delete_many.js\nWhich will give you this result:\n2 document(s) deleted\nThe Result Object\nThe\ndeleteMany()\nmethod returns an object which contains information about how \nthe execution affected the database.\nMost of the information is not important to understand, but one object inside \nthe object is called \"result\" which tells us if the execution went OK, and how \nmany documents were affected.\nThe result object looks like this:\n{ n: 2, ok: 1 }\nYou can use this object to return the number of deleted documents:\nExample\nReturn the number of deleted documents:\nconsole.log(obj.result.n);\nWhich will produce this result:\n2\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: 'Mountain 21' };\ndbo.collection(\"customers\").deleteOne(myquery, function(err, obj) {\nif (err) throw err;\nconsole.log(\"1 \n  document deleted\");\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "C:\\Users\\\nYour Name\n>node demo_delete.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "1 document deleted",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: /^O/ };\ndbo.collection(\"customers\").deleteMany(myquery, function(err, obj) {\nif (err) throw err;\nconsole.log(obj.result.n + \" \n  document(s) deleted\");\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "C:\\Users\\\nYour Name\n>node demo_delete_many.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "2 document(s) deleted",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "{ n: 2, ok: 1 }",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "console.log(obj.result.n);",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "2",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\n# TODO: Complete this line\ndbo.collection(\"customers\").deleteOne(myquery, function(err, obj) {\nif (err) throw err;\nconsole.log(\"1 \n  document deleted\");\ndb.close();\n});\n});",
+      "solution": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: 'Mountain 21' };\ndbo.collection(\"customers\").deleteOne(myquery, function(err, obj) {\nif (err) throw err;\nconsole.log(\"1 \n  document deleted\");\ndb.close();\n});\n});"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "C:\\Users\\\n# TODO: Complete this line\n>node demo_delete.js",
+      "solution": "C:\\Users\\\nYour Name\n>node demo_delete.js"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "9db02486-a596-4bcb-bfd1-819ef4fa531c",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2f089e4e-d88b-4678-93e4-421c5551a334",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "1eec9eda-74fd-4482-a487-81d2641ae6b9",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is or document as it?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "a query object defining which document to delete",
+        "called in MongoDB"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of or document as it is 'called in MongoDB'."
+    },
+    {
+      "question": "What is method?",
+      "options": [
+        "a query object defining which document to delete",
+        "called in MongoDB",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of method is 'a query object defining which document to delete'."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsMongoDBDelete concepts and techniques. You'll learn how to use Node.jsMongoDBDelete effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsMongoDBDelete and how to apply it in your projects."
+}

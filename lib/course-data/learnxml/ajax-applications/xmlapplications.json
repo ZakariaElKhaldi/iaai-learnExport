@@ -1,0 +1,142 @@
+{
+  "id": "95f4b312-ef70-4c77-bd72-85e389ece265",
+  "title": "XMLApplications",
+  "slug": "xmlapplications",
+  "metadata": {
+    "description": "Learn about XMLApplications with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "function",
+      "getelementsbytagname",
+      "table",
+      "example",
+      "xmlhttp",
+      "childnodes",
+      "nodevalue",
+      "html",
+      "artist",
+      "title"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnXML",
+    "subcategory": "AJAX Applications"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "XML\nApplications",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "This chapter demonstrates some HTML applications using \nXML, HTTP, DOM, and JavaScript.\nThe XML Document Used\nIn this chapter we will use the XML file called\n\"cd_catalog.xml\"\n.\nDisplay XML Data in an HTML Table\nThis example loops through each <CD> element, and displays the values of the <ARTIST> and the \n<TITLE> elements in an HTML table:\nExample\n<html>\n<head>\n<style>\ntable, th, td {\nborder: 1px solid black;\nborder-collapse:collapse;\n}\nth, td {\npadding: 5px;\n}\n</style>\n</head>\n<body>\n<button type=\"button\" onclick=\"loadXMLDoc()\">Get my CD collection</button>\n<br><br>\n<table id=\"demo\"></table>\n<script>\nfunction loadXMLDoc() {\nvar xmlhttp = new XMLHttpRequest();\nxmlhttp.onreadystatechange = \nfunction() {\nif (this.readyState == 4 && this.status == 200) {\nmyFunction(this);\n}\n};\nxmlhttp.open(\"GET\", \"cd_catalog.xml\", true);\nxmlhttp.send();\n}\nfunction myFunction(xml) {\nvar i;\nvar xmlDoc = xml.responseXML;\nvar table=\"<tr><th>Artist</th><th>Title</th></tr>\";\nvar x = xmlDoc.getElementsByTagName(\"CD\");\nfor (i = 0; i <x.length; \ni++) {\ntable += \"<tr><td>\" +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n+\n\"</td><td>\" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n+\n\"</td></tr>\";\n}\ndocument.getElementById(\"demo\").innerHTML = table;\n}\n</script>\n</body>\n</html>\n\nFor more information about using JavaScript and the XML DOM, go to\nDOM Intro.\nDisplay the First CD in an HTML div Element\nThis example uses a function to display the first CD element in an HTML element with id=\"showCD\":\nExample\ndisplayCD(0);\nfunction displayCD(i) {\nvar xmlhttp \n = new XMLHttpRequest();\nxmlhttp.onreadystatechange = \n function() {\nif (this.readyState \n == 4 && this.status == 200) {\nmyFunction(this, i);\n}\n};\nxmlhttp.open(\"GET\", \"cd_catalog.xml\", true);\nxmlhttp.send();\n}\nfunction myFunction(xml, i) {\nvar xmlDoc = xml.responseXML;\nx = \n xmlDoc.getElementsByTagName(\"CD\");\ndocument.getElementById(\"showCD\").innerHTML =\n\"Artist: \" \n +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n +\n\"<br>Title: \" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n +\n\"<br>Year: \" +\nx[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}\n\nNavigate Between the CDs\nTo navigate between the CDs, in the example above, add a\n\nExample\nfunction \n{\n// display the \nif (i < x.length-1) {\ni++;\ndisplayCD(i);\n}\n}\nfunction \n{\n// display the \nif (i > 0) {\ni--;\ndisplayCD(i);\n}\n}\n\nShow Album Information When Clicking On a CD\nThe last example shows how you can display album information when the user clicks on a CD:\nExample\nfunction displayCD(i) {\ndocument.getElementById(\"showCD\").innerHTML \n\t=\n\"Artist: \" +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n\t+\n\"<br>Title: \" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n\t+\n\"<br>Year: \" +\nx[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<html>\n<head>\n<style>\ntable, th, td {\nborder: 1px solid black;\nborder-collapse:collapse;\n}\nth, td {\npadding: 5px;\n}\n</style>\n</head>\n<body>\n<button type=\"button\" onclick=\"loadXMLDoc()\">Get my CD collection</button>\n<br><br>\n<table id=\"demo\"></table>\n<script>\nfunction loadXMLDoc() {\nvar xmlhttp = new XMLHttpRequest();\nxmlhttp.onreadystatechange = \nfunction() {\nif (this.readyState == 4 && this.status == 200) {\nmyFunction(this);\n}\n};\nxmlhttp.open(\"GET\", \"cd_catalog.xml\", true);\nxmlhttp.send();\n}\nfunction myFunction(xml) {\nvar i;\nvar xmlDoc = xml.responseXML;\nvar table=\"<tr><th>Artist</th><th>Title</th></tr>\";\nvar x = xmlDoc.getElementsByTagName(\"CD\");\nfor (i = 0; i <x.length; \ni++) {\ntable += \"<tr><td>\" +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n+\n\"</td><td>\" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n+\n\"</td></tr>\";\n}\ndocument.getElementById(\"demo\").innerHTML = table;\n}\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "displayCD(0);\nfunction displayCD(i) {\nvar xmlhttp \n = new XMLHttpRequest();\nxmlhttp.onreadystatechange = \n function() {\nif (this.readyState \n == 4 && this.status == 200) {\nmyFunction(this, i);\n}\n};\nxmlhttp.open(\"GET\", \"cd_catalog.xml\", true);\nxmlhttp.send();\n}\nfunction myFunction(xml, i) {\nvar xmlDoc = xml.responseXML;\nx = \n xmlDoc.getElementsByTagName(\"CD\");\ndocument.getElementById(\"showCD\").innerHTML =\n\"Artist: \" \n +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n +\n\"<br>Title: \" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n +\n\"<br>Year: \" +\nx[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "function next()\n{\n// display the next CD, unless you are on the last CD\nif (i < x.length-1) {\ni++;\ndisplayCD(i);\n}\n}\nfunction previous()\n{\n// display the previous CD, unless you are on the first CD\nif (i > 0) {\ni--;\ndisplayCD(i);\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "function displayCD(i) {\ndocument.getElementById(\"showCD\").innerHTML \n\t=\n\"Artist: \" +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n\t+\n\"<br>Title: \" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n\t+\n\"<br>Year: \" +\nx[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n<head>\n<style>\ntable, th, td {\nborder: 1px solid black;\nborder-collapse:collapse;\n}\nth, td {\npadding: 5px;\n}\n</style>\n</head>\n<body>\n<button type=\"button\" onclick=\"loadXMLDoc()\">Get my CD collection</button>\n<br><br>\n<table id=\"demo\"></table>\n<script>\nfunction loadXMLDoc() {\nvar xmlhttp = new XMLHttpRequest();\nxmlhttp.onreadystatechange = \nfunction() {\nif (this.readyState == 4 && this.status == 200) {\nmyFunction(this);\n}\n};\nxmlhttp.open(\"GET\", \"cd_catalog.xml\", true);\n# TODO: Complete this line\n}\nfunction myFunction(xml) {\nvar i;\nvar xmlDoc = xml.responseXML;\nvar table=\"<tr><th>Artist</th><th>Title</th></tr>\";\nvar x = xmlDoc.getElementsByTagName(\"CD\");\nfor (i = 0; i <x.length; \ni++) {\ntable += \"<tr><td>\" +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n+\n\"</td><td>\" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n+\n\"</td></tr>\";\n}\ndocument.getElementById(\"demo\").innerHTML = table;\n}\n</script>\n</body>\n</html>",
+      "solution": "<html>\n<head>\n<style>\ntable, th, td {\nborder: 1px solid black;\nborder-collapse:collapse;\n}\nth, td {\npadding: 5px;\n}\n</style>\n</head>\n<body>\n<button type=\"button\" onclick=\"loadXMLDoc()\">Get my CD collection</button>\n<br><br>\n<table id=\"demo\"></table>\n<script>\nfunction loadXMLDoc() {\nvar xmlhttp = new XMLHttpRequest();\nxmlhttp.onreadystatechange = \nfunction() {\nif (this.readyState == 4 && this.status == 200) {\nmyFunction(this);\n}\n};\nxmlhttp.open(\"GET\", \"cd_catalog.xml\", true);\nxmlhttp.send();\n}\nfunction myFunction(xml) {\nvar i;\nvar xmlDoc = xml.responseXML;\nvar table=\"<tr><th>Artist</th><th>Title</th></tr>\";\nvar x = xmlDoc.getElementsByTagName(\"CD\");\nfor (i = 0; i <x.length; \ni++) {\ntable += \"<tr><td>\" +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n+\n\"</td><td>\" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n+\n\"</td></tr>\";\n}\ndocument.getElementById(\"demo\").innerHTML = table;\n}\n</script>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "displayCD(0);\nfunction displayCD(i) {\nvar xmlhttp \n = new XMLHttpRequest();\nxmlhttp.onreadystatechange = \n function() {\nif (this.readyState \n == 4 && this.status == 200) {\nmyFunction(this, i);\n}\n};\nxmlhttp.open(\"GET\", \"cd_catalog.xml\", true);\nxmlhttp.send();\n}\nfunction myFunction(xml, i) {\nvar xmlDoc = xml.responseXML;\nx = \n xmlDoc.getElementsByTagName(\"CD\");\ndocument.getElementById(\"showCD\").innerHTML =\n\"Artist: \" \n# TODO: Complete this line\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n +\n\"<br>Title: \" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n +\n\"<br>Year: \" +\nx[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}",
+      "solution": "displayCD(0);\nfunction displayCD(i) {\nvar xmlhttp \n = new XMLHttpRequest();\nxmlhttp.onreadystatechange = \n function() {\nif (this.readyState \n == 4 && this.status == 200) {\nmyFunction(this, i);\n}\n};\nxmlhttp.open(\"GET\", \"cd_catalog.xml\", true);\nxmlhttp.send();\n}\nfunction myFunction(xml, i) {\nvar xmlDoc = xml.responseXML;\nx = \n xmlDoc.getElementsByTagName(\"CD\");\ndocument.getElementById(\"showCD\").innerHTML =\n\"Artist: \" \n +\nx[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n +\n\"<br>Title: \" +\nx[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n +\n\"<br>Year: \" +\nx[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "05ba26ee-d5f6-4942-b037-f92c78f5cc94",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "5184f4c1-eadc-464f-9f52-1b26fba5aebd",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f0775a82-9d2d-440d-9fa1-f5ba854aa00b",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers XMLApplications concepts and techniques. You'll learn how to use XMLApplications effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of XMLApplications and how to apply it in your projects."
+}

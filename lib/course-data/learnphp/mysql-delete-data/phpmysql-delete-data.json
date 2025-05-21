@@ -1,0 +1,133 @@
+{
+  "id": "8eeaf2b2-4250-462c-980f-f50eefbb809f",
+  "title": "PHPMySQL Delete Data",
+  "slug": "phpmysql-delete-data",
+  "metadata": {
+    "description": "Learn about PHPMySQL Delete Data with clear explanations and practical examples.",
+    "keywords": [
+      "php",
+      "conn",
+      "delete",
+      "record",
+      "username",
+      "password",
+      "example",
+      "dbname",
+      "deleted",
+      "servername",
+      "connection"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "MySQL Delete Data"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nMySQL Delete Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Delete Data From a MySQL Table Using MySQLi and PDO\nThe DELETE statement is used to delete records from a table:\nDELETE FROM table_name\nWHERE some_column = some_value\nNotice the WHERE clause in the DELETE syntax:\nThe WHERE clause \nspecifies which record or records that should be deleted. If you omit the WHERE \nclause, all records will be deleted!\nTo learn more about SQL, please visit our\nSQL tutorial\n.\nLet's look at the \"MyGuests\" table:\nid\nfirstname\nlastname\nemail\nreg_date\n1\nJohn\nDoe\njohn@example.com\n2014-10-22 14:26:15\n2\nMary\nMoe\nmary@example.com\n2014-10-23 10:22:30\n3\nJulie\nDooley\njulie@example.com\n2014-10-26 10:48:23\nThe following examples delete the record with id=3 in the \"MyGuests\" table:\nExample (MySQLi Object-oriented)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\nif ($conn->query($sql) === TRUE) {\necho \"Record deleted successfully\";\n} else {\necho \"Error deleting record: \" . $conn->error;\n}\n$conn->close();\n?>\nExample (MySQLi Procedural)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\nif (mysqli_query($conn, $sql)) {\necho \"Record deleted successfully\";\n} else {\necho \"Error deleting record: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>\nExample (PDO)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\n// use exec() because no results are returned\n$conn->exec($sql);\necho \"Record deleted successfully\";\n} catch(PDOException $e) {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>\nAfter the record is deleted, the table will look like this:\nid\nfirstname\nlastname\nemail\nreg_date\n1\nJohn\nDoe\njohn@example.com\n2014-10-22 14:26:15\n2\nMary\nMoe\nmary@example.com\n2014-10-23 10:22:30\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Object-oriented)",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\nif ($conn->query($sql) === TRUE) {\necho \"Record deleted successfully\";\n} else {\necho \"Error deleting record: \" . $conn->error;\n}\n$conn->close();\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli object-oriented)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Procedural)",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\nif (mysqli_query($conn, $sql)) {\necho \"Record deleted successfully\";\n} else {\necho \"Error deleting record: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli procedural)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (PDO)",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\n// use exec() because no results are returned\n$conn->exec($sql);\necho \"Record deleted successfully\";\n} catch(PDOException $e) {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>",
+      "language": "html",
+      "explanation": "Example of example (pdo)"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\nif ($conn->query($sql) === TRUE) {\necho \"Record deleted successfully\";\n} else {\necho \"Error deleting record: \" . $conn->error;\n}\n# TODO: Complete this line\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\nif ($conn->query($sql) === TRUE) {\necho \"Record deleted successfully\";\n} else {\necho \"Error deleting record: \" . $conn->error;\n}\n$conn->close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n# TODO: Complete this line\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\nif (mysqli_query($conn, $sql)) {\necho \"Record deleted successfully\";\n} else {\necho \"Error deleting record: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// sql to delete a record\n$sql = \"DELETE FROM MyGuests WHERE id=3\";\nif (mysqli_query($conn, $sql)) {\necho \"Record deleted successfully\";\n} else {\necho \"Error deleting record: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "10b698fa-1950-4789-8cfb-1e8ee8ef15bd",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "7e44ddfc-e55d-473f-a0f9-6e8775d01139",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "1d167d9c-1a43-41a5-89fe-e203091e0859",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is PHP\nMySQL Delete Data\n\nDelete Data From a MySQL Table Using MySQLi and PDO\nThe DELETE statement?",
+      "options": [
+        "used to delete records from a table:\nDELETE FROM table_name\nWHERE some_column = some_value\nNotice the WHERE clause in the DELETE syntax:\nThe WHERE clause \nspecifies which record or records that should be deleted",
+        "returned\n$conn->exec($sql);\necho \"Record deleted successfully\";\n} catch(PDOException $e) {\necho $sql",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of PHP\nMySQL Delete Data\n\nDelete Data From a MySQL Table Using MySQLi and PDO\nThe DELETE statement is 'used to delete records from a table:\nDELETE FROM table_name\nWHERE some_column = some_value\nNotice the WHERE clause in the DELETE syntax:\nThe WHERE clause \nspecifies which record or records that should be deleted'."
+    },
+    {
+      "question": "What is because no results?",
+      "options": [
+        "used to delete records from a table:\nDELETE FROM table_name\nWHERE some_column = some_value\nNotice the WHERE clause in the DELETE syntax:\nThe WHERE clause \nspecifies which record or records that should be deleted",
+        "None of the above.",
+        "returned\n$conn->exec($sql);\necho \"Record deleted successfully\";\n} catch(PDOException $e) {\necho $sql",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of because no results is 'returned\n$conn->exec($sql);\necho \"Record deleted successfully\";\n} catch(PDOException $e) {\necho $sql'."
+    }
+  ],
+  "summary": "This tutorial covers PHPMySQL Delete Data concepts and techniques. You'll learn how to use PHPMySQL Delete Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPMySQL Delete Data and how to apply it in your projects."
+}

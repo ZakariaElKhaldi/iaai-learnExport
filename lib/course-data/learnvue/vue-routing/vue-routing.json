@@ -1,0 +1,112 @@
+{
+  "id": "08bb140b-b79a-4cd3-8d71-d7761d30f6b6",
+  "title": "Vue Routing",
+  "slug": "vue-routing",
+  "metadata": {
+    "description": "Learn about Vue Routing with clear explanations and practical examples.",
+    "keywords": [
+      "router",
+      "component",
+      "food",
+      "link",
+      "routing",
+      "page",
+      "template",
+      "example",
+      "animals",
+      "button"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue Routing"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue Routing",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Routing\nin Vue is used to navigate the Vue application, and it happens on the client side (in the browser) without full page reload, which results in a faster user experience.\nRouting\nis a way to navigate, similar to how we have used\ndynamic components\nearlier.\nWith\nrouting\nwe can use the URL address to direct someone to a specific place in our Vue application.\nNavigate Using a Dynamic Component\nTo understand routing in Vue, let's first look at an application that uses a dynamic component to switch between two components.\nWe can switch between the components using buttons:\nExample\nFoodItems.vue\n:\n<template>\n    <h1>Food!</h1>\n    <p>I like most types of food.</p>\n</template>\nAnimalCollection.vue\n:\n<template>\n    <h1>Animals!</h1>\n    <p>I want to learn about at least one new animal every year.</p>\n</template>\nApp.vue\n:\n<template>\n  <p>Choose what part of this page you want to see:</p>\n  <button @click=\"activeComp = 'animal-collection'\">Animals</button>\n  <button @click=\"activeComp = 'food-items'\">Food</button><br>\n  <div>\n    <component :is=\"activeComp\"></component>\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n      return {\n        activeComp: ''\n      }\n    }\n}\n</script>\n\n<style scoped>\n  button {\n    padding: 5px;\n    margin: 10px;\n  }\n  div {\n    border: dashed black 1px;\n    padding: 20px;\n    margin: 10px;\n    display: inline-block;\n  }\n</style>\nRun Example \u00bb\nFrom Dynamic Component to Routing\nWe build SPAs (Single Page Applications) with Vue, which means that our application only contains one *.html file. And that means we cannot direct people to other *.html files to show them different content on our page.\nIn the example above, we can navigate between different content on the page, but we cannot give someone else an address to the page so that they come directly to the part about food, but with routing we can do that.\nWith routing set up appropriately, if you open the Vue application with an extension to the URL address, like \"/food-items\" for example, you will come directly to the part with the food content.\nInstall The Vue Router Library\nTo use routing in Vue on your machine, install the Vue Router library in your project folder using the terminal:\nnpm install vue-router@4\nUpdate main.js\nTo use routing we must create a router, and we do that in the main.js file.\nmain.js\n:\nimport { createApp } from 'vue'\nimport { createRouter, createWebHistory } from 'vue-router'\n\nimport App from './App.vue'\nimport FoodItems from './components/FoodItems.vue'\nimport AnimalCollection from './components/AnimalCollection.vue'\n\nconst router = createRouter({\n    history: createWebHistory(),\n    routes: [\n        { path: '/animals', component: AnimalCollection },\n        { path: '/food', component: FoodItems },\n    ]\n});\n\nconst app = createApp(App)\n\napp.use(router);\napp.component('food-items', FoodItems);\napp.component('animal-collection', AnimalCollection);\napp.mount('#app')\nLines 2, 8-14 and 18 are added to add router functionality.\nLines 19-20 are deleted because the components already get included via the router on lines 11-12.\nWe have now created a router that can for example open the 'AnimalCollection' component if '/animals' is added to the end of the original URL address, but it won't work until the \n<router-view>\ncomponent. The router also keep track of the web history so that you can go back and forwards in the history with the arrows usually located in the top left corner in the web browser \nUse The <router-view> Component\nTo change the content on our page with the new router, we need to remove the dynamic component in the \n<router-view>\ncomponent instead.\nApp.vue\n:\n<template>\n  <p>Choose what part of this page you want to see:</p>\n  <button @click=\"activeComp = 'animal-collection'\">Animals</button>\n  <button @click=\"activeComp = 'food-items'\">Food</button><br>\n  <div>\n    <router-view></router-view>\n<component :is=\"activeComp\"></component>\n</div>\n</template>\nIf you have done the change above on your computer you can add '/food' to the URL address of your project page in the browser, and the page should update to show the food content, like this:\nUse The <router-link> Component\nWe can replace the buttons with the\n<router-link>\ncomponent because that works better with the router.\nWe have no need for the 'activeComp' data property anymore, so we can delete it, and we can actually delete the whole\n<script>\ntag, because it is empty.\nApp.vue\n:\n<template>\n  <p>Choose what part of this page you want to see:</p>\n  <router-link to=\"/animals\">Animals</router-link>\n  <router-link to=\"/food\">Food</router-link><br>\n  <div>\n    <router-view></router-view>\n  </div>\n</template>\n<script></script>\nStyle to The <router-link> Component\nThe\n<router-link>\ncomponent is rendered to an\n<a>\ntag. We can see that if we right-click the element in the browser and inspect it:\nAs you can see in the screenshot above, Vue also keeps track on which component is the active one, and provides the 'router-link-active' class to the active\n<router-link>\ncomponent (that is now rendered to an\n<a>\ntag).\nWe can use the information above to give style to highlight which\n<router-link>\ncomponent is the active one:\nExample\nApp.vue\n:\n<template>\n  <p>Choose what part of this page you want to see:</p>\n  <router-link to=\"/animals\">Animals</router-link>\n  <router-link to=\"/food\">Food</router-link><br>\n  <div>\n    <router-view></router-view>\n  </div>\n</template>\n\n<style scoped>\n  a {\n    display: inline-block;\n    background-color: black;\n    border: solid 1px black;\n    color: white;\n    padding: 5px;\n    margin: 10px;\n  }\n  a:hover,\n  a.router-link-active {\n    background-color: rgb(110, 79, 13);\n  }\n  div {\n    border: dashed black 1px;\n    padding: 20px;\n    margin: 10px;\n    display: inline-block;\n  }\n</style>\nRun Example \u00bb\nNote:\nIn the example above, the URL address is not updated, but if you do this on your own machine the URL address will be updated. The example above works even if the URL address is not updated because the routing is taken care of internally by the router in Vue.\nVue Exercises\nTest Yourself With Exercises\nExercise:\nRouting in Vue is set up in the 'main.js' file.\nFill the blanks below so that the route is created successfully.\nimport { createApp } from 'vue'\nimport { createRouter, createWebHistory } from 'vue-router'\n\nimport App from './App.vue'\nimport FishTypes from './components/FishTypes.vue'\n\nconst router = createRouter({\n    history: createWebHistory(),\n    routes: [\n        {\n: '/fish',\n: FishTypes }\n    ]\n});\n\nconst app = createApp(App)\napp.use(router);\napp.mount('#app')\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "npm install vue-router@4",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "npm install vue-router@4"
+    },
+    {
+      "title": "Create a Layout",
+      "description": "Build a simple layout using the techniques from this tutorial.",
+      "difficulty": "easy",
+      "starter_code": "<!-- Add your code here -->",
+      "solution": "<!-- Example solution would go here -->"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "18f0eb84-8ef9-424e-b452-d911328bfbd1",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "c91c87e5-b093-4998-a609-ec85c4bdc053",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "64a9c63d-cb5c-4290-a52b-46cd002c380d",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Vue Routing\n\nRouting\nin Vue?",
+      "options": [
+        "used to navigate the Vue application",
+        "None of the above.",
+        "None of the above.",
+        "a way to navigate"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Vue Routing\n\nRouting\nin Vue is 'used to navigate the Vue application'."
+    },
+    {
+      "question": "What is Routing?",
+      "options": [
+        "a way to navigate",
+        "None of the above.",
+        "None of the above.",
+        "used to navigate the Vue application"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Routing is 'a way to navigate'."
+    }
+  ],
+  "summary": "This tutorial covers Vue Routing concepts and techniques. You'll learn how to use Vue Routing effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue Routing and how to apply it in your projects."
+}

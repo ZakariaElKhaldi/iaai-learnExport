@@ -1,0 +1,151 @@
+{
+  "id": "98febe31-1d3d-4fc0-93fd-ac7e8947641b",
+  "title": "MySQLINSERT INTO SELECTStatement",
+  "slug": "mysqlinsert-into-selectstatement",
+  "metadata": {
+    "description": "Learn about MySQLINSERT INTO SELECTStatement with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "insert",
+      "select",
+      "table",
+      "country",
+      "city",
+      "statement",
+      "customers",
+      "suppliers",
+      "copies",
+      "columns"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMySQL",
+    "subcategory": "MySQL INSERT SELECT"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "MySQL\nINSERT INTO SELECT\nStatement",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The MySQL INSERT INTO SELECT Statement\nThe\nINSERT INTO SELECT\nstatement copies data from one table and \ninserts it into another table.\nThe\nINSERT INTO SELECT\nstatement requires that \nthe data types in source and target tables matches.\nNote:\nThe existing records in the target table are unaffected.\nINSERT INTO SELECT Syntax\nCopy all columns from one table to another table:\nINSERT INTO\ntable2\nSELECT * FROM\ntable1\nWHERE\ncondition\n;\nCopy only some columns from one table into another table:\nINSERT INTO\ntable2\n(\ncolumn1\n,\ncolumn2\n,\ncolumn3\n, ...)\nSELECT\ncolumn1\n,\ncolumn2\n,\ncolumn3\n, ...\nFROM\ntable1\nWHERE\ncondition\n;\nDemo Database\nIn this tutorial we will use the well-known Northwind sample database.\nBelow is a selection from the \"Customers\" table:\nCustomerID\nCustomerName\nContactName\nAddress\nCity\nPostalCode\nCountry\n1\nAlfreds Futterkiste\nMaria Anders\nObere Str. 57\nBerlin\n12209\nGermany\n2\nAna Trujillo Emparedados y helados\nAna Trujillo\nAvda. de la Constituci\u00f3n 2222\nM\u00e9xico D.F.\n05021\nMexico\n3\nAntonio Moreno Taquer\u00eda\nAntonio Moreno\nMataderos 2312\nM\u00e9xico D.F.\n05023\nMexico\nAnd a selection from the \"Suppliers\" table:\nSupplierID\nSupplierName\nContactName\nAddress\nCity\nPostal Code\nCountry\n1\nExotic Liquid\nCharlotte Cooper\n49 Gilbert St.\nLondona\nEC1 4SD\nUK\n2\nNew Orleans Cajun Delights\nShelley Burke\nP.O. Box 78934\nNew Orleans\n70117\nUSA\n3\nGrandma Kelly's Homestead\nRegina Murphy\n707 Oxford Rd.\nAnn Arbor\n48104\nUSA\nMySQL INSERT INTO SELECT Examples\nThe following SQL statement copies \"Suppliers\" into \"Customers\" (the columns \nthat are not filled with data, will contain NULL):\nExample\nINSERT INTO Customers (CustomerName, \n  City, Country)\nSELECT SupplierName, City, Country FROM Suppliers;\nThe following SQL statement copies \"Suppliers\" into \"Customers\" (fill all \ncolumns):\nExample\nINSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, \n  Country)\nSELECT SupplierName, ContactName, Address, City, PostalCode, \n  Country FROM Suppliers;\nThe following SQL statement copies only the German suppliers into \"Customers\":\nExample\nINSERT INTO Customers (CustomerName, \n  City, Country)\nSELECT SupplierName, City, Country FROM Suppliers\nWHERE Country='Germany';\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "INSERT INTO\ntable2\nSELECT * FROM\ntable1\nWHERE\ncondition\n;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "INSERT INTO\ntable2\n(\ncolumn1\n,\ncolumn2\n,\ncolumn3\n, ...)\nSELECT\ncolumn1\n,\ncolumn2\n,\ncolumn3\n, ...\nFROM\ntable1\nWHERE\ncondition\n;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "INSERT INTO Customers (CustomerName, \n  City, Country)\nSELECT SupplierName, City, Country FROM Suppliers;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, \n  Country)\nSELECT SupplierName, ContactName, Address, City, PostalCode, \n  Country FROM Suppliers;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "INSERT INTO Customers (CustomerName, \n  City, Country)\nSELECT SupplierName, City, Country FROM Suppliers\nWHERE Country='Germany';",
+      "language": "sql",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "INSERT INTO\ntable2\n# TODO: Complete this line\ntable1\nWHERE\ncondition\n;",
+      "solution": "INSERT INTO\ntable2\nSELECT * FROM\ntable1\nWHERE\ncondition\n;"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "INSERT INTO\ntable2\n(\ncolumn1\n,\n# TODO: Complete this line\n,\ncolumn3\n, ...)\nSELECT\ncolumn1\n,\ncolumn2\n,\ncolumn3\n, ...\nFROM\ntable1\nWHERE\ncondition\n;",
+      "solution": "INSERT INTO\ntable2\n(\ncolumn1\n,\ncolumn2\n,\ncolumn3\n, ...)\nSELECT\ncolumn1\n,\ncolumn2\n,\ncolumn3\n, ...\nFROM\ntable1\nWHERE\ncondition\n;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b5c1665b-6d21-4c06-b65a-5c9f9485ec13",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "1618b5a0-1266-45dd-a03a-f1e259cf38c8",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "fe55404a-9991-465f-99c2-af34440ac82d",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The existing records in the target table?",
+      "options": [
+        "a selection from the \"Customers\" table:\nCustomerID\nCustomerName\nContactName\nAddress\nCity\nPostalCode\nCountry\n1\nAlfreds Futterkiste\nMaria Anders\nObere Str",
+        "unaffected",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The existing records in the target table is 'unaffected'."
+    },
+    {
+      "question": "What is Below?",
+      "options": [
+        "a selection from the \"Customers\" table:\nCustomerID\nCustomerName\nContactName\nAddress\nCity\nPostalCode\nCountry\n1\nAlfreds Futterkiste\nMaria Anders\nObere Str",
+        "unaffected",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Below is 'a selection from the \"Customers\" table:\nCustomerID\nCustomerName\nContactName\nAddress\nCity\nPostalCode\nCountry\n1\nAlfreds Futterkiste\nMaria Anders\nObere Str'."
+    }
+  ],
+  "summary": "This tutorial covers MySQLINSERT INTO SELECTStatement concepts and techniques. You'll learn how to use MySQLINSERT INTO SELECTStatement effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of MySQLINSERT INTO SELECTStatement and how to apply it in your projects."
+}

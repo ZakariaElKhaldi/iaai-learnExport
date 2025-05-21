@@ -1,0 +1,151 @@
+{
+  "id": "a6ca84a4-1c66-4372-9508-66929beaee83",
+  "title": "Python MongoDBFind",
+  "slug": "python-mongodbfind",
+  "metadata": {
+    "description": "Learn about Python MongoDBFind with clear explanations and practical examples.",
+    "keywords": [
+      "python",
+      "find",
+      "example",
+      "pymongo",
+      "myclient",
+      "mydb",
+      "mycol",
+      "mongodb",
+      "method",
+      "customers",
+      "print"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Python Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMatplotlib",
+    "subcategory": "MongoDB Find"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Python MongoDB\nFind",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "In MongoDB we use the\nfind()\nand\nfind_one()\nmethods to find data in a collection.\nJust like the\nSELECT\nstatement is used to find data in a \n  table in a MySQL database.\nFind One\nTo select data from a collection in MongoDB, we can use the\nfind_one()\nmethod.\nThe\nfind_one()\nmethod returns the first \noccurrence in the selection.\nExample\nFind the first document in the customers collection:\nimport pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nx = mycol.find_one()\nprint(x)\nRun example \u00bb\nFind All\nTo select data from a table in MongoDB, we can also use the\nfind()\nmethod.\nThe\nfind()\nmethod returns all \noccurrences in the selection.\nThe first parameter of the\nfind()\nmethod \nis a query object. In this example we use an empty query object, which selects \nall documents in the collection.\nNo parameters in the find() method gives you the same result as\nSELECT *\nin MySQL.\nExample\nReturn all documents in the \"customers\" collection, and print each document:\nimport pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find():\nprint(x)\nRun example \u00bb\nReturn Only Some Fields\nThe second parameter of the\nfind()\nmethod \nis an object describing which fields to include in the result.\nThis parameter is optional, and if omitted, all fields will be included in \nthe result.\nExample\nReturn only the names and addresses, not the _ids:\nimport pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find({},{ \"_id\": 0, \"name\": 1, \"address\": 1 }):\nprint(x)\nRun example \u00bb\nYou are not allowed to specify both 0 and 1 values in the same object (except \nif one of the fields is the _id field). If you specify a field with the value 0, all other fields get the value 1, \nand vice versa:\nExample\nThis example will exclude \"address\" from the result:\nimport pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find({},{ \"address\": 0 }):\nprint(x)\nRun example \u00bb\nExample\nYou get an error if you specify both 0 and 1 values in the same object \n(except if one of the fields is the _id field):\nimport pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find({},{ \"name\": 1, \"address\": 0 }):\nprint(x)\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nx = mycol.find_one()\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find():\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find({},{ \"_id\": 0, \"name\": 1, \"address\": 1 }):\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find({},{ \"address\": 0 }):\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find({},{ \"name\": 1, \"address\": 0 }):\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nx = mycol.find_one()\n# TODO: Complete this line",
+      "solution": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nx = mycol.find_one()\nprint(x)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\n# TODO: Complete this line\nmycol = mydb[\"customers\"]\nfor x in mycol.find():\nprint(x)",
+      "solution": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nfor x in mycol.find():\nprint(x)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c7f2dfbc-a562-4e00-a41b-39edb36947db",
+      "title": "Python Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "0ef52cfe-3ace-48a5-9743-ee29a6c8017c",
+      "title": "Python Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "b0c5c9d3-e07a-4b35-96bc-6039bb46a614",
+      "title": "Python Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Just like the\nSELECT\nstatement?",
+      "options": [
+        "a query object",
+        "None of the above.",
+        "None of the above.",
+        "used to find data in a \n  table in a MySQL database"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Just like the\nSELECT\nstatement is 'used to find data in a \n  table in a MySQL database'."
+    },
+    {
+      "question": "What is method?",
+      "options": [
+        "None of the above.",
+        "used to find data in a \n  table in a MySQL database",
+        "a query object",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of method is 'a query object'."
+    }
+  ],
+  "summary": "This tutorial covers Python MongoDBFind concepts and techniques. You'll learn how to use Python MongoDBFind effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Python MongoDBFind and how to apply it in your projects."
+}

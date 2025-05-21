@@ -1,0 +1,133 @@
+{
+  "id": "b26a870a-3dda-479f-9769-0343fccca1d5",
+  "title": "AppML Case Study - Customers",
+  "slug": "appml-case-study-customers",
+  "metadata": {
+    "description": "Learn about AppML Case Study - Customers with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "appml",
+      "label",
+      "input",
+      "item",
+      "class",
+      "html",
+      "customername",
+      "city",
+      "country",
+      "border"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAppML",
+    "subcategory": "Case Customers"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AppML Case Study - Customers",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The HTML Page\nThis is the HTML source:\n<!DOCTYPE html>\n<html>\n<head>\n<link rel=\"stylesheet\" \n    href=\"https://www..com/w3css/4/w3.css\">\n<script src=\"https://www..com/appml/2.0.3/appml.js\"></script>\n</head>\n<body>\n<div class=\"w3-container w3-content\">\n<h1>Customers</h1>\n<div class=\"w3-container w3-light-grey \n    w3-padding-large w3-margin-bottom\" \n    appml-data=\"appml.php?model=model_customersform\" \n    appml-controller=\"myFormController\" id=\"Form01\" style=\"display:none;\">\n<div appml-include-html=\"inc_formcommands.htm\"></div>\n<p>\n<label>CustomerName:</label>\n<input id=\"customername\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>ContactName:</label>\n<input id=\"contactname\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label>Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label>PostalCode:</label>\n<input id=\"postalcode\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>Country:</label>\n<input \n    id=\"country\" class=\"w3-input w3-border\">\n</p>\n</div>\n<div appml-data=\"appml.php?model=model_customerslist\">\n<div \n    appml-include-html=\"inc_listcommands.htm\"></div>\n<div \n    appml-include-html=\"inc_filter.htm\"></div>\n<table class=\"w3-table-all\">\n<tr>\n<th></th>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr \n    appml-repeat=\"records\">\n<td style=\"cursor:pointer;width:40px;\" \n    onclick=\"appml('Form01').run({{CustomerID}});\">&#9998;</td>\n<td>{{CustomerName}}</td>\n<td>{{City}}</td>\n<td>{{Country}}</td>\n</tr>\n</table>\n</div>\n</div>\n<script>\nfunction myFormController($appml) {\nif ($appml.message == \n    \"ready\") {return -1; }\nif ($appml.message == \"loaded\") {\ndocument.getElementById(\"Form01\").style.display = \"\";\n}\n}\n</script>\n</body>\n</html>\nPHP \n  \u00bb\n.NET \u00bb\nModels\nThese are the models used in the application:\nList Model\n{\n\"rowsperpage\" : 10,\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"sql\" : \"SELECT * FROM Customers\",\n\"orderby\" : \"CustomerName\"\n},\n\"filteritems\" : [\n{\"item\" : \"CustomerName\", \"label\" : \"Customer\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n],\n\"sortitems\" : [\n{\"item\" : \"CustomerName\", \"label\" : \"Customer\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n]\n}\nForm Model\n{\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"maintable\" : \n    \"Customers\",\n\"keyfield\" : \"CustomerID\",\n\"sql\" : \"SELECT * FROM \n    Customers\"\n},\n\"updateItems\" : [\n{\"item\" : \"CustomerName\"},\n{\"item\" : \"Address\"},\n{\"item\" : \"PostalCode\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n]\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<!DOCTYPE html>\n<html>\n<head>\n<link rel=\"stylesheet\" \n    href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://www.w3schools.com/appml/2.0.3/appml.js\"></script>\n</head>\n<body>\n<div class=\"w3-container w3-content\">\n<h1>Customers</h1>\n<div class=\"w3-container w3-light-grey \n    w3-padding-large w3-margin-bottom\" \n    appml-data=\"appml.php?model=model_customersform\" \n    appml-controller=\"myFormController\" id=\"Form01\" style=\"display:none;\">\n<div appml-include-html=\"inc_formcommands.htm\"></div>\n<p>\n<label>CustomerName:</label>\n<input id=\"customername\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>ContactName:</label>\n<input id=\"contactname\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label>Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label>PostalCode:</label>\n<input id=\"postalcode\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>Country:</label>\n<input \n    id=\"country\" class=\"w3-input w3-border\">\n</p>\n</div>\n<div appml-data=\"appml.php?model=model_customerslist\">\n<div \n    appml-include-html=\"inc_listcommands.htm\"></div>\n<div \n    appml-include-html=\"inc_filter.htm\"></div>\n<table class=\"w3-table-all\">\n<tr>\n<th></th>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr \n    appml-repeat=\"records\">\n<td style=\"cursor:pointer;width:40px;\" \n    onclick=\"appml('Form01').run({{CustomerID}});\">&#9998;</td>\n<td>{{CustomerName}}</td>\n<td>{{City}}</td>\n<td>{{Country}}</td>\n</tr>\n</table>\n</div>\n</div>\n<script>\nfunction myFormController($appml) {\nif ($appml.message == \n    \"ready\") {return -1; }\nif ($appml.message == \"loaded\") {\ndocument.getElementById(\"Form01\").style.display = \"\";\n}\n}\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "List Model",
+      "content": "",
+      "order": 4,
+      "code": "{\n\"rowsperpage\" : 10,\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"sql\" : \"SELECT * FROM Customers\",\n\"orderby\" : \"CustomerName\"\n},\n\"filteritems\" : [\n{\"item\" : \"CustomerName\", \"label\" : \"Customer\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n],\n\"sortitems\" : [\n{\"item\" : \"CustomerName\", \"label\" : \"Customer\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n]\n}",
+      "language": "javascript",
+      "explanation": "Example of list model"
+    },
+    {
+      "type": "code_example",
+      "title": "Form Model",
+      "content": "",
+      "order": 5,
+      "code": "{\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"maintable\" : \n    \"Customers\",\n\"keyfield\" : \"CustomerID\",\n\"sql\" : \"SELECT * FROM \n    Customers\"\n},\n\"updateItems\" : [\n{\"item\" : \"CustomerName\"},\n{\"item\" : \"Address\"},\n{\"item\" : \"PostalCode\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n]\n}",
+      "language": "javascript",
+      "explanation": "Example of form model"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<html>\n<head>\n<link rel=\"stylesheet\" \n    href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://www.w3schools.com/appml/2.0.3/appml.js\"></script>\n</head>\n<body>\n<div class=\"w3-container w3-content\">\n<h1>Customers</h1>\n<div class=\"w3-container w3-light-grey \n    w3-padding-large w3-margin-bottom\" \n    appml-data=\"appml.php?model=model_customersform\" \n    appml-controller=\"myFormController\" id=\"Form01\" style=\"display:none;\">\n<div appml-include-html=\"inc_formcommands.htm\"></div>\n<p>\n<label>CustomerName:</label>\n<input id=\"customername\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>ContactName:</label>\n<input id=\"contactname\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label>Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label>PostalCode:</label>\n<input id=\"postalcode\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>Country:</label>\n<input \n    id=\"country\" class=\"w3-input w3-border\">\n</p>\n</div>\n<div appml-data=\"appml.php?model=model_customerslist\">\n<div \n    appml-include-html=\"inc_listcommands.htm\"></div>\n<div \n    appml-include-html=\"inc_filter.htm\"></div>\n<table class=\"w3-table-all\">\n<tr>\n<th></th>\n<th>Customer</th>\n<th>City</th>\n# TODO: Complete this line\n</tr>\n<tr \n    appml-repeat=\"records\">\n<td style=\"cursor:pointer;width:40px;\" \n    onclick=\"appml('Form01').run({{CustomerID}});\">&#9998;</td>\n<td>{{CustomerName}}</td>\n<td>{{City}}</td>\n<td>{{Country}}</td>\n</tr>\n</table>\n</div>\n</div>\n<script>\nfunction myFormController($appml) {\nif ($appml.message == \n    \"ready\") {return -1; }\nif ($appml.message == \"loaded\") {\ndocument.getElementById(\"Form01\").style.display = \"\";\n}\n}\n</script>\n</body>\n</html>",
+      "solution": "<!DOCTYPE html>\n<html>\n<head>\n<link rel=\"stylesheet\" \n    href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://www.w3schools.com/appml/2.0.3/appml.js\"></script>\n</head>\n<body>\n<div class=\"w3-container w3-content\">\n<h1>Customers</h1>\n<div class=\"w3-container w3-light-grey \n    w3-padding-large w3-margin-bottom\" \n    appml-data=\"appml.php?model=model_customersform\" \n    appml-controller=\"myFormController\" id=\"Form01\" style=\"display:none;\">\n<div appml-include-html=\"inc_formcommands.htm\"></div>\n<p>\n<label>CustomerName:</label>\n<input id=\"customername\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>ContactName:</label>\n<input id=\"contactname\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label>Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label>PostalCode:</label>\n<input id=\"postalcode\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label>Country:</label>\n<input \n    id=\"country\" class=\"w3-input w3-border\">\n</p>\n</div>\n<div appml-data=\"appml.php?model=model_customerslist\">\n<div \n    appml-include-html=\"inc_listcommands.htm\"></div>\n<div \n    appml-include-html=\"inc_filter.htm\"></div>\n<table class=\"w3-table-all\">\n<tr>\n<th></th>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr \n    appml-repeat=\"records\">\n<td style=\"cursor:pointer;width:40px;\" \n    onclick=\"appml('Form01').run({{CustomerID}});\">&#9998;</td>\n<td>{{CustomerName}}</td>\n<td>{{City}}</td>\n<td>{{Country}}</td>\n</tr>\n</table>\n</div>\n</div>\n<script>\nfunction myFormController($appml) {\nif ($appml.message == \n    \"ready\") {return -1; }\nif ($appml.message == \"loaded\") {\ndocument.getElementById(\"Form01\").style.display = \"\";\n}\n}\n</script>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "{\n\"rowsperpage\" : 10,\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"sql\" : \"SELECT * FROM Customers\",\n\"orderby\" : \"CustomerName\"\n},\n\"filteritems\" : [\n{\"item\" : \"CustomerName\", \"label\" : \"Customer\"},\n# TODO: Complete this line\n{\"item\" : \"Country\"}\n],\n\"sortitems\" : [\n{\"item\" : \"CustomerName\", \"label\" : \"Customer\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n]\n}",
+      "solution": "{\n\"rowsperpage\" : 10,\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"sql\" : \"SELECT * FROM Customers\",\n\"orderby\" : \"CustomerName\"\n},\n\"filteritems\" : [\n{\"item\" : \"CustomerName\", \"label\" : \"Customer\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n],\n\"sortitems\" : [\n{\"item\" : \"CustomerName\", \"label\" : \"Customer\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}\n]\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "711aabf1-50c3-4e4c-8cb6-e0c35b5d46dd",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "a9398f09-7ffe-4f4f-8ca6-32e0361185f4",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "16d3d2a6-5ea9-4932-a64e-a5378794ab8e",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Customers\n\nThe HTML Page\nThis?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "the HTML source:\n<",
+        "the models used in the application:\nList Model\n{\n\"rowsperpage\" : 10"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Customers\n\nThe HTML Page\nThis is 'the HTML source:\n<'."
+    },
+    {
+      "question": "What is Models\nThese?",
+      "options": [
+        "the HTML source:\n<",
+        "the models used in the application:\nList Model\n{\n\"rowsperpage\" : 10",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Models\nThese is 'the models used in the application:\nList Model\n{\n\"rowsperpage\" : 10'."
+    }
+  ],
+  "summary": "This tutorial covers AppML Case Study - Customers concepts and techniques. You'll learn how to use AppML Case Study - Customers effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AppML Case Study - Customers and how to apply it in your projects."
+}

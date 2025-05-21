@@ -1,0 +1,214 @@
+{
+  "id": "168d00b9-6439-4095-b8e6-21b589bf10ff",
+  "title": "Game Controllers",
+  "slug": "game-controllers",
+  "metadata": {
+    "description": "Learn about Game Controllers with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "mygamearea",
+      "function",
+      "canvas",
+      "mygamepiece",
+      "button",
+      "width",
+      "height",
+      "component",
+      "keys",
+      "document"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 7,
+    "category": "LearnGraphics",
+    "subcategory": "Game Controllers"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Game Controllers",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Push the buttons to move the red square:\nUP\nLEFT\nRIGHT\nDOWN\nGet in Control\nNow we want to control the red square.\nAdd four buttons, up, down, left, and right.\nWrite a function for each button to move the component in the selected \ndirection.\nMake two new properties in the\ncomponent\nconstructor, and call them\nspeedX\nand\nspeedY\n. These properties are being used as speed indicators.\nAdd a function in the\ncomponent\nconstructor, called\nnewPos()\n, which uses the\nspeedX\nand\nspeedY\nproperties to change the component's position.\nThe newpos function is called from the updateGameArea function before drawing \nthe component:\nExample\n<script>\nfunction component(width, height,  color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.newPos = function() {\nthis.x += this.speedX;\nthis.y += this.speedY;\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.newPos();\nmyGamePiece.update();\n}\nfunction moveup() {\nmyGamePiece.speedY -= 1;\n}\nfunction movedown() {\nmyGamePiece.speedY += 1;\n}\nfunction moveleft() {\nmyGamePiece.speedX -= 1;\n}\nfunction moveright() {\nmyGamePiece.speedX += 1;\n}\n</script>\n<button onclick=\"moveup()\">UP</button>\n<button onclick=\"movedown()\">DOWN</button>\n<button onclick=\"moveleft()\">LEFT</button>\n<button onclick=\"moveright()\">RIGHT</button>\n\nStop Moving\nIf you want, you can make the red square stop when you release a button.\nAdd a function that will set the speed indicators to 0.\nTo deal with both normal screens and touch screens, we will add code for both \ndevices:\nExample\nfunction stopMove() {\nmyGamePiece.speedX = 0;\nmyGamePiece.speedY = 0;\n}\n</script>\n<button  onmousedown=\"moveup()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveup()\n\">UP</button>\n<button  onmousedown=\"movedown()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"movedown()\"\n>DOWN</button>\n<button  onmousedown=\"moveleft()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveleft()\"\n>LEFT</button>\n<button  onmousedown=\"moveright()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveright()\"\n>RIGHT</button>\n\nKeyboard as Controller\nWe can also control the red square by using the arrow keys on the keyboard.\nCreate a method that checks if a key is pressed, and set the\nkey\nproperty of the\nmyGameArea\nobject to the key code. When the key is \nreleased, set the\nkey\nproperty to\nfalse\n:\nExample\nvar myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('keydown', function (e) {\nmyGameArea.key = e.keyCode;\n})\nwindow.addEventListener('keyup', function (e) {\nmyGameArea.key = false;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nThen we can move the red square if one of the arrow keys are pressed:\nExample\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.speedX = 0;\nmyGamePiece.speedY = 0;\nif (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -1; }\nif (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 1; }\nif (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -1; }\nif (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 1; }\nmyGamePiece.newPos();\nmyGamePiece.update();\n}\n\nMultiple Keys Pressed\nWhat if more than one key is pressed at the same time?\nIn the example above, the component can only move horizontally or vertically. \nNow we want the component to also move diagonally.\nCreate a\nkeys\narray\nfor the\nmyGameArea\nobject, and insert one element \nfor each key that is pressed, and give it the value\ntrue\n, the \nvalue remains true untill the key is no longer pressed, the value becomes\nfalse\nin the\nkeyup\nevent listener function:\nExample\nvar myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('keydown', function (e) {\nmyGameArea.keys = (myGameArea.keys || []);\nmyGameArea.keys[e.keyCode] = true;\n})\nwindow.addEventListener('keyup', function (e) {\nmyGameArea.keys[e.keyCode] = false;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.speedX = 0;\nmyGamePiece.speedY = 0;\nif (\nmyGameArea.keys && myGameArea.keys[37]\n) {myGamePiece.speedX = -1; }\nif (\nmyGameArea.keys && myGameArea.keys[39]\n) {myGamePiece.speedX = 1; }\nif (\nmyGameArea.keys && myGameArea.keys[38]\n) {myGamePiece.speedY = -1; }\nif (\nmyGameArea.keys && myGameArea.keys[40]\n) {myGamePiece.speedY = 1; }\nmyGamePiece.newPos();\nmyGamePiece.update();\n}\n\nUsing The Mouse Cursor as a Controller\nIf you want to control the red square by using the mouse cursor,\nadd a method in\nmyGameArea\nobject that updates the x and y \ncoordinates of the mouse cursor:.\nExample\nvar myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.canvas.style.cursor = \"none\"; //hide the original cursor\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('mousemove', function (e) {\nmyGameArea.x = e.pageX;\nmyGameArea.y = e.pageY;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nThen we can move the red square using the mouse cursor:\nExample\nfunction updateGameArea() {\nmyGameArea.clear();\nif (myGameArea.x && myGameArea.y) {\nmyGamePiece.x = myGameArea.x;\nmyGamePiece.y = myGameArea.y;\n}\nmyGamePiece.update();\n}\n\nTouch The Screen to Control The Game\nWe can also control the red square on a touch screen.\nAdd a method in the\nmyGameArea\nobject that uses the x and y coordinates of where \nthe screen is touched:\nExample\nvar myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('touchmove', function (e) {\nmyGameArea.x = e.touches[0].screenX;\nmyGameArea.y = e.touches[0].screenY;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nThen we can move the red square if the user touches the screen, \nby using the same code as we did for the mouse cursor:\nExample\nfunction updateGameArea() {\nmyGameArea.clear();\nif (myGameArea.x && myGameArea.y) {\nmyGamePiece.x = myGameArea.x;\nmyGamePiece.y = myGameArea.y;\n}\nmyGamePiece.update();\n}\n\nControllers on The Canvas\nWe can also draw our own buttons on the canvas, and use them as controllers:\nExample\nfunction startGame() {\nmyGamePiece = new component(30, 30, \"red\", 10, 120);\nmyUpBtn = new component(30, 30, \"blue\", 50, 10);\nmyDownBtn = new component(30, 30, \"blue\", 50, 70);\nmyLeftBtn = new component(30, 30, \"blue\", 20, 40);\nmyRightBtn = new component(30, 30, \"blue\", 80, 40);\nmyGameArea.start();\n}\nAdd a new function that figures out if a component, in this case a button, is clicked.\nStart by adding event listeners to check if a mouse button is clicked (\nmousedown\nand\nmouseup\n). \nTo deal with touch screens, also add event listeners to check if the screen is \nclicked on (\ntouchstart\nand\ntouchend\n):\nExample\nvar myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('mousedown', function (e) {\nmyGameArea.x = e.pageX;\nmyGameArea.y = e.pageY;\n})\nwindow.addEventListener('mouseup', function (e) {\nmyGameArea.x = false;\nmyGameArea.y = false;\n})\nwindow.addEventListener('touchstart', function (e) {\nmyGameArea.x = e.pageX;\nmyGameArea.y = e.pageY;\n})\nwindow.addEventListener('touchend', function (e) {\nmyGameArea.x = false;\nmyGameArea.y = false;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nNow the\nmyGameArea\nobject has properties that tells us the x- \nand y-coordinates of a click. We use these properties to check if the click was \nperformed on one of our blue buttons.\nThe new method is called\nclicked\n, it is a method of the\ncomponent\nconstructor, and it checks if the \ncomponent is being clicked.\nIn the\nupdateGameArea\nfunction, we take the neccessarry actions\nif one of the blue buttons is clicked:\nExample\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.clicked = function() {\nvar myleft = this.x;\nvar myright = this.x + (this.width);\nvar mytop = this.y;\nvar mybottom = this.y + (this.height);\nvar clicked = true;\nif ((mybottom < myGameArea.y) || (mytop > myGameArea.y) || (myright < myGameArea.x) || (myleft > myGameArea.x)) {\nclicked = false;\n}\nreturn clicked;\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nif (myGameArea.x && myGameArea.y) {\nif (myUpBtn.clicked()) {\nmyGamePiece.y -= 1;\n}\nif (myDownBtn.clicked()) {\nmyGamePiece.y += 1;\n}\nif (myLeftBtn.clicked()) {\nmyGamePiece.x += -1;\n}\nif (myRightBtn.clicked()) {\nmyGamePiece.x += 1;\n}\n}\nmyUpBtn.update();\nmyDownBtn.update();\nmyLeftBtn.update();\nmyRightBtn.update();\nmyGamePiece.update();\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<script>\nfunction component(width, height,  color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.newPos = function() {\nthis.x += this.speedX;\nthis.y += this.speedY;\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.newPos();\nmyGamePiece.update();\n}\nfunction moveup() {\nmyGamePiece.speedY -= 1;\n}\nfunction movedown() {\nmyGamePiece.speedY += 1;\n}\nfunction moveleft() {\nmyGamePiece.speedX -= 1;\n}\nfunction moveright() {\nmyGamePiece.speedX += 1;\n}\n</script>\n<button onclick=\"moveup()\">UP</button>\n<button onclick=\"movedown()\">DOWN</button>\n<button onclick=\"moveleft()\">LEFT</button>\n<button onclick=\"moveright()\">RIGHT</button>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "function stopMove() {\nmyGamePiece.speedX = 0;\nmyGamePiece.speedY = 0;\n}\n</script>\n<button  onmousedown=\"moveup()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveup()\n\">UP</button>\n<button  onmousedown=\"movedown()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"movedown()\"\n>DOWN</button>\n<button  onmousedown=\"moveleft()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveleft()\"\n>LEFT</button>\n<button  onmousedown=\"moveright()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveright()\"\n>RIGHT</button>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "var myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('keydown', function (e) {\nmyGameArea.key = e.keyCode;\n})\nwindow.addEventListener('keyup', function (e) {\nmyGameArea.key = false;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "function updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.speedX = 0;\nmyGamePiece.speedY = 0;\nif (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX = -1; }\nif (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX = 1; }\nif (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY = -1; }\nif (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY = 1; }\nmyGamePiece.newPos();\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "var myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('keydown', function (e) {\nmyGameArea.keys = (myGameArea.keys || []);\nmyGameArea.keys[e.keyCode] = true;\n})\nwindow.addEventListener('keyup', function (e) {\nmyGameArea.keys[e.keyCode] = false;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.speedX = 0;\nmyGamePiece.speedY = 0;\nif (\nmyGameArea.keys && myGameArea.keys[37]\n) {myGamePiece.speedX = -1; }\nif (\nmyGameArea.keys && myGameArea.keys[39]\n) {myGamePiece.speedX = 1; }\nif (\nmyGameArea.keys && myGameArea.keys[38]\n) {myGamePiece.speedY = -1; }\nif (\nmyGameArea.keys && myGameArea.keys[40]\n) {myGamePiece.speedY = 1; }\nmyGamePiece.newPos();\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "var myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.canvas.style.cursor = \"none\"; //hide the original cursor\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('mousemove', function (e) {\nmyGameArea.x = e.pageX;\nmyGameArea.y = e.pageY;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "function updateGameArea() {\nmyGameArea.clear();\nif (myGameArea.x && myGameArea.y) {\nmyGamePiece.x = myGameArea.x;\nmyGamePiece.y = myGameArea.y;\n}\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "var myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('touchmove', function (e) {\nmyGameArea.x = e.touches[0].screenX;\nmyGameArea.y = e.touches[0].screenY;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "function updateGameArea() {\nmyGameArea.clear();\nif (myGameArea.x && myGameArea.y) {\nmyGamePiece.x = myGameArea.x;\nmyGamePiece.y = myGameArea.y;\n}\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "function startGame() {\nmyGamePiece = new component(30, 30, \"red\", 10, 120);\nmyUpBtn = new component(30, 30, \"blue\", 50, 10);\nmyDownBtn = new component(30, 30, \"blue\", 50, 70);\nmyLeftBtn = new component(30, 30, \"blue\", 20, 40);\nmyRightBtn = new component(30, 30, \"blue\", 80, 40);\nmyGameArea.start();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "var myGameArea = {\ncanvas : document.createElement(\"canvas\"),\nstart : function() {\nthis.canvas.width = 480;\nthis.canvas.height = 270;\nthis.context = this.canvas.getContext(\"2d\");\ndocument.body.insertBefore(this.canvas, document.body.childNodes[0]);\nthis.interval = setInterval(updateGameArea, 20);\nwindow.addEventListener('mousedown', function (e) {\nmyGameArea.x = e.pageX;\nmyGameArea.y = e.pageY;\n})\nwindow.addEventListener('mouseup', function (e) {\nmyGameArea.x = false;\nmyGameArea.y = false;\n})\nwindow.addEventListener('touchstart', function (e) {\nmyGameArea.x = e.pageX;\nmyGameArea.y = e.pageY;\n})\nwindow.addEventListener('touchend', function (e) {\nmyGameArea.x = false;\nmyGameArea.y = false;\n})\n},\nclear : function(){\nthis.context.clearRect(0, 0, this.canvas.width, this.canvas.height);\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "function component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.clicked = function() {\nvar myleft = this.x;\nvar myright = this.x + (this.width);\nvar mytop = this.y;\nvar mybottom = this.y + (this.height);\nvar clicked = true;\nif ((mybottom < myGameArea.y) || (mytop > myGameArea.y) || (myright < myGameArea.x) || (myleft > myGameArea.x)) {\nclicked = false;\n}\nreturn clicked;\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nif (myGameArea.x && myGameArea.y) {\nif (myUpBtn.clicked()) {\nmyGamePiece.y -= 1;\n}\nif (myDownBtn.clicked()) {\nmyGamePiece.y += 1;\n}\nif (myLeftBtn.clicked()) {\nmyGamePiece.x += -1;\n}\nif (myRightBtn.clicked()) {\nmyGamePiece.x += 1;\n}\n}\nmyUpBtn.update();\nmyDownBtn.update();\nmyLeftBtn.update();\nmyRightBtn.update();\nmyGamePiece.update();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<script>\nfunction component(width, height,  color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.newPos = function() {\nthis.x += this.speedX;\nthis.y += this.speedY;\n}\n}\nfunction updateGameArea() {\n# TODO: Complete this line\nmyGamePiece.newPos();\nmyGamePiece.update();\n}\nfunction moveup() {\nmyGamePiece.speedY -= 1;\n}\nfunction movedown() {\nmyGamePiece.speedY += 1;\n}\nfunction moveleft() {\nmyGamePiece.speedX -= 1;\n}\nfunction moveright() {\nmyGamePiece.speedX += 1;\n}\n</script>\n<button onclick=\"moveup()\">UP</button>\n<button onclick=\"movedown()\">DOWN</button>\n<button onclick=\"moveleft()\">LEFT</button>\n<button onclick=\"moveright()\">RIGHT</button>",
+      "solution": "<script>\nfunction component(width, height,  color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.newPos = function() {\nthis.x += this.speedX;\nthis.y += this.speedY;\n}\n}\nfunction updateGameArea() {\nmyGameArea.clear();\nmyGamePiece.newPos();\nmyGamePiece.update();\n}\nfunction moveup() {\nmyGamePiece.speedY -= 1;\n}\nfunction movedown() {\nmyGamePiece.speedY += 1;\n}\nfunction moveleft() {\nmyGamePiece.speedX -= 1;\n}\nfunction moveright() {\nmyGamePiece.speedX += 1;\n}\n</script>\n<button onclick=\"moveup()\">UP</button>\n<button onclick=\"movedown()\">DOWN</button>\n<button onclick=\"moveleft()\">LEFT</button>\n<button onclick=\"moveright()\">RIGHT</button>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function stopMove() {\nmyGamePiece.speedX = 0;\nmyGamePiece.speedY = 0;\n}\n</script>\n# TODO: Complete this line\nonmouseup=\"stopMove()\"  ontouchstart=\"moveup()\n\">UP</button>\n<button  onmousedown=\"movedown()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"movedown()\"\n>DOWN</button>\n<button  onmousedown=\"moveleft()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveleft()\"\n>LEFT</button>\n<button  onmousedown=\"moveright()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveright()\"\n>RIGHT</button>",
+      "solution": "function stopMove() {\nmyGamePiece.speedX = 0;\nmyGamePiece.speedY = 0;\n}\n</script>\n<button  onmousedown=\"moveup()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveup()\n\">UP</button>\n<button  onmousedown=\"movedown()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"movedown()\"\n>DOWN</button>\n<button  onmousedown=\"moveleft()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveleft()\"\n>LEFT</button>\n<button  onmousedown=\"moveright()\"\nonmouseup=\"stopMove()\"  ontouchstart=\"moveright()\"\n>RIGHT</button>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "6e3f533e-c85c-4287-a277-65bfa4e12486",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e892107d-d876-4204-b671-ca1c8b20e70d",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4fe2c25e-047c-4c10-aff7-cd2de9237619",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is These properties?",
+      "options": [
+        "None of the above.",
+        "called from the updateGameArea function before drawing \nthe component:\nExample\n<script>\nfunction component(width",
+        "None of the above.",
+        "being used as speed indicators"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of These properties is 'being used as speed indicators'."
+    },
+    {
+      "question": "What is The newpos function?",
+      "options": [
+        "being used as speed indicators",
+        "None of the above.",
+        "called from the updateGameArea function before drawing \nthe component:\nExample\n<script>\nfunction component(width",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The newpos function is 'called from the updateGameArea function before drawing \nthe component:\nExample\n<script>\nfunction component(width'."
+    }
+  ],
+  "summary": "This tutorial covers Game Controllers concepts and techniques. You'll learn how to use Game Controllers effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Game Controllers and how to apply it in your projects."
+}

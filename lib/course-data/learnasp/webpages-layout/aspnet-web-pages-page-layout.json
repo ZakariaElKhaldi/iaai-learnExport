@@ -1,0 +1,130 @@
+{
+  "id": "057bbe21-61df-4ac4-916d-cd829fd54dba",
+  "title": "ASP.NET Web Pages- Page Layout",
+  "slug": "aspnet-web-pages-page-layout",
+  "metadata": {
+    "description": "Learn about ASP.NET Web Pages- Page Layout with clear explanations and practical examples.",
+    "keywords": [
+      "page",
+      "layout",
+      "content",
+      "pages",
+      "files",
+      "example",
+      "cshtml",
+      "consistent",
+      "every",
+      "blocks"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "WebPages Layout"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ASP.NET Web Pages\n- Page Layout",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "With Web Pages it is easy to create a web site with a \nconsistent layout.\nA Consistent Look\nOn the Internet you will discover many web sites with a consistent look and \nfeel:\nEvery page have the same header\nEvery page have the same footer\nEvery page have the same style and layout\nWith Web Pages this can be done very efficiently. You can have reusable \nblocks of content (content blocks), like headers and footers, in separate files.\nYou can \nalso define a consistent layout for all your pages, using a layout template \n(layout file).\nContent Blocks\nMany websites have content that is displayed on every \npage (like headers and footers).\nWith Web Pages you can use the\n@RenderPage()\nmethod to import content from separate \nfiles.\nContent block (from another file) can be imported anywhere in a web page, and \ncan contain text, markup, and code, just like any regular web page.\nUsing common headers and footers as an example, this saves you a lot of work. You don't have to write the \nsame content in every page, and when you change the header or footer files, the \ncontent is \nupdated in all your pages.\nThis is how it looks in code:\nExample\n<html>\n<body>\n@RenderPage(\"header.cshtml\")\n<h1>Hello Web Pages</h1>\n<p>This is a paragraph</p>\n@RenderPage(\"footer.cshtml\")\n</body>\n</html>\nRun example \u00bb\nUsing a Layout Page\nIn the \nweb pages is easy.\nAnother approach to creating a consistent look is to use a layout page. A layout page \ncontains the structure, but not the content, of a web page. When a web page \n(content page) is linked to a layout page, it will be displayed \naccording to the layout page (template).\nThe layout page is just like a normal web page, except from a call to the\n@RenderBody()\nmethod where the content page will be \nincluded.\nEach content page must start with a\nLayout directive\n.\nThis is how it looks in code:\nLayout Page:\n<html>\n<body>\n<p>This is header text</p>\n@RenderBody()\n<p>&copy; 2014 . All rights reserved.</p>\n</body>\n</html>\nAny Web Page:\n@{Layout=\"Layout.cshtml\";}\n<h1>Welcome to </h1>\n<p>\nLorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor \nincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis \nnostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat.\n</p>\nRun example \u00bb\nD.R.Y. - Don't Repeat Yourself\nWith two ASP.NET tools, Content Blocks and Layout Pages, you can give your \nweb applications a consistent look.\nThese tools also save you a lot of work, since you don't have to repeat the \nsame information on all pages. Centralizing markup, style, and code makes web \napplications much more manageable and easier to maintain.\nPreventing Files from Being Browsed\nWith ASP.NET, files with a name that starts with an underscore cannot be \nbrowsed from the web.\nIf you want to prevent your content blocks or layout files from being viewed \nby your users, rename the files to:\n_header.cshtml\n_footer.cshtml\n_Layout.cshtml\nHiding Sensitive Information\nWith ASP.NET, the common way to hide sensitive information (database passwords, \nemail passwords, etc.) is to keep the information in a separate file named \n\"_AppStart\".\n_AppStart.cshtml\n@{\nWebMail.SmtpServer = \"mailserver.example.com\";\nWebMail.EnableSsl = true;\nWebMail.UserName = \"username@example.com\";\nWebMail.Password = \"your-password\";\nWebMail.From = \"your-name-here@example.com\";\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<html>\n<body>\n@RenderPage(\"header.cshtml\")\n<h1>Hello Web Pages</h1>\n<p>This is a paragraph</p>\n@RenderPage(\"footer.cshtml\")\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Layout Page:",
+      "content": "",
+      "order": 4,
+      "code": "<html>\n<body>\n<p>This is header text</p>\n@RenderBody()\n<p>&copy; 2014 W3Schools. All rights reserved.</p>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of layout page:"
+    },
+    {
+      "type": "code_example",
+      "title": "_AppStart.cshtml",
+      "content": "",
+      "order": 5,
+      "code": "@{\nWebMail.SmtpServer = \"mailserver.example.com\";\nWebMail.EnableSsl = true;\nWebMail.UserName = \"username@example.com\";\nWebMail.Password = \"your-password\";\nWebMail.From = \"your-name-here@example.com\";\n}",
+      "language": "unknown",
+      "explanation": "Example of _appstart.cshtml"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n<body>\n@RenderPage(\"header.cshtml\")\n<h1>Hello Web Pages</h1>\n<p>This is a paragraph</p>\n@RenderPage(\"footer.cshtml\")\n</body>\n# TODO: Complete this line",
+      "solution": "<html>\n<body>\n@RenderPage(\"header.cshtml\")\n<h1>Hello Web Pages</h1>\n<p>This is a paragraph</p>\n@RenderPage(\"footer.cshtml\")\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n<body>\n<p>This is header text</p>\n# TODO: Complete this line\n<p>&copy; 2014 W3Schools. All rights reserved.</p>\n</body>\n</html>",
+      "solution": "<html>\n<body>\n<p>This is header text</p>\n@RenderBody()\n<p>&copy; 2014 W3Schools. All rights reserved.</p>\n</body>\n</html>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "2b19d7d6-f3b3-48ad-9cb8-83efd3bb80a4",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "6d29e45f-6415-42a9-b680-d447c8fee50f",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f68083d6-dcee-47a9-9257-23a4da229b72",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Page Layout\n\nWith Web Pages it?",
+      "options": [
+        "easy to create a web site with a \nconsistent layout",
+        "displayed on every \npage (like headers and footers)",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Page Layout\n\nWith Web Pages it is 'easy to create a web site with a \nconsistent layout'."
+    },
+    {
+      "question": "What is Content Blocks\nMany websites have content that?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "easy to create a web site with a \nconsistent layout",
+        "displayed on every \npage (like headers and footers)"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Content Blocks\nMany websites have content that is 'displayed on every \npage (like headers and footers)'."
+    }
+  ],
+  "summary": "This tutorial covers ASP.NET Web Pages- Page Layout concepts and techniques. You'll learn how to use ASP.NET Web Pages- Page Layout effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ASP.NET Web Pages- Page Layout and how to apply it in your projects."
+}

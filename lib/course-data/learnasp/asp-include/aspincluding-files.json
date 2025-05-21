@@ -1,0 +1,98 @@
+{
+  "id": "b7777c8d-4cba-481b-aec9-b4b91302248d",
+  "title": "ASPIncluding Files",
+  "slug": "aspincluding-files",
+  "metadata": {
+    "description": "Learn about ASPIncluding Files with clear explanations and practical examples.",
+    "keywords": [
+      "file",
+      "include",
+      "html",
+      "header",
+      "directive",
+      "virtual",
+      "files",
+      "time",
+      "directory",
+      "included"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "ASP #include"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ASP\nIncluding Files",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The #include Directive\nYou can insert the content of one ASP file into another ASP file before the\nserver executes it, with the #include directive.\nThe #include directive is used to create functions, headers, footers, or \nelements that will be reused on multiple pages.\nHow to Use the #include Directive\nHere is a file called \"mypage.asp\":\n<!DOCTYPE html>\n<html>\n<body>\n<h3>Words of Wisdom:</h3>\n<p><!--#include file=\"wisdom.inc\"--></p>\n<h3>The time is:</h3>\n<p><!--#include file=\"time.inc\"--></p>\n</body>\n</html>\nHere is the \"wisdom.inc\" file:\n\"One should never increase, beyond what is necessary,\nthe number of entities required to explain anything.\"\nHere is the \"time.inc\" file:\n<%\nResponse.Write(Time)\n%>\nIf you look at the source code in a browser, it will look something like this:\n<!DOCTYPE html>\n<html>\n<body>\n<h3>Words of Wisdom:</h3>\n<p>\"One should never increase, beyond what is necessary,\nthe number of entities required to explain anything.\"</p>\n<h3>The time is:</h3>\n<p>11:33:42 AM</p>\n</body>\n</html>\nSyntax for Including Files\nTo include a file in an ASP page, place the #include directive inside comment tags:\n<!--#include virtual=\"somefilename\"-->\nor\n<!--#include file =\"somefilename\"-->\nThe Virtual Keyword\nUse the virtual keyword to indicate a path beginning with a virtual directory.\nIf a file named \"header.inc\" resides in a virtual directory named /html, the following line would insert the contents of \"header.inc\":\n<!-- #include virtual =\"/html/header.inc\" -->\nThe File Keyword\nUse the file keyword to indicate a relative path. A relative path begins with the directory that contains the including file.\nIf you have a file in the html directory, and the file \"header.inc\" resides in html\\headers, the following line would insert \"header.inc\" in your file:\n<!-- #include file =\"headers\\header.inc\" -->\nNote that the path to the included file (headers\\header.inc) is relative to the including file. \nIf the file containing this #include statement is not in the html directory, the statement will not work.\nTips and Notes\nIn the sections above we have used the file extension \".inc\" for included files. Notice that if a user tries to browse an INC file directly,\nits content will be displayed. If your included file contains confidential information or information you do not want any users to see, it is better to use an \nASP extension. The source code in an ASP file will not be visible after the interpretation. An included file can also include other files,\nand one ASP file can include the same file more than once.\nImportant:\nIncluded files are processed and inserted before the scripts are executed. The following script will NOT work because ASP executes the \n#include directive before it assigns a value to the variable:\n<%\nfname=\"header.inc\"\n%>\n<!--#include file=\"<%fname%>\"-->\nYou cannot open or close a script delimiter in an INC file. The following script will NOT work:\n<%\nFor i = 1 To n\n<!--#include file=\"count.inc\"-->\n\n%>\nBut this script will work:\n<% For i = 1 to n %>\n<!--#include file=\"count.inc\" -->\n<%\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "96acf445-5310-40ae-b65a-8478735fcf8e",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "c1003b60-dee8-456b-9747-c64ce58ed36f",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "3be6e7fc-7300-4113-8f47-d01842a460fe",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is include directive?",
+      "options": [
+        "used to create functions",
+        "None of the above.",
+        "None of the above.",
+        "a file called \"mypage"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of include directive is 'used to create functions'."
+    },
+    {
+      "question": "What is include Directive\nHere?",
+      "options": [
+        "None of the above.",
+        "used to create functions",
+        "a file called \"mypage",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of include Directive\nHere is 'a file called \"mypage'."
+    }
+  ],
+  "summary": "This tutorial covers ASPIncluding Files concepts and techniques. You'll learn how to use ASPIncluding Files effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ASPIncluding Files and how to apply it in your projects."
+}

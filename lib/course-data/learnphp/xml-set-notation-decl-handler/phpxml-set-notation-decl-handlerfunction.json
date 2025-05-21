@@ -1,0 +1,115 @@
+{
+  "id": "f428ee82-b304-4034-906f-767a73fc4111",
+  "title": "PHPxml_set_notation_decl_handler()Function",
+  "slug": "phpxml-set-notation-decl-handlerfunction",
+  "metadata": {
+    "description": "Learn about PHPxml_set_notation_decl_handler()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "parser",
+      "handler",
+      "function",
+      "data",
+      "notation",
+      "declaration",
+      "echo",
+      "base",
+      "specifies",
+      "parameter"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "xml_set_notation_decl_handler()"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nxml_set_notation_decl_handler()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nCreate an XML parser, set character data handler, set notation declaration handler, and parse an XML document:\n<?php\n// Create an XML parser\n$parser=xml_parser_create();\nfunction char($parser,$data) {\necho $data;\n}\nfunction not_decl_handler($parser,$not,$base,$sysID,$pubID)\u00a0 \n  {\necho \"$not<br>\";\necho \"$sysID<br>\";\necho \"$pubID<br>\";\n}\n// Set the \n  character data handler\nxml_set_character_data_handler($parser,\"char\");\n// Set the \n  notation declaration handler\nxml_set_notation_decl_handler($parser, \"not_decl_handler\");\n$fp=fopen(\"note_notation.xml\",\"r\");\nwhile ($data=fread($fp,4096)) {\n// Parse XML data\nxml_parse($parser,$data,feof($fp)) or\ndie (sprintf(\"XML Error: %s \n  at line %d\",\nxml_error_string(xml_get_error_code($parser)),\nxml_get_current_line_number($parser)));\n}\nxml_parser_free($parser);\nfclose($fp);\n?>\nDefinition and Usage\nThe xml_set_notation_decl_handler() function specifies a function to be called \nwhen the parser finds a notation declaration in the XML document.\nNote:\nThe handler parameter can also be an array containing an object reference and a method name.\nSyntax\nxml_set_notation_decl_handler(\nparser\n,\nhandler\n)\nParameter Values\nParameter\nDescription\nparser\nRequired. Specifies the XML parser to use\nhandler\nRequired. Specifies a function to be used as an event handler. The function must \n    accept five parameters:\n$parser - A variable containing the XML parser calling the handler\n$name - A variable containing the name of the notation\n$base - The base for resolving the system identifier (system_id) of the external entity. Currently, this is always \n      an empty string\n$system_id - The system identifier of the external notation declaration\n$public_id - The public identifier of the external notation declaration\nTechnical Details\nReturn Value:\nTRUE on \n success. FALSE on failure\nPHP Version:\n4.0+\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n// Create an XML parser\n$parser=xml_parser_create();\nfunction char($parser,$data) {\necho $data;\n}\nfunction not_decl_handler($parser,$not,$base,$sysID,$pubID)\u00a0 \n  {\necho \"$not<br>\";\necho \"$sysID<br>\";\necho \"$pubID<br>\";\n}\n// Set the \n  character data handler\nxml_set_character_data_handler($parser,\"char\");\n// Set the \n  notation declaration handler\nxml_set_notation_decl_handler($parser, \"not_decl_handler\");\n$fp=fopen(\"note_notation.xml\",\"r\");\nwhile ($data=fread($fp,4096)) {\n// Parse XML data\nxml_parse($parser,$data,feof($fp)) or\ndie (sprintf(\"XML Error: %s \n  at line %d\",\nxml_error_string(xml_get_error_code($parser)),\nxml_get_current_line_number($parser)));\n}\nxml_parser_free($parser);\nfclose($fp);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n// Create an XML parser\n$parser=xml_parser_create();\nfunction char($parser,$data) {\necho $data;\n}\nfunction not_decl_handler($parser,$not,$base,$sysID,$pubID)\u00a0 \n  {\necho \"$not<br>\";\necho \"$sysID<br>\";\necho \"$pubID<br>\";\n}\n// Set the \n  character data handler\nxml_set_character_data_handler($parser,\"char\");\n// Set the \n  notation declaration handler\nxml_set_notation_decl_handler($parser, \"not_decl_handler\");\n$fp=fopen(\"note_notation.xml\",\"r\");\n# TODO: Complete this line\n// Parse XML data\nxml_parse($parser,$data,feof($fp)) or\ndie (sprintf(\"XML Error: %s \n  at line %d\",\nxml_error_string(xml_get_error_code($parser)),\nxml_get_current_line_number($parser)));\n}\nxml_parser_free($parser);\nfclose($fp);\n?>",
+      "solution": "<?php\n// Create an XML parser\n$parser=xml_parser_create();\nfunction char($parser,$data) {\necho $data;\n}\nfunction not_decl_handler($parser,$not,$base,$sysID,$pubID)\u00a0 \n  {\necho \"$not<br>\";\necho \"$sysID<br>\";\necho \"$pubID<br>\";\n}\n// Set the \n  character data handler\nxml_set_character_data_handler($parser,\"char\");\n// Set the \n  notation declaration handler\nxml_set_notation_decl_handler($parser, \"not_decl_handler\");\n$fp=fopen(\"note_notation.xml\",\"r\");\nwhile ($data=fread($fp,4096)) {\n// Parse XML data\nxml_parse($parser,$data,feof($fp)) or\ndie (sprintf(\"XML Error: %s \n  at line %d\",\nxml_error_string(xml_get_error_code($parser)),\nxml_get_current_line_number($parser)));\n}\nxml_parser_free($parser);\nfclose($fp);\n?>"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d30e1e65-ef43-44ba-8bef-95ea9a95e2fc",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e0a93453-9d75-4c12-a52b-bf6ada391c63",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "391ad05e-1d92-4cc0-86d5-8107702949d3",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is this?",
+      "options": [
+        "always \n      an empty string\n$system_id - The system identifier of the external notation declaration\n$public_id - The public identifier of the external notation declaration\nTechnical Details\nReturn Value:\nTRUE on \n success",
+        "None of the above.",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of this is 'always \n      an empty string\n$system_id - The system identifier of the external notation declaration\n$public_id - The public identifier of the external notation declaration\nTechnical Details\nReturn Value:\nTRUE on \n success'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPxml_set_notation_decl_handler()Function concepts and techniques. You'll learn how to use PHPxml_set_notation_decl_handler()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPxml_set_notation_decl_handler()Function and how to apply it in your projects."
+}

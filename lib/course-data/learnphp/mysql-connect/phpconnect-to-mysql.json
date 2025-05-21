@@ -1,0 +1,160 @@
+{
+  "id": "27d8169d-c1a9-48ab-b4a8-425e9d9ab309",
+  "title": "PHPConnect to MySQL",
+  "slug": "phpconnect-to-mysql",
+  "metadata": {
+    "description": "Learn about PHPConnect to MySQL with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "mysqli",
+      "connection",
+      "mysql",
+      "conn",
+      "database",
+      "username",
+      "password",
+      "installation",
+      "servername",
+      "object"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "MySQL Connect"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nConnect to MySQL",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "PHP 5 and later can work with a MySQL database using:\nMySQLi extension\n(the \"i\" stands for improved)\nPDO (PHP Data Objects)\nEarlier versions of PHP used the MySQL extension. However, this \nextension was deprecated in 2012.\nShould I Use MySQLi or PDO?\nIf you need a short answer, it would be \"Whatever you like\".\nBoth MySQLi and PDO have their advantages:\nPDO will work on 12 different database systems, whereas MySQLi will only \nwork with MySQL databases.\nSo, if you have to switch your project \nto use another database, PDO makes the process easy. You only have \nto change the connection string and a few queries. With MySQLi, you will need \nto rewrite the entire code - queries included.\nBoth are object-oriented, but MySQLi also offers a procedural API.\nBoth support Prepared Statements. Prepared Statements protect \nfrom SQL injection, and are very important for web application security.\nMySQL Examples in Both MySQLi and PDO Syntax\nIn this, and in the following chapters we demonstrate three ways of working \nwith PHP and MySQL:\nMySQLi (object-oriented)\nMySQLi (procedural)\nPDO\nMySQLi Installation\nFor Linux and Windows: The MySQLi extension is automatically installed in \nmost cases, when php5 mysql package is installed.\nFor installation details, go to:\nhttp://php.net/manual/en/mysqli.installation.php\nPDO Installation\nFor installation details, go to:\nhttp://php.net/manual/en/pdo.installation.php\nOpen a Connection to MySQL\nBefore we can access data in the MySQL database, we need to be able to connect to \nthe server:\nExample (MySQLi Object-Oriented)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = new mysqli($servername, $username, $password);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\necho \"Connected successfully\";\n?>\nNote on the object-oriented example above:\n$connect_error was \nbroken until PHP 5.2.9 and 5.3.0. If you need to ensure compatibility with PHP \nversions prior to 5.2.9 and 5.3.0, use the following code instead:\n// Check connection\nif (mysqli_connect_error()) {\ndie(\"Database connection failed: \" . mysqli_connect_error());\n}\nExample (MySQLi Procedural)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\necho \"Connected successfully\";\n?>\nExample (PDO)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=myDB\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\necho \"Connected successfully\";\n} catch(PDOException $e)\u00a0{\necho \"Connection failed: \" . $e->getMessage();\n}\n?>\nNote:\nIn the PDO example above we have also\nspecified a database (myDB)\n. PDO require a valid database \nto connect to. If no database is specified, an exception is thrown.\nTip:\nA great benefit of PDO is that it \nhas an exception class to handle any problems that may \noccur in our database queries. If an exception is thrown within the try{ } block, \nthe script stops executing and flows directly to the first catch(){ } block.\nClose the Connection\nThe connection will be closed automatically when the script ends. To close the \nconnection before, use the following:\nMySQLi Object-Oriented:\n$conn->close();\nMySQLi Procedural:\nmysqli_close($conn);\nPDO:\n$conn = null;\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Object-Oriented)",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = new mysqli($servername, $username, $password);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\necho \"Connected successfully\";\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli object-oriented)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Procedural)",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\necho \"Connected successfully\";\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli procedural)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (PDO)",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=myDB\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\necho \"Connected successfully\";\n} catch(PDOException $e)\u00a0{\necho \"Connection failed: \" . $e->getMessage();\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example (pdo)"
+    },
+    {
+      "type": "code_example",
+      "title": "MySQLi Object-Oriented:",
+      "content": "",
+      "order": 6,
+      "code": "$conn->close();",
+      "language": "html",
+      "explanation": "Example of mysqli object-oriented:"
+    },
+    {
+      "type": "code_example",
+      "title": "MySQLi Procedural:",
+      "content": "",
+      "order": 7,
+      "code": "mysqli_close($conn);",
+      "language": "unknown",
+      "explanation": "Example of mysqli procedural:"
+    },
+    {
+      "type": "code_example",
+      "title": "PDO:",
+      "content": "",
+      "order": 8,
+      "code": "$conn = null;",
+      "language": "unknown",
+      "explanation": "Example of pdo:"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = new mysqli($servername, $username, $password);\n// Check connection\nif ($conn->connect_error)\u00a0{\n# TODO: Complete this line\n}\necho \"Connected successfully\";\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = new mysqli($servername, $username, $password);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\necho \"Connected successfully\";\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n# TODO: Complete this line\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\necho \"Connected successfully\";\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\necho \"Connected successfully\";\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d078c9f5-6b41-44bc-8937-8bd51551882a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e2bbf8f7-8955-46b6-a2e4-11b3235532b4",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "6b61b19f-08fc-4db7-a0b4-7275774950da",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Both?",
+      "options": [
+        "object-oriented",
+        "None of the above.",
+        "None of the above.",
+        "very important for web application security"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Both is 'object-oriented'."
+    },
+    {
+      "question": "What is and?",
+      "options": [
+        "object-oriented",
+        "very important for web application security",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of and is 'very important for web application security'."
+    }
+  ],
+  "summary": "This tutorial covers PHPConnect to MySQL concepts and techniques. You'll learn how to use PHPConnect to MySQL effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPConnect to MySQL and how to apply it in your projects."
+}

@@ -1,0 +1,151 @@
+{
+  "id": "d93d6dfa-2421-4b43-8419-bcf133c07d2f",
+  "title": "Machine Learning",
+  "slug": "machine-learning",
+  "metadata": {
+    "description": "Learn about Machine Learning with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "function",
+      "points",
+      "weight",
+      "cost",
+      "bias",
+      "xarr",
+      "train",
+      "line",
+      "yarr",
+      "learnc"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAI",
+    "subcategory": "ML Learning"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Machine Learning",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Learning is Looping\nAn ML model is\nTrained\nby\nLooping\nover data multiple times.\nFor each iteration, the\nWeight Values\nare adjusted.\nTraining is complete when the iterations fails to\nReduce the Cost\n.\nTrain me to find the line of best fit:\n100 times\n200 times\n300 times\n500 times\n\nGradient Descent\nGradient Descent\nis a popular algorithm for solving AI problems.\nA simple\nLinear Regression Model\ncan be used to demonstrate a gradient descent.\nThe goal of a linear regression is to fit a linear graph to a set of (x,y) points.\nThis can be solved with a math formula. But a\nMachine Learning Algorithm\ncan also solve this.\nThis is what the example above does.\nIt starts with a scatter plot and a linear model (y = wx + b).\nThen it trains the model to find a line that fits the plot.\nThis is done by altering the weight (slope) and the bias (intercept) of the line.\nBelow is the code for a\nTrainer Object\nthat can solve this problem\n(and many other problems).\nA Trainer Object\nCreate a Trainer object that can take any number of (x,y) values in two arrays (xArr,yArr).\nSet weight to zero and the bias to 1.\nA learning constant (learnc) has to be set, and a cost variable must be defined:\nExample\nfunction Trainer(xArray, yArray) {\nthis.xArr = xArray;\nthis.yArr = yArray;\nthis.points = this.xArr.length;\nthis.learnc = 0.00001;\nthis.weight = 0;\nthis.bias = 1;\nthis.cost;\nCost Function\nA standard way to solve a regression problem is with an \"Cost Function\" that measures how good the solution is.\nThe function uses the weight and bias from the model (y = wx + b) and returns an error,\nbased on how well the line fits a plot.\nThe way to compute this error is to loop through all (x,y) points in the plot,\nand sum the square distances between the y value of each point and the line.\nThe most conventional way is to square the distances (to ensure positive values)\nand to make the error function differentiable.\nthis.costError = function() {\ntotal = 0;\nfor (let i = 0; i < this.points; i++) {\ntotal += (this.yArr[i] - (this.weight * this.xArr[i] + this.bias)) **2;\n}\nreturn total / this.points;\n}\nAnother name for the\nCost Function\nis\nError Function\n.\nThe formula used in the function is actually this:\nE\nis the error (cost)\nN\nis the total number of observations (points)\ny\nis the value (label) of each observation\nx\nis the value (feature) of each observation\nm\nis the slope (weight)\nb\nis intercept (bias)\nmx + b\nis the prediction\n1/N * N\u22111\nis the squared mean value\nThe Train Function\nWe will now run a gradient descent.\nThe gradient descent algorithm should walk the cost function towards the best line.\nEach iteration should update both m and b towards a line with a lower cost (error).\nTo do that, we add a train function that loops over all the data many times:\nthis.train = function(iter) {\nfor (let i = 0; i < iter; i++) {\nthis.updateWeights();\n}\nthis.cost = this.costError();\n}\nAn Update Weights Function\nThe train function above should update the weights and biases in each iteration.\nThe direction to move is calculated using two partial derivatives:\nthis.updateWeights = function() {\nlet wx;\nlet w_deriv = 0;\nlet b_deriv = 0;\nfor (let i = 0; i < this.points; i++) {\nwx = this.yArr[i] - (this.weight * this.xArr[i] + this.bias);\nw_deriv += -2 * wx * this.xArr[i];\nb_deriv += -2 * wx;\n}\nthis.weight -= (w_deriv / this.points) * this.learnc;\nthis.bias -= (b_deriv / this.points) * this.learnc;\n}\nCreate Your Own Library\nLibrary Code\nfunction Trainer(xArray, yArray) {\nthis.xArr = xArray;\nthis.yArr = yArray;\nthis.points = this.xArr.length;\nthis.learnc = 0.00001;\nthis.weight = 0;\nthis.bias = 1;\nthis.cost;\n// Cost Function\nthis.costError = function() {\ntotal = 0;\nfor (let i = 0; i < this.points; i++) {\ntotal += (this.yArr[i] - (this.weight * this.xArr[i] + this.bias)) **2;\n}\nreturn total / this.points;\n}\n// Train Function\nthis.train = function(iter) {\nfor (let i = 0; i < iter; i++) {\nthis.updateWeights();\n}\nthis.cost = this.costError();\n}\n// Update Weights Function\nthis.updateWeights = function() {\nlet wx;\nlet w_deriv = 0;\nlet b_deriv = 0;\nfor (let i = 0; i < this.points; i++) {\nwx = this.yArr[i] - (this.weight * this.xArr[i] + this.bias);\nw_deriv += -2 * wx * this.xArr[i];\nb_deriv += -2 * wx;\n}\nthis.weight -= (w_deriv / this.points) * this.learnc;\nthis.bias -= (b_deriv / this.points) * this.learnc;\n}\n} // End Trainer Object\nNow you can include the library in HTML:\n<script src=\"myailib.js\"></script>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "function Trainer(xArray, yArray) {\nthis.xArr = xArray;\nthis.yArr = yArray;\nthis.points = this.xArr.length;\nthis.learnc = 0.00001;\nthis.weight = 0;\nthis.bias = 1;\nthis.cost;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "this.costError = function() {\ntotal = 0;\nfor (let i = 0; i < this.points; i++) {\ntotal += (this.yArr[i] - (this.weight * this.xArr[i] + this.bias)) **2;\n}\nreturn total / this.points;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "this.train = function(iter) {\nfor (let i = 0; i < iter; i++) {\nthis.updateWeights();\n}\nthis.cost = this.costError();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "this.updateWeights = function() {\nlet wx;\nlet w_deriv = 0;\nlet b_deriv = 0;\nfor (let i = 0; i < this.points; i++) {\nwx = this.yArr[i] - (this.weight * this.xArr[i] + this.bias);\nw_deriv += -2 * wx * this.xArr[i];\nb_deriv += -2 * wx;\n}\nthis.weight -= (w_deriv / this.points) * this.learnc;\nthis.bias -= (b_deriv / this.points) * this.learnc;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Library Code",
+      "content": "",
+      "order": 7,
+      "code": "function Trainer(xArray, yArray) {\nthis.xArr = xArray;\nthis.yArr = yArray;\nthis.points = this.xArr.length;\nthis.learnc = 0.00001;\nthis.weight = 0;\nthis.bias = 1;\nthis.cost;\n// Cost Function\nthis.costError = function() {\ntotal = 0;\nfor (let i = 0; i < this.points; i++) {\ntotal += (this.yArr[i] - (this.weight * this.xArr[i] + this.bias)) **2;\n}\nreturn total / this.points;\n}\n// Train Function\nthis.train = function(iter) {\nfor (let i = 0; i < iter; i++) {\nthis.updateWeights();\n}\nthis.cost = this.costError();\n}\n// Update Weights Function\nthis.updateWeights = function() {\nlet wx;\nlet w_deriv = 0;\nlet b_deriv = 0;\nfor (let i = 0; i < this.points; i++) {\nwx = this.yArr[i] - (this.weight * this.xArr[i] + this.bias);\nw_deriv += -2 * wx * this.xArr[i];\nb_deriv += -2 * wx;\n}\nthis.weight -= (w_deriv / this.points) * this.learnc;\nthis.bias -= (b_deriv / this.points) * this.learnc;\n}\n} // End Trainer Object",
+      "language": "javascript",
+      "explanation": "Example of library code"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function Trainer(xArray, yArray) {\nthis.xArr = xArray;\nthis.yArr = yArray;\nthis.points = this.xArr.length;\nthis.learnc = 0.00001;\n# TODO: Complete this line\nthis.bias = 1;\nthis.cost;",
+      "solution": "function Trainer(xArray, yArray) {\nthis.xArr = xArray;\nthis.yArr = yArray;\nthis.points = this.xArr.length;\nthis.learnc = 0.00001;\nthis.weight = 0;\nthis.bias = 1;\nthis.cost;"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "this.costError = function() {\n# TODO: Complete this line\nfor (let i = 0; i < this.points; i++) {\ntotal += (this.yArr[i] - (this.weight * this.xArr[i] + this.bias)) **2;\n}\nreturn total / this.points;\n}",
+      "solution": "this.costError = function() {\ntotal = 0;\nfor (let i = 0; i < this.points; i++) {\ntotal += (this.yArr[i] - (this.weight * this.xArr[i] + this.bias)) **2;\n}\nreturn total / this.points;\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c5e5c95d-ae31-40ee-a77c-0ede51d51ad4",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "fc58c3b6-a0d2-4e0f-93cb-eaae560b9819",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "cc031955-12f2-4028-b404-856cd2d51b68",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Machine Learning\n\nLearning is Looping\nAn ML model?",
+      "options": [
+        "adjusted",
+        "None of the above.",
+        "None of the above.",
+        "Trained\nby\nLooping\nover data multiple times"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Machine Learning\n\nLearning is Looping\nAn ML model is 'Trained\nby\nLooping\nover data multiple times'."
+    },
+    {
+      "question": "What is the\nWeight Values?",
+      "options": [
+        "Trained\nby\nLooping\nover data multiple times",
+        "None of the above.",
+        "None of the above.",
+        "adjusted"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of the\nWeight Values is 'adjusted'."
+    }
+  ],
+  "summary": "This tutorial covers Machine Learning concepts and techniques. You'll learn how to use Machine Learning effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Machine Learning and how to apply it in your projects."
+}

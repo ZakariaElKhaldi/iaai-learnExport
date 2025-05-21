@@ -1,0 +1,259 @@
+{
+  "id": "739df8e9-ba83-4054-b4cb-0c741f6e3f7c",
+  "title": "XSDRestrictions/Facets",
+  "slug": "xsdrestrictionsfacets",
+  "metadata": {
+    "description": "Learn about XSDRestrictions/Facets with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "restriction",
+      "element",
+      "value",
+      "simpletype",
+      "name",
+      "base",
+      "string",
+      "must",
+      "characters",
+      "values"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnXML",
+    "subcategory": "XSD Restrictions"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "XSD\nRestrictions/Facets",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Restrictions are used to define acceptable values for XML elements or attributes. Restrictions on XML elements are called facets.\nRestrictions on Values\nThe following example defines an element called \"age\" with a restriction. The value of age cannot be lower than 0 or greater than 120:\n<xs:element name=\"age\">\n<xs:simpleType>\n<xs:restriction base=\"xs:integer\">\n<xs:minInclusive value=\"0\"/>\n<xs:maxInclusive value=\"120\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nRestrictions on a Set of Values\nTo limit the content of an XML element to a set of acceptable values, we would use the enumeration constraint.\nThe example below defines an element called \"car\" with a restriction. The only acceptable values are: Audi, Golf, BMW:\n<xs:element name=\"car\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:enumeration value=\"Audi\"/>\n<xs:enumeration value=\"Golf\"/>\n<xs:enumeration value=\"BMW\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThe example above could also have been written like this:\n<xs:element name=\"car\" type=\"carType\"/>\n<xs:simpleType name=\"carType\">\n<xs:restriction base=\"xs:string\">\n<xs:enumeration value=\"Audi\"/>\n<xs:enumeration value=\"Golf\"/>\n<xs:enumeration value=\"BMW\"/>\n</xs:restriction>\n</xs:simpleType>\nNote:\nIn this case the type \"carType\" can be used by other elements because it is not a part of the \"car\" element.\nRestrictions on a Series of Values\nTo limit the content of an XML element to define a series of numbers or \nletters that can be used, we would use the pattern constraint.\nThe example below defines an element called \"letter\" with a restriction. \nThe only acceptable value is ONE of the LOWERCASE letters from a to z:\n<xs:element name=\"letter\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[a-z]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThe \n<xs:element name=\"initials\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[A-Z][A-Z][A-Z]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThe \nrestriction. The only acceptable value is THREE of the LOWERCASE OR UPPERCASE \nletters from a to z:\n<xs:element name=\"initials\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[a-zA-Z][a-zA-Z][a-zA-Z]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThe \nThe only acceptable value is ONE of the following letters: x, y, OR z:\n<xs:element name=\"choice\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[xyz]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThe \nrestriction. The only acceptable value is FIVE digits in a sequence, and each \ndigit must be in a range from 0 to 9:\n<xs:element name=\"prodid\">\n<xs:simpleType>\n<xs:restriction base=\"xs:integer\">\n<xs:pattern value=\"[0-9][0-9][0-9][0-9][0-9]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nOther Restrictions on a Series of Values\nThe example below defines an element called \"letter\" with a \nrestriction. The acceptable value is zero or more occurrences of lowercase letters from a to z:\n<xs:element name=\"letter\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"([a-z])*\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThe \nrestriction. The acceptable value is one or more pairs of letters, each pair \nconsisting of a lower case letter followed by an upper case letter. For example, \n\"sToP\" will be validated by this pattern, but not \"Stop\" or \"STOP\" or \"stop\":\n<xs:element name=\"letter\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"([a-z][A-Z])+\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThe \n<xs:element name=\"gender\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"male|female\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThe \nrestriction. There must be exactly eight characters in a row and those \ncharacters must be lowercase or uppercase letters from a to z, or a number from 0 to 9:\n<xs:element name=\"password\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[a-zA-Z0-9]{8}\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nRestrictions on Whitespace Characters\nTo specify how whitespace characters should be handled, we would use the whiteSpace constraint.\nThis example defines an element called \"address\" with a \nrestriction. The whiteSpace constraint is set to \"preserve\", which means that \nthe XML processor WILL NOT remove any white space characters:\n<xs:element name=\"address\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:whiteSpace value=\"preserve\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThis example also defines an element called \"address\" with a \nrestriction. The whiteSpace constraint is set to \"replace\", which means that the \nXML processor WILL REPLACE all white space characters (line feeds, tabs, spaces, \nand carriage returns) with spaces:\n<xs:element name=\"address\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:whiteSpace value=\"replace\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThis example also defines an element called \"address\" with a \nrestriction. The whiteSpace constraint is set to \"collapse\", which means that \nthe XML processor WILL REMOVE all white space characters (line feeds, tabs, \nspaces, carriage returns are replaced with spaces, leading and trailing spaces \nare removed, and multiple spaces are reduced to a single space):\n<xs:element name=\"address\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:whiteSpace value=\"collapse\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nRestrictions on Length\nTo limit the length of a value in an element, we would use the length, maxLength, and minLength constraints.\nThis example defines an element called \"password\" with a restriction. The value must be exactly eight characters:\n<xs:element name=\"password\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:length value=\"8\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nThis example defines another element called \"password\" with a \nrestriction. The value must be minimum five characters and maximum eight \ncharacters:\n<xs:element name=\"password\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:minLength value=\"5\"/>\n<xs:maxLength value=\"8\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>\nRestrictions for Datatypes\nConstraint\nDescription\nenumeration\nDefines a list of acceptable values\nfractionDigits\nSpecifies the maximum number of decimal places allowed. \n    Must be equal to or greater than zero\nlength\nSpecifies the exact number of characters or list items \n    allowed. Must be equal to or greater than zero\nmaxExclusive\nSpecifies the upper bounds for numeric values (the value \n    must be less than this value)\nmaxInclusive\nSpecifies the upper bounds for numeric values (the value \n    must be less than or equal to this value)\nmaxLength\nSpecifies the maximum number of characters or list items \n    allowed. Must be equal to or greater than zero\nminExclusive\nSpecifies the lower bounds for numeric values (the value \n    must be greater than this value)\nminInclusive\nSpecifies the lower bounds for numeric values (the value \n    must be greater than or equal to this value)\nminLength\nSpecifies the minimum number of characters or list items \n    allowed. Must be equal to or greater than zero\npattern\nDefines the exact sequence of characters that are \n    acceptable\ntotalDigits\nSpecifies the exact number of digits allowed. Must be \n    greater than zero\nwhiteSpace\nSpecifies how white space (line feeds, tabs, spaces, and \n    carriage returns) is handled\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<xs:element name=\"age\">\n<xs:simpleType>\n<xs:restriction base=\"xs:integer\">\n<xs:minInclusive value=\"0\"/>\n<xs:maxInclusive value=\"120\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<xs:element name=\"car\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:enumeration value=\"Audi\"/>\n<xs:enumeration value=\"Golf\"/>\n<xs:enumeration value=\"BMW\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<xs:element name=\"car\" type=\"carType\"/>\n<xs:simpleType name=\"carType\">\n<xs:restriction base=\"xs:string\">\n<xs:enumeration value=\"Audi\"/>\n<xs:enumeration value=\"Golf\"/>\n<xs:enumeration value=\"BMW\"/>\n</xs:restriction>\n</xs:simpleType>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<xs:element name=\"letter\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[a-z]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<xs:element name=\"initials\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[A-Z][A-Z][A-Z]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<xs:element name=\"initials\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[a-zA-Z][a-zA-Z][a-zA-Z]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<xs:element name=\"choice\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[xyz]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "<xs:element name=\"prodid\">\n<xs:simpleType>\n<xs:restriction base=\"xs:integer\">\n<xs:pattern value=\"[0-9][0-9][0-9][0-9][0-9]\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<xs:element name=\"letter\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"([a-z])*\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "<xs:element name=\"letter\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"([a-z][A-Z])+\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "<xs:element name=\"gender\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"male|female\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "<xs:element name=\"password\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[a-zA-Z0-9]{8}\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 15,
+      "code": "<xs:element name=\"address\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:whiteSpace value=\"preserve\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 16,
+      "code": "<xs:element name=\"address\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:whiteSpace value=\"replace\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 17,
+      "code": "<xs:element name=\"address\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:whiteSpace value=\"collapse\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 18,
+      "code": "<xs:element name=\"password\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:length value=\"8\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 19,
+      "code": "<xs:element name=\"password\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:minLength value=\"5\"/>\n<xs:maxLength value=\"8\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<xs:element name=\"age\">\n<xs:simpleType>\n<xs:restriction base=\"xs:integer\">\n<xs:minInclusive value=\"0\"/>\n<xs:maxInclusive value=\"120\"/>\n</xs:restriction>\n# TODO: Complete this line\n</xs:element>",
+      "solution": "<xs:element name=\"age\">\n<xs:simpleType>\n<xs:restriction base=\"xs:integer\">\n<xs:minInclusive value=\"0\"/>\n<xs:maxInclusive value=\"120\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<xs:element name=\"car\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:enumeration value=\"Audi\"/>\n<xs:enumeration value=\"Golf\"/>\n<xs:enumeration value=\"BMW\"/>\n</xs:restriction>\n# TODO: Complete this line\n</xs:element>",
+      "solution": "<xs:element name=\"car\">\n<xs:simpleType>\n<xs:restriction base=\"xs:string\">\n<xs:enumeration value=\"Audi\"/>\n<xs:enumeration value=\"Golf\"/>\n<xs:enumeration value=\"BMW\"/>\n</xs:restriction>\n</xs:simpleType>\n</xs:element>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "e2d0f5f6-c5bd-44a8-aca9-791386697c79",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "0840fbcd-3634-4d3f-a2d7-07ca2b6855c4",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "625e2c00-0f64-4418-b12c-5c86c3126266",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Facets\n\nRestrictions?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "called facets",
+        "used to define acceptable values for XML elements or attributes"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Facets\n\nRestrictions is 'used to define acceptable values for XML elements or attributes'."
+    },
+    {
+      "question": "What is Restrictions on XML elements?",
+      "options": [
+        "None of the above.",
+        "called facets",
+        "None of the above.",
+        "used to define acceptable values for XML elements or attributes"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Restrictions on XML elements is 'called facets'."
+    }
+  ],
+  "summary": "This tutorial covers XSDRestrictions/Facets concepts and techniques. You'll learn how to use XSDRestrictions/Facets effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of XSDRestrictions/Facets and how to apply it in your projects."
+}

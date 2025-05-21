@@ -1,0 +1,124 @@
+{
+  "id": "dfb77224-2948-4b4b-9124-ff6a01211e55",
+  "title": "PHPmysqli rollback()Function",
+  "slug": "phpmysqli-rollbackfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli rollback()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "mysqli",
+      "transaction",
+      "commit",
+      "rollback",
+      "values",
+      "insert",
+      "style",
+      "connection",
+      "name",
+      "function"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "rollback"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli rollback()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nTurn off auto-committing, make some queries, commit the queries, then roll \nback the current transaction:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Turn autocommit off\n$mysqli -> autocommit(FALSE);\n// Insert some values\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli -> commit()) {\necho \"Commit \n  transaction failed\";\nexit();\n}\n// Rollback transaction\n$mysqli -> rollback();\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe rollback() / mysqli_rollback() function rolls back the current transaction for the specified database connection.\nTip:\nAlso look at the\ncommit()\nfunction, which commits the current transaction, and the\nautocommit()\nfunction, which turns on or off auto-committing database modifications.\nSyntax\nObject oriented style:\n$mysqli -> \n  rollback(\nflags, name\n)\nProcedural style:\nmysqli_rollback(\nconnection, flags, name\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nflags\nOptional. A constant:\nMYSQLI_TRANS_COR_AND_CHAIN - Appends \"AND CHAIN\"\nMYSQLI_TRANS_COR_AND_NO_CHAIN - Appends \"AND NO CHAIN\"\nMYSQLI_TRANS_COR_RELEASE - Appends \"RELEASE\"\nMYSQLI_TRANS_COR_NO_RELEASE - Appends \"NO RELEASE\"\nname\nOptional. ROLLBACK/*\nname\n*/ is executed if this parameter is \n    specified\nTechnical Details\nReturn Value:\nTRUE on success. FALSE on failure\nPHP Version:\n5+\nPHP Changelog:\nPHP 5.5: Added the\nflags\nand\nname\nparameters\nExample - Procedural style\nTurn off auto-committing, make some queries, commit the queries, then roll \nback the current transaction:\n<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Turn autocommit off\nmysqli_autocommit($con,FALSE);\n// Insert some values\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli_commit($con)) {\necho \n  \"Commit transaction failed\";\nexit();\n}\n// Rollback transaction\nmysqli_rollback($con);\n// Close connection\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Turn autocommit off\n$mysqli -> autocommit(FALSE);\n// Insert some values\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli -> commit()) {\necho \"Commit \n  transaction failed\";\nexit();\n}\n// Rollback transaction\n$mysqli -> rollback();\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Turn autocommit off\nmysqli_autocommit($con,FALSE);\n// Insert some values\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli_commit($con)) {\necho \n  \"Commit transaction failed\";\nexit();\n}\n// Rollback transaction\nmysqli_rollback($con);\n// Close connection\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n# TODO: Complete this line\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Turn autocommit off\n$mysqli -> autocommit(FALSE);\n// Insert some values\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli -> commit()) {\necho \"Commit \n  transaction failed\";\nexit();\n}\n// Rollback transaction\n$mysqli -> rollback();\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Turn autocommit off\n$mysqli -> autocommit(FALSE);\n// Insert some values\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli -> commit()) {\necho \"Commit \n  transaction failed\";\nexit();\n}\n// Rollback transaction\n$mysqli -> rollback();\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Turn autocommit off\n# TODO: Complete this line\n// Insert some values\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli_commit($con)) {\necho \n  \"Commit transaction failed\";\nexit();\n}\n// Rollback transaction\nmysqli_rollback($con);\n// Close connection\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Turn autocommit off\nmysqli_autocommit($con,FALSE);\n// Insert some values\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli_commit($con)) {\necho \n  \"Commit transaction failed\";\nexit();\n}\n// Rollback transaction\nmysqli_rollback($con);\n// Close connection\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "284637bf-79d6-434c-81ee-85eacfd77a90",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "73ccf5e5-1eb6-40ea-887a-d2baf649c464",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "fb9c35da-5a63-41fa-b597-ef46fb5c8c49",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is is executed if this parameter?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "None of the above.",
+        "specified\nTechnical Details\nReturn Value:\nTRUE on success"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of is executed if this parameter is 'specified\nTechnical Details\nReturn Value:\nTRUE on success'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli rollback()Function concepts and techniques. You'll learn how to use PHPmysqli rollback()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli rollback()Function and how to apply it in your projects."
+}

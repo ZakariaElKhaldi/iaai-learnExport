@@ -1,0 +1,98 @@
+{
+  "id": "7cc8ed92-7031-4241-a9ba-9a13ea1b6cfc",
+  "title": "Vue Provide/Inject",
+  "slug": "vue-provideinject",
+  "metadata": {
+    "description": "Learn about Vue Provide/Inject with clear explanations and practical examples.",
+    "keywords": [
+      "data",
+      "provide",
+      "component",
+      "foods",
+      "inject",
+      "components",
+      "name",
+      "food",
+      "imgurl",
+      "available"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue Provide/Inject"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue Provide/Inject",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Provide/Inject\nin Vue is used to provide data from one component to other components, particularly in large projects.\nProvide\nmakes data available to other components.\nInject\nis used to get the provided data.\nProvide/Inject\nis a way to share data as an alternative to passing data using props.\nProvide/Inject\nIn a large project, with components inside components, it can be hard to use props to provide data from \"App.vue\" to a sub-component, because it requires props to be defined in every component the data passes through.\nIf we use provide/inject instead of props, we only need to define the provided data where it is provided, and we only need to define the injected data where it is injected.\nProvide Data\nWe use the 'provide' configuration option to make data available to other components:\nApp.vue\n:\n<template>\n  <h1>Food</h1>\n  <div @click=\"this.activeComp = 'food-about'\" class=\"divBtn\">About</div>\n  <div @click=\"this.activeComp = 'food-kinds'\" class=\"divBtn\">Kinds</div>\n  <div id=\"divComp\">\n    <component :is=\"activeComp\"></component>\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      activeComp: 'food-about',\n      foods: [\n        { name: 'Pizza', imgUrl: '/img_pizza.svg' },\n        { name: 'Apple', imgUrl: '/img_apple.svg' },\n        { name: 'Cake', imgUrl: '/img_cake.svg' },\n        { name: 'Fish', imgUrl: '/img_fish.svg' },\n        { name: 'Rice', imgUrl: '/img_rice.svg' }\n      ]\n    }\n  },\n  provide() {\n    return {\n      foods: this.foods\n    }\n  }\n}\n</script>\nIn the code above, the 'foods' array is now provided so that it is available to be injected in other components in your project.\nInject Data\nNow that the 'foods' array is made available by 'provide' in 'App.vue', we can include it in the 'FoodKinds' component.\nWith the 'foods' data injected in the 'FoodKinds' component, we can use the data from App.vue to display different foods in the 'FoodKinds' component:\nExample\nFoodKinds.vue\n:\n<template>\n    <h2>Different Kinds of Food</h2>\n    <p><mark>In this application, food data is provided in \"App.vue\", and injected in the \"FoodKinds.vue\" component so that it can be shown here:</mark></p>\n    <div v-for=\"x in foods\">\n        <img :src=\"x.imgUrl\">\n        <p class=\"pName\">{{ x.name }}</p>\n    </div>\n</template>\n\n<script>\nexport default {\n    inject: ['foods']\n}\n</script>\n\n<style scoped>\n    div {\n        margin: 10px;\n        padding: 10px;\n        display: inline-block;\n        width: 80px;\n        background-color: #28e49f47;\n        border-radius: 10px;\n    }\n    .pName {\n        text-align: center;\n    }\n    img {\n        width: 100%;\n    }\n</style>\nRun Example \u00bb\nVue Exercises\nTest Yourself With Exercises\nExercise:\nWhich configuration option is needed in the code below so that the fish name 'Turbot' becomes available to other components?\ndata() {\n  return {\n    fishName: 'Turbot',\n    count: 4\n  }\n},\n() {\n  return {\n    fishName: this.fishName\n  }\n}\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "efafe5bd-cc9d-4933-850c-dc04606261bb",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "5b336422-4bf0-40e4-97a0-a424ba19f442",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "a77682d7-3ed8-4756-b04b-b28057128d11",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Inject\nin Vue?",
+      "options": [
+        "None of the above.",
+        "used to provide data from one component to other components",
+        "used to get the provided data",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Inject\nin Vue is 'used to provide data from one component to other components'."
+    },
+    {
+      "question": "What is Inject?",
+      "options": [
+        "used to get the provided data",
+        "used to provide data from one component to other components",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Inject is 'used to get the provided data'."
+    }
+  ],
+  "summary": "This tutorial covers Vue Provide/Inject concepts and techniques. You'll learn how to use Vue Provide/Inject effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue Provide/Inject and how to apply it in your projects."
+}

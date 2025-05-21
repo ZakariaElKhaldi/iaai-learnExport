@@ -1,0 +1,98 @@
+{
+  "id": "c0cdbf21-6c95-4889-9743-e1b416902aca",
+  "title": "ReactuseEffectHooks",
+  "slug": "reactuseeffecthooks",
+  "metadata": {
+    "description": "Learn about ReactuseEffectHooks with clear explanations and practical examples.",
+    "keywords": [
+      "count",
+      "useeffect",
+      "example",
+      "render",
+      "root",
+      "timer",
+      "react",
+      "usestate",
+      "const",
+      "import"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnReact",
+    "subcategory": "useEffect"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "React\nuseEffect\nHooks",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The\nuseEffect\nHook allows you to perform side effects in your components.\nSome examples of side effects are: fetching data, directly updating the DOM, and timers.\nuseEffect\naccepts two arguments. The second argument is optional.\nuseEffect(<function>, <dependency>)\nLet's use a timer as an example.\nExample:\nUse\nsetTimeout()\nto count 1 second after initial render:\nimport { useState, useEffect } from \"react\";\nimport ReactDOM from \"react-dom/client\";\n\nfunction Timer() {\n  const [count, setCount] = useState(0);\n\nuseEffect(() => {\n    setTimeout(() => {\n      setCount((count) => count + 1);\n    }, 1000);\n  });\n\nreturn <h1>I've rendered {count} times!</h1>;\n}\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<Timer />);\nRun \nExample \u00bb\nBut wait!! It keeps counting even though it should only count once!\nuseEffect\nruns on every render. That means that when the count changes, a render happens, which then triggers another effect.\nThis is not what we want. There are several ways to control when side effects run.\nWe should always include the second parameter which accepts an array.\nWe can optionally pass dependencies to\nuseEffect\nin this array.\nExample\n1. No dependency passed:\nuseEffect(() => {\n  //Runs on every render\n});\nExample\n2. An empty array:\nuseEffect(() => {\n  //Runs only on the first render\n}, []);\nExample\n3. Props or state values:\nuseEffect(() => {\n  //Runs on the first render\n  //And any time any dependency value changes\n}, [prop, state]);\nSo, to fix this issue, let's only run this effect on the initial render.\nExample:\nOnly run the effect on the initial render:\nimport { useState, useEffect } from \"react\";\nimport ReactDOM from \"react-dom/client\";\n\nfunction Timer() {\n  const [count, setCount] = useState(0);\n\nuseEffect(() => {\n    setTimeout(() => {\n      setCount((count) => count + 1);\n    }, 1000);\n  }, []); // <- add empty brackets here\n\nreturn <h1>I've rendered {count} times!</h1>;\n}\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<Timer />);\nRun \nExample \u00bb\nExample:\nHere is an example of a\nuseEffect\nHook that is dependent on a variable. If the\ncount\nvariable updates, the effect will run again:\nimport { useState, useEffect } from \"react\";\nimport ReactDOM from \"react-dom/client\";\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  const [calculation, setCalculation] = useState(0);\n\nuseEffect(() => {\n    setCalculation(() => count * 2);\n  }, [count]); // <- add the count variable here\n\nreturn (\n    <>\n      <p>Count: {count}</p>\n      <button onClick={() => setCount((c) => c + 1)}>+</button>\n      <p>Calculation: {calculation}</p>\n    </>\n  );\n}\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<Counter />);\nRun \nExample \u00bb\nIf there are multiple dependencies, they should be included in the\nuseEffect\ndependency array.\nEffect Cleanup\nSome effects require cleanup to reduce memory leaks.\nTimeouts, subscriptions, event listeners, and other effects that are no longer needed should be disposed.\nWe do this by including a return function at the end of the\nuseEffect\nHook.\nExample:\nClean up the timer at the end of the\nuseEffect\nHook:\nimport { useState, useEffect } from \"react\";\nimport ReactDOM from \"react-dom/client\";\n\nfunction Timer() {\n  const [count, setCount] = useState(0);\n\nuseEffect(() => {\n    let timer = setTimeout(() => {\n    setCount((count) => count + 1);\n  }, 1000);\n\nreturn () => clearTimeout(timer)\n  }, []);\n\nreturn <h1>I've rendered {count} times!</h1>;\n}\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<Timer />);\nRun \nExample \u00bb\nNote:\nTo clear the timer, we had to name it.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c073c099-0229-474a-9643-99fe11a1f3dc",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "67f86355-555e-4475-a979-67809c90c89c",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "39ea4b9f-d67b-4c1c-9450-785b5eaf023a",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The second argument?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "optional",
+        "Not a The second argument."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The second argument is 'optional'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers ReactuseEffectHooks concepts and techniques. You'll learn how to use ReactuseEffectHooks effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ReactuseEffectHooks and how to apply it in your projects."
+}

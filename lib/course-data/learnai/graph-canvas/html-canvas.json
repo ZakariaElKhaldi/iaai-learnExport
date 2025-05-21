@@ -1,0 +1,196 @@
+{
+  "id": "8a4c4fb4-5f56-4d84-9a1b-77866c205687",
+  "title": "HTML Canvas",
+  "slug": "html-canvas",
+  "metadata": {
+    "description": "Learn about HTML Canvas with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "canvas",
+      "function",
+      "xmax",
+      "const",
+      "color",
+      "plot",
+      "html",
+      "line",
+      "xarray",
+      "beginpath"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAI",
+    "subcategory": "Graph Canvas"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "HTML Canvas",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "HTML Canvas is perfect for\nScatter Plots\nHTML Canvas is perfect for\nLine Graphs\nHTML Canvas is perfect for combining\nScatter\nand\nLines\nScatter Plots\nSource Code\nconst xArray = [50,60,70,80,90,100,110,120,130,140,150];\nconst yArray = [7,8,8,9,9,9,10,11,14,14,15];\n// Plot Scatter\nctx.fillStyle = \"red\";\nfor (let i = 0; i < xArray.length-1; i++) {\nlet x = xArray[i]*400/150;\nlet y = yArray[i]*400/15;\nctx.beginPath();\nctx.ellipse(x, y, 2, 3, 0, 0, Math.PI * 2);\nctx.fill();\n}\n\nLine Graphs\nSource Code\nconst xMax = canvas.height = canvas.width;\nconst slope = 1.2;\nconst intercept = 70;\n// Plot Line\nctx.beginPath();\nctx.moveTo(0, intercept);\nctx.lineTo(xMax, xMax * slope + intercept);\nctx.stroke();\n\nCombined\nSource Code\nlet xMax = canvas.height;\nlet yMax = canvas.width;\nlet slope = 1.2;\nlet intercept = 70;\nconst xArray = [50,60,70,80,90,100,110,120,130,140,150];\nconst yArray = [7,8,8,9,9,9,10,11,14,14,15];\n// Plot Scatter\nctx.fillStyle = \"red\";\nfor (let i = 0; i < xArray.length-1; i++) {\nlet x = xArray[i] * xMax/150;\nlet y = yArray[i] * yMax/15;\nctx.beginPath();\nctx.ellipse(x, y, 2, 3, 0, 0, Math.PI * 2);\nctx.fill();\n}\n// Plot Line\nctx.beginPath();\nctx.moveTo(0, intercept);\nctx.lineTo(xMax, xMax * slope + intercept);\nctx.stroke();\n\nHaving a\nPlotter Object\nis nice when studying Artificial Intelligence:\nMakes AI more\nFun\nMakes AI more\nVisual\nMakes AI more\nUnderstandable\nCreate a Plotter Object\nExample\nfunction XYPlotter(id) {\nthis.canvas = document.getElementById(id);\nthis.ctx = this.canvas.getContext(\"2d\");\nthis.xMin = 0;\nthis.yMin = 0;\nthis.xMax = this.canvas.width;\nthis.yMax = this.canvas.height;\n.\n.\nAdd a Method for Plotting a Line\nExample\nthis.plotLine = function(x0, y0, x, y, color) {\nthis.ctx.moveTo(x0, y0);\nthis.ctx.lineTo(x, y);\nthis.ctx.strokeStyle = color;\nthis.ctx.stroke();\n}\n\nAdd a Method for Transforming XY Values\nExample\nthis.transformXY = function() {\nthis.ctx.transform(1, 0, 0, -1, 0, this.canvas.height)\n}\n\nAdd a Method for Plotting Points\nExample\nthis.plotPoints = function(n, xArr, yArr, color, radius = 3) {\nfor (let i = 0; i < n; i++) {\nthis.ctx.fillStyle = color;\nthis.ctx.beginPath();\nthis.ctx.ellipse(xArr[i], yArr[i], radius, radius, 0, 0, Math.PI * 2);\nthis.ctx.fill();\n}\n}\nPlot Some Random Points\nExample\n// Create a Plotter\nlet myPlotter = new XYPlotter(\"myCanvas\");\n// Create random XY Points\nnumPoints = 500;\nconst xPoints = Array(numPoints).fill(0).map(function(){return Math.random() * myPlotter.xMax});\nconst yPoints = Array(numPoints).fill(0).map(function(){return Math.random() * myPlotter.yMax});\n// Plot the Points\nmyPlotter.plotPoints(numPoints, xPoints, yPoints, \"blue\");\n\nPut the Code in a Library\nSource Code\nfunction XYPlotter(id) {\nthis.canvas = document.getElementById(id);\nthis.ctx = this.canvas.getContext(\"2d\");\nthis.xMin = 0;\nthis.yMin = 0;\nthis.xMax = this.canvas.width;\nthis.yMax = this.canvas.height;\n// Plot Line Function\nthis.plotLine = function(x0, y0, x, y, color) {\nthis.ctx.moveTo(x0, y0);\nthis.ctx.lineTo(x, y);\nthis.ctx.strokeStyle = color;\nthis.ctx.stroke();\n}\n// Transform XY Function\nthis.transformXY = function() {\nthis.ctx.transform(1, 0, 0, -1, 0, this.canvas.height)\n}\n// Pot Points Function\nthis.plotPoints = function(n, xArr, yArr, color, radius = 3) {\nfor (let i = 0; i < n; i++) {\nthis.ctx.fillStyle = color;\nthis.ctx.beginPath();\nthis.ctx.ellipse(xArr[i], yArr[i], radius, radius, 0, 0, Math.PI * 2);\nthis.ctx.fill();\n}\n}\n} // End Plotter Object\nSave it in a file (like \"myplotlib.js\")\nUse it in Your HTML Pages\nNow you can add your plotter object to your HTML pages:\nExample\n<script src=\"myplotlib.js\"></script>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Source Code",
+      "content": "",
+      "order": 3,
+      "code": "const xArray = [50,60,70,80,90,100,110,120,130,140,150];\nconst yArray = [7,8,8,9,9,9,10,11,14,14,15];\n// Plot Scatter\nctx.fillStyle = \"red\";\nfor (let i = 0; i < xArray.length-1; i++) {\nlet x = xArray[i]*400/150;\nlet y = yArray[i]*400/15;\nctx.beginPath();\nctx.ellipse(x, y, 2, 3, 0, 0, Math.PI * 2);\nctx.fill();\n}",
+      "language": "javascript",
+      "explanation": "Example of source code"
+    },
+    {
+      "type": "code_example",
+      "title": "Source Code",
+      "content": "",
+      "order": 4,
+      "code": "const xMax = canvas.height = canvas.width;\nconst slope = 1.2;\nconst intercept = 70;\n// Plot Line\nctx.beginPath();\nctx.moveTo(0, intercept);\nctx.lineTo(xMax, xMax * slope + intercept);\nctx.stroke();",
+      "language": "javascript",
+      "explanation": "Example of source code"
+    },
+    {
+      "type": "code_example",
+      "title": "Source Code",
+      "content": "",
+      "order": 5,
+      "code": "let xMax = canvas.height;\nlet yMax = canvas.width;\nlet slope = 1.2;\nlet intercept = 70;\nconst xArray = [50,60,70,80,90,100,110,120,130,140,150];\nconst yArray = [7,8,8,9,9,9,10,11,14,14,15];\n// Plot Scatter\nctx.fillStyle = \"red\";\nfor (let i = 0; i < xArray.length-1; i++) {\nlet x = xArray[i] * xMax/150;\nlet y = yArray[i] * yMax/15;\nctx.beginPath();\nctx.ellipse(x, y, 2, 3, 0, 0, Math.PI * 2);\nctx.fill();\n}\n// Plot Line\nctx.beginPath();\nctx.moveTo(0, intercept);\nctx.lineTo(xMax, xMax * slope + intercept);\nctx.stroke();",
+      "language": "javascript",
+      "explanation": "Example of source code"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "function XYPlotter(id) {\nthis.canvas = document.getElementById(id);\nthis.ctx = this.canvas.getContext(\"2d\");\nthis.xMin = 0;\nthis.yMin = 0;\nthis.xMax = this.canvas.width;\nthis.yMax = this.canvas.height;\n.\n.",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "this.plotLine = function(x0, y0, x, y, color) {\nthis.ctx.moveTo(x0, y0);\nthis.ctx.lineTo(x, y);\nthis.ctx.strokeStyle = color;\nthis.ctx.stroke();\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "this.transformXY = function() {\nthis.ctx.transform(1, 0, 0, -1, 0, this.canvas.height)\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "this.plotPoints = function(n, xArr, yArr, color, radius = 3) {\nfor (let i = 0; i < n; i++) {\nthis.ctx.fillStyle = color;\nthis.ctx.beginPath();\nthis.ctx.ellipse(xArr[i], yArr[i], radius, radius, 0, 0, Math.PI * 2);\nthis.ctx.fill();\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "// Create a Plotter\nlet myPlotter = new XYPlotter(\"myCanvas\");\n// Create random XY Points\nnumPoints = 500;\nconst xPoints = Array(numPoints).fill(0).map(function(){return Math.random() * myPlotter.xMax});\nconst yPoints = Array(numPoints).fill(0).map(function(){return Math.random() * myPlotter.yMax});\n// Plot the Points\nmyPlotter.plotPoints(numPoints, xPoints, yPoints, \"blue\");",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Source Code",
+      "content": "",
+      "order": 11,
+      "code": "function XYPlotter(id) {\nthis.canvas = document.getElementById(id);\nthis.ctx = this.canvas.getContext(\"2d\");\nthis.xMin = 0;\nthis.yMin = 0;\nthis.xMax = this.canvas.width;\nthis.yMax = this.canvas.height;\n// Plot Line Function\nthis.plotLine = function(x0, y0, x, y, color) {\nthis.ctx.moveTo(x0, y0);\nthis.ctx.lineTo(x, y);\nthis.ctx.strokeStyle = color;\nthis.ctx.stroke();\n}\n// Transform XY Function\nthis.transformXY = function() {\nthis.ctx.transform(1, 0, 0, -1, 0, this.canvas.height)\n}\n// Pot Points Function\nthis.plotPoints = function(n, xArr, yArr, color, radius = 3) {\nfor (let i = 0; i < n; i++) {\nthis.ctx.fillStyle = color;\nthis.ctx.beginPath();\nthis.ctx.ellipse(xArr[i], yArr[i], radius, radius, 0, 0, Math.PI * 2);\nthis.ctx.fill();\n}\n}\n} // End Plotter Object",
+      "language": "javascript",
+      "explanation": "Example of source code"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "<script src=\"myplotlib.js\"></script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "const xArray = [50,60,70,80,90,100,110,120,130,140,150];\nconst yArray = [7,8,8,9,9,9,10,11,14,14,15];\n# TODO: Complete this line\nctx.fillStyle = \"red\";\nfor (let i = 0; i < xArray.length-1; i++) {\nlet x = xArray[i]*400/150;\nlet y = yArray[i]*400/15;\nctx.beginPath();\nctx.ellipse(x, y, 2, 3, 0, 0, Math.PI * 2);\nctx.fill();\n}",
+      "solution": "const xArray = [50,60,70,80,90,100,110,120,130,140,150];\nconst yArray = [7,8,8,9,9,9,10,11,14,14,15];\n// Plot Scatter\nctx.fillStyle = \"red\";\nfor (let i = 0; i < xArray.length-1; i++) {\nlet x = xArray[i]*400/150;\nlet y = yArray[i]*400/15;\nctx.beginPath();\nctx.ellipse(x, y, 2, 3, 0, 0, Math.PI * 2);\nctx.fill();\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "const xMax = canvas.height = canvas.width;\nconst slope = 1.2;\nconst intercept = 70;\n// Plot Line\nctx.beginPath();\nctx.moveTo(0, intercept);\nctx.lineTo(xMax, xMax * slope + intercept);\n# TODO: Complete this line",
+      "solution": "const xMax = canvas.height = canvas.width;\nconst slope = 1.2;\nconst intercept = 70;\n// Plot Line\nctx.beginPath();\nctx.moveTo(0, intercept);\nctx.lineTo(xMax, xMax * slope + intercept);\nctx.stroke();"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "11388a89-1577-4d0c-9635-1aeeec9a032c",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "090aa21a-70a1-4eef-a93f-2605d1d69978",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "8db6ab28-f2f8-49ce-a23c-fc2842f93345",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is HTML Canvas\n\nHTML Canvas is perfect for\nScatter Plots\nHTML Canvas is perfect for\nLine Graphs\nHTML Canvas?",
+      "options": [
+        "None of the above.",
+        "perfect for combining\nScatter\nand\nLines\nScatter Plots\nSource Code\nconst xArray = [50",
+        "None of the above.",
+        "nice when studying Artificial Intelligence:\nMakes AI more\nFun\nMakes AI more\nVisual\nMakes AI more\nUnderstandable\nCreate a Plotter Object\nExample\nfunction XYPlotter(id) {\nthis"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of HTML Canvas\n\nHTML Canvas is perfect for\nScatter Plots\nHTML Canvas is perfect for\nLine Graphs\nHTML Canvas is 'perfect for combining\nScatter\nand\nLines\nScatter Plots\nSource Code\nconst xArray = [50'."
+    },
+    {
+      "question": "What is Having a\nPlotter Object?",
+      "options": [
+        "None of the above.",
+        "nice when studying Artificial Intelligence:\nMakes AI more\nFun\nMakes AI more\nVisual\nMakes AI more\nUnderstandable\nCreate a Plotter Object\nExample\nfunction XYPlotter(id) {\nthis",
+        "perfect for combining\nScatter\nand\nLines\nScatter Plots\nSource Code\nconst xArray = [50",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Having a\nPlotter Object is 'nice when studying Artificial Intelligence:\nMakes AI more\nFun\nMakes AI more\nVisual\nMakes AI more\nUnderstandable\nCreate a Plotter Object\nExample\nfunction XYPlotter(id) {\nthis'."
+    }
+  ],
+  "summary": "This tutorial covers HTML Canvas concepts and techniques. You'll learn how to use HTML Canvas effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of HTML Canvas and how to apply it in your projects."
+}

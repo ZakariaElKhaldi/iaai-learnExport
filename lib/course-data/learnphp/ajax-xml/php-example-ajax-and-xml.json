@@ -1,0 +1,124 @@
+{
+  "id": "554a7f08-97e0-4c7d-a78b-084f83aea19c",
+  "title": "PHP Example -AJAX and XML",
+  "slug": "php-example-ajax-and-xml",
+  "metadata": {
+    "description": "Learn about PHP Example -AJAX and XML with clear explanations and practical examples.",
+    "keywords": [
+      "php",
+      "option",
+      "item",
+      "file",
+      "function",
+      "example",
+      "select",
+      "value",
+      "ajax",
+      "page",
+      "html"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "AJAX XML"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP Example -\nAJAX and XML",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AJAX can be used for interactive communication with an XML file.\nAJAX XML Example\nThe following example will demonstrate how a web page can fetch information from an XML file with AJAX:\nExample\nSelect a CD:\nBob Dylan\nBee Gees\nCat Stevens\nCD info will be listed here...\nExample Explained - The HTML Page\nWhen a user selects a CD in the dropdown list above, a function called \"showCD()\" is executed. The \nfunction is triggered by the \"onchange\" event:\n<html>\n<head>\n<script>\nfunction showCD(str)\n{\nif (str==\"\") {\ndocument.getElementById(\"txtHint\").innerHTML=\"\";\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\nxmlhttp.onreadystatechange=function() {\nif (this.readyState==4 && this.status==200) {\ndocument.getElementById(\"txtHint\").innerHTML=this.responseText;\n}\n}\nxmlhttp.open(\"GET\",\"getcd.php?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head>\n<body>\n<form>\nSelect a CD:\n<select name=\"cds\" onchange=\"showCD(this.value)\">\n<option value=\"\">Select a CD:</option>\n<option value=\"Bob Dylan\">Bob Dylan</option>\n<option value=\"Bee Gees\">Bee Gees</option>\n<option value=\"Cat Stevens\">Cat Stevens</option>\n</select>\n</form>\n<div id=\"txtHint\"><b>CD info will be listed here...</b></div>\n</body>\n</html>\nThe showCD() function does the following:\nCheck if a CD is selected\nCreate an XMLHttpRequest object\nCreate the function to be executed when the server response is ready\nSend the request off to a file on the server\nNotice that a parameter (q) is added to the URL (with the content of the dropdown list)\nThe PHP File\nThe page on the server called by the JavaScript above is a PHP file called \"getcd.php\".\nThe PHP script loads an XML document, \"\ncd_catalog.xml\n\", runs a query against the XML file, and returns the result as HTML:\n<?php\n$q=$_GET[\"q\"];\n$xmlDoc = new DOMDocument();\n$xmlDoc->load(\"cd_catalog.xml\");\n$x=$xmlDoc->getElementsByTagName('ARTIST');\nfor ($i=0; $i<=$x->length-1; $i++)\n{\n//Process only element nodes\nif ($x->item($i)->nodeType==1)\u00a0{\nif ($x->item($i)->childNodes->item(0)->nodeValue == $q) {\n$y=($x->item($i)->parentNode);\n}\n}\n}\n$cd=($y->childNodes);\nfor ($i=0;$i<$cd->length;$i++)\n{\n//Process only element nodes\nif ($cd->item($i)->nodeType==1)\u00a0{\necho(\"<b>\" . $cd->item($i)->nodeName . \":</b> \");\necho($cd->item($i)->childNodes->item(0)->nodeValue);\necho(\"<br>\");\n}\n}\n?>\nWhen the CD query is sent from the JavaScript to the PHP page, the following \nhappens:\nPHP creates an XML DOM object\nFind all <artist> elements that matches the name sent from the JavaScript\nOutput the album information (send to the \"txtHint\" placeholder)\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<html>\n<head>\n<script>\nfunction showCD(str)\n{\nif (str==\"\") {\ndocument.getElementById(\"txtHint\").innerHTML=\"\";\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\nxmlhttp.onreadystatechange=function() {\nif (this.readyState==4 && this.status==200) {\ndocument.getElementById(\"txtHint\").innerHTML=this.responseText;\n}\n}\nxmlhttp.open(\"GET\",\"getcd.php?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head>\n<body>\n<form>\nSelect a CD:\n<select name=\"cds\" onchange=\"showCD(this.value)\">\n<option value=\"\">Select a CD:</option>\n<option value=\"Bob Dylan\">Bob Dylan</option>\n<option value=\"Bee Gees\">Bee Gees</option>\n<option value=\"Cat Stevens\">Cat Stevens</option>\n</select>\n</form>\n<div id=\"txtHint\"><b>CD info will be listed here...</b></div>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$q=$_GET[\"q\"];\n$xmlDoc = new DOMDocument();\n$xmlDoc->load(\"cd_catalog.xml\");\n$x=$xmlDoc->getElementsByTagName('ARTIST');\nfor ($i=0; $i<=$x->length-1; $i++)\n{\n//Process only element nodes\nif ($x->item($i)->nodeType==1)\u00a0{\nif ($x->item($i)->childNodes->item(0)->nodeValue == $q) {\n$y=($x->item($i)->parentNode);\n}\n}\n}\n$cd=($y->childNodes);\nfor ($i=0;$i<$cd->length;$i++)\n{\n//Process only element nodes\nif ($cd->item($i)->nodeType==1)\u00a0{\necho(\"<b>\" . $cd->item($i)->nodeName . \":</b> \");\necho($cd->item($i)->childNodes->item(0)->nodeValue);\necho(\"<br>\");\n}\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n<head>\n<script>\nfunction showCD(str)\n{\nif (str==\"\") {\ndocument.getElementById(\"txtHint\").innerHTML=\"\";\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\nxmlhttp.onreadystatechange=function() {\n# TODO: Complete this line\ndocument.getElementById(\"txtHint\").innerHTML=this.responseText;\n}\n}\nxmlhttp.open(\"GET\",\"getcd.php?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head>\n<body>\n<form>\nSelect a CD:\n<select name=\"cds\" onchange=\"showCD(this.value)\">\n<option value=\"\">Select a CD:</option>\n<option value=\"Bob Dylan\">Bob Dylan</option>\n<option value=\"Bee Gees\">Bee Gees</option>\n<option value=\"Cat Stevens\">Cat Stevens</option>\n</select>\n</form>\n<div id=\"txtHint\"><b>CD info will be listed here...</b></div>\n</body>\n</html>",
+      "solution": "<html>\n<head>\n<script>\nfunction showCD(str)\n{\nif (str==\"\") {\ndocument.getElementById(\"txtHint\").innerHTML=\"\";\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\nxmlhttp.onreadystatechange=function() {\nif (this.readyState==4 && this.status==200) {\ndocument.getElementById(\"txtHint\").innerHTML=this.responseText;\n}\n}\nxmlhttp.open(\"GET\",\"getcd.php?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head>\n<body>\n<form>\nSelect a CD:\n<select name=\"cds\" onchange=\"showCD(this.value)\">\n<option value=\"\">Select a CD:</option>\n<option value=\"Bob Dylan\">Bob Dylan</option>\n<option value=\"Bee Gees\">Bee Gees</option>\n<option value=\"Cat Stevens\">Cat Stevens</option>\n</select>\n</form>\n<div id=\"txtHint\"><b>CD info will be listed here...</b></div>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$q=$_GET[\"q\"];\n$xmlDoc = new DOMDocument();\n$xmlDoc->load(\"cd_catalog.xml\");\n$x=$xmlDoc->getElementsByTagName('ARTIST');\nfor ($i=0; $i<=$x->length-1; $i++)\n{\n//Process only element nodes\n# TODO: Complete this line\nif ($x->item($i)->childNodes->item(0)->nodeValue == $q) {\n$y=($x->item($i)->parentNode);\n}\n}\n}\n$cd=($y->childNodes);\nfor ($i=0;$i<$cd->length;$i++)\n{\n//Process only element nodes\nif ($cd->item($i)->nodeType==1)\u00a0{\necho(\"<b>\" . $cd->item($i)->nodeName . \":</b> \");\necho($cd->item($i)->childNodes->item(0)->nodeValue);\necho(\"<br>\");\n}\n}\n?>",
+      "solution": "<?php\n$q=$_GET[\"q\"];\n$xmlDoc = new DOMDocument();\n$xmlDoc->load(\"cd_catalog.xml\");\n$x=$xmlDoc->getElementsByTagName('ARTIST');\nfor ($i=0; $i<=$x->length-1; $i++)\n{\n//Process only element nodes\nif ($x->item($i)->nodeType==1)\u00a0{\nif ($x->item($i)->childNodes->item(0)->nodeValue == $q) {\n$y=($x->item($i)->parentNode);\n}\n}\n}\n$cd=($y->childNodes);\nfor ($i=0;$i<$cd->length;$i++)\n{\n//Process only element nodes\nif ($cd->item($i)->nodeType==1)\u00a0{\necho(\"<b>\" . $cd->item($i)->nodeName . \":</b> \");\necho($cd->item($i)->childNodes->item(0)->nodeValue);\necho(\"<br>\");\n}\n}\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "5e0d5aef-5849-4ff2-ab04-1ef103381cf7",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "987b6afe-b185-47ad-b91c-f117e39e51ef",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "570a4c4f-dc56-44fc-b0cb-3e4c52ca737b",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The \nfunction?",
+      "options": [
+        "triggered by the \"onchange\" event:\n<html>\n<head>\n<script>\nfunction showCD(str)\n{\nif (str==\"\") {\ndocument",
+        "Not a The \nfunction.",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of The \nfunction is 'triggered by the \"onchange\" event:\n<html>\n<head>\n<script>\nfunction showCD(str)\n{\nif (str==\"\") {\ndocument'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHP Example -AJAX and XML concepts and techniques. You'll learn how to use PHP Example -AJAX and XML effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHP Example -AJAX and XML and how to apply it in your projects."
+}

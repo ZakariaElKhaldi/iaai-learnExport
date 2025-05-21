@@ -1,0 +1,133 @@
+{
+  "id": "54016d44-6575-406a-89a3-f587a6f41614",
+  "title": "MySQLEXISTS Operator",
+  "slug": "mysqlexists-operator",
+  "metadata": {
+    "description": "Learn about MySQLEXISTS Operator with clear explanations and practical examples.",
+    "keywords": [
+      "sql",
+      "exists",
+      "suppliers",
+      "select",
+      "supplierid",
+      "products",
+      "price",
+      "operator",
+      "returns",
+      "mysql",
+      "true"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Sql Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMySQL",
+    "subcategory": "MySQL EXISTS"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "MySQL\nEXISTS Operator",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The MySQL EXISTS Operator\nThe\nEXISTS\noperator is used to test for the existence of any record in a subquery.\nThe\nEXISTS\noperator returns TRUE if the subquery returns one or more records.\nEXISTS Syntax\nSELECT\ncolumn_name(s)\nFROM\ntable_name\nWHERE \n  EXISTS\n(SELECT\ncolumn_name\nFROM\ntable_name\nWHERE\ncondition\n);\nDemo Database\nBelow is a selection from the \"Products\" table in the Northwind sample database:\nProductID\nProductName\nSupplierID\nCategoryID\nUnit\nPrice\n1\nChais\n1\n1\n10 boxes x 20 bags\n18\n2\nChang\n1\n1\n24 - 12 oz bottles\n19\n3\nAniseed Syrup\n1\n2\n12 - 550 ml bottles\n10\n4\nChef Anton's Cajun Seasoning\n2\n2\n48 - 6 oz jars\n22\n5\nChef Anton's Gumbo Mix\n2\n2\n36 boxes\n21.35\nAnd a selection from the \"Suppliers\" table:\nSupplierID\nSupplierName\nContactName\nAddress\nCity\nPostalCode\nCountry\n1\nExotic Liquid\nCharlotte Cooper\n49 Gilbert St.\nLondon\nEC1 4SD\nUK\n2\nNew Orleans Cajun Delights\nShelley Burke\nP.O. Box 78934\nNew Orleans\n70117\nUSA\n3\nGrandma Kelly's Homestead\nRegina Murphy\n707 Oxford Rd.\nAnn Arbor\n48104\nUSA\n4\nTokyo Traders\nYoshi Nagase\n9-8 Sekimai Musashino-shi\nTokyo\n100\nJapan\nMySQL EXISTS Examples\nThe following SQL statement returns TRUE and lists the suppliers with a product price less than 20:\nExample\nSELECT SupplierName\nFROM Suppliers\nWHERE EXISTS (SELECT ProductName FROM \n  Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);\n\nThe following SQL statement returns TRUE and lists the suppliers with a product price \nequal to 22:\nExample\nSELECT SupplierName\nFROM Suppliers\nWHERE EXISTS (SELECT ProductName FROM \n  Products WHERE Products.SupplierID = Suppliers.supplierID AND Price = 22);\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "SELECT\ncolumn_name(s)\nFROM\ntable_name\nWHERE \n  EXISTS\n(SELECT\ncolumn_name\nFROM\ntable_name\nWHERE\ncondition\n);",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "SELECT SupplierName\nFROM Suppliers\nWHERE EXISTS (SELECT ProductName FROM \n  Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "SELECT SupplierName\nFROM Suppliers\nWHERE EXISTS (SELECT ProductName FROM \n  Products WHERE Products.SupplierID = Suppliers.supplierID AND Price = 22);",
+      "language": "sql",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "SELECT\ncolumn_name(s)\nFROM\ntable_name\nWHERE \n# TODO: Complete this line\n(SELECT\ncolumn_name\nFROM\ntable_name\nWHERE\ncondition\n);",
+      "solution": "SELECT\ncolumn_name(s)\nFROM\ntable_name\nWHERE \n  EXISTS\n(SELECT\ncolumn_name\nFROM\ntable_name\nWHERE\ncondition\n);"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "SELECT SupplierName\nFROM Suppliers\n# TODO: Complete this line\n  Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);",
+      "solution": "SELECT SupplierName\nFROM Suppliers\nWHERE EXISTS (SELECT ProductName FROM \n  Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "de44b914-7b9e-47d8-a60e-13569e887450",
+      "title": "Sql Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "90cab4da-7092-4a98-9ea7-3030a16e491a",
+      "title": "Sql Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "db0188b3-834e-4e29-8d90-8844ad87234d",
+      "title": "Sql Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is MySQL\nEXISTS Operator\n\nThe MySQL EXISTS Operator\nThe\nEXISTS\noperator?",
+      "options": [
+        "a selection from the \"Products\" table in the Northwind sample database:\nProductID\nProductName\nSupplierID\nCategoryID\nUnit\nPrice\n1\nChais\n1\n1\n10 boxes x 20 bags\n18\n2\nChang\n1\n1\n24 - 12 oz bottles\n19\n3\nAniseed Syrup\n1\n2\n12 - 550 ml bottles\n10\n4\nChef Anton's Cajun Seasoning\n2\n2\n48 - 6 oz jars\n22\n5\nChef Anton's Gumbo Mix\n2\n2\n36 boxes\n21",
+        "None of the above.",
+        "used to test for the existence of any record in a subquery",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of MySQL\nEXISTS Operator\n\nThe MySQL EXISTS Operator\nThe\nEXISTS\noperator is 'used to test for the existence of any record in a subquery'."
+    },
+    {
+      "question": "What is Demo Database\nBelow?",
+      "options": [
+        "used to test for the existence of any record in a subquery",
+        "None of the above.",
+        "None of the above.",
+        "a selection from the \"Products\" table in the Northwind sample database:\nProductID\nProductName\nSupplierID\nCategoryID\nUnit\nPrice\n1\nChais\n1\n1\n10 boxes x 20 bags\n18\n2\nChang\n1\n1\n24 - 12 oz bottles\n19\n3\nAniseed Syrup\n1\n2\n12 - 550 ml bottles\n10\n4\nChef Anton's Cajun Seasoning\n2\n2\n48 - 6 oz jars\n22\n5\nChef Anton's Gumbo Mix\n2\n2\n36 boxes\n21"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Demo Database\nBelow is 'a selection from the \"Products\" table in the Northwind sample database:\nProductID\nProductName\nSupplierID\nCategoryID\nUnit\nPrice\n1\nChais\n1\n1\n10 boxes x 20 bags\n18\n2\nChang\n1\n1\n24 - 12 oz bottles\n19\n3\nAniseed Syrup\n1\n2\n12 - 550 ml bottles\n10\n4\nChef Anton's Cajun Seasoning\n2\n2\n48 - 6 oz jars\n22\n5\nChef Anton's Gumbo Mix\n2\n2\n36 boxes\n21'."
+    }
+  ],
+  "summary": "This tutorial covers MySQLEXISTS Operator concepts and techniques. You'll learn how to use MySQLEXISTS Operator effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of MySQLEXISTS Operator and how to apply it in your projects."
+}

@@ -1,0 +1,116 @@
+{
+  "id": "83775ff0-01ef-48eb-aae6-4815b35437e5",
+  "title": "Django if Tag",
+  "slug": "django-if-tag",
+  "metadata": {
+    "description": "Learn about Django if Tag with clear explanations and practical examples.",
+    "keywords": [
+      "example",
+      "greeting",
+      "endif",
+      "hello",
+      "else",
+      "operator",
+      "check",
+      "objects",
+      "equal",
+      "template"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Django If Else"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Django if Tag\n\nIf Statement\nAn\nif\nstatement evaluates a variable and executes a block of code if the value is true",
+      "content": ".\nExample\n{% if greeting == 1 %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\nElif\nThe\nelif\nkeyword says \"if the \nthen try this condition\".\nExample\n{% if greeting == 1 %}\n  <h1>Hello</h1>\n{% elif greeting == 2 %}\n  <h1>Welcome</h1>\n{% endif %}\nRun Example \u00bb\nElse\nThe\nelse\nkeyword catches anything which isn't caught by the preceding conditions.\nExample\n{% if greeting == 1 %}\n  <h1>Hello</h1>\n{% elif greeting == 2 %}\n  <h1>Welcome</h1>\n{% else %}\n  <h1>Goodbye</h1>\n{% endif %}\nRun Example \u00bb",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The above examples uses the",
+      "content": "==\noperator, which is used to check if a variable is equal to a value,\nbut there are many other operators you can use, or you can even drop the operator if you just want to check if \na variable is not empty:\nExample\n{% if greeting %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\n==\nIs equal to.\nExample\n{% if greeting == 2 %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\n!=\nIs not equal to.\nExample\n{% if greeting != 1 %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\n<\nIs less than.\nExample\n{% if greeting < 3 %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\n<=\nIs less than, or equal to.\nExample\n{% if greeting <= 3 %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\n>\nIs greater than.\nExample\n{% if greeting > 1 %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\n>=\nIs greater than, or equal to.\nExample\n{% if greeting >= 1 %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\nand\nTo check if more than one condition is true.\nExample\n{% if greeting == 1 and day == \"Friday\" %}\n  <h1>Hello Weekend!</h1>\n{% endif %}\nRun Example \u00bb\nor\nTo check if one of the conditions is true.\nExample\n{% if greeting == 1 or greeting == 5 %}\n  <h1>Hello</h1>\n{% endif %}\nRun Example \u00bb\nand/or\nCombine\nand\nand\nor\n.\nExample\n{% if greeting == 1 and day == \"Friday\" or greeting == 5 %}\nRun Example \u00bb\nParentheses are not allowed in\nif\nstatements \nin Django, so when you combine\nand\nand\nor\noperators, it is important to know that \nparentheses are added for\nand\nbut not for\nor\n.\nMeaning that the above example is \nread by the interpreter like this:\n{% if (greeting == 1 and day == \"Friday\") or greeting == 5 %}\nin\nTo check if a certain item is present in an object.\nExample\n{% if 'Banana' in fruits %}\n  <h1>Hello</h1>\n{% else %}\n  <h1>Goodbye</h1>\n{% endif %}\nRun Example \u00bb\nnot in\nTo check if a certain item is not present in an object.\nExample\n{% if 'Banana' not in fruits %}\n  <h1>Hello</h1>\n{% else %}\n  <h1>Goodbye</h1>\n{% endif %}\nRun Example \u00bb\nis\nCheck if two objects are the same.",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "This operator is different from the",
+      "content": "==\noperator, because the\n==\noperator \nchecks the values of two objects, but the\nis\noperator checks \nthe identity of two \nobjects.\nIn the view we have two objects,\nx\nand\ny\n, with the same values:\nExample\nviews.py\n:\nfrom django.http import HttpResponse\nfrom django.template import loader\n\ndef testing(request):\n  template = loader.get_template('template.html')\n  context = {\n    'x': ['Apple', 'Banana', 'Cherry'], \n    'y': ['Apple', 'Banana', 'Cherry'], \n  }\n  return HttpResponse(template.render(context, request))\nThe two objects have the same value, but is it the same object?\nExample\n{% if x is y %}\n  <h1>YES</h1>\n{% else %}\n  <h1>NO</h1>\n{% endif %}\nRun Example \u00bb",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Let us try the same example with the",
+      "content": "==\noperator instead:\nExample\n{% if x == y %}\n  <h1>YES</h1>\n{% else %}\n  <h1>NO</h1>\n{% endif %}\nRun Example \u00bb\nHow can two objects be the same? Well, if you have two objects that points to \nthe same object, then the\nis\noperator evaluates \nto true:\nWe will demonstrate this by using the\n{% with %}\ntag, which allows us to create variables in the template:\nExample\n{% with var1=x var2=x %}\n  {% if var1 is var2 %}\n    <h1>YES</h1>\n  {% else %}\n    <h1>NO</h1>\n  {% endif %}\n{% endwith %}\nRun Example \u00bb\nis not\nTo check if two objects are not the same.\nExample\n{% if x is not y %}\n  <h1>YES</h1>\n{% else %}\n  <h1>NO</h1>\n{% endif %}\nRun Example \u00bb\n\n\u2605\n+1",
+      "order": 4,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "ba6f02aa-82a3-4bb1-8869-7d4f7b72b226",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "3761b2a2-3ed0-475c-ab60-278450dc8dec",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "92799a16-ba4c-48a5-8a52-1685b1b0e01d",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Django if Tag\n\nIf Statement\nAn\nif\nstatement evaluates a variable and executes a block of code if the value?",
+      "options": [
+        "None of the above.",
+        "true",
+        "equal to a value",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Django if Tag\n\nIf Statement\nAn\nif\nstatement evaluates a variable and executes a block of code if the value is 'true'."
+    },
+    {
+      "question": "What is which is used to check if a variable?",
+      "options": [
+        "true",
+        "None of the above.",
+        "equal to a value",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of which is used to check if a variable is 'equal to a value'."
+    }
+  ],
+  "summary": "This tutorial covers Django if Tag concepts and techniques. You'll learn how to use Django if Tag effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django if Tag and how to apply it in your projects."
+}

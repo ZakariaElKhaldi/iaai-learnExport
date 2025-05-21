@@ -1,0 +1,169 @@
+{
+  "id": "d9788fa0-7afd-4aa3-b0f4-facb129296cc",
+  "title": "AngularJS SQL",
+  "slug": "angularjs-sql",
+  "metadata": {
+    "description": "Learn about AngularJS SQL with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "outp",
+      "country",
+      "data",
+      "city",
+      "conn",
+      "access",
+      "json",
+      "server",
+      "response",
+      "companyname"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAngularJS",
+    "subcategory": "AngularJS SQL"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AngularJS SQL",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AngularJS is perfect for displaying data from a Database. Just make sure the \ndata is in JSON format.\nFetching Data From a PHP Server Running MySQL\nAngularJS Example\n<div ng-app=\"myApp\" ng-controller=\"customersCtrl\">\n<table>\n<tr ng-repeat=\"x in names\">\n<td>{{ x.Name }}</td>\n<td>{{ x.Country }}</td>\n</tr>\n</table>\n</div>\n<script>\nvar app = angular.module('myApp', []);\napp.controller('customersCtrl', function($scope, $http) {\n$http.get(\"customers_mysql.php\")\n.then(function (response) {$scope.names = response.data.records;});\n});\n</script>\n\nFetching Data From an ASP.NET Server Running SQL\nAngularJS Example\n<div ng-app=\"myApp\" ng-controller=\"customersCtrl\">\n<table>\n<tr ng-repeat=\"x in names\">\n<td>{{ x.Name }}</td>\n<td>{{ x.Country }}</td>\n</tr>\n</table>\n</div>\n<script>\nvar app = angular.module('myApp', []);\napp.controller('customersCtrl', function($scope, $http) {\n$http.get(\"customers_sql.aspx\")\n.then(function (response) {$scope.names = response.data.records;});\n});\n</script>\n\nServer Code Examples\nThe following section is a listing of the server code used to fetch SQL data.\nUsing PHP and MySQL. Returning JSON.\nUsing PHP and MS Access. Returning JSON.\nUsing ASP.NET, VB, and MS Access. Returning JSON.\nUsing ASP.NET, Razor, and SQL Lite. Returning JSON.\nCross-Site HTTP Requests\nA request for data from a different server (other than the requesting page), are \ncalled\ncross-site\nHTTP requests.\nCross-site requests are common on the web. Many pages load CSS, images, \nand scripts from different servers.\nIn modern browsers, cross-site HTTP requests\nfrom scripts\nare restricted to\nsame site\nfor security reasons.\nThe following line, in our PHP examples, has been added to allow cross-site access.\nheader(\"Access-Control-Allow-Origin: *\");\n1. Server Code PHP and MySQL\n<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: application/json; charset=UTF-8\");\n$conn = new mysqli(\"myServer\", \"myUser\", \"myPassword\", \"Northwind\");\n$result = $conn->query(\"SELECT CompanyName, City, Country FROM Customers\");\n$outp = \"\";\nwhile($rs = $result->fetch_array(MYSQLI_ASSOC)) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n}\n$outp ='{\"records\":['.$outp.']}';\n$conn->close();\necho($outp);\n?>\n2. Server Code PHP and MS Access\n<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: application/json; charset=ISO-8859-1\");\n$conn = new COM(\"ADODB.Connection\");\n$conn->open(\"PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=Northwind.mdb\");\n$rs = $conn->execute(\"SELECT CompanyName, City, Country FROM Customers\");\n$outp = \"\";\nwhile (!$rs->EOF) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n$rs->Move\n}\n$outp ='{\"records\":['.$outp.']}';\n$conn->close();\necho ($outp);\n?>\n3. Server Code ASP.NET, VB and MS Access\n<%@ Import Namespace=\"System.IO\"%>\n<%@ Import Namespace=\"System.Data\"%>\n<%@ Import Namespace=\"System.Data.OleDb\"%>\n<%\nResponse.AppendHeader(\"Access-Control-Allow-Origin\", \"*\")\nResponse.AppendHeader(\"Content-type\", \"application/json\")\nDim conn As OleDbConnection\nDim objAdapter As OleDbDataAdapter\nDim objTable As DataTable\nDim objRow As DataRow\nDim objDataSet As New DataSet()\nDim outp\nDim c\nconn = New OledbConnection(\"Provider=Microsoft.Jet.OLEDB.4.0;data source=Northwind.mdb\")\nobjAdapter = New OledbDataAdapter(\"SELECT CompanyName, City, Country FROM Customers\", conn)\nobjAdapter.Fill(objDataSet, \"myTable\")\nobjTable=objDataSet.Tables(\"myTable\")\noutp = \"\"\nc = chr(34)\nfor each x in objTable.Rows\nif outp <> \"\" then outp = outp & \",\"\noutp = outp & \"{\" & c & \"Name\"\u00a0\u00a0\u00a0 & c & \":\" & c & x(\"CompanyName\") & c & \",\"\noutp = outp &\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c & \"City\"\u00a0\u00a0\u00a0 & c & \":\" & c \n& x(\"City\")\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 & c & \",\"\noutp = outp &\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c & \"Country\" & c & \":\" & c & x(\"Country\")\u00a0\u00a0\u00a0\u00a0 & c & \"}\"\n\noutp =\"{\" & c & \"records\" & c & \":[\" & outp & \"]}\"\nresponse.write(outp)\nconn.close\n%>\n4. Server Code ASP.NET, Razor C# and SQL Lite\n@{\nResponse.AppendHeader(\"Access-Control-Allow-Origin\", \"*\")\nResponse.AppendHeader(\"Content-type\", \"application/json\")\nvar db = Database.Open(\"Northwind\");\nvar query = db.Query(\"SELECT CompanyName, City, Country FROM Customers\");\nvar outp =\"\"\nvar c = chr(34)\n}\n@foreach(var row in query){\nif (outp != \"\") {outp = outp + \",\"}\noutp = outp + \"{\" + c + \"Name\"\u00a0\u00a0\u00a0 + c + \":\" + c + @row.CompanyName + c + \",\"\noutp = outp +\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c + \"City\"\u00a0\u00a0\u00a0 + c + \":\" + c + @row.City\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 + c + \",\"\noutp = outp +\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c + \"Country\" + c + \":\" + c + @row.Country\u00a0\u00a0\u00a0\u00a0 + c + \"}\"\n}\noutp =\"{\" + c  + \"records\" + c + \":[\" + outp + \"]}\"\n@outp\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "AngularJS Example",
+      "content": "",
+      "order": 3,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"customersCtrl\">\n<table>\n<tr ng-repeat=\"x in names\">\n<td>{{ x.Name }}</td>\n<td>{{ x.Country }}</td>\n</tr>\n</table>\n</div>\n<script>\nvar app = angular.module('myApp', []);\napp.controller('customersCtrl', function($scope, $http) {\n$http.get(\"customers_mysql.php\")\n.then(function (response) {$scope.names = response.data.records;});\n});\n</script>",
+      "language": "html",
+      "explanation": "Example of angularjs example"
+    },
+    {
+      "type": "code_example",
+      "title": "AngularJS Example",
+      "content": "",
+      "order": 4,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"customersCtrl\">\n<table>\n<tr ng-repeat=\"x in names\">\n<td>{{ x.Name }}</td>\n<td>{{ x.Country }}</td>\n</tr>\n</table>\n</div>\n<script>\nvar app = angular.module('myApp', []);\napp.controller('customersCtrl', function($scope, $http) {\n$http.get(\"customers_sql.aspx\")\n.then(function (response) {$scope.names = response.data.records;});\n});\n</script>",
+      "language": "html",
+      "explanation": "Example of angularjs example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "header(\"Access-Control-Allow-Origin: *\");",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: application/json; charset=UTF-8\");\n$conn = new mysqli(\"myServer\", \"myUser\", \"myPassword\", \"Northwind\");\n$result = $conn->query(\"SELECT CompanyName, City, Country FROM Customers\");\n$outp = \"\";\nwhile($rs = $result->fetch_array(MYSQLI_ASSOC)) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n}\n$outp ='{\"records\":['.$outp.']}';\n$conn->close();\necho($outp);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: application/json; charset=ISO-8859-1\");\n$conn = new COM(\"ADODB.Connection\");\n$conn->open(\"PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=Northwind.mdb\");\n$rs = $conn->execute(\"SELECT CompanyName, City, Country FROM Customers\");\n$outp = \"\";\nwhile (!$rs->EOF) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n$rs->MoveNext();\n}\n$outp ='{\"records\":['.$outp.']}';\n$conn->close();\necho ($outp);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<%@ Import Namespace=\"System.IO\"%>\n<%@ Import Namespace=\"System.Data\"%>\n<%@ Import Namespace=\"System.Data.OleDb\"%>\n<%\nResponse.AppendHeader(\"Access-Control-Allow-Origin\", \"*\")\nResponse.AppendHeader(\"Content-type\", \"application/json\")\nDim conn As OleDbConnection\nDim objAdapter As OleDbDataAdapter\nDim objTable As DataTable\nDim objRow As DataRow\nDim objDataSet As New DataSet()\nDim outp\nDim c\nconn = New OledbConnection(\"Provider=Microsoft.Jet.OLEDB.4.0;data source=Northwind.mdb\")\nobjAdapter = New OledbDataAdapter(\"SELECT CompanyName, City, Country FROM Customers\", conn)\nobjAdapter.Fill(objDataSet, \"myTable\")\nobjTable=objDataSet.Tables(\"myTable\")\noutp = \"\"\nc = chr(34)\nfor each x in objTable.Rows\nif outp <> \"\" then outp = outp & \",\"\noutp = outp & \"{\" & c & \"Name\"\u00a0\u00a0\u00a0 & c & \":\" & c & x(\"CompanyName\") & c & \",\"\noutp = outp &\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c & \"City\"\u00a0\u00a0\u00a0 & c & \":\" & c \n& x(\"City\")\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 & c & \",\"\noutp = outp &\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c & \"Country\" & c & \":\" & c & x(\"Country\")\u00a0\u00a0\u00a0\u00a0 & c & \"}\"\nnext\noutp =\"{\" & c & \"records\" & c & \":[\" & outp & \"]}\"\nresponse.write(outp)\nconn.close\n%>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "@{\nResponse.AppendHeader(\"Access-Control-Allow-Origin\", \"*\")\nResponse.AppendHeader(\"Content-type\", \"application/json\")\nvar db = Database.Open(\"Northwind\");\nvar query = db.Query(\"SELECT CompanyName, City, Country FROM Customers\");\nvar outp =\"\"\nvar c = chr(34)\n}\n@foreach(var row in query){\nif (outp != \"\") {outp = outp + \",\"}\noutp = outp + \"{\" + c + \"Name\"\u00a0\u00a0\u00a0 + c + \":\" + c + @row.CompanyName + c + \",\"\noutp = outp +\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c + \"City\"\u00a0\u00a0\u00a0 + c + \":\" + c + @row.City\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 + c + \",\"\noutp = outp +\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c + \"Country\" + c + \":\" + c + @row.Country\u00a0\u00a0\u00a0\u00a0 + c + \"}\"\n}\noutp =\"{\" + c  + \"records\" + c + \":[\" + outp + \"]}\"\n@outp",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div ng-app=\"myApp\" ng-controller=\"customersCtrl\">\n<table>\n<tr ng-repeat=\"x in names\">\n<td>{{ x.Name }}</td>\n<td>{{ x.Country }}</td>\n</tr>\n</table>\n# TODO: Complete this line\n<script>\nvar app = angular.module('myApp', []);\napp.controller('customersCtrl', function($scope, $http) {\n$http.get(\"customers_mysql.php\")\n.then(function (response) {$scope.names = response.data.records;});\n});\n</script>",
+      "solution": "<div ng-app=\"myApp\" ng-controller=\"customersCtrl\">\n<table>\n<tr ng-repeat=\"x in names\">\n<td>{{ x.Name }}</td>\n<td>{{ x.Country }}</td>\n</tr>\n</table>\n</div>\n<script>\nvar app = angular.module('myApp', []);\napp.controller('customersCtrl', function($scope, $http) {\n$http.get(\"customers_mysql.php\")\n.then(function (response) {$scope.names = response.data.records;});\n});\n</script>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div ng-app=\"myApp\" ng-controller=\"customersCtrl\">\n<table>\n<tr ng-repeat=\"x in names\">\n<td>{{ x.Name }}</td>\n<td>{{ x.Country }}</td>\n</tr>\n</table>\n</div>\n<script>\nvar app = angular.module('myApp', []);\n# TODO: Complete this line\n$http.get(\"customers_sql.aspx\")\n.then(function (response) {$scope.names = response.data.records;});\n});\n</script>",
+      "solution": "<div ng-app=\"myApp\" ng-controller=\"customersCtrl\">\n<table>\n<tr ng-repeat=\"x in names\">\n<td>{{ x.Name }}</td>\n<td>{{ x.Country }}</td>\n</tr>\n</table>\n</div>\n<script>\nvar app = angular.module('myApp', []);\napp.controller('customersCtrl', function($scope, $http) {\n$http.get(\"customers_sql.aspx\")\n.then(function (response) {$scope.names = response.data.records;});\n});\n</script>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "eaa65bd2-b913-4ab0-8f38-ecc74595a9e6",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "f53adac5-27f9-49e8-bf92-f893c19894f5",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "af97c69e-b1fd-4f96-8b37-959aa9965fc9",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is AngularJS SQL\n\nAngularJS?",
+      "options": [
+        "None of the above.",
+        "perfect for displaying data from a Database",
+        "in JSON format",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of AngularJS SQL\n\nAngularJS is 'perfect for displaying data from a Database'."
+    },
+    {
+      "question": "What is Just make sure the \ndata?",
+      "options": [
+        "in JSON format",
+        "perfect for displaying data from a Database",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Just make sure the \ndata is 'in JSON format'."
+    }
+  ],
+  "summary": "This tutorial covers AngularJS SQL concepts and techniques. You'll learn how to use AngularJS SQL effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AngularJS SQL and how to apply it in your projects."
+}

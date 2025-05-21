@@ -1,0 +1,148 @@
+{
+  "id": "77b4d813-0b03-4f2f-ae9c-9e25aad53ddb",
+  "title": "Example 2 Data",
+  "slug": "example-2-data",
+  "metadata": {
+    "description": "Learn about Example 2 Data with clear explanations and practical examples.",
+    "keywords": [
+      "data",
+      "area",
+      "function",
+      "values",
+      "remove",
+      "errors",
+      "example",
+      "code",
+      "house",
+      "json"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnAI",
+    "subcategory": "Ex2 Data"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Example 2 Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example 2 uses the same source code as Example 1.\nBut, because another dataset is used, the code must collect other data.\nData Collection\nThe data used in Example 2, is a list of house objects:\n{\n\"Avg. Area Income\": 79545.45857,\n\"Avg. Area House Age\": 5.682861322,\n\"Avg. AreaNumberofRooms\": 7.009188143,\n\"Avg. Area Number of Bedrooms\": 4.09,\n\"Area Population\": 23086.8005,\n\"Price\": 1059033.558,\n},\n{\n\"Avg. Area Income\": 79248.64245,\n\"Avg. Area House Age\": 6.002899808,\n\"Avg. AreaNumberofRooms\": 6.730821019,\n\"Avg. Area Number of Bedrooms\": 3.09,\n\"Area Population\": 40173.07217,\n\"Price\": 1505890.915,\n},\nThe dataset is a JSON file stored at:\nhttps://github.com/meetnandu05/ml1/blob/master/house.json\nCleaning Data\nWhen preparing for machine learning, it is always important to:\nRemove the data you don't need\nClean the data from errors\nRemove Data\nA smart way to remove unnecessary data, it to extract\nonly the data you need\n.\nThis can be done by iterating (looping over) your data with a\nmap function\n.\nThe function below takes an object and returns\nonly x and y\nfrom the object's\nHorsepower and Miles_per_Gallon properties:\nfunction extractData(obj) {\nreturn {x:obj.Horsepower, y:obj.Miles_per_Gallon};\n}\nRemove Errors\nMost datasets contain some type of errors.\nA smart way to remove errors is to use a\nfilter function\nto filter out the errors.\nThe code below returns false if on of the properties (x or y) contains a null value:\nfunction removeErrors(obj) {\nreturn obj.x != null && obj.y != null;\n}\nFetching Data\nWhen you have your map and filter functions ready, you can write a function to fetch the data.\nasync function runTF() {\nconst jsonData = await fetch(\"cardata.json\");\nlet values = await jsonData.json();\nvalues = values.map(extractData).filter(removeErrors);\n}\n\nPlotting the Data\nHere is some code you can use to plot the data:\nfunction tfPlot(values, surface) {\ntfvis.render.scatterplot(surface,\n{values:values, series:['Original','Predicted']},\n{xLabel:'Rooms', yLabel:'Price',});\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "{\n\"Avg. Area Income\": 79545.45857,\n\"Avg. Area House Age\": 5.682861322,\n\"Avg. AreaNumberofRooms\": 7.009188143,\n\"Avg. Area Number of Bedrooms\": 4.09,\n\"Area Population\": 23086.8005,\n\"Price\": 1059033.558,\n},\n{\n\"Avg. Area Income\": 79248.64245,\n\"Avg. Area House Age\": 6.002899808,\n\"Avg. AreaNumberofRooms\": 6.730821019,\n\"Avg. Area Number of Bedrooms\": 3.09,\n\"Area Population\": 40173.07217,\n\"Price\": 1505890.915,\n},",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "function extractData(obj) {\nreturn {x:obj.Horsepower, y:obj.Miles_per_Gallon};\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "function removeErrors(obj) {\nreturn obj.x != null && obj.y != null;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "async function runTF() {\nconst jsonData = await fetch(\"cardata.json\");\nlet values = await jsonData.json();\nvalues = values.map(extractData).filter(removeErrors);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "function tfPlot(values, surface) {\ntfvis.render.scatterplot(surface,\n{values:values, series:['Original','Predicted']},\n{xLabel:'Rooms', yLabel:'Price',});\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "{\n\"Avg. Area Income\": 79545.45857,\n\"Avg. Area House Age\": 5.682861322,\n\"Avg. AreaNumberofRooms\": 7.009188143,\n\"Avg. Area Number of Bedrooms\": 4.09,\n\"Area Population\": 23086.8005,\n\"Price\": 1059033.558,\n},\n{\n\"Avg. Area Income\": 79248.64245,\n# TODO: Complete this line\n\"Avg. AreaNumberofRooms\": 6.730821019,\n\"Avg. Area Number of Bedrooms\": 3.09,\n\"Area Population\": 40173.07217,\n\"Price\": 1505890.915,\n},",
+      "solution": "{\n\"Avg. Area Income\": 79545.45857,\n\"Avg. Area House Age\": 5.682861322,\n\"Avg. AreaNumberofRooms\": 7.009188143,\n\"Avg. Area Number of Bedrooms\": 4.09,\n\"Area Population\": 23086.8005,\n\"Price\": 1059033.558,\n},\n{\n\"Avg. Area Income\": 79248.64245,\n\"Avg. Area House Age\": 6.002899808,\n\"Avg. AreaNumberofRooms\": 6.730821019,\n\"Avg. Area Number of Bedrooms\": 3.09,\n\"Area Population\": 40173.07217,\n\"Price\": 1505890.915,\n},"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function extractData(obj) {\nreturn {x:obj.Horsepower, y:obj.Miles_per_Gallon};\n# TODO: Complete this line",
+      "solution": "function extractData(obj) {\nreturn {x:obj.Horsepower, y:obj.Miles_per_Gallon};\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b3ec40ea-8253-431e-8909-b36fd770c629",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "384b4cb2-07b0-41fa-9097-216018fcd878",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4b5ea7ea-dfb4-4ee4-a332-373294791fcf",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is because another dataset?",
+      "options": [
+        "used",
+        "None of the above.",
+        "None of the above.",
+        "Not a because another dataset."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of because another dataset is 'used'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers Example 2 Data concepts and techniques. You'll learn how to use Example 2 Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Example 2 Data and how to apply it in your projects."
+}

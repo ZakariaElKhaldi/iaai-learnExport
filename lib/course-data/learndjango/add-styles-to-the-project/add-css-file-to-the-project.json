@@ -1,0 +1,169 @@
+{
+  "id": "62a546a6-3531-41e1-afd9-f36f345c46d9",
+  "title": "Add CSS File to the Project",
+  "slug": "add-css-file-to-the-project",
+  "metadata": {
+    "description": "Learn about Add CSS File to the Project with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "html",
+      "members",
+      "static",
+      "file",
+      "background",
+      "color",
+      "master",
+      "block",
+      "endblock",
+      "project"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Add Styles to the Project"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Add CSS File to the Project",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The Project - My Tennis Club\nIf you have followed the steps in the entire Django tutorial, you will have a\nmy_tennis_club\nproject on your computer, with 5 members:\nRun Example\nWe want to add a stylesheet to this project, and put it in the\nmystaticfiles\nfolder:\nmy_tennis_club\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/\nmystyles.css\nThe name of the CSS file is your choice, we call it\nmystyles.css\nin this project.\nOpen the CSS file and insert the following:\nmy_tennis_club/mystaticfiles/mystyles.css\n:\nbody {\n  background-color: violet;\n}\nModify the Master Template\nNow you have a css file, the \nOpen the master template file and add the following:\nmy_tennis_club/members/templates/master.html\n:\n{% load static %}\n<!DOCTYPE html>\n<html>\n<head>\n  <title>{% block title %}{% endblock %}</title>\n  <link rel=\"stylesheet\" href=\"{% static 'mystyles.css' %}\">  \n</head>\n<body>\n\n{% block content %}\n{% endblock %}\n\n</body>\n</html>\nCheck Settings\nMake sure your\nsettings.py\nfile contains a\nSTATICFILES_DIRS\nlist with a reference to the\nmystaticfiles\nfolder on the root directory, and \nthat you have specified a\nSTATICFILES_ROOT\nfolder:\nmy_tennis_club/my_tennis_club/settings.py\n:\n.\n.\nSTATIC_ROOT = BASE_DIR / 'productionfiles'\n\nSTATIC_URL = 'static/'\n\n#Add this in your settings.py file:\nSTATICFILES_DIRS = [\n    BASE_DIR / 'mystaticfiles'\n]\n.\n.\nCollect Static Files\nEvery time you make a change in a static file, you must run the\ncollectstatic\ncommand to make the changes take effect:\npython manage.py collectstatic\nIf you have executed the command earlier in the project, Django will prompt you with a question:\nYou have requested to collect static files at the destination\nlocation as specified in your settings:\nC:\\Users\\\nYour Name\n\\myworld\\my_tennis_club\\productionfiles\nThis will overwrite existing files!\nAre you sure you want to do this?\nType 'yes' to continue, or 'no' to cancel:\nType 'yes'. This will update any changes done in the static files, and give you this result:\n1 static file copied to 'C:\\Users\\\nYour Name\n\\minverden\\my_tennis_club\\productionfiles', 129 unmodified.\nNow, if you run the project:\npython manage.py runserver\nIt will look like this:\nRun Example\nIf you have followed all the steps on you own computer, you can see the result in your own browser:\nIn the browser window, type\n127.0.0.1:8000/members/\nin the address bar.\nSpice up the Style!\nIn the example above we showed you how to include a stylesheet to your project.\nWe ended up with a purple web page, but CSS can do more than just change the background color.\nWe want to do more with the styles, and end up with a result like this:\nRun Example\nFirst, replace the content of the\nmystyles.css\nfile with this:\nmy_tennis_club/mystaticfiles/mystyles.css\n:\n@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');\nbody {\n  margin:0;\n  font: 600 18px 'Source Sans Pro', sans-serif;\n  letter-spacing: 0.64px;\n  color: #585d74;\n}\n.topnav {\n  background-color:#375BDC;\n  color:#ffffff;\n  padding:10px;\n}\n.topnav a:link, .topnav a:visited {\n  text-decoration: none;\n  color: #ffffff; \n}\n.topnav a:hover, .topnav a:active {\n  text-decoration: underline;\n}\n.mycard {\n  background-color: #f1f1f1;\n  background-image: linear-gradient(to bottom, #375BDC, #4D70EF); \n  background-size: 100% 120px;\n  background-repeat: no-repeat;\n  margin: 40px auto;\n  width: 350px;\n  border-radius: 5px;\n  box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23); \n  padding: 20px;\n}\n.mycard h1 {\n  text-align: center;\n  color:#ffffff;\n  margin:20px 0 60px 0;\n}\nul {\n  list-style-type: none;\n  padding: 0;\n  margin: 0;\n}\nli {\n  background-color: #ffffff;\n  background-image: linear-gradient(to right, #375BDC, #4D70EF); \n  background-size: 50px 60px;\n  background-repeat: no-repeat;\n  cursor: pointer;\n  transition: transform .25s;\n  border-radius: 5px;\n  box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);\n  padding: 15px;\n  padding-left: 70px;\n  margin-top: 5px;\n}\nli:hover {\n  transform: scale(1.1);\n}\na:link, a:visited {\n  color: #375BDC; \n}\n.main, .main h1 {\n  text-align:center;\n  color:#375BDC;\n}\nModify Templates\nYou also have to make some changes to the templates:\nMaster\nWe want all pages to have the same top navigation, therefor we insert the top \nnavigation into\nmaster.html\n:\nmy_tennis_club/members/templates/master.html\n:\n{% load static %}\n<!DOCTYPE html>\n<html>\n<head>\n  <link rel=\"stylesheet\" href=\"{% static 'mystyles.css' %}\">\n  <title>{% block title %}{% endblock %}</title>\n</head>\n<body>\n\n<div class=\"topnav\">\n  <a href=\"/\">HOME</a> |\n  <a href=\"/members\">MEMBERS</a>\n</div>\n\n{% block content %}\n{% endblock %}\n\n</body>\n</html>\nMembers\nIn\nall_members.html\nwe want to make som changes in the HTML code.\nThe members are put in a div element, and the links become list items with onclick attributes.\nWe also want to remove the navigation, because that is now a part of the master template.\nmy_tennis_club/members/templates/all_members.html\n:\n{% extends \"master.html\" %}\n\n{% block title %}\n  My Tennis Club - List of all members\n{% endblock %}\n\n{% block content %}\n  <div class=\"mycard\">\n    <h1>Members</h1>\n    <ul>\n      {% for x in mymembers %}\n        <li onclick=\"window.location = 'details/{{ x.id }}'\">{{ x.firstname }} {{ x.lastname }}</li>\n      {% endfor %}\n    </ul>\n  </div>\n{% endblock %}\nDetails\nIn\ndetails.html\nwe will put the member details in \na div element, and remove the link back to members,\nbecause that is now a part of the navigation in the master template.\nmy_tennis_club/members/templates/details.html\n:\n{% extends \"master.html\" %}\n\n{% block title %}\n  Details about {{ mymember.firstname }} {{ mymember.lastname }}\n{% endblock %}\n\n{% block content %}\n  <div class=\"mycard\">\n    <h1>{{ mymember.firstname }} {{ mymember.lastname }}</h1>\n    <p>Phone {{ mymember.phone }}</p>\n    <p>Member since: {{ mymember.joined_date }}</p>\n  </div>\n{% endblock %}\nMain\nIn the\nmain.html\ntemplate, we will\nput some of the HTML code into a div element:\nmy_tennis_club/members/templates/main.html\n:\n{% extends \"master.html\" %}\n\n{% block title %}\n  My Tennis Club\n{% endblock %}\n\n{% block content %}\n  <div class=\"main\">\n    <h1>My Tennis Club</h1>\n\n<h3>Members</h3>\n\n<p>Check out all our <a href=\"members/\">members</a></p>\n  </div>\n{% endblock %}\nCollect Static Files\nSince we did some changes in the static\nmystyles.css\nfile,\nwe have to run the\ncollectstatic\ncommand to make the changes take effect:\npython manage.py collectstatic\nNow, if you run the project:\npython manage.py runserver\nYou can see what the result should look like:\nRun Example\nOr, if you have followed all the steps on you own computer, you can see the result in your own browser:\nIn the browser window, type\n127.0.0.1:8000/members/\nin the address bar.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "my_tennis_club\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/\nmystyles.css",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "python manage.py collectstatic",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "You have requested to collect static files at the destination\nlocation as specified in your settings:\nC:\\Users\\\nYour Name\n\\myworld\\my_tennis_club\\productionfiles\nThis will overwrite existing files!\nAre you sure you want to do this?\nType 'yes' to continue, or 'no' to cancel:",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "1 static file copied to 'C:\\Users\\\nYour Name\n\\minverden\\my_tennis_club\\productionfiles', 129 unmodified.",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "python manage.py runserver",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "python manage.py collectstatic",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "python manage.py runserver",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "my_tennis_club\n# TODO: Complete this line\nmy_tennis_club/\nmembers/\nmystaticfiles/\nmystyles.css",
+      "solution": "my_tennis_club\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/\nmystyles.css"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "python manage.py collectstatic"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "99b24e94-555c-408d-820e-23cf62a1cb3a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "935cb4e3-3631-4568-824f-e29a6a7072e3",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "3123d6bb-c66f-4e9f-9ea0-5895367f7ba7",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is css\nThe name of the CSS file?",
+      "options": [
+        "None of the above.",
+        "your choice",
+        "put in a div element",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of css\nThe name of the CSS file is 'your choice'."
+    },
+    {
+      "question": "What is The members?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "put in a div element",
+        "your choice"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The members is 'put in a div element'."
+    }
+  ],
+  "summary": "This tutorial covers Add CSS File to the Project concepts and techniques. You'll learn how to use Add CSS File to the Project effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Add CSS File to the Project and how to apply it in your projects."
+}

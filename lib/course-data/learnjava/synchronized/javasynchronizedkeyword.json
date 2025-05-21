@@ -1,0 +1,98 @@
+{
+  "id": "99b619da-1f3c-461b-ad3e-3ee6f5334275",
+  "title": "JavasynchronizedKeyword",
+  "slug": "javasynchronizedkeyword",
+  "metadata": {
+    "description": "Learn about JavasynchronizedKeyword with clear explanations and practical examples.",
+    "keywords": [
+      "amount",
+      "threads",
+      "transfer",
+      "thread",
+      "synchronized",
+      "public",
+      "total",
+      "main",
+      "java",
+      "keyword"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Java Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnJava",
+    "subcategory": "synchronized"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Java\nsynchronized\nKeyword",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nUse the\nsynchronized\nmodifier to prevent race conditions between threads:\npublic class Main implements Runnable {\n  public static int a, b;\n\npublic static void main(String[] args) {\n    a = 100;\n    b = 100;\n\n// Check the total amount shared between a and b before the transfers\n    System.out.println(\"Total before: \" + (a + b));\n\n// Run threads which will transfer amounts between a and b\n    Thread thread1 = new Thread(new Main());\n    Thread thread2 = new Thread(new Main());\n    thread1.start();\n    thread2.start();\n\n// Wait for the threads to finish running\n    try {\n      thread1.join();\n      thread2.join();\n    } catch (InterruptedException e) {\n      e.printStackTrace();\n    }\n\n// Check the total amount shared between a and b after the transfers\n    // It should be the same amount as before\n    System.out.println(\"Total after: \" + (a + b));\n  }\n\npublic void run() {\n    for (int i = 0; i < 10000000; i++) {\n      transfer();\n    }\n  }\n\npublic static synchronized void transfer() {\n    // Choose a random amount to transfer\n    int amount = (int) (5.0 * Math.random());\n\n// Transfer between a and b\n    if (a > b) {\n      a -= amount;\n      b += amount;\n    } else {\n      a += amount;\n      b -= amount;\n    }\n  }\n}\n\nDefinition and Usage\nThe\nsynchronized\nkeyword is a modifier that locks a method so that only one thread can use it at a time. This prevents problems that arise from race conditions between threads.\nIn the example above, removing the\nsynchronized\nkeyword from the\ntransfer()\nmethod may cause the values of\na\nand\nb\nto be modified by another thread in between operations. This would result in the total amount between the two variables to change.\nRelated Pages\nRead more about modifiers in our\nJava Modifiers Tutorial\n.\nRead more about threads in our\nJava Threads Tutorial\n.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your java function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "a0668e3c-38ac-4f6d-82a6-718136d6f989",
+      "title": "Java Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e4e572c4-1aa7-4ad7-8890-84cd4b0ff64b",
+      "title": "Java Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f86a24d0-5f07-4a2d-95cb-c97a9a69bb2a",
+      "title": "Java Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Definition and Usage\nThe\nsynchronized\nkeyword?",
+      "options": [
+        "None of the above.",
+        "a modifier that locks a method so that only one thread can use it at a time",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Definition and Usage\nThe\nsynchronized\nkeyword is 'a modifier that locks a method so that only one thread can use it at a time'."
+    },
+    {
+      "question": "Which best describes the main purpose of this java feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers JavasynchronizedKeyword concepts and techniques. You'll learn how to use JavasynchronizedKeyword effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JavasynchronizedKeyword and how to apply it in your projects."
+}

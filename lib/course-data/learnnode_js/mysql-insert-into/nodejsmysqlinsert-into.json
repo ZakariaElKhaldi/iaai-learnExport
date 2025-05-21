@@ -1,0 +1,214 @@
+{
+  "id": "1b194cd0-d3a4-4ead-be12-b226909e77f2",
+  "title": "Node.jsMySQLInsert Into",
+  "slug": "nodejsmysqlinsert-into",
+  "metadata": {
+    "description": "Learn about Node.jsMySQLInsert Into with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "result",
+      "insert",
+      "mysql",
+      "inserted",
+      "example",
+      "values",
+      "record",
+      "customers",
+      "name",
+      "table"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnNode.js",
+    "subcategory": "MySQL Insert Into"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nMySQL\nInsert Into",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Insert Into Table\nTo fill a table in MySQL, use the \"INSERT INTO\" statement.\nExample\nInsert a record in the \"customers\" table:\nvar mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"\nyourusername\n\",\npassword: \"\nyourpassword\n\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\nconsole.log(\"Connected!\");\nvar sql = \"INSERT INTO customers (name, address) \n  VALUES ('Company Inc', 'Highway 37')\";\ncon.query(sql, function (err, result) {\nif (err) throw err;\nconsole.log(\"1 record inserted\");\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_db_insert.js\", and run the file:\nRun \"demo_db_insert.js\"\nC:\\Users\\\nYour Name\n>node demo_db_insert.js\nWhich will give you this result:\nConnected!\n1 record inserted\nInsert Multiple Records\nTo insert more than one record, make an array containing the values, and \ninsert a question mark in the sql, which will be replaced by the value array:\nINSERT INTO customers (name, address) VALUES ?\nExample\nFill the \"customers\" table with data:\nvar mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"\nyourusername\n\",\npassword: \"\nyourpassword\n\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\nconsole.log(\"Connected!\");\nvar sql = \"INSERT INTO customers (name, \n  address) VALUES ?\";\nvar values = [\n['John', \n  'Highway 71'],\n['Peter', 'Lowstreet 4'],\n['Amy', 'Apple st 652'],\n['Hannah', 'Mountain 21'],\n['Michael', 'Valley 345'],\n['Sandy', 'Ocean blvd 2'],\n['Betty', 'Green Grass 1'],\n['Richard', 'Sky st 331'],\n['Susan', 'One way 98'],\n['Vicky', 'Yellow Garden 2'],\n['Ben', 'Park Lane 38'],\n['William', 'Central st 954'],\n['Chuck', 'Main Road 989'],\n['Viola', 'Sideway 1633']\n];\ncon.query(sql,\n[values]\n, function (err, result) \n  {\nif (err) throw err;\nconsole.log(\"Number \n  of records inserted: \" + result.affectedRows);\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_db_insert_multple.js\", and run the file:\nRun \"demo_db_insert_multiple.js\"\nC:\\Users\\\nYour Name\n>node demo_db_insert_multiple.js\nWhich will give you this result:\nConnected!\nNumber of records inserted: 14\nThe Result Object\nWhen executing a query, a result object is returned.\nThe result object contains information about how the query  \naffected the table.\nThe result object returned from the example above looks like this:\n{\nfieldCount: 0,\naffectedRows: 14,\ninsertId: 0,\nserverStatus: 2,\nwarningCount: 0,\nmessage: '\\'Records:14\u00a0 \n  Duplicated: 0\u00a0 Warnings: 0',\nprotocol41: true,\nchangedRows: 0\n}\nThe values of the properties can be displayed like this:\nExample\nReturn the  number of affected rows:\nconsole.log(result.affectedRows)\nWhich will produce this result:\n14\nGet Inserted ID\nFor tables with an auto increment id field, you can get the id of the row you \njust inserted by asking the result object.\nNote:\nTo be able to get the inserted id,\nonly one row\ncan be inserted.\nExample\nInsert a record in the \"customers\" table, and return the ID:\nvar mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"\nyourusername\n\",\npassword: \"\nyourpassword\n\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\nvar sql = \"INSERT INTO customers (name, address) \n  VALUES ('Michelle', 'Blue Village 1')\";\ncon.query(sql, function (err, result) {\nif (err) throw err;\nconsole.log(\"1 record inserted, \n  ID: \" +\nresult.insertId\n);\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_db_insert_id.js\", and run the file:\nRun \"demo_db_insert_id.js\"\nC:\\Users\\\nYour Name\n>node demo_db_insert_id.js\nWhich will give you something like this in return:\n1 record inserted, ID: 15\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"\nyourusername\n\",\npassword: \"\nyourpassword\n\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\nconsole.log(\"Connected!\");\nvar sql = \"INSERT INTO customers (name, address) \n  VALUES ('Company Inc', 'Highway 37')\";\ncon.query(sql, function (err, result) {\nif (err) throw err;\nconsole.log(\"1 record inserted\");\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "C:\\Users\\\nYour Name\n>node demo_db_insert.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "Connected!\n1 record inserted",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"\nyourusername\n\",\npassword: \"\nyourpassword\n\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\nconsole.log(\"Connected!\");\nvar sql = \"INSERT INTO customers (name, \n  address) VALUES ?\";\nvar values = [\n['John', \n  'Highway 71'],\n['Peter', 'Lowstreet 4'],\n['Amy', 'Apple st 652'],\n['Hannah', 'Mountain 21'],\n['Michael', 'Valley 345'],\n['Sandy', 'Ocean blvd 2'],\n['Betty', 'Green Grass 1'],\n['Richard', 'Sky st 331'],\n['Susan', 'One way 98'],\n['Vicky', 'Yellow Garden 2'],\n['Ben', 'Park Lane 38'],\n['William', 'Central st 954'],\n['Chuck', 'Main Road 989'],\n['Viola', 'Sideway 1633']\n];\ncon.query(sql,\n[values]\n, function (err, result) \n  {\nif (err) throw err;\nconsole.log(\"Number \n  of records inserted: \" + result.affectedRows);\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "C:\\Users\\\nYour Name\n>node demo_db_insert_multiple.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "Connected!\nNumber of records inserted: 14",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "{\nfieldCount: 0,\naffectedRows: 14,\ninsertId: 0,\nserverStatus: 2,\nwarningCount: 0,\nmessage: '\\'Records:14\u00a0 \n  Duplicated: 0\u00a0 Warnings: 0',\nprotocol41: true,\nchangedRows: 0\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "console.log(result.affectedRows)",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "14",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"\nyourusername\n\",\npassword: \"\nyourpassword\n\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\nvar sql = \"INSERT INTO customers (name, address) \n  VALUES ('Michelle', 'Blue Village 1')\";\ncon.query(sql, function (err, result) {\nif (err) throw err;\nconsole.log(\"1 record inserted, \n  ID: \" +\nresult.insertId\n);\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "C:\\Users\\\nYour Name\n>node demo_db_insert_id.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "1 record inserted, ID: 15",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"\nyourusername\n\",\npassword: \"\n# TODO: Complete this line\n\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\nconsole.log(\"Connected!\");\nvar sql = \"INSERT INTO customers (name, address) \n  VALUES ('Company Inc', 'Highway 37')\";\ncon.query(sql, function (err, result) {\nif (err) throw err;\nconsole.log(\"1 record inserted\");\n});\n});",
+      "solution": "var mysql = require('mysql');\nvar con = mysql.createConnection({\nhost: \"localhost\",\nuser: \"\nyourusername\n\",\npassword: \"\nyourpassword\n\",\ndatabase: \"mydb\"\n});\ncon.connect(function(err) {\nif (err) throw err;\nconsole.log(\"Connected!\");\nvar sql = \"INSERT INTO customers (name, address) \n  VALUES ('Company Inc', 'Highway 37')\";\ncon.query(sql, function (err, result) {\nif (err) throw err;\nconsole.log(\"1 record inserted\");\n});\n});"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "C:\\Users\\\nYour Name\n# TODO: Complete this line",
+      "solution": "C:\\Users\\\nYour Name\n>node demo_db_insert.js"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "f0e98378-c903-4636-b033-0062ae56f36d",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "d386434f-0edb-4642-b1dc-c23d9ad1e406",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "866371d3-f805-4b17-b2e3-7fd547b1ee8e",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is a result object?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "None of the above.",
+        "returned"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of a result object is 'returned'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsMySQLInsert Into concepts and techniques. You'll learn how to use Node.jsMySQLInsert Into effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsMySQLInsert Into and how to apply it in your projects."
+}

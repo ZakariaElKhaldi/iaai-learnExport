@@ -1,0 +1,196 @@
+{
+  "id": "8744937e-1eb7-4d47-b664-221e9fe315e1",
+  "title": "Go For Loops",
+  "slug": "go-for-loops",
+  "metadata": {
+    "description": "Learn about Go For Loops with clear explanations and practical examples.",
+    "keywords": [
+      "go",
+      "loop",
+      "main",
+      "example",
+      "value",
+      "package",
+      "import",
+      "func",
+      "fruits",
+      "result",
+      "apple"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnGo",
+    "subcategory": "Go Loops"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Go For Loops",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The\nfor\nloop loops through a block of code a specified number of times.\nThe\nfor\nloop is the only loop \navailable in Go.\nGo for Loop\nLoops are handy if you want to run the same code over and over again, each time with a different value.\nEach execution of a loop is called an\niteration\n.\nThe\nfor\nloop can take up to three statements:\nSyntax\nfor\nstatement1; statement2; statement3\n{\n// code to be executed for each iteration\n}\nstatement1\nInitializes the loop counter value.\nstatement2\nEvaluated for each loop iteration. If it evaluates to TRUE, the loop continues. If it evaluates to FALSE, the loop ends.\nstatement3\nIncreases the loop counter value.\nNote:\nThese statements don't need to be present as loops arguments. However, they need to be present in the code in some form.\nfor Loop Examples\nExample 1\nThis example will print the numbers from 0 to 4:\npackage main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i < 5; i++ {\nfmt.Println(i)\n}\n}\nResult:\n0\n1\n2\n3\n4\n\nExample 1 explained\ni:=0; - Initialize the loop counter (i), and set the start value to 0\ni < 5; - Continue the loop as long as i is less than 5\ni++ - Increase the loop counter value by 1 for each iteration\nExample 2\nThis example counts to 100 by tens:\npackage main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i <= 100; i+=10 {\nfmt.Println(i)\n}\n}\nResult:\n0\n10\n20\n30\n40\n50\n60\n70\n80\n90\n100\n\nExample 2 explained\ni:=0; - Initialize the loop counter (i), and set the start value to 0\ni <= 100; - Continue the loop as long as i is less than or equal to 100\ni+=10 - Increase the loop counter value by 10 for each iteration\nThe continue Statement\nThe\ncontinue\nstatement is used to skip one \nor more iterations in the loop. It then continues with the \nExample\nThis example skips the value of 3:\npackage main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i < 5; i++ {\nif i == 3 {\ncontinue\n}\nfmt.Println(i)\n}\n}\nResult:\n0\n1\n2\n4\n\nThe break Statement\nThe\nbreak\nstatement is used to break/terminate the loop execution.\nExample\nThis example breaks out of the loop when i is equal to 3:\npackage main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i < 5; i++ {\nif i == 3 {\nbreak\n}\nfmt.Println(i)\n}\n}\nResult:\n0\n1\n2\n\nNote:\ncontinue\nand\nbreak\nare usually used with\nconditions\n.\nNested Loops\nIt is possible to place a loop inside another loop.\nHere, the \"inner loop\" will be executed one time for each iteration of the \"outer loop\":\nExample\npackage main\nimport (\"fmt\")\nfunc main() {\nadj := [2]string{\"big\", \"tasty\"}\nfruits := [3]string{\"apple\", \"orange\", \"banana\"}\nfor i:=0; i < len(adj); i++ {\nfor j:=0; j < len(fruits); j++ {\nfmt.Println(adj[i],fruits[j])\n}\n}\n}\nResult:\nbig apple\nbig orange\nbig banana\ntasty apple\ntasty orange\ntasty banana\n\nThe Range Keyword\nThe\nrange\nkeyword is used to more easily iterate \nthrough the elements of an array, slice or map. It returns both the index and the value.\nThe\nrange\nkeyword is used like this:\nSyntax\nfor\nindex, value :=\nrange\narray\n|\nslice\n|\nmap\n{\n// code to be executed for each iteration\n}\nExample\nThis example uses\nrange\nto iterate over an \n  array and print both the indexes and the values at each (\nidx\nstores the index,\nval\nstores the value):\npackage main\nimport (\"fmt\")\nfunc main() {\nfruits := [3]string{\"apple\", \"orange\", \"banana\"}\nfor \n    idx, val := range fruits {\nfmt.Printf(\"%v\\t%v\\n\", idx, val)\n}\n}\nResult:\n0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0apple\n1\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0orange\n2\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0banana\n\nTip:\nTo only show the value or the index, you can omit the other output using an underscore (\n_\n).\nExample\nHere, we want to omit the indexes (\nidx\nstores the index,\nval\nstores the value):\npackage main\nimport (\"fmt\")\nfunc main() {\nfruits := [3]string{\"apple\", \"orange\", \"banana\"}\nfor _, \n    val := range fruits {\nfmt.Printf(\"%v\\n\", val)\n}\n}\nResult:\napple\norange\nbanana\n\nExample\nHere, we want to omit the values (\nidx\nstores the index,\nval\nstores the value):\npackage main\nimport (\"fmt\")\nfunc main() {\nfruits := [3]string{\"apple\", \"orange\", \"banana\"}\nfor idx, _ := range fruits {\nfmt.Printf(\"%v\\n\", idx)\n}\n}\nResult:\n0\n1\n2\n\nGo Exercises\nTest Yourself With Exercises\nExercise:\nPrint i as long as i is less than 6.\npackage main   \nimport (\"fmt\")\nfunc main() {\ni:=0; i < 6;\n{\n    fmt.Println(i)\n  }\n}\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Syntax",
+      "content": "",
+      "order": 3,
+      "code": "for\nstatement1; statement2; statement3\n{\n// code to be executed for each iteration\n}",
+      "language": "java",
+      "explanation": "Example of syntax"
+    },
+    {
+      "type": "code_example",
+      "title": "Example 1",
+      "content": "",
+      "order": 4,
+      "code": "package main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i < 5; i++ {\nfmt.Println(i)\n}\n}",
+      "language": "java",
+      "explanation": "Example of example 1"
+    },
+    {
+      "type": "code_example",
+      "title": "Example 2",
+      "content": "",
+      "order": 5,
+      "code": "package main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i <= 100; i+=10 {\nfmt.Println(i)\n}\n}",
+      "language": "java",
+      "explanation": "Example of example 2"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "package main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i < 5; i++ {\nif i == 3 {\ncontinue\n}\nfmt.Println(i)\n}\n}",
+      "language": "java",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "package main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i < 5; i++ {\nif i == 3 {\nbreak\n}\nfmt.Println(i)\n}\n}",
+      "language": "java",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "package main\nimport (\"fmt\")\nfunc main() {\nadj := [2]string{\"big\", \"tasty\"}\nfruits := [3]string{\"apple\", \"orange\", \"banana\"}\nfor i:=0; i < len(adj); i++ {\nfor j:=0; j < len(fruits); j++ {\nfmt.Println(adj[i],fruits[j])\n}\n}\n}",
+      "language": "java",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Syntax",
+      "content": "",
+      "order": 9,
+      "code": "for\nindex, value :=\nrange\narray\n|\nslice\n|\nmap\n{\n// code to be executed for each iteration\n}",
+      "language": "java",
+      "explanation": "Example of syntax"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "package main\nimport (\"fmt\")\nfunc main() {\nfruits := [3]string{\"apple\", \"orange\", \"banana\"}\nfor \n    idx, val := range fruits {\nfmt.Printf(\"%v\\t%v\\n\", idx, val)\n}\n}",
+      "language": "java",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "package main\nimport (\"fmt\")\nfunc main() {\nfruits := [3]string{\"apple\", \"orange\", \"banana\"}\nfor _, \n    val := range fruits {\nfmt.Printf(\"%v\\n\", val)\n}\n}",
+      "language": "java",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "package main\nimport (\"fmt\")\nfunc main() {\nfruits := [3]string{\"apple\", \"orange\", \"banana\"}\nfor idx, _ := range fruits {\nfmt.Printf(\"%v\\n\", idx)\n}\n}",
+      "language": "java",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "for\nstatement1; statement2; statement3\n{\n// code to be executed for each iteration\n# TODO: Complete this line",
+      "solution": "for\nstatement1; statement2; statement3\n{\n// code to be executed for each iteration\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "package main\nimport (\"fmt\")\nfunc main() {\n# TODO: Complete this line\nfmt.Println(i)\n}\n}",
+      "solution": "package main\nimport (\"fmt\")\nfunc main() {\nfor i:=0; i < 5; i++ {\nfmt.Println(i)\n}\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "2f08678a-8ca8-41b5-bd1c-4f3b49a75c1b",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "970aa4ee-3905-4a34-8798-aa9e40dfe42a",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "21800737-9eff-439b-bb56-a56f158d933a",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The\nfor\nloop?",
+      "options": [
+        "the only loop \navailable in Go",
+        "None of the above.",
+        "handy if you want to run the same code over and over again",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of The\nfor\nloop is 'the only loop \navailable in Go'."
+    },
+    {
+      "question": "What is Go for Loop\nLoops?",
+      "options": [
+        "None of the above.",
+        "handy if you want to run the same code over and over again",
+        "the only loop \navailable in Go",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Go for Loop\nLoops is 'handy if you want to run the same code over and over again'."
+    }
+  ],
+  "summary": "This tutorial covers Go For Loops concepts and techniques. You'll learn how to use Go For Loops effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Go For Loops and how to apply it in your projects."
+}

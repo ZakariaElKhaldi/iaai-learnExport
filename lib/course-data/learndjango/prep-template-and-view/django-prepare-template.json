@@ -1,0 +1,115 @@
+{
+  "id": "74a58c27-0655-4323-a1bf-bd6c2248dc02",
+  "title": "Django Prepare Template",
+  "slug": "django-prepare-template",
+  "metadata": {
+    "description": "Learn about Django Prepare Template with clear explanations and practical examples.",
+    "keywords": [
+      "go",
+      "html",
+      "template",
+      "django",
+      "members",
+      "mymembers",
+      "import",
+      "member",
+      "object",
+      "tags",
+      "view"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Prep Template and View"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Django Prepare Template",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Create Template\nAfter creating Models, with the fields and data we want in them,\nit is time to display the data in a web page.\nStart by creating an HTML file named\nall_members.html\nand place it in the\n/templates/\nfolder:\nmy_tennis_club/members/templates/all_members.html\n:\n<!DOCTYPE html>\n<html>\n<body>\n\n<h1>Members</h1>\n\n<ul>\n  {% for x in mymembers %}\n    <li>{{ x.firstname }} {{ x.lastname }}</li>\n  {% endfor %}\n</ul>\n\n</body>\n</html>\nDo you see the\n{% %}\nbrackets inside the HTML document?\nThey are Django Tags, telling Django to perform some programming logic inside these brackets.\nYou will learn more about Django Tags in our\nDjango Tags chapter\n.\nModify View\n\nIn the view we have to import the\nMember\nmodel, and send it to the template like this:\nmy_tennis_club/members/views.py\n:\nfrom django.http import HttpResponse\nfrom django.template import loader\nfrom .models import Member\n\ndef members(request):\n  mymembers = Member.objects.all().values()\n  template = loader.get_template('all_members.html')\n  context = {\n    'mymembers': mymembers,\n  }\n  return HttpResponse(template.render(context, request))\nRun Example \u00bb\nThe\nmembers\nview does the following:\nCreates a\nmymembers\nobject with all the values of the\nMember\nmodel.\nLoads the\nall_members.html\ntemplate.\nCreates an object containing the\nmymembers\nobject.\nSends the object to the template.\nOutputs the HTML that is rendered by the template.\nThe Result\nWe have created an example so that you can see the result:\nRun Example \u00bb\nIf you have followed all the steps on your own computer, you can see the result in your own browser:\nStart the server by navigating to the\n/my_tennis_club/\nfolder and execute this command:\npython manage.py runserver\nIn the browser window, type\n127.0.0.1:8000/members/\nin the address bar.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "python manage.py runserver",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "python manage.py runserver"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "56bd9197-143f-4b36-8250-fa05703cbb92",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "dafb005a-e898-41f6-b31f-5f6581ee94dd",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "2e4e4ebe-787e-40b0-b770-fec76b153b72",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is it?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "time to display the data in a web page",
+        "Django Tags"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of it is 'time to display the data in a web page'."
+    },
+    {
+      "question": "What is They?",
+      "options": [
+        "None of the above.",
+        "Django Tags",
+        "time to display the data in a web page",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of They is 'Django Tags'."
+    }
+  ],
+  "summary": "This tutorial covers Django Prepare Template concepts and techniques. You'll learn how to use Django Prepare Template effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django Prepare Template and how to apply it in your projects."
+}

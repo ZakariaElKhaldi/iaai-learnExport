@@ -1,0 +1,205 @@
+{
+  "id": "6dcf504a-f738-477d-bdf4-51de89699430",
+  "title": "JavaScriptHTML DOM Navigation",
+  "slug": "javascripthtml-dom-navigation",
+  "metadata": {
+    "description": "Learn about JavaScriptHTML DOM Navigation with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "html",
+      "node",
+      "document",
+      "body",
+      "nodes",
+      "innerhtml",
+      "getelementbyid",
+      "script",
+      "text",
+      "element"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnJSON",
+    "subcategory": "DOM Navigation"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "JavaScript\nHTML DOM Navigation",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "With the HTML DOM, you can navigate the node tree using node \nrelationships.\nDOM Nodes\nAccording to the W3C HTML DOM standard, everything in an HTML document is a node:\nThe entire document is a document node\nEvery HTML element is an element node\nThe text inside HTML elements are text nodes\nEvery HTML attribute is an attribute node (deprecated)\nAll comments are comment nodes\nWith the HTML DOM, all nodes in the node tree can be accessed by JavaScript.\nNew nodes can be created, and all \nnodes can be modified or deleted.\nNode Relationships\nThe nodes in the node tree have a hierarchical relationship to each other.\nThe terms parent, child, and sibling are used to describe the relationships.\nIn a node tree, the top node is called the root (or root node)\nEvery node has exactly one parent, except the root (which has no parent)\nA node can have a number of children\nSiblings (brothers or sisters) are nodes with the same parent\n<html>\n<head>\n<title>DOM Tutorial</title>\n</head>\n<body>\n<h1>DOM Lesson one</h1>\n<p>Hello world!</p>\n</body>\n</html>\nFrom the HTML above you can read:\n<html>\nis the root node\n<html>\nhas no parents\n<html>\nis the parent of\n<head>\nand\n<body>\n<head>\nis the first child of\n<html>\n<body>\nis the last child of\n<html>\nand:\n<head>\nhas one child:\n<title>\n<title>\nhas one child (a text node): \"DOM Tutorial\"\n<body>\nhas two children:\n<h1>\nand\n<p>\n<h1>\nhas one child: \"DOM Lesson one\"\n<p>\nhas one child: \"Hello world!\"\n<h1>\nand\n<p>\nare siblings\nNavigating Between Nodes\nYou can use the following node properties to navigate between nodes with \nJavaScript:\nparentNode\nchildNodes[\nnodenumber\n]\nfirstChild\nlastChild\n\nChild Nodes and Node Values\nA common error in DOM processing is to expect an element node to contain text.\nExample:\n<title \n id=\"demo\">DOM Tutorial</title>\nThe element node\n<title>\n(in the example above) does\nnot\ncontain text.\nIt contains a\ntext node\nwith the value \"DOM Tutorial\".\nThe value of the text node can be accessed by the \nnode's\ninnerHTML\nproperty:\nmyTitle = document.getElementById(\"demo\").innerHTML;\nAccessing the innerHTML property is the same as accessing the\nnodeValue\nof the first child:\nmyTitle = document.getElementById(\"demo\").firstChild.nodeValue;\nAccessing the first child can also be done like this:\nmyTitle = document.getElementById(\"demo\").childNodes[0].nodeValue;\nAll the (3) following examples retrieves the text of an\n<h1>\nelement and copies it \ninto a\n<p>\nelement:\nExample\n<html>\n<body>\n<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\"></p>\n<script>\ndocument.getElementById(\"id02\").innerHTML \n = document.getElementById(\"id01\").innerHTML;\n</script>\n</body>\n</html>\n\nExample\n<html>\n<body>\n<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\"></p>\n<script>\ndocument.getElementById(\"id02\").innerHTML = document.getElementById(\"id01\").firstChild.nodeValue;\n</script>\n</body>\n</html>\n\nExample\n<html>\n<body>\n<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\">Hello!</p>\n<script>\ndocument.getElementById(\"id02\").innerHTML = document.getElementById(\"id01\").childNodes[0].nodeValue;\n</script>\n</body>\n</html>\n\nInnerHTML\nIn this tutorial we use the innerHTML property to retrieve the content of an \nHTML element.\nHowever, learning \nthe other methods above is useful for understanding the tree structure and the \nnavigation of the DOM.\nDOM Root Nodes\nThere are two special properties that allow access to the full document:\ndocument.body\n- The body of the document\ndocument.documentElement\n- The full document\nExample\n<html>\n<body>\n<h2>JavaScript HTMLDOM</h2>\n<p>Displaying document.body</p>\n<p \nid=\"demo\"></p>\n<script>\ndocument.getElementById(\"demo\").innerHTML \n= document.body.innerHTML;\n</script>\n</body>\n</html>\n\nExample\n<html>\n<body>\n<h2>JavaScript HTMLDOM</h2>\n<p>Displaying document.documentElement</p>\n<p id=\"demo\"></p>\n<script>\ndocument.getElementById(\"demo\").innerHTML = \ndocument.documentElement.innerHTML;\n</script>\n</body>\n</html>\n\nThe nodeName Property\nThe\nnodeName\nproperty specifies the name of a node.\nnodeName is read-only\nnodeName of an element node is the same as the tag name\nnodeName of an attribute node is the attribute name\nnodeName of a text node is always #text\nnodeName of the document node is always #document\nExample\n<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\"></p>\n<script>\ndocument.getElementById(\"id02\").innerHTML \n = document.getElementById(\"id01\").nodeName;\n</script>\n\nNote:\nnodeName\nalways contains the uppercase tag name of an HTML element.\nThe nodeValue Property\nThe\nnodeValue\nproperty specifies the value of a node.\nnodeValue for element nodes is\nnull\nnodeValue for text nodes is the text itself\nnodeValue for attribute nodes is the attribute value\nThe nodeType Property\nThe\nnodeType\nproperty is read only. It returns the type of a node.\nExample\n<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\"></p>\n<script>\ndocument.getElementById(\"id02\").innerHTML \n = document.getElementById(\"id01\").nodeType;\n</script>\n\nThe most important nodeType properties are:\nNode\nType\nExample\nELEMENT_NODE\n1\n<h1 class=\"heading\"></h1>\nATTRIBUTE_NODE\n2\nclass = \"heading\" (deprecated)\nTEXT_NODE\n3\n\nCOMMENT_NODE\n8\n<!-- This is a comment -->\nDOCUMENT_NODE\n9\nThe HTML document itself (the parent of <html>)\nDOCUMENT_TYPE_NODE\n10\n<!Doctype html>\nType 2 is deprecated in the HTML DOM (but works). It is not deprecated in the XML DOM.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 3,
+      "code": "<title \n id=\"demo\">DOM Tutorial</title>",
+      "language": "html",
+      "explanation": "Example of example:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "myTitle = document.getElementById(\"demo\").innerHTML;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "myTitle = document.getElementById(\"demo\").firstChild.nodeValue;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "myTitle = document.getElementById(\"demo\").childNodes[0].nodeValue;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<html>\n<body>\n<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\"></p>\n<script>\ndocument.getElementById(\"id02\").innerHTML \n = document.getElementById(\"id01\").innerHTML;\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<html>\n<body>\n<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\"></p>\n<script>\ndocument.getElementById(\"id02\").innerHTML = document.getElementById(\"id01\").firstChild.nodeValue;\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<html>\n<body>\n<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\">Hello!</p>\n<script>\ndocument.getElementById(\"id02\").innerHTML = document.getElementById(\"id01\").childNodes[0].nodeValue;\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "<html>\n<body>\n<h2>JavaScript HTMLDOM</h2>\n<p>Displaying document.body</p>\n<p \nid=\"demo\"></p>\n<script>\ndocument.getElementById(\"demo\").innerHTML \n= document.body.innerHTML;\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<html>\n<body>\n<h2>JavaScript HTMLDOM</h2>\n<p>Displaying document.documentElement</p>\n<p id=\"demo\"></p>\n<script>\ndocument.getElementById(\"demo\").innerHTML = \ndocument.documentElement.innerHTML;\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\"></p>\n<script>\ndocument.getElementById(\"id02\").innerHTML \n = document.getElementById(\"id01\").nodeName;\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "<h1 id=\"id01\">My First Page</h1>\n<p id=\"id02\"></p>\n<script>\ndocument.getElementById(\"id02\").innerHTML \n = document.getElementById(\"id01\").nodeType;\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "<title \n id=\"demo\">DOM Tutorial</title>"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "myTitle = document.getElementById(\"demo\").innerHTML;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "6177e3f7-4336-4427-b8d7-a6f6d13a3c4a",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "a970b5dd-35cb-4b09-98bf-1aa4de650bf9",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "dd4c2cd7-b294-44b5-b436-d9b07334cae0",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is everything in an HTML document?",
+      "options": [
+        "a node:\nThe entire document is a document node\nEvery HTML element is an element node\nThe text inside HTML elements are text nodes\nEvery HTML attribute is an attribute node (deprecated)\nAll comments are comment nodes\nWith the HTML DOM",
+        "used to describe the relationships",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of everything in an HTML document is 'a node:\nThe entire document is a document node\nEvery HTML element is an element node\nThe text inside HTML elements are text nodes\nEvery HTML attribute is an attribute node (deprecated)\nAll comments are comment nodes\nWith the HTML DOM'."
+    },
+    {
+      "question": "What is and sibling?",
+      "options": [
+        "None of the above.",
+        "a node:\nThe entire document is a document node\nEvery HTML element is an element node\nThe text inside HTML elements are text nodes\nEvery HTML attribute is an attribute node (deprecated)\nAll comments are comment nodes\nWith the HTML DOM",
+        "used to describe the relationships",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of and sibling is 'used to describe the relationships'."
+    }
+  ],
+  "summary": "This tutorial covers JavaScriptHTML DOM Navigation concepts and techniques. You'll learn how to use JavaScriptHTML DOM Navigation effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JavaScriptHTML DOM Navigation and how to apply it in your projects."
+}

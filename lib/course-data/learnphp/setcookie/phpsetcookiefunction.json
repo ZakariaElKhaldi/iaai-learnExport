@@ -1,0 +1,151 @@
+{
+  "id": "4e7bdc8f-8dc3-4d17-b3de-97e7f30403b0",
+  "title": "PHPsetcookie()Function",
+  "slug": "phpsetcookiefunction",
+  "metadata": {
+    "description": "Learn about PHPsetcookie()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "cookie",
+      "value",
+      "setcookie",
+      "html",
+      "example",
+      "user",
+      "body",
+      "expire",
+      "echo",
+      "time"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "setcookie()"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nsetcookie()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nThe following example creates a cookie named \"user\" \nwith the value \"John Doe\". The cookie will expire after 30 days (86400 * 30). \nThe \"/\" means that the cookie is available in entire website (otherwise, select the directory you prefer).\nWe then retrieve the value of the cookie \"user\" (using the global variable \n$_COOKIE). We also use the isset() function to find out if the cookie is set:\n<!DOCTYPE html>\n<?php\n$cookie_name = \"user\";\n$cookie_value = \"John Doe\";\nsetcookie($cookie_name, $cookie_value, time() + (86400 * 30), \"/\"); // 86400 = 1 day\n?>\n<html>\n<body>\n<?php\nif(!isset($_COOKIE[$cookie_name])) {\necho \"Cookie named '\" . $cookie_name . \"' is not set!\";\n} else {\necho \"Cookie '\" . $cookie_name . \"' is set!<br>\";\necho \"Value is: \" . $_COOKIE[$cookie_name];\n}\n?>\n</body>\n</html>\n\nDefinition and Usage\nThe setcookie() function defines a cookie to be sent along with the rest of the HTTP headers.\nA cookie is often used to identify a user. A cookie is a small file that the \nserver embeds on the user's computer. Each time the same computer requests a \npage with a browser, it will send the cookie too. With PHP, you can both create and retrieve cookie values.\nThe name of the cookie is automatically assigned to a variable of the same \nname. For example, if a cookie was sent with the name \"user\", a variable is \nautomatically created called $user, containing the cookie value.\nNote:\nThe setcookie() function must appear BEFORE the <html> tag.\nNote:\nThe value of the cookie is automatically URLencoded when \nsending the cookie, and automatically decoded when received (to prevent \nURLencoding, use\nsetrawcookie()\ninstead).\nSyntax\nsetcookie(\nname, value, expire, path, domain, secure, httponly\n);\nParameter Values\nParameter\nDescription\nname\nRequired. Specifies the name of the cookie\nvalue\nOptional. Specifies the value of the cookie\nexpire\nOptional. Specifies when the cookie expires. The value: time()+86400*30, will set the cookie to expire in 30 days. If this parameter is omitted or set to 0, the cookie will expire at the end of the session (when the browser closes). Default is 0\npath\nOptional. Specifies the server path of the cookie.\n    If set to \"/\", the cookie will be available within the entire domain. If set to \"/php/\", the cookie will only be available within the php directory and all sub-directories of php. The default value is the current directory that the cookie is being set in\ndomain\nOptional. Specifies the domain name of the cookie. To make the cookie available on all subdomains of example.com, set domain to \"example.com\". Setting it to www.example.com will make the cookie only available in the www subdomain\nsecure\nOptional. Specifies whether or not the cookie should only be transmitted over a secure HTTPS connection. TRUE indicates that the cookie will only be set if a secure connection exists. Default is FALSE\nhttponly\nOptional. If set to TRUE the cookie will be accessible only through the HTTP protocol (the cookie will not be accessible by scripting languages). This setting can help to reduce identity theft through XSS attacks. Default is FALSE\nTechnical Details\nReturn Value:\nTRUE on success. FALSE on failure\nPHP Version:\n4+\nPHP Changelog:\nPHP 5.5 - A Max-Age attribute was included in the Set-Cookie header sent to the client\nPHP 5.2 - The httponly parameter was added\nMore Examples\nExample\nSeveral expire dates for cookies:\n<?php\n$value = \"Hello world!\";\n// cookie will expire when the browser close\nsetcookie(\"myCookie\", $value);\n// cookie will expire in 1 hour\nsetcookie(\"myCookie\", $value, time() + 3600);\n// cookie will expire in 1 hour, and will only be available\n// within the php directory + all sub-directories of php\nsetcookie(\"myCookie\", $value, time() + 3600, \"/php/\");\n?>\n<html>\n<body>\n...some code...\n</body>\n</html>\n\nExample\nTo modify a cookie, just set (again) the cookie using the setcookie() function:\n<?php\n$cookie_name = \"user\";\n$cookie_value = \"Alex Porter\";\nsetcookie($cookie_name, $cookie_value, time() + (86400 * 30), \"/\");\n?>\n<html>\n<body>\n<?php\nif(!isset($_COOKIE[$cookie_name])) {\necho \"Cookie named '\" . $cookie_name . \"' is not set!\";\n} else {\necho \"Cookie '\" . $cookie_name . \"' is set!<br>\";\necho \"Value is: \" . $_COOKIE[$cookie_name];\n}\n?>\n</body>\n</html>\n\nExample\nTo delete a cookie, use the setcookie() function with an expiration date in the past:\n<?php\n// set the expiration date to one hour ago\nsetcookie(\"user\", \"\", time() - 3600);\n?>\n<html>\n<body>\n<?php\necho \"Cookie 'user' is deleted.\";\n?>\n</body>\n</html>\n\nExample\nCreate a small script that checks whether cookies are enabled. First, try to create a test cookie with the setcookie() function, then count the $_COOKIE array variable:\n<?php\nsetcookie(\"test_cookie\", \"test\", time() + 3600, '/');\n?>\n<html>\n<body>\n<?php\nif(count($_COOKIE) > 0) {\necho \"Cookies are enabled.\";\n} else {\necho \"Cookies are disabled.\";\n}\n?>\n</body>\n</html>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<!DOCTYPE html>\n<?php\n$cookie_name = \"user\";\n$cookie_value = \"John Doe\";\nsetcookie($cookie_name, $cookie_value, time() + (86400 * 30), \"/\"); // 86400 = 1 day\n?>\n<html>\n<body>\n<?php\nif(!isset($_COOKIE[$cookie_name])) {\necho \"Cookie named '\" . $cookie_name . \"' is not set!\";\n} else {\necho \"Cookie '\" . $cookie_name . \"' is set!<br>\";\necho \"Value is: \" . $_COOKIE[$cookie_name];\n}\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$value = \"Hello world!\";\n// cookie will expire when the browser close\nsetcookie(\"myCookie\", $value);\n// cookie will expire in 1 hour\nsetcookie(\"myCookie\", $value, time() + 3600);\n// cookie will expire in 1 hour, and will only be available\n// within the php directory + all sub-directories of php\nsetcookie(\"myCookie\", $value, time() + 3600, \"/php/\");\n?>\n<html>\n<body>\n...some code...\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$cookie_name = \"user\";\n$cookie_value = \"Alex Porter\";\nsetcookie($cookie_name, $cookie_value, time() + (86400 * 30), \"/\");\n?>\n<html>\n<body>\n<?php\nif(!isset($_COOKIE[$cookie_name])) {\necho \"Cookie named '\" . $cookie_name . \"' is not set!\";\n} else {\necho \"Cookie '\" . $cookie_name . \"' is set!<br>\";\necho \"Value is: \" . $_COOKIE[$cookie_name];\n}\n?>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<?php\n// set the expiration date to one hour ago\nsetcookie(\"user\", \"\", time() - 3600);\n?>\n<html>\n<body>\n<?php\necho \"Cookie 'user' is deleted.\";\n?>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<?php\nsetcookie(\"test_cookie\", \"test\", time() + 3600, '/');\n?>\n<html>\n<body>\n<?php\nif(count($_COOKIE) > 0) {\necho \"Cookies are enabled.\";\n} else {\necho \"Cookies are disabled.\";\n}\n?>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<?php\n$cookie_name = \"user\";\n$cookie_value = \"John Doe\";\n# TODO: Complete this line\n?>\n<html>\n<body>\n<?php\nif(!isset($_COOKIE[$cookie_name])) {\necho \"Cookie named '\" . $cookie_name . \"' is not set!\";\n} else {\necho \"Cookie '\" . $cookie_name . \"' is set!<br>\";\necho \"Value is: \" . $_COOKIE[$cookie_name];\n}\n?>\n</body>\n</html>",
+      "solution": "<!DOCTYPE html>\n<?php\n$cookie_name = \"user\";\n$cookie_value = \"John Doe\";\nsetcookie($cookie_name, $cookie_value, time() + (86400 * 30), \"/\"); // 86400 = 1 day\n?>\n<html>\n<body>\n<?php\nif(!isset($_COOKIE[$cookie_name])) {\necho \"Cookie named '\" . $cookie_name . \"' is not set!\";\n} else {\necho \"Cookie '\" . $cookie_name . \"' is set!<br>\";\necho \"Value is: \" . $_COOKIE[$cookie_name];\n}\n?>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$value = \"Hello world!\";\n// cookie will expire when the browser close\nsetcookie(\"myCookie\", $value);\n// cookie will expire in 1 hour\nsetcookie(\"myCookie\", $value, time() + 3600);\n// cookie will expire in 1 hour, and will only be available\n// within the php directory + all sub-directories of php\nsetcookie(\"myCookie\", $value, time() + 3600, \"/php/\");\n?>\n<html>\n<body>\n# TODO: Complete this line\n</body>\n</html>",
+      "solution": "<?php\n$value = \"Hello world!\";\n// cookie will expire when the browser close\nsetcookie(\"myCookie\", $value);\n// cookie will expire in 1 hour\nsetcookie(\"myCookie\", $value, time() + 3600);\n// cookie will expire in 1 hour, and will only be available\n// within the php directory + all sub-directories of php\nsetcookie(\"myCookie\", $value, time() + 3600, \"/php/\");\n?>\n<html>\n<body>\n...some code...\n</body>\n</html>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "46548835-cdd0-4078-83d6-ff5070a5aa51",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "52bf9e21-8252-4d90-ab82-fc3f09d64148",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "db58c7c6-f5eb-47cb-b15b-f0b5c4415a39",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is means that the cookie?",
+      "options": [
+        "available in entire website (otherwise",
+        "None of the above.",
+        "set:\n<",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of means that the cookie is 'available in entire website (otherwise'."
+    },
+    {
+      "question": "What is function to find out if the cookie?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "set:\n<",
+        "available in entire website (otherwise"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of function to find out if the cookie is 'set:\n<'."
+    }
+  ],
+  "summary": "This tutorial covers PHPsetcookie()Function concepts and techniques. You'll learn how to use PHPsetcookie()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPsetcookie()Function and how to apply it in your projects."
+}

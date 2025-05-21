@@ -1,0 +1,166 @@
+{
+  "id": "888413ad-04d4-4027-a2da-1552cdb8152b",
+  "title": "AppML Forms",
+  "slug": "appml-forms",
+  "metadata": {
+    "description": "Learn about AppML Forms with clear explanations and practical examples.",
+    "keywords": [
+      "appml",
+      "input",
+      "class",
+      "label",
+      "form",
+      "html",
+      "border",
+      "city",
+      "country",
+      "style"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnAppML",
+    "subcategory": "AppML Forms"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AppML Forms",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "This chapter demonstrates how to construct an input form \nagainst a database.\nThe examples on this page use a local SQL database.\nLocal SQL databases does not work in IE or Firefox. Use Chrome or Safari.\nCreate a Form Model\nmodel_customersform.js\n{\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"maintable\" : \"Customers\",\n\"keyfield\" : \"CustomerID\",\n\"sql\" : \"SELECT * FROM Customers\"},\n\"updateItems\" : [\n{\"item\" : \n   \"CustomerName\"},\n{\"item\" : \"Address\"},\n{\"item\" : \"PostalCode\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}]\n}\nCreate an HTML Form\nIn the \na database.\nNow add a form application to the page:\nHTML Form\n<div id=\"Form01\" class=\"w3-container w3-light-grey w3-padding-large \n    w3-margin-bottom\" appml-data=\"local?model=model_customersform\">\n<p>\n<label for=\"customername\">Customer:</label>\n<input id=\"customername\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"address\">Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label for=\"city\">City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"postalcode\">Postal Code:</label>\n<input id=\"postalcode\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label for=\"country\">Country:</label>\n<input id=\"country\" \n    class=\"w3-input w3-border\">\n</p>\n</div>\n\nHTML Form Explained\nappml-data=\"local?model=model_customersform\"\ndefines the AppML application for the form.\nCreate HTML Form Commands\nUse your favorite style sheet (we use bootstrap), and create your wanted form \ncommands:\ninc_formcommands.htm\n<span onclick=\"document.getElementById('Form01').style.display='none'\" \n    class=\"w3-button w3-xlarge w3-right\">&times;</span>\n<div \n    class=\"w3-bar w3-border w3-white\">\n<button \n    onclick=\"appml('Form01').newRecord();\" class=\"w3-btn\">New</button>\n<button onclick=\"appml('Form01').saveRecord();\" class=\"w3-btn \n    w3-green\">Save</button>\n<button onclick=\"appml('Form01').deleteRecord();\" \n    class=\"w3-btn\">Delete</button>\n</div>\n<div id=\"appmlmessage\" \n    class=\"w3-container w3-pale-yellow w3-padding\" style=\"display:none;\">\n<span onclick=\"this.parentNode.style.display='none';\" class=\"w3-button \n    w3-xlarge w3-right\">&times;</span>\n<div id=\"message\"></div>\n</div>\nInclude the Form Commands\nInclude the form commands in in your form:\nHTML Form\n<div id=\"Form01\" class=\"w3-container w3-light-grey w3-padding-large \n    w3-margin-bottom\" appml-data=\"local?model=model_customersform\">\n<div appml-include-html=\"inc_formcommands.htm\"></div>\n<p>\n<label for=\"customername\">Customer:</label>\n<input \n    id=\"customername\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"address\">Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label for=\"city\">City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"postalcode\">Postal Code:</label>\n<input id=\"postalcode\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label for=\"country\">Country:</label>\n<input id=\"country\" \n    class=\"w3-input w3-border\">\n</p>\n</div>\n\nAdd a Clickable Column to the Table\nIn the \na database.\nNow add a new column to the table:\nHTML Source\n<div appml-data=\"local?model=model_customerslist\">\n<h1>Customers</h1>\n<div appml-include-html=\"inc_listcommands.htm\"></div>\n<div appml-include-html=\"inc_filter.htm\"></div>\n<table \n    class=\"w3-table-all\">\n<tr>\n<th></th>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr appml-repeat=\"records\">\n<td style=\"cursor:pointer;width:34px;\" \n    onclick=\"appml('Form01').run({{CustomerID}})\">&#9998;</td>\n<td>{{CustomerName}}</td>\n<td>{{City}}</td>\n<td>{{Country}}</td>\n</tr>\n</table>\n</div>\n\nThe onclick event (in the new column) triggers a call to run an AppML \napplication located in the HTML element with id=\"Form01\":\nappml('Form01')\nreturns the AppML application\nrun({{CustomerID}})\nruns the applications with CustomerID \n as parameter.\nFinally, Hide the Form\nAdd a style to the form to make it invisible:\nHTML\n<div id=\"Form01\" appml-data=\"local?model=model_customersform\"\nappml-controller=\"myFormController\"\nclass=\"jumbotron\"\nstyle=\"display:none\"\n>\nAdd a controller to the form, to display the form only when it is loaded and \nready to display data:\nController\n<script>\nfunction myFormController($appml) {\nif ($appml.message == \n    \"ready\") {return -1;}\nif ($appml.message == \"loaded\") {\ndocument.getElementById(\"Form01\").style.display=\"\";\n}\n}\n</script>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "model_customersform.js",
+      "content": "",
+      "order": 3,
+      "code": "{\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"maintable\" : \"Customers\",\n\"keyfield\" : \"CustomerID\",\n\"sql\" : \"SELECT * FROM Customers\"},\n\"updateItems\" : [\n{\"item\" : \n   \"CustomerName\"},\n{\"item\" : \"Address\"},\n{\"item\" : \"PostalCode\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}]\n}",
+      "language": "javascript",
+      "explanation": "Example of model_customersform.js"
+    },
+    {
+      "type": "code_example",
+      "title": "HTML Form",
+      "content": "",
+      "order": 4,
+      "code": "<div id=\"Form01\" class=\"w3-container w3-light-grey w3-padding-large \n    w3-margin-bottom\" appml-data=\"local?model=model_customersform\">\n<p>\n<label for=\"customername\">Customer:</label>\n<input id=\"customername\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"address\">Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label for=\"city\">City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"postalcode\">Postal Code:</label>\n<input id=\"postalcode\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label for=\"country\">Country:</label>\n<input id=\"country\" \n    class=\"w3-input w3-border\">\n</p>\n</div>",
+      "language": "html",
+      "explanation": "Example of html form"
+    },
+    {
+      "type": "code_example",
+      "title": "inc_formcommands.htm",
+      "content": "",
+      "order": 5,
+      "code": "<span onclick=\"document.getElementById('Form01').style.display='none'\" \n    class=\"w3-button w3-xlarge w3-right\">&times;</span>\n<div \n    class=\"w3-bar w3-border w3-white\">\n<button \n    onclick=\"appml('Form01').newRecord();\" class=\"w3-btn\">New</button>\n<button onclick=\"appml('Form01').saveRecord();\" class=\"w3-btn \n    w3-green\">Save</button>\n<button onclick=\"appml('Form01').deleteRecord();\" \n    class=\"w3-btn\">Delete</button>\n</div>\n<div id=\"appmlmessage\" \n    class=\"w3-container w3-pale-yellow w3-padding\" style=\"display:none;\">\n<span onclick=\"this.parentNode.style.display='none';\" class=\"w3-button \n    w3-xlarge w3-right\">&times;</span>\n<div id=\"message\"></div>\n</div>",
+      "language": "html",
+      "explanation": "Example of inc_formcommands.htm"
+    },
+    {
+      "type": "code_example",
+      "title": "HTML Form",
+      "content": "",
+      "order": 6,
+      "code": "<div id=\"Form01\" class=\"w3-container w3-light-grey w3-padding-large \n    w3-margin-bottom\" appml-data=\"local?model=model_customersform\">\n<div appml-include-html=\"inc_formcommands.htm\"></div>\n<p>\n<label for=\"customername\">Customer:</label>\n<input \n    id=\"customername\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"address\">Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label for=\"city\">City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"postalcode\">Postal Code:</label>\n<input id=\"postalcode\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label for=\"country\">Country:</label>\n<input id=\"country\" \n    class=\"w3-input w3-border\">\n</p>\n</div>",
+      "language": "html",
+      "explanation": "Example of html form"
+    },
+    {
+      "type": "code_example",
+      "title": "HTML Source",
+      "content": "",
+      "order": 7,
+      "code": "<div appml-data=\"local?model=model_customerslist\">\n<h1>Customers</h1>\n<div appml-include-html=\"inc_listcommands.htm\"></div>\n<div appml-include-html=\"inc_filter.htm\"></div>\n<table \n    class=\"w3-table-all\">\n<tr>\n<th></th>\n<th>Customer</th>\n<th>City</th>\n<th>Country</th>\n</tr>\n<tr appml-repeat=\"records\">\n<td style=\"cursor:pointer;width:34px;\" \n    onclick=\"appml('Form01').run({{CustomerID}})\">&#9998;</td>\n<td>{{CustomerName}}</td>\n<td>{{City}}</td>\n<td>{{Country}}</td>\n</tr>\n</table>\n</div>",
+      "language": "html",
+      "explanation": "Example of html source"
+    },
+    {
+      "type": "code_example",
+      "title": "HTML",
+      "content": "",
+      "order": 8,
+      "code": "<div id=\"Form01\" appml-data=\"local?model=model_customersform\"\nappml-controller=\"myFormController\"\nclass=\"jumbotron\"\nstyle=\"display:none\"\n>",
+      "language": "html",
+      "explanation": "Example of html"
+    },
+    {
+      "type": "code_example",
+      "title": "Controller",
+      "content": "",
+      "order": 9,
+      "code": "<script>\nfunction myFormController($appml) {\nif ($appml.message == \n    \"ready\") {return -1;}\nif ($appml.message == \"loaded\") {\ndocument.getElementById(\"Form01\").style.display=\"\";\n}\n}\n</script>",
+      "language": "html",
+      "explanation": "Example of controller"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "{\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"maintable\" : \"Customers\",\n\"keyfield\" : \"CustomerID\",\n\"sql\" : \"SELECT * FROM Customers\"},\n\"updateItems\" : [\n{\"item\" : \n# TODO: Complete this line\n{\"item\" : \"Address\"},\n{\"item\" : \"PostalCode\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}]\n}",
+      "solution": "{\n\"database\" : {\n\"connection\" : \"localmysql\",\n\"maintable\" : \"Customers\",\n\"keyfield\" : \"CustomerID\",\n\"sql\" : \"SELECT * FROM Customers\"},\n\"updateItems\" : [\n{\"item\" : \n   \"CustomerName\"},\n{\"item\" : \"Address\"},\n{\"item\" : \"PostalCode\"},\n{\"item\" : \"City\"},\n{\"item\" : \"Country\"}]\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div id=\"Form01\" class=\"w3-container w3-light-grey w3-padding-large \n    w3-margin-bottom\" appml-data=\"local?model=model_customersform\">\n<p>\n<label for=\"customername\">Customer:</label>\n# TODO: Complete this line\n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"address\">Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label for=\"city\">City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"postalcode\">Postal Code:</label>\n<input id=\"postalcode\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label for=\"country\">Country:</label>\n<input id=\"country\" \n    class=\"w3-input w3-border\">\n</p>\n</div>",
+      "solution": "<div id=\"Form01\" class=\"w3-container w3-light-grey w3-padding-large \n    w3-margin-bottom\" appml-data=\"local?model=model_customersform\">\n<p>\n<label for=\"customername\">Customer:</label>\n<input id=\"customername\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"address\">Address:</label>\n<input id=\"address\" class=\"w3-input \n    w3-border\">\n</p>\n<p>\n<label for=\"city\">City:</label>\n<input \n    id=\"city\" class=\"w3-input w3-border\">\n</p>\n<p>\n<label \n    for=\"postalcode\">Postal Code:</label>\n<input id=\"postalcode\" \n    class=\"w3-input w3-border\">\n</p>\n<p>\n<label for=\"country\">Country:</label>\n<input id=\"country\" \n    class=\"w3-input w3-border\">\n</p>\n</div>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c72cf788-bbe1-46fb-828a-11741b9651fb",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9789e24f-d751-483d-905d-9443516bcb28",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ba14a094-917f-4219-8052-19b7169639ad",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is to display the form only when it?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "loaded and \nready to display data:\nController\n<script>\nfunction myFormController($appml) {\nif ($appml",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of to display the form only when it is 'loaded and \nready to display data:\nController\n<script>\nfunction myFormController($appml) {\nif ($appml'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers AppML Forms concepts and techniques. You'll learn how to use AppML Forms effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AppML Forms and how to apply it in your projects."
+}

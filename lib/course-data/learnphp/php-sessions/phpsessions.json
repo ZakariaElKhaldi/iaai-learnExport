@@ -1,0 +1,151 @@
+{
+  "id": "ea4d81d8-274e-4cf3-a5a2-b362b599aa56",
+  "title": "PHPSessions",
+  "slug": "phpsessions",
+  "metadata": {
+    "description": "Learn about PHPSessions with clear explanations and practical examples.",
+    "keywords": [
+      "php",
+      "session",
+      "html",
+      "variables",
+      "example",
+      "body",
+      "variable",
+      "user",
+      "page",
+      "information",
+      "doctype"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "PHP Sessions"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nSessions",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A session is a way to store information (in variables) to be used across multiple pages.\nUnlike a cookie, the information is not stored on the users computer.\nWhat is a PHP Session?\nWhen you work with an application, you open it, do some changes, and \nthen you close it. This is much like a Session. The computer knows who you are. \nIt knows when you start the application and when you end. But on the internet \nthere is one problem: the web server does not know who you are or what you do, \nbecause the HTTP address doesn't maintain state.\nSession variables solve this problem by storing user information \nto be used across multiple pages (e.g. username, favorite color, etc). By \ndefault, session variables last until the user closes the browser.\nSo; Session variables hold information about one single user, and are available to all pages in one application.\nTip:\nIf you need a permanent storage, you may want to store the data in a\ndatabase\n.\nStart a PHP Session\nA session is started with the\nsession_start()\nfunction.\nSession variables are set with the PHP global variable: $_SESSION.\nNow, let's create a new page called \"demo_session1.php\". In this page, we start a \nnew PHP session and set some session variables:\nExample\n<?php\n// Start the session\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// Set session variables\n$_SESSION[\"favcolor\"] = \"green\";\n$_SESSION[\"favanimal\"] = \"cat\";\necho \"Session variables are set.\";\n?>\n</body>\n</html>\nRun example \u00bb\nNote:\nThe\nsession_start()\nfunction must be the very \nfirst thing in your document. Before any HTML tags.\nGet PHP Session Variable Values\n\nwill access the session information we set on the first page (\"demo_session1.php\").\nNotice that session variables are not passed individually to each new page, \ninstead they are retrieved from the session we open at the beginning of each \npage (\nsession_start()\n).\nAlso notice that all session variable values are stored in the global $_SESSION variable:\nExample\n<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// Echo session variables that were set on \necho \"Favorite color is \" . $_SESSION[\"favcolor\"] . \".<br>\";\necho \"Favorite animal is \" . $_SESSION[\"favanimal\"] . \".\";\n?>\n</body>\n</html>\nRun example \u00bb\nAnother way to show all the session variable values for a user session is to run the \nfollowing code:\nExample\n<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\nprint_r($_SESSION);\n?>\n</body>\n</html>\nRun example \u00bb\nHow does it work? How does it know it's me?\nMost sessions set a user-key on \nthe user's computer that \nlooks something like this: 765487cf34ert8dede5a562e4f3a7e12. Then, when a \nsession is opened on another page, it scans the computer for a user-key. If \nthere is a match, it accesses that session, if not, it starts a new session.\nModify a PHP Session Variable\nTo change a session variable, just overwrite it:\nExample\n<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// to change a session variable, just overwrite it\n$_SESSION[\"favcolor\"] = \"yellow\";\nprint_r($_SESSION);\n?>\n</body>\n</html>\nRun example \u00bb\nDestroy a PHP Session\nTo remove all global session variables and destroy the session, use\nsession_unset()\nand\nsession_destroy()\n:\nExample\n<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// remove all session variables\nsession_unset();\n// destroy the session\nsession_destroy();\n?>\n</body>\n</html>\nRun example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n// Start the session\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// Set session variables\n$_SESSION[\"favcolor\"] = \"green\";\n$_SESSION[\"favanimal\"] = \"cat\";\necho \"Session variables are set.\";\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// Echo session variables that were set on previous page\necho \"Favorite color is \" . $_SESSION[\"favcolor\"] . \".<br>\";\necho \"Favorite animal is \" . $_SESSION[\"favanimal\"] . \".\";\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\nprint_r($_SESSION);\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// to change a session variable, just overwrite it\n$_SESSION[\"favcolor\"] = \"yellow\";\nprint_r($_SESSION);\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// remove all session variables\nsession_unset();\n// destroy the session\nsession_destroy();\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n// Start the session\nsession_start();\n# TODO: Complete this line\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// Set session variables\n$_SESSION[\"favcolor\"] = \"green\";\n$_SESSION[\"favanimal\"] = \"cat\";\necho \"Session variables are set.\";\n?>\n</body>\n</html>",
+      "solution": "<?php\n// Start the session\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// Set session variables\n$_SESSION[\"favcolor\"] = \"green\";\n$_SESSION[\"favanimal\"] = \"cat\";\necho \"Session variables are set.\";\n?>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nsession_start();\n# TODO: Complete this line\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// Echo session variables that were set on previous page\necho \"Favorite color is \" . $_SESSION[\"favcolor\"] . \".<br>\";\necho \"Favorite animal is \" . $_SESSION[\"favanimal\"] . \".\";\n?>\n</body>\n</html>",
+      "solution": "<?php\nsession_start();\n?>\n<!DOCTYPE html>\n<html>\n<body>\n<?php\n// Echo session variables that were set on previous page\necho \"Favorite color is \" . $_SESSION[\"favcolor\"] . \".<br>\";\necho \"Favorite animal is \" . $_SESSION[\"favanimal\"] . \".\";\n?>\n</body>\n</html>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "375f32c8-a0dd-4335-bdaf-07814a4af84c",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "d063183f-3ec9-4497-a61e-74768cb0909d",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "c327b45a-58cd-4ff7-bc73-238ab1ba328e",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is PHP\nSessions\n\nA session?",
+      "options": [
+        "not stored on the users computer",
+        "None of the above.",
+        "a way to store information (in variables) to be used across multiple pages",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of PHP\nSessions\n\nA session is 'a way to store information (in variables) to be used across multiple pages'."
+    },
+    {
+      "question": "What is the information?",
+      "options": [
+        "not stored on the users computer",
+        "None of the above.",
+        "a way to store information (in variables) to be used across multiple pages",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of the information is 'not stored on the users computer'."
+    }
+  ],
+  "summary": "This tutorial covers PHPSessions concepts and techniques. You'll learn how to use PHPSessions effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPSessions and how to apply it in your projects."
+}

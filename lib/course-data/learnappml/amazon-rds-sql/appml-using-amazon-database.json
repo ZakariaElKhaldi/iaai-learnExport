@@ -1,0 +1,130 @@
+{
+  "id": "457e786e-9eca-4577-ba06-5397b79f5fa2",
+  "title": "AppML using Amazon Database",
+  "slug": "appml-using-amazon-database",
+  "metadata": {
+    "description": "Learn about AppML using Amazon Database with clear explanations and practical examples.",
+    "keywords": [
+      "database",
+      "amazon",
+      "click",
+      "free",
+      "password",
+      "user",
+      "create",
+      "group",
+      "instance",
+      "select"
+    ],
+    "difficulty": "advanced",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnAppML",
+    "subcategory": "Amazon RDS SQL"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AppML using Amazon Database",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Amazon RDS is a database cloud service.\nIt is easy to set up and manage.\nIt is FREE to try!\nWhat is Amazon Relational Database Service (RDS)\nAmazon Relational Database Service (RDS) is a cloud based database service.\nWhy use Amazon RDS?\nAmazon RDS manages many of the challenges of running a database.\nWith Amazon RDS you can scale performance and storage as you need it.\nAmazon RDS manages automated backups, patching, and recovery.\nIt supports popular database products like:\nMySQL\nPostgreSQL\nOracle\nMicrosoft SQL Server\nand the new, MySQL-compatible Amazon Aurora DB \nengine\nGetting Started\nBefore you can start using RDS, you need to \nand set up a database user and security group.\n\nWhen you \nIf you are a new AWS customer, you can get started with Amazon RDS for \nfree.\nThe AWS Free Tier is allows you to try AWS for free for 12 months after you \nFor more information, see\nAWS Free Usage Tier\n.\nIf you decide to continue with AWS after your free period (or if you need \nmore storage or performance than the free usage tier offers), you only pay for the resources you use.\nTo create an AWS account\n\ngo to:\nhttps://aws.amazon.com/\n, and then click \nFollow the on-screen instructions.\n\nNote your AWS account number, because you'll need it later.\nCreate a MySQL Database Instance\nIn this example we will set up a free Database instance running MySQL. (This is \nfree because it is intended for testing).\nCreate a MySQL DB instance:\nGo to Amazon RDS console:\nhttps://console.aws.amazon.com/rds/\nIn the navigation pane, click Instances.\nClick Launch DB Instance\nOn the Select Engine page, click the MySQL icon and then click Select \n    for the MySQL DB engine\nOn the Production? page, click checkbox \n    Step\nOn the Specify DB Details page follow the instructions (follow\nthese \n    instructions\nfor setting up a free test database)\nFor this option:\nTypical Input\nLicense Model\ngeneral-public-license\nDB Engine Version\nSelect the default version of MySQL\nDB Instance Class\nSelect db.t2.micro to select a configuration that is eligible for free test usage\nMulti-AZ Deployment\nSelect No\nStorage Type\nMagnetic (Standard)\nAllocated Storage\n5\nDB Instance Identifier\nType the name of your database instance (this is not the name of your database)\nMaster Username\nType the master username for your database\nMaster Password\nType the password for your master user\nConfirm Password\nConform the password\nOn the Configure Advanced Settings page follow the instructions (follow\nthese \n    instructions\nfor setting up a free test database)\nFor this option:\nTypical Input\nVPC\nDefault VPC\nSubnet Group\ndefault\nPublicly Accessible\nYes\nAvailability Zone\nNo Preference\nVPC Security Group(s)\ndefault\nDatabase Name\nType the name of your database (in this example, we will show you how to create the northwind database we use for examples in the AppML tutorial)\nDatabase Port\n3306 (unless you need it to run on a specific port)\nDB Parameter Group\nKeep the default value\nOption Group\nKeep the default value\nEnable Encryption\nNo\nBackup Retention Period\n7\nBackup Window\nNo Preference\nAuto Minor Version Upgrade\nYes\nMaintenance Window\nNo Preference\nClick Launch DB Instance\nClick View Your DB Instances\nThe new DB instance appears in the list of DB instances (it will have a \n    \"creating\" status until it is ready for use)\nWhen the status changes to \"available\", you can connect to the database\nClick the details icon to view details and copy the URL from \"Endpoint\", \n    including the port\nThe Endpoint URL should look something like this:\ndatabasename\n.\naaabbbcccddd\n.\nregion\n.rds.amazonaws.com:3306\nConfigure Database Connection in AppML\nTo configure the database connection, edit the appml_config file:\nPHP example: appml_config.php\n<?php echo(\"Access Forbidden\");exit();?>\n{\n\"dateformat\" : \n    \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"\nmydatabase\n\",\n\"host\" : \"\nyourDatabaseURL\n\",\n\"dbname\" : \"\nyourDatabaseName\n\",\n\"username\" : \"\nyourUserName\n\",\n\"password\" : \"\nyourPassword\n\"\n}]\n}\nEdit the following:\nmydatabase\n- change to whatever you want the database \n    connection to be called in your application\nyourDatabaseURL\n- change to the endpoint URL from the \n    step\nyourDatabaseName\n- change to the name you specified for your \n    database in Amazon RDS\nyourUserName\n- change to the username you specified for your \n    database in Amazon RDS\nyourPassword\n- change to the password you specified for your \n    database in Amazon RDS\nAppML should now be configured to connect to your Amazon RDS database.\nYou can now fill your database with data:\nIf you have access to a PHP server, this is described in the\nAppML PHP chapter\nIf you have access to an ASP.NET server, this is described in the\nAppML .NET chapter\nOptional: Create an IAM User for increased security\nAmazon RDS, require that you provide username and password when you access \nit.\nYou can access the account with your Amazon username, but for security \npurposes \nwe recommend that you create an Identity and Access Management (IAM) user, for \nyour database.\nFirst, create the Administrators group:\nSign in to the AWS Management Console and open the IAM console at\nhttps://console.aws.amazon.com/iam/\nIn the menu, click Groups, then click Create New Group\nIn the Group Name box, type Administrators and then click \nIn the list of policies, select the check box \n    AdministratorAccess policy\nClick \nThen create the IAM user, and add it to the Administrators group:\nIn the menu, click Users, then click Create New User\nIn box 1, enter a user name\nClear the check box \n    user\", then click Create\nIn the list of users, click the name (not the check box) of the user you \n    just created\nIn the Groups section, click Add User to Groups\nSelect the check box \n    Groups\nScroll down to the Security Credentials section, and click Manage \n    Password\nSelect Assign a custom password, then enter a password in the Password \n    and Confirm Password boxes, click Apply\nTo sign in as this new IAM user, sign out of the AWS console, then use the \nfollowing URL:\nLogin with IAM\nhttps://\nyour_aws_account_id\n.signin.aws.amazon.com/console/\nReplace\nyour_aws_account_id\nwith your AWS account number without the \nhyphens (if your account number is 1234-5678-9012, your AWS account ID is \n123456789012)\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "The Endpoint URL should look something like this:",
+      "content": "",
+      "order": 3,
+      "code": "databasename\n.\naaabbbcccddd\n.\nregion\n.rds.amazonaws.com:3306",
+      "language": "unknown",
+      "explanation": "Example of the endpoint url should look something like this:"
+    },
+    {
+      "type": "code_example",
+      "title": "PHP example: appml_config.php",
+      "content": "",
+      "order": 4,
+      "code": "<?php echo(\"Access Forbidden\");exit();?>\n{\n\"dateformat\" : \n    \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"\nmydatabase\n\",\n\"host\" : \"\nyourDatabaseURL\n\",\n\"dbname\" : \"\nyourDatabaseName\n\",\n\"username\" : \"\nyourUserName\n\",\n\"password\" : \"\nyourPassword\n\"\n}]\n}",
+      "language": "unknown",
+      "explanation": "Example of php example: appml_config.php"
+    },
+    {
+      "type": "code_example",
+      "title": "Login with IAM",
+      "content": "",
+      "order": 5,
+      "code": "https://\nyour_aws_account_id\n.signin.aws.amazon.com/console/",
+      "language": "unknown",
+      "explanation": "Example of login with iam"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "databasename\n.\n# TODO: Complete this line\n.\nregion\n.rds.amazonaws.com:3306",
+      "solution": "databasename\n.\naaabbbcccddd\n.\nregion\n.rds.amazonaws.com:3306"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php echo(\"Access Forbidden\");exit();?>\n# TODO: Complete this line\n\"dateformat\" : \n    \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"\nmydatabase\n\",\n\"host\" : \"\nyourDatabaseURL\n\",\n\"dbname\" : \"\nyourDatabaseName\n\",\n\"username\" : \"\nyourUserName\n\",\n\"password\" : \"\nyourPassword\n\"\n}]\n}",
+      "solution": "<?php echo(\"Access Forbidden\");exit();?>\n{\n\"dateformat\" : \n    \"yyyy-mm-dd\",\n\"databases\" : [{\n\"connection\" : \"\nmydatabase\n\",\n\"host\" : \"\nyourDatabaseURL\n\",\n\"dbname\" : \"\nyourDatabaseName\n\",\n\"username\" : \"\nyourUserName\n\",\n\"password\" : \"\nyourPassword\n\"\n}]\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "f0c3103f-df08-4fb4-9b31-1babe475a0d6",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ddfd5d97-d19e-4967-906e-b0a7a76d755e",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "06f29cea-c5aa-4788-8f81-3477b3b4fbd5",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is AppML using Amazon Database\n\nAmazon RDS?",
+      "options": [
+        "None of the above.",
+        "easy to set up and manage",
+        "None of the above.",
+        "a database cloud service"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of AppML using Amazon Database\n\nAmazon RDS is 'a database cloud service'."
+    },
+    {
+      "question": "What is It?",
+      "options": [
+        "None of the above.",
+        "a database cloud service",
+        "None of the above.",
+        "easy to set up and manage"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of It is 'easy to set up and manage'."
+    }
+  ],
+  "summary": "This tutorial covers AppML using Amazon Database concepts and techniques. You'll learn how to use AppML using Amazon Database effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AppML using Amazon Database and how to apply it in your projects."
+}

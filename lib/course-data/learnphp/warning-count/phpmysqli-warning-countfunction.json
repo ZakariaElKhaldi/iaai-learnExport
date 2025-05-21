@@ -1,0 +1,124 @@
+{
+  "id": "0c1867cb-0022-4959-83b7-c96a9d0f014c",
+  "title": "PHPmysqli warning_count()Function",
+  "slug": "phpmysqli-warning-countfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli warning_count()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "mysqli",
+      "warnings",
+      "query",
+      "result",
+      "style",
+      "number",
+      "last",
+      "connection",
+      "mypersons",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "warning_count"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli warning_count()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nReturn the number of warnings from the last query:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n// Check connection\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$mysqli -> query(\"CREATE TABLE myPersons LIKE Persons\");\n$sql \n  = \"INSERT INTO myPersons (FirstName) VALUES(\n'Hdghfhjgjtjyjn.,,\ufffd\ufffdl\ufffdjkghfjbmbngfgffdhfhjgjgkjhlkhlkjljljlkjkljlkjkljkljlkj')\";\n$mysqli -> query($sql);\nif ($mysqli -> warning_count) {\nif ($result = $mysqli -> query(\"SHOW WARNINGS\")) {\n$row \n  = $result -> fetch_row();\nprintf(\"%s (%d): %s\\n\", \n  $row[0], $row[1], $row[2]);\n$result -> close();\n}\n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe warning_count / mysqli_warning_count() function returns the number of \nwarnings from the last query.\nSyntax\nObject oriented style:\n$mysqli -> warning_count\nProcedural style:\nmysqli_warning_count(\nconnection\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nTechnical Details\nReturn Value:\nThe number of warnings from the last query. 0 if no \n warnings\nPHP Version:\n5+\nExample - Procedural style\nReturn the number of warnings from the last query:\n<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\nmysqli_query($con, \"CREATE TABLE myPersons LIKE Persons\");\n$sql \n  = \"INSERT INTO myPersons (FirstName) VALUES(\n'Hdghfhjgjtjyjn.,,\ufffd\ufffdl\ufffdjkghfjbmbngfgffdhfhjgjgkjhlkhlkjljljlkjkljlkjkljkljlkj')\";\nmysqli_query($con, $sql);\nif (mysqli_warning_count($con)) {\nif ($result = mysqli_query($con, \"SHOW WARNINGS\")) {\n$row = mysql_fetch_row($result);\nprintf(\"%s (%d): %s\\n\", \n  $row[0], $row[1], $row[2]);\nmysqli_free_result($result);\n}\n}\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n// Check connection\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$mysqli -> query(\"CREATE TABLE myPersons LIKE Persons\");\n$sql \n  = \"INSERT INTO myPersons (FirstName) VALUES(\n'Hdghfhjgjtjyjn.,,\ufffd\ufffdl\ufffdjkghfjbmbngfgffdhfhjgjgkjhlkhlkjljljlkjkljlkjkljkljlkj')\";\n$mysqli -> query($sql);\nif ($mysqli -> warning_count) {\nif ($result = $mysqli -> query(\"SHOW WARNINGS\")) {\n$row \n  = $result -> fetch_row();\nprintf(\"%s (%d): %s\\n\", \n  $row[0], $row[1], $row[2]);\n$result -> close();\n}\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\nmysqli_query($con, \"CREATE TABLE myPersons LIKE Persons\");\n$sql \n  = \"INSERT INTO myPersons (FirstName) VALUES(\n'Hdghfhjgjtjyjn.,,\ufffd\ufffdl\ufffdjkghfjbmbngfgffdhfhjgjgkjhlkhlkjljljlkjkljlkjkljkljlkj')\";\nmysqli_query($con, $sql);\nif (mysqli_warning_count($con)) {\nif ($result = mysqli_query($con, \"SHOW WARNINGS\")) {\n$row = mysql_fetch_row($result);\nprintf(\"%s (%d): %s\\n\", \n  $row[0], $row[1], $row[2]);\nmysqli_free_result($result);\n}\n}\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n// Check connection\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$mysqli -> query(\"CREATE TABLE myPersons LIKE Persons\");\n$sql \n  = \"INSERT INTO myPersons (FirstName) VALUES(\n'Hdghfhjgjtjyjn.,,\ufffd\ufffdl\ufffdjkghfjbmbngfgffdhfhjgjgkjhlkhlkjljljlkjkljlkjkljkljlkj')\";\n# TODO: Complete this line\nif ($mysqli -> warning_count) {\nif ($result = $mysqli -> query(\"SHOW WARNINGS\")) {\n$row \n  = $result -> fetch_row();\nprintf(\"%s (%d): %s\\n\", \n  $row[0], $row[1], $row[2]);\n$result -> close();\n}\n}\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n// Check connection\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$mysqli -> query(\"CREATE TABLE myPersons LIKE Persons\");\n$sql \n  = \"INSERT INTO myPersons (FirstName) VALUES(\n'Hdghfhjgjtjyjn.,,\ufffd\ufffdl\ufffdjkghfjbmbngfgffdhfhjgjgkjhlkhlkjljljlkjkljlkjkljkljlkj')\";\n$mysqli -> query($sql);\nif ($mysqli -> warning_count) {\nif ($result = $mysqli -> query(\"SHOW WARNINGS\")) {\n$row \n  = $result -> fetch_row();\nprintf(\"%s (%d): %s\\n\", \n  $row[0], $row[1], $row[2]);\n$result -> close();\n}\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n# TODO: Complete this line\nmysqli_query($con, \"CREATE TABLE myPersons LIKE Persons\");\n$sql \n  = \"INSERT INTO myPersons (FirstName) VALUES(\n'Hdghfhjgjtjyjn.,,\ufffd\ufffdl\ufffdjkghfjbmbngfgffdhfhjgjgkjhlkhlkjljljlkjkljlkjkljkljlkj')\";\nmysqli_query($con, $sql);\nif (mysqli_warning_count($con)) {\nif ($result = mysqli_query($con, \"SHOW WARNINGS\")) {\n$row = mysql_fetch_row($result);\nprintf(\"%s (%d): %s\\n\", \n  $row[0], $row[1], $row[2]);\nmysqli_free_result($result);\n}\n}\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\nmysqli_query($con, \"CREATE TABLE myPersons LIKE Persons\");\n$sql \n  = \"INSERT INTO myPersons (FirstName) VALUES(\n'Hdghfhjgjtjyjn.,,\ufffd\ufffdl\ufffdjkghfjbmbngfgffdhfhjgjgkjhlkhlkjljljlkjkljlkjkljkljlkj')\";\nmysqli_query($con, $sql);\nif (mysqli_warning_count($con)) {\nif ($result = mysqli_query($con, \"SHOW WARNINGS\")) {\n$row = mysql_fetch_row($result);\nprintf(\"%s (%d): %s\\n\", \n  $row[0], $row[1], $row[2]);\nmysqli_free_result($result);\n}\n}\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "4b313d1a-35fb-4c1e-bb97-9ab9cbdfde15",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "4c4215a6-1387-412a-a48c-07484cfa0561",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "0923cffa-04b3-437c-963c-c88f981a2510",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli warning_count()Function concepts and techniques. You'll learn how to use PHPmysqli warning_count()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli warning_count()Function and how to apply it in your projects."
+}

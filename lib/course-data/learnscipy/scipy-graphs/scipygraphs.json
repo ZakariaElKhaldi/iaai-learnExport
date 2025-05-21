@@ -1,0 +1,160 @@
+{
+  "id": "02c22d78-e2ee-4205-bda5-4458100582df",
+  "title": "SciPyGraphs",
+  "slug": "scipygraphs",
+  "metadata": {
+    "description": "Learn about SciPyGraphs with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "import",
+      "scipy",
+      "sparse",
+      "newarr",
+      "graph",
+      "path",
+      "csgraph",
+      "example",
+      "find",
+      "method"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnSciPy",
+    "subcategory": "SciPy Graphs"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "SciPy\nGraphs",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Working with Graphs\nGraphs are an essential data structure.\nSciPy provides us with the module\nscipy.sparse.csgraph\nfor working with \nsuch data structures.\nAdjacency Matrix\nAdjacency matrix is a\nnxn\nmatrix where\nn\nis the number of elements in a graph.\nAnd the values represents the connection between the elements.\nExample:\nFor a graph like this, with elements A, B and C, the connections are:\nA & B are connected with weight 1.\nA & C are connected with weight 2.\nC & B is not connected.\nThe Adjency Matrix would look like this:\nA B C\n   A:[0 1 2]  \n   B:[1 0 0]\n   C:[2 0 0]\nBelow follows some of the most used methods for working with adjacency matrices.\nConnected Components\nFind all of the connected components with the\nconnected_components()\nmethod.\nExample\nimport numpy as np\nfrom scipy.sparse.csgraph import connected_components\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(connected_components(newarr))\n\nDijkstra\nUse the\ndijkstra\nmethod to find the shortest path in a graph from one element to \nanother.\nIt takes following arguments:\nreturn_predecessors:\nboolean (True to return whole path of traversal \notherwise False).\nindices:\nindex of the element to return all paths from that element only.\nlimit:\nmax weight of path.\nExample\nFind the shortest path from element 1 to 2:\nimport numpy as np\nfrom scipy.sparse.csgraph import dijkstra\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(dijkstra(newarr, return_predecessors=True, indices=0))\n\nFloyd Warshall\nUse the\nfloyd_warshall()\nmethod to find shortest path between all pairs of elements.\nExample\nFind the shortest path between all pairs of elements:\nimport numpy as np\nfrom scipy.sparse.csgraph import floyd_warshall\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(floyd_warshall(newarr, return_predecessors=True))\n\nBellman Ford\nThe\nbellman_ford()\nmethod can also find the shortest path between all pairs of elements, but this method can handle negative weights as well.\nExample\nFind shortest path from element 1 to 2 with given graph with a negative weight:\nimport numpy as np\nfrom scipy.sparse.csgraph import bellman_ford\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, -1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(bellman_ford(newarr, return_predecessors=True, indices=0))\n\nDepth First Order\nThe\ndepth_first_order()\nmethod returns a depth first traversal from a node.\nThis function takes following arguments:\nthe graph.\nthe starting element to traverse graph from.\nExample\nTraverse the graph depth first for given adjacency matrix:\nimport numpy as np\nfrom scipy.sparse.csgraph import depth_first_order\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 0, 1],\n[1, 1, 1, 1],\n[2, 1, 1, 0],\n[0, 1, 0, 1]\n])\nnewarr = csr_matrix(arr)\nprint(depth_first_order(newarr, 1))\n\nBreadth First Order\nThe\nbreadth_first_order()\nmethod returns a breadth first traversal from a node.\nThis function takes following arguments:\nthe graph.\nthe starting element to traverse graph from.\nExample\nTraverse the graph breadth first for given adjacency matrix:\nimport numpy as np\nfrom scipy.sparse.csgraph import breadth_first_order\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 0, 1],\n[1, 1, 1, 1],\n[2, 1, 1, 0],\n[0, 1, 0, 1]\n])\nnewarr = csr_matrix(arr)\nprint(breadth_first_order(newarr, 1))\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import numpy as np\nfrom scipy.sparse.csgraph import connected_components\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(connected_components(newarr))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import numpy as np\nfrom scipy.sparse.csgraph import dijkstra\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(dijkstra(newarr, return_predecessors=True, indices=0))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import numpy as np\nfrom scipy.sparse.csgraph import floyd_warshall\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(floyd_warshall(newarr, return_predecessors=True))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import numpy as np\nfrom scipy.sparse.csgraph import bellman_ford\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, -1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(bellman_ford(newarr, return_predecessors=True, indices=0))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import numpy as np\nfrom scipy.sparse.csgraph import depth_first_order\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 0, 1],\n[1, 1, 1, 1],\n[2, 1, 1, 0],\n[0, 1, 0, 1]\n])\nnewarr = csr_matrix(arr)\nprint(depth_first_order(newarr, 1))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "import numpy as np\nfrom scipy.sparse.csgraph import breadth_first_order\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 0, 1],\n[1, 1, 1, 1],\n[2, 1, 1, 0],\n[0, 1, 0, 1]\n])\nnewarr = csr_matrix(arr)\nprint(breadth_first_order(newarr, 1))",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\nfrom scipy.sparse.csgraph import connected_components\n# TODO: Complete this line\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(connected_components(newarr))",
+      "solution": "import numpy as np\nfrom scipy.sparse.csgraph import connected_components\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(connected_components(newarr))"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\n# TODO: Complete this line\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(dijkstra(newarr, return_predecessors=True, indices=0))",
+      "solution": "import numpy as np\nfrom scipy.sparse.csgraph import dijkstra\nfrom scipy.sparse import csr_matrix\narr = np.array([\n[0, 1, 2],\n[1, 0, 0],\n[2, 0, 0]\n])\nnewarr = csr_matrix(arr)\nprint(dijkstra(newarr, return_predecessors=True, indices=0))"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "93203dfb-46e1-45f8-9884-d1f969876278",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2adddac6-16ea-46f0-acbc-ab77cf6fe663",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f3253c87-9877-41df-9701-2a215989d408",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is SciPy\nGraphs\n\nWorking with Graphs\nGraphs?",
+      "options": [
+        "the number of elements in a graph",
+        "None of the above.",
+        "an essential data structure",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of SciPy\nGraphs\n\nWorking with Graphs\nGraphs is 'an essential data structure'."
+    },
+    {
+      "question": "What is Adjacency Matrix\nAdjacency matrix is a\nnxn\nmatrix where\nn?",
+      "options": [
+        "an essential data structure",
+        "the number of elements in a graph",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Adjacency Matrix\nAdjacency matrix is a\nnxn\nmatrix where\nn is 'the number of elements in a graph'."
+    }
+  ],
+  "summary": "This tutorial covers SciPyGraphs concepts and techniques. You'll learn how to use SciPyGraphs effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of SciPyGraphs and how to apply it in your projects."
+}

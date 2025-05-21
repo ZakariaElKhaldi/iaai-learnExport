@@ -1,0 +1,130 @@
+{
+  "id": "19a967cc-34dc-475e-a90e-dd186ff8d867",
+  "title": "How TO - Sort a Table",
+  "slug": "how-to-sort-a-table",
+  "metadata": {
+    "description": "Learn about How TO - Sort a Table with clear explanations and practical examples.",
+    "keywords": [
+      "rows",
+      "switching",
+      "table",
+      "switch",
+      "sort",
+      "shouldswitch",
+      "true",
+      "loop",
+      "done",
+      "innerhtml"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnHow To",
+    "subcategory": "Sort Table"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "How TO - Sort a Table",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Learn how to sort an HTML table, using JavaScript.\nClick the button to sort the table alphabetically, based on customer name:\nSort\nName\nCountry\nBerglunds snabbkop\nSweden\nNorth/South\nUK\nAlfreds Futterkiste\nGermany\nKoniglich Essen\nGermany\nMagazzini Alimentari Riuniti\nItaly\nParis specialites\nFrance\nIsland Trading\nUK\nLaughing Bacchus Winecellars\nCanada\n\nCreating a Sort Function\nExample\nfunction sortTable() {\nvar table, rows, switching, i, x, y, \n  shouldSwitch;\ntable = document.getElementById(\"myTable\");\nswitching = true;\n/* Make a loop that will continue until\nno switching has been done: */\nwhile (switching) {\n// Start by saying: no switching is done:\nswitching = \n  false;\nrows = table.rows;\n/* Loop through all table rows (except the\nfirst, which \n  contains table headers): */\nfor (i = 1; i < (rows.length \n  - 1); i++) {\n// Start by saying there should \n  be no switching:\nshouldSwitch = false;\n/* Get the two elements you want to compare,\none from current row and one from the \nx = rows[i].getElementsByTagName(\"TD\")[0];\ny \n  = rows[i + 1].getElementsByTagName(\"TD\")[0];\n// Check if the two rows should switch place:\nif (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n}\nif (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\n}\n}\n}\n\nSort Table by Clicking the Headers\nClick the headers to sort the table.\nClick \"Name\" to sort by names, and \"Country\" to sort by country.\nThe first time you click, the sorting direction is ascending (A to Z).\nClick again, and the sorting direction will be descending (Z to A):\nName\nCountry\nBerglunds snabbkop\nSweden\nNorth/South\nUK\nAlfreds Futterkiste\nGermany\nKoniglich Essen\nGermany\nMagazzini Alimentari Riuniti\nItaly\nParis specialites\nFrance\nIsland Trading\nUK\nLaughing Bacchus Winecellars\nCanada\nExample\n<table id=\"myTable2\">\n<tr>\n<!--When a header is clicked, run the \n  sortTable function, with a parameter,\n0 for sorting by names, 1 for sorting \n  by country: -->\n<th onclick=\"sortTable(0)\">Name</th>\n<th onclick=\"sortTable(1)\">Country</th>\n</tr>\n...\n<script>\nfunction sortTable(n) {\nvar table, \n  rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;\ntable \n  = document.getElementById(\"myTable2\");\nswitching = true;\n// Set the sorting direction to ascending:\ndir = \"asc\";\n/* Make a loop that will continue until\nno switching has been done: */\nwhile (switching) {\n// Start by saying: no switching is \n  done:\nswitching = false;\nrows = \n  table.rows;\n/* Loop through all \n  table rows (except the\nfirst, which contains table \n  headers): */\nfor (i = 1; i < (rows.length - 1); i++) {\n// Start by saying there should be no switching:\nshouldSwitch = false;\n/* Get the two elements \n  you want to compare,\none from current row \n  and one from the \nx = rows[i].getElementsByTagName(\"TD\")[n];\ny = rows[i + 1].getElementsByTagName(\"TD\")[n];\n/* Check if the two rows should switch place,\nbased on the direction, asc or desc: */\nif (dir \n  == \"asc\") {\nif (x.innerHTML.toLowerCase() \n  > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n} else if (dir == \"desc\") {\nif (x.innerHTML.toLowerCase() \n  < y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n}\n}\nif (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\n// Each time a switch is \n  done, increase this count by 1:\nswitchcount \n  ++;\n} else {\n/* If no \n  switching has been done AND the direction is \"asc\",\nset the direction to \"desc\" and run the while loop again. */\nif (switchcount == 0 && dir == \"asc\") {\ndir = \"desc\";\nswitching = true;\n}\n}\n}\n}\n</script>\n\nSort Table Numerically\nExample\nif (Number(x.innerHTML) > Number(y.innerHTML)) {\nshouldSwitch = true;\nbreak;\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "function sortTable() {\nvar table, rows, switching, i, x, y, \n  shouldSwitch;\ntable = document.getElementById(\"myTable\");\nswitching = true;\n/* Make a loop that will continue until\nno switching has been done: */\nwhile (switching) {\n// Start by saying: no switching is done:\nswitching = \n  false;\nrows = table.rows;\n/* Loop through all table rows (except the\nfirst, which \n  contains table headers): */\nfor (i = 1; i < (rows.length \n  - 1); i++) {\n// Start by saying there should \n  be no switching:\nshouldSwitch = false;\n/* Get the two elements you want to compare,\none from current row and one from the next: */\nx = rows[i].getElementsByTagName(\"TD\")[0];\ny \n  = rows[i + 1].getElementsByTagName(\"TD\")[0];\n// Check if the two rows should switch place:\nif (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n}\nif (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\n}\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<table id=\"myTable2\">\n<tr>\n<!--When a header is clicked, run the \n  sortTable function, with a parameter,\n0 for sorting by names, 1 for sorting \n  by country: -->\n<th onclick=\"sortTable(0)\">Name</th>\n<th onclick=\"sortTable(1)\">Country</th>\n</tr>\n...\n<script>\nfunction sortTable(n) {\nvar table, \n  rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;\ntable \n  = document.getElementById(\"myTable2\");\nswitching = true;\n// Set the sorting direction to ascending:\ndir = \"asc\";\n/* Make a loop that will continue until\nno switching has been done: */\nwhile (switching) {\n// Start by saying: no switching is \n  done:\nswitching = false;\nrows = \n  table.rows;\n/* Loop through all \n  table rows (except the\nfirst, which contains table \n  headers): */\nfor (i = 1; i < (rows.length - 1); i++) {\n// Start by saying there should be no switching:\nshouldSwitch = false;\n/* Get the two elements \n  you want to compare,\none from current row \n  and one from the next: */\nx = rows[i].getElementsByTagName(\"TD\")[n];\ny = rows[i + 1].getElementsByTagName(\"TD\")[n];\n/* Check if the two rows should switch place,\nbased on the direction, asc or desc: */\nif (dir \n  == \"asc\") {\nif (x.innerHTML.toLowerCase() \n  > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n} else if (dir == \"desc\") {\nif (x.innerHTML.toLowerCase() \n  < y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n}\n}\nif (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\n// Each time a switch is \n  done, increase this count by 1:\nswitchcount \n  ++;\n} else {\n/* If no \n  switching has been done AND the direction is \"asc\",\nset the direction to \"desc\" and run the while loop again. */\nif (switchcount == 0 && dir == \"asc\") {\ndir = \"desc\";\nswitching = true;\n}\n}\n}\n}\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "if (Number(x.innerHTML) > Number(y.innerHTML)) {\nshouldSwitch = true;\nbreak;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function sortTable() {\n# TODO: Complete this line\n  shouldSwitch;\ntable = document.getElementById(\"myTable\");\nswitching = true;\n/* Make a loop that will continue until\nno switching has been done: */\nwhile (switching) {\n// Start by saying: no switching is done:\nswitching = \n  false;\nrows = table.rows;\n/* Loop through all table rows (except the\nfirst, which \n  contains table headers): */\nfor (i = 1; i < (rows.length \n  - 1); i++) {\n// Start by saying there should \n  be no switching:\nshouldSwitch = false;\n/* Get the two elements you want to compare,\none from current row and one from the next: */\nx = rows[i].getElementsByTagName(\"TD\")[0];\ny \n  = rows[i + 1].getElementsByTagName(\"TD\")[0];\n// Check if the two rows should switch place:\nif (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n}\nif (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\n}\n}\n}",
+      "solution": "function sortTable() {\nvar table, rows, switching, i, x, y, \n  shouldSwitch;\ntable = document.getElementById(\"myTable\");\nswitching = true;\n/* Make a loop that will continue until\nno switching has been done: */\nwhile (switching) {\n// Start by saying: no switching is done:\nswitching = \n  false;\nrows = table.rows;\n/* Loop through all table rows (except the\nfirst, which \n  contains table headers): */\nfor (i = 1; i < (rows.length \n  - 1); i++) {\n// Start by saying there should \n  be no switching:\nshouldSwitch = false;\n/* Get the two elements you want to compare,\none from current row and one from the next: */\nx = rows[i].getElementsByTagName(\"TD\")[0];\ny \n  = rows[i + 1].getElementsByTagName(\"TD\")[0];\n// Check if the two rows should switch place:\nif (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n}\nif (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\n}\n}\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<table id=\"myTable2\">\n<tr>\n<!--When a header is clicked, run the \n  sortTable function, with a parameter,\n0 for sorting by names, 1 for sorting \n  by country: -->\n<th onclick=\"sortTable(0)\">Name</th>\n<th onclick=\"sortTable(1)\">Country</th>\n</tr>\n...\n<script>\nfunction sortTable(n) {\nvar table, \n  rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;\ntable \n  = document.getElementById(\"myTable2\");\nswitching = true;\n// Set the sorting direction to ascending:\ndir = \"asc\";\n/* Make a loop that will continue until\nno switching has been done: */\nwhile (switching) {\n// Start by saying: no switching is \n  done:\nswitching = false;\nrows = \n  table.rows;\n/* Loop through all \n  table rows (except the\nfirst, which contains table \n  headers): */\nfor (i = 1; i < (rows.length - 1); i++) {\n// Start by saying there should be no switching:\nshouldSwitch = false;\n/* Get the two elements \n  you want to compare,\none from current row \n  and one from the next: */\nx = rows[i].getElementsByTagName(\"TD\")[n];\ny = rows[i + 1].getElementsByTagName(\"TD\")[n];\n/* Check if the two rows should switch place,\nbased on the direction, asc or desc: */\nif (dir \n  == \"asc\") {\nif (x.innerHTML.toLowerCase() \n  > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n} else if (dir == \"desc\") {\nif (x.innerHTML.toLowerCase() \n  < y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n}\n}\nif (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\n// Each time a switch is \n  done, increase this count by 1:\nswitchcount \n  ++;\n# TODO: Complete this line\n/* If no \n  switching has been done AND the direction is \"asc\",\nset the direction to \"desc\" and run the while loop again. */\nif (switchcount == 0 && dir == \"asc\") {\ndir = \"desc\";\nswitching = true;\n}\n}\n}\n}\n</script>",
+      "solution": "<table id=\"myTable2\">\n<tr>\n<!--When a header is clicked, run the \n  sortTable function, with a parameter,\n0 for sorting by names, 1 for sorting \n  by country: -->\n<th onclick=\"sortTable(0)\">Name</th>\n<th onclick=\"sortTable(1)\">Country</th>\n</tr>\n...\n<script>\nfunction sortTable(n) {\nvar table, \n  rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;\ntable \n  = document.getElementById(\"myTable2\");\nswitching = true;\n// Set the sorting direction to ascending:\ndir = \"asc\";\n/* Make a loop that will continue until\nno switching has been done: */\nwhile (switching) {\n// Start by saying: no switching is \n  done:\nswitching = false;\nrows = \n  table.rows;\n/* Loop through all \n  table rows (except the\nfirst, which contains table \n  headers): */\nfor (i = 1; i < (rows.length - 1); i++) {\n// Start by saying there should be no switching:\nshouldSwitch = false;\n/* Get the two elements \n  you want to compare,\none from current row \n  and one from the next: */\nx = rows[i].getElementsByTagName(\"TD\")[n];\ny = rows[i + 1].getElementsByTagName(\"TD\")[n];\n/* Check if the two rows should switch place,\nbased on the direction, asc or desc: */\nif (dir \n  == \"asc\") {\nif (x.innerHTML.toLowerCase() \n  > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n} else if (dir == \"desc\") {\nif (x.innerHTML.toLowerCase() \n  < y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\n}\n}\n}\nif (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\n// Each time a switch is \n  done, increase this count by 1:\nswitchcount \n  ++;\n} else {\n/* If no \n  switching has been done AND the direction is \"asc\",\nset the direction to \"desc\" and run the while loop again. */\nif (switchcount == 0 && dir == \"asc\") {\ndir = \"desc\";\nswitching = true;\n}\n}\n}\n}\n</script>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "dd3e52ff-cb65-4ce8-bbb0-34a38e400e04",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ffdd24d0-b41c-489e-aba7-6d6cce869003",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "b0c27fb2-54bf-48ca-8d15-dc6c18671d25",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is no switching?",
+      "options": [
+        "done:\nswitching = \n  false;\nrows = table",
+        "ascending (A to Z)",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of no switching is 'done:\nswitching = \n  false;\nrows = table'."
+    },
+    {
+      "question": "What is the sorting direction?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "ascending (A to Z)",
+        "done:\nswitching = \n  false;\nrows = table"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of the sorting direction is 'ascending (A to Z)'."
+    }
+  ],
+  "summary": "This tutorial covers How TO - Sort a Table concepts and techniques. You'll learn how to use How TO - Sort a Table effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of How TO - Sort a Table and how to apply it in your projects."
+}

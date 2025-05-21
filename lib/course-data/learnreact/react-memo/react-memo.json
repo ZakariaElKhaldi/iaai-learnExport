@@ -1,0 +1,98 @@
+{
+  "id": "08581cea-5986-438a-84f4-7b69326dfed0",
+  "title": "React Memo",
+  "slug": "react-memo",
+  "metadata": {
+    "description": "Learn about React Memo with clear explanations and practical examples.",
+    "keywords": [
+      "todos",
+      "const",
+      "react",
+      "todo",
+      "memo",
+      "component",
+      "import",
+      "index",
+      "usestate",
+      "count"
+    ],
+    "difficulty": "advanced",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnReact",
+    "subcategory": "React Memo"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "React Memo",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Using\nmemo\nwill cause React to skip rendering a component if its props have not changed.\nThis can improve performance.\nThis section uses React Hooks. See the\nReact Hooks\nsection for more information on Hooks.\nProblem\nIn this example, the\nTodos\ncomponent re-renders even when the todos have not changed.\nExample:\nindex.js\n:\nimport { useState } from \"react\";\nimport ReactDOM from \"react-dom/client\";\nimport Todos from \"./Todos\";\n\nconst App = () => {\n  const [count, setCount] = useState(0);\n  const [todos, setTodos] = useState([\"todo 1\", \"todo 2\"]);\n\nconst increment = () => {\n    setCount((c) => c + 1);\n  };\n\nreturn (\n    <>\n      <Todos todos={todos} />\n      <hr />\n      <div>\n        Count: {count}\n        <button onClick={increment}>+</button>\n      </div>\n    </>\n  );\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<App />);\nTodos.js\n:\nconst Todos = ({ todos }) => {\n  console.log(\"child render\");\n  return (\n    <>\n      <h2>My Todos</h2>\n      {todos.map((todo, index) => {\n        return <p key={index}>{todo}</p>;\n      })}\n    </>\n  );\n};\n\nexport default Todos;\nRun \nExample \u00bb\nWhen you click the increment button, the\nTodos\ncomponent re-renders.\nIf this component was complex, it could cause performance issues.\nSolution\nTo fix this, we can use\nmemo\n.\nUse\nmemo\nto keep the\nTodos\ncomponent from needlessly re-rendering.\nWrap the\nTodos\ncomponent export in\nmemo\n:\nExample:\nindex.js\n:\nimport { useState } from \"react\";\nimport ReactDOM from \"react-dom/client\";\nimport Todos from \"./Todos\";\n\nconst App = () => {\n  const [count, setCount] = useState(0);\n  const [todos, setTodos] = useState([\"todo 1\", \"todo 2\"]);\n\nconst increment = () => {\n    setCount((c) => c + 1);\n  };\n\nreturn (\n    <>\n      <Todos todos={todos} />\n      <hr />\n      <div>\n        Count: {count}\n        <button onClick={increment}>+</button>\n      </div>\n    </>\n  );\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<App />);\nTodos.js\n:\nimport { memo } from \"react\";\n\nconst Todos = ({ todos }) => {\n  console.log(\"child render\");\n  return (\n    <>\n      <h2>My Todos</h2>\n      {todos.map((todo, index) => {\n        return <p key={index}>{todo}</p>;\n      })}\n    </>\n  );\n};\n\nexport default memo(Todos);\nRun \nExample \u00bb\nNow the\nTodos\ncomponent only re-renders when the\ntodos\nthat are passed to it through props are updated.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "e1c5ac08-7966-49ea-bd35-b04ceeea8d15",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "8a8cb324-df6d-413e-84d1-af0576f43a78",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "c29070fe-7206-463d-b5de-d96c49bb2a6f",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is renders when the\ntodos\nthat are passed to it through props?",
+      "options": [
+        "None of the above.",
+        "updated",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of renders when the\ntodos\nthat are passed to it through props is 'updated'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers React Memo concepts and techniques. You'll learn how to use React Memo effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of React Memo and how to apply it in your projects."
+}

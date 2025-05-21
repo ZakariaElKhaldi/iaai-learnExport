@@ -1,0 +1,124 @@
+{
+  "id": "33b1711f-20f2-4f71-9227-ee878eb59183",
+  "title": "PHPpreg_replace_callback_array()Function",
+  "slug": "phppreg-replace-callback-arrayfunction",
+  "metadata": {
+    "description": "Learn about PHPpreg_replace_callback_array()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "matches",
+      "function",
+      "input",
+      "patterns",
+      "string",
+      "return",
+      "array",
+      "countletters",
+      "countdigits",
+      "result"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "preg_replace_callback_array"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\npreg_replace_callback_array()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nShow how many letters or digits are found in each word in a sentence:\n<?php\nfunction countLetters($matches) {\nreturn $matches[0] . '[' . \n  strlen($matches[0]) . 'letter]';\n}\nfunction countDigits($matches) {\nreturn $matches[0] . '[' . strlen($matches[0]) . 'digit]';\n}\n$input \n  = \"There are 365 days in a year.\";\n$patterns = [\n'/\\b[a-z]+\\b/i' => \n  'countLetters',\n'/\\b[0-9]+\\b/' => 'countDigits'\n];\n$result = \n  preg_replace_callback_array($patterns, $input);\necho $result;\n?>\n\nDefinition and Usage\nThe\npreg_replace_callback_array()\nfunction returns a string or an array of strings in which matches of a set of regular expressions are\nreplaced with the return value of a callback function.\nNote:\nFor each string, the function evaluates the patterns in the order that they are given.\nThe result of evaluating the first pattern on the string is used as the input string for the\nsecond pattern and so on. This can lead to unexpected behaviour.\nSyntax\npreg_replace_callback_array(\npatterns, input, limit, count\n)\nParameter Values\nParameter\nDescription\npattern\nRequired. An associative array which associates regular\nexpression patterns to callback functions.\nThe callback functions have one parameter which is an array of\nmatches.The first element in the array contains the match for the\nwhole expression while the remaining elements have matches for\neach of the groups in the expression.\ninput\nRequired. The string or array of strings in which replacements are being performed\nlimit\nOptional. Defaults to -1, meaning unlimited. Sets a limit to how many replacements can be done in each string\ncount\nOptional. After the function has executed, this variable will contain a number indicating how many replacements were performed\nTechnical Details\nReturn Value:\nReturns a string or an array of strings resulting from applying the\nreplacements to the input string or strings\nPHP Version:\n7+\nMore Examples\nExample\nThis example illustrates the potentially unexpected effects of the patterns being evaluated in sequence. First, the countLetters replacement adds \"[4letter]\" to \"days\" and, after that \nreplacement has been performed, the countDigits replacement finds the \"4\" in \"4letter\" and adds \"[1digit]\" to that:\n<?php\nfunction countLetters($matches) {\nreturn $matches[0] . '[' . \n  strlen($matches[0]) . 'letter]';\n}\nfunction countDigits($matches) {\nreturn $matches[0] . '[' . strlen($matches[0]) . 'digit]';\n}\n$input \n  = \"365 days\";\n$patterns = [\n'/[a-z]+/i' => 'countLetters',\n'/[0-9]+/' => 'countDigits'\n];\n$result = \n  preg_replace_callback_array($patterns, $input);\necho $result;\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\nfunction countLetters($matches) {\nreturn $matches[0] . '[' . \n  strlen($matches[0]) . 'letter]';\n}\nfunction countDigits($matches) {\nreturn $matches[0] . '[' . strlen($matches[0]) . 'digit]';\n}\n$input \n  = \"There are 365 days in a year.\";\n$patterns = [\n'/\\b[a-z]+\\b/i' => \n  'countLetters',\n'/\\b[0-9]+\\b/' => 'countDigits'\n];\n$result = \n  preg_replace_callback_array($patterns, $input);\necho $result;\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\nfunction countLetters($matches) {\nreturn $matches[0] . '[' . \n  strlen($matches[0]) . 'letter]';\n}\nfunction countDigits($matches) {\nreturn $matches[0] . '[' . strlen($matches[0]) . 'digit]';\n}\n$input \n  = \"365 days\";\n$patterns = [\n'/[a-z]+/i' => 'countLetters',\n'/[0-9]+/' => 'countDigits'\n];\n$result = \n  preg_replace_callback_array($patterns, $input);\necho $result;\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nfunction countLetters($matches) {\n# TODO: Complete this line\n  strlen($matches[0]) . 'letter]';\n}\nfunction countDigits($matches) {\nreturn $matches[0] . '[' . strlen($matches[0]) . 'digit]';\n}\n$input \n  = \"There are 365 days in a year.\";\n$patterns = [\n'/\\b[a-z]+\\b/i' => \n  'countLetters',\n'/\\b[0-9]+\\b/' => 'countDigits'\n];\n$result = \n  preg_replace_callback_array($patterns, $input);\necho $result;\n?>",
+      "solution": "<?php\nfunction countLetters($matches) {\nreturn $matches[0] . '[' . \n  strlen($matches[0]) . 'letter]';\n}\nfunction countDigits($matches) {\nreturn $matches[0] . '[' . strlen($matches[0]) . 'digit]';\n}\n$input \n  = \"There are 365 days in a year.\";\n$patterns = [\n'/\\b[a-z]+\\b/i' => \n  'countLetters',\n'/\\b[0-9]+\\b/' => 'countDigits'\n];\n$result = \n  preg_replace_callback_array($patterns, $input);\necho $result;\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nfunction countLetters($matches) {\nreturn $matches[0] . '[' . \n  strlen($matches[0]) . 'letter]';\n}\nfunction countDigits($matches) {\nreturn $matches[0] . '[' . strlen($matches[0]) . 'digit]';\n# TODO: Complete this line\n$input \n  = \"365 days\";\n$patterns = [\n'/[a-z]+/i' => 'countLetters',\n'/[0-9]+/' => 'countDigits'\n];\n$result = \n  preg_replace_callback_array($patterns, $input);\necho $result;\n?>",
+      "solution": "<?php\nfunction countLetters($matches) {\nreturn $matches[0] . '[' . \n  strlen($matches[0]) . 'letter]';\n}\nfunction countDigits($matches) {\nreturn $matches[0] . '[' . strlen($matches[0]) . 'digit]';\n}\n$input \n  = \"365 days\";\n$patterns = [\n'/[a-z]+/i' => 'countLetters',\n'/[0-9]+/' => 'countDigits'\n];\n$result = \n  preg_replace_callback_array($patterns, $input);\necho $result;\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "76021759-6a13-4c1b-9619-754d01955698",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "915f89ac-cbc3-4c8b-a2f6-889f67b24a36",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "1f2b2f75-feb0-4ce5-b39b-ccd30e4c95c8",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Function\n\nExample\nShow how many letters or digits?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "365 days in a year",
+        "found in each word in a sentence:\n<"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Function\n\nExample\nShow how many letters or digits is 'found in each word in a sentence:\n<'."
+    },
+    {
+      "question": "What is There?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "found in each word in a sentence:\n<",
+        "365 days in a year"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of There is '365 days in a year'."
+    }
+  ],
+  "summary": "This tutorial covers PHPpreg_replace_callback_array()Function concepts and techniques. You'll learn how to use PHPpreg_replace_callback_array()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPpreg_replace_callback_array()Function and how to apply it in your projects."
+}

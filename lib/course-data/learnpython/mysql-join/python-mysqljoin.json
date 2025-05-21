@@ -1,0 +1,151 @@
+{
+  "id": "c21813a6-30eb-48e2-8aca-146fbe390226",
+  "title": "Python MySQLJoin",
+  "slug": "python-mysqljoin",
+  "metadata": {
+    "description": "Learn about Python MySQLJoin with clear explanations and practical examples.",
+    "keywords": [
+      "python",
+      "users",
+      "products",
+      "name",
+      "join",
+      "favorite",
+      "example",
+      "user",
+      "select",
+      "product",
+      "mysql"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Python Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPython",
+    "subcategory": "MySQL Join"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Python MySQL\nJoin",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Join Two or More Tables\nYou can combine rows from two or more tables, based on a related column \nbetween them, by using a JOIN statement.\nConsider you have a \"users\" table and a \"products\" table:\nusers\n{ id: 1, name: 'John', fav: 154},\n{ id: \n  2, name: 'Peter', fav: 154},\n{ id: 3, name: 'Amy', fav: 155},\n{ id: 4, name: 'Hannah', fav:},\n{ id: 5, name: 'Michael', fav:}\nproducts\n{ id: 154, name: \n  'Chocolate Heaven' },\n{ id: 155, name: 'Tasty Lemons' },\n{ \n  id: 156, name: 'Vanilla Dreams' }\nThese two tables can be combined by using users'\nfav\nfield and products'\nid\nfield.\nExample\nJoin users and products to see the name of the users favorite product:\nimport mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = mydb.cursor()\nsql = \"SELECT \\\nusers.name AS user, \n  \\\nproducts.name AS favorite \\\nFROM users \\\nINNER JOIN \n  products ON users.fav = products.id\"\nmycursor.execute(sql)\nmyresult = mycursor.fetchall()\nfor x in myresult:\nprint(x)\nRun example \u00bb\nNote:\nYou can use JOIN instead of INNER JOIN. They will \n  both give you the same result.\nLEFT JOIN\nIn the example above, Hannah, and Michael were excluded from the result, that \nis because INNER JOIN only shows the records where there is a match.\nIf you want to show all users, even if they do not have a favorite product, \nuse the LEFT JOIN statement:\nExample\nSelect all users and their favorite product:\nsql = \"SELECT \\\nusers.name AS user, \n  \\\nproducts.name AS favorite \\\nFROM users \\\nLEFT JOIN \n  products ON users.fav = products.id\"\nRun example \u00bb\nRIGHT JOIN\nIf you want to return all products, and the users who have them as their \nfavorite, even if no user have them as their favorite, use the RIGHT JOIN \nstatement:\nExample\nSelect all products, and the user(s) who have them as their favorite:\nsql = \"SELECT \\\nusers.name AS user, \n  \\\nproducts.name AS favorite \\\nFROM users \\\nRIGHT JOIN \n  products ON users.fav = products.id\"\nRun example \u00bb\nNote:\nHannah and Michael, who have no favorite product, are not included in the result.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "users",
+      "content": "",
+      "order": 3,
+      "code": "{ id: 1, name: 'John', fav: 154},\n{ id: \n  2, name: 'Peter', fav: 154},\n{ id: 3, name: 'Amy', fav: 155},\n{ id: 4, name: 'Hannah', fav:},\n{ id: 5, name: 'Michael', fav:}",
+      "language": "unknown",
+      "explanation": "Example of users"
+    },
+    {
+      "type": "code_example",
+      "title": "products",
+      "content": "",
+      "order": 4,
+      "code": "{ id: 154, name: \n  'Chocolate Heaven' },\n{ id: 155, name: 'Tasty Lemons' },\n{ \n  id: 156, name: 'Vanilla Dreams' }",
+      "language": "unknown",
+      "explanation": "Example of products"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import mysql.connector\nmydb = mysql.connector.connect(\nhost=\"localhost\",\nuser=\"\nyourusername\n\",\npassword=\"\nyourpassword\n\",\ndatabase=\"mydatabase\"\n)\nmycursor = mydb.cursor()\nsql = \"SELECT \\\nusers.name AS user, \n  \\\nproducts.name AS favorite \\\nFROM users \\\nINNER JOIN \n  products ON users.fav = products.id\"\nmycursor.execute(sql)\nmyresult = mycursor.fetchall()\nfor x in myresult:\nprint(x)",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "sql = \"SELECT \\\nusers.name AS user, \n  \\\nproducts.name AS favorite \\\nFROM users \\\nLEFT JOIN \n  products ON users.fav = products.id\"",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "sql = \"SELECT \\\nusers.name AS user, \n  \\\nproducts.name AS favorite \\\nFROM users \\\nRIGHT JOIN \n  products ON users.fav = products.id\"",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "{ id: 1, name: 'John', fav: 154},\n{ id: \n  2, name: 'Peter', fav: 154},\n{ id: 3, name: 'Amy', fav: 155},\n{ id: 4, name: 'Hannah', fav:},\n# TODO: Complete this line",
+      "solution": "{ id: 1, name: 'John', fav: 154},\n{ id: \n  2, name: 'Peter', fav: 154},\n{ id: 3, name: 'Amy', fav: 155},\n{ id: 4, name: 'Hannah', fav:},\n{ id: 5, name: 'Michael', fav:}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "{ id: 154, name: \n  'Chocolate Heaven' },\n# TODO: Complete this line\n{ \n  id: 156, name: 'Vanilla Dreams' }",
+      "solution": "{ id: 154, name: \n  'Chocolate Heaven' },\n{ id: 155, name: 'Tasty Lemons' },\n{ \n  id: 156, name: 'Vanilla Dreams' }"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d4b77c8b-288d-48ee-b54c-ce0031f1a332",
+      "title": "Python Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "bf87f200-5019-45a6-bbcd-48196b608859",
+      "title": "Python Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "2abf5b1d-a1fe-4481-beb5-18e9a54ac9bb",
+      "title": "Python Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is that \nis because INNER JOIN only shows the records where there?",
+      "options": [
+        "None of the above.",
+        "Not a that \nis because INNER JOIN only shows the records where there.",
+        "a match",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of that \nis because INNER JOIN only shows the records where there is 'a match'."
+    },
+    {
+      "question": "Which best describes the main purpose of this python feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers Python MySQLJoin concepts and techniques. You'll learn how to use Python MySQLJoin effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Python MySQLJoin and how to apply it in your projects."
+}

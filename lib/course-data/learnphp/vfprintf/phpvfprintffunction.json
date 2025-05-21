@@ -1,0 +1,142 @@
+{
+  "id": "b3c5180e-bf43-499f-b723-947ee58a236b",
+  "title": "PHPvfprintf()Function",
+  "slug": "phpvfprintffunction",
+  "metadata": {
+    "description": "Learn about PHPvfprintf()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "number",
+      "printf",
+      "file",
+      "string",
+      "format",
+      "example",
+      "array",
+      "vfprintf",
+      "test",
+      "sign"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "vfprintf()"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nvfprintf()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nWrite some text to a text file named \"test.txt\":\n<?php\n$number = 9;\n$str = \"Beijing\";\n$file = fopen(\"test.txt\",\"w\");\necho vfprintf($file,\"There are %u million bicycles in %s.\",array($number,$str));\n?>\nThe output of the code above will be:\n40\nThe following text will be written to the file \"test.txt\":\nThere are 9 million bicycles in Beijing.\nDefinition and Usage\nThe vfprintf() function writes a formatted string to a \nspecified output stream (example: file or database).\nUnlike fprintf(), the arguments in vfprintf(), are placed in an array. The \narray elements will be inserted at the percent (%) \nsigns in the main string. This function works \"step-by-step\". At the first % sign, \nthe first array element is inserted, at the second % sign, the second array element is inserted, etc.\nNote:\nIf there are more % signs than arguments, you must use \nplaceholders. A placeholder is inserted after the % sign, and consists of the \nargument- number and \"\\$\". See example two.\nTip:\nRelated functions:\nfprintf()\n,\nprintf()\n,\nsprintf()\n,\nvprintf()\nand\nvsprintf()\n.\nSyntax\nvfprintf(\nstream,format,argarray\n)\nParameter Values\nParameter\nDescription\nstream\nRequired. Specifies where to write/output the string\nformat\nRequired. Specifies the string and how to format the variables in it.\nPossible format values:\n%% - Returns a percent sign\n%b - Binary number\n%c - The character according to the ASCII value\n%d - Signed decimal number (negative, zero or positive)\n%e - Scientific notation using a lowercase (e.g. 1.2e+2)\n%E - Scientific notation using a uppercase (e.g. 1.2E+2)\n%u - Unsigned decimal number (equal to or greather than zero)\n%f - Floating-point number (local settings aware)\n%F - Floating-point number (not local settings aware)\n%g - shorter of %e and %f\n%G - shorter of %E and %f\n%o - Octal number\n%s - String\n%x - Hexadecimal number (lowercase letters)\n%X - Hexadecimal number (uppercase letters)\nAdditional format values. These are placed between the % and the letter (example %.2f):\n+ (Forces both + and - in front of numbers. By default, only negative numbers are marked)\n' (Specifies what to use as padding. Default is space. Must be used  together with the width specifier.  Example: %'x20s (this uses \"x\" as padding)\n- (Left-justifies the variable value)\n[0-9] (Specifies the minimum width held of to the variable value)\n.[0-9] (Specifies the number of decimal digits or maximum string length)\nNote:\nIf multiple additional format values are used, they must be in the same order as above.\nargarray\nRequired. An array with arguments to be inserted at the % signs in the format string\nTechnical Details\nReturn Value:\nReturns the length of the written string\nPHP Version:\n5+\nMore Examples\nExample\nWrite some text to a file:\n<?php\n$num1 = 123;\n$num2 = 456;\n$file = fopen(\"test.txt\",\"w\");\nvfprintf($file,\"%f%f\",array($num1,$num2));\n?>\nThe following text will be written to the file \"test.txt\":\n123.000000456.000000\nExample\nUse of placeholders:\n<?php\n$number = 123;\n$file = fopen(\"test.txt\",\"w\");\nvfprintf($file,\"With 2 decimals: %1\\$.2f\n\\nWith no decimals: %1\\$u\",array($number));\n?>\nThe following text will be written to the file \"test.txt\":\nWith 2 decimals: 123.00\nWith no decimals: 123\nExample\nUsing printf() to demonstrate all possible format values:\n<?php\n$num1 = 123456789;\n$num2 = -123456789;\n$char = 50; // The ASCII Character 50 is 2\n// Note: The format value \"%%\" returns a percent sign\nprintf(\"%%b = %b <br>\",$num1); // Binary number\nprintf(\"%%c = %c <br>\",$char); // The ASCII Character\nprintf(\"%%d = %d <br>\",$num1); // Signed decimal number\nprintf(\"%%d = %d <br>\",$num2); // Signed decimal number\nprintf(\"%%e = %e <br>\",$num1); // Scientific notation (lowercase)\nprintf(\"%%E = %E <br>\",$num1); // Scientific notation (uppercase)\nprintf(\"%%u = %u <br>\",$num1); // Unsigned decimal number (positive)\nprintf(\"%%u = %u <br>\",$num2); // Unsigned decimal number (negative)\nprintf(\"%%f = %f <br>\",$num1); // Floating-point number (local settings aware)\nprintf(\"%%F = %F <br>\",$num1); // Floating-point number (not local settings aware)\nprintf(\"%%g = %g <br>\",$num1); // Shorter of %e and %f\nprintf(\"%%G = %G <br>\",$num1); // Shorter of %E and %f\nprintf(\"%%o = %o <br>\",$num1); // Octal number\nprintf(\"%%s = %s <br>\",$num1); // String\nprintf(\"%%x = %x <br>\",$num1); // Hexadecimal number (lowercase)\nprintf(\"%%X = %X <br>\",$num1); // Hexadecimal number (uppercase)\nprintf(\"%%+d = %+d <br>\",$num1); // Sign specifier (positive)\nprintf(\"%%+d = %+d <br>\",$num2); // Sign specifier (negative)\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$number = 9;\n$str = \"Beijing\";\n$file = fopen(\"test.txt\",\"w\");\necho vfprintf($file,\"There are %u million bicycles in %s.\",array($number,$str));\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$num1 = 123;\n$num2 = 456;\n$file = fopen(\"test.txt\",\"w\");\nvfprintf($file,\"%f%f\",array($num1,$num2));\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$number = 123;\n$file = fopen(\"test.txt\",\"w\");\nvfprintf($file,\"With 2 decimals: %1\\$.2f\n\\nWith no decimals: %1\\$u\",array($number));\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<?php\n$num1 = 123456789;\n$num2 = -123456789;\n$char = 50; // The ASCII Character 50 is 2\n// Note: The format value \"%%\" returns a percent sign\nprintf(\"%%b = %b <br>\",$num1); // Binary number\nprintf(\"%%c = %c <br>\",$char); // The ASCII Character\nprintf(\"%%d = %d <br>\",$num1); // Signed decimal number\nprintf(\"%%d = %d <br>\",$num2); // Signed decimal number\nprintf(\"%%e = %e <br>\",$num1); // Scientific notation (lowercase)\nprintf(\"%%E = %E <br>\",$num1); // Scientific notation (uppercase)\nprintf(\"%%u = %u <br>\",$num1); // Unsigned decimal number (positive)\nprintf(\"%%u = %u <br>\",$num2); // Unsigned decimal number (negative)\nprintf(\"%%f = %f <br>\",$num1); // Floating-point number (local settings aware)\nprintf(\"%%F = %F <br>\",$num1); // Floating-point number (not local settings aware)\nprintf(\"%%g = %g <br>\",$num1); // Shorter of %e and %f\nprintf(\"%%G = %G <br>\",$num1); // Shorter of %E and %f\nprintf(\"%%o = %o <br>\",$num1); // Octal number\nprintf(\"%%s = %s <br>\",$num1); // String\nprintf(\"%%x = %x <br>\",$num1); // Hexadecimal number (lowercase)\nprintf(\"%%X = %X <br>\",$num1); // Hexadecimal number (uppercase)\nprintf(\"%%+d = %+d <br>\",$num1); // Sign specifier (positive)\nprintf(\"%%+d = %+d <br>\",$num2); // Sign specifier (negative)\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n# TODO: Complete this line\n$str = \"Beijing\";\n$file = fopen(\"test.txt\",\"w\");\necho vfprintf($file,\"There are %u million bicycles in %s.\",array($number,$str));\n?>",
+      "solution": "<?php\n$number = 9;\n$str = \"Beijing\";\n$file = fopen(\"test.txt\",\"w\");\necho vfprintf($file,\"There are %u million bicycles in %s.\",array($number,$str));\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$num1 = 123;\n# TODO: Complete this line\n$file = fopen(\"test.txt\",\"w\");\nvfprintf($file,\"%f%f\",array($num1,$num2));\n?>",
+      "solution": "<?php\n$num1 = 123;\n$num2 = 456;\n$file = fopen(\"test.txt\",\"w\");\nvfprintf($file,\"%f%f\",array($num1,$num2));\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "43afa65d-e424-4f1d-b6f7-d25515ec51eb",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "52ae70d2-6464-40e9-b125-512846cc79d4",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f2d6d980-02c4-4a9b-a000-379707052414",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is There?",
+      "options": [
+        "None of the above.",
+        "%u million bicycles in %s",
+        "9 million bicycles in Beijing",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of There is '%u million bicycles in %s'."
+    },
+    {
+      "question": "What is There?",
+      "options": [
+        "%u million bicycles in %s",
+        "None of the above.",
+        "None of the above.",
+        "9 million bicycles in Beijing"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of There is '9 million bicycles in Beijing'."
+    }
+  ],
+  "summary": "This tutorial covers PHPvfprintf()Function concepts and techniques. You'll learn how to use PHPvfprintf()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPvfprintf()Function and how to apply it in your projects."
+}

@@ -1,0 +1,124 @@
+{
+  "id": "6208d3c3-8bf1-4a3b-a310-068153c607c9",
+  "title": "PHPmysqli fetch_field()Function",
+  "slug": "phpmysqli-fetch-fieldfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli fetch_field()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "name",
+      "table",
+      "result",
+      "field",
+      "fieldinfo",
+      "mysqli",
+      "printf",
+      "style",
+      "object",
+      "lastname"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "fetch_field"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli fetch_field()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nReturn the \nname, table, and max length:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = $mysqli -> query($sql)) {\n// Get field information for all fields\nwhile ($fieldinfo = \n  $result -> fetch_field()) {\nprintf(\"Name: %s\\n\", $fieldinfo -> name);\nprintf(\"Table: %s\\n\", $fieldinfo -> table);\nprintf(\"Max. Len: %d\\n\", $fieldinfo -> max_length);\n}\n$result \n  -> free_result();\n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe fetch_field() / mysqli_fetch_field() function returns the \nSyntax\nObject oriented style:\n$mysqli_result -> fetch_field()\nProcedural style:\nmysqli_fetch_field(\nresult\n)\nParameter Values\nParameter\nDescription\nresult\nRequired. Specifies a result set identifier returned by mysqli_query(), mysqli_store_result() or mysqli_use_result()\nTechnical Details\nReturn Value:\nReturns an object containing field definition information. FALSE if no info is available. The object has the following properties:\nname - name of the column\norgname - original column name (if an alias is specified)\ntable - name of table\norgtable - original table name (if an alias is specified)\ndef - reserved for default values, currently always \"\"\ndb - database (new in PHP 5.3.6)\ncatalog - catalog name, always \"def\" (since PHP 5.3.6)\nmax_length - maximum width of field\nlength - width of field as specified in table definition\ncharsetnr - character set number for the field\nflags - bit-flags for the field\ntype - data type used for the field\ndecimals - for integer fields; the number of decimals used\nPHP Version:\n5+\nExample - Procedural style\nReturn the \nname, table, and max length:\n<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = mysqli_query($con, $sql)) {\n// Get field information for all fields\nwhile ($fieldinfo = mysqli_fetch_field($result)) {\nprintf(\"Name: %s\\n\", $fieldinfo -> name);\nprintf(\"Table: %s\\n\", $fieldinfo -> table);\nprintf(\"max. Len: %d\\n\", $fieldinfo -> max_length);\n}\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = $mysqli -> query($sql)) {\n// Get field information for all fields\nwhile ($fieldinfo = \n  $result -> fetch_field()) {\nprintf(\"Name: %s\\n\", $fieldinfo -> name);\nprintf(\"Table: %s\\n\", $fieldinfo -> table);\nprintf(\"Max. Len: %d\\n\", $fieldinfo -> max_length);\n}\n$result \n  -> free_result();\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = mysqli_query($con, $sql)) {\n// Get field information for all fields\nwhile ($fieldinfo = mysqli_fetch_field($result)) {\nprintf(\"Name: %s\\n\", $fieldinfo -> name);\nprintf(\"Table: %s\\n\", $fieldinfo -> table);\nprintf(\"max. Len: %d\\n\", $fieldinfo -> max_length);\n}\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = $mysqli -> query($sql)) {\n// Get field information for all fields\nwhile ($fieldinfo = \n  $result -> fetch_field()) {\nprintf(\"Name: %s\\n\", $fieldinfo -> name);\n# TODO: Complete this line\nprintf(\"Max. Len: %d\\n\", $fieldinfo -> max_length);\n}\n$result \n  -> free_result();\n}\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = $mysqli -> query($sql)) {\n// Get field information for all fields\nwhile ($fieldinfo = \n  $result -> fetch_field()) {\nprintf(\"Name: %s\\n\", $fieldinfo -> name);\nprintf(\"Table: %s\\n\", $fieldinfo -> table);\nprintf(\"Max. Len: %d\\n\", $fieldinfo -> max_length);\n}\n$result \n  -> free_result();\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n# TODO: Complete this line\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = mysqli_query($con, $sql)) {\n// Get field information for all fields\nwhile ($fieldinfo = mysqli_fetch_field($result)) {\nprintf(\"Name: %s\\n\", $fieldinfo -> name);\nprintf(\"Table: %s\\n\", $fieldinfo -> table);\nprintf(\"max. Len: %d\\n\", $fieldinfo -> max_length);\n}\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = mysqli_query($con, $sql)) {\n// Get field information for all fields\nwhile ($fieldinfo = mysqli_fetch_field($result)) {\nprintf(\"Name: %s\\n\", $fieldinfo -> name);\nprintf(\"Table: %s\\n\", $fieldinfo -> table);\nprintf(\"max. Len: %d\\n\", $fieldinfo -> max_length);\n}\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "872cb45b-6f58-436f-af76-76c4e3286527",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "77edde3e-ac9f-48b3-b77c-86825e137119",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "70cdc5a9-4065-4888-8b28-8e4372a5e160",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is FALSE if no info?",
+      "options": [
+        "None of the above.",
+        "specified)\ntable - name of table\norgtable - original table name (if an alias is specified)\ndef - reserved for default values",
+        "None of the above.",
+        "available"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of FALSE if no info is 'available'."
+    },
+    {
+      "question": "What is if an alias?",
+      "options": [
+        "available",
+        "None of the above.",
+        "None of the above.",
+        "specified)\ntable - name of table\norgtable - original table name (if an alias is specified)\ndef - reserved for default values"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of if an alias is 'specified)\ntable - name of table\norgtable - original table name (if an alias is specified)\ndef - reserved for default values'."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli fetch_field()Function concepts and techniques. You'll learn how to use PHPmysqli fetch_field()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli fetch_field()Function and how to apply it in your projects."
+}

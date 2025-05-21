@@ -1,0 +1,124 @@
+{
+  "id": "fe949e5c-93f4-4842-969a-2ba27501e7b8",
+  "title": "Machine Learning - Grid Search",
+  "slug": "machine-learning-grid-search",
+  "metadata": {
+    "description": "Learn about Machine Learning - Grid Search with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "model",
+      "data",
+      "values",
+      "logit",
+      "iris",
+      "score",
+      "scores",
+      "grid",
+      "example",
+      "sklearn"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPython",
+    "subcategory": "Grid Search"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Machine Learning - Grid Search",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "On this page, .com collaborates with\nNYC Data Science Academy\n, to deliver digital training content to our students.\nGrid Search\nThe majority of machine learning models contain parameters that can be adjusted to vary how the model learns.\nFor example, the logistic regression model, from\nsklearn\n,\nhas a parameter\nC\nthat controls regularization,which affects the complexity of the model.\nHow do we pick the best value for\nC\n?\nThe best value is dependent on the data used to train the model.\nHow does it work?\nOne method is to try out different values and then pick the value that gives the best score. This technique is known as a\ngrid search\n.\nIf we had to select the values for two or more parameters, we would evaluate all combinations of the sets of values thus forming a grid of values.\nBefore we get into the example it is good to know what the parameter we are changing does.\nHigher values of\nC\ntell the model, the training data resembles real world information,\nplace a greater weight on the training data. While lower values of\nC\ndo the opposite.\nUsing Default Parameters\nFirst let's see what kind of results we can generate without a grid search using only the base parameters.\nTo get started we must first load in the dataset we will be working with.\nfrom sklearn import datasets\niris = datasets.load_iris()\n\nX = iris['data']\ny = iris['target']\nNow we will load the logistic model for classifying the iris flowers.\nfrom sklearn.linear_model import LogisticRegression\nCreating the model, setting max_iter to a higher value to ensure that the model finds a result.\nKeep in mind the default value for\nC\nin a logistic regression model is\n1\n, we will compare this later.\nIn the example below, we look at the iris data set and try to train a model with varying values for\nC\nin logistic regression.\nlogit = LogisticRegression(max_iter = 10000)\nAfter we create the model, we must fit the model to the data.\nprint(logit.fit(X,y))\nTo evaluate the model we run the score method.\nprint(logit.score(X,y))\nExample\nfrom sklearn import datasets\nfrom sklearn.linear_model import \n  LogisticRegression\niris = datasets.load_iris()\nX = iris['data']\ny = iris['target']\nlogit = LogisticRegression(max_iter = 10000)\nprint(logit.fit(X,y))\nprint(logit.score(X,y))\nRun example \u00bb\nWith the default setting of\nC = 1\n, we achieved a score of\n0.973\n.\nLet's see if we can do any better by implementing a grid search with difference values of 0.973.\nADVERTISEMENT\nImplementing Grid Search\nWe will follow the same steps of before except this time we will set a range of values for\nC\n.\nKnowing which values to set for the searched parameters will take a combination of domain knowledge and practice.\nSince the default value for\nC\nis\n1\n, we will set a range of values surrounding it.\nC = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]\n\nC\nand evaluate the model with each change.\nFirst we will create an empty list to store the score within.\nscores = []\nTo change the values of\nC\nwe must loop over the range of values and update the parameter each time.\nfor choice in C:\nlogit.set_params(C=choice)\nlogit.fit(X, y)\nscores.append(logit.score(X, y))\nWith the scores stored in a list, we can evaluate what the best choice of\nC\nis.\nprint(scores)\nExample\nfrom sklearn import datasets\nfrom sklearn.linear_model import \n  LogisticRegression\niris = datasets.load_iris()\nX = iris['data']\ny = iris['target']\nlogit = LogisticRegression(max_iter = 10000)\nC = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]\nscores = []\nfor choice in C:\nlogit.set_params(C=choice)\nlogit.fit(X, y)\nscores.append(logit.score(X, y))\nprint(scores)\nRun example \u00bb\nResults Explained\nWe can see that the lower values of\nC\nperformed worse than the base parameter of\n1\n. However, as we increased the value of\nC\nto\n1.75\nthe model experienced increased accuracy.\nIt seems that increasing\nC\nbeyond this amount does not help increase model accuracy.\nNote on Best Practices\nWe scored our logistic regression model by using the same data that was used to train it. If the model corresponds too closely to that data, it may not be great at predicting unseen data. This statistical error is known as\nover fitting\n.\nTo avoid being misled by the scores on the training data, we can put aside a portion of our data and use it specifically for the purpose of testing the model. Refer to the lecture on train/test splitting to avoid being misled and overfitting.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "from sklearn import datasets\nfrom sklearn.linear_model import \n  LogisticRegression\niris = datasets.load_iris()\nX = iris['data']\ny = iris['target']\nlogit = LogisticRegression(max_iter = 10000)\nprint(logit.fit(X,y))\nprint(logit.score(X,y))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "from sklearn import datasets\nfrom sklearn.linear_model import \n  LogisticRegression\niris = datasets.load_iris()\nX = iris['data']\ny = iris['target']\nlogit = LogisticRegression(max_iter = 10000)\nC = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]\nscores = []\nfor choice in C:\nlogit.set_params(C=choice)\nlogit.fit(X, y)\nscores.append(logit.score(X, y))\nprint(scores)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "from sklearn import datasets\nfrom sklearn.linear_model import \n  LogisticRegression\n# TODO: Complete this line\nX = iris['data']\ny = iris['target']\nlogit = LogisticRegression(max_iter = 10000)\nprint(logit.fit(X,y))\nprint(logit.score(X,y))",
+      "solution": "from sklearn import datasets\nfrom sklearn.linear_model import \n  LogisticRegression\niris = datasets.load_iris()\nX = iris['data']\ny = iris['target']\nlogit = LogisticRegression(max_iter = 10000)\nprint(logit.fit(X,y))\nprint(logit.score(X,y))"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "from sklearn import datasets\nfrom sklearn.linear_model import \n  LogisticRegression\n# TODO: Complete this line\nX = iris['data']\ny = iris['target']\nlogit = LogisticRegression(max_iter = 10000)\nC = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]\nscores = []\nfor choice in C:\nlogit.set_params(C=choice)\nlogit.fit(X, y)\nscores.append(logit.score(X, y))\nprint(scores)",
+      "solution": "from sklearn import datasets\nfrom sklearn.linear_model import \n  LogisticRegression\niris = datasets.load_iris()\nX = iris['data']\ny = iris['target']\nlogit = LogisticRegression(max_iter = 10000)\nC = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]\nscores = []\nfor choice in C:\nlogit.set_params(C=choice)\nlogit.fit(X, y)\nscores.append(logit.score(X, y))\nprint(scores)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "92044920-9178-41e1-9bc3-44007fbc50f2",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "71503ed2-2b73-423e-ae8d-9db00c57f269",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e1338ea1-6e70-43ea-8294-2a988e5a2cc1",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The best value?",
+      "options": [
+        "None of the above.",
+        "dependent on the data used to train the model",
+        "None of the above.",
+        "to try out different values and then pick the value that gives the best score"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The best value is 'dependent on the data used to train the model'."
+    },
+    {
+      "question": "What is One method?",
+      "options": [
+        "None of the above.",
+        "to try out different values and then pick the value that gives the best score",
+        "None of the above.",
+        "dependent on the data used to train the model"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of One method is 'to try out different values and then pick the value that gives the best score'."
+    }
+  ],
+  "summary": "This tutorial covers Machine Learning - Grid Search concepts and techniques. You'll learn how to use Machine Learning - Grid Search effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Machine Learning - Grid Search and how to apply it in your projects."
+}

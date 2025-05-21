@@ -1,0 +1,202 @@
+{
+  "id": "0f3b75fd-03ff-4288-bac0-e751cfae5fb7",
+  "title": "NumPyArray Iterating",
+  "slug": "numpyarray-iterating",
+  "metadata": {
+    "description": "Learn about NumPyArray Iterating with clear explanations and practical examples.",
+    "keywords": [
+      "array",
+      "numpy",
+      "iterating",
+      "iterate",
+      "arrays",
+      "example",
+      "import",
+      "print",
+      "element",
+      "elements"
+    ],
+    "difficulty": "advanced",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnNumPy",
+    "subcategory": "NumPy Array Iterating"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "NumPy\nArray Iterating",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "NumPy\nArray Iterating\n\nIterating Arrays\nIterating means going through elements one by one",
+      "content": ".\nAs we deal with multi-dimensional arrays in numpy, we can do this using basic\nfor\nloop of python.\nIf we iterate on a 1-D array it will go through each element one by one.\nExample\nIterate on the elements of the following 1-D array:\nimport numpy as np\narr = np.array([1, 2, 3])\nfor x in arr:\nprint(x)\n\nIterating 2-D Arrays\nIn a 2-D array it will go through all the rows.\nExample\nIterate on the elements of the following 2-D array:\nimport numpy as np\narr = np.array([[1, 2, 3], [4, 5, 6]])\nfor x \n  in arr:\nprint(x)",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "If we iterate on a\nn",
+      "content": "-D array it will go through n-1th dimension one by one.\nTo return the actual values, the scalars, we have to iterate the arrays in each dimension.\nExample\nIterate on each scalar element of the 2-D array:\nimport numpy as np\narr = np.array([[1, 2, 3], [4, 5, 6]])\nfor x \n  in arr:\nfor y in x:\nprint(y)\n\nIterating 3-D Arrays\nIn a 3-D array it will go through all the 2-D arrays.\nExample\nIterate on the elements of the following 3-D array:\nimport numpy as np\narr = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], \n  [10, 11, 12]]])\nfor x \n  in arr:\nprint(x)\n\nTo return the actual values, the scalars, we have to iterate the arrays in each dimension.\nExample\nIterate down to the scalars:\nimport numpy as np\narr = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], \n  [10, 11, 12]]])\nfor x \n  in arr:\nfor y in x:\nfor z in y:\nprint(z)\n\nIterating Arrays Using nditer()\nThe function\nnditer()\nis a helping function that can be used from very basic to very advanced iterations. \nIt solves some basic issues which we face in iteration, lets go through it with examples.\nIterating on Each Scalar Element\nIn basic\nfor\nloops, iterating through each scalar of an array we need to use\nn\nfor\nloops which can be difficult to write for arrays with very high dimensionality.\nExample\nIterate through the following 3-D array:\nimport numpy as np\narr = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])\nfor x in np.nditer(arr):\nprint(x)\n\nIterating Array With Different Data Types\nWe can use\nop_dtypes\nargument and pass it the expected datatype to change the datatype of elements while iterating.\nNumPy does not change the data type of the element in-place (where the element is in array) so it needs some other space to perform this action, that extra space is called buffer, and in order to enable it in\nnditer()\nwe pass\nflags=['buffered']\n.\nExample\nIterate through the array as a string:\nimport numpy as np\narr = np.array([1, 2, 3])\nfor x in \n  np.nditer(arr, flags=['buffered'], op_dtypes=['S']):\nprint(x)\n\nIterating With Different Step Size\nWe can use filtering and followed by iteration.\nExample\nIterate through every scalar element of the 2D array skipping 1 element:\nimport numpy as np\narr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])\nfor x in np.nditer(arr[:, ::2]):\nprint(x)\n\nEnumerated Iteration Using ndenumerate()\nEnumeration means mentioning sequence number of somethings one by one.\nSometimes we require corresponding index of the element while iterating, the\nndenumerate()\nmethod can be used for those usecases.\nExample\nEnumerate on following 1D arrays elements:\nimport numpy as np\narr = np.array([1, 2, 3])\nfor idx, x in \n  np.ndenumerate(arr):\nprint(idx, x)\n\nExample\nEnumerate on following 2D array's elements:\nimport numpy as np\narr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])\nfor idx, x in np.ndenumerate(arr):\nprint(idx, x)\n\n\u2605\n+1",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import numpy as np\narr = np.array([1, 2, 3])\nfor x in arr:\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import numpy as np\narr = np.array([[1, 2, 3], [4, 5, 6]])\nfor x \n  in arr:\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import numpy as np\narr = np.array([[1, 2, 3], [4, 5, 6]])\nfor x \n  in arr:\nfor y in x:\nprint(y)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import numpy as np\narr = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], \n  [10, 11, 12]]])\nfor x \n  in arr:\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "import numpy as np\narr = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], \n  [10, 11, 12]]])\nfor x \n  in arr:\nfor y in x:\nfor z in y:\nprint(z)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "import numpy as np\narr = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])\nfor x in np.nditer(arr):\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "import numpy as np\narr = np.array([1, 2, 3])\nfor x in \n  np.nditer(arr, flags=['buffered'], op_dtypes=['S']):\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "import numpy as np\narr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])\nfor x in np.nditer(arr[:, ::2]):\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "import numpy as np\narr = np.array([1, 2, 3])\nfor idx, x in \n  np.ndenumerate(arr):\nprint(idx, x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "import numpy as np\narr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])\nfor idx, x in np.ndenumerate(arr):\nprint(idx, x)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\narr = np.array([1, 2, 3])\n# TODO: Complete this line\nprint(x)",
+      "solution": "import numpy as np\narr = np.array([1, 2, 3])\nfor x in arr:\nprint(x)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\n# TODO: Complete this line\nfor x \n  in arr:\nprint(x)",
+      "solution": "import numpy as np\narr = np.array([[1, 2, 3], [4, 5, 6]])\nfor x \n  in arr:\nprint(x)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "41114014-b44a-499e-adf5-ff315f6e6e28",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "899d0286-15a7-4be7-951b-071342e1ae3a",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "d8ec391b-f760-45b6-8a06-aed73bfe70c1",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is NumPy\nArray Iterating\n\nIterating Arrays\nIterating?",
+      "options": [
+        "going through elements one by one",
+        "Not a NumPy\nArray Iterating\n\nIterating Arrays\nIterating.",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of NumPy\nArray Iterating\n\nIterating Arrays\nIterating is 'going through elements one by one'."
+    },
+    {
+      "question": "Which best describes the main purpose of this python feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers NumPyArray Iterating concepts and techniques. You'll learn how to use NumPyArray Iterating effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of NumPyArray Iterating and how to apply it in your projects."
+}

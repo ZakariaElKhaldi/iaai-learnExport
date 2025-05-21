@@ -1,0 +1,142 @@
+{
+  "id": "9eaf4f50-b9e8-4a41-84aa-9fd34a5a9455",
+  "title": "GitBranch Merge",
+  "slug": "gitbranch-merge",
+  "metadata": {
+    "description": "Learn about GitBranch Merge with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "merge",
+      "branch",
+      "hello",
+      "commit",
+      "html",
+      "world",
+      "file",
+      "example",
+      "master",
+      "conflict"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 6,
+    "category": "LearnGit",
+    "subcategory": "Git Merge"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Git\nBranch Merge",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Git\nBranch Merge\n\nChange Platform",
+      "content": ":\nGitHub\nBitbucket\nGitLab\nWhat is Merging in Git?\nMerging in Git means combining the changes from one branch into another.\nThis is how you bring your work together after working separately on different features or bug fixes.",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Options\ngit merge",
+      "content": "- Merge a branch into your current branch\ngit merge --no-ff\n- Always create a merge commit\ngit merge --squash\n- Combine changes into a single commit\ngit merge --abort\n- Abort a merge in progress\nMerging Branches (\ngit merge\n)\nTo combine the changes from one branch into another, use\ngit merge\n.\nUsually, you first switch to the branch you want to merge\ninto\n(often\nmain\nor\nmaster\n), then run the merge command with the branch name you want to combine in.\nFirst, we need to change to the master branch:\nExample\ngit checkout master\nSwitched to branch 'master'\nNow we merge the current branch (master) with emergency-fix:\nExample\ngit merge emergency-fix\nUpdating 09f4acd..dfa79db\nFast-forward\n index.html | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\nSince the emergency-fix branch came directly from master, and no other changes had been made to master while we were working, Git sees this as a continuation of master.\nSo it can \"Fast-forward\", just pointing both master and emergency-fix to the same commit.\nBest Practices for Merging Branches\nAlways commit or stash your changes before starting a merge.\nRegularly merge from the main branch into your feature branch to minimize conflicts.\nRead and resolve conflicts carefully\u2014don't just accept all changes blindly.\nWrite clear and descriptive merge commit messages.\nPractical Examples\nAbort a merge:\ngit merge --abort\nCheck status during a merge:\ngit status\nResolve a conflict and complete the merge:\nEdit the conflicted file(s), then\ngit add file\nand\ngit commit\nFast-forward merge:\nHappens when no new commits diverged\u2014Git just moves the branch pointer forward.\nNo-fast-forward merge:\nUse\ngit merge --no-ff branch\nto always create a merge commit, preserving branch history.\nAs master and emergency-fix are essentially the same now, we can delete emergency-fix, as it is no longer needed:\nExample\ngit branch -d emergency-fix\nDeleted branch emergency-fix (was dfa79db).\nNon-Fast-Forward Merge (\ngit merge --no-ff\n)\nBy default, if your branch can be merged with a fast-forward (no new commits on the base), Git just moves the branch pointer forward.\nIf you want to always create a merge commit (to keep history clearer), use\ngit merge --no-ff branchname\n.\nExample\ngit merge --no-ff feature-branch\nMerge made by the 'recursive' strategy.\n index.html | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\nSquash Merge (\ngit merge --squash\n)\nIf you want to combine all the changes from a branch into a single commit (instead of keeping every commit), use\ngit merge --squash branchname\n.\nThis is useful for cleaning up commit history before merging.\nExample\ngit merge --squash feature-branch\nSquash commit -- not updating HEAD\nAutomatic merge went well; stopped before committing as requested\nAborting a Merge (\ngit merge --abort\n)\nIf you run into trouble during a merge (like a conflict you don't want to resolve), you can cancel the merge and go back to how things were before with\ngit merge --abort\n.\nExample\ngit merge --abort\nWhat is a Merge Conflict?\nA\nmerge conflict\nhappens when changes in two branches touch the same part of a file and Git doesn't know which version to keep.\nThink of it like two people editing the same sentence in a document in different ways\u2014Git needs your help to decide which version to use.\nHow to Resolve a Merge Conflict\nGit will mark the conflict in your file.\nYou need to open the file, look for lines like\n<<<<<<< HEAD\nand\n=======\n, and decide what the final version should be.\nThen, stage and commit your changes.\nTroubleshooting & Tips\nIf you want to cancel a merge, use\ngit merge --abort\n.\nAlways commit or stash your changes before starting a merge.\nRead the conflict markers carefully and remove them after you've resolved the issue.\nUse\ngit status\nto see what files need your attention.\nIf you're unsure, ask a teammate or look up the error message.\nMerge Conflict Example\nNow we can move over to hello-world-images from last chapter, and keep working.\nAdd another image file (img_hello_git.jpg) and change index.html, so it shows it:\nExample\ngit checkout hello-world-images\nSwitched to branch 'hello-world-images'\nExample\n<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n<link rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World \n  from Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first \n  file in my new Git Repo.</p>\n<p>A new line in our file!</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n</body>\n</html>\nNow, we are done with our work here and can stage and commit for this branch:\nExample\ngit add --all\ngit commit -m \"added new image\"\n[hello-world-images 1f1584e] added new image\n 2 files changed, 1 insertion(+)\n create mode 100644 img_hello_git.jpg\nWe see that index.html has been changed in both branches.\nNow we are ready to merge hello-world-images into master.\nBut what will happen to the changes we recently made in master?\nExample\ngit checkout master\ngit merge hello-world-images\nAuto-merging index.html\nCONFLICT (content): Merge conflict in index.html\nAutomatic merge failed; fix conflicts and then commit the result.\nThe merge failed, as there is conflict between the versions for index.html.\nLet us check the status:\nExample\ngit status\nOn branch master\nYou have unmerged paths.\n  (fix conflicts and run \"git commit\")\n  (use \"git merge --abort\" to abort the merge)\n\nChanges to be committed:\n        new file:   img_hello_git.jpg\n        new file:   img_hello_world.jpg\n\nUnmerged paths:\n  (use \"git add <file>...\" to mark resolution)\n        both modified:   index.html\nThis confirms there is a conflict in index.html, but the image files are ready and staged to be committed.\nSo we need to fix that conflict. Open the file in our editor:\nExample\n<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n<link \n  rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello \n  world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World from \n  Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first file \n  in my new Git Repo.</p>\n<<<<<<< HEAD\n<p>This line is here to show how \n  merging works.</p>\n=======\n<p>A new line in our file!</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n>>>>>>> hello-world-images\n</body>\n</html>\nWe can see the differences between the versions and edit it like we want:\nExample\n<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n<link \n  rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello \n  world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World from \n  Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first file \n  in my new Git Repo.</p>\n<p>This line is here to show how \n  merging works.</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n</body>\n</html>\nNow we can stage index.html and check the status:\nExample\ngit add index.html\ngit status\nOn branch master\nAll conflicts fixed but you are still merging.\n  (use \"git commit\" to conclude merge)\n\nChanges to be committed:\n        new file:   img_hello_git.jpg\n        new file:   img_hello_world.jpg\n        modified:   index.html\nThe conflict has been fixed, and we can use commit to conclude the merge:\nExample\ngit commit -m \"merged with hello-world-images after fixing conflicts\"\n[master e0b6038] merged with hello-world-images after fixing conflicts\nAnd delete the hello-world-images branch:\nExample\ngit branch -d hello-world-images\nDeleted branch hello-world-images (was 1f1584e).\nNow you have a better understanding of how branches and merging works.\nTime to start working with a remote repository!\n\n\u2605\n+1",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n<link rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World \n  from Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first \n  file in my new Git Repo.</p>\n<p>A new line in our file!</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n<link \n  rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello \n  world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World from \n  Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first file \n  in my new Git Repo.</p>\n<<<<<<< HEAD\n<p>This line is here to show how \n  merging works.</p>\n=======\n<p>A new line in our file!</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n>>>>>>> hello-world-images\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n<link \n  rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello \n  world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World from \n  Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first file \n  in my new Git Repo.</p>\n<p>This line is here to show how \n  merging works.</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n# TODO: Complete this line\n</head>\n<body>\n<h1>Hello world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World \n  from Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first \n  file in my new Git Repo.</p>\n<p>A new line in our file!</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n</body>\n</html>",
+      "solution": "<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n<link rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World \n  from Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first \n  file in my new Git Repo.</p>\n<p>A new line in our file!</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n# TODO: Complete this line\n  rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello \n  world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World from \n  Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first file \n  in my new Git Repo.</p>\n<<<<<<< HEAD\n<p>This line is here to show how \n  merging works.</p>\n=======\n<p>A new line in our file!</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n>>>>>>> hello-world-images\n</body>\n</html>",
+      "solution": "<!DOCTYPE html>\n<html>\n<head>\n<title>Hello World!</title>\n<link \n  rel=\"stylesheet\" href=\"bluestyle.css\">\n</head>\n<body>\n<h1>Hello \n  world!</h1>\n<div><img src=\"img_hello_world.jpg\" alt=\"Hello World from \n  Space\" style=\"width:100%;max-width:960px\"></div>\n<p>This is the first file \n  in my new Git Repo.</p>\n<<<<<<< HEAD\n<p>This line is here to show how \n  merging works.</p>\n=======\n<p>A new line in our file!</p>\n<div><img \n  src=\"img_hello_git.jpg\" alt=\"Hello Git\" \n  style=\"width:100%;max-width:640px\"></div>\n>>>>>>> hello-world-images\n</body>\n</html>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c560c528-5c2c-4a5a-8611-f0f017e5f6a6",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "89d94d84-a777-4f99-a6fe-508521d89926",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "b6d6d228-630f-4099-b3b3-6e07a7f97952",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is GitHub\nBitbucket\nGitLab\nWhat?",
+      "options": [
+        "Merging in Git",
+        "combining the changes from one branch into another",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of GitHub\nBitbucket\nGitLab\nWhat is 'Merging in Git'."
+    },
+    {
+      "question": "What is Merging in Git?",
+      "options": [
+        "combining the changes from one branch into another",
+        "None of the above.",
+        "Merging in Git",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Merging in Git is 'combining the changes from one branch into another'."
+    }
+  ],
+  "summary": "This tutorial covers GitBranch Merge concepts and techniques. You'll learn how to use GitBranch Merge effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of GitBranch Merge and how to apply it in your projects."
+}

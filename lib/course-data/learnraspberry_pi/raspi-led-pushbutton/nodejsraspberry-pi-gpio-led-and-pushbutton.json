@@ -1,0 +1,115 @@
+{
+  "id": "9e2fc7ba-1468-4910-953b-9c052fd95442",
+  "title": "Node.jsRaspberry Pi GPIO - LED and Pushbutton",
+  "slug": "nodejsraspberry-pi-gpio-led-and-pushbutton",
+  "metadata": {
+    "description": "Learn about Node.jsRaspberry Pi GPIO - LED and Pushbutton with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "gpio",
+      "button",
+      "raspberry",
+      "breadboard",
+      "example",
+      "power",
+      "side",
+      "push",
+      "male",
+      "jumper"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnRaspberry Pi",
+    "subcategory": "RasPi LED & Pushbutton"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nRaspberry Pi GPIO - LED and Pushbutton",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Using both Input and Output\nIn the \nmake a LED blink.\nFor that we used a GPIO pin as \"Output\".\nIn this chapter we will use another GPIO pin as \"Input\".\nInstead of blinking for 5 seconds, we want the LED to light up when you push \na button connected to the breadboard.\nWhat do we need?\nIn this chapter we will create a simple example where \nwe control a LED light with a Push Button.\nFor this you need:\nA Raspberry Pi with Raspian, internet, SSH, with Node.js installed\nThe\nonoff module\nfor Node.js\n1 x\nBreadboard\n1 x\n68 Ohm resistor\n1 x\n1k Ohm resistor\n1 x\nThrough Hole LED\n1 x\nPush Button\n4 x\nFemale to male jumper wires\n1 x\nMale to Male jumper wires\nClick the links in the list above for descriptions of the different \ncomponents.\nNote:\nThe resistor you need can be different from what we use depending on the type of LED you use. Most small LEDs only need a small resistor, around 200-500 ohms. It is generally not critical what exact value you use, but the smaller the value of the resistor, the brighter the LED will\nshine.\nIn this chapter we will build on the circuit we built in last chapter, so you \nwill recognize some of the parts in the list above.\nBuilding the Circuit\nNow it is time to build the circuit on our Breadboard. We will use the\ncircuit we created in the last chapter\nas a starting point.\nIf you are new to electronics, we recommend you turn off the power for \nthe Raspberry Pi. And use an anti-static mat or a grounding strap to avoid \ndamaging it.\nShut down the Raspberry Pi properly with the command:\npi@w3demopi:~ $ sudo shutdown -h now\nAfter the LEDs stop blinking on the Raspberry Pi, then pull out the power \nplug from the Raspberry Pi (or turn of the power strip it is connected to).\nJust pulling the plug without shutting down properly may cause corruption of the memory card.\nLook at the above illustration of the circuit.\nStarting with the circuit we created in the last chapter:\nOn the Raspberry Pi, connect the female leg of a jumper wire to a\n5V\npower pin. In our example we used Physical Pin 2 (\n5V\n, \n    row 1, right column)\nOn the Breadboard, connect the male leg of the jumper wire connected to \n    the\n5V\npower, to the\nPower Bus\non the right side. That entire column \n    of your breadboard is connected, so it doesn't matter which row. In our \n    example we attached it to row 1\nOn the Breadboard, connect the push button so that it fits across the \n    Trench. In our example it connects to rows 13 and 15, columns E and F\nOn the Breadboard, connect one leg of the 1k ohm resistor to the\nGround Bus\ncolumn on the right side, and the other leg to the right side Tie-Point row \n    where it connects to one of the right side legs of the push button. In our example we attached \n    one side to Tie-Point row 13, column J, and the other side to the closest\nGround Bus\nhole\nOn the Breadboard, connect a male-to-male jumper wire from the right\nPower Bus\n, to the right Tie-Point row that \n    connects to the other leg of the \n    push button. In our example we attached \n    one side to Tie-Point row 15, column J, and the other side to the closest\nPower Bus\nhole\nOn the Raspberry Pi, connect the female leg of a jumper wire to a\nGPIO\npin. In our example we used Physical Pin \n    11 (\nGPIO 17\n, row 6, left \n    column)\nOn the Breadboard, connect the male leg of the jumper wire to left \n    Tie-Point row the Push Button leg that is directly across the\nGround\nconnection leg.\u00a0 In our example we \n    attached it to row 13, column A\nYour circuit should now be complete, and your connections should look \n  pretty similar to the illustration above.\nNow it is time to boot up the Raspberry Pi, and write the Node.js script to \n  interact with it.\nRaspberry Pi and Node.js LED and Button Script\nGo to the \"nodetest\" directory, and create a new file called \"\nbuttonled.js\n\":\npi@w3demopi:~ $ nano buttonled.js\nThe file is now open and can be edited with the built in Nano Editor.\nWrite, or paste the following:\nbuttonled.js\nvar\n  Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar \n  LED = new Gpio(4, 'out'); //use GPIO pin 4 as output\nvar pushButton = new \n  Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, \n  and releases should be handled\npushButton.watch(function (err, value) { \n  //Watch for hardware interrupts on pushButton GPIO, specify callback function\nif (err) { //if an error\nconsole.error('There was an \n  error', err); //output error message to console\nreturn;\n}\nLED.writeSync(value); //turn LED on or off depending on the button state (0 or \n  1)\n});\nfunction unexportOnClose() { //function to run when exiting program\nLED.writeSync(0); // Turn LED off\nLED.unexport(); // Unexport LED \n  GPIO to free resources\npushButton.unexport(); // Unexport Button \n  GPIO to free resources\n};\nprocess.on('SIGINT', unexportOnClose); //function to \n  run when user closes using ctrl+c\nPress \"\nCtrl+x\n\" to save the code. Confirm with \"\ny\n\", and confirm the name with \"\nEnter\n\".\nRun the code:\npi@w3demopi:~ $ node buttonled.js\nNow the LED should turn on when you press the button, and turn off when you \nrelease it.\nEnd the program with\nCtrl+c\n.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "buttonled.js",
+      "content": "",
+      "order": 3,
+      "code": "var\n  Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar \n  LED = new Gpio(4, 'out'); //use GPIO pin 4 as output\nvar pushButton = new \n  Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, \n  and releases should be handled\npushButton.watch(function (err, value) { \n  //Watch for hardware interrupts on pushButton GPIO, specify callback function\nif (err) { //if an error\nconsole.error('There was an \n  error', err); //output error message to console\nreturn;\n}\nLED.writeSync(value); //turn LED on or off depending on the button state (0 or \n  1)\n});\nfunction unexportOnClose() { //function to run when exiting program\nLED.writeSync(0); // Turn LED off\nLED.unexport(); // Unexport LED \n  GPIO to free resources\npushButton.unexport(); // Unexport Button \n  GPIO to free resources\n};\nprocess.on('SIGINT', unexportOnClose); //function to \n  run when user closes using ctrl+c",
+      "language": "javascript",
+      "explanation": "Example of buttonled.js"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var\n  Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar \n  LED = new Gpio(4, 'out'); //use GPIO pin 4 as output\nvar pushButton = new \n  Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, \n  and releases should be handled\npushButton.watch(function (err, value) { \n  //Watch for hardware interrupts on pushButton GPIO, specify callback function\nif (err) { //if an error\nconsole.error('There was an \n# TODO: Complete this line\nreturn;\n}\nLED.writeSync(value); //turn LED on or off depending on the button state (0 or \n  1)\n});\nfunction unexportOnClose() { //function to run when exiting program\nLED.writeSync(0); // Turn LED off\nLED.unexport(); // Unexport LED \n  GPIO to free resources\npushButton.unexport(); // Unexport Button \n  GPIO to free resources\n};\nprocess.on('SIGINT', unexportOnClose); //function to \n  run when user closes using ctrl+c",
+      "solution": "var\n  Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar \n  LED = new Gpio(4, 'out'); //use GPIO pin 4 as output\nvar pushButton = new \n  Gpio(17, 'in', 'both'); //use GPIO pin 17 as input, and 'both' button presses, \n  and releases should be handled\npushButton.watch(function (err, value) { \n  //Watch for hardware interrupts on pushButton GPIO, specify callback function\nif (err) { //if an error\nconsole.error('There was an \n  error', err); //output error message to console\nreturn;\n}\nLED.writeSync(value); //turn LED on or off depending on the button state (0 or \n  1)\n});\nfunction unexportOnClose() { //function to run when exiting program\nLED.writeSync(0); // Turn LED off\nLED.unexport(); // Unexport LED \n  GPIO to free resources\npushButton.unexport(); // Unexport Button \n  GPIO to free resources\n};\nprocess.on('SIGINT', unexportOnClose); //function to \n  run when user closes using ctrl+c"
+    },
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your javascript function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "0796a35e-5573-4ea4-82d2-b9c669ae9711",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "5878d833-1bfd-4af1-ab3a-d80fbb754caa",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "6eff3e32-0a43-49d5-8b3f-97095acd291a",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is It?",
+      "options": [
+        "generally not critical what exact value you use",
+        "time to build the circuit on our Breadboard",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of It is 'generally not critical what exact value you use'."
+    },
+    {
+      "question": "What is Building the Circuit\nNow it?",
+      "options": [
+        "generally not critical what exact value you use",
+        "time to build the circuit on our Breadboard",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Building the Circuit\nNow it is 'time to build the circuit on our Breadboard'."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsRaspberry Pi GPIO - LED and Pushbutton concepts and techniques. You'll learn how to use Node.jsRaspberry Pi GPIO - LED and Pushbutton effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsRaspberry Pi GPIO - LED and Pushbutton and how to apply it in your projects."
+}

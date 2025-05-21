@@ -1,0 +1,223 @@
+{
+  "id": "f7e93c2b-ad60-4200-8819-6f46dbb73cb0",
+  "title": "Data Science- Data Preparation",
+  "slug": "data-science-data-preparation",
+  "metadata": {
+    "description": "Learn about Data Science- Data Preparation with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "data",
+      "example",
+      "pandas",
+      "function",
+      "print",
+      "values",
+      "number",
+      "import",
+      "type",
+      "rows"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnData Science",
+    "subcategory": "DS Data Preparation"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Data Science\n- Data Preparation",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Data Science",
+      "content": "- Data Preparation\n\nBefore analyzing data, a Data Scientist must extract the data, \nand make it clean and valuable.\nExtract and Read Data With Pandas\nBefore data can be analyzed, it must be imported/extracted.\nIn the example below, we show you how to import data using Pandas in Python.\nWe  use the\nread_csv()\nfunction to import a CSV file with the health data:\nExample\nimport pandas as pd\nhealth_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nprint(health_data)\n\nExample Explained\nImport the Pandas library\nName the data frame as\nhealth_data\n.\nheader=0\nmeans that the headers for the variable names are to be found in the first row (note that \n  0 means the first row in Python)\nsep=\",\"\nmeans that \",\" is used as the separator between the \n  values. This is because we are using the file type .csv (comma separated \n  values)\nTip:\nIf you have a large CSV file, you can use the\nhead()\nfunction to only show the top 5rows:\nExample\nimport pandas as pd\nhealth_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nprint(health_data.head())\n\nData Cleaning\nLook at the imported data. As you can see, the data are \"dirty\" with wrongly or unregistered values:\nThere are some blank fields\nAverage pulse of 9 000 is not possible\n9 000 will be treated as non-numeric, because of the space separator\nOne observation of max pulse is denoted as \"AF\", which does not make sense\nSo, we must clean the data in order to perform the analysis.\nRemove Blank Rows\nWe see that the non-numeric values (9 000 and AF) are in the same rows with missing values.\nSolution: We can remove the rows with missing observations to fix this problem.\nWhen we load a data set using Pandas, all blank cells are automatically converted into \"NaN\" values.\nSo, removing the NaN cells gives us a clean data set that can be analyzed.\nWe can \nuse the\ndropna()\nfunction to remove the NaNs. axis=0 means that we want to remove all rows that have a NaN value:\nExample\nhealth_data.dropna(axis=0,inplace=True)\nprint(health_data)\n\nThe result is a data set without NaN rows:\nData Categories\nTo analyze data, we also need to know the types of data we are dealing with.\nData can be split into two main categories:",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Quantitative Data",
+      "content": "- Can be expressed as a number or can \n  be quantified. Can be divided into two sub-categories:\nDiscrete data\n: Numbers are counted as \"whole\", e.g. \n      number of students in a class, number of goals in a soccer game\nContinuous data\n: Numbers can be of infinite precision. \n      e.g. weight of a person, shoe size, temperature",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Qualitative Data",
+      "content": "- Cannot be expressed as a number and \n  cannot be quantified. Can be divided into two sub-categories:\nNominal data\n: Example: gender, hair color, ethnicity\nOrdinal data\n: Example: school grades (A, B, C), \n    economic status (low, middle, high)\nBy knowing the type of your data, you will be able to know what technique to use when analyzing them.\nData Types\nWe can use the\ninfo()\nfunction to list the data types \nwithin our data set:\nExample\nprint(health_data.info())\n\nResult:\nWe see that this data set has two different types of data:\nFloat64\nObject\nWe cannot use objects to calculate and perform analysis here. We must convert \nthe type object to float64 (float64 is a number with a decimal in Python).\nWe can use the\nastype()\nfunction to convert the data into float64.\nThe following example converts \"Average_Pulse\" and \"Max_Pulse\" into data \ntype float64 (the other variables are already of data type float64):\nExample\nhealth_data[\"Average_Pulse\"] \n  = health_data['Average_Pulse'].astype(float)\nhealth_data[\"Max_Pulse\"] = \n  health_data[\"Max_Pulse\"].astype(float)\nprint \n  (health_data.info())\n\nResult:\nNow, the data set has only float64 data types.\nAnalyze the Data\nWhen we have cleaned the data set, we can start analyzing the data.\nWe can use the\ndescribe()\nfunction in Python \nto summarize data:\nExample\nprint(health_data.describe())\n\nResult:\nDuration\nAverage_Pulse\nMax_Pulse\nCalorie_Burnage\nHours_Work\nHours_Sleep\nCount\n10.0\n10.0\n10.0\n10.0\n10.0\n10.0\nMean\n51.0\n102.5\n137.0\n285.0\n6.6\n7.5\nStd\n10.49\n15.4\n11.35\n30.28\n3.63\n0.53\nMin\n30.0\n80.0\n120.0\n240.0\n0.0\n7.0\n25%\n45.0\n91.25\n130.0\n262.5\n7.0\n7.0\n50%\n52.5\n102.5\n140.0\n285.0\n8.0\n7.5\n75%\n60.0\n113.75\n145.0\n307.5\n8.0\n8.0\nMax\n60.0\n125.0\n150.0\n330.0\n10.0\n8.0",
+      "order": 4,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Count",
+      "content": "- Counts the number of observations",
+      "order": 5,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Mean",
+      "content": "- The average value",
+      "order": 6,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Std",
+      "content": "- Standard deviation (explained in the statistics chapter)",
+      "order": 7,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Min",
+      "content": "- The lowest value\n25%\n,\n50%\nand\n75%\nare percentiles \n  (explained in the statistics chapter)",
+      "order": 8,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Max",
+      "content": "- The highest value\n\n\u2605\n+1",
+      "order": 9,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "import pandas as pd\nhealth_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nprint(health_data)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "import pandas as pd\nhealth_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nprint(health_data.head())",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "health_data.dropna(axis=0,inplace=True)\nprint(health_data)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "print(health_data.info())",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "health_data[\"Average_Pulse\"] \n  = health_data['Average_Pulse'].astype(float)\nhealth_data[\"Max_Pulse\"] = \n  health_data[\"Max_Pulse\"].astype(float)\nprint \n  (health_data.info())",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 15,
+      "code": "print(health_data.describe())",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas as pd\nhealth_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\n# TODO: Complete this line",
+      "solution": "import pandas as pd\nhealth_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nprint(health_data)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas as pd\nhealth_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\n# TODO: Complete this line",
+      "solution": "import pandas as pd\nhealth_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nprint(health_data.head())"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "e205158d-2f27-4a39-ad70-85e2cf0f24cb",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "aad59bd3-a03e-4fce-9ee8-4e14421b0f19",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e6402bbd-8034-4345-be3e-29a877797c39",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is means that the headers for the variable names?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "to be found in the first row (note that \n  0 means the first row in Python)\nsep=\"",
+        "using the file type"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of means that the headers for the variable names is 'to be found in the first row (note that \n  0 means the first row in Python)\nsep=\"'."
+    },
+    {
+      "question": "What is This is because we?",
+      "options": [
+        "None of the above.",
+        "to be found in the first row (note that \n  0 means the first row in Python)\nsep=\"",
+        "using the file type",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of This is because we is 'using the file type'."
+    }
+  ],
+  "summary": "This tutorial covers Data Science- Data Preparation concepts and techniques. You'll learn how to use Data Science- Data Preparation effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Data Science- Data Preparation and how to apply it in your projects."
+}

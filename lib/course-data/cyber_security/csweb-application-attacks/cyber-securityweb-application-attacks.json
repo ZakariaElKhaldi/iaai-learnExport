@@ -1,0 +1,169 @@
+{
+  "id": "596eb319-b2dc-4783-bf7d-130b8700ad7a",
+  "title": "Cyber SecurityWeb Application Attacks",
+  "slug": "cyber-securityweb-application-attacks",
+  "metadata": {
+    "description": "Learn about Cyber SecurityWeb Application Attacks with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "application",
+      "code",
+      "example",
+      "password",
+      "user",
+      "username",
+      "attack",
+      "used",
+      "return",
+      "data"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 7,
+    "category": "Cyber Security",
+    "subcategory": "CSWeb Application Attacks"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Cyber Security\nWeb Application Attacks",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Web applications are everywhere today, and they are used to control just about everything you can imagine. In this section we will look into web application attacks and security.\nIDOR (\"Insecure Direct Object Reference\")\nIDOR vulnerabilities happen when developers have not implemented authorization requirements to access resources.\nEve, by simply changing an identifier, e.g. the document Rest parameter, she can access Alice's documents.\nThis happens when the web application does not enforce authorization between objects, allowing attackers to enumerate values and test access to other points of data.\nFor example we might have the following pseudo-code showing no signs of authorization:\n$id = getInputFromUser();\n$doc = getDocument($id);\nreturn $doc;\nThe code above asks for input from user, performs no validation or sanitization, then performs a lookup with the getDocument function directly and returns the document in question.\nA better implementation would be to check the privileges:\n$id = getInputFromUser();\n$user = findUsername();\n$doc = \"\";\nif (hasAccessToDocument($user, $id)) {\n$doc = getDocument($id);\n} else {\n$doc = \"Not authorized for this document\";\n}\nreturn $doc;\nVulnerabilities like these are easy to find as you can simply change a simple number and see if you get access to someone \nelse's data. Checking if the user is authorized first prevents this vulnerability.\nNote\n: Pseudo code simply means code which resembles real code, but might not actually work. It is used to make an example of actual code.\nAvoiding \"Magic Numbers\"\nAn application want to avoid using sequences of numbers when referencing data. In the IDOR example, the documents had identifiers from 1000 to 1002. Sometimes these numbers are called \"Magic Numbers\" as they directly point to a resource on the server, e.g. via database, and all values can easily be enumerated. For example an attacker can check all document identifiers from 0 all the way to 10000 and record any results which provides access to data.\nWhile authorization should be properly implemented, it is also helpful to use GUID (\"Globally Unique Identifier\") or UUID (\"Universally Unique Identifier\") when referencing data. These identifiers are designed to be globally unique and impossible to enumerate because of the built-in entropy of the generation of the numbers.\nThis is what a GUID can look like:\n3377d5a6-236e-4d68-be9c-e91b22afd216\nNote:\nIf you were to look at the mathematics behind guessing the number above, we would quickly see it is not easy to enumerate. Enumeration is a technique which can be used to walk through all possible options of a value, the GUID or UUID prevents this.\nSQL Injection\nMany web applications are connected to a database. The database holds all the information the web application wish to store and use.\nSQL Injection is a technique which allows attackers to manipulate the SQL (\"Structured Query Language\") the developer of the web application is using. This typically happens because of lack of data sanitization. SQL is used regularly by developers to access database resources.\nIn the request Eve makes in the graphic above, we see she inputs the value: 1000' OR '1'='1\nThis causes the resulting SQL Query to return all rows of the table because the database evaluates the statement as always true.\u00a0 Think about it: the database receives a request where the value can be either 1000 OR 1 is equal to 1; it will return a value every time! There are many different SQL functions and operations we can use to manipulate the syntax, and this example is just one of very many.\nBelow is a pseudo-code example which contains a SQL Injection vulnerability.\n$username =  getUserName();\n$pw = getPassword();\n$user = mysql_query(\"SELECT * FROM userTable WHERE username = $username AND password =  $pw\");\nif ($user) {\n$loggedIn = True;\n} else {\n$loggedIn = False;\n}\nWe can see there is no sanitization on both the username and password variables; instead they are used directly in the SQL causing the vulnerability to occur. The code allows the $loggedIn variable to be set if the query returns anything.\nFor an attacker to exploit this, they could simply craft a URL against the target domain with the attack in it like this:\n/login?username=admin&password=password' OR '1'='1\nThe password variable is set to contain the SQL characters, causing the resulting SQL string to return a row, even if the password is unknown to us. The resulting SQL query would be:\nSELECT * FROM userTable WHERE username = 'admin' AND password = 'password' OR '1'='1'\nParameterized queries is the recommended solution to defeat SQL Injections. Within a parameterized query, the developers carefully ensure each input to the query is defined as a specific value and type. Here is an example from the above code which is considered a secure implementation:\n$username = getUserName();\n$pw = getPassword();\n$parameterizedQuery = prepare_query(\"SELECT * FROM userTable where username = ? and password = ?\");\n$parameterizedQuery.setString(1, $username)\n$parameterizedQuery.setString(2, $password)\n$user = parameterizedQuery.execute();\nif ($user) {\n$loggedIn = True;\n} else {\n$loggedIn = False;\n}\nIn the above example, the developer has carefully said that parameter 1 should be a string and contain the username, and the password in the second parameter.\nNote:\nSQL Injection is made possible because developers are not carefully sanitizing the input from users, and thus allows an attacker to fool the application and database into running unauthorized SQL code.\nXSS (\"Cross-Site Scripting\")\nXSS uses the server to attack visitors of the server. The attack does not target the server itself, but instead the users.\nThe server is simply used to reflect attackers values, typically JavaScript, against visitors who then run the attackers data in their own browser. The attacker has to craft an input which the server does not clean and sanitize, that way when a visitor clicks a link containing the attackers values, or visits a resource on the webpage which the attacker has used in their attack, the user runs code which the attacker supplied.\nHere is a graphical example of Eve sending a link to Alice which contains the XSS attack:\nThis attack is called a Reflected XSS and involves Eve finding the vulnerability, then sending a link containing the attack to an unsuspecting user and having them click the link. The link contains the attack and makes the webserver return the attack to the victim clicking the link.\nThe code behind this could be something simple as this pseudo-code example:\n$nickname = etNickName();\necho \"Greeting $nickname, nice to meet you!\";\nAnother kind of XSS is called a Stored XSS attack. In Stored XSS attacks the attacker is capable of saving content on the webpage which is reflected every time someone visits the website. It does not require someone to click a link necessarily.\nThis graphic describes how Eve is able to store malicious JavaScript to be executed in anyone's browser when the visit the resource:\nXSS attacks can accomplish many things, for example:\nStealing cookies which can be used for authentication\nDefacing the website, presenting content which the webserver did not intend to\nPhishing users in leaving credentials in fake login forms\nTo defend against XSS there are several best-practices to follow:\nLet the webserver return CSP (\"Content Security Policy\") headers which strictly decides where and how JavaScript is executed from\nSafely encode the output the webserver returns to users, effectively turning HTML characters into encoded safe characters\nHTML Encoding\nHTML encoding allows the web application to return typically unsafe characters in a safe manner. For example the following special characters can be encoded into their respective counterpart:\nSpecial Character\nHTML Entity\n<\n&lt;\n>\n&gt;\n\"\n&quot;\n&\n&amp;\n'\n&apos;\nThis produces output which can be displayed safely. We can then use the JavaScript on the client-side to safely turn the HTML entities into values.\nCSP (\"Content Security Policy\")\nThe webserver can control what kind of JavaScript is allowed to run on the website. This does not remove vulnerabilities but adds \ndefense in depth for when there is an unknown vulnerability.\nA common and strict CSP is to provide the users of the web-application with a list of all accepted JavaScript source files.\nIn addition, it is typical for CSP to prevent execution of in-line JavaScript.\nTo allow for easier implementation and detection of on-going attacks, CSP allows for clients to report CSP violations to a URL provided by the server\nWeb-Application Scanning\nThere are many web application scanners out there. These allow for applications to be scanned for vulnerabilities such as SQL Injection and XSS. Contrary to a network vulnerability scanner, a web-application scanner is typically built on heuristics instead of signatures and lists of known vulnerabilities.\nWeb application scanners are useful, especially when built into development processes such as CI (\"Continuous Integration\") and CD (\"Continuous Delivery\")\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "$id = getInputFromUser();\n$doc = getDocument($id);\nreturn $doc;",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "$id = getInputFromUser();\n$user = findUsername();\n$doc = \"\";\nif (hasAccessToDocument($user, $id)) {\n$doc = getDocument($id);\n} else {\n$doc = \"Not authorized for this document\";\n}\nreturn $doc;",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "$username =  getUserName();\n$pw = getPassword();\n$user = mysql_query(\"SELECT * FROM userTable WHERE username = $username AND password =  $pw\");\nif ($user) {\n$loggedIn = True;\n} else {\n$loggedIn = False;\n}",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "/login?username=admin&password=password' OR '1'='1",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "SELECT * FROM userTable WHERE username = 'admin' AND password = 'password' OR '1'='1'",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "$username = getUserName();\n$pw = getPassword();\n$parameterizedQuery = prepare_query(\"SELECT * FROM userTable where username = ? and password = ?\");\n$parameterizedQuery.setString(1, $username)\n$parameterizedQuery.setString(2, $password)\n$user = parameterizedQuery.execute();\nif ($user) {\n$loggedIn = True;\n} else {\n$loggedIn = False;\n}",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "$nickname = etNickName();\necho \"Greeting $nickname, nice to meet you!\";",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "$id = getInputFromUser();\n$doc = getDocument($id);\n# TODO: Complete this line",
+      "solution": "$id = getInputFromUser();\n$doc = getDocument($id);\nreturn $doc;"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "$id = getInputFromUser();\n$user = findUsername();\n$doc = \"\";\nif (hasAccessToDocument($user, $id)) {\n$doc = getDocument($id);\n# TODO: Complete this line\n$doc = \"Not authorized for this document\";\n}\nreturn $doc;",
+      "solution": "$id = getInputFromUser();\n$user = findUsername();\n$doc = \"\";\nif (hasAccessToDocument($user, $id)) {\n$doc = getDocument($id);\n} else {\n$doc = \"Not authorized for this document\";\n}\nreturn $doc;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "6e109a36-658b-467e-9489-7728a197b9c0",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "5b07c363-76aa-41f0-835f-f7bcf101b844",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "26571850-72d8-422f-a4a3-05457a261892",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Cyber Security\nWeb Application Attacks\n\nWeb applications?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "easy to find as you can simply change a simple number and see if you get access to someone \nelse's data",
+        "everywhere today"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Cyber Security\nWeb Application Attacks\n\nWeb applications is 'everywhere today'."
+    },
+    {
+      "question": "What is Vulnerabilities like these?",
+      "options": [
+        "None of the above.",
+        "easy to find as you can simply change a simple number and see if you get access to someone \nelse's data",
+        "everywhere today",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Vulnerabilities like these is 'easy to find as you can simply change a simple number and see if you get access to someone \nelse's data'."
+    }
+  ],
+  "summary": "This tutorial covers Cyber SecurityWeb Application Attacks concepts and techniques. You'll learn how to use Cyber SecurityWeb Application Attacks effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Cyber SecurityWeb Application Attacks and how to apply it in your projects."
+}

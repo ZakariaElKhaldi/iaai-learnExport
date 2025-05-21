@@ -1,0 +1,98 @@
+{
+  "id": "40b2859f-1054-475d-99dd-22fe3c74a7e8",
+  "title": "React Custom Hooks",
+  "slug": "react-custom-hooks",
+  "metadata": {
+    "description": "Learn about React Custom Hooks with clear explanations and practical examples.",
+    "keywords": [
+      "data",
+      "usefetch",
+      "fetch",
+      "hook",
+      "const",
+      "custom",
+      "example",
+      "item",
+      "root",
+      "react"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnReact",
+    "subcategory": "Custom Hooks"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "React Custom Hooks",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Hooks are reusable functions.\nWhen you have component logic that needs to be used by multiple components, we can extract that logic to a custom Hook.\nCustom Hooks start with \"use\". Example:\nuseFetch\n.\nBuild a Hook\nIn the following code, we are fetching data in our\nHome\ncomponent and displaying it.\nWe will use the\nJSONPlaceholder\nservice to fetch fake data. This service is great for testing applications when there is no existing data.\nTo learn more, check out the\nJavaScript Fetch API\nsection.\nUse the JSONPlaceholder service to fetch fake \"todo\" items and display the titles on the page:\nExample:\nindex.js\n:\nimport { useState, useEffect } from \"react\";\nimport ReactDOM from \"react-dom/client\";\n\nconst Home = () => {\n  const [data, setData] = useState(null);\n\nuseEffect(() => {\n    fetch(\"\")\n      .then((res) => res.json())\n      .then((data) => setData(data));\n }, []);\n\nreturn (\n    <>\n      {data &&\n        data.map((item) => {\n          return <p key={item.id}>{item.title}</p>;\n        })}\n    </>\n  );\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<Home />);\nRun \nExample \u00bb\nThe fetch logic may be needed in other components as well, so we will extract that into a custom Hook.\nMove the fetch logic to a new file to be used as a custom Hook:\nExample:\nuseFetch.js\n:\nimport { useState, useEffect } from \"react\";\n\nconst useFetch = (url) => {\n  const [data, setData] = useState(null);\n\nuseEffect(() => {\n    fetch(url)\n      .then((res) => res.json())\n      .then((data) => setData(data));\n  }, [url]);\n\nreturn [data];\n};\n\nexport default useFetch;\nindex.js\n:\nimport ReactDOM from \"react-dom/client\";\nimport useFetch from \"./useFetch\";\n\nconst Home = () => {\n  const [data] = useFetch(\"\");\n\nreturn (\n    <>\n      {data &&\n        data.map((item) => {\n          return <p key={item.id}>{item.title}</p>;\n        })}\n    </>\n  );\n};\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<Home />);\nRun \nExample \u00bb\nExample Explained\nWe have created a new file called\nuseFetch.js\ncontaining a function called\nuseFetch\nwhich contains all of the logic needed to fetch our data.\nWe removed the hard-coded URL and replaced it with a\nurl\nvariable that can be passed to the custom Hook.\nLastly, we are returning our data from our Hook.\nIn\nindex.js\n, we are importing our\nuseFetch\nHook and utilizing it like any other Hook. This is where we pass in the URL to fetch data from.\nNow we can reuse this custom Hook in any component to fetch data from any URL.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "5f25ecc6-1a21-4d62-af16-bd552aaa5a8d",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "4bea84d9-dab6-402f-912b-970a9b628634",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e0d6dd09-961e-4a44-b8b3-d08f490a98a9",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is React Custom Hooks\n\nHooks?",
+      "options": [
+        "fetching data in our\nHome\ncomponent and displaying it",
+        "None of the above.",
+        "None of the above.",
+        "reusable functions"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of React Custom Hooks\n\nHooks is 'reusable functions'."
+    },
+    {
+      "question": "What is we?",
+      "options": [
+        "fetching data in our\nHome\ncomponent and displaying it",
+        "None of the above.",
+        "reusable functions",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of we is 'fetching data in our\nHome\ncomponent and displaying it'."
+    }
+  ],
+  "summary": "This tutorial covers React Custom Hooks concepts and techniques. You'll learn how to use React Custom Hooks effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of React Custom Hooks and how to apply it in your projects."
+}

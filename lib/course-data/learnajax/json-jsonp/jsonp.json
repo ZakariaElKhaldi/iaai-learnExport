@@ -1,0 +1,169 @@
+{
+  "id": "e19e7bf1-3afd-491f-aa14-aa3394446237",
+  "title": "JSONP",
+  "slug": "jsonp",
+  "metadata": {
+    "description": "Learn about JSONP with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "function",
+      "file",
+      "script",
+      "json",
+      "myfunc",
+      "jsonp",
+      "document",
+      "example",
+      "object",
+      "server"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAJAX",
+    "subcategory": "JSON JSONP"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "JSONP",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "JSONP is a method for sending JSON data without worrying about cross-domain issues.\nJSONP does not use the\nXMLHttpRequest\nobject.\nJSONP uses the\n<script>\ntag instead.\nJSONP Intro\nJSONP stands for JSON with Padding.\nRequesting a file from another domain can cause problems, due to cross-domain policy.\nRequesting an external\nscript\nfrom another domain does not have this problem.\nJSONP uses this advantage, and request files using the script tag \ninstead of the\nXMLHttpRequest\nobject.\n<script src=\"demo_jsonp.php\">\nThe Server File\nThe file on the server wraps the result inside a \nfunction call:\nExample\n<?php\n$myJSON = '{ \"name\":\"John\", \"age\":30, \"city\":\"New York\" }';\necho \"myFunc(\".$myJSON.\");\";\n?>\nShow PHP file \u00bb\nThe result returns a call to a function named \"myFunc\" with the JSON data as \na parameter.\nMake sure that the function exists on the client.\nThe JavaScript function\nThe function named \"myFunc\" is located on the client, and ready to handle \nJSON data:\nExample\nfunction myFunc(myObj) \n  {\ndocument.getElementById(\"demo\").innerHTML = \n  myObj.name;\n}\n\nCreating a Dynamic Script Tag\nThe example above will execute the \"myFunc\" function when the page is \nloading, based on where you put the script tag, which is not very satisfying.\nThe script tag should only be created when needed:\nExample\nCreate and insert the <script> tag when a button is clicked:\nfunction clickButton() {\nlet s = document.createElement(\"script\");\ns.src = \"demo_jsonp.php\";\ndocument.body.appendChild(s);\n}\n\nDynamic JSONP Result\nThe examples above are still very static.\nMake the example dynamic by sending JSON to the php file, and let the php file return a JSON object based on \nthe information it gets.\nPHP file\n<?php\nheader(\"Content-Type: application/json; charset=UTF-8\");\n$obj = \n  json_decode($_GET[\"x\"], false);\n$conn = new mysqli(\"myServer\", \"myUser\", \"myPassword\", \"Northwind\");\n$result = $conn->query(\"SELECT name FROM \n  \".$obj->$table.\" LIMIT \".$obj->$limit);\n$outp = array();\n$outp = $result->fetch_all(MYSQLI_ASSOC);\necho \"myFunc(\".json_encode($outp).\")\";\n?>\nPHP File explained:\nConvert the request into an object, using the PHP function\njson_decode()\n.\nAccess the database, and fill an array with the requested data.\nAdd the array to an object.\nConvert the array into JSON using \nthe\njson_encode()\nfunction.\nWrap \"myFunc()\" around the return object.\nJavaScript Example\nThe \"myFunc\" function will be called from the php file:\nconst obj = { table: \"products\", limit: 10 };\nlet s = document.createElement(\"script\");\ns.src = \"jsonp_demo_db.php?x=\" + JSON.stringify(obj);\ndocument.body.appendChild(s);\nfunction myFunc(myObj) {\nlet txt = \"\";\nfor (let x in myObj) \n  {\ntxt += myObj[x].name + \"<br>\";\n}\ndocument.getElementById(\"demo\").innerHTML = txt;\n}\n\nCallback Function\nWhen you have no control over the server file, how do you get the server file \nto call the correct function?\nSometimes the server file offers a callback function as \na parameter:\nExample\nThe php file will call the function you pass as a callback parameter:\nlet s = document.createElement(\"script\");\ns.src = \"jsonp_demo_db.php?callback=\nmyDisplayFunction\n\";\ndocument.body.appendChild(s);\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<script src=\"demo_jsonp.php\">",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$myJSON = '{ \"name\":\"John\", \"age\":30, \"city\":\"New York\" }';\necho \"myFunc(\".$myJSON.\");\";\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "function myFunc(myObj) \n  {\ndocument.getElementById(\"demo\").innerHTML = \n  myObj.name;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "function clickButton() {\nlet s = document.createElement(\"script\");\ns.src = \"demo_jsonp.php\";\ndocument.body.appendChild(s);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "PHP file",
+      "content": "",
+      "order": 7,
+      "code": "<?php\nheader(\"Content-Type: application/json; charset=UTF-8\");\n$obj = \n  json_decode($_GET[\"x\"], false);\n$conn = new mysqli(\"myServer\", \"myUser\", \"myPassword\", \"Northwind\");\n$result = $conn->query(\"SELECT name FROM \n  \".$obj->$table.\" LIMIT \".$obj->$limit);\n$outp = array();\n$outp = $result->fetch_all(MYSQLI_ASSOC);\necho \"myFunc(\".json_encode($outp).\")\";\n?>",
+      "language": "html",
+      "explanation": "Example of php file"
+    },
+    {
+      "type": "code_example",
+      "title": "JavaScript Example",
+      "content": "",
+      "order": 8,
+      "code": "const obj = { table: \"products\", limit: 10 };\nlet s = document.createElement(\"script\");\ns.src = \"jsonp_demo_db.php?x=\" + JSON.stringify(obj);\ndocument.body.appendChild(s);\nfunction myFunc(myObj) {\nlet txt = \"\";\nfor (let x in myObj) \n  {\ntxt += myObj[x].name + \"<br>\";\n}\ndocument.getElementById(\"demo\").innerHTML = txt;\n}",
+      "language": "javascript",
+      "explanation": "Example of javascript example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "let s = document.createElement(\"script\");\ns.src = \"jsonp_demo_db.php?callback=\nmyDisplayFunction\n\";\ndocument.body.appendChild(s);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "<script src=\"demo_jsonp.php\">"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$myJSON = '{ \"name\":\"John\", \"age\":30, \"city\":\"New York\" }';\n# TODO: Complete this line\n?>",
+      "solution": "<?php\n$myJSON = '{ \"name\":\"John\", \"age\":30, \"city\":\"New York\" }';\necho \"myFunc(\".$myJSON.\");\";\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "31742ae1-34a8-43fd-a4c8-e4592607dcb3",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "b61f2b3d-bfdb-48f5-9a2e-f80957f1e2d2",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "06201856-4082-4564-9150-5447da51a9cf",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is JSONP\n\nJSONP?",
+      "options": [
+        "Not a JSONP\n\nJSONP.",
+        "None of the above.",
+        "None of the above.",
+        "a method for sending JSON data without worrying about cross-domain issues"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of JSONP\n\nJSONP is 'a method for sending JSON data without worrying about cross-domain issues'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers JSONP concepts and techniques. You'll learn how to use JSONP effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JSONP and how to apply it in your projects."
+}

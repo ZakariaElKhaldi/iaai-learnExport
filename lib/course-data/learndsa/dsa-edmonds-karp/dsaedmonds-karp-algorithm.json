@@ -1,0 +1,98 @@
+{
+  "id": "4ecbc7a8-103b-4409-9fdf-d9feef313e57",
+  "title": "DSAEdmonds-Karp Algorithm",
+  "slug": "dsaedmonds-karp-algorithm",
+  "metadata": {
+    "description": "Learn about DSAEdmonds-Karp Algorithm with clear explanations and practical examples.",
+    "keywords": [
+      "flow",
+      "path",
+      "edge",
+      "vertex",
+      "self",
+      "edmonds",
+      "karp",
+      "capacity",
+      "algorithm",
+      "augmented"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 12,
+    "category": "LearnDSA",
+    "subcategory": "DSA Edmonds-Karp"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "DSA\nEdmonds",
+      "content": "-Karp Algorithm\n\nThe Edmonds-Karp algorithm solves the maximum flow problem.\nFinding the maximum flow can be helpful in many areas: for optimizing network traffic, for manufacturing, for supply chain and logistics, or for airline scheduling.\nThe Edmonds-Karp Algorithm\nThe Edmonds-Karp algorithm solves\nthe maximum flow problem\nfor a directed graph.\nThe flow comes from a source vertex (\\(s\\)) and ends up in a sink vertex (\\(t\\)), and each edge in the graph allows a flow, limited by a capacity.\nThe Edmonds-Karp algorithm is very similar to\nthe Ford-Fulkerson algorithm\n, except the Edmonds-Karp algorithm uses\nBreadth First Search (BFS)\nto find augmented paths to increase flow.\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nMax flow: {{maxFlow}}\n{{btnText}}\n{{statusText}}\nThe Edmonds-Karp algorithm works by using Breadth-First Search (BFS) to find a path with available capacity from the source to the sink (called an\naugmented path\n), and then sends as much flow as possible through that path.\nThe Edmonds-Karp algorithm continues to find new paths to send more flow through until the maximum flow is reached.\nIn the simulation above, the Edmonds-Karp algorithm solves the maximum flow problem: It finds out how much flow can be sent from the source vertex \\(s\\), to the sink vertex \\(t\\), and that maximum flow is 8.\nThe numbers in the simulation above are written in fractions, where the first number is the flow, and the second number is the capacity (maximum possible flow in that edge). So for example,\n0/7\non edge \\(s \\rightarrow v_2\\), means there is\n0\nflow, with a capacity of\n7\non that edge.\nYou can see the basic step-by-step description of how the Edmonds-Karp algorithm works below, but we need to go into more detail later to actually understand it.\nHow it works:\nStart with zero flow on all edges.\nUse BFS to find an\naugmented path\nwhere more flow can be sent.\nDo a\nbottleneck calculation\nto find out how much flow can be sent through that augmented path.\nIncrease the flow found from the bottleneck calculation for each edge in the augmented path.\nRepeat steps 2-4 until max flow is found. This happens when a new augmented path can no longer be found.\nResidual Network in Edmonds-Karp\nThe Edmonds-Karp algorithm works by creating and using something called a\nresidual network\n, which is a representation of the original graph.\nIn the residual network, every edge has a\nresidual capacity\n, which is the original capacity of the edge, minus the the flow in that edge. The residual capacity can be seen as the leftover capacity in an edge with some flow.\nFor example, if there is a flow of 2 in the \\( v_3 \\rightarrow v_4 \\) edge, and the capacity is 3, the residual flow is 1 in that edge, because there is room for sending 1 more unit of flow through that edge.\nReversed Edges in Edmonds-Karp\nThe Edmonds-Karp algorithm also uses something called\nreversed edges\nto send flow back. This is useful to increase the total flow.\nTo send flow back, in the opposite direction of the edge, a reverse edge is created for each original edge in the network. The Edmonds-Karp algorithm can then use these reverse edges to send flow in the reverse direction.\nA reversed edge has no flow or capacity, just residual capacity. The residual capacity for a reversed edge is always the same as the flow in the corresponding original edge.\nIn our example, the edge \\( v_1 \\rightarrow v_3 \\) has a flow of 2, which means there is a residual capacity of 2 on the corresponding reversed edge \\( v_3 \\rightarrow v_1 \\).\nThis just means that when there is a flow of 2 on the original edge \\( v_1 \\rightarrow v_3 \\), there is a possibility of sending that same amount of flow back on that edge, but in the reversed direction. Using a reversed edge to push back flow can also be seen as undoing a part of the flow that is already created.\nThe idea of a residual network with residual capacity on edges, and the idea of reversed edges, are central to how the Edmonds-Karp algorithm works, and we will go into more detail about this when we implement the algorithm further down on this page.\nManual Run Through\nThere is no flow in the graph to start with.\nThe Edmonds-Karp algorithm starts with using Breadth-First Search to find an augmented path where flow can be increased, which is \\(s \\rightarrow v_1 \\rightarrow v_3 \\rightarrow t\\).\nAfter finding the augmented path, a bottleneck calculation is done to find how much flow can be sent through that path, and that flow is: 2.\nSo a flow of 2 is sent over each edge in the augmented path.\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nThe \nThe \nThe flow can only be increased by 1 in this path because there is only room for one more unit of flow in the \\( s \\rightarrow v_1 \\) edge.\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nThe \nThe flow can be increased by 3 in this path. The bottleneck (limiting edge) is \\( v_2 \\rightarrow v_4 \\) because the capacity is 3.\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nThe last augmented path found is \\(s \\rightarrow v_2 \\rightarrow v_1 \\rightarrow v_4 \\rightarrow t\\).\nThe flow can only be increased by 2 in this path because of edge \\( v_4 \\rightarrow t \\) being the bottleneck in this path with only space for 2 more units of flow (\\(capacity-flow=1\\)).\n{{edge.flow}}/{{edge.capacity}}\n{{vertex.name}}\nAt this point, a new augmenting path cannot be found (it is not possible to find a path where more flow can be sent through from \\(s\\) to \\(t\\)), which means the max flow has been found, and the Edmonds-Karp algorithm is finished.\nThe maximum flow is 8. As you can see in the image above, the flow (8) is the same going out of the source vertex \\(s\\), as the flow going into the sink vertex \\(t\\).\nAlso, if you take any other vertex than \\(s\\) or \\(t\\), you can see that the amount of flow going into a vertex, is the same as the flow going out of it. This is what we call\nconservation of flow\n, and this must hold for all such flow networks (directed graphs where each edge has a flow and a capacity).\nImplementation of The Edmonds-Karp Algorithm\nTo implement the Edmonds-Karp algorithm, we create a\nGraph\nclass.\nThe\nGraph\nrepresents the graph with its vertices and edges:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n\n    def add_edge(self, u, v, c):\n        self.adj_matrix[u][v] = c\n\n    def add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\nLine 3:\nWe create the\nadj_matrix\nto hold all the edges and edge capacities. Initial values are set to\n0\n.\nLine 4:\nsize\nis the number of vertices in the graph.\nLine 5:\nThe\nvertex_data\nholds the names of all the vertices.\nLine 7-8:\nThe\nadd_edge\nmethod is used to add an edge from vertex\nu\nto vertex\nv\n, with capacity\nc\n.\nLine 10-12:\nThe\nadd_vertex_data\nmethod is used to add a vertex name to the graph. The index of the vertex is given with the\nvertex\nargument, and\ndata\nis the name of the vertex.\nThe\nGraph\nclass also contains the\nbfs\nmethod to find augmented paths, using Breadth-First-Search:\ndef bfs(self, s, t, parent):\n        visited = [False] * self.size\n        queue = []  # Using list as a queue\n        queue.append(s)\n        visited[s] = True\n\n        while queue:\n            u = queue.pop(0)  # Pop from the start of the list\n\n            for ind, val in enumerate(self.adj_matrix[u]):\n                if not visited[ind] and val > 0:\n                    queue.append(ind)\n                    visited[ind] = True\n                    parent[ind] = u\n\n        return visited[t]\nLine 15-18:\nThe\nvisited\narray helps to avoid revisiting the same vertices during the search for an augmented path. The\nqueue\nholds vertices to be explored, the search always starts with the source vertex\ns\n.\nLine 20-21:\nAs long as there are vertices to be explored in the\nqueue\n, take the first vertex out of the\nqueue\nso that a path can be found from there to the \nLine 23:\nFor every adjacent vertex to the current vertex.\nLine 24-27:\nIf the adjacent vertex is not visited yet, and there is a residual capacity on the edge to that vertex: add it to the queue of vertices that needs to be explored, mark it as visited, and set the\nparent\nof the adjacent vertex to be the current vertex\nu\n.\nThe\nparent\narray holds the parent of a vertex, creating a path from the sink vertex, backwards to the source vertex. The\nparent\nis used later in the Edmonds-Karp algorithm, outside the\nbfs\nmethod, to increase flow in the augmented path.\nLine 29:\nThe last line returns\nvisited[t]\n, which is\ntrue\nif the augmented path ends in the sink node\nt\n. Returning\ntrue\nmeans that an augmenting path has been found.\nThe\nedmonds_karp\nmethod is the last method we add to the\nGraph\nclass:\ndef edmonds_karp(self, source, sink):\n        parent = [-1] * self.size\n        max_flow = 0\n\n        while self.bfs(source, sink, parent):\n            path_flow = float(\"Inf\")\n            s = sink\n            while(s != source):\n                path_flow = min(path_flow, self.adj_matrix[parent[s]][s])\n                s = parent[s]\n\n            max_flow += path_flow\n            v = sink\n            while(v != source):\n                u = parent[v]\n                self.adj_matrix[u][v] -= path_flow\n                self.adj_matrix[v][u] += path_flow\n                v = parent[v]\n\n            path = []\n            v = sink\n            while(v != source):\n                path.append(v)\n                v = parent[v]\n            path.append(source)\n            path.reverse()\n            path_names = [self.vertex_data[node] for node in path]\n            print(\"Path:\", \" -> \".join(path_names), \", Flow:\", path_flow)\n\n        return max_flow\nInitially, the\nparent\narray holds invalid index values, because there is no augmented path to begin with, and the\nmax_flow\nis\n0\n, and the\nwhile\nloop keeps increasing the\nmax_flow\nas long as there is an augmented path to increase flow in.\nLine 35:\nThe outer\nwhile\nloop makes sure the Edmonds-Karp algorithm keeps increasing flow as long as there are augmented paths to increase flow along.\nLine 36-37:\nThe initial flow along an augmented path is infinite, and the possible flow increase will be calculated starting with the sink vertex.\nLine 38-40:\nThe value for\npath_flow\nis found by going backwards from the sink vertex towards the source vertex. The lowest value of residual capacity along the path is what decides how much flow can be sent on the path.\nLine 42:\npath_flow\nis increased by the\npath_flow\n.\nLine 44-48:\nStepping through the augmented path, going backwards from sink to source, the residual capacity is decreased with the\npath_flow\non the forward edges, and the residual capacity is increased with the\npath_flow\non the reversed edges.\nLine 50-58:\nThis part of the code is just for printing so that we are able to track each time an augmented path is found, and how much flow is sent through that path.\nAfter defining the\nGraph\nclass, the vertices and edges must be defined to initialize the specific graph, and the complete code for the Edmonds-Karp algorithm example looks like this:\nExample\nPython:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n\n    def add_edge(self, u, v, c):\n        self.adj_matrix[u][v] = c\n\n    def add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\n\n    def bfs(self, s, t, parent):\n        visited = [False] * self.size\n        queue = []  # Using list as a queue\n        queue.append(s)\n        visited[s] = True\n\n        while queue:\n            u = queue.pop(0)  # Pop from the start of the list\n\n            for ind, val in enumerate(self.adj_matrix[u]):\n                if not visited[ind] and val > 0:\n                    queue.append(ind)\n                    visited[ind] = True\n                    parent[ind] = u\n\n        return visited[t]\n\n    def edmonds_karp(self, source, sink):\n        parent = [-1] * self.size\n        max_flow = 0\n\n        while self.bfs(source, sink, parent):\n            path_flow = float(\"Inf\")\n            s = sink\n            while(s != source):\n                path_flow = min(path_flow, self.adj_matrix[parent[s]][s])\n                s = parent[s]\n\n            max_flow += path_flow\n            v = sink\n            while(v != source):\n                u = parent[v]\n                self.adj_matrix[u][v] -= path_flow\n                self.adj_matrix[v][u] += path_flow\n                v = parent[v]\n\n            path = []\n            v = sink\n            while(v != source):\n                path.append(v)\n                v = parent[v]\n            path.append(source)\n            path.reverse()\n            path_names = [self.vertex_data[node] for node in path]\n            print(\"Path:\", \" -> \".join(path_names), \", Flow:\", path_flow)\n\n        return max_flow",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 2",
+      "content": "# Example usage:\ng = Graph(6)\nvertex_names = ['s', 'v1', 'v2', 'v3', 'v4', 't']\nfor i, name in enumerate(vertex_names):\n    g.add_vertex_data(i, name)\n\ng.add_edge(0, 1, 3)  # s  -> v1, cap: 3\ng.add_edge(0, 2, 7)  # s  -> v2, cap: 7\ng.add_edge(1, 3, 3)  # v1 -> v3, cap: 3\ng.add_edge(1, 4, 4)  # v1 -> v4, cap: 4\ng.add_edge(2, 1, 5)  # v2 -> v1, cap: 5\ng.add_edge(2, 4, 3)  # v2 -> v4, cap: 3\ng.add_edge(3, 4, 3)  # v3 -> v4, cap: 3\ng.add_edge(3, 5, 2)  # v3 -> t,  cap: 2\ng.add_edge(4, 5, 6)  # v4 -> t,  cap: 6\n\nsource = 0; sink = 5\nprint(\"The maximum possible flow is %d \" % g.edmonds_karp(source, sink))\nRun Example \u00bb\nTime Complexity for The Edmonds-Karp Algorithm\nThe difference between Edmonds-Karp and Ford-Fulkerson is that Edmonds-Karp uses Breadth-First Search (BFS) to find augmented paths, while Ford-Fulkerson uses Depth-First Search (DFS).\nThis means that the time it takes to run Edmonds-Karp is easier to predict than Ford-Fulkerson, because Edmonds-Karp is not affected by the maximum flow value.\nWith the number of vertices \\(V\\), the number of edges \\(E\\), the time complexity for the Edmonds-Karp algorithm is\n\\[ O(V \\cdot E^2) \\]\nThis means Edmonds-Karp does not depend on the maximum flow, like Ford-Fulkerson does, but on how many vertices and edges we have.\nThe reason we get this time complexity for Edmonds-Karp is that it runs BFS which has time complexity \\(O(E+V)\\).\nBut if we assume a bad case scenario for Edmonds-Karp, with a dense graph, where the number of edges \\(E\\) is much greater than the number of vertices \\(V\\), time complexity for BFS becomes \\(O(E)\\).\nBFS must run one time for every augmented path, and there can actually be found close to \\(V \\cdot E \\) augmented paths during running of the Edmonds-Karp algorithm.\nSo, BFS with time complexity \\(O(E)\\) can run close to \\(V \\cdot E \\) times in the worst case, which means we get a total time complexity for Edmonds-Karp: \\( O(V \\cdot E \\cdot E) = O(V \\cdot E^2) \\).\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "938efbe4-16d5-4ae8-9a01-fa709deca8e2",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "617eab55-ec8c-4c33-8154-2cf7e0de2e22",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "15e00e8a-ddaa-486b-9b4e-e798d191942f",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Karp algorithm?",
+      "options": [
+        "reached",
+        "None of the above.",
+        "None of the above.",
+        "very similar to\nthe Ford-Fulkerson algorithm"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Karp algorithm is 'very similar to\nthe Ford-Fulkerson algorithm'."
+    },
+    {
+      "question": "What is Karp algorithm continues to find new paths to send more flow through until the maximum flow?",
+      "options": [
+        "None of the above.",
+        "very similar to\nthe Ford-Fulkerson algorithm",
+        "None of the above.",
+        "reached"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Karp algorithm continues to find new paths to send more flow through until the maximum flow is 'reached'."
+    }
+  ],
+  "summary": "This tutorial covers DSAEdmonds-Karp Algorithm concepts and techniques. You'll learn how to use DSAEdmonds-Karp Algorithm effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSAEdmonds-Karp Algorithm and how to apply it in your projects."
+}

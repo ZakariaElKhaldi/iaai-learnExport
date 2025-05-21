@@ -1,0 +1,133 @@
+{
+  "id": "61795129-3739-46e5-90da-ef7e67493855",
+  "title": "PHPMySQL Insert Data",
+  "slug": "phpmysql-insert-data",
+  "metadata": {
+    "description": "Learn about PHPMySQL Insert Data with clear explanations and practical examples.",
+    "keywords": [
+      "php",
+      "conn",
+      "username",
+      "password",
+      "insert",
+      "dbname",
+      "values",
+      "example",
+      "servername",
+      "connection",
+      "john"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "MySQL Insert Data"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nMySQL Insert Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Insert Data Into MySQL Using MySQLi and PDO\nAfter a database and a table have been created, we can start adding data in \nthem.\nHere are some syntax rules to follow:\nThe SQL query must be quoted in PHP\nString values inside the SQL query must be quoted\nNumeric values must not be quoted\nThe word NULL must not be quoted\nThe INSERT INTO statement is used to add new records to a MySQL table:\nINSERT INTO table_name (column1, column2, column3,...)\nVALUES (value1, value2, value3,...)\nTo learn more about SQL, please visit our\nSQL tutorial\n.\nIn the \nfive columns: \"id\", \"firstname\", \"lastname\", \"email\" and \"reg_date\". \nNow, let us fill the table with data.\nNote:\nIf a column is AUTO_INCREMENT (like the \"id\" column) or TIMESTAMP \nwith default update of current_timesamp \n(like the \"reg_date\" column), it is no need to be specified in \nthe SQL query; MySQL will automatically add the value.\nThe following examples add a new record to the \"MyGuests\" table:\nExample (MySQLi Object-oriented)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\necho \"New record created successfully\";\n} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;\n}\n$conn->close();\n?>\nExample (MySQLi Procedural)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif (mysqli_query($conn, $sql)) {\necho \"New record created successfully\";\n} else {\necho \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>\nExample (PDO)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\n// use exec() because no results are returned\n$conn->exec($sql);\necho \"New record created successfully\";\n} catch(PDOException $e) \n  {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Object-oriented)",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\necho \"New record created successfully\";\n} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;\n}\n$conn->close();\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli object-oriented)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Procedural)",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif (mysqli_query($conn, $sql)) {\necho \"New record created successfully\";\n} else {\necho \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli procedural)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (PDO)",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\n// use exec() because no results are returned\n$conn->exec($sql);\necho \"New record created successfully\";\n} catch(PDOException $e) \n  {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>",
+      "language": "html",
+      "explanation": "Example of example (pdo)"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n# TODO: Complete this line\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\necho \"New record created successfully\";\n} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;\n}\n$conn->close();\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\necho \"New record created successfully\";\n} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;\n}\n$conn->close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif (mysqli_query($conn, $sql)) {\necho \"New record created successfully\";\n} else {\necho \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);\n# TODO: Complete this line\nmysqli_close($conn);\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif (mysqli_query($conn, $sql)) {\necho \"New record created successfully\";\n} else {\necho \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "8e5083ef-eafa-444e-982c-9eca197be7f8",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e2beeb4c-1e57-4cd3-bed5-a57ab1012272",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "548509ef-48ff-47bb-b874-447e69021aa6",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Here?",
+      "options": [
+        "None of the above.",
+        "AUTO_INCREMENT (like the \"id\" column) or TIMESTAMP \nwith default update of current_timesamp \n(like the \"reg_date\" column)",
+        "some syntax rules to follow:\nThe SQL query must be quoted in PHP\nString values inside the SQL query must be quoted\nNumeric values must not be quoted\nThe word NULL must not be quoted\nThe INSERT INTO statement is used to add new records to a MySQL table:\nINSERT INTO table_name (column1",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Here is 'some syntax rules to follow:\nThe SQL query must be quoted in PHP\nString values inside the SQL query must be quoted\nNumeric values must not be quoted\nThe word NULL must not be quoted\nThe INSERT INTO statement is used to add new records to a MySQL table:\nINSERT INTO table_name (column1'."
+    },
+    {
+      "question": "What is If a column?",
+      "options": [
+        "None of the above.",
+        "some syntax rules to follow:\nThe SQL query must be quoted in PHP\nString values inside the SQL query must be quoted\nNumeric values must not be quoted\nThe word NULL must not be quoted\nThe INSERT INTO statement is used to add new records to a MySQL table:\nINSERT INTO table_name (column1",
+        "AUTO_INCREMENT (like the \"id\" column) or TIMESTAMP \nwith default update of current_timesamp \n(like the \"reg_date\" column)",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of If a column is 'AUTO_INCREMENT (like the \"id\" column) or TIMESTAMP \nwith default update of current_timesamp \n(like the \"reg_date\" column)'."
+    }
+  ],
+  "summary": "This tutorial covers PHPMySQL Insert Data concepts and techniques. You'll learn how to use PHPMySQL Insert Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPMySQL Insert Data and how to apply it in your projects."
+}

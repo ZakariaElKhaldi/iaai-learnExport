@@ -1,0 +1,178 @@
+{
+  "id": "fb8c30db-abc8-4edc-b2d6-229c2e7042bd",
+  "title": "AngularJS Filters",
+  "slug": "angularjs-filters",
+  "metadata": {
+    "description": "Learn about AngularJS Filters with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "filter",
+      "name",
+      "country",
+      "format",
+      "filters",
+      "myapp",
+      "controller",
+      "array",
+      "currency",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAngularJS",
+    "subcategory": "AngularJS Filters"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AngularJS Filters",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Filters can be added in AngularJS to format data.\nAngularJS Filters\nAngularJS provides filters to transform data:\ncurrency\nFormat a number to a currency format.\ndate\nFormat a date to a specified format.\nfilter\nSelect a subset of items from an array.\njson\nFormat an object to a JSON string.\nlimitTo\nLimits an array/string, into a specified number of elements/characters.\nlowercase\nFormat a string to lower case.\nnumber\nFormat a number to a string.\norderBy\nOrders an array by an expression.\nuppercase\nFormat a string to upper case.\nAdding Filters to Expressions\nFilters can be added to expressions by using the pipe character\n|\n, \nfollowed by a filter.\nThe\nuppercase\nfilter format strings to upper case:\nExample\n<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | uppercase }}</p>\n</div>\n\nThe\nlowercase\nfilter format strings to lower case:\nExample\n<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | lowercase }}</p>\n</div>\n\nAdding Filters to Directives\nFilters are added to directives, like\nng-repeat\n, by using the pipe character\n|\n, followed by a filter:\nExample\nThe\norderBy\nfilter sorts an array:\n<div ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<ul>\n<li ng-repeat=\"x in names | orderBy:'country'\">\n{{ x.name + ', ' + x.country }}\n</li>\n</ul>\n</div>\n\nThe currency Filter\nThe\ncurrency\nfilter formats a number as currency:\nExample\n<div ng-app=\"myApp\" ng-controller=\"costCtrl\">\n<h1>Price: {{ price | currency }}</h1>\n</div>\n\nRead more about the currency filter in our\nAngularJS currency Filter Reference\nThe filter Filter\nThe\nfilter\nfilter selects a subset of an array.\nThe\nfilter\nfilter can only be used on arrays, and it returns an \narray containing only the matching items.\nExample\nReturn the names that contains the letter \"i\":\n<div ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<ul>\n<li ng-repeat=\"x in names | \nfilter : 'i'\">\n{{ x }}\n</li>\n</ul>\n</div>\n\nRead more about the filter filter in our\nAngularJS \nfilter Filter Reference\nFilter an Array Based on User Input\nBy setting the\nng-model\ndirective \non an input field, we can use the value of the input field as an expression in a \nfilter.\nType a letter in the input field, and the list will shrink/grow depending on the match:\n{{ x }}\nExample\n<div ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<p><input type=\"text\" ng-model=\"test\"></p>\n<ul>\n<li ng-repeat=\"x in names | filter : test\">\n{{ x }}\n</li>\n</ul>\n</div>\n\nSort an Array Based on User Input\nClick the table headers to change the sort order::\nName\nCountry\n{{x.name}}\n{{x.country}}\nBy adding the\nng-click\ndirective on the table headers, we can run a function that changes the sorting order of the array:\nExample\n<div ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<table border=\"1\" width=\"100%\">\n<tr>\n<th ng-click=\"orderByMe('name')\">Name</th>\n<th ng-click=\"orderByMe('country')\">Country</th>\n</tr>\n<tr \n    ng-repeat=\"x in names | orderBy:myOrderBy\">\n<td>{{x.name}}</td>\n<td>{{x.country}}</td>\n</tr>\n</table>\n</div>\n<script>\nangular.module('myApp', []).controller('namesCtrl', \n    function($scope) {\n$scope.names = [\n{name:'Jani',country:'Norway'},\n{name:'Carl',country:'Sweden'},\n{name:'Margareth',country:'England'},\n{name:'Hege',country:'Norway'},\n{name:'Joe',country:'Denmark'},\n{name:'Gustav',country:'Sweden'},\n{name:'Birgit',country:'Denmark'},\n{name:'Mary',country:'England'},\n{name:'Kai',country:'Norway'}\n];\n$scope.orderByMe = function(x) {\n$scope.myOrderBy \n    = x;\n}\n});\n</script>\n\nCustom Filters\nYou can make your own filters by registering a new filter factory function with \nyour module:\nExample\nMake a custom filter called \"myFormat\":\n<ul ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<li ng-repeat=\"x \n    in names\">\n{{x |\nmyFormat\n}}\n</li>\n</ul>\n<script>\nvar app = \n    angular.module('myApp', []);\napp.filter('\nmyFormat\n', \n    function() {\nreturn function(x) {\nvar i, c, txt = \"\";\nfor (i = 0; i < \n    x.length; i++) {\nc = x[i];\nif (i % 2 == 0) {\nc = c.toUpperCase();\n}\ntxt \n    += c;\n}\nreturn txt;\n};\n});\napp.controller('namesCtrl', function($scope) \n    {\n$scope.names = ['Jani', 'Carl', 'Margareth', 'Hege', \n    'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai'];\n});\n</script>\n\nThe\nmyFormat\nfilter will format every other character to uppercase.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | uppercase }}</p>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | lowercase }}</p>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<ul>\n<li ng-repeat=\"x in names | orderBy:'country'\">\n{{ x.name + ', ' + x.country }}\n</li>\n</ul>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"costCtrl\">\n<h1>Price: {{ price | currency }}</h1>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<ul>\n<li ng-repeat=\"x in names | \nfilter : 'i'\">\n{{ x }}\n</li>\n</ul>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<p><input type=\"text\" ng-model=\"test\"></p>\n<ul>\n<li ng-repeat=\"x in names | filter : test\">\n{{ x }}\n</li>\n</ul>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<div ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<table border=\"1\" width=\"100%\">\n<tr>\n<th ng-click=\"orderByMe('name')\">Name</th>\n<th ng-click=\"orderByMe('country')\">Country</th>\n</tr>\n<tr \n    ng-repeat=\"x in names | orderBy:myOrderBy\">\n<td>{{x.name}}</td>\n<td>{{x.country}}</td>\n</tr>\n</table>\n</div>\n<script>\nangular.module('myApp', []).controller('namesCtrl', \n    function($scope) {\n$scope.names = [\n{name:'Jani',country:'Norway'},\n{name:'Carl',country:'Sweden'},\n{name:'Margareth',country:'England'},\n{name:'Hege',country:'Norway'},\n{name:'Joe',country:'Denmark'},\n{name:'Gustav',country:'Sweden'},\n{name:'Birgit',country:'Denmark'},\n{name:'Mary',country:'England'},\n{name:'Kai',country:'Norway'}\n];\n$scope.orderByMe = function(x) {\n$scope.myOrderBy \n    = x;\n}\n});\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "<ul ng-app=\"myApp\" ng-controller=\"namesCtrl\">\n<li ng-repeat=\"x \n    in names\">\n{{x |\nmyFormat\n}}\n</li>\n</ul>\n<script>\nvar app = \n    angular.module('myApp', []);\napp.filter('\nmyFormat\n', \n    function() {\nreturn function(x) {\nvar i, c, txt = \"\";\nfor (i = 0; i < \n    x.length; i++) {\nc = x[i];\nif (i % 2 == 0) {\nc = c.toUpperCase();\n}\ntxt \n    += c;\n}\nreturn txt;\n};\n});\napp.controller('namesCtrl', function($scope) \n    {\n$scope.names = ['Jani', 'Carl', 'Margareth', 'Hege', \n    'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai'];\n});\n</script>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n# TODO: Complete this line\n</div>",
+      "solution": "<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | uppercase }}</p>\n</div>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | lowercase }}</p>\n# TODO: Complete this line",
+      "solution": "<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | lowercase }}</p>\n</div>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "89685362-18d8-4586-9de9-dde1d7e3f5e3",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "29023fa8-5140-4998-bf08-b723e4dd171f",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4c30e2c3-a9ca-485e-add3-bc99b598bcf0",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The name?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "None of the above.",
+        "{{ lastName | uppercase }}</p>\n</div>\n\nThe\nlowercase\nfilter format strings to lower case:\nExample\n<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | lowercase }}</p>\n</div>\n\nAdding Filters to Directives\nFilters are added to directives"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of The name is '{{ lastName | uppercase }}</p>\n</div>\n\nThe\nlowercase\nfilter format strings to lower case:\nExample\n<div ng-app=\"myApp\" ng-controller=\"personCtrl\">\n<p>The name is {{ lastName | lowercase }}</p>\n</div>\n\nAdding Filters to Directives\nFilters are added to directives'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers AngularJS Filters concepts and techniques. You'll learn how to use AngularJS Filters effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AngularJS Filters and how to apply it in your projects."
+}

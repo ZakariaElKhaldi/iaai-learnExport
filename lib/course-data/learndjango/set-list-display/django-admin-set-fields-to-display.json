@@ -1,0 +1,98 @@
+{
+  "id": "cecacfbb-641d-4c85-b636-64deda15fac0",
+  "title": "Django Admin - Set Fields to Display",
+  "slug": "django-admin-set-fields-to-display",
+  "metadata": {
+    "description": "Learn about Django Admin - Set Fields to Display with clear explanations and practical examples.",
+    "keywords": [
+      "models",
+      "member",
+      "admin",
+      "memberadmin",
+      "django",
+      "string",
+      "representation",
+      "change",
+      "display",
+      "model"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Set List Display"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Django Admin",
+      "content": "- Set Fields to Display\n\nMake the List Display More Reader-Friendly\nWhen you display a Model as a list, Django displays each record as the string representation of the record object,\nwhich in our case is \"Member object (1)\", \"Member object(2)\" etc.:\nTo change this to a more reader-friendly format, we have two choices:\nChange the string representation function,\n__str__()\nof the Member Model\nSet the\nlist_display\nproperty of the MemberAdmin class\nChange the String Representation Function\nTo change the string representation, we have to define the\n__str__()\nfunction of the Member Model\nin\nmodels.py\n, like this:\nmy_tennis_club/members/models.py\n:\nfrom django.db import models\n\nclass Member(models.Model):\n  firstname = models.CharField(max_length=255)\n  lastname = models.CharField(max_length=255)\n  phone = models.IntegerField(null=True)\n  joined_date = models.DateField(null=True)\n\n  def __str__(self):\n    return f\"{self.firstname} {self.lastname}\"\nWhich gives us this result:\nDefining our own\n__str__()\nfunction is not a Django feature,\nit is how to change the string representation of objects in Python.\nRead more about Python objects in our\nPython object tutorial\n.\nSet list_display\nWe can control the fields to display by specifying them in a\nlist_display\nproperty in the\nadmin.py\nfile.\nFirst create a\nMemberAdmin()\nclass and specify the\nlist_display\ntuple, like this:\nmy_tennis_club/members/admin.py\n:\nfrom django.contrib import admin\nfrom .models import Member",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 2",
+      "content": "# Register your models here.\n\nclass MemberAdmin(admin.ModelAdmin):\n  list_display = (\"firstname\", \"lastname\", \"joined_date\",)\n  \nadmin.site.register(Member, MemberAdmin)\nRemember to add the MemberAdmin as an argumet in the\nadmin.site.register(Member, MemberAdmin)\n.\nNow go back to the browser and you should get this result:\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "5171fa79-eb50-4aaa-870b-3af6dc0fae86",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "3ac69c3b-e875-45d7-9b55-97638b186203",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "da7f243b-0360-4eb7-939d-d07c22b14de7",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is which in our case?",
+      "options": [
+        "not a Django feature",
+        "\"Member object (1)\"",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of which in our case is '\"Member object (1)\"'."
+    },
+    {
+      "question": "What is function?",
+      "options": [
+        "None of the above.",
+        "\"Member object (1)\"",
+        "None of the above.",
+        "not a Django feature"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of function is 'not a Django feature'."
+    }
+  ],
+  "summary": "This tutorial covers Django Admin - Set Fields to Display concepts and techniques. You'll learn how to use Django Admin - Set Fields to Display effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django Admin - Set Fields to Display and how to apply it in your projects."
+}

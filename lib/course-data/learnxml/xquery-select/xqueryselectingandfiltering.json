@@ -1,0 +1,232 @@
+{
+  "id": "5cc485c1-292f-4552-80b3-a3ff5d0753bf",
+  "title": "XQuerySelectingandFiltering",
+  "slug": "xqueryselectingandfiltering",
+  "metadata": {
+    "description": "Learn about XQuerySelectingandFiltering with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "test",
+      "title",
+      "book",
+      "clause",
+      "result",
+      "return",
+      "order",
+      "lang",
+      "expression",
+      "books"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnXML",
+    "subcategory": "XQuery Select"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "XQuery\nSelecting\nand\nFiltering",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The XML Example Document\nWe will use the \"books.xml\" document in the examples below (same XML file as in the \nView the \"books.xml\" file in your browser\n.\nSelecting and Filtering Elements\nAs we have seen in the \nLook at the following FLWOR expression:\nfor $x in doc(\"books.xml\")/bookstore/book\nwhere $x/price>30\norder by $x/title\nreturn $x/title\nfor - (optional) binds a variable to each item returned by the in expression\nlet - (optional)\nwhere - (optional) specifies a criteria\norder by - (optional) specifies the sort-order of the result\nreturn - specifies what to return in the result\nThe for Clause\nThe for clause binds a variable to each item returned by the in expression. \nThe for clause results in iteration. There can be multiple for clauses in the same FLWOR expression.\nTo loop a specific number of times in a for clause, you may use the\nto\nkeyword:\nfor $x in (1 to 5)\nreturn <test>{$x}</test>\nResult:\n<test>1</test>\n<test>2</test>\n<test>3</test>\n<test>4</test>\n<test>5</test>\nThe\nat\nkeyword can be used to count the iteration:\nfor $x at $i in doc(\"books.xml\")/bookstore/book/title\nreturn <book>{$i}. {data($x)}</book>\nResult:\n<book>1. Everyday Italian</book>\n<book>2. Harry Potter</book>\n<book>3. XQuery Kick Start</book>\n<book>4. Learning XML</book>\nIt is also allowed with more than one in expression in the for clause. Use comma to separate each in expression:\nfor $x in (10,20), $y in (100,200)\nreturn <test>x={$x} and y={$y}</test>\nResult:\n<test>x=10 and y=100</test>\n<test>x=10 and y=200</test>\n<test>x=20 and y=100</test>\n<test>x=20 and y=200</test>\nThe let Clause\nThe let clause allows variable assignments and it avoids repeating the same expression many times. \nThe let clause does not result in iteration.\nlet $x := (1 to 5)\nreturn <test>{$x}</test>\nResult:\n<test>1 2 3 4 5</test>\nThe where Clause\nThe where clause is used to specify one or more criteria for the result:\nwhere $x/price>30 and $x/price<100\nThe order by Clause\nThe order by clause is used to specify the sort order of the result. Here we \nwant to order the result by category and title:\nfor $x in doc(\"books.xml\")/bookstore/book\norder by $x/@category, $x/title\nreturn $x/title\nResult:\n<title lang=\"en\">Harry Potter</title>\n<title lang=\"en\">Everyday Italian</title>\n<title lang=\"en\">Learning XML</title>\n<title lang=\"en\">XQuery Kick Start</title>\nThe return Clause\nThe return clause specifies what is to be returned.\nfor $x in doc(\"books.xml\")/bookstore/book\nreturn $x/title\nResult:\n<title lang=\"en\">Everyday Italian</title>\n<title lang=\"en\">Harry Potter</title>\n<title lang=\"en\">XQuery Kick Start</title>\n<title lang=\"en\">Learning XML</title>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "for $x in doc(\"books.xml\")/bookstore/book\nwhere $x/price>30\norder by $x/title\nreturn $x/title",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "for $x in (1 to 5)\nreturn <test>{$x}</test>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<test>1</test>\n<test>2</test>\n<test>3</test>\n<test>4</test>\n<test>5</test>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "for $x at $i in doc(\"books.xml\")/bookstore/book/title\nreturn <book>{$i}. {data($x)}</book>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<book>1. Everyday Italian</book>\n<book>2. Harry Potter</book>\n<book>3. XQuery Kick Start</book>\n<book>4. Learning XML</book>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "for $x in (10,20), $y in (100,200)\nreturn <test>x={$x} and y={$y}</test>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<test>x=10 and y=100</test>\n<test>x=10 and y=200</test>\n<test>x=20 and y=100</test>\n<test>x=20 and y=200</test>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "let $x := (1 to 5)\nreturn <test>{$x}</test>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<test>1 2 3 4 5</test>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "where $x/price>30 and $x/price<100",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "for $x in doc(\"books.xml\")/bookstore/book\norder by $x/@category, $x/title\nreturn $x/title",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "<title lang=\"en\">Harry Potter</title>\n<title lang=\"en\">Everyday Italian</title>\n<title lang=\"en\">Learning XML</title>\n<title lang=\"en\">XQuery Kick Start</title>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 15,
+      "code": "for $x in doc(\"books.xml\")/bookstore/book\nreturn $x/title",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 16,
+      "code": "<title lang=\"en\">Everyday Italian</title>\n<title lang=\"en\">Harry Potter</title>\n<title lang=\"en\">XQuery Kick Start</title>\n<title lang=\"en\">Learning XML</title>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "for $x in doc(\"books.xml\")/bookstore/book\n# TODO: Complete this line\norder by $x/title\nreturn $x/title",
+      "solution": "for $x in doc(\"books.xml\")/bookstore/book\nwhere $x/price>30\norder by $x/title\nreturn $x/title"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "for $x in (1 to 5)\nreturn <test>{$x}</test>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "ee6deb6e-fd38-45ea-81c1-0865d397bc24",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2650c228-3a49-4590-9513-ce8051e16584",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "c4cb74ca-b6b6-42ae-a1c0-fec964571bac",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is It?",
+      "options": [
+        "used to specify one or more criteria for the result:\nwhere $x/price>30 and $x/price<100\nThe order by Clause\nThe order by clause is used to specify the sort order of the result",
+        "also allowed with more than one in expression in the for clause",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of It is 'also allowed with more than one in expression in the for clause'."
+    },
+    {
+      "question": "What is The where Clause\nThe where clause?",
+      "options": [
+        "used to specify one or more criteria for the result:\nwhere $x/price>30 and $x/price<100\nThe order by Clause\nThe order by clause is used to specify the sort order of the result",
+        "None of the above.",
+        "None of the above.",
+        "also allowed with more than one in expression in the for clause"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of The where Clause\nThe where clause is 'used to specify one or more criteria for the result:\nwhere $x/price>30 and $x/price<100\nThe order by Clause\nThe order by clause is used to specify the sort order of the result'."
+    }
+  ],
+  "summary": "This tutorial covers XQuerySelectingandFiltering concepts and techniques. You'll learn how to use XQuerySelectingandFiltering effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of XQuerySelectingandFiltering and how to apply it in your projects."
+}

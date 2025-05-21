@@ -1,0 +1,134 @@
+{
+  "id": "ee37aff1-fa72-4ddb-82ce-13fa104da53d",
+  "title": "BashdfCommand - File System Disk Space Usage",
+  "slug": "bashdfcommand-file-system-disk-space-usage",
+  "metadata": {
+    "description": "Learn about BashdfCommand - File System Disk Space Usage with clear explanations and practical examples.",
+    "keywords": [
+      "file",
+      "show",
+      "system",
+      "used",
+      "usage",
+      "format",
+      "mounted",
+      "tmpfs",
+      "data",
+      "output"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnBash",
+    "subcategory": "Bash Disk Space (df)"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Bash\ndf\nCommand",
+      "content": "- File System Disk Space Usage\n\nUsing the\ndf\nCommand\nThe\ndf\ncommand is used to report file system disk space usage.\nIt's a useful tool for checking available storage on your system.\nAll examples below use a hypothetical output for demonstration:\nFilesystem     1K-blocks    Used Available Use% Mounted on\n/dev/sda1       20480000 1024000  19456000   5% /\ntmpfs            4096000       0   4096000   0% /dev/shm\n/dev/sdb1       10240000  512000   9728000   5% /mnt/data\nUnderstanding the Output\nThe\ndf\ncommand output consists of several columns, each representing different aspects of the file system's disk usage:\nFilesystem\n: The name of the file system.\n1K-blocks\n: Total size of the file system in 1K blocks.\nUsed\n: Amount of space used.\nAvailable\n: Amount of space available for use.\nUse%\n: Percentage of space used.\nMounted on\n: Directory where the file system is mounted.\nBasic Usage\nTo display disk space usage, use\ndf\n:\nExample: Basic Usage\ndf\nFilesystem     1K-blocks    Used Available Use% Mounted on\n/dev/sda1       20480000 1024000  19456000   5% /\ntmpfs            4096000       0   4096000   0% /dev/shm\n/dev/sdb1       10240000  512000   9728000   5% /mnt/data\nOptions\nThe\ndf\ncommand has options to change how it works:\n-h\n- Show sizes in human-readable format (e.g., KB, MB)\n-a\n- Show all file systems, even empty ones\n-T\n- Show the type of file system\n-i\n- Show inode usage\n-P\n- Use POSIX output format\nShow Sizes in Human-Readable Format",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-h\noption allows you to show sizes in human-readable format.\nExample: Show Sizes in Human-Readable Format\ndf -h\nFilesystem      Size  Used Avail Use% Mounted on\n/dev/sda1        20G  1.0G   19G   5% /\ntmpfs           4.0G     0  4.0G   0% /dev/shm\n/dev/sdb1        10G  500M  9.5G   5% /mnt/data",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-a\noption allows you to show all file systems, even empty ones.\nExample: Show All File Systems\ndf -a\nFilesystem     1K-blocks    Used Available Use% Mounted on\n/dev/sda1       20480000 1024000  19456000   5% /\ntmpfs            4096000       0   4096000   0% /dev/shm\n/dev/sdb1       10240000  512000   9728000   5% /mnt/data\nnone                   0       0         0    - /proc/sys/fs/binfmt_misc",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-T\noption allows you to show the type of file system.\nExample: Show File System Type\ndf -T\nFilesystem     Type     1K-blocks    Used Available Use% Mounted on\n/dev/sda1      ext4      20480000 1024000  19456000   5% /\ntmpfs          tmpfs      4096000       0   4096000   0% /dev/shm\n/dev/sdb1      ext4      10240000  512000   9728000   5% /mnt/data\nFile System Type:\nThis indicates the format and structure used to store and organize data on a disk.\nCommon file system types include\next4\n,\nntfs\n, and\nvfat\n.\nEach type has its own features, limitations, and compatibility with operating systems.",
+      "order": 4,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-i\noption allows you to show inode usage.\nExample: Show Inode Usage\ndf -i\nFilesystem     Inodes IUsed IFree IUse% Mounted on\n/dev/sda1     1310720  2560 1308160    1% /\ntmpfs         1048576     1 1048575    1% /dev/shm\n/dev/sdb1      655360   100  655260    1% /mnt/data\nInodes:\nInodes are data structures used by many file systems to store information about files and directories, such as their size, owner, permissions, and timestamps.\nEach file or directory has a unique inode. The\ndf -i\ncommand shows inode usage, which can be important for systems with many small files.",
+      "order": 5,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-P\noption allows you to use the POSIX output format.\nExample: Use POSIX Output Format\ndf -P\nFilesystem     1024-blocks    Used Available Capacity Mounted on\n/dev/sda1       20480000 1024000  19456000       5% /\ntmpfs            4096000       0   4096000       0% /dev/shm\n/dev/sdb1       10240000  512000   9728000       5% /mnt/data\nPOSIX:\nPOSIX (Portable Operating System Interface) is a set of standards specified by the IEEE for maintaining compatibility between operating systems.\nThe\ndf -P\noption provides output in a POSIX-compliant format, ensuring consistency across different environments and systems.\nCombining Options\nOptions can be combined to provide more detailed output.\nFor example,\ndf -hT\nshows sizes in human-readable format along with the file system type.\nExample: Combine Options\ndf -hT\nFilesystem     Type     Size  Used Avail Use% Mounted on\n/dev/sda1      ext4      20G  1.0G   19G   5% /\ntmpfs          tmpfs    4.0G     0  4.0G   0% /dev/shm\n/dev/sdb1      ext4      10G  500M  9.5G   5% /mnt/data\n\n\u2605\n+1",
+      "order": 6,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "f948d91a-ad97-4230-bfe6-e20eaca158fd",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "74244988-2eee-4b2f-9e08-e03b60a9b355",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "fbfa340c-6291-4341-8273-d54051d12e1e",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is File System Disk Space Usage\n\nUsing the\ndf\nCommand\nThe\ndf\ncommand?",
+      "options": [
+        "mounted",
+        "None of the above.",
+        "None of the above.",
+        "used to report file system disk space usage"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of File System Disk Space Usage\n\nUsing the\ndf\nCommand\nThe\ndf\ncommand is 'used to report file system disk space usage'."
+    },
+    {
+      "question": "What is Directory where the file system?",
+      "options": [
+        "mounted",
+        "None of the above.",
+        "used to report file system disk space usage",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Directory where the file system is 'mounted'."
+    }
+  ],
+  "summary": "This tutorial covers BashdfCommand - File System Disk Space Usage concepts and techniques. You'll learn how to use BashdfCommand - File System Disk Space Usage effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of BashdfCommand - File System Disk Space Usage and how to apply it in your projects."
+}

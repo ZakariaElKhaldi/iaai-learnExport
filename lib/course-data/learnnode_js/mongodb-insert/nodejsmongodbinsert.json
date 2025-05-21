@@ -1,0 +1,214 @@
+{
+  "id": "56814815-6fe0-458e-bf4d-1b725c075af2",
+  "title": "Node.jsMongoDBInsert",
+  "slug": "nodejsmongodbinsert",
+  "metadata": {
+    "description": "Learn about Node.jsMongoDBInsert with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "name",
+      "address",
+      "mongodb",
+      "result",
+      "insert",
+      "collection",
+      "document",
+      "example",
+      "mongoclient",
+      "function"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnNode.js",
+    "subcategory": "MongoDB Insert"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nMongoDB\nInsert",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Insert Into Collection\nTo insert a record, or\ndocument\nas it is called in MongoDB, into a collection, we use the\ninsertOne()\nmethod.\nA\ndocument\nin MongoDB is the same as a\nrecord\nin MySQL\nThe first parameter of the\ninsertOne()\nmethod is an object containing the \nname(s) and value(s) of each field in the document you want to insert.\nIt also takes a callback function where you can work with any errors, or the \nresult of the insertion:\nExample\nInsert a document in the \"customers\" collection:\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myobj = { name: \"Company \n  Inc\", address: \"Highway 37\" };\ndbo.collection(\"customers\").insertOne(myobj, function(err, res) {\nif (err) throw err;\nconsole.log(\"1 \n  document \n  inserted\");\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_mongodb_insert.js\" and run the file:\nRun \"demo_mongodb_insert.js\"\nC:\\Users\\\nYour Name\n>node demo_mongodb_insert.js\nWhich will give you this result:\n1 document inserted\nNote:\nIf you try to insert documents in a collection that do not \nexist, MongoDB will create the collection automatically.\nInsert Multiple Documents\nTo insert multiple documents into a collection in MongoDB, we use the\ninsertMany()\nmethod.\nThe first parameter of the\ninsertMany()\nmethod \nis an array of objects, containing the data you want to \ninsert.\nIt also takes a callback function where you can work with any errors, or the \nresult of the insertion:\nExample\nInsert multiple documents in the \"customers\" collection:\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myobj = [\n{ name: 'John', address: 'Highway 71'},\n{ name: 'Peter', address: 'Lowstreet 4'},\n{ name: 'Amy', \n  address: 'Apple st 652'},\n{ name: 'Hannah', address: \n  'Mountain 21'},\n{ name: 'Michael', address: 'Valley \n  345'},\n{ name: 'Sandy', address: 'Ocean blvd 2'},\n{ name: 'Betty', address: 'Green Grass 1'},\n{ name: \n  'Richard', address: 'Sky st 331'},\n{ name: 'Susan', \n  address: 'One way 98'},\n{ name: 'Vicky', address: \n  'Yellow Garden 2'},\n{ name: 'Ben', address: 'Park Lane \n  38'},\n{ name: 'William', address: 'Central st 954'},\n{ name: 'Chuck', address: 'Main Road 989'},\n{ name: \n  'Viola', address: 'Sideway 1633'}\n];\ndbo.collection(\"customers\").insertMany(myobj, \n  function(err, res) {\nif (err) throw err;\nconsole.log(\"Number of documents inserted: \" + res.insertedCount);\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_mongodb_insert_multiple.js\" and run the file:\nRun \"demo_mongodb_insert_multiple.js\"\nC:\\Users\\\nYour Name\n>node demo_mongodb_insert_multiple.js\nWhich will give you this result:\nNumber of documents inserted: 14\nThe Result Object\nWhen executing the\ninsertMany()\nmethod, a result object is returned.\nThe result object contains information about how the insertion affected the \ndatabase.\nThe object returned from the example above looked like this:\n{\nresult: { ok: 1, n: 14 },\nops: [\n{ \n  name: 'John', address: 'Highway 71', _id: 58fdbf5c0ef8a50b4cdd9a84 },\n{ name: 'Peter', address: 'Lowstreet 4', _id: 58fdbf5c0ef8a50b4cdd9a85 },\n{ name: 'Amy', address: 'Apple st 652', _id: 58fdbf5c0ef8a50b4cdd9a86 },\n{ name: 'Hannah', address: 'Mountain 21', _id: 58fdbf5c0ef8a50b4cdd9a87 },\n{ name: 'Michael', address: 'Valley 345', _id: 58fdbf5c0ef8a50b4cdd9a88 },\n{ name: 'Sandy', address: 'Ocean blvd 2', _id: 58fdbf5c0ef8a50b4cdd9a89 },\n{ name: 'Betty', address: 'Green Grass 1', _id: 58fdbf5c0ef8a50b4cdd9a8a },\n{ name: 'Richard', address: 'Sky st 331', _id: 58fdbf5c0ef8a50b4cdd9a8b },\n{ name: 'Susan', address: 'One way 98', _id: 58fdbf5c0ef8a50b4cdd9a8c },\n{ name: 'Vicky', address: 'Yellow Garden 2', _id: 58fdbf5c0ef8a50b4cdd9a8d },\n{ name: 'Ben', address: 'Park Lane 38', _id: 58fdbf5c0ef8a50b4cdd9a8e },\n{ name: 'William', address: 'Central st 954', _id: 58fdbf5c0ef8a50b4cdd9a8f },\n{ name: 'Chuck', address: 'Main Road 989', _id: 58fdbf5c0ef8a50b4cdd9a90 },\n{ name: 'Viola', address: 'Sideway 1633', _id: 58fdbf5c0ef8a50b4cdd9a91 } ],\ninsertedCount: 14,\ninsertedIds: [\n58fdbf5c0ef8a50b4cdd9a84,\n58fdbf5c0ef8a50b4cdd9a85,\n58fdbf5c0ef8a50b4cdd9a86,\n58fdbf5c0ef8a50b4cdd9a87,\n58fdbf5c0ef8a50b4cdd9a88,\n58fdbf5c0ef8a50b4cdd9a89,\n58fdbf5c0ef8a50b4cdd9a8a,\n58fdbf5c0ef8a50b4cdd9a8b,\n58fdbf5c0ef8a50b4cdd9a8c,\n58fdbf5c0ef8a50b4cdd9a8d,\n58fdbf5c0ef8a50b4cdd9a8e,\n58fdbf5c0ef8a50b4cdd9a8f\n58fdbf5c0ef8a50b4cdd9a90,\n58fdbf5c0ef8a50b4cdd9a91 ]\n}\nThe values of the properties can be displayed like this:\nExample\nReturn the number of inserted documents:\nconsole.log(res.insertedCount)\nWhich will produce this result:\n14\nThe _id Field\nIf you do not specify an\n_id\nfield, then MongoDB \nwill add one for you and assign a unique id for each document.\nIn the example above no\n_id\nfield was \nspecified, and as you can see from the result object, MongoDB assigned a unique \n_id for each document.\nIf you\ndo\nspecify the\n_id\nfield, the value must \nbe unique for each document:\nExample\nInsert three records in a \"products\" table, with specified\n_id\nfields:\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myobj = [\n{\n_id: 154\n, name: \n  'Chocolate Heaven'},\n{\n_id: 155\n, name: \n  'Tasty Lemon'},\n{\n_id: 156\n, name: \n  'Vanilla Dream'}\n];\ndbo.collection(\"products\").insertMany(myobj, \n  function(err, res) {\nif (err) throw err;\nconsole.log(res);\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_mongodb_insert_id.js\" and run the file:\nRun \"demo_mongodb_insert_id.js\"\nC:\\Users\\\nYour Name\n>node demo_mongodb_insert_id.js\nWhich will give you this result:\n{\nresult: { ok: 1, n: 3 },\nops: [\n{ \n  _id: 154, name: 'Chocolate Heaven },\n{ \n  _id: 155, name: 'Tasty Lemon },\n{ \n  _id: 156, name: 'Vanilla Dream } ],\ninsertedCount: 3,\ninsertedIds: [\n154,\n155,\n156 ]\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myobj = { name: \"Company \n  Inc\", address: \"Highway 37\" };\ndbo.collection(\"customers\").insertOne(myobj, function(err, res) {\nif (err) throw err;\nconsole.log(\"1 \n  document \n  inserted\");\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "C:\\Users\\\nYour Name\n>node demo_mongodb_insert.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "1 document inserted",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myobj = [\n{ name: 'John', address: 'Highway 71'},\n{ name: 'Peter', address: 'Lowstreet 4'},\n{ name: 'Amy', \n  address: 'Apple st 652'},\n{ name: 'Hannah', address: \n  'Mountain 21'},\n{ name: 'Michael', address: 'Valley \n  345'},\n{ name: 'Sandy', address: 'Ocean blvd 2'},\n{ name: 'Betty', address: 'Green Grass 1'},\n{ name: \n  'Richard', address: 'Sky st 331'},\n{ name: 'Susan', \n  address: 'One way 98'},\n{ name: 'Vicky', address: \n  'Yellow Garden 2'},\n{ name: 'Ben', address: 'Park Lane \n  38'},\n{ name: 'William', address: 'Central st 954'},\n{ name: 'Chuck', address: 'Main Road 989'},\n{ name: \n  'Viola', address: 'Sideway 1633'}\n];\ndbo.collection(\"customers\").insertMany(myobj, \n  function(err, res) {\nif (err) throw err;\nconsole.log(\"Number of documents inserted: \" + res.insertedCount);\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "C:\\Users\\\nYour Name\n>node demo_mongodb_insert_multiple.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "Number of documents inserted: 14",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "{\nresult: { ok: 1, n: 14 },\nops: [\n{ \n  name: 'John', address: 'Highway 71', _id: 58fdbf5c0ef8a50b4cdd9a84 },\n{ name: 'Peter', address: 'Lowstreet 4', _id: 58fdbf5c0ef8a50b4cdd9a85 },\n{ name: 'Amy', address: 'Apple st 652', _id: 58fdbf5c0ef8a50b4cdd9a86 },\n{ name: 'Hannah', address: 'Mountain 21', _id: 58fdbf5c0ef8a50b4cdd9a87 },\n{ name: 'Michael', address: 'Valley 345', _id: 58fdbf5c0ef8a50b4cdd9a88 },\n{ name: 'Sandy', address: 'Ocean blvd 2', _id: 58fdbf5c0ef8a50b4cdd9a89 },\n{ name: 'Betty', address: 'Green Grass 1', _id: 58fdbf5c0ef8a50b4cdd9a8a },\n{ name: 'Richard', address: 'Sky st 331', _id: 58fdbf5c0ef8a50b4cdd9a8b },\n{ name: 'Susan', address: 'One way 98', _id: 58fdbf5c0ef8a50b4cdd9a8c },\n{ name: 'Vicky', address: 'Yellow Garden 2', _id: 58fdbf5c0ef8a50b4cdd9a8d },\n{ name: 'Ben', address: 'Park Lane 38', _id: 58fdbf5c0ef8a50b4cdd9a8e },\n{ name: 'William', address: 'Central st 954', _id: 58fdbf5c0ef8a50b4cdd9a8f },\n{ name: 'Chuck', address: 'Main Road 989', _id: 58fdbf5c0ef8a50b4cdd9a90 },\n{ name: 'Viola', address: 'Sideway 1633', _id: 58fdbf5c0ef8a50b4cdd9a91 } ],\ninsertedCount: 14,\ninsertedIds: [\n58fdbf5c0ef8a50b4cdd9a84,\n58fdbf5c0ef8a50b4cdd9a85,\n58fdbf5c0ef8a50b4cdd9a86,\n58fdbf5c0ef8a50b4cdd9a87,\n58fdbf5c0ef8a50b4cdd9a88,\n58fdbf5c0ef8a50b4cdd9a89,\n58fdbf5c0ef8a50b4cdd9a8a,\n58fdbf5c0ef8a50b4cdd9a8b,\n58fdbf5c0ef8a50b4cdd9a8c,\n58fdbf5c0ef8a50b4cdd9a8d,\n58fdbf5c0ef8a50b4cdd9a8e,\n58fdbf5c0ef8a50b4cdd9a8f\n58fdbf5c0ef8a50b4cdd9a90,\n58fdbf5c0ef8a50b4cdd9a91 ]\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "console.log(res.insertedCount)",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "14",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myobj = [\n{\n_id: 154\n, name: \n  'Chocolate Heaven'},\n{\n_id: 155\n, name: \n  'Tasty Lemon'},\n{\n_id: 156\n, name: \n  'Vanilla Dream'}\n];\ndbo.collection(\"products\").insertMany(myobj, \n  function(err, res) {\nif (err) throw err;\nconsole.log(res);\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "C:\\Users\\\nYour Name\n>node demo_mongodb_insert_id.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "{\nresult: { ok: 1, n: 3 },\nops: [\n{ \n  _id: 154, name: 'Chocolate Heaven },\n{ \n  _id: 155, name: 'Tasty Lemon },\n{ \n  _id: 156, name: 'Vanilla Dream } ],\ninsertedCount: 3,\ninsertedIds: [\n154,\n155,\n156 ]\n}",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\n# TODO: Complete this line\n  Inc\", address: \"Highway 37\" };\ndbo.collection(\"customers\").insertOne(myobj, function(err, res) {\nif (err) throw err;\nconsole.log(\"1 \n  document \n  inserted\");\ndb.close();\n});\n});",
+      "solution": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myobj = { name: \"Company \n  Inc\", address: \"Highway 37\" };\ndbo.collection(\"customers\").insertOne(myobj, function(err, res) {\nif (err) throw err;\nconsole.log(\"1 \n  document \n  inserted\");\ndb.close();\n});\n});"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "C:\\Users\\\nYour Name\n# TODO: Complete this line",
+      "solution": "C:\\Users\\\nYour Name\n>node demo_mongodb_insert.js"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "db1d3e2b-27e2-4dcc-9f53-e80b021105b6",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "24cbdebe-c2bc-4141-896b-7f40abe0fe4d",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "140d3e55-2414-4ada-874b-5b6244799f39",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is or\ndocument\nas it?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "the same as a\nrecord\nin MySQL\nThe first parameter of the\ninsertOne()\nmethod is an object containing the \nname(s) and value(s) of each field in the document you want to insert",
+        "called in MongoDB"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of or\ndocument\nas it is 'called in MongoDB'."
+    },
+    {
+      "question": "What is A\ndocument\nin MongoDB?",
+      "options": [
+        "None of the above.",
+        "the same as a\nrecord\nin MySQL\nThe first parameter of the\ninsertOne()\nmethod is an object containing the \nname(s) and value(s) of each field in the document you want to insert",
+        "called in MongoDB",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of A\ndocument\nin MongoDB is 'the same as a\nrecord\nin MySQL\nThe first parameter of the\ninsertOne()\nmethod is an object containing the \nname(s) and value(s) of each field in the document you want to insert'."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsMongoDBInsert concepts and techniques. You'll learn how to use Node.jsMongoDBInsert effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsMongoDBInsert and how to apply it in your projects."
+}

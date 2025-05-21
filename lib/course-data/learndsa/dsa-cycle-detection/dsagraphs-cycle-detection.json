@@ -1,0 +1,98 @@
+{
+  "id": "3cbb97eb-8933-4d14-abea-8aa4475a86c7",
+  "title": "DSAGraphs Cycle Detection",
+  "slug": "dsagraphs-cycle-detection",
+  "metadata": {
+    "description": "Learn about DSAGraphs Cycle Detection with clear explanations and practical examples.",
+    "keywords": [
+      "self",
+      "cycle",
+      "visited",
+      "vertex",
+      "size",
+      "graph",
+      "detection",
+      "vertices",
+      "find",
+      "union"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 9,
+    "category": "LearnDSA",
+    "subcategory": "DSA Cycle Detection"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "DSA\nGraphs Cycle Detection\n\nCycles in Graphs\nA cycle in a Graph is a path that starts and ends at the same vertex",
+      "content": ", where no edges are repeated. It is similar to walking through a maze and ending up exactly where you started.\nF\nB\nC\nA\nE\nD\nG\nIs cyclic:\nDFS Cycle Detection\nA cycle can be defined slightly different depending on the situation. A self-loop for example, where an edge goes from and to the same vertex, might or might not be considered a cycle, depending on the problem you are trying to solve.\nCycle Detection\nIt is important to be able to detect cycles in Graphs because cycles can indicate problems or special conditions in many applications like networking, scheduling, and circuit design.\nThe two most common ways to detect cycles are:\nDepth First Search (DFS):\nDFS traversal explores the Graph and marks vertices as visited. A cycle is detected when the current vertex has an adjacent vertex that has already been visited.\nUnion-Find:\nThis works by initially defining each vertex as a group, or a subset. Then these groups are joined for every edge. Whenever a new edge is explored, a cycle is detected if two vertices already belong to the same group.\nHow cycle detection with DFS and Union-Find work, and how they are implemented, are explained in more detail below.\nDFS Cycle Detection for Undirected Graphs\nTo detect cycles in an undirected Graph using Depth First Search (DFS), we use a code very similar to\nthe DFS traversal code\non the \nHow it works:\nStart DFS traversal on each unvisited vertex (in case the Graph is not connected).\nDuring DFS, mark vertices as visited, and run DFS on the adjacent vertices (recursively).\nIf an adjacent vertex is already visited and is not the parent of the current vertex, a cycle is detected, and\nTrue\nis returned.\nIf DFS traversal is done on all vertices and no cycles are detected,\nFalse\nis returned.\nRun the animation below to see how DFS cycle detection runs on a specific Graph, starting in vertex A (this is the same as the \nF\nB\nC\nA\nE\nD\nG\nIs cyclic:\nDFS Cycle Detection\nThe DFS traversal starts in vertex A because that is the first vertex in the adjacency matrix. Then, for every new vertex visited, the traversal method is called recursively on all adjacent vertices that have not been visited yet. The cycle is detected when vertex F is visited, and it is discovered that the adjacent vertex C has already been visited.\nExample\nPython:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size  \n\n    def add_edge(self, u, v):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.adj_matrix[u][v] = 1\n            self.adj_matrix[v][u] = 1\n\n    def add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\n\n    def print_graph(self):\n        print(\"Adjacency Matrix:\")\n        for row in self.adj_matrix:\n            print(' '.join(map(str, row)))\n        print(\"\\nVertex Data:\")\n        for vertex, data in enumerate(self.vertex_data):\n            print(f\"Vertex {vertex}: {data}\")\n            \n    def dfs_util(self, v, visited, parent):\n        visited[v] = True\n\n        for i in range(self.size):\n            if self.adj_matrix[v][i] == 1:\n                if not visited[i]:\n                    if self.dfs_util(i, visited, v):\n                        return True\n                elif parent != i:\n                    return True\n        return False\n\n    def is_cyclic(self):\n        visited = [False] * self.size\n        for i in range(self.size):\n            if not visited[i]:\n                if self.dfs_util(i, visited, -1):\n                    return True\n        return False\n\ng = Graph(7)\n\ng.add_vertex_data(0, 'A')\ng.add_vertex_data(1, 'B')\ng.add_vertex_data(2, 'C')\ng.add_vertex_data(3, 'D')\ng.add_vertex_data(4, 'E')\ng.add_vertex_data(5, 'F')\ng.add_vertex_data(6, 'G')\n\ng.add_edge(3, 0)  # D - A\ng.add_edge(0, 2)  # A - C\ng.add_edge(0, 3)  # A - D\ng.add_edge(0, 4)  # A - E\ng.add_edge(4, 2)  # E - C\ng.add_edge(2, 5)  # C - F\ng.add_edge(2, 1)  # C - B\ng.add_edge(2, 6)  # C - G\ng.add_edge(1, 5)  # B - F\n\ng.print_graph()\n\nprint(\"\\nGraph has cycle:\", g.is_cyclic())\nRun Example \u00bb\nLine 66:\nThe DFS cycle detection starts when the\nis_cyclic()\nmethod is called.\nLine 37:\nThe\nvisited\narray is first set to\nfalse\nfor all vertices, because no vertices are visited yet at this point.\nLine 38-42:\nDFS cycle detection is run on all vertices in the Graph. This is to make sure all vertices are visited in case the Graph is not connected. If a node is already visited, there must be a cycle, and\nTrue\nis returned. If all nodes are visited just ones, which means no cycles are detected,\nFalse\nis returned.\nLine 24-34:\nThis is the part of the DFS cycle detection that visits a vertex, and then visits adjacent vertices recursively. A cycle is detected and\nTrue\nis returned if an adjacent vertex has already been visited, and it is not the parent node.\nDFS Cycle Detection for Directed Graphs\nTo detect cycles in Graphs that are directed, the algorithm is still very similar as for undirected Graphs, but the code must be modified a little bit because for a directed Graph, if we come to an adjacent node that has already been visited, it does not necessarily mean that there is a cycle.\nJust consider the following Graph where two paths are explored, trying to detect a cycle:\n1\n2\nC\nB\nD\nA\nIn path 1, the first path to be explored, vertices A->B->C are visited, no cycles detected.\nIn the second path to be explored (path 2), vertices D->B->C are visited, and the path has no cycles, right? But without changes in our program, a false cycle would actually be detected when going from D to the adjacent vertex B, because B has already been visited in path 1. To avoid such false detections, the code is modified to detect cycles only in case a node has been visited before in the same path.\nF\nB\nC\nA\nE\nD\nG\nIs cyclic:\nDFS Cycle Detection\nTo implement DFS cycle detection on a directed Graph, like in the animation above, we need to remove the symmetry we have in the adjacency matrix for undirected Graphs. We also need to use a\nrecStack\narray to keep track of visited vertices in the current recursive path.\nExample\nPython:\nclass Graph:\n    # ......\n    def add_edge(self, u, v):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.adj_matrix[u][v] = 1\nself.adj_matrix[v][u] = 1\n# ......\n    def dfs_util(self, v, visited, recStack):\n        visited[v] = True\n        recStack[v] = True\n        print(\"Current vertex:\",self.vertex_data[v])\n\n        for i in range(self.size):\n            if self.adj_matrix[v][i] == 1:\n                if not visited[i]:\n                    if self.dfs_util(i, visited, recStack):\n                        return True\n                elif recStack[i]:\n                    return True\n        \n        recStack[v] = False\n        return False\n\n    def is_cyclic(self):\n        visited = [False] * self.size\n        recStack = [False] * self.size\n        for i in range(self.size):\n            if not visited[i]:\n                print() #new line\n                if self.dfs_util(i, visited, recStack):\n                    return True\n        return False\n\ng = Graph(7)",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Section 2",
+      "content": "# ......\n\ng.add_edge(3, 0)  # D -> A\ng.add_edge(0, 2)  # A -> C\ng.add_edge(2, 1)  # C -> B\ng.add_edge(2, 4)  # C -> E\ng.add_edge(1, 5)  # B -> F\ng.add_edge(4, 0)  # E -> A\ng.add_edge(2, 6)  # C -> G\n\ng.print_graph()\n\nprint(\"Graph has cycle:\", g.is_cyclic())\nRun Example \u00bb\nLine 6:\nThis line is removed because it is only applicable for undirected Graphs.\nLine 26:\nThe\nrecStack\narray keeps an overview over which vertices have been visited during a recursive exploration of a path.\nLine 14-19:\nFor every adjacent vertex not visited before, do a recursive DFS cycle detection. If an adjacent vertex has been visited before, also in the same recursive path (line 13), a cycle has been found, and\nTrue\nis returned.\nUnion-Find Cycle Detection\nDetecting cycles using Union-Find is very different from using Depth First Search.\nUnion-Find cycle detection works by first putting each node in its own subset (like a bag or container). Then, for every edge, the subsets belonging to each vertex are merged. For an edge, if the vertices already belong to the same subset, it means that we have found a cycle.\nF\nE\nD\nA\nC\nB\nG\nIs cyclic:\nUnion-Find Cycle Detection\nIn the animation above, Union-Find cycle detection explores the edges in the Graph. As edges are explored, the subset of vertex A grows to also include vertices B, C, and D. The cycle is detected when the edge between A and D is explored, and it is discovered that both A and D already belong to the same subset.\nThe edges between D, E, and F also construct a circle, but this circle is not detected because the algorithm stops (returns\nTrue\n) when the first circle is detected.\nUnion-Find cycle detection is only applicable for Graphs that are undirected.\nUnion-Find cycle detection is implemented using the\nadjacency matrix representation\n, so setting up the Graph structure with vertices and edges is basically the same as in \nExample\nPython:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n        self.parent = [i for i in range(size)]  # Union-Find array\n\n    def add_edge(self, u, v):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.adj_matrix[u][v] = 1\n            self.adj_matrix[v][u] = 1\n\n    def add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\n\n    def find(self, i):\n        if self.parent[i] == i:\n            return i\n        return self.find(self.parent[i])\n\n    def union(self, x, y):\n        x_root = self.find(x)\n        y_root = self.find(y)\n        print('Union:',self.vertex_data[x],'+',self.vertex_data[y])\n        self.parent[x_root] = y_root\n        print(self.parent,'\\n')\n\n    def is_cyclic(self):\n        for i in range(self.size):\n            for j in range(i + 1, self.size):\n                if self.adj_matrix[i][j]:\n                    x = self.find(i)\n                    y = self.find(j)\n                    if x == y:\n                        return True\n                    self.union(x, y)\n        return False\n\ng = Graph(7)\n\ng.add_vertex_data(0, 'A')\ng.add_vertex_data(1, 'B')\ng.add_vertex_data(2, 'C')\ng.add_vertex_data(3, 'D')\ng.add_vertex_data(4, 'E')\ng.add_vertex_data(5, 'F')\ng.add_vertex_data(6, 'G')\n\ng.add_edge(1, 0)  # B - A\ng.add_edge(0, 3)  # A - D\ng.add_edge(0, 2)  # A - C\ng.add_edge(2, 3)  # C - D\ng.add_edge(3, 4)  # D - E\ng.add_edge(3, 5)  # D - F\ng.add_edge(3, 6)  # D - G\ng.add_edge(4, 5)  # E - F\n\nprint(\"Graph has cycle:\", g.is_cyclic())\nRun Example \u00bb\nLine 6:\nThe\nparent\narray contains the root vertex for every subset. This is used to detect a cycle by checking if two vertices on either side of an edge already belong to the same subset.\nLine 17:\nThe\nfind\nmethod finds the root of the set that the given vertex belongs to.\nLine 22:\nThe\nunion\nmethod combines two subsets.\nLine 29:\nThe\nis_cyclic\nmethod uses the\nfind\nmethod to detect a cycle if two vertices\nx\nand\ny\nare already in the same subset. If a cycle is not detected, the\nunion\nmethod is used to combine the subsets.\nDSA Exercises\nTest Yourself With Exercises\nExercise:\nWhat is a cycle in a Graph?\nA cycle in a Graph is a path \nthat starts and ends at the \nsame\n, where no\nare repeated.\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "894c3afb-4fc8-4c7e-a875-e2e6ed6aadf4",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "c4743aac-289b-4ef8-860f-9df890e2e44b",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "735be281-fdd1-46c8-846a-b2bf2560f00c",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is DSA\nGraphs Cycle Detection\n\nCycles in Graphs\nA cycle in a Graph?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "similar to walking through a maze and ending up exactly where you started",
+        "a path that starts and ends at the same vertex"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of DSA\nGraphs Cycle Detection\n\nCycles in Graphs\nA cycle in a Graph is 'a path that starts and ends at the same vertex'."
+    },
+    {
+      "question": "What is It?",
+      "options": [
+        "None of the above.",
+        "a path that starts and ends at the same vertex",
+        "None of the above.",
+        "similar to walking through a maze and ending up exactly where you started"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of It is 'similar to walking through a maze and ending up exactly where you started'."
+    }
+  ],
+  "summary": "This tutorial covers DSAGraphs Cycle Detection concepts and techniques. You'll learn how to use DSAGraphs Cycle Detection effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSAGraphs Cycle Detection and how to apply it in your projects."
+}

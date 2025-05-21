@@ -1,0 +1,151 @@
+{
+  "id": "7d5d6b62-e7cc-4994-a24d-11f8c633075e",
+  "title": "PHPInclude Files",
+  "slug": "phpinclude-files",
+  "metadata": {
+    "description": "Learn about PHPInclude Files with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "include",
+      "file",
+      "require",
+      "example",
+      "html",
+      "statement",
+      "body",
+      "menu",
+      "text",
+      "echo"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "PHP Include"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nInclude Files",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The\ninclude\n(or\nrequire\n) statement takes all the text/code/markup that exists in the specified file and copies it into\nthe file that uses the include statement.\nIncluding files is very useful when you want to include the same PHP,\nHTML, or text on multiple pages of a website.\nPHP include and require Statements\nIt is possible to insert the content of one PHP file into another PHP file (before the \nserver executes it), with the include or require statement.\nThe include and require statements are identical, except upon failure:\nrequire\nwill produce a fatal error (E_COMPILE_ERROR) and stop the script\ninclude\nwill only produce a warning (E_WARNING) and the script will continue\nSo, if you want the execution to go on and show users the output, even if the \ninclude file is missing, use the include statement. Otherwise, in case of FrameWork, CMS, or a \ncomplex PHP application coding, always use the require statement to include a key file to the \nflow of execution. This will help avoid compromising your application's security \nand integrity, just in-case one key file is accidentally missing.\nIncluding files saves a lot of work. This means that \nyou can create a standard header, footer, or menu file for all your web pages. \nThen, when the header needs to be updated, you can only \nupdate the header include file.\nSyntax\ninclude '\nfilename\n';\nor\nrequire '\nfilename\n';\nPHP include Examples\nExample 1\nAssume we have a standard footer file called \"footer.php\", that looks like this:\n<?php\necho \"<p>Copyright &copy; 1999-\" . date(\"Y\") . \" .com</p>\";\n?>\nTo include the footer file in a page, use the\ninclude\nstatement:\nExample\n<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<p>Some text.</p>\n<p>Some more text.</p>\n<?php include 'footer.php';?>\n</body>\n</html>\nRun example \u00bb\nExample 2\nAssume we have a standard menu file called \"menu.php\":\n<?php\necho '<a href=\"/default.asp\">Home</a> -\n<a href=\"/html/default.asp\">HTML Tutorial</a> -\n<a href=\"/css/default.asp\">CSS Tutorial</a> -\n<a href=\"/js/default.asp\">JavaScript Tutorial</a> -\n<a href=\"default.asp\">PHP Tutorial</a>';\n?>\nAll pages in the Web site should use this menu file. Here is how it can be done \n(we are using a <div> element so that the menu easily can be styled with CSS later):\nExample\n<html>\n<body>\n<div class=\"menu\">\n<?php include 'menu.php';?>\n</div>\n<h1>Welcome to my home page!</h1>\n<p>Some text.</p>\n<p>Some more text.</p>\n</body>\n</html>\nRun example \u00bb\nExample 3\nAssume we have a file called \"vars.php\", with some variables defined:\n<?php\n$color='red';\n$car='BMW';\n?>\nThen, if we include the \"vars.php\" file, the variables can be used in the calling file:\nExample\n<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<?php include 'vars.php';\necho \"I have a $color $car.\";\n?>\n</body>\n</html>\nRun example \u00bb\nPHP include vs. require\nThe\nrequire\nstatement is also used to include a file into the PHP code.\nHowever, there is one big difference between include and require; when a \nfile is included with the\ninclude\nstatement and PHP cannot find it, the script \nwill continue to execute:\nExample\n<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<?php include 'noFileExists.php';\necho \"I have a $color $car.\";\n?>\n</body>\n</html>\nRun example \u00bb\nIf we do the same example using the\nrequire\nstatement, the \necho statement will not be executed because the script execution dies after the\nrequire\nstatement returned a fatal error:\nExample\n<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<?php require 'noFileExists.php';\necho \"I have a $color $car.\";\n?>\n</body>\n</html>\nRun example \u00bb\nUse\nrequire\nwhen the file is required by the application.\nUse\ninclude\nwhen the file is not required and application should continue when file is not found.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<p>Some text.</p>\n<p>Some more text.</p>\n<?php include 'footer.php';?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<html>\n<body>\n<div class=\"menu\">\n<?php include 'menu.php';?>\n</div>\n<h1>Welcome to my home page!</h1>\n<p>Some text.</p>\n<p>Some more text.</p>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<?php include 'vars.php';\necho \"I have a $color $car.\";\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<?php include 'noFileExists.php';\necho \"I have a $color $car.\";\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<?php require 'noFileExists.php';\necho \"I have a $color $car.\";\n?>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n<body>\n# TODO: Complete this line\n<p>Some text.</p>\n<p>Some more text.</p>\n<?php include 'footer.php';?>\n</body>\n</html>",
+      "solution": "<html>\n<body>\n<h1>Welcome to my home page!</h1>\n<p>Some text.</p>\n<p>Some more text.</p>\n<?php include 'footer.php';?>\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n<body>\n# TODO: Complete this line\n<?php include 'menu.php';?>\n</div>\n<h1>Welcome to my home page!</h1>\n<p>Some text.</p>\n<p>Some more text.</p>\n</body>\n</html>",
+      "solution": "<html>\n<body>\n<div class=\"menu\">\n<?php include 'menu.php';?>\n</div>\n<h1>Welcome to my home page!</h1>\n<p>Some text.</p>\n<p>Some more text.</p>\n</body>\n</html>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "daa4e71a-c152-4935-be08-a00efb4d09df",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "bddeb3b9-7185-4015-b643-6da46d919172",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "43b7fdb7-05ad-4943-9e4e-c89f3595b650",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Including files?",
+      "options": [
+        "very useful when you want to include the same PHP",
+        "None of the above.",
+        "None of the above.",
+        "possible to insert the content of one PHP file into another PHP file (before the \nserver executes it)"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Including files is 'very useful when you want to include the same PHP'."
+    },
+    {
+      "question": "What is PHP include and require Statements\nIt?",
+      "options": [
+        "possible to insert the content of one PHP file into another PHP file (before the \nserver executes it)",
+        "None of the above.",
+        "very useful when you want to include the same PHP",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of PHP include and require Statements\nIt is 'possible to insert the content of one PHP file into another PHP file (before the \nserver executes it)'."
+    }
+  ],
+  "summary": "This tutorial covers PHPInclude Files concepts and techniques. You'll learn how to use PHPInclude Files effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPInclude Files and how to apply it in your projects."
+}

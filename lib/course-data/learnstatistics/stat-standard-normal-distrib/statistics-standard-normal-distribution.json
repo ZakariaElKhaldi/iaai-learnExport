@@ -1,0 +1,142 @@
+{
+  "id": "e4515beb-90d1-4d9d-9558-a5f23eeec9ee",
+  "title": "Statistics - Standard Normal Distribution",
+  "slug": "statistics-standard-normal-distribution",
+  "metadata": {
+    "description": "Learn about Statistics - Standard Normal Distribution with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "value",
+      "standard",
+      "values",
+      "frac",
+      "find",
+      "distribution",
+      "probability",
+      "normal",
+      "sigma",
+      "height"
+    ],
+    "difficulty": "advanced",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnStatistics",
+    "subcategory": "Stat Standard Normal Distrib."
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Statistics - Standard Normal Distribution",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The standard normal distribution is a\nnormal distribution\nwhere the mean is 0 and the standard deviation is 1.\nStandard Normal Distribution\nNormally distributed data can be transformed into a standard normal distribution.\nStandardizing normally distributed data makes it easier to compare different sets of data.\nThe standard normal distribution is used for:\nCalculating confidence intervals\nHypothesis tests\nHere is a graph of the standard normal distribution with probability values (p-values) between the standard deviations:\nStandardizing makes it easier to calculate probabilities.\nThe functions for calculating probabilities are complex and difficult to calculate by hand.\nTypically, probabilities are found by looking up tables of pre-calculated values, or by using software and programming.\nThe standard normal distribution is also called the 'Z-distribution' and the values are called 'Z-values' (or Z-scores).\nZ-Values\nZ-values express how many standard deviations from the mean a value is.\nThe formula for calculating a Z-value is:\n\\(\\displaystyle Z = \\frac{x-\\mu}{\\sigma}\\)\n\\(x\\) is the value we are standardizing, \\(\\mu\\) is the mean, and \\(\\sigma\\) is the standard deviation.\nFor example, if we know that:\nThe mean height of people in Germany is 170 cm (\\(\\mu\\))\nThe standard deviation of the height of people in Germany is 10 cm (\\(\\sigma\\))\nBob is 200 cm tall (\\(x\\))\nBob is 30 cm taller than the average person in Germany.\n30 cm is 3 times 10 cm. So Bob's height is 3 standard deviations larger than mean height in Germany.\nUsing the formula:\n\\(\\displaystyle Z = \\frac{x-\\mu}{\\sigma} = \\frac{200-170}{10} = \\frac{30}{10} = \\underline{3} \\)\nThe Z-value of Bob's height (200 cm) is 3.\nFinding the P-value of a Z-Value\nUsing a\nZ-table\nor programming we can calculate how many people Germany are shorter than Bob and how many are taller.\nExample\nWith Python use the Scipy Stats library\nnorm.cdf()\nfunction find the probability of getting less than a Z-value of 3:\nimport scipy.stats as stats\nprint(stats.norm.cdf(3))\n\nExample\nWith R use the built-in\npnorm()\nfunction find the probability of getting less than a Z-value of 3:\npnorm(3)\n\nUsing either method we can find that the probability is \\(\\approx 0.9987\\), or \\( 99.87\\% \\)\nWhich means that Bob is taller than 99.87% of the people in Germany.\nHere is a graph of the standard normal distribution and a Z-value of 3 to visualize the probability:\nThese methods find the p-value up to the particular z-value we have.\nTo find the p-value above the z-value we can calculate 1 minus the probability.\nSo in Bob's example, we can calculate 1 - 0.9987 = 0.0013, or 0.13%.\nWhich means that only 0.13% of Germans are taller than Bob.\nFinding the P-Value Between Z-Values\nIf we instead want to know how many people are between 155 cm and 165 cm in Germany using the same example:\nThe mean height of people in Germany is 170 cm (\\(\\mu\\))\nThe standard deviation of the height of people in Germany is 10 cm (\\(\\sigma\\))\nNow we need to calculate Z-values for both 155 cm and 165 cm:\n\\(\\displaystyle Z = \\frac{x-\\mu}{\\sigma} = \\frac{155-170}{10} = \\frac{-15}{10} = \\underline{-1.5} \\)\nThe Z-value of 155 cm is -1.5\n\\(\\displaystyle Z = \\frac{x-\\mu}{\\sigma} = \\frac{165-170}{10} = \\frac{-5}{10} = \\underline{-0.5} \\)\nThe Z-value of 165 cm is -0.5\nUsing the\nZ-table\nor programming we can find that the p-value for the two z-values:\nThe probability of a z-value smaller than -0.5 (shorter than 165 cm) is 30.85%\nThe probability of a z-value smaller than -1.5 (shorter than 155 cm) is 6.68%\nSubtract 6.68% from 30.85% to find the probability of getting a z-value between them.\n30.85% - 6.68% =\n24.17%\nHere is a set of graphs illustrating the process:\nFinding the Z-value of a P-Value\nYou can also use p-values (probability) to find z-values.\nFor example:\n\"How tall are you if you are taller than 90% of Germans?\"\nThe p-value is 0.9, or 90%.\nUsing a\nZ-table\nor programming we can calculate the z-value:\nExample\nWith Python use the Scipy Stats library\nnorm.ppf()\nfunction find the z-value separating the top 10% from the bottom 90%:\nimport scipy.stats as stats\nprint(stats.norm.ppf(0.9))\n\nExample\nWith R use the built-in\nqnorm()\nfunction find the z-value separating the top 10% from the bottom 90%:\nqnorm(0.9)\n\nUsing either method we can find that the Z-value is \\(\\approx 1.281\\)\nMeaning that a person that is 1.281 standard deviations taller than the mean height of Germans is taller than 90% of Germans.\nWe then use the formula to calculate the height (\\(x\\)) based on a mean (\\(\\mu\\)) of 170 cm and standard deviation (\\(\\sigma\\)) of 10 cm:\n\\(\\displaystyle Z  = \\frac{x-\\mu}{\\sigma} \\)\n\\(\\displaystyle  1.281 = \\frac{x-170}{10} \\)\n\\(1.281 \\cdot 10 = x-170 \\)\n\\(12.81 = x - 170 \\)\n\\(12.81 + 170 = x \\)\n\\(\\underline{182.81} = x \\)\nSo we can conclude that:\n\"You have to be at\nleast\n182.81 cm tall to be taller than 90% of Germans\"\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import scipy.stats as stats\nprint(stats.norm.cdf(3))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "pnorm(3)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import scipy.stats as stats\nprint(stats.norm.ppf(0.9))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "qnorm(0.9)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your python code here",
+      "solution": "import scipy.stats as stats\nprint(stats.norm.cdf(3))"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your python code here",
+      "solution": "pnorm(3)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "809ff8b1-476d-4189-b0b5-3cc6a4d5d7f0",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e70e9254-d95c-4555-9956-fa8942690746",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "1f54ccdb-45eb-42a7-b5ae-ea9518d249ce",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Standard Normal Distribution\n\nThe standard normal distribution is a\nnormal distribution\nwhere the mean?",
+      "options": [
+        "used for:\nCalculating confidence intervals\nHypothesis tests\nHere is a graph of the standard normal distribution with probability values (p-values) between the standard deviations:\nStandardizing makes it easier to calculate probabilities",
+        "0 and the standard deviation is 1",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Standard Normal Distribution\n\nThe standard normal distribution is a\nnormal distribution\nwhere the mean is '0 and the standard deviation is 1'."
+    },
+    {
+      "question": "What is The standard normal distribution?",
+      "options": [
+        "None of the above.",
+        "used for:\nCalculating confidence intervals\nHypothesis tests\nHere is a graph of the standard normal distribution with probability values (p-values) between the standard deviations:\nStandardizing makes it easier to calculate probabilities",
+        "0 and the standard deviation is 1",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The standard normal distribution is 'used for:\nCalculating confidence intervals\nHypothesis tests\nHere is a graph of the standard normal distribution with probability values (p-values) between the standard deviations:\nStandardizing makes it easier to calculate probabilities'."
+    }
+  ],
+  "summary": "This tutorial covers Statistics - Standard Normal Distribution concepts and techniques. You'll learn how to use Statistics - Standard Normal Distribution effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Statistics - Standard Normal Distribution and how to apply it in your projects."
+}

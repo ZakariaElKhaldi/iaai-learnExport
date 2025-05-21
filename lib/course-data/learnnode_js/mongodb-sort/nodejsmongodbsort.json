@@ -1,0 +1,160 @@
+{
+  "id": "abf3f250-2b24-4c89-a472-8d7ded0e2a07",
+  "title": "Node.jsMongoDBSort",
+  "slug": "nodejsmongodbsort",
+  "metadata": {
+    "description": "Learn about Node.jsMongoDBSort with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "name",
+      "address",
+      "sort",
+      "result",
+      "mongoclient",
+      "mongodb",
+      "descending",
+      "example",
+      "function",
+      "throw"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnNode.js",
+    "subcategory": "MongoDB Sort"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nMongoDB\nSort",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Sort the Result\nUse the\nsort()\nmethod to sort the result in ascending or descending order.\nThe\nsort()\nmethod takes one parameter, an \nobject defining the sorting order.\nExample\nSort the result alphabetically by name:\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar mysort = { name: 1 };\ndbo.collection(\"customers\").find()\n.sort(mysort)\n.toArray(function(err, result) {\nif (err) throw err;\nconsole.log(result);\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_sort.js\" and run the file:\nRun \"demo_sort.js\"\nC:\\Users\\\nYour Name\n>node demo_sort.js\nWhich will give you this result:\n[\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a86, name: 'Amy', \n  address: 'Apple st 652'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8e, name: 'Ben', address: 'Park Lane 38'},\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a8a, \n  name: 'Betty', address: 'Green Grass 1'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a90, name: 'Chuck', address: \n  'Main Road 989'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a87, name: 'Hannah', address: \n  'Mountain 21'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a84, name: 'John', address: 'Highway 71'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a88, name: 'Michael', address: 'Valley 345'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a85, name: 'Peter', address: 'Lowstreet 4'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a8b, name: 'Richard', \n  address: 'Sky st 331'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a89, name: 'Sandy', address: 'Ocean blvd 2'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8c, name: 'Susan', address: 'One way \n  98'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8d, name: 'Vicky', address: 'Yellow Garden 2'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a91, name: 'Viola', address: 'Sideway \n  1633'},\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a8f, name: 'William', \n  address: 'Central st 954'}\n]\nSort Descending\nUse the value -1 in the sort object to sort descending.\n{ name: 1 } // ascending\n{ name: -1 } // descending\nExample\nSort the result reverse alphabetically by name:\nvar MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar mysort = { name: -1 };\ndbo.collection(\"customers\").find()\n.sort(mysort)\n.toArray(function(err, result) {\nif (err) throw err;\nconsole.log(result);\ndb.close();\n});\n});\nRun example \u00bb\nSave the code above in a file called \"demo_sort_desc.js\" and run the file:\nRun \"demo_sort_desc.js\"\nC:\\Users\\\nYour Name\n>node demo_sort_desc.js\nWhich will give you this result:\n[\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a8f, name: 'William', \n  address: 'Central st 954'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a91, name: 'Viola', address: 'Sideway \n  1633'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8d, name: 'Vicky', address: 'Yellow Garden 2'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8c, name: 'Susan', address: 'One way \n  98'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a89, name: 'Sandy', address: 'Ocean blvd 2'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a8b, name: 'Richard', \n  address: 'Sky st 331'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a85, name: 'Peter', address: 'Lowstreet 4'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a88, name: 'Michael', address: 'Valley 345'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a84, name: 'John', address: 'Highway 71'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a87, name: 'Hannah', address: \n  'Mountain 21'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a90, name: 'Chuck', address: \n  'Main Road 989'},\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a8a, \n  name: 'Betty', address: 'Green Grass 1'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8e, name: 'Ben', address: 'Park Lane 38'},\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a86, name: 'Amy', \n  address: 'Apple st 652'}\n]\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar mysort = { name: 1 };\ndbo.collection(\"customers\").find()\n.sort(mysort)\n.toArray(function(err, result) {\nif (err) throw err;\nconsole.log(result);\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "C:\\Users\\\nYour Name\n>node demo_sort.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "[\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a86, name: 'Amy', \n  address: 'Apple st 652'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8e, name: 'Ben', address: 'Park Lane 38'},\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a8a, \n  name: 'Betty', address: 'Green Grass 1'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a90, name: 'Chuck', address: \n  'Main Road 989'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a87, name: 'Hannah', address: \n  'Mountain 21'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a84, name: 'John', address: 'Highway 71'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a88, name: 'Michael', address: 'Valley 345'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a85, name: 'Peter', address: 'Lowstreet 4'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a8b, name: 'Richard', \n  address: 'Sky st 331'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a89, name: 'Sandy', address: 'Ocean blvd 2'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8c, name: 'Susan', address: 'One way \n  98'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8d, name: 'Vicky', address: 'Yellow Garden 2'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a91, name: 'Viola', address: 'Sideway \n  1633'},\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a8f, name: 'William', \n  address: 'Central st 954'}\n]",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar mysort = { name: -1 };\ndbo.collection(\"customers\").find()\n.sort(mysort)\n.toArray(function(err, result) {\nif (err) throw err;\nconsole.log(result);\ndb.close();\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "C:\\Users\\\nYour Name\n>node demo_sort_desc.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "[\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a8f, name: 'William', \n  address: 'Central st 954'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a91, name: 'Viola', address: 'Sideway \n  1633'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8d, name: 'Vicky', address: 'Yellow Garden 2'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8c, name: 'Susan', address: 'One way \n  98'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a89, name: 'Sandy', address: 'Ocean blvd 2'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a8b, name: 'Richard', \n  address: 'Sky st 331'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a85, name: 'Peter', address: 'Lowstreet 4'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a88, name: 'Michael', address: 'Valley 345'},\n{ _id: \n  58fdbf5c0ef8a50b4cdd9a84, name: 'John', address: 'Highway 71'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a87, name: 'Hannah', address: \n  'Mountain 21'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a90, name: 'Chuck', address: \n  'Main Road 989'},\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a8a, \n  name: 'Betty', address: 'Green Grass 1'},\n{ _id: 58fdbf5c0ef8a50b4cdd9a8e, name: 'Ben', address: 'Park Lane 38'},\n{ \n  _id: 58fdbf5c0ef8a50b4cdd9a86, name: 'Amy', \n  address: 'Apple st 652'}\n]",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar mysort = { name: 1 };\ndbo.collection(\"customers\").find()\n.sort(mysort)\n.toArray(function(err, result) {\nif (err) throw err;\n# TODO: Complete this line\ndb.close();\n});\n});",
+      "solution": "var MongoClient = require('mongodb').MongoClient;\nvar url = \"mongodb://localhost:27017/\";\nMongoClient.connect(url, function(err, db) {\nif (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar mysort = { name: 1 };\ndbo.collection(\"customers\").find()\n.sort(mysort)\n.toArray(function(err, result) {\nif (err) throw err;\nconsole.log(result);\ndb.close();\n});\n});"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "C:\\Users\\\nYour Name\n# TODO: Complete this line",
+      "solution": "C:\\Users\\\nYour Name\n>node demo_sort.js"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "4f0dc8f4-5606-4f25-af2b-d2cbcb769f19",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "c91b3604-3db4-46f9-9396-52d40b48bc58",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "2224fc01-2dd9-41e8-b566-d00947244f0c",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsMongoDBSort concepts and techniques. You'll learn how to use Node.jsMongoDBSort effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsMongoDBSort and how to apply it in your projects."
+}

@@ -1,0 +1,169 @@
+{
+  "id": "080496d9-0ed9-41e6-ad91-789d6d79c4f2",
+  "title": "Django - Global Static Files",
+  "slug": "django-global-static-files",
+  "metadata": {
+    "description": "Learn about Django - Global Static Files with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "static",
+      "file",
+      "files",
+      "folder",
+      "mystaticfiles",
+      "html",
+      "example",
+      "django",
+      "root",
+      "myglobal"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Add Global Static Files"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Django - Global Static Files",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Add a Global CSS File\nWe have learned how to add a static file in the application's\nstatic\nfolder, and how to use it in the application.\nBut what if other applications in your project wants to use the file?\nThen we have to create a folder on the root directory and put the file(s) there.\nIt is not enough to create a\nstatic\nfolder in the root directory,\nand Django will fix the rest.\nWe have to tell Django where to look for these static files.\nStart by creating a folder on the project's root level,\nthis folder can be called whatever you like, I will call it\nmystaticfiles\nin this tutorial:\nmy_tennis_club\ndb.sqlite3\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/\nAdd a CSS file in the\nmystaticfiles\nfolder, \nthe name is your choice, we will call it\nmyglobal.css\nin this example:\nmy_tennis_club\ndb.sqlite3\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/\nmyglobal.css\nOpen the CSS file and insert the following:\nmy_tennis_club/mystaticfiles/myglobal.css\n:\nbody {\n  color: violet;\n}\nModify Settings\nYou will have to tell Django to also look for static files in the\nmystaticfiles\nfolder in the root directory,\nthis is done in the\nsettings.py\nfile:\nAdd a\nSTATICFILES_DIRS\nlist:\nmy_tennis_club/my_tennis_club/settings.py\n:\n.\n.\n\nSTATIC_ROOT = BASE_DIR / 'productionfiles'\n\nSTATIC_URL = 'static/'\n\n#Add this in your settings.py file:\nSTATICFILES_DIRS = [\n    BASE_DIR / 'mystaticfiles'\n]\n.\n.\nIn the\nSTATICFILES_DIRS\nlist, you can list all the directories where Django should look for static files.\nThe\nBASE_DIR\nkeyword represents the root directory of the project,\nand together with the\n/ \"mystaticfiles\"\n, it \nmeans the\nmystaticfiles\nfolder in the root \ndirectory.\nSearch Order\nIf you have files with the same name, Django will use the first occurrence of \nthe file.\nThe search starts in the directories listed in\nSTATICFILES_DIRS\n, using the order you have provided.\nThen\n, if the file is not found, the search continues in the\nstatic\nfolder of each application.\nModify the Template\nNow you have a\nglobal\nCSS file for the entire project, which can be \naccessed from all your applications.\nTo use it in a template, use the same syntax as you did for the\nmyfirst.css\nfile:\nBegin the template with the following:\n{% load static %}\nAnd refer to the file like this:\n<link rel=\"stylesheet\" href=\"{% static 'myglobal.css' %}\">\nExample\nmy_tennis_club/members/templates/template.html\n:\n{% load static %}\n<!DOCTYPE html>\n<html>\n<link rel=\"stylesheet\" href=\"{% static 'myglobal.css' %}\">\n<body>\n\n{% for x in fruits %}\n  <h1>{{ x }}</h1>\n{% endfor %}\n\n</body>\n</html>\nRun Example \u00bb\nDidn't Work?\nThat is correct. You need to collect the static files once again.\nCollect Static Files\nRun the collectstatic command to collect the new static file:\npython manage.py collectstatic\nWhich will produce this result:\nYou have requested to collect static files at the destination\nlocation as specified in your settings:\nC:\\Users\\\nYour Name\n\\myworld\\my_tennis_club\\productionfiles\nThis will overwrite existing files!\nAre you sure you want to do this?\nType 'yes' to continue, or 'no' to cancel:\nType yes:\nType 'yes' to continue, or 'no' to cancel: yes\nWhich will produce this result:\n1 static file copied to 'C:\\Users\\\nYour Name\n\\myworld\\my_tennis_club\\productionfiles', 128 unmodified.\nThe Example Should Work\nStart the server, and the example will work:\npython manage.py runserver\nCheck out the result in your own browser:\n127.0.0.1:8000/testing/\n.\nExample\nmy_tennis_club/members/templates/template.html\n:\n{% load static %}\n<!DOCTYPE html>\n<html>\n<link rel=\"stylesheet\" href=\"{% static 'myglobal.css' %}\">\n<body>\n\n{% for x in fruits %}\n  <h1>{{ x }}</h1>\n{% endfor %}\n\n</body>\n</html>\nRun Example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "my_tennis_club\ndb.sqlite3\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "my_tennis_club\ndb.sqlite3\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/\nmyglobal.css",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "python manage.py collectstatic",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "You have requested to collect static files at the destination\nlocation as specified in your settings:\nC:\\Users\\\nYour Name\n\\myworld\\my_tennis_club\\productionfiles\nThis will overwrite existing files!\nAre you sure you want to do this?\nType 'yes' to continue, or 'no' to cancel:",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "Type 'yes' to continue, or 'no' to cancel: yes",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "1 static file copied to 'C:\\Users\\\nYour Name\n\\myworld\\my_tennis_club\\productionfiles', 128 unmodified.",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "python manage.py runserver",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "my_tennis_club\ndb.sqlite3\n# TODO: Complete this line\nmy_tennis_club/\nmembers/\nmystaticfiles/",
+      "solution": "my_tennis_club\ndb.sqlite3\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "my_tennis_club\ndb.sqlite3\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/\n# TODO: Complete this line",
+      "solution": "my_tennis_club\ndb.sqlite3\nmanage.py\nmy_tennis_club/\nmembers/\nmystaticfiles/\nmyglobal.css"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d0867cef-7e78-46f3-a279-a5c2e7670475",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2677cc96-e994-496a-b04f-7fce2dd433d2",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "96636e1a-2ae0-4c03-83f1-bd726745e0d7",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is It?",
+      "options": [
+        "your choice",
+        "not enough to create a\nstatic\nfolder in the root directory",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of It is 'not enough to create a\nstatic\nfolder in the root directory'."
+    },
+    {
+      "question": "What is the name?",
+      "options": [
+        "None of the above.",
+        "not enough to create a\nstatic\nfolder in the root directory",
+        "None of the above.",
+        "your choice"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of the name is 'your choice'."
+    }
+  ],
+  "summary": "This tutorial covers Django - Global Static Files concepts and techniques. You'll learn how to use Django - Global Static Files effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django - Global Static Files and how to apply it in your projects."
+}

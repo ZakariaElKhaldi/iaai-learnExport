@@ -1,0 +1,133 @@
+{
+  "id": "c5cfe158-e572-4161-9b8f-d5525c3c58b4",
+  "title": "Python MongoDBDelete Document",
+  "slug": "python-mongodbdelete-document",
+  "metadata": {
+    "description": "Learn about Python MongoDBDelete Document with clear explanations and practical examples.",
+    "keywords": [
+      "python",
+      "delete",
+      "documents",
+      "document",
+      "example",
+      "pymongo",
+      "myclient",
+      "mydb",
+      "mycol",
+      "method",
+      "mongodb"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Python Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPython",
+    "subcategory": "MongoDB Delete"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Python MongoDB\nDelete Document",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Delete Document\nTo delete one document, we use the\ndelete_one()\nmethod.\nThe first parameter of the\ndelete_one()\nmethod \nis a query object defining which document to delete.\nNote:\nIf the query finds more than one document, only the first \noccurrence is deleted.\nExample\nDelete the document with the address \"Mountain 21\":\nimport pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nmyquery = { \"address\": \"Mountain 21\" }\nmycol.delete_one(myquery)\nRun example \u00bb\nDelete Many Documents\nTo delete more than one document, use the\ndelete_many()\nmethod.\nThe first parameter of the\ndelete_many()\nmethod \nis a query object defining which documents to delete.\nExample\nDelete all documents were the address starts with the letter S:\nimport pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nmyquery = { \"address\": {\"$regex\": \"^S\"} }\nx = mycol.delete_many(myquery)\nprint(x.deleted_count, \" documents \n  deleted.\")\nRun example \u00bb\nDelete All Documents in a Collection\nTo delete all documents in a collection, pass an empty query object to the\ndelete_many()\nmethod:\nExample\nDelete all documents in the \"customers\" collection:\nimport pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nx = mycol.delete_many({})\nprint(x.deleted_count, \" documents \n  deleted.\")\nRun example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nmyquery = { \"address\": \"Mountain 21\" }\nmycol.delete_one(myquery)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nmyquery = { \"address\": {\"$regex\": \"^S\"} }\nx = mycol.delete_many(myquery)\nprint(x.deleted_count, \" documents \n  deleted.\")",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nx = mycol.delete_many({})\nprint(x.deleted_count, \" documents \n  deleted.\")",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pymongo\n# TODO: Complete this line\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nmyquery = { \"address\": \"Mountain 21\" }\nmycol.delete_one(myquery)",
+      "solution": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nmyquery = { \"address\": \"Mountain 21\" }\nmycol.delete_one(myquery)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\n# TODO: Complete this line\nmyquery = { \"address\": {\"$regex\": \"^S\"} }\nx = mycol.delete_many(myquery)\nprint(x.deleted_count, \" documents \n  deleted.\")",
+      "solution": "import pymongo\nmyclient = pymongo.MongoClient(\"mongodb://localhost:27017/\")\nmydb = myclient[\"mydatabase\"]\nmycol = mydb[\"customers\"]\nmyquery = { \"address\": {\"$regex\": \"^S\"} }\nx = mycol.delete_many(myquery)\nprint(x.deleted_count, \" documents \n  deleted.\")"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "843e7db7-b431-4977-ac32-72cc7aca9f0a",
+      "title": "Python Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2ce726a8-b23d-48c0-80a1-d22eef7d8cb3",
+      "title": "Python Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f1bf5b0c-d4fc-43d4-a96b-5c7ee57fb137",
+      "title": "Python Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is method?",
+      "options": [
+        "a query object defining which document to delete",
+        "None of the above.",
+        "deleted",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of method is 'a query object defining which document to delete'."
+    },
+    {
+      "question": "What is only the first \noccurrence?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "a query object defining which document to delete",
+        "deleted"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of only the first \noccurrence is 'deleted'."
+    }
+  ],
+  "summary": "This tutorial covers Python MongoDBDelete Document concepts and techniques. You'll learn how to use Python MongoDBDelete Document effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Python MongoDBDelete Document and how to apply it in your projects."
+}

@@ -1,0 +1,121 @@
+{
+  "id": "de4e4429-a01b-4279-96fb-6f764a900abe",
+  "title": "Game Movement",
+  "slug": "game-movement",
+  "metadata": {
+    "description": "Learn about Game Movement with clear explanations and practical examples.",
+    "keywords": [
+      "angle",
+      "speed",
+      "width",
+      "height",
+      "component",
+      "function",
+      "property",
+      "math",
+      "moveangle",
+      "newpos"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnCanvas",
+    "subcategory": "Game Movement"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Game Movement",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "With the new way of drawing components, explained in the Game Rotation chapter, the movements are more flexible.\nPlay again\nHow to Move Objects?\nAdd a\nspeed\nproperty to the\ncomponent\nconstructor, which represents the current speed of the component.\nAlso make some changes in the\nnewPos()\nmethod, to calculate the \nposition of the component, based on\nspeed\nand\nangle\n.\nBy default, the components are facing up, and by setting the speed \nproperty to 1, the component will start moving forward.\nExample\nfunction component(width, height, color, x, y) {\nthis.gamearea = gamearea;\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.speed = 1;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\nthis.newPos = function() {\nthis.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\n}\n}\n\nMaking Turns\nWe also want to be able to make left and right turns. Make a new \nproperty called\nmoveAngle\n, which indicates the current moving \nvalue, or rotation angle. In the\nnewPos()\nmethod calculate the\nangle\nbased on the\nmoveAngle\nproperty:\nExample\nSet the moveangle property to 1, and see what happens:\nfunction component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.moveAngle = 1;\nthis.speed = 1;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\nthis.newPos = function() {\nthis.angle += this.moveAngle * Math.PI / 180;\nthis.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\n}\n}\n\nUse the Keyboard\nHow does the red square move when using the keyboard?\nInstead of moving up and down, and from side to side, the red square moves forward when you use the \"up\" arrow,\nand turns left and right when pressing the left and right arrows.\nExample\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "function component(width, height, color, x, y) {\nthis.gamearea = gamearea;\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.speed = 1;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\nthis.newPos = function() {\nthis.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "function component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.moveAngle = 1;\nthis.speed = 1;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\nthis.newPos = function() {\nthis.angle += this.moveAngle * Math.PI / 180;\nthis.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function component(width, height, color, x, y) {\nthis.gamearea = gamearea;\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.speed = 1;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\n# TODO: Complete this line\nctx.restore();\n}\nthis.newPos = function() {\nthis.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\n}\n}",
+      "solution": "function component(width, height, color, x, y) {\nthis.gamearea = gamearea;\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.speed = 1;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\nthis.newPos = function() {\nthis.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\n}\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\n# TODO: Complete this line\nthis.speed = 1;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\nthis.newPos = function() {\nthis.angle += this.moveAngle * Math.PI / 180;\nthis.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\n}\n}",
+      "solution": "function component(width, height, color, x, y) {\nthis.width = width;\nthis.height = height;\nthis.angle = 0;\nthis.moveAngle = 1;\nthis.speed = 1;\nthis.x = x;\nthis.y = y;\nthis.update = function() {\nctx = myGameArea.context;\nctx.save();\nctx.translate(this.x, this.y);\nctx.rotate(this.angle);\nctx.fillStyle = color;\nctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore();\n}\nthis.newPos = function() {\nthis.angle += this.moveAngle * Math.PI / 180;\nthis.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\n}\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d7cbe65b-2de2-4e9c-85f5-4ecfcdb29a58",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "5f57a4fc-1288-43be-b194-a953394d4afc",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "6452f8dc-d53f-47ff-9ea9-46167b54f531",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is the movements?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "more flexible",
+        "facing up"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of the movements is 'more flexible'."
+    },
+    {
+      "question": "What is the components?",
+      "options": [
+        "None of the above.",
+        "facing up",
+        "None of the above.",
+        "more flexible"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of the components is 'facing up'."
+    }
+  ],
+  "summary": "This tutorial covers Game Movement concepts and techniques. You'll learn how to use Game Movement effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Game Movement and how to apply it in your projects."
+}

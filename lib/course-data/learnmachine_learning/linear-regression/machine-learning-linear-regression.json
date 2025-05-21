@@ -1,0 +1,160 @@
+{
+  "id": "123bad9d-99d5-4d97-8f48-0cbed972dcbd",
+  "title": "Machine Learning - Linear Regression",
+  "slug": "machine-learning-linear-regression",
+  "metadata": {
+    "description": "Learn about Machine Learning - Linear Regression with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "regression",
+      "example",
+      "linear",
+      "import",
+      "relationship",
+      "values",
+      "stats",
+      "slope",
+      "intercept",
+      "scipy"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMachine Learning",
+    "subcategory": "Linear Regression"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Machine Learning - Linear Regression",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Regression\nThe term regression is used when you try to find the relationship between variables.\nIn Machine Learning, and in statistical modeling, that relationship is used to predict the outcome of future events.\nLinear Regression\nLinear regression uses the relationship between the data-points to draw a straight line through \nall them.\nThis line can be used to predict future values.\nIn Machine Learning, predicting the future is very important.\nHow Does it Work?\nPython has methods for finding a relationship between data-points and to draw a line of linear regression. \nWe will show you \nhow to use these methods instead of going through the mathematic formula.\nIn the example below, the x-axis represents age, and the y-axis represents speed. We have registered the age and speed of 13 cars as they were passing a \ntollbooth. Let us see if the data we collected could be used in a linear \nregression:\nExample\nStart by drawing a scatter plot:\nimport matplotlib.pyplot as plt\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nplt.scatter(x, y)\nplt.show()\nResult:\nRun example \u00bb\nExample\nImport\nscipy\nand draw the line of Linear Regression:\nimport matplotlib.pyplot as plt\nfrom scipy import stats\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn slope * x + intercept\nmymodel = list(map(myfunc, x))\nplt.scatter(x, y)\nplt.plot(x, mymodel)\nplt.show()\nResult:\nRun example \u00bb\nExample Explained\nImport the modules you need.\nYou can learn about the Matplotlib module in our\nMatplotlib Tutorial\n.\nYou can learn about the SciPy module in our\nSciPy Tutorial\n.\nimport matplotlib.pyplot as plt\nfrom scipy \n  import stats\nCreate the arrays that represent the values of the x and y axis:\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = [99,86,87,88,111,86,103,87,94,78,77,85,86]\nExecute a method that returns some important key values of Linear Regression:\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\nCreate a function that uses the\nslope\nand\nintercept\nvalues to return a new value. This \nnew value represents where on the y-axis the corresponding x value will be \nplaced:\ndef myfunc(x):\nreturn slope * x + intercept\nRun each value of the x array through the function. This will result in a new \narray with new values for the y-axis:\nmymodel = list(map(myfunc, x))\nDraw the original scatter plot:\nplt.scatter(x, y)\nDraw the line of linear regression:\nplt.plot(x, mymodel)\nDisplay the diagram:\nplt.show()\nR for Relationship\nIt is important to know how the relationship between the values of the \nx-axis and the values of the y-axis is, if there are no relationship the linear \nregression can not be used to predict anything.\nThis relationship - the coefficient of correlation - is called\nr\n.\nThe\nr\nvalue ranges from -1 to 1, where 0 means no relationship, and 1 \n(and -1) \nmeans 100% related.\nPython and the Scipy module will compute this value for you, all you have to \ndo is feed it with the x and y values.\nExample\nHow well does my data fit in a linear regression?\nfrom scipy import stats\nx = \n  [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\nprint(r)\n\nNote:\nThe result -0.76 shows that there is a relationship, \n  not perfect, but it indicates that we could use linear regression in future \n  predictions.\nPredict Future Values\nNow we can use the information we have gathered to predict future values.\nExample: Let us try to predict the speed of a 10 years old car.\nTo do so, we need the same\nmyfunc()\nfunction \nfrom the example above:\ndef myfunc(x):\nreturn slope * x + intercept\nExample\nPredict the speed of a 10 years old car:\nfrom scipy import stats\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn slope * x + intercept\nspeed = myfunc(10)\nprint(speed)\nRun example \u00bb\nThe example predicted a speed at 85.6, which we also could read from the \ndiagram:\nBad Fit?\nLet us create an example where linear regression would not be the best method \nto predict future values.\nExample\nThese values for the x- and y-axis should result in a very bad fit for linear \n  regression:\nimport matplotlib.pyplot as plt\nfrom scipy import stats\nx = [89,43,36,36,95,10,66,34,38,20,26,29,48,64,6,5,36,66,72,40]\ny = \n  [21,46,3,35,67,95,53,72,58,10,26,34,90,33,38,20,56,2,47,15]\nslope, \n  intercept, r, p, std_err = stats.linregress(x, y)\ndef \n  myfunc(x):\nreturn slope * x + intercept\nmymodel = list(map(myfunc, \n  x))\nplt.scatter(x, y)\nplt.plot(x, mymodel)\nplt.show()\nResult:\nRun example \u00bb\nAnd the\nr\nfor relationship?\nExample\nYou should get a very low\nr\nvalue.\nimport numpy\nfrom scipy import stats\nx = \n  [89,43,36,36,95,10,66,34,38,20,26,29,48,64,6,5,36,66,72,40]\ny = \n  [21,46,3,35,67,95,53,72,58,10,26,34,90,33,38,20,56,2,47,15]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\nprint(r)\n\nThe result: 0.013 indicates a very bad relationship, and tells us that this data set is not suitable for linear regression.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import matplotlib.pyplot as plt\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nplt.scatter(x, y)\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import matplotlib.pyplot as plt\nfrom scipy import stats\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn slope * x + intercept\nmymodel = list(map(myfunc, x))\nplt.scatter(x, y)\nplt.plot(x, mymodel)\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "from scipy import stats\nx = \n  [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\nprint(r)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "from scipy import stats\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn slope * x + intercept\nspeed = myfunc(10)\nprint(speed)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import matplotlib.pyplot as plt\nfrom scipy import stats\nx = [89,43,36,36,95,10,66,34,38,20,26,29,48,64,6,5,36,66,72,40]\ny = \n  [21,46,3,35,67,95,53,72,58,10,26,34,90,33,38,20,56,2,47,15]\nslope, \n  intercept, r, p, std_err = stats.linregress(x, y)\ndef \n  myfunc(x):\nreturn slope * x + intercept\nmymodel = list(map(myfunc, \n  x))\nplt.scatter(x, y)\nplt.plot(x, mymodel)\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "import numpy\nfrom scipy import stats\nx = \n  [89,43,36,36,95,10,66,34,38,20,26,29,48,64,6,5,36,66,72,40]\ny = \n  [21,46,3,35,67,95,53,72,58,10,26,34,90,33,38,20,56,2,47,15]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\nprint(r)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import matplotlib.pyplot as plt\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\n# TODO: Complete this line\nplt.show()",
+      "solution": "import matplotlib.pyplot as plt\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nplt.scatter(x, y)\nplt.show()"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import matplotlib.pyplot as plt\nfrom scipy import stats\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\n# TODO: Complete this line\nreturn slope * x + intercept\nmymodel = list(map(myfunc, x))\nplt.scatter(x, y)\nplt.plot(x, mymodel)\nplt.show()",
+      "solution": "import matplotlib.pyplot as plt\nfrom scipy import stats\nx = [5,7,8,7,2,17,2,9,4,11,12,9,6]\ny = \n  [99,86,87,88,111,86,103,87,94,78,77,85,86]\nslope, intercept, r, \n  p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn slope * x + intercept\nmymodel = list(map(myfunc, x))\nplt.scatter(x, y)\nplt.plot(x, mymodel)\nplt.show()"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "45f7cd72-dcb5-4c2e-b84d-1dbf75439f04",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "f869a028-eac6-4ed3-a4f1-c46531677a2e",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "f18f7db1-afd3-484b-ac13-6e798d2924c7",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Linear Regression\n\nRegression\nThe term regression?",
+      "options": [
+        "None of the above.",
+        "used when you try to find the relationship between variables",
+        "None of the above.",
+        "used to predict the outcome of future events"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Linear Regression\n\nRegression\nThe term regression is 'used when you try to find the relationship between variables'."
+    },
+    {
+      "question": "What is that relationship?",
+      "options": [
+        "used when you try to find the relationship between variables",
+        "None of the above.",
+        "used to predict the outcome of future events",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of that relationship is 'used to predict the outcome of future events'."
+    }
+  ],
+  "summary": "This tutorial covers Machine Learning - Linear Regression concepts and techniques. You'll learn how to use Machine Learning - Linear Regression effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Machine Learning - Linear Regression and how to apply it in your projects."
+}

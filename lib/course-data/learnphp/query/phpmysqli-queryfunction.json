@@ -1,0 +1,124 @@
+{
+  "id": "d95f0abb-06e5-4f6b-9578-fc69d223e677",
+  "title": "PHPmysqli query()Function",
+  "slug": "phpmysqli-queryfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli query()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "query",
+      "mysqli",
+      "result",
+      "style",
+      "perform",
+      "connection",
+      "echo",
+      "example",
+      "object",
+      "database"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "query"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli query()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nPerform query against a database:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n// Check connection\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Perform query\nif ($result = $mysqli -> query(\"SELECT * FROM Persons\")) \n  {\necho \"Returned rows are: \" . $result -> num_rows;\n// Free result set\n$result -> free_result();\n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe query() / mysqli_query() function performs a query against a database.\nSyntax\nObject oriented style:\n$mysqli -> query(\nquery, \n  resultmode\n)\nProcedural style:\nmysqli_query(\nconnection, query, resultmode\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nquery\nRequired. Specifies the SQL query string\nresultmode\nOptional. A constant. Can be one of the following:\nMYSQLI_USE_RESULT (Use this to retrieve large amount of  data)\nMYSQLI_STORE_RESULT (This is default)\nTechnical Details\nReturn Value:\nFor successful SELECT, SHOW, DESCRIBE, or EXPLAIN queries it will return a mysqli_result object. For other successful queries it will return TRUE. FALSE on failure\nPHP Version:\n5+\nPHP Changelog:\nPHP 5.3.0 added the ability for async queries\nExample - Procedural style\nPerform query against a database:\n<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Perform query\nif ($result = mysqli_query($con, \"SELECT * FROM Persons\")) \n  {\necho \"Returned rows are: \" . mysqli_num_rows($result);\n// Free result set\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n// Check connection\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Perform query\nif ($result = $mysqli -> query(\"SELECT * FROM Persons\")) \n  {\necho \"Returned rows are: \" . $result -> num_rows;\n// Free result set\n$result -> free_result();\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Perform query\nif ($result = mysqli_query($con, \"SELECT * FROM Persons\")) \n  {\necho \"Returned rows are: \" . mysqli_num_rows($result);\n// Free result set\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n// Check connection\nif ($mysqli -> connect_errno) {\n# TODO: Complete this line\nexit();\n}\n// Perform query\nif ($result = $mysqli -> query(\"SELECT * FROM Persons\")) \n  {\necho \"Returned rows are: \" . $result -> num_rows;\n// Free result set\n$result -> free_result();\n}\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\n// Check connection\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Perform query\nif ($result = $mysqli -> query(\"SELECT * FROM Persons\")) \n  {\necho \"Returned rows are: \" . $result -> num_rows;\n// Free result set\n$result -> free_result();\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Perform query\nif ($result = mysqli_query($con, \"SELECT * FROM Persons\")) \n# TODO: Complete this line\necho \"Returned rows are: \" . mysqli_num_rows($result);\n// Free result set\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Perform query\nif ($result = mysqli_query($con, \"SELECT * FROM Persons\")) \n  {\necho \"Returned rows are: \" . mysqli_num_rows($result);\n// Free result set\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "3bb52481-97e2-476a-bd70-c0872e363f89",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "23f8a835-53a5-4e09-96e8-5a295a45789c",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "3ae92f88-06bc-4b67-a05a-ce21e7a98e19",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is This?",
+      "options": [
+        "None of the above.",
+        "Not a This.",
+        "None of the above.",
+        "default)\nTechnical Details\nReturn Value:\nFor successful SELECT"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of This is 'default)\nTechnical Details\nReturn Value:\nFor successful SELECT'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli query()Function concepts and techniques. You'll learn how to use PHPmysqli query()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli query()Function and how to apply it in your projects."
+}

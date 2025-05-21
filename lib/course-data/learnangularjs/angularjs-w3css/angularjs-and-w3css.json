@@ -1,0 +1,133 @@
+{
+  "id": "972daacf-9ba1-4ee3-8883-ebb5a2cf2709",
+  "title": "AngularJS and W3.CSS",
+  "slug": "angularjs-and-w3css",
+  "metadata": {
+    "description": "Learn about AngularJS and W3.CSS with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "scope",
+      "user",
+      "button",
+      "edit",
+      "fname",
+      "lname",
+      "input",
+      "model",
+      "true",
+      "class"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAngularJS",
+    "subcategory": "AngularJS W3.CSS"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AngularJS and W3.CSS",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "You can easily use w3.css style sheet together with AngularJS. This chapter demonstrates how.\nW3.CSS\nTo include W3.CSS in your AngularJS application, add the following \nline to the head of your document:\n<link rel=\"stylesheet\" href=\"https://www..com/w3css/4/w3.css\">\nIf you want to study W3.CSS, visit our\nW3.CSS Tutorial\n.\nBelow is a complete HTML example, with all AngularJS directives and \nW3.CSS classes explained.\nHTML Code\n<!DOCTYPE html>\n<html>\n<link rel=\"stylesheet\" href=\"https://www..com/w3css/4/w3.css\">\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js\"></script>\n<body ng-app=\"myApp\" ng-controller=\"userCtrl\">\n<div \n    class=\"w3-container\">\n<h3>Users</h3>\n<table class=\"w3-table \n    w3-bordered w3-striped\">\n<tr>\n<th>Edit</th>\n<th>First Name</th>\n<th>Last Name</th>\n</tr>\n<tr ng-repeat=\"user in users\">\n<td>\n<button class=\"w3-btn w3-ripple\" ng-click=\"editUser(user.id)\">&#9998; \n    Edit</button>\n</td>\n<td>{{ \n    user.fName }}</td>\n<td>{{ user.lName }}</td>\n</tr>\n</table>\n<br>\n<button class=\"w3-btn w3-green w3-ripple\" \n    ng-click=\"editUser('new')\">&#9998; Create New User</button>\n<form \n    ng-hide=\"hideform\">\n<h3 ng-show=\"edit\">Create New \n    User:</h3>\n<h3 ng-hide=\"edit\">Edit User:</h3>\n<label>First \n    Name:</label>\n<input class=\"w3-input w3-border\" \n    type=\"text\" ng-model=\"fName\" ng-disabled=\"!edit\" placeholder=\"First Name\">\n<br>\n<label>Last Name:</label>\n<input \n    class=\"w3-input w3-border\" type=\"text\" ng-model=\"lName\" ng-disabled=\"!edit\" \n    placeholder=\"Last Name\">\n<br>\n<label>Password:</label>\n<input \n    class=\"w3-input w3-border\" type=\"password\" ng-model=\"passw1\" \n    placeholder=\"Password\">\n<br>\n<label>Repeat:</label>\n<input \n    class=\"w3-input w3-border\" type=\"password\" ng-model=\"passw2\" \n    placeholder=\"Repeat Password\">\n<br>\n<button \n    class=\"w3-btn w3-green w3-ripple\" ng-disabled=\"error || incomplete\">&#10004; \n    Save Changes</button>\n</form>\n</div>\n<script src= \"myUsers.js\"></script>\n</body>\n</html>\n\nDirectives (Used Above) Explained\nAngularJS Directive\nDescription\n<body ng-app\nDefines an application for the <body> element\n<body ng-controller\nDefines a controller for the <body> element\n<tr ng-repeat\nRepeats the <tr> element for each user in users\n<button ng-click\nInvoke the function editUser() when the <button> element is clicked\n<h3 ng-show\nShow the <h3>s element if edit = true\n<h3 ng-hide\nHide the form if hideform = true, and hide the <h3> element if edit = true\n<input ng-model\nBind the <input> element to the application\n<button ng-disabled\nDisables the <button> element if error or incomplete = true\nW3.CSS Classes Explained\nElement\nClass\nDefines\n<div>\nw3-container\nA content container\n<table>\nw3-table\nA table\n<table>\nw3-bordered\nA bordered table\n<table>\nw3-striped\nA striped table\n<button>\nw3-btn\nA button\n<button>\nw3-green\nA green button\n<button>\nw3-ripple\nA ripple effect when you click the button\n<input>\nw3-input\nAn input field\n<input>\nw3-border\nA border on the input field\nJavaScript Code\nmyUsers.js\nangular.module('myApp', []).controller('userCtrl',  \n function($scope) {\n$scope.fName \n= '';\n$scope.lName = '';\n$scope.passw1 = '';\n$scope.passw2 = '';\n$scope.users = [\n{id:1, fName:'Hege',\u00a0lName:\"Pege\" },\n{id:2, fName:'Kim',\u00a0\u00a0lName:\"Pim\" },\n{id:3, fName:'Sal',\u00a0\u00a0lName:\"Smith\" },\n{id:4, fName:'Jack',\u00a0lName:\"Jones\" },\n{id:5, fName:'John',\u00a0lName:\"Doe\" \n},\n{id:6, fName:'Peter',lName:\"Pan\" }\n];\n$scope.edit = true;\n$scope.error = false;\n$scope.incomplete = false;\n$scope.hideform = true;\n$scope.editUser = \nfunction(id) {\n$scope.hideform = false;\nif (id == 'new') {\n$scope.edit = true;\n$scope.incomplete \n= true;\n$scope.fName = '';\n$scope.lName \n= '';\n} else {\n$scope.edit = false;\n$scope.fName \n= $scope.users[id-1].fName;\n$scope.lName \n= $scope.users[id-1].lName;\n}\n};\n$scope.$watch('passw1',function() \n{$scope.test();});\n$scope.$watch('passw2',function() {$scope.test();});\n$scope.$watch('fName',\u00a0function() {$scope.test();});\n$scope.$watch('lName',\u00a0function() {$scope.test();});\n$scope.test = function() {\nif \n($scope.passw1 !== $scope.passw2) {\n$scope.error = \ntrue;\n} else {\n$scope.error = \nfalse;\n}\n$scope.incomplete = false;\nif ($scope.edit \n&& (!$scope.fName.length ||\n!$scope.lName.length ||\n!$scope.passw1.length || !$scope.passw2.length)) {\n$scope.incomplete = true;\n}\n};\n});\nJavaScript Code Explained\nScope Properties\nUsed for\n$scope.fName\nModel variable (user first name)\n$scope.lName\nModel variable (user last name)\n$scope.passw1\nModel variable (user password 1)\n$scope.passw2\nModel variable (user password 2)\n$scope.users\nModel variable (array of users)\n$scope.edit\nSet to true when user clicks on 'Create user'.\n$scope.hideform\nSet to false when user clicks on 'Edit' or 'Create user'.\n$scope.error\nSet to true if passw1 not equal passw2\n$scope.incomplete\nSet to true if any field is empty (length = 0)\n$scope.editUser\nSets model variables\n$scope.$watch\nWatches model variables\n$scope.test\nTests model variables for errors and incompleteness\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<!DOCTYPE html>\n<html>\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js\"></script>\n<body ng-app=\"myApp\" ng-controller=\"userCtrl\">\n<div \n    class=\"w3-container\">\n<h3>Users</h3>\n<table class=\"w3-table \n    w3-bordered w3-striped\">\n<tr>\n<th>Edit</th>\n<th>First Name</th>\n<th>Last Name</th>\n</tr>\n<tr ng-repeat=\"user in users\">\n<td>\n<button class=\"w3-btn w3-ripple\" ng-click=\"editUser(user.id)\">&#9998; \n    Edit</button>\n</td>\n<td>{{ \n    user.fName }}</td>\n<td>{{ user.lName }}</td>\n</tr>\n</table>\n<br>\n<button class=\"w3-btn w3-green w3-ripple\" \n    ng-click=\"editUser('new')\">&#9998; Create New User</button>\n<form \n    ng-hide=\"hideform\">\n<h3 ng-show=\"edit\">Create New \n    User:</h3>\n<h3 ng-hide=\"edit\">Edit User:</h3>\n<label>First \n    Name:</label>\n<input class=\"w3-input w3-border\" \n    type=\"text\" ng-model=\"fName\" ng-disabled=\"!edit\" placeholder=\"First Name\">\n<br>\n<label>Last Name:</label>\n<input \n    class=\"w3-input w3-border\" type=\"text\" ng-model=\"lName\" ng-disabled=\"!edit\" \n    placeholder=\"Last Name\">\n<br>\n<label>Password:</label>\n<input \n    class=\"w3-input w3-border\" type=\"password\" ng-model=\"passw1\" \n    placeholder=\"Password\">\n<br>\n<label>Repeat:</label>\n<input \n    class=\"w3-input w3-border\" type=\"password\" ng-model=\"passw2\" \n    placeholder=\"Repeat Password\">\n<br>\n<button \n    class=\"w3-btn w3-green w3-ripple\" ng-disabled=\"error || incomplete\">&#10004; \n    Save Changes</button>\n</form>\n</div>\n<script src= \"myUsers.js\"></script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "myUsers.js",
+      "content": "",
+      "order": 5,
+      "code": "angular.module('myApp', []).controller('userCtrl',  \n function($scope) {\n$scope.fName \n= '';\n$scope.lName = '';\n$scope.passw1 = '';\n$scope.passw2 = '';\n$scope.users = [\n{id:1, fName:'Hege',\u00a0lName:\"Pege\" },\n{id:2, fName:'Kim',\u00a0\u00a0lName:\"Pim\" },\n{id:3, fName:'Sal',\u00a0\u00a0lName:\"Smith\" },\n{id:4, fName:'Jack',\u00a0lName:\"Jones\" },\n{id:5, fName:'John',\u00a0lName:\"Doe\" \n},\n{id:6, fName:'Peter',lName:\"Pan\" }\n];\n$scope.edit = true;\n$scope.error = false;\n$scope.incomplete = false;\n$scope.hideform = true;\n$scope.editUser = \nfunction(id) {\n$scope.hideform = false;\nif (id == 'new') {\n$scope.edit = true;\n$scope.incomplete \n= true;\n$scope.fName = '';\n$scope.lName \n= '';\n} else {\n$scope.edit = false;\n$scope.fName \n= $scope.users[id-1].fName;\n$scope.lName \n= $scope.users[id-1].lName;\n}\n};\n$scope.$watch('passw1',function() \n{$scope.test();});\n$scope.$watch('passw2',function() {$scope.test();});\n$scope.$watch('fName',\u00a0function() {$scope.test();});\n$scope.$watch('lName',\u00a0function() {$scope.test();});\n$scope.test = function() {\nif \n($scope.passw1 !== $scope.passw2) {\n$scope.error = \ntrue;\n} else {\n$scope.error = \nfalse;\n}\n$scope.incomplete = false;\nif ($scope.edit \n&& (!$scope.fName.length ||\n!$scope.lName.length ||\n!$scope.passw1.length || !$scope.passw2.length)) {\n$scope.incomplete = true;\n}\n};\n});",
+      "language": "javascript",
+      "explanation": "Example of myusers.js"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<html>\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js\"></script>\n<body ng-app=\"myApp\" ng-controller=\"userCtrl\">\n<div \n    class=\"w3-container\">\n<h3>Users</h3>\n<table class=\"w3-table \n    w3-bordered w3-striped\">\n<tr>\n<th>Edit</th>\n<th>First Name</th>\n<th>Last Name</th>\n</tr>\n<tr ng-repeat=\"user in users\">\n<td>\n<button class=\"w3-btn w3-ripple\" ng-click=\"editUser(user.id)\">&#9998; \n    Edit</button>\n</td>\n<td>{{ \n    user.fName }}</td>\n# TODO: Complete this line\n</tr>\n</table>\n<br>\n<button class=\"w3-btn w3-green w3-ripple\" \n    ng-click=\"editUser('new')\">&#9998; Create New User</button>\n<form \n    ng-hide=\"hideform\">\n<h3 ng-show=\"edit\">Create New \n    User:</h3>\n<h3 ng-hide=\"edit\">Edit User:</h3>\n<label>First \n    Name:</label>\n<input class=\"w3-input w3-border\" \n    type=\"text\" ng-model=\"fName\" ng-disabled=\"!edit\" placeholder=\"First Name\">\n<br>\n<label>Last Name:</label>\n<input \n    class=\"w3-input w3-border\" type=\"text\" ng-model=\"lName\" ng-disabled=\"!edit\" \n    placeholder=\"Last Name\">\n<br>\n<label>Password:</label>\n<input \n    class=\"w3-input w3-border\" type=\"password\" ng-model=\"passw1\" \n    placeholder=\"Password\">\n<br>\n<label>Repeat:</label>\n<input \n    class=\"w3-input w3-border\" type=\"password\" ng-model=\"passw2\" \n    placeholder=\"Repeat Password\">\n<br>\n<button \n    class=\"w3-btn w3-green w3-ripple\" ng-disabled=\"error || incomplete\">&#10004; \n    Save Changes</button>\n</form>\n</div>\n<script src= \"myUsers.js\"></script>\n</body>\n</html>",
+      "solution": "<!DOCTYPE html>\n<html>\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js\"></script>\n<body ng-app=\"myApp\" ng-controller=\"userCtrl\">\n<div \n    class=\"w3-container\">\n<h3>Users</h3>\n<table class=\"w3-table \n    w3-bordered w3-striped\">\n<tr>\n<th>Edit</th>\n<th>First Name</th>\n<th>Last Name</th>\n</tr>\n<tr ng-repeat=\"user in users\">\n<td>\n<button class=\"w3-btn w3-ripple\" ng-click=\"editUser(user.id)\">&#9998; \n    Edit</button>\n</td>\n<td>{{ \n    user.fName }}</td>\n<td>{{ user.lName }}</td>\n</tr>\n</table>\n<br>\n<button class=\"w3-btn w3-green w3-ripple\" \n    ng-click=\"editUser('new')\">&#9998; Create New User</button>\n<form \n    ng-hide=\"hideform\">\n<h3 ng-show=\"edit\">Create New \n    User:</h3>\n<h3 ng-hide=\"edit\">Edit User:</h3>\n<label>First \n    Name:</label>\n<input class=\"w3-input w3-border\" \n    type=\"text\" ng-model=\"fName\" ng-disabled=\"!edit\" placeholder=\"First Name\">\n<br>\n<label>Last Name:</label>\n<input \n    class=\"w3-input w3-border\" type=\"text\" ng-model=\"lName\" ng-disabled=\"!edit\" \n    placeholder=\"Last Name\">\n<br>\n<label>Password:</label>\n<input \n    class=\"w3-input w3-border\" type=\"password\" ng-model=\"passw1\" \n    placeholder=\"Password\">\n<br>\n<label>Repeat:</label>\n<input \n    class=\"w3-input w3-border\" type=\"password\" ng-model=\"passw2\" \n    placeholder=\"Repeat Password\">\n<br>\n<button \n    class=\"w3-btn w3-green w3-ripple\" ng-disabled=\"error || incomplete\">&#10004; \n    Save Changes</button>\n</form>\n</div>\n<script src= \"myUsers.js\"></script>\n</body>\n</html>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "bd376bc5-c027-4dc2-bb55-75e0bbb98cc3",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "f6b65c30-3f7c-4600-afc4-2231ab874851",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "eaefc6b2-067f-455d-bf73-5fadfb32d24f",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Below?",
+      "options": [
+        "a complete HTML example",
+        "None of the above.",
+        "None of the above.",
+        "clicked\n<h3 ng-show\nShow the <h3>s element if edit = true\n<h3 ng-hide\nHide the form if hideform = true"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Below is 'a complete HTML example'."
+    },
+    {
+      "question": "What is element?",
+      "options": [
+        "None of the above.",
+        "clicked\n<h3 ng-show\nShow the <h3>s element if edit = true\n<h3 ng-hide\nHide the form if hideform = true",
+        "a complete HTML example",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of element is 'clicked\n<h3 ng-show\nShow the <h3>s element if edit = true\n<h3 ng-hide\nHide the form if hideform = true'."
+    }
+  ],
+  "summary": "This tutorial covers AngularJS and W3.CSS concepts and techniques. You'll learn how to use AngularJS and W3.CSS effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AngularJS and W3.CSS and how to apply it in your projects."
+}

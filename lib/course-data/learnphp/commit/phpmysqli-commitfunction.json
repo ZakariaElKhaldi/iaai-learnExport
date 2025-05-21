@@ -1,0 +1,124 @@
+{
+  "id": "cf48e932-4708-46cc-9c0f-6b2c26e59e32",
+  "title": "PHPmysqli commit()Function",
+  "slug": "phpmysqli-commitfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli commit()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "mysqli",
+      "commit",
+      "values",
+      "insert",
+      "transaction",
+      "style",
+      "connection",
+      "name",
+      "function",
+      "turn"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "commit"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli commit()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nTurn off auto-committing, make some queries, then commit the queries:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Turn autocommit off\n$mysqli -> autocommit(FALSE);\n// Insert some values\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli -> commit()) {\necho \"Commit \n  transaction failed\";\nexit();\n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe commit() / mysqli_commit() function commits the current transaction for the specified database connection.\nTip:\nAlso look at the\nautocommit()\nfunction,\nwhich turns on or off auto-committing database modifications, and the\nrollback()\nfunction, which rolls back the current transaction.\nSyntax\nObject oriented style:\n$mysqli -> commit(\nflags, name\n)\nProcedural style:\nmysqli_commit(\nconnection, flags, name\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nflags\nOptional. A constant:\nMYSQLI_TRANS_COR_AND_CHAIN - Appends \"AND CHAIN\"\nMYSQLI_TRANS_COR_AND_NO_CHAIN - Appends \"AND NO CHAIN\"\nMYSQLI_TRANS_COR_RELEASE - Appends \"RELEASE\"\nMYSQLI_TRANS_COR_NO_RELEASE - Appends \"NO RELEASE\"\nname\nOptional. COMMIT/*\nname\n*/ is executed if this parameter is \n    specified\nTechnical Details\nReturn Value:\nTRUE on success. FALSE on failure\nPHP Version:\n5+\nPHP Changelog:\nPHP 5.5: Added the\nflags\nand\nname\nparameters\nExample - Procedural style\nTurn off auto-committing, make some queries, then commit the queries:\n<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Turn autocommit off\nmysqli_autocommit($con,FALSE);\n// Insert some values\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!mysqli_commit($con)) {\necho \n  \"Commit transaction failed\";\nexit();\n}\n// Close connection\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Turn autocommit off\n$mysqli -> autocommit(FALSE);\n// Insert some values\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli -> commit()) {\necho \"Commit \n  transaction failed\";\nexit();\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Turn autocommit off\nmysqli_autocommit($con,FALSE);\n// Insert some values\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!mysqli_commit($con)) {\necho \n  \"Commit transaction failed\";\nexit();\n}\n// Close connection\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Turn autocommit off\n$mysqli -> autocommit(FALSE);\n// Insert some values\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n# TODO: Complete this line\nif (!$mysqli -> commit()) {\necho \"Commit \n  transaction failed\";\nexit();\n}\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Turn autocommit off\n$mysqli -> autocommit(FALSE);\n// Insert some values\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\n$mysqli -> query(\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!$mysqli -> commit()) {\necho \"Commit \n  transaction failed\";\nexit();\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Turn autocommit off\nmysqli_autocommit($con,FALSE);\n// Insert some values\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!mysqli_commit($con)) {\necho \n  \"Commit transaction failed\";\n# TODO: Complete this line\n}\n// Close connection\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n// Turn autocommit off\nmysqli_autocommit($con,FALSE);\n// Insert some values\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Peter','Griffin',35)\");\nmysqli_query($con,\"INSERT INTO Persons (FirstName,LastName,Age)\nVALUES ('Glenn','Quagmire',33)\");\n// Commit transaction\nif (!mysqli_commit($con)) {\necho \n  \"Commit transaction failed\";\nexit();\n}\n// Close connection\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "60fb990a-d42b-4fb5-8423-fe99b997771a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e2f9a923-0652-4457-a6e2-7e7e7ff90cb6",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ed830fda-0ddc-4ff3-8c6f-3acff2a35003",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is is executed if this parameter?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "specified\nTechnical Details\nReturn Value:\nTRUE on success",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of is executed if this parameter is 'specified\nTechnical Details\nReturn Value:\nTRUE on success'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli commit()Function concepts and techniques. You'll learn how to use PHPmysqli commit()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli commit()Function and how to apply it in your projects."
+}

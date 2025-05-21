@@ -1,0 +1,223 @@
+{
+  "id": "f0643407-1ee4-4db7-af6a-71d68bef64f8",
+  "title": "AngularJS Routing",
+  "slug": "angularjs-routing",
+  "metadata": {
+    "description": "Learn about AngularJS Routing with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "routeprovider",
+      "application",
+      "templateurl",
+      "module",
+      "ngroute",
+      "paris",
+      "view",
+      "london",
+      "example",
+      "config"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAngularJS",
+    "subcategory": "AngularJS Routing"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AngularJS Routing",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The\nngRoute\nmodule helps your application to become a Single \nPage Application.\nWhat is Routing in AngularJS?\nIf you want to navigate to different pages in your application, but you also \nwant the application to be a SPA (Single Page Application), \nwith no page reloading, you can use the\nngRoute\nmodule.\nThe\nngRoute\nmodule\nroutes\nyour application to different pages \nwithout reloading the entire application.\nExample:\nNavigate to \"red.htm\", \"green.htm\", and \"blue.htm\":\n<body ng-app=\"myApp\">\n<p><a href=\"#/!\">Main</a></p>\n<a href=\"#!red\">Red</a>\n<a href=\"#!green\">Green</a>\n<a href=\"#!blue\">Blue</a>\n<div ng-view></div>\n<script>\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/red\", {\ntemplateUrl : \"red.htm\"\n})\n.when(\"/green\", {\ntemplateUrl : \"green.htm\"\n})\n.when(\"/blue\", {\ntemplateUrl : \"blue.htm\"\n});\n});\n</script>\n</body>\n\nWhat do I Need?\nTo make your applications ready for routing, you must include the AngularJS Route module:\n<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js\"></script>\nThen you must add the\nngRoute\nas a dependency in the \napplication module:\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\nNow your application has access to the route module, which provides the\n$routeProvider\n.\nUse the\n$routeProvider\nto configure different routes in your \napplication:\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/red\", {\ntemplateUrl : \"red.htm\"\n})\n.when(\"/green\", {\ntemplateUrl : \n    \"green.htm\"\n})\n.when(\"/blue\", {\ntemplateUrl : \"blue.htm\"\n});\n});\nWhere Does it Go?\nYour application needs a container to put the content provided by the routing.\nThis container is the\nng-view\ndirective.\nThere are three different ways to include the\nng-view\ndirective \nin your application:\nExample:\n<div ng-view></div>\n\nExample:\n<ng-view></ng-view>\n\nExample:\n<div \n    class=\"ng-view\"></div>\n\nApplications can only have one\nng-view\ndirective, and this will be the placeholder for all views \nprovided by the route.\n$routeProvider\nWith the\n$routeProvider\nyou can define what page to display when a user \nclicks a link.\nExample:\nDefine a\n$routeProvider\n:\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/london\", {\ntemplateUrl : \"london.htm\"\n})\n.when(\"/paris\", {\ntemplateUrl : \"paris.htm\"\n});\n});\n\nDefine the\n$routeProvider\nusing the\nconfig\nmethod of your application. Work \nregistered in the\nconfig\nmethod will be performed when the \napplication is \nloading.\nControllers\nWith the\n$routeProvider\nyou can also define a controller for \neach \"view\".\nExample:\nAdd controllers:\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/london\", {\ntemplateUrl : \"london.htm\",\ncontroller : \"londonCtrl\"\n})\n.when(\"/paris\", {\ntemplateUrl : \"paris.htm\",\ncontroller : \"parisCtrl\"\n});\n});\napp.controller(\"londonCtrl\", function ($scope) {\n$scope.msg = \"I love London\";\n});\napp.controller(\"parisCtrl\", function \n    ($scope) {\n$scope.msg = \"I love Paris\";\n});\n\nThe \"london.htm\" and \"paris.htm\" are normal HTML files, which you can add AngularJS expressions as you would with any other HTML sections of your \nAngularJS application.\nThe files looks like this:\nlondon.htm\n<h1>London</h1>\n<h3>London is the capital city of England.</h3>\n<p>It \n    is the most populous city in the United Kingdom, with a metropolitan area of \n    over 13 million inhabitants.</p>\n<p>{{msg}}</p>\nparis.htm\n<h1>Paris</h1>\n<h3>Paris is the capital city of France.</h3>\n<p>The Paris area is one of the largest population centers in Europe, with more than 12 million inhabitants.</p>\n<p>{{msg}}</p>\nTemplate\nIn the \ntemplateUrl\nproperty in the\n$routeProvider.when\nmethod.\nYou can also use the\ntemplate\nproperty, which allows you to write HTML \ndirectly in the property value, and not refer to a page.\nExample:\nWrite templates:\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplate : \"<h1>Main</h1><p>Click \n    on the links to change this content</p>\"\n})\n.when(\"/banana\", {\ntemplate : \"<h1>Banana</h1><p>Bananas \n    contain around 75% water.</p>\"\n})\n.when(\"/tomato\", {\ntemplate : \"<h1>Tomato</h1><p>Tomatoes \n    contain around 95% water.</p>\"\n});\n});\n\nThe otherwise method\nIn the \nwhen\nmethod of the\n$routeProvider\n.\nYou can also use the\notherwise\nmethod, which is the default route \nwhen none of the others get a match.\nExample:\nIf neither the \"Banana\" nor the \"Tomato\" link has been clicked, let them \nknow:\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/banana\", {\ntemplate : \"<h1>Banana</h1><p>Bananas \n    contain around 75% water.</p>\"\n})\n.when(\"/tomato\", {\ntemplate : \"<h1>Tomato</h1><p>Tomatoes \n    contain around 95% water.</p>\"\n})\n.otherwise({\ntemplate : \"<h1>None</h1><p>Nothing \n    has been selected</p>\"\n});\n});\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 3,
+      "code": "<body ng-app=\"myApp\">\n<p><a href=\"#/!\">Main</a></p>\n<a href=\"#!red\">Red</a>\n<a href=\"#!green\">Green</a>\n<a href=\"#!blue\">Blue</a>\n<div ng-view></div>\n<script>\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/red\", {\ntemplateUrl : \"red.htm\"\n})\n.when(\"/green\", {\ntemplateUrl : \"green.htm\"\n})\n.when(\"/blue\", {\ntemplateUrl : \"blue.htm\"\n});\n});\n</script>\n</body>",
+      "language": "html",
+      "explanation": "Example of example:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js\"></script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "var app = angular.module(\"myApp\", [\"ngRoute\"]);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "app.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/red\", {\ntemplateUrl : \"red.htm\"\n})\n.when(\"/green\", {\ntemplateUrl : \n    \"green.htm\"\n})\n.when(\"/blue\", {\ntemplateUrl : \"blue.htm\"\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 7,
+      "code": "<div ng-view></div>",
+      "language": "html",
+      "explanation": "Example of example:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 8,
+      "code": "<ng-view></ng-view>",
+      "language": "html",
+      "explanation": "Example of example:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 9,
+      "code": "<div \n    class=\"ng-view\"></div>",
+      "language": "html",
+      "explanation": "Example of example:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 10,
+      "code": "var app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/london\", {\ntemplateUrl : \"london.htm\"\n})\n.when(\"/paris\", {\ntemplateUrl : \"paris.htm\"\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 11,
+      "code": "var app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/london\", {\ntemplateUrl : \"london.htm\",\ncontroller : \"londonCtrl\"\n})\n.when(\"/paris\", {\ntemplateUrl : \"paris.htm\",\ncontroller : \"parisCtrl\"\n});\n});\napp.controller(\"londonCtrl\", function ($scope) {\n$scope.msg = \"I love London\";\n});\napp.controller(\"parisCtrl\", function \n    ($scope) {\n$scope.msg = \"I love Paris\";\n});",
+      "language": "javascript",
+      "explanation": "Example of example:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "<h1>London</h1>\n<h3>London is the capital city of England.</h3>\n<p>It \n    is the most populous city in the United Kingdom, with a metropolitan area of \n    over 13 million inhabitants.</p>\n<p>{{msg}}</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "<h1>Paris</h1>\n<h3>Paris is the capital city of France.</h3>\n<p>The Paris area is one of the largest population centers in Europe, with more than 12 million inhabitants.</p>\n<p>{{msg}}</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 14,
+      "code": "var app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplate : \"<h1>Main</h1><p>Click \n    on the links to change this content</p>\"\n})\n.when(\"/banana\", {\ntemplate : \"<h1>Banana</h1><p>Bananas \n    contain around 75% water.</p>\"\n})\n.when(\"/tomato\", {\ntemplate : \"<h1>Tomato</h1><p>Tomatoes \n    contain around 95% water.</p>\"\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example:"
+    },
+    {
+      "type": "code_example",
+      "title": "Example:",
+      "content": "",
+      "order": 15,
+      "code": "var app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/banana\", {\ntemplate : \"<h1>Banana</h1><p>Bananas \n    contain around 75% water.</p>\"\n})\n.when(\"/tomato\", {\ntemplate : \"<h1>Tomato</h1><p>Tomatoes \n    contain around 95% water.</p>\"\n})\n.otherwise({\ntemplate : \"<h1>None</h1><p>Nothing \n    has been selected</p>\"\n});\n});",
+      "language": "javascript",
+      "explanation": "Example of example:"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<body ng-app=\"myApp\">\n<p><a href=\"#/!\">Main</a></p>\n<a href=\"#!red\">Red</a>\n<a href=\"#!green\">Green</a>\n<a href=\"#!blue\">Blue</a>\n<div ng-view></div>\n<script>\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n# TODO: Complete this line\ntemplateUrl : \"red.htm\"\n})\n.when(\"/green\", {\ntemplateUrl : \"green.htm\"\n})\n.when(\"/blue\", {\ntemplateUrl : \"blue.htm\"\n});\n});\n</script>\n</body>",
+      "solution": "<body ng-app=\"myApp\">\n<p><a href=\"#/!\">Main</a></p>\n<a href=\"#!red\">Red</a>\n<a href=\"#!green\">Green</a>\n<a href=\"#!blue\">Blue</a>\n<div ng-view></div>\n<script>\nvar app = angular.module(\"myApp\", [\"ngRoute\"]);\napp.config(function($routeProvider) {\n$routeProvider\n.when(\"/\", {\ntemplateUrl : \"main.htm\"\n})\n.when(\"/red\", {\ntemplateUrl : \"red.htm\"\n})\n.when(\"/green\", {\ntemplateUrl : \"green.htm\"\n})\n.when(\"/blue\", {\ntemplateUrl : \"blue.htm\"\n});\n});\n</script>\n</body>"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "<script src=\"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js\"></script>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "3573cfe4-4253-49e9-8e3c-4d1b2d2db98f",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9bb776e8-e0f5-4ff3-9ed8-fd6399f7d706",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "89ce0c35-98e0-4662-95b7-035ea658f090",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is What?",
+      "options": [
+        "Routing in AngularJS",
+        "None of the above.",
+        "the\nng-view\ndirective",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of What is 'Routing in AngularJS'."
+    },
+    {
+      "question": "What is This container?",
+      "options": [
+        "None of the above.",
+        "Routing in AngularJS",
+        "None of the above.",
+        "the\nng-view\ndirective"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of This container is 'the\nng-view\ndirective'."
+    }
+  ],
+  "summary": "This tutorial covers AngularJS Routing concepts and techniques. You'll learn how to use AngularJS Routing effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AngularJS Routing and how to apply it in your projects."
+}

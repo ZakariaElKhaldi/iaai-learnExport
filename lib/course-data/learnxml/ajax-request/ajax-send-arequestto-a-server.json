@@ -1,0 +1,175 @@
+{
+  "id": "d5a2c8d6-f331-4ed6-9cdc-08e94dce442d",
+  "title": "AJAX - Send aRequestTo a Server",
+  "slug": "ajax-send-arequestto-a-server",
+  "metadata": {
+    "description": "Learn about AJAX - Send aRequestTo a Server with clear explanations and practical examples.",
+    "keywords": [
+      "xhttp",
+      "server",
+      "send",
+      "open",
+      "request",
+      "true",
+      "post",
+      "method",
+      "file",
+      "example"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnXML",
+    "subcategory": "AJAX Request"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AJAX - Send a\nRequest\nTo a Server",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The XMLHttpRequest object is used to exchange data with a \nserver.\nSend a Request To a Server\nTo send a request to a server, we use the open() and send() methods of the XMLHttpRequest object:\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();\nMethod\nDescription\nopen(\nmethod, url, async\n)\nSpecifies the type of request\nmethod\n: the type of request: GET or POST\nurl\n: the server (file) location\nasync\n: true (asynchronous) or false (synchronous)\nsend()\nSends the request to the server (used for GET)\nsend(\nstring\n)\nSends the request to the server (used for POST)\nGET or POST?\nGET is simpler and faster than POST, and can be used in most cases.\nHowever, always use POST requests when:\nA cached file is not an option (update a file or database on the server).\nSending a large amount of data to the server (POST has no size limitations).\nSending user input (which can contain unknown characters), POST is more robust and secure than GET.\nGET Requests\nA simple GET request:\nExample\nxhttp.open(\"GET\", \"demo_get.asp\", true);\nxhttp.send();\n\nIn the example above, you may get a cached result. To avoid this, add a unique ID to the URL:\nExample\nxhttp.open(\"GET\", \"demo_get.asp?t=\" + Math.random(), true);\nxhttp.send();\n\nIf you want to send information with the GET method, add the information to the URL:\nExample\nxhttp.open(\"GET\", \"demo_get2.asp?fname=Henry&lname=Ford\", true);\nxhttp.send();\n\nPOST Requests\nA simple POST request:\nExample\nxhttp.open(\"POST\", \"demo_post.asp\", true);\nxhttp.send();\n\nTo POST data like an HTML form, add an HTTP header with setRequestHeader(). \nSpecify the data you want to send in the send() method:\nExample\nxhttp.open(\"POST\", \"demo_post2.asp\", true);\nxhttp.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded\");\nxhttp.send(\"fname=Henry&lname=Ford\");\n\nMethod\nDescription\nsetRequestHeader(\nheader, value\n)\nAdds HTTP headers to the request\nheader\n: specifies the header name\nvalue\n: specifies the header value\nThe url - A File On a Server\nThe url parameter of the open() method, is an address to a file on a server:\nxhttp.open(\"GET\", \"ajax_test.asp\", true);\nThe file can be any kind of file, like .txt and \n.xml, or server scripting files like .asp and .php (which can perform  \nactions on the server before sending the response back).\nAsynchronous - True or False?\nServer requests should be sent asynchronously.\nThe async parameter of the open() \nmethod should be set to true:\nxhttp.open(\"GET\", \"ajax_test.asp\", true);\nBy sending asynchronously, the \nJavaScript does not have to wait for the server response, but can instead:\nexecute other scripts while waiting for server response\ndeal with the response after the response is ready\nThe onreadystatechange Property\nWith the XMLHttpRequest object you can define a function to be executed when \nthe request receives an answer.\nThe function is defined in the\nonreadystatechange\nproperty of the XMLHttpResponse object:\nExample\nxhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML = this.responseText;\n}\n};\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();\n\nThe \"ajax_info.txt\" file used in the example above, is a simple text file and looks like this:\n<h1>AJAX</h1>\n<p>AJAX is not a programming language.</p>\n<p>AJAX is a \n  technique for accessing web servers from a web page.</p>\n<p>AJAX stands for \n  Asynchronous JavaScript And XML.</p>\nYou will learn more about onreadystatechange in a later chapter.\nSynchronous Request\nTo execute a synchronous request, change the third parameter in the open() method to false:\nxhttp.open(\"GET\", \"ajax_info.txt\", false);\nSometimes async = false are used for quick testing. You will also find \nsynchronous requests in older JavaScript code.\nSince the code will wait for server completion, there is no need for an onreadystatechange \nfunction:\nExample\nxhttp.open(\"GET\", \"ajax_info.txt\", false);\nxhttp.send();\ndocument.getElementById(\"demo\").innerHTML = xhttp.responseText;\n\nSynchronous XMLHttpRequest (async = false) is not recommended because the JavaScript will \nstop executing until the server response is ready. If the server is busy or slow, the \napplication will hang or stop.\nSynchronous XMLHttpRequest is in the process of being removed from the web standard, \nbut this process can take many years.\nModern developer tools are encouraged to warn about using \nsynchronous requests and may throw an InvalidAccessError exception when it occurs.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "xhttp.open(\"GET\", \"demo_get.asp\", true);\nxhttp.send();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "xhttp.open(\"GET\", \"demo_get.asp?t=\" + Math.random(), true);\nxhttp.send();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "xhttp.open(\"GET\", \"demo_get2.asp?fname=Henry&lname=Ford\", true);\nxhttp.send();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "xhttp.open(\"POST\", \"demo_post.asp\", true);\nxhttp.send();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "xhttp.open(\"POST\", \"demo_post2.asp\", true);\nxhttp.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded\");\nxhttp.send(\"fname=Henry&lname=Ford\");",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "xhttp.onreadystatechange = function() {\nif (this.readyState == 4 && this.status == 200) {\ndocument.getElementById(\"demo\").innerHTML = this.responseText;\n}\n};\nxhttp.open(\"GET\", \"ajax_info.txt\", true);\nxhttp.send();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<h1>AJAX</h1>\n<p>AJAX is not a programming language.</p>\n<p>AJAX is a \n  technique for accessing web servers from a web page.</p>\n<p>AJAX stands for \n  Asynchronous JavaScript And XML.</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "xhttp.open(\"GET\", \"ajax_info.txt\", false);\nxhttp.send();\ndocument.getElementById(\"demo\").innerHTML = xhttp.responseText;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "xhttp.open(\"GET\", \"demo_get.asp\", true);\nxhttp.send();"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "xhttp.open(\"GET\", \"demo_get.asp?t=\" + Math.random(), true);\nxhttp.send();"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "dc92b273-10c9-41e9-8c9b-05a2748b38f1",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "85ae454d-6238-4fe4-ad69-a4f71ce0a4fa",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "67197f9f-a723-4ab4-a550-e6f1e2ce250e",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Send a\nRequest\nTo a Server\n\nThe XMLHttpRequest object?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "used to exchange data with a \nserver",
+        "simpler and faster than POST"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Send a\nRequest\nTo a Server\n\nThe XMLHttpRequest object is 'used to exchange data with a \nserver'."
+    },
+    {
+      "question": "What is GET?",
+      "options": [
+        "simpler and faster than POST",
+        "used to exchange data with a \nserver",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of GET is 'simpler and faster than POST'."
+    }
+  ],
+  "summary": "This tutorial covers AJAX - Send aRequestTo a Server concepts and techniques. You'll learn how to use AJAX - Send aRequestTo a Server effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AJAX - Send aRequestTo a Server and how to apply it in your projects."
+}

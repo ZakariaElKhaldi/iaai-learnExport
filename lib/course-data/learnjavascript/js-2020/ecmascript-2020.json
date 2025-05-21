@@ -1,0 +1,214 @@
+{
+  "id": "102ee464-f962-4e01-a2f0-0b173a5122ff",
+  "title": "ECMAScript 2020",
+  "slug": "ecmascript-2020",
+  "metadata": {
+    "description": "Learn about ECMAScript 2020 with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "operator",
+      "example",
+      "bigint",
+      "promise",
+      "assignment",
+      "javascript",
+      "browsers",
+      "nullish",
+      "supported",
+      "modern"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnJavaScript",
+    "subcategory": "JS 2020"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ECMAScript 2020",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "JavaScript Version Numbers\nOld ECMAScript versions was named by numbers: ES5 and ES6.\nFrom 2016, versions are named by year: ES2016, 2018, 2020 ...\nNew Features in ES2020\nBigInt\nString matchAll()\nThe Nullish Coalescing Operator (??)\nThe Optional Chaining Operator (?.)\nLogical AND Assignment Operator (&&=)\nLogical OR Assignment (||=)\nNullish Coalescing Assignment (??=)\nPromise.allSettled()\nDynamic Import\nWarning\nThese features are relatively new.\nOlder browsers may need an alternative code (Polyfill)\nJavaScript BigInt\nJavaScript\nBigInt\nvariables are used to store big integer values\nthat are too big to be represented by a a normal JavaScript\nNumber\n.\nJavaScript integers are only accurate up to about 15 digits.\nInteger Example\nlet x = 999999999999999;\nlet y = 9999999999999999; // too big\n\nBigInt Example\nlet x = 9999999999999999;\nlet y = 9999999999999999n;\n\nTo create a\nBigInt\n, append n to the end of an integer or call\nBigInt()\n:\nExample\nlet x = 1234567890123456789012345n;\nlet y = BigInt(1234567890123456789012345)\n\nThe JavaScript\ntypeof\na\nBigInt\nis \"bigint\":\nExample\nlet x = BigInt(999999999999999);\nlet type = typeof x;\n\nBigInt\nis supported in all modern browsers since September 2020:\nChrome 67\nEdge 79\nFirefox 68\nSafari 14\nOpera 54\nMay 2018\nJan 2020\nJul 2019\nSep 2020\nJun 2018\nJavaScript String matchAll()\nBefore ES2020 there was no string method that could be used to search for all occurrences\nof a string in a string.\nExample\nconst iterator = text.matchAll(\"Cats\");\n\nIf the parameter is a regular expression, the global flag (g) must be set set, otherwise\na TypeError is thrown.\nExample\nconst iterator = text.matchAll(/Cats/g);\n\nIf you want to search case insensitive, the insensitive flag (i) must be set:\nExample\nconst iterator = text.matchAll(/Cats/gi);\n\nNote\nES2021\nintroduced the string method replaceAll().\nThe Nullish Coalescing Operator (??)\nThe\n??\noperator returns the first argument if it is not\nnullish\n(\nnull\nor\nundefined\n).\nOtherwise it returns the second.\nExample\nlet name = null;\nlet text = \"missing\";\nlet result = name ?? text;\n\nThe nullish operator is supported in all modern browsers since March 2020:\nChrome 80\nEdge 80\nFirefox 72\nSafari 13.1\nOpera 67\nFeb 2020\nFeb 2020\nJan 2020\nMar 2020\nMar 2020\nThe Optional Chaining Operator (?.)\nThe\nOptional Chaining Operator\nreturns\nundefined\nif an object is\nundefined\nor\nnull\n(instead of throwing an error).\nExample\nconst car = {type:\"Fiat\", model:\"500\", color:\"white\"};\nlet name = car?.name;\n\nThe\n?.=\noperator is supported in all modern browsers since March 2020:\nChrome 80\nEdge 80\nFirefox 74\nSafari 13.1\nOpera 67\nFeb 2020\nFeb 2020\nMar 2020\nMar 2020\nMar 2020\nThe &&= Operator\nThe\nLogical AND Assignment Operator\nis used between two values.\nIf the first value is\ntrue\n, the second value is assigned.\nLogical AND Assignment Example\nlet x = 10;\nx &&= 5;\n\nThe\n&&=\noperator is supported in all modern browsers since September 2020:\nChrome 85\nEdge 85\nFirefox 79\nSafari 14\nOpera 71\nAug 2020\nAug 2020\nMar 2020\nSep 2020\nSep 2020\nThe ||= Operator\nThe\nLogical OR Assignment Operator\nis used between two values.\nIf the first value is\nfalse\n, the second value is assigned.\nLogical OR Assignment Example\nlet x = 10;\nx ||= 5;\n\nThe\n||=\noperator is supported in all modern browsers since September 2020:\nChrome 85\nEdge 85\nFirefox 79\nSafari 14\nOpera 71\nAug 2020\nAug 2020\nMar 2020\nSep 2020\nSep 2020\nThe ??= Operator\nThe\nNullish Coalescing Assignment Operator\nis used between two values.\nIf the first value is\nundefined\nor\nnull\n, the second value is assigned.\nNullish Coalescing Assignment Example\nlet x;\nx ??= 5;\n\nThe\n??=\noperator is supported in all modern browsers since September 2020:\nChrome 85\nEdge 85\nFirefox 79\nSafari 14\nOpera 71\nAug 2020\nAug 2020\nMar 2020\nSep 2020\nSep 2020\nJavaScript Promise.allSettled()\nThe\nPromise.allSettled()\nmethod returns a single Promise from a list of promises.\nExample\n// Create a Promise\nconst myPromise1 = new Promise((resolve, reject) => {\nsetTimeout(resolve, 200, \"King\");\n});\n// Create another Promise\nconst myPromise2 = new Promise((resolve, reject) => {\nsetTimeout(resolve, 100, \"Queen\");\n});\n// Settle All\nPromise.allSettled([myPromise1, myPromise2]).then((results) =>\nresults.forEach((x) => myDisplay(x.status)),\n);\n\nPromise.allSettled()\nis supported in all modern browsers since March 2020:\nChrome 76\nEdge 79\nFirefox 71\nSafari 13\nOpera 63\nMay 2019\nNov 2019\nMar 2020\nSep 2019\nAug 2019\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Integer Example",
+      "content": "",
+      "order": 3,
+      "code": "let x = 999999999999999;\nlet y = 9999999999999999; // too big",
+      "language": "javascript",
+      "explanation": "Example of integer example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "let x = 1234567890123456789012345n;\nlet y = BigInt(1234567890123456789012345)",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "let x = BigInt(999999999999999);\nlet type = typeof x;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "const iterator = text.matchAll(\"Cats\");",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "const iterator = text.matchAll(/Cats/g);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "const iterator = text.matchAll(/Cats/gi);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "let name = null;\nlet text = \"missing\";\nlet result = name ?? text;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "const car = {type:\"Fiat\", model:\"500\", color:\"white\"};\nlet name = car?.name;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Logical AND Assignment Example",
+      "content": "",
+      "order": 11,
+      "code": "let x = 10;\nx &&= 5;",
+      "language": "javascript",
+      "explanation": "Example of logical and assignment example"
+    },
+    {
+      "type": "code_example",
+      "title": "Logical OR Assignment Example",
+      "content": "",
+      "order": 12,
+      "code": "let x = 10;\nx ||= 5;",
+      "language": "javascript",
+      "explanation": "Example of logical or assignment example"
+    },
+    {
+      "type": "code_example",
+      "title": "Nullish Coalescing Assignment Example",
+      "content": "",
+      "order": 13,
+      "code": "let x;\nx ??= 5;",
+      "language": "javascript",
+      "explanation": "Example of nullish coalescing assignment example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "// Create a Promise\nconst myPromise1 = new Promise((resolve, reject) => {\nsetTimeout(resolve, 200, \"King\");\n});\n// Create another Promise\nconst myPromise2 = new Promise((resolve, reject) => {\nsetTimeout(resolve, 100, \"Queen\");\n});\n// Settle All\nPromise.allSettled([myPromise1, myPromise2]).then((results) =>\nresults.forEach((x) => myDisplay(x.status)),\n);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "let x = 999999999999999;\nlet y = 9999999999999999; // too big"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "let x = 1234567890123456789012345n;\nlet y = BigInt(1234567890123456789012345)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "8647c87e-5557-42cf-b0c4-c73dced9cc4e",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "6ef24dd3-5c60-49f8-8382-ede5ab014483",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e16f8154-4b6f-46ca-ac42-da5fd00c7bc4",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is versions?",
+      "options": [
+        "None of the above.",
+        "named by year: ES2016",
+        "None of the above.",
+        "relatively new"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of versions is 'named by year: ES2016'."
+    },
+    {
+      "question": "What is Dynamic Import\nWarning\nThese features?",
+      "options": [
+        "named by year: ES2016",
+        "None of the above.",
+        "None of the above.",
+        "relatively new"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Dynamic Import\nWarning\nThese features is 'relatively new'."
+    }
+  ],
+  "summary": "This tutorial covers ECMAScript 2020 concepts and techniques. You'll learn how to use ECMAScript 2020 effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ECMAScript 2020 and how to apply it in your projects."
+}

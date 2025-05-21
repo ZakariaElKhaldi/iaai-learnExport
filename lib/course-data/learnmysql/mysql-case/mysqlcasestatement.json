@@ -1,0 +1,133 @@
+{
+  "id": "d6299b0b-31b6-46d8-825d-93a817ae93e9",
+  "title": "MySQLCASEStatement",
+  "slug": "mysqlcasestatement",
+  "metadata": {
+    "description": "Learn about MySQLCASEStatement with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "case",
+      "quantity",
+      "else",
+      "city",
+      "statement",
+      "conditions",
+      "returns",
+      "mysql",
+      "value",
+      "condition"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMySQL",
+    "subcategory": "MySQL CASE"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "MySQL\nCASE\nStatement",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The MySQL CASE Statement\nThe\nCASE\nstatement goes through conditions and returns a value when the first condition is \nmet (like an if-then-else statement). So, once a condition is true, it will stop \nreading and return the result. If no conditions are true, it returns \nthe value in the\nELSE\nclause.\nIf there is no\nELSE\npart and no conditions are true, it returns NULL.\nCASE Syntax\nCASE\nWHEN\ncondition1\nTHEN\nresult1\nWHEN\ncondition2\nTHEN\nresult2\nWHEN\nconditionN\nTHEN\nresultN\nELSE\nresult\nEND;\nDemo Database\nBelow is a selection from the \"OrderDetails\" table in the Northwind sample database:\nOrderDetailID\nOrderID\nProductID\nQuantity\n1\n10248\n11\n12\n2\n10248\n42\n10\n3\n10248\n72\n5\n4\n10249\n14\n9\n5\n10249\n51\n40\nMySQL CASE Examples\nThe following SQL goes through conditions and returns a value when the first condition is met:\nExample\nSELECT OrderID, Quantity,\nCASE\nWHEN Quantity > 30 \n  THEN 'The quantity is greater than 30'\nWHEN Quantity = 30 THEN 'The \n  quantity is 30'\nELSE 'The quantity is under 30'\nEND AS QuantityText\nFROM OrderDetails;\n\nThe following SQL will order the customers by City. However, if City is NULL, then order by Country:\nExample\nSELECT CustomerName, City, Country\nFROM Customers\nORDER BY\n(CASE\nWHEN City IS NULL THEN Country\nELSE City\nEND);\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "CASE\nWHEN\ncondition1\nTHEN\nresult1\nWHEN\ncondition2\nTHEN\nresult2\nWHEN\nconditionN\nTHEN\nresultN\nELSE\nresult\nEND;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "SELECT OrderID, Quantity,\nCASE\nWHEN Quantity > 30 \n  THEN 'The quantity is greater than 30'\nWHEN Quantity = 30 THEN 'The \n  quantity is 30'\nELSE 'The quantity is under 30'\nEND AS QuantityText\nFROM OrderDetails;",
+      "language": "sql",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "SELECT CustomerName, City, Country\nFROM Customers\nORDER BY\n(CASE\nWHEN City IS NULL THEN Country\nELSE City\nEND);",
+      "language": "sql",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "CASE\nWHEN\ncondition1\n# TODO: Complete this line\nresult1\nWHEN\ncondition2\nTHEN\nresult2\nWHEN\nconditionN\nTHEN\nresultN\nELSE\nresult\nEND;",
+      "solution": "CASE\nWHEN\ncondition1\nTHEN\nresult1\nWHEN\ncondition2\nTHEN\nresult2\nWHEN\nconditionN\nTHEN\nresultN\nELSE\nresult\nEND;"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "SELECT OrderID, Quantity,\nCASE\nWHEN Quantity > 30 \n  THEN 'The quantity is greater than 30'\nWHEN Quantity = 30 THEN 'The \n  quantity is 30'\nELSE 'The quantity is under 30'\nEND AS QuantityText\n# TODO: Complete this line",
+      "solution": "SELECT OrderID, Quantity,\nCASE\nWHEN Quantity > 30 \n  THEN 'The quantity is greater than 30'\nWHEN Quantity = 30 THEN 'The \n  quantity is 30'\nELSE 'The quantity is under 30'\nEND AS QuantityText\nFROM OrderDetails;"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "549c3d69-0598-4b28-9987-61125e010405",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "bb11a066-8947-4f86-8a27-26c20b14efa9",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "264298a4-07ee-4c81-a769-2c24020cd432",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is MySQL\nCASE\nStatement\n\nThe MySQL CASE Statement\nThe\nCASE\nstatement goes through conditions and returns a value when the first condition?",
+      "options": [
+        "true",
+        "None of the above.",
+        "met (like an if-then-else statement)",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of MySQL\nCASE\nStatement\n\nThe MySQL CASE Statement\nThe\nCASE\nstatement goes through conditions and returns a value when the first condition is 'met (like an if-then-else statement)'."
+    },
+    {
+      "question": "What is once a condition?",
+      "options": [
+        "true",
+        "None of the above.",
+        "met (like an if-then-else statement)",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of once a condition is 'true'."
+    }
+  ],
+  "summary": "This tutorial covers MySQLCASEStatement concepts and techniques. You'll learn how to use MySQLCASEStatement effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of MySQLCASEStatement and how to apply it in your projects."
+}

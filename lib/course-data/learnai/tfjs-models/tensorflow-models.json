@@ -1,0 +1,193 @@
+{
+  "id": "29f895ae-0670-497c-b6de-02a08bf07d01",
+  "title": "TensorFlow Models",
+  "slug": "tensorflow-models",
+  "metadata": {
+    "description": "Learn about TensorFlow Models with clear explanations and practical examples.",
+    "keywords": [
+      "model",
+      "const",
+      "tensorflow",
+      "function",
+      "xmax",
+      "xarr",
+      "yarr",
+      "layers",
+      "values",
+      "tensor"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnAI",
+    "subcategory": "TFJS Models"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "TensorFlow Models",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "TesorFlow.js\nA JavaScript Library for\nTraining and Deploying\nMachine Learning Models\nIn the Browser\nTensorflow Models\nModels\nand\nLayers\nare important building blocks in\nMachine Learning\n.\nFor different Machine Learning tasks you must combine different types of Layers\ninto a Model that can be trained with data to predict future values.\nTensorFlow.js is supporting different types of\nModels\nand different types of\nLayers.\nA TensorFlow\nModel\nis a\nNeural Network\nwith one or more\nLayers\n.\nA Tensorflow Project\nA Tensorflow project has this typical workflow:\nCollecting Data\nCreating a Model\nAdding Layers to the Model\nCompiling the Model\nTraining the Model\nUsing the Model\nExample\nSuppose you knew a function that defined a strait line:\nY = 1.2X + 5\nThen you could calculate any y value with the JavaScript formula:\ny = 1.2 * x + 5;\nTo demonstrate Tensorflow.js, we could train a Tensorflow.js model to\npredict Y values based on X inputs.\nNote\nThe TensorFlow model does not know the function.\n// Create Training Data\nconst xs = tf.tensor([0, 1, 2, 3, 4]);\nconst ys = xs.mul(1.2).add(5);\n// Define a Linear Regression Model\nconst model = tf.sequential();\nmodel.add(tf.layers.dense({units:1, inputShape:[1]}));\n// Specify Loss and Optimizer\nmodel.compile({loss:'meanSquaredError', optimizer:'sgd'});\n// Train the Model\nmodel.fit(xs, ys, {epochs:500}).then(() => {myFunction()});\n// Use the Model\nfunction myFunction() {\nconst xMax = 10;\nconst xArr = [];\nconst yArr = [];\nfor (let x = 0; x <= xMax; x++) {\nlet result = model.predict(tf.tensor([Number(x)]));\nresult.data().then(y => {\nxArr.push(x);\nyArr.push(Number(y));\nif (x == xMax) {plot(xArr, yArr)};\n});\n}\n}\n\nThe example is explained below:\nCollecting Data\nCreate a tensor (xs) with 5 x values:\nconst xs = tf.tensor([0, 1, 2, 3, 4]);\nCreate a tensor (ys) with 5 correct y answers (multiply xs with 1.2 and add 5):\nconst ys = xs.mul(1.2).add(5);\nCreating a Model\nCreate a sequential mode:.\nconst model = tf.sequential();\nNote\nIn a sequential model, the output from one layer is the input to the \nAdding Layers\nAdd one dense layer to the model.\nThe layer is only one unit (tensor) and the shape is 1 (one dimentional):\nmodel.add(tf.layers.dense({units:1, inputShape:[1]}));\nNote\nin a dense the layer, every node is connected to every node in the preceding layer.\nCompiling the Model\nCompile the model using meanSquaredError as loss function and\nsgd (stochastic gradient descent) as optimizer function:\nmodel.compile({loss:'meanSquaredError', optimizer:'sgd'});\nTensorflow Optimizers\nAdadelta -Implements the Adadelta algorithm.\nAdagrad - Implements the Adagrad algorithm.\nAdam - Implements the Adam algorithm.\nAdamax - Implements the Adamax algorithm.\nFtrl - Implements the FTRL algorithm.\nNadam - Implements the NAdam algorithm.\nOptimizer - Base class for Keras optimizers.\nRMSprop - Implements the RMSprop algorithm.\nSGD - Stochastic Gradient Descent Optimizer.\nTraining the Model\nTrain the model (using xs and ys) with 500 repeats (epochs):\nmodel.fit(xs, ys, {epochs:500}).then(() => {myFunction()});\nUsing the Model\nAfter the model is trained, you can use it for many different purposes.\nThis example predicts 10 y values, given 10 x values, and calls a function to plot the predictions in a graph:\nfunction myFunction() {\nconst xMax = 10;\nconst xArr = [];\nconst yArr = [];\nfor (let x = 0; x <= xMax; x++) {\nlet result = model.predict(tf.tensor([Number(x)]));\nresult.data().then(y => {\nxArr.push(x);\nyArr.push(Number(y));\nif (x == xMax) {plot(xArr, yArr)};\n});\n}\n}\n\nThis example predicts 10 y values, given 10 x values, and calls a function to display the values:\nfunction myFunction() {\nconst xMax = 10;\nconst xArr = [];\nconst yArr = [];\nfor (let x = 0; x <= xMax; x++) {\nlet result = model.predict(tf.tensor([Number(x)]));\nresult.data().then(y => {\nxArr.push(x);\nyArr.push(Number(y));\nif (x == xMax) {display(xArr, yArr)};\n});\n}\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "y = 1.2 * x + 5;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "// Create Training Data\nconst xs = tf.tensor([0, 1, 2, 3, 4]);\nconst ys = xs.mul(1.2).add(5);\n// Define a Linear Regression Model\nconst model = tf.sequential();\nmodel.add(tf.layers.dense({units:1, inputShape:[1]}));\n// Specify Loss and Optimizer\nmodel.compile({loss:'meanSquaredError', optimizer:'sgd'});\n// Train the Model\nmodel.fit(xs, ys, {epochs:500}).then(() => {myFunction()});\n// Use the Model\nfunction myFunction() {\nconst xMax = 10;\nconst xArr = [];\nconst yArr = [];\nfor (let x = 0; x <= xMax; x++) {\nlet result = model.predict(tf.tensor([Number(x)]));\nresult.data().then(y => {\nxArr.push(x);\nyArr.push(Number(y));\nif (x == xMax) {plot(xArr, yArr)};\n});\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "const xs = tf.tensor([0, 1, 2, 3, 4]);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "const ys = xs.mul(1.2).add(5);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "const model = tf.sequential();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "model.add(tf.layers.dense({units:1, inputShape:[1]}));",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "model.compile({loss:'meanSquaredError', optimizer:'sgd'});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "model.fit(xs, ys, {epochs:500}).then(() => {myFunction()});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "function myFunction() {\nconst xMax = 10;\nconst xArr = [];\nconst yArr = [];\nfor (let x = 0; x <= xMax; x++) {\nlet result = model.predict(tf.tensor([Number(x)]));\nresult.data().then(y => {\nxArr.push(x);\nyArr.push(Number(y));\nif (x == xMax) {plot(xArr, yArr)};\n});\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "function myFunction() {\nconst xMax = 10;\nconst xArr = [];\nconst yArr = [];\nfor (let x = 0; x <= xMax; x++) {\nlet result = model.predict(tf.tensor([Number(x)]));\nresult.data().then(y => {\nxArr.push(x);\nyArr.push(Number(y));\nif (x == xMax) {display(xArr, yArr)};\n});\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "y = 1.2 * x + 5;"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "// Create Training Data\nconst xs = tf.tensor([0, 1, 2, 3, 4]);\nconst ys = xs.mul(1.2).add(5);\n// Define a Linear Regression Model\nconst model = tf.sequential();\nmodel.add(tf.layers.dense({units:1, inputShape:[1]}));\n// Specify Loss and Optimizer\nmodel.compile({loss:'meanSquaredError', optimizer:'sgd'});\n// Train the Model\nmodel.fit(xs, ys, {epochs:500}).then(() => {myFunction()});\n// Use the Model\nfunction myFunction() {\nconst xMax = 10;\nconst xArr = [];\nconst yArr = [];\n# TODO: Complete this line\nlet result = model.predict(tf.tensor([Number(x)]));\nresult.data().then(y => {\nxArr.push(x);\nyArr.push(Number(y));\nif (x == xMax) {plot(xArr, yArr)};\n});\n}\n}",
+      "solution": "// Create Training Data\nconst xs = tf.tensor([0, 1, 2, 3, 4]);\nconst ys = xs.mul(1.2).add(5);\n// Define a Linear Regression Model\nconst model = tf.sequential();\nmodel.add(tf.layers.dense({units:1, inputShape:[1]}));\n// Specify Loss and Optimizer\nmodel.compile({loss:'meanSquaredError', optimizer:'sgd'});\n// Train the Model\nmodel.fit(xs, ys, {epochs:500}).then(() => {myFunction()});\n// Use the Model\nfunction myFunction() {\nconst xMax = 10;\nconst xArr = [];\nconst yArr = [];\nfor (let x = 0; x <= xMax; x++) {\nlet result = model.predict(tf.tensor([Number(x)]));\nresult.data().then(y => {\nxArr.push(x);\nyArr.push(Number(y));\nif (x == xMax) {plot(xArr, yArr)};\n});\n}\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "12777a50-f7a6-4bc8-b4b8-b72266682a98",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9eeff8ef-d240-49db-aaeb-5a7f4cc4baa2",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "d98c4c46-032c-4ab1-9026-3f811448ca7c",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is js\nA JavaScript Library for\nTraining and Deploying\nMachine Learning Models\nIn the Browser\nTensorflow Models\nModels\nand\nLayers?",
+      "options": [
+        "None of the above.",
+        "supporting different types of\nModels\nand different types of\nLayers",
+        "important building blocks in\nMachine Learning",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of js\nA JavaScript Library for\nTraining and Deploying\nMachine Learning Models\nIn the Browser\nTensorflow Models\nModels\nand\nLayers is 'important building blocks in\nMachine Learning'."
+    },
+    {
+      "question": "What is js?",
+      "options": [
+        "important building blocks in\nMachine Learning",
+        "None of the above.",
+        "None of the above.",
+        "supporting different types of\nModels\nand different types of\nLayers"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of js is 'supporting different types of\nModels\nand different types of\nLayers'."
+    }
+  ],
+  "summary": "This tutorial covers TensorFlow Models concepts and techniques. You'll learn how to use TensorFlow Models effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of TensorFlow Models and how to apply it in your projects."
+}

@@ -1,0 +1,96 @@
+{
+  "id": "62287d8a-61bf-4935-b230-9e248c2542d3",
+  "title": "ADODisplay Data",
+  "slug": "adodisplay-data",
+  "metadata": {
+    "description": "Learn about ADODisplay Data with clear explanations and practical examples.",
+    "keywords": [
+      "conn",
+      "html",
+      "table",
+      "response",
+      "write",
+      "body",
+      "server",
+      "createobject",
+      "adodb",
+      "open"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "ADO Display"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ADO\nDisplay Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A common way to display data from a recordset, is to\ndisplay the data in an HTML table.\nDisplay the Field Names and Field Values\nWe have a database named \"Northwind\" and we want to display the\ndata from the \"Customers\" table (remember to save the file with an \n.asp extension):\n<html>\n<body>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\nset rs = Server.CreateObject(\"ADODB.recordset\")\nrs.Open \"SELECT * FROM Customers\", conn\ndo until rs.EOF\nfor each x in rs.Fields\nResponse.Write(x.name)\nResponse.Write(\" = \")\nResponse.Write(x.value & \"<br>\")\n\nResponse.Write(\"<br>\")\nrs.Move\nloop\nrs.close\nconn.close\n%>\n</body>\n</html>\nDisplay the Data in an HTML Table\nWe can also display the data from the \"Customers\" table inside an HTML\ntable with the following lines (remember to save the file with an .asp extension):\n<html>\n<body>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\nset rs = Server.CreateObject(\"ADODB.recordset\")\nrs.Open \"SELECT Companyname, Contactname FROM Customers\", conn\n%>\n<table border=\"1\" width=\"100%\">\n<%do until rs.EOF%>\n<tr>\n<%for each x in rs.Fields%>\n<td><%Response.Write(x.value)%></td>\n<%\nrs.Move\n</tr>\n<%loop\nrs.close\nconn.close\n%>\n</table>\n</body>\n</html>\nAdd Headers to the HTML Table\nWe want to add headers to the HTML table to make it more readable (remember to save the file with an .asp extension):\n<html>\n<body>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\nset rs = Server.CreateObject(\"ADODB.recordset\")\nsql=\"SELECT Companyname, Contactname FROM Customers\"\nrs.Open sql, conn\n%>\n<table border=\"1\" width=\"100%\">\n<tr>\n<%for each x in rs.Fields\nresponse.write(\"<th>\" & x.name & \"</th>\")\n\n</tr>\n<%do until rs.EOF%>\n<tr>\n<%for each x in rs.Fields%>\n<td><%Response.Write(x.value)%></td>\n<%\nrs.Move\n</tr>\n<%loop\nrs.close\nconn.close\n%>\n</table>\n</body>\n</html>\nAdd Colors to the HTML Table\nWe want to add colors to the HTML table to make it look nice (remember to save the file with an .asp extension):\n<html>\n<body>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\nset rs = Server.CreateObject(\"ADODB.recordset\")\nsql=\"SELECT Companyname, Contactname FROM Customers\"\nrs.Open sql, conn\n%>\n<table border=\"1\" \n  style=\"width:100%;background-color:#fff5ee;\">\n<tr>\n<%for each x in rs.Fields\nresponse.write(\"<th \n  style='text-align:left;background-color:#b0c4de;'>\" & x.name & \"</th>\")\n\n</tr>\n<%do until rs.EOF%>\n<tr>\n<%for each x in rs.Fields%>\n<td><%Response.Write(x.value)%></td>\n<%\nrs.Move\n</tr>\n<%loop\nrs.close\nconn.close\n%>\n</table>\n</body>\n</html>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Create a Layout",
+      "description": "Build a simple layout using the techniques from this tutorial.",
+      "difficulty": "easy",
+      "starter_code": "<!-- Add your code here -->",
+      "solution": "<!-- Example solution would go here -->"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "738f7b04-a92e-4ff1-8b9c-07fde4e7f903",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "b459859a-6723-4a2c-9c7a-604c69c19846",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "34e39b0f-8df3-4422-b299-59a38d698f3d",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers ADODisplay Data concepts and techniques. You'll learn how to use ADODisplay Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ADODisplay Data and how to apply it in your projects."
+}

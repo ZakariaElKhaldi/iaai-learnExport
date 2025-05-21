@@ -1,0 +1,142 @@
+{
+  "id": "fe537c4b-e913-4ef8-bc24-c5be1758e2fe",
+  "title": "Vuev-modelDirective",
+  "slug": "vuev-modeldirective",
+  "metadata": {
+    "description": "Learn about Vuev-modelDirective with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "item",
+      "input",
+      "important",
+      "model",
+      "data",
+      "list",
+      "script",
+      "form",
+      "found",
+      "type"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue v-model"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue\nv-model\nDirective",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Compared to normal JavaScript, it is easier to work with forms in Vue because the\nv-model\ndirective connects with all types of input elements in the same way.\nv-model\ncreates a link between the input element\nvalue\nattribute and a data value in the Vue instance. When you change the input, the data updates and when the data changes, the input updates as well (two-way binding).\nTwo-way Binding\nAs we have already seen in the shopping list example on the \nv-model\nprovides us with a two-way binding, meaning that the form input elements update the Vue data instance, and a change in the Vue instance data updates the inputs.\nThe example below also demonstrates the two-way binding with\nv-model\n.\nExample\nTwo-way binding: Try to write inside the input field to see that the Vue data property value gets updated. Try also to write directly in the code to change the Vue data property value, run the code, and see how the input field is updated.\n<div id=\"app\">\n<input type=\"text\" v-model=\"inpText\">\n<p> {{ inpText }} </p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ninpText: 'Initial text'\n}\n}\n})\napp.mount('#app')\n</script>\n\nNote:\nThe\nv-model\ntwo-way binding functionality could actually be achieved with a combination of\nv-bind:value\nand\nv-on:input\n:\nv-bind:value\nto update the input element from the Vue instance data,\nand\nv-on:input\nto update the Vue instance data from the input.\nBut\nv-model\nis much easier to use so that is what we will do.\nA Dynamic Checkbox\nWe add a checkbox to our shopping list on the\n\nWe use\nv-model\nto add this dynamic checkbox and text to improve user interaction.\nWe need:\na boolean value in the Vue instance data property called 'important'\na checkbox where the user can check if the item is important\na dynamic feedback text so that the user can see if the item is important\nBelow is how the 'important' feature looks, isolated from the shopping list.\nExample\nThe checkbox text is made dynamic so that the text reflects the current checkbox input value.\n<div id=\"app\">\n<form>\n<p>\nImportant item?\n<label>\n<input type=\"checkbox\" v-model=\"important\">\n{{ important }}\n</label>\n</p>\n</form>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nimportant: false\n}\n}\n})\napp.mount('#app')\n</script>\n\nLet's include this dynamic feature in our shopping list example.\nExample\n<div id=\"app\">\n<form v-on:submit.prevent=\"addItem\">\n<p>Add item</p>\n<p>Item name: <input type=\"text\" required v-model=\"itemName\"></p>\n<p>How many: <input type=\"number\" v-model=\"itemNumber\"></p>\n<p>\nImportant?\n<label>\n<input type=\"checkbox\" v-model=\"itemImportant\">\n{{ important }}\n</label>\n</p>\n<button type=\"submit\">Add item</button>\n</form>\n<hr>\n<p>Shopping list:</p>\n<ul>\n<li v-for=\"item in shoppingList\">{{item.name}}, {{item.number}}</li>\n</ul>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nitemName: null,\nitemNumber: null,\nimportant: false,\nshoppingList: [\n{ name: 'Tomatoes', number: 5, important: false }\n]\n}\n},\nmethods: {\naddItem() {\nlet item = {\nname: this.itemName,\nnumber: this.itemNumber\nimportant: this.itemImportant\n}\nthis.shoppingList.push(item)\nthis.itemName = null\nthis.itemNumber = null\nthis.itemImportant = false\n}\n}\n})\napp.mount('#app')\n</script>\n\nMark Found Items in The Shopping List\nLet's add functionality so that items added to the shopping list can be marked as found.\nWe need:\nthe list items to react on click\nto change the status of the clicked item to 'found', and use this to visually move the item away and strike it through with CSS\nWe create one list with all items we need to find, and one list below with items found striked through. We can actually put all the items in the first list, and all the items in the second list, and just use\nv-show\nwith the Vue data property 'found' to define whether to show the item in the first or second list.\nExample\nAfter adding items to the shopping list we can pretend to go shopping, clicking the items away after finding them. If we click an item by mistake we can take it back to the 'not found' list by clicking the item once more.\n<div id=\"app\">\n<form v-on:submit.prevent=\"addItem\">\n<p>Add item</p>\n<p>Item name: <input type=\"text\" required v-model=\"itemName\"></p>\n<p>How many: <input type=\"number\" v-model=\"itemNumber\"></p>\n<p>\nImportant?\n<label>\n<input type=\"checkbox\" v-model=\"itemImportant\">\n{{ important }}\n</label>\n</p>\n<button type=\"submit\">Add item</button>\n</form>\n<p><strong>Shopping list:</strong></p>\n<ul id=\"ulToFind\">\n<li v-for=\"item in shoppingList\"\nv-bind:class=\"{ impClass: item.important }\"\nv-on:click=\"item.found=!item.found\"\nv-show=\"!item.found\">\n{{ item.name }}, {{ item.number}}\n</li>\n</ul>\n<ul id=\"ulFound\">\n<li v-for=\"item in shoppingList\"\nv-bind:class=\"{ impClass: item.important }\"\nv-on:click=\"item.found=!item.found\"\nv-show=\"item.found\">\n{{ item.name }}, {{ item.number}}\n</li>\n</ul>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nitemName: null,\nitemNumber: null,\nimportant: false,\nshoppingList: [\n{ name: 'Tomatoes', number: 5, important: false, found: false }\n]\n}\n},\nmethods: {\naddItem() {\nlet item = {\nname: this.itemName,\nnumber: this.itemNumber,\nimportant: this.itemImportant,\nfound: false\n}\nthis.shoppingList.push(item)\nthis.itemName = null\nthis.itemNumber = null\nthis.itemImportant = false\n}\n}\n})\napp.mount('#app')\n</script>\n\nUse v-model to make The Form Itself Dynamic\nWe can make a form where the customer orders from a menu. To make it easy for the customer, we only present the drinks to choose from after the customer chooses to order drinks. This is can be argued to be better than presenting the customer with all items from the menu at once. In this example we use\nv-model\nand\nv-show\nto make the form itself dynamic.\nWe need:\nA form, with relevant input tags and 'Order' button.\nRadio-buttons to select 'Dinner', 'Drink' or 'Dessert'.\nAfter category is chosen, a dropdown menu appears with all the items in that category.\nWhen an item is chosen you see an image of it, you can choose how many and add it to the order. The form is reset when the item is added to the order.\nExample\nThis form is dynamic. It changes based on user choices. The user must first choose category, then product and how many, before the order button becomes visible and the user can order it.\n\nVue Exercises\nTest Yourself With Exercises\nExercise:\nProvide the correct code so that the default browser refresh on submit is prevented.\nAlso, provide code so that the input field values get a two-way binding to the Vue data instance properties 'itemName' and 'itemNumber'.\n<form v-on:\n=\"addItem\">\n  <p>Add item</p>\n  <p>\n    Item name: \n    <input type=\"text\" required\n=\"itemName\">\n  </p>\n  <p>\n    How many: \n    <input type=\"number\"\n=\"itemNumber\">\n  </p>\n  <button type=\"submit\">Add item</button>\n</form>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<div id=\"app\">\n<input type=\"text\" v-model=\"inpText\">\n<p> {{ inpText }} </p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ninpText: 'Initial text'\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<div id=\"app\">\n<form>\n<p>\nImportant item?\n<label>\n<input type=\"checkbox\" v-model=\"important\">\n{{ important }}\n</label>\n</p>\n</form>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nimportant: false\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<div id=\"app\">\n<form v-on:submit.prevent=\"addItem\">\n<p>Add item</p>\n<p>Item name: <input type=\"text\" required v-model=\"itemName\"></p>\n<p>How many: <input type=\"number\" v-model=\"itemNumber\"></p>\n<p>\nImportant?\n<label>\n<input type=\"checkbox\" v-model=\"itemImportant\">\n{{ important }}\n</label>\n</p>\n<button type=\"submit\">Add item</button>\n</form>\n<hr>\n<p>Shopping list:</p>\n<ul>\n<li v-for=\"item in shoppingList\">{{item.name}}, {{item.number}}</li>\n</ul>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nitemName: null,\nitemNumber: null,\nimportant: false,\nshoppingList: [\n{ name: 'Tomatoes', number: 5, important: false }\n]\n}\n},\nmethods: {\naddItem() {\nlet item = {\nname: this.itemName,\nnumber: this.itemNumber\nimportant: this.itemImportant\n}\nthis.shoppingList.push(item)\nthis.itemName = null\nthis.itemNumber = null\nthis.itemImportant = false\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<div id=\"app\">\n<form v-on:submit.prevent=\"addItem\">\n<p>Add item</p>\n<p>Item name: <input type=\"text\" required v-model=\"itemName\"></p>\n<p>How many: <input type=\"number\" v-model=\"itemNumber\"></p>\n<p>\nImportant?\n<label>\n<input type=\"checkbox\" v-model=\"itemImportant\">\n{{ important }}\n</label>\n</p>\n<button type=\"submit\">Add item</button>\n</form>\n<p><strong>Shopping list:</strong></p>\n<ul id=\"ulToFind\">\n<li v-for=\"item in shoppingList\"\nv-bind:class=\"{ impClass: item.important }\"\nv-on:click=\"item.found=!item.found\"\nv-show=\"!item.found\">\n{{ item.name }}, {{ item.number}}\n</li>\n</ul>\n<ul id=\"ulFound\">\n<li v-for=\"item in shoppingList\"\nv-bind:class=\"{ impClass: item.important }\"\nv-on:click=\"item.found=!item.found\"\nv-show=\"item.found\">\n{{ item.name }}, {{ item.number}}\n</li>\n</ul>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nitemName: null,\nitemNumber: null,\nimportant: false,\nshoppingList: [\n{ name: 'Tomatoes', number: 5, important: false, found: false }\n]\n}\n},\nmethods: {\naddItem() {\nlet item = {\nname: this.itemName,\nnumber: this.itemNumber,\nimportant: this.itemImportant,\nfound: false\n}\nthis.shoppingList.push(item)\nthis.itemName = null\nthis.itemNumber = null\nthis.itemImportant = false\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div id=\"app\">\n<input type=\"text\" v-model=\"inpText\">\n<p> {{ inpText }} </p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ninpText: 'Initial text'\n# TODO: Complete this line\n}\n})\napp.mount('#app')\n</script>",
+      "solution": "<div id=\"app\">\n<input type=\"text\" v-model=\"inpText\">\n<p> {{ inpText }} </p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ninpText: 'Initial text'\n}\n}\n})\napp.mount('#app')\n</script>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div id=\"app\">\n<form>\n<p>\nImportant item?\n<label>\n<input type=\"checkbox\" v-model=\"important\">\n{{ important }}\n</label>\n</p>\n</form>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nimportant: false\n}\n}\n})\napp.mount('#app')\n# TODO: Complete this line",
+      "solution": "<div id=\"app\">\n<form>\n<p>\nImportant item?\n<label>\n<input type=\"checkbox\" v-model=\"important\">\n{{ important }}\n</label>\n</p>\n</form>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nimportant: false\n}\n}\n})\napp.mount('#app')\n</script>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "7b881040-90ae-42b2-b510-726db63ebe14",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "01799898-ee4a-4c22-bc19-bc0380d190f0",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "221ab25e-5fa9-421c-9c37-fc1cf0dbaaec",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is it?",
+      "options": [
+        "None of the above.",
+        "easier to work with forms in Vue because the\nv-model\ndirective connects with all types of input elements in the same way",
+        "None of the above.",
+        "updated"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of it is 'easier to work with forms in Vue because the\nv-model\ndirective connects with all types of input elements in the same way'."
+    },
+    {
+      "question": "What is and see how the input field?",
+      "options": [
+        "None of the above.",
+        "easier to work with forms in Vue because the\nv-model\ndirective connects with all types of input elements in the same way",
+        "None of the above.",
+        "updated"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of and see how the input field is 'updated'."
+    }
+  ],
+  "summary": "This tutorial covers Vuev-modelDirective concepts and techniques. You'll learn how to use Vuev-modelDirective effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vuev-modelDirective and how to apply it in your projects."
+}

@@ -1,0 +1,160 @@
+{
+  "id": "21016bb6-32d1-4fc7-aa51-425e86696ad6",
+  "title": "Vuev-ifDirective",
+  "slug": "vuev-ifdirective",
+  "metadata": {
+    "description": "Learn about Vuev-ifDirective with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "else",
+      "text",
+      "stock",
+      "pizza",
+      "script",
+      "example",
+      "includes",
+      "word",
+      "create",
+      "true"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue v-if"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue\nv-if\nDirective",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "It is a lot easier to create an HTML element depending on a condition in Vue with the\nv-if\ndirective than with plain JavaScript.\nWith Vue you just write the if-statement directly in the HTML element you want to create conditionally. It's that simple.\nConditional Rendering in Vue\nConditional rendering\nin Vue is done by using the\nv-if\n,\nv-else-if\nand\nv-else\ndirectives.\nConditional rendering is when an HTML element is created only if a condition is true, i.e. create the text \"In stock\" if a variable is 'true', or 'Not in stock' if that variable is 'false'.\nExample\nWrite different messages depending on whether there are any typewriters in stock or not:\n<p v-if=\"typewritersInStock\">\nin stock\n</p>\n<p v-else>\nnot in stock\n</p>\n\nConditions in Vue\nA condition, or \"if-statement\", is something that is either\ntrue\nor\nfalse\n.\nA condition is often a\ncomparison check\nbetween two values like in the example above to see if one value is greater than the other.\nWe use\ncomparison operators\nlike\n<\n,\n>=\nor\n!==\nto do such checks.\nComparison checks can also be combined with\nlogical operators\nsuch as\n&&\nor\n||\n.\nGo to our\nJavaScript tutorial\npage to find out more about JavaScript comparisons.\nWe can use the number of typewriters in storage with a comparison check to decide if they are in stock or not:\nExample\nUse a comparison check to decide whether to write \"In stock\" or \"Not in stock\" depending on the number of typewriters in storage.\n<p v-if=\"typewriterCount > 0\">\nin stock\n</p>\n<p v-else>\nnot in stock\n</p>\n\nDirectives for Conditional Rendering\nThis overview describes how the different Vue directives used for conditional rendering are used together.\nDirective\nDetails\nv-if\nCan be used alone, or with\nv-else-if\nand/or\nv-else\n. If the condition inside\nv-if\nis 'true',\nv-else-if\nor\nv-else\nare not considered.\nv-else-if\nMust be used after\nv-if\nor another\nv-else-if\n. If the condition inside\nv-else-if\nis 'true',\nv-else-if\nor\nv-else\nthat comes after are not considered.\nv-else\nThis part will happen if the first part of the if-statement is false. Must be placed at the very end of the if-statement, after\nv-if\nand\nv-else-if\n.\nTo see an example with all three directives shown above, we can expand the \nv-else-if\nso that the user sees 'In stock', 'Very few left!' or 'Out of stock':\nExample\nUse a comparison check to decide whether to write \"In stock\", \"Very few left!\" or \"Not in stock\" depending on the number of typewriters in storage.\n<p v-if=\"typewriterCount>3\">\nIn stock\n</p>\n<p v-else-if=\"typewriterCount>0\">\nVery few left!\n</p>\n<p v-else>\nNot in stock\n</p>\n\nUse The Return Value from a Function\nInstead of using a comparison check with the\nv-if\ndirective, we can use the 'true' or 'false' return value from a function:\nExample\nIf a certain text contains the word 'pizza', create a <p> tag with an appropriate message. The 'includes()' method is a native JavaScript method that checks if a text contain certain words.\n<div id=\"app\">\n<p v-if=\"text.includes('pizza')\">The text includes the word 'pizza'</p>\n<p v-else>The word 'pizza' is not found in the text</p>\n</div>\ndata() {\nreturn {\ntext: 'I like taco, pizza, Thai beef salad, pho soup and tagine.'\n}\n}\n\nThe example above can be expanded to show that\nv-if\nalso can create other tags like <div> and <img> tags:\nExample\nIf a certain text contains the word 'pizza', create a <div> tag with a pizza image and a <p> tag with a message. The 'includes()' method is a native JavaScript method that check if a text contain certain words.\n<div id=\"app\">\n<div v-if=\"text.includes('pizza')\">\n<p>The text includes the word 'pizza'</p>\n<img src=\"img_pizza.svg\">\n</div>\n<p v-else>The word 'pizza' is not found in the text</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: 'I like taco, pizza, Thai beef salad, pho soup and tagine.'\n}\n}\n})\napp.mount('#app')\n</script>\n\nBelow the example is expanded even more.\nExample\nIf a certain text contains the word 'pizza' or 'burrito' or none of these words, different images and texts will be created.\n<div id=\"app\">\n<div v-if=\"text.includes('pizza')\">\n<p>The text includes the word 'pizza'</p>\n<img src=\"img_pizza.svg\">\n</div>\n<div v-else-if=\"text.includes('burrito')\">\n<p>The text includes the word 'burrito', but not 'pizza'</p>\n<img src=\"img_burrito.svg\">\n</div>\n<p v-else>The words 'pizza' or 'burrito' are not found in the text</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: 'I like taco, pizza, Thai beef salad, pho soup and tagine.'\n}\n}\n})\napp.mount('#app')\n</script>\n\nWith Vue we can now write code that create elements under certain conditions in a much easier way than with traditional JavaScript.\nVue Exercises\nTest Yourself With Exercises\nExercise:\nFill in the missing part so that Vue toggles the visibility of the <div> tag below for us, depending on the 'typewritersInStock' boolean data property.\n<div id=\"app\">\n  <p\n=\"typewritersInStock\">\n    in stock\n  </p>\n  <p\n>\n    not in stock\n  </p>\n</div>\n\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\n  data() {\n    return {\n      typewritersInStock: true\n    }\n  }\n})\napp.mount('#app')\n</script>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<p v-if=\"typewritersInStock\">\nin stock\n</p>\n<p v-else>\nnot in stock\n</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<p v-if=\"typewriterCount > 0\">\nin stock\n</p>\n<p v-else>\nnot in stock\n</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<p v-if=\"typewriterCount>3\">\nIn stock\n</p>\n<p v-else-if=\"typewriterCount>0\">\nVery few left!\n</p>\n<p v-else>\nNot in stock\n</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<div id=\"app\">\n<p v-if=\"text.includes('pizza')\">The text includes the word 'pizza'</p>\n<p v-else>The word 'pizza' is not found in the text</p>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<div id=\"app\">\n<div v-if=\"text.includes('pizza')\">\n<p>The text includes the word 'pizza'</p>\n<img src=\"img_pizza.svg\">\n</div>\n<p v-else>The word 'pizza' is not found in the text</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: 'I like taco, pizza, Thai beef salad, pho soup and tagine.'\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<div id=\"app\">\n<div v-if=\"text.includes('pizza')\">\n<p>The text includes the word 'pizza'</p>\n<img src=\"img_pizza.svg\">\n</div>\n<div v-else-if=\"text.includes('burrito')\">\n<p>The text includes the word 'burrito', but not 'pizza'</p>\n<img src=\"img_burrito.svg\">\n</div>\n<p v-else>The words 'pizza' or 'burrito' are not found in the text</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: 'I like taco, pizza, Thai beef salad, pho soup and tagine.'\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<p v-if=\"typewritersInStock\">\nin stock\n</p>\n# TODO: Complete this line\nnot in stock\n</p>",
+      "solution": "<p v-if=\"typewritersInStock\">\nin stock\n</p>\n<p v-else>\nnot in stock\n</p>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<p v-if=\"typewriterCount > 0\">\nin stock\n</p>\n<p v-else>\nnot in stock\n# TODO: Complete this line",
+      "solution": "<p v-if=\"typewriterCount > 0\">\nin stock\n</p>\n<p v-else>\nnot in stock\n</p>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "ff58eda0-25e9-413e-ac91-8c635cede54a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "f8642ee2-f33c-4c32-99b7-41b2240f95e5",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "81c03db6-6823-4658-bf05-1b72ed9fe07f",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is if\nDirective\n\nIt?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "a lot easier to create an HTML element depending on a condition in Vue with the\nv-if\ndirective than with plain JavaScript",
+        "done by using the\nv-if"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of if\nDirective\n\nIt is 'a lot easier to create an HTML element depending on a condition in Vue with the\nv-if\ndirective than with plain JavaScript'."
+    },
+    {
+      "question": "What is Conditional Rendering in Vue\nConditional rendering\nin Vue?",
+      "options": [
+        "None of the above.",
+        "done by using the\nv-if",
+        "None of the above.",
+        "a lot easier to create an HTML element depending on a condition in Vue with the\nv-if\ndirective than with plain JavaScript"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Conditional Rendering in Vue\nConditional rendering\nin Vue is 'done by using the\nv-if'."
+    }
+  ],
+  "summary": "This tutorial covers Vuev-ifDirective concepts and techniques. You'll learn how to use Vuev-ifDirective effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vuev-ifDirective and how to apply it in your projects."
+}

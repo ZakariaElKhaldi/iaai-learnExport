@@ -1,0 +1,112 @@
+{
+  "id": "6b8ca43d-e69b-41be-92d2-3a7eedfb1e0a",
+  "title": "AJAXASP Example",
+  "slug": "ajaxasp-example",
+  "metadata": {
+    "description": "Learn about AJAXASP Example with clear explanations and practical examples.",
+    "keywords": [
+      "input",
+      "hint",
+      "example",
+      "field",
+      "function",
+      "name",
+      "txthint",
+      "xmlhttp",
+      "gethint",
+      "response"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnJavaScript",
+    "subcategory": "AJAX ASP"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "AJAX\nASP Example",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AJAX is used to create more interactive applications.\nAJAX ASP Example\nThe following example will demonstrate how a web page can communicate with a \nweb server while a user type characters in an input field:\nExample\nStart typing a name in the input field below:\nSuggestions:\nFirst name:\nExample Explained\nIn the example above, when a user types a character in the input field, a function \ncalled\nshowHint()\nis executed.\nThe function is triggered by the\nonkeyup\nevent.\nHere is the code:\nExample\n<p>Start typing a name in the input field below:</p>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n<form>\nFirst name: <input type=\"text\" onkeyup=\"showHint(this.value)\">\n</form>\n<script>\nfunction showHint(str) {\nif (str.length == 0) {\ndocument.getElementById(\"txtHint\").innerHTML = \"\";\nreturn;\n} else {\nconst xmlhttp = new XMLHttpRequest();\nxmlhttp.onload = function() {\ndocument.getElementById(\"txtHint\").innerHTML = this.responseText;\n}\nxmlhttp.open(\"GET\", \"gethint.asp?q=\" + str);\nxmlhttp.send();\n}\n}\n</script>\n\nCode explanation:\nFirst, check if the input field is empty (str.length == 0). If it is, clear the \ncontent of the txtHint placeholder and exit the function.\nHowever, if the input field is not empty, do the following:\nCreate an XMLHttpRequest object\nCreate the function to be executed when the server response is ready\nSend the request off to an ASP file (gethint.asp) on the server\nNotice that q parameter is added gethint.asp?q=\"+str\nThe str variable holds the content of the input field\nThe ASP File - \"gethint.asp\"\nThe ASP file checks an array of names, and returns the corresponding name(s) to the \nbrowser:\n<%\nresponse.expires=-1\ndim a(30)\n'Fill up array with names\na(1)=\"Anna\"\na(2)=\"Brittany\"\na(3)=\"Cinderella\"\na(4)=\"Diana\"\na(5)=\"Eva\"\na(6)=\"Fiona\"\na(7)=\"Gunda\"\na(8)=\"Hege\"\na(9)=\"Inga\"\na(10)=\"Johanna\"\na(11)=\"Kitty\"\na(12)=\"Linda\"\na(13)=\"Nina\"\na(14)=\"Ophelia\"\na(15)=\"Petunia\"\na(16)=\"Amanda\"\na(17)=\"Raquel\"\na(18)=\"Cindy\"\na(19)=\"Doris\"\na(20)=\"Eve\"\na(21)=\"Evita\"\na(22)=\"Sunniva\"\na(23)=\"Tove\"\na(24)=\"Unni\"\na(25)=\"Violet\"\na(26)=\"Liza\"\na(27)=\"Elizabeth\"\na(28)=\"Ellen\"\na(29)=\"Wenche\"\na(30)=\"Vicky\"\n'get the q parameter from URL\nq=ucase(request.querystring(\"q\"))\n'lookup all hints from array if length of q>0\nif len(q)>0 then\nhint=\"\"\nfor i=1 to 30\nif q=ucase(mid(a(i),1,len(q))) then\nif hint=\"\" then\nhint=a(i)\nelse\nhint=hint & \" , \" & a(i)\nend if\nend if\n\nend if\n'Output \"no suggestion\" if no hint were found\n'or output the correct values\nif hint=\"\" then\nresponse.write(\"no suggestion\")\nelse\nresponse.write(hint)\nend if\n%>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<p>Start typing a name in the input field below:</p>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n<form>\nFirst name: <input type=\"text\" onkeyup=\"showHint(this.value)\">\n</form>\n<script>\nfunction showHint(str) {\nif (str.length == 0) {\ndocument.getElementById(\"txtHint\").innerHTML = \"\";\nreturn;\n} else {\nconst xmlhttp = new XMLHttpRequest();\nxmlhttp.onload = function() {\ndocument.getElementById(\"txtHint\").innerHTML = this.responseText;\n}\nxmlhttp.open(\"GET\", \"gethint.asp?q=\" + str);\nxmlhttp.send();\n}\n}\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<p>Start typing a name in the input field below:</p>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n<form>\nFirst name: <input type=\"text\" onkeyup=\"showHint(this.value)\">\n</form>\n<script>\nfunction showHint(str) {\nif (str.length == 0) {\n# TODO: Complete this line\nreturn;\n} else {\nconst xmlhttp = new XMLHttpRequest();\nxmlhttp.onload = function() {\ndocument.getElementById(\"txtHint\").innerHTML = this.responseText;\n}\nxmlhttp.open(\"GET\", \"gethint.asp?q=\" + str);\nxmlhttp.send();\n}\n}\n</script>",
+      "solution": "<p>Start typing a name in the input field below:</p>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n<form>\nFirst name: <input type=\"text\" onkeyup=\"showHint(this.value)\">\n</form>\n<script>\nfunction showHint(str) {\nif (str.length == 0) {\ndocument.getElementById(\"txtHint\").innerHTML = \"\";\nreturn;\n} else {\nconst xmlhttp = new XMLHttpRequest();\nxmlhttp.onload = function() {\ndocument.getElementById(\"txtHint\").innerHTML = this.responseText;\n}\nxmlhttp.open(\"GET\", \"gethint.asp?q=\" + str);\nxmlhttp.send();\n}\n}\n</script>"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "7f487e82-050a-4b18-baf2-43cb75312bbd",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e4740733-3997-4c67-93cb-714666251695",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4b4616a4-3530-4d56-b9f4-2802e00efb0d",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is AJAX\nASP Example\n\nAJAX?",
+      "options": [
+        "Not a AJAX\nASP Example\n\nAJAX.",
+        "used to create more interactive applications",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of AJAX\nASP Example\n\nAJAX is 'used to create more interactive applications'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers AJAXASP Example concepts and techniques. You'll learn how to use AJAXASP Example effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of AJAXASP Example and how to apply it in your projects."
+}

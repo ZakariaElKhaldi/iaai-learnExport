@@ -1,0 +1,142 @@
+{
+  "id": "446cbaa4-c95d-4bcc-b29d-f03a8271de37",
+  "title": "PHPMySQL Use The WHERE Clause",
+  "slug": "phpmysql-use-the-where-clause",
+  "metadata": {
+    "description": "Learn about PHPMySQL Use The WHERE Clause with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "lastname",
+      "conn",
+      "echo",
+      "example",
+      "result",
+      "firstname",
+      "username",
+      "password",
+      "table",
+      "dbname"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "MySQL Where"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nMySQL Use The WHERE Clause",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Select and Filter Data From a MySQL Database\nThe WHERE clause is used to filter records.\nThe WHERE clause is used to extract only those records that fulfill a \nspecified condition.\nSELECT column_name(s)\nFROM table_name WHERE column_name operator value\nTo learn more about SQL, please visit our\nSQL tutorial\n.\nSelect and Filter Data With MySQLi\nThe following example selects the id, firstname and lastname columns from the MyGuests \ntable where the lastname is \"Doe\", and displays it on the page:\nExample (MySQLi Object-oriented)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error) {\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests WHERE \n  lastname='Doe'\";\n$result = $conn->query($sql);\nif ($result->num_rows > 0) {\n// output data of each row\nwhile($row = $result->fetch_assoc()) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}\n} else {\necho \"0 results\";\n}\n$conn->close();\n?>\nRun example \u00bb\nCode lines to explain from the example above:\nFirst, we set up the SQL query that selects the id, firstname and lastname columns from the MyGuests \ntable where the lastname is \"Doe\". The \nvariable called $result.\nThen, the\nfunction num_rows()\nchecks if there are more than zero \nrows returned.\nIf there are more than zero rows returned, the \nfunction\nfetch_assoc()\nputs all the results into an associative array that we can loop \nthrough. The\nwhile()\nloop loops through the result set and outputs the data from \nthe id, firstname and lastname columns.\nThe following example shows the same as the example above, in the MySQLi procedural way:\nExample (MySQLi Procedural)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests \n  WHERE lastname='Doe'\";\n$result = mysqli_query($conn, $sql);\nif (mysqli_num_rows($result) > 0) {\n// output data of each row\nwhile($row = mysqli_fetch_assoc($result)) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}\n} else {\necho \"0 results\";\n}\nmysqli_close($conn);\n?>\nRun example \u00bb\nYou can also put the result in an HTML table:\nExample (MySQLi Object-oriented)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error) {\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests WHERE \n  lastname='Doe'\";\n$result = $conn->query($sql);\nif ($result->num_rows > 0) {\necho \"<table><tr><th>ID</th><th>Name</th></tr>\";\n// output data of each row\nwhile($row = $result->fetch_assoc()) {\necho \"<tr><td>\".$row[\"id\"].\"</td><td>\".$row[\"firstname\"].\" \".$row[\"lastname\"].\"</td></tr>\";\n}\necho \"</table>\";\n} else {\necho \"0 results\";\n}\n$conn->close();\n?>\nRun example \u00bb\nSelect Data With PDO (+ Prepared Statements)\nThe following example uses prepared statements.\nIt selects the id, firstname and lastname columns from the MyGuests table \nwhere the lastname is \"Doe\", and \ndisplays it in an HTML table:\nExample (PDO)\n<?php\necho \"<table style='border: solid 1px black;'>\";\necho \"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\";\nclass TableRows extends RecursiveIteratorIterator {\nfunction __construct($it) {\nparent::__construct($it, self::LEAVES_ONLY);\n}\nfunction current() {\nreturn \"<td style='width:150px;border:1px solid black;'>\" . parent::current(). \"</td>\";\n}\nfunction beginChildren() {\necho \"<tr>\";\n}\nfunction endChildren() {\necho \"</tr>\" . \"\\n\";\n}\n}\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$stmt = $conn->prepare(\"SELECT id, firstname, lastname FROM MyGuests \n  WHERE lastname='Doe'\");\n$stmt->execute();\n// set the resulting array to associative\n$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);\nforeach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {\necho $v;\n}\n}\ncatch(PDOException $e) {\necho \"Error: \" . $e->getMessage();\n}\n$conn = null;\necho \"</table>\";\n?>\nRun example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Object-oriented)",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error) {\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests WHERE \n  lastname='Doe'\";\n$result = $conn->query($sql);\nif ($result->num_rows > 0) {\n// output data of each row\nwhile($row = $result->fetch_assoc()) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}\n} else {\necho \"0 results\";\n}\n$conn->close();\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli object-oriented)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Procedural)",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests \n  WHERE lastname='Doe'\";\n$result = mysqli_query($conn, $sql);\nif (mysqli_num_rows($result) > 0) {\n// output data of each row\nwhile($row = mysqli_fetch_assoc($result)) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}\n} else {\necho \"0 results\";\n}\nmysqli_close($conn);\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli procedural)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Object-oriented)",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error) {\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests WHERE \n  lastname='Doe'\";\n$result = $conn->query($sql);\nif ($result->num_rows > 0) {\necho \"<table><tr><th>ID</th><th>Name</th></tr>\";\n// output data of each row\nwhile($row = $result->fetch_assoc()) {\necho \"<tr><td>\".$row[\"id\"].\"</td><td>\".$row[\"firstname\"].\" \".$row[\"lastname\"].\"</td></tr>\";\n}\necho \"</table>\";\n} else {\necho \"0 results\";\n}\n$conn->close();\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli object-oriented)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (PDO)",
+      "content": "",
+      "order": 6,
+      "code": "<?php\necho \"<table style='border: solid 1px black;'>\";\necho \"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\";\nclass TableRows extends RecursiveIteratorIterator {\nfunction __construct($it) {\nparent::__construct($it, self::LEAVES_ONLY);\n}\nfunction current() {\nreturn \"<td style='width:150px;border:1px solid black;'>\" . parent::current(). \"</td>\";\n}\nfunction beginChildren() {\necho \"<tr>\";\n}\nfunction endChildren() {\necho \"</tr>\" . \"\\n\";\n}\n}\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$stmt = $conn->prepare(\"SELECT id, firstname, lastname FROM MyGuests \n  WHERE lastname='Doe'\");\n$stmt->execute();\n// set the resulting array to associative\n$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);\nforeach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {\necho $v;\n}\n}\ncatch(PDOException $e) {\necho \"Error: \" . $e->getMessage();\n}\n$conn = null;\necho \"</table>\";\n?>",
+      "language": "html",
+      "explanation": "Example of example (pdo)"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error) {\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests WHERE \n  lastname='Doe'\";\n$result = $conn->query($sql);\nif ($result->num_rows > 0) {\n// output data of each row\nwhile($row = $result->fetch_assoc()) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}\n} else {\necho \"0 results\";\n# TODO: Complete this line\n$conn->close();\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error) {\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests WHERE \n  lastname='Doe'\";\n$result = $conn->query($sql);\nif ($result->num_rows > 0) {\n// output data of each row\nwhile($row = $result->fetch_assoc()) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}\n} else {\necho \"0 results\";\n}\n$conn->close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests \n# TODO: Complete this line\n$result = mysqli_query($conn, $sql);\nif (mysqli_num_rows($result) > 0) {\n// output data of each row\nwhile($row = mysqli_fetch_assoc($result)) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}\n} else {\necho \"0 results\";\n}\nmysqli_close($conn);\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"SELECT id, firstname, lastname FROM MyGuests \n  WHERE lastname='Doe'\";\n$result = mysqli_query($conn, $sql);\nif (mysqli_num_rows($result) > 0) {\n// output data of each row\nwhile($row = mysqli_fetch_assoc($result)) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}\n} else {\necho \"0 results\";\n}\nmysqli_close($conn);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "1f644224-f0e7-4083-8599-8722faa36d54",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ad631a51-c4c1-4242-bbc4-89dda27a4dca",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "57cd4781-7047-490d-9ef8-8564e58471fa",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is PHP\nMySQL Use The WHERE Clause\n\nSelect and Filter Data From a MySQL Database\nThe WHERE clause?",
+      "options": [
+        "None of the above.",
+        "used to extract only those records that fulfill a \nspecified condition",
+        "used to filter records",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of PHP\nMySQL Use The WHERE Clause\n\nSelect and Filter Data From a MySQL Database\nThe WHERE clause is 'used to filter records'."
+    },
+    {
+      "question": "What is The WHERE clause?",
+      "options": [
+        "None of the above.",
+        "used to filter records",
+        "used to extract only those records that fulfill a \nspecified condition",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The WHERE clause is 'used to extract only those records that fulfill a \nspecified condition'."
+    }
+  ],
+  "summary": "This tutorial covers PHPMySQL Use The WHERE Clause concepts and techniques. You'll learn how to use PHPMySQL Use The WHERE Clause effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPMySQL Use The WHERE Clause and how to apply it in your projects."
+}

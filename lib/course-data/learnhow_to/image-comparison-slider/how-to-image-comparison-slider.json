@@ -1,0 +1,142 @@
+{
+  "id": "404ae0c7-4e74-45f8-b43f-af06a0caaca3",
+  "title": "How TO - Image Comparison Slider",
+  "slug": "how-to-image-comparison-slider",
+  "metadata": {
+    "description": "Learn about How TO - Image Comparison Slider with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "slider",
+      "function",
+      "comp",
+      "image",
+      "width",
+      "height",
+      "clicked",
+      "overlay",
+      "position",
+      "addeventlistener"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnHow To",
+    "subcategory": "Image Comparison Slider"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "How TO - Image Comparison Slider",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Learn how to create a slider that compares two images.\nImage Comparison Slider\nMove the blue slider to compare images:\n\nCreate an Image Comparison Slider\nStep 1) Add HTML:\nExample\n<div class=\"img-comp-container\">\n<div class=\"img-comp-img\">\n<img src=\"img_snow.jpg\" width=\"300\" height=\"200\">\n</div>\n<div class=\"img-comp-img img-comp-overlay\">\n<img src=\"img_forest.jpg\" \n  width=\"300\" height=\"200\">\n</div>\n</div>\nStep 2) Add CSS:\nThe container must have a \"relative\" positioning.\nExample\n* {box-sizing: border-box;}\n.img-comp-container {\nposition: \n  relative;\nheight: 200px; /*should be the same height as the images*/\n}\n.img-comp-img {\nposition: absolute;\nwidth: auto;\nheight: auto;\noverflow: hidden;\n}\n.img-comp-img img {\ndisplay: block;\nvertical-align: middle;\n}\n.img-comp-slider {\nposition: \n  absolute;\nz-index: 9;\ncursor: ew-resize;\n/*set \n  the appearance of the slider:*/\nwidth: 40px;\nheight: 40px;\nbackground-color: #2196F3;\nopacity: 0.7;\nborder-radius: \n  50%;\n}\nStep 3) Add JavaScript:\nExample\nfunction initComparisons() {\nvar x, i;\n/* Find all elements \n  with an \"overlay\" class: */\nx = document.getElementsByClassName(\"img-comp-overlay\");\nfor (i = 0; i < x.length; i++) {\n/* Once for each \n  \"overlay\" element:\npass the \"overlay\" element as a \n  parameter when executing the compareImages function: */\ncompareImages(x[i]);\n}\nfunction compareImages(img) {\nvar slider, img, clicked = 0, w, h;\n/* Get the width and \n  height of the img element */\nw = img.offsetWidth;\nh = img.offsetHeight;\n/* Set the width of the img element \n  to 50%: */\nimg.style.width = (w / 2) + \"px\";\n/* \n  Create slider: */\nslider = document.createElement(\"DIV\");\nslider.setAttribute(\"class\", \"img-comp-slider\");\n/* Insert slider */\nimg.parentElement.insertBefore(slider, \n  img);\n/* Position the slider in the middle: */\nslider.style.top = (h / 2) - (slider.offsetHeight / 2) + \"px\";\nslider.style.left = (w / 2) - (slider.offsetWidth / 2) + \"px\";\n/* \n  Execute a function when the mouse button \n  is pressed: */\nslider.addEventListener(\"mousedown\", \n  slideReady);\n/* And another function when the mouse \n  button is released: */\nwindow.addEventListener(\"mouseup\", \n  slideFinish);\n/* Or touched (for touch screens: */\nslider.addEventListener(\"touchstart\", slideReady);\n/* And released (for touch screens: */\nwindow.addEventListener(\"touchend\", slideFinish);\nfunction slideReady(e) {\n/* Prevent any other \n  actions that may occur when moving over the image: */\ne.preventDefault();\n/* The slider is now \n  clicked and ready to move: */\nclicked = 1;\n/* Execute a function when the slider is moved: */\nwindow.addEventListener(\"mousemove\", slideMove);\nwindow.addEventListener(\"touchmove\", slideMove);\n}\nfunction slideFinish() {\n/* The slider is no \n  longer clicked: */\nclicked = 0;\n}\nfunction slideMove(e) {\nvar pos;\n/* If the slider is no longer \n  clicked, exit this function: */\nif (clicked \n  == 0) return false;\n/* Get the cursor's x \n  position: */\npos = getCursorPos(e)\n/* Prevent the slider from being positioned outside the image: */\nif (pos < 0) pos = 0;\nif (pos > w) pos = w;\n/* Execute a function that will resize the overlay image according to the \n  cursor: */\nslide(pos);\n}\nfunction getCursorPos(e) {\nvar a, x = 0;\ne = (e.changedTouches) ? e.changedTouches[0] : e;\n/* Get the x positions of the image: */\na = \n  img.getBoundingClientRect();\n/* Calculate the \n  cursor's x coordinate, relative to the image: */\nx = e.pageX - a.left;\n/* Consider any page \n  scrolling: */\nx = x - window.pageXOffset;\nreturn x;\n}\nfunction slide(x) {\n/* Resize the image: */\nimg.style.width = x + \n  \"px\";\n/* Position the slider: */\nslider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + \"px\";\n}\n}\n}\nStep 4) Execute Script:\nExample\n<script>\ninitComparisons();\n</script>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<div class=\"img-comp-container\">\n<div class=\"img-comp-img\">\n<img src=\"img_snow.jpg\" width=\"300\" height=\"200\">\n</div>\n<div class=\"img-comp-img img-comp-overlay\">\n<img src=\"img_forest.jpg\" \n  width=\"300\" height=\"200\">\n</div>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "* {box-sizing: border-box;}\n.img-comp-container {\nposition: \n  relative;\nheight: 200px; /*should be the same height as the images*/\n}\n.img-comp-img {\nposition: absolute;\nwidth: auto;\nheight: auto;\noverflow: hidden;\n}\n.img-comp-img img {\ndisplay: block;\nvertical-align: middle;\n}\n.img-comp-slider {\nposition: \n  absolute;\nz-index: 9;\ncursor: ew-resize;\n/*set \n  the appearance of the slider:*/\nwidth: 40px;\nheight: 40px;\nbackground-color: #2196F3;\nopacity: 0.7;\nborder-radius: \n  50%;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "function initComparisons() {\nvar x, i;\n/* Find all elements \n  with an \"overlay\" class: */\nx = document.getElementsByClassName(\"img-comp-overlay\");\nfor (i = 0; i < x.length; i++) {\n/* Once for each \n  \"overlay\" element:\npass the \"overlay\" element as a \n  parameter when executing the compareImages function: */\ncompareImages(x[i]);\n}\nfunction compareImages(img) {\nvar slider, img, clicked = 0, w, h;\n/* Get the width and \n  height of the img element */\nw = img.offsetWidth;\nh = img.offsetHeight;\n/* Set the width of the img element \n  to 50%: */\nimg.style.width = (w / 2) + \"px\";\n/* \n  Create slider: */\nslider = document.createElement(\"DIV\");\nslider.setAttribute(\"class\", \"img-comp-slider\");\n/* Insert slider */\nimg.parentElement.insertBefore(slider, \n  img);\n/* Position the slider in the middle: */\nslider.style.top = (h / 2) - (slider.offsetHeight / 2) + \"px\";\nslider.style.left = (w / 2) - (slider.offsetWidth / 2) + \"px\";\n/* \n  Execute a function when the mouse button \n  is pressed: */\nslider.addEventListener(\"mousedown\", \n  slideReady);\n/* And another function when the mouse \n  button is released: */\nwindow.addEventListener(\"mouseup\", \n  slideFinish);\n/* Or touched (for touch screens: */\nslider.addEventListener(\"touchstart\", slideReady);\n/* And released (for touch screens: */\nwindow.addEventListener(\"touchend\", slideFinish);\nfunction slideReady(e) {\n/* Prevent any other \n  actions that may occur when moving over the image: */\ne.preventDefault();\n/* The slider is now \n  clicked and ready to move: */\nclicked = 1;\n/* Execute a function when the slider is moved: */\nwindow.addEventListener(\"mousemove\", slideMove);\nwindow.addEventListener(\"touchmove\", slideMove);\n}\nfunction slideFinish() {\n/* The slider is no \n  longer clicked: */\nclicked = 0;\n}\nfunction slideMove(e) {\nvar pos;\n/* If the slider is no longer \n  clicked, exit this function: */\nif (clicked \n  == 0) return false;\n/* Get the cursor's x \n  position: */\npos = getCursorPos(e)\n/* Prevent the slider from being positioned outside the image: */\nif (pos < 0) pos = 0;\nif (pos > w) pos = w;\n/* Execute a function that will resize the overlay image according to the \n  cursor: */\nslide(pos);\n}\nfunction getCursorPos(e) {\nvar a, x = 0;\ne = (e.changedTouches) ? e.changedTouches[0] : e;\n/* Get the x positions of the image: */\na = \n  img.getBoundingClientRect();\n/* Calculate the \n  cursor's x coordinate, relative to the image: */\nx = e.pageX - a.left;\n/* Consider any page \n  scrolling: */\nx = x - window.pageXOffset;\nreturn x;\n}\nfunction slide(x) {\n/* Resize the image: */\nimg.style.width = x + \n  \"px\";\n/* Position the slider: */\nslider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + \"px\";\n}\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<script>\ninitComparisons();\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div class=\"img-comp-container\">\n# TODO: Complete this line\n<img src=\"img_snow.jpg\" width=\"300\" height=\"200\">\n</div>\n<div class=\"img-comp-img img-comp-overlay\">\n<img src=\"img_forest.jpg\" \n  width=\"300\" height=\"200\">\n</div>\n</div>",
+      "solution": "<div class=\"img-comp-container\">\n<div class=\"img-comp-img\">\n<img src=\"img_snow.jpg\" width=\"300\" height=\"200\">\n</div>\n<div class=\"img-comp-img img-comp-overlay\">\n<img src=\"img_forest.jpg\" \n  width=\"300\" height=\"200\">\n</div>\n</div>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "* {box-sizing: border-box;}\n.img-comp-container {\nposition: \n  relative;\nheight: 200px; /*should be the same height as the images*/\n}\n# TODO: Complete this line\nposition: absolute;\nwidth: auto;\nheight: auto;\noverflow: hidden;\n}\n.img-comp-img img {\ndisplay: block;\nvertical-align: middle;\n}\n.img-comp-slider {\nposition: \n  absolute;\nz-index: 9;\ncursor: ew-resize;\n/*set \n  the appearance of the slider:*/\nwidth: 40px;\nheight: 40px;\nbackground-color: #2196F3;\nopacity: 0.7;\nborder-radius: \n  50%;\n}",
+      "solution": "* {box-sizing: border-box;}\n.img-comp-container {\nposition: \n  relative;\nheight: 200px; /*should be the same height as the images*/\n}\n.img-comp-img {\nposition: absolute;\nwidth: auto;\nheight: auto;\noverflow: hidden;\n}\n.img-comp-img img {\ndisplay: block;\nvertical-align: middle;\n}\n.img-comp-slider {\nposition: \n  absolute;\nz-index: 9;\ncursor: ew-resize;\n/*set \n  the appearance of the slider:*/\nwidth: 40px;\nheight: 40px;\nbackground-color: #2196F3;\nopacity: 0.7;\nborder-radius: \n  50%;\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "3034784c-1bb8-4388-a42e-77e50358a75b",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "de40652d-4c95-4b74-b67a-c09a15d1aded",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "eb544e45-b7da-4d09-8614-f85ce8de3890",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Execute a function when the mouse button?",
+      "options": [
+        "None of the above.",
+        "pressed: */\nslider",
+        "None of the above.",
+        "released: */\nwindow"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Execute a function when the mouse button is 'pressed: */\nslider'."
+    },
+    {
+      "question": "What is And another function when the mouse \n  button?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "released: */\nwindow",
+        "pressed: */\nslider"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of And another function when the mouse \n  button is 'released: */\nwindow'."
+    }
+  ],
+  "summary": "This tutorial covers How TO - Image Comparison Slider concepts and techniques. You'll learn how to use How TO - Image Comparison Slider effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of How TO - Image Comparison Slider and how to apply it in your projects."
+}

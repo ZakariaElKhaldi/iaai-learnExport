@@ -1,0 +1,177 @@
+{
+  "id": "68b1efb0-8e3d-4c67-9c92-6471cf317e9d",
+  "title": "JavaScriptClosures",
+  "slug": "javascriptclosures",
+  "metadata": {
+    "description": "Learn about JavaScriptClosures with clear explanations and practical examples.",
+    "keywords": [
+      "function",
+      "counter",
+      "variables",
+      "global",
+      "variable",
+      "local",
+      "javascript",
+      "closures",
+      "scope",
+      "access"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnJavaScript",
+    "subcategory": "Function Closures"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "JavaScript\nClosures",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "JavaScript variables can belong to:\nThe\nlocal scope\nor The\nglobal scope\nGlobal variables can be made local (private) with\nclosures\n.\nClosures makes it possible for a function to have \"private\" variables.\nLocal Variables\nA\nlocal variable\nis a \"private\" variable defined\ninside\na function.\nA\nfunction\ncan access all variables in the\nlocal scope\n.\nExample\na\nis a\nlocal variable\ndefined inside the function:\nfunction myFunction() {\nlet a = 4;\nreturn a * a;\n}\n\nGlobal Variables\nA\nglobal variable\nis a \"public\" variable defined\noutside\na function.\nA\nfunction\ncan access all variables in the\nglobal scope\n:\nExample\na\nis\nglobal variable\ndefined outside the function:\nlet a = 4;\nfunction myFunction() {\nreturn a * a;\n}\n\nIn a web page, global variables belong to the page.\nGlobal variables can be used (or changed) by all scripts in the page.\nA local variable can only be used inside the function where it is defined. It \nis private and hidden from other functions and other scripting code.\nGlobal \nand local variables with the same name are  \ndifferent variables. Modifying one, does not modify the other.\nNote\nUndeclared variables\n(created without a keyword\nvar\n,\nlet\n,\nconst\n), \nare\nalways global\n, even if they are created inside a function.\nExample\nThe variable\na\nis a\nglobal variable\nbecause it is\nundeclared\n:\nfunction myFunction() {\na = 4;\n}\n\nVariable Lifetime\nGlobal variables live until the page is discarded, like when you navigate \nto another page or close the window.\nLocal \nvariables have short lives. They are created when the function is \ninvoked, and deleted when the function is finished.\nA Counter Dilemma\nSuppose you want to use a variable for counting something, and you want this \ncounter to be available to everyone (all functions).\nYou could use a global variable, and a\nfunction\nto increase the counter:\nExample\n// Initiate counter\nlet counter = 0;\n// Function to increment \n  counter\nfunction add() {\ncounter += 1;\n}\n// Call add() 3 times\nadd();\nadd();\nadd();\n// The counter should now be 3\n\nWarning !\nThere is a problem with the solution above: Any code on the page can change the counter,\nwithout calling add()\n.\nThe counter should be local to the\nadd()\nfunction, to prevent other code from changing \nit:\nExample\n// Initiate counter\nlet counter = 0;\n// Function to increment \n  counter\nfunction add() {\nlet counter = 0;\ncounter += 1;\n}\n// \n  Call add() 3 times\nadd();\nadd();\nadd();\n// The counter should \n  now be 3. But it is 0\n\nIt did not work because we display the global counter instead of the local \ncounter.\nWe can remove the global counter and access the local counter by letting the \nfunction return it:\nExample\n// Function to increment counter\nfunction add() {\nlet counter = 0;\ncounter += 1;\nreturn counter;\n}\nlet x= 0;\n// Call add() 3 times\nx = add();\nx = add();\nx = add();\n// The counter should now be 3. But it is 1.\n\nIt did not work because we reset the local counter every time we call the \nfunction.\nSolution\nA JavaScript inner function can solve this.\nJavaScript Nested Functions\nAll functions have access to the global scope.\nIn fact, in JavaScript, all functions have access to the scope \"above\" them.\nJavaScript supports nested functions. Nested functions have access to the \nscope \"above\" them.\nExample\nThe inner function\nplus()\nhas access \nto the\ncounter\nvariable in the parent function:\nfunction add() {\nlet counter = 0;\nfunction plus() {counter += 1;}\nplus();\nreturn counter;\n}\n\nThis could have solved the counter dilemma, if we could reach the\nplus()\nfunction from the outside.\nWe also need to find a way to execute\ncounter = 0\nonly once.\nSolution\nWe need a closure.\nJavaScript Closures\nExample\nfunction myCounter() {\nlet counter = 0;\nreturn function() {\ncounter++;\nreturn counter;\n};\n}\nconst add = myCounter();\nadd();\nadd();\nadd();\n// the counter is now 3\n\nExample Explained\nThe variable\nadd\nis assigned to the return value of a function.\nThe function only runs once. It sets the counter to zero (0), and returns a function expression.\nThis way add becomes a function. The \"wonderful\" part is that it can access the counter in its parent scope.\nThis is called a\nclosure.\nIt makes it possible \nfor a function to have \"\nprivate\n\" variables.\nThe counter is protected by the scope of the myCounter function, \nand can only be changed using the add function.\nConclusion\nA closure is a function that has access to the parent scope, after the parent function has closed.\nClosures has historically been used to:\nCreate private variables\nPreserve state between function calls\nSimulate block-scoping before let and const existed\nImplement certain design patterns like currying and memoization\nNote\nOld JavaScript code will often contain closures, but modern JavaScript will not use closures as frequently as\nbefore.\nECMAScript 2015 and subsequent JavaScript versions have introduced new language features that provide\nalternatives to closures.\nWhile closures are a powerful concept in JavaScript, new JavaScript features make some use cases for\nclosures less necessary.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "function myFunction() {\nlet a = 4;\nreturn a * a;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "let a = 4;\nfunction myFunction() {\nreturn a * a;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "function myFunction() {\na = 4;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "// Initiate counter\nlet counter = 0;\n// Function to increment \n  counter\nfunction add() {\ncounter += 1;\n}\n// Call add() 3 times\nadd();\nadd();\nadd();\n// The counter should now be 3",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "// Initiate counter\nlet counter = 0;\n// Function to increment \n  counter\nfunction add() {\nlet counter = 0;\ncounter += 1;\n}\n// \n  Call add() 3 times\nadd();\nadd();\nadd();\n// The counter should \n  now be 3. But it is 0",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "// Function to increment counter\nfunction add() {\nlet counter = 0;\ncounter += 1;\nreturn counter;\n}\nlet x= 0;\n// Call add() 3 times\nx = add();\nx = add();\nx = add();\n// The counter should now be 3. But it is 1.",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "function add() {\nlet counter = 0;\nfunction plus() {counter += 1;}\nplus();\nreturn counter;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "function myCounter() {\nlet counter = 0;\nreturn function() {\ncounter++;\nreturn counter;\n};\n}\nconst add = myCounter();\nadd();\nadd();\nadd();\n// the counter is now 3",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function myFunction() {\nlet a = 4;\nreturn a * a;\n# TODO: Complete this line",
+      "solution": "function myFunction() {\nlet a = 4;\nreturn a * a;\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "let a = 4;\n# TODO: Complete this line\nreturn a * a;\n}",
+      "solution": "let a = 4;\nfunction myFunction() {\nreturn a * a;\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "4bbf00e8-67e0-4c48-b8d8-62208f268b43",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "f2f06544-9518-45b7-b997-3698aa98c787",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "94677f7a-65d2-471c-9bc5-264b24c8dde8",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Local Variables\nA\nlocal variable?",
+      "options": [
+        "a\nlocal variable\ndefined inside the function:\nfunction myFunction() {\nlet a = 4;\nreturn a * a;\n}\n\nGlobal Variables\nA\nglobal variable\nis a \"public\" variable defined\noutside\na function",
+        "None of the above.",
+        "a \"private\" variable defined\ninside\na function",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Local Variables\nA\nlocal variable is 'a \"private\" variable defined\ninside\na function'."
+    },
+    {
+      "question": "What is Example\na?",
+      "options": [
+        "a \"private\" variable defined\ninside\na function",
+        "None of the above.",
+        "a\nlocal variable\ndefined inside the function:\nfunction myFunction() {\nlet a = 4;\nreturn a * a;\n}\n\nGlobal Variables\nA\nglobal variable\nis a \"public\" variable defined\noutside\na function",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Example\na is 'a\nlocal variable\ndefined inside the function:\nfunction myFunction() {\nlet a = 4;\nreturn a * a;\n}\n\nGlobal Variables\nA\nglobal variable\nis a \"public\" variable defined\noutside\na function'."
+    }
+  ],
+  "summary": "This tutorial covers JavaScriptClosures concepts and techniques. You'll learn how to use JavaScriptClosures effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JavaScriptClosures and how to apply it in your projects."
+}

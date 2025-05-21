@@ -1,0 +1,98 @@
+{
+  "id": "7a8521aa-8489-427d-b115-214700956116",
+  "title": "JavaAdvanced Sorting (Comparator and Comparable)",
+  "slug": "javaadvanced-sorting-comparator-and-comparable",
+  "metadata": {
+    "description": "Learn about JavaAdvanced Sorting (Comparator and Comparable) with clear explanations and practical examples.",
+    "keywords": [
+      "year",
+      "comparator",
+      "return",
+      "object",
+      "public",
+      "objects",
+      "sort",
+      "comparable",
+      "first",
+      "mycars"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Java Basics"
+    ],
+    "estimated_time": 6,
+    "category": "LearnJava",
+    "subcategory": "Java Advanced Sorting"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Java\nAdvanced Sorting (Comparator and Comparable)",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Java Advanced Sorting\nIn the\nList Sorting Chapter\n, you learned how to sort lists alphabetically and numerically, but what if the list has objects in it?\nTo sort objects you need to specify a rule that decides how objects should be sorted. For example, if you have a list of cars you might want to sort them by year, the rule could be that cars with an earlier year go first.\nThe\nComparator\nand\nComparable\ninterfaces allow you to specify what rule is used to sort objects.\nBeing able to specify a sorting rule also allows you to change how strings and numbers are sorted.\nComparators\nAn object that implements the\nComparator\ninterface is called a comparator.\nThe\nComparator\ninterface allows you to create a class with a\ncompare()\nmethod that compares two objects to decide which one should go first in a list.\nThe\ncompare()\nmethod should return a number which is:\nNegative if the first object should go first in a list.\nPositive if the second object should go first in a list.\nZero if the order does not matter.\nA class that implements the\nComparator\ninterface might look something like this:\n// Sort Car objects by year\nclass SortByYear implements Comparator {\n  public int compare(Object obj1, Object obj2) {\n    // Make sure that the objects are Car objects\n    Car a = (Car) obj1;\n    Car b = (Car) obj2;\n\n// Compare the objects\n    if (a.year < b.year) return -1; // The first car has a smaller year\n    if (a.year > b.year) return 1;  // The first car has a larger year\n    return 0; // Both cars have the same year\n  }\n}\nTo use the comparator, pass it as an argument into a sorting method:\n// Use a comparator to sort the cars\nComparator myComparator = new SortByYear();\nCollections.sort(myCars, myComparator);\nHere is a complete example using a comparator to sort a list of cars by year:\nExample\nimport java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.Comparator;\n\n// Define a Car class\nclass Car {\n  public String brand;\n  public String model;\n  public int year;\n\npublic Car(String b, String m, int y) {\n    brand = b;\n    model = m;\n    year = y;\n  }\n}\n\n// Create a comparator\nclass SortByYear implements Comparator {\n  public int compare(Object obj1, Object obj2) {\n    // Make sure that the objects are Car objects\n    Car a = (Car) obj1;\n    Car b = (Car) obj2;\n\n// Compare the year of both objects\n    if (a.year < b.year) return -1; // The first car has a smaller year\n    if (a.year > b.year) return 1;  // The first car has a larger year\n    return 0; // Both cars have the same year\n  }\n}\n\npublic class Main { \n  public static void main(String[] args) { \n    // Create a list of cars\n    ArrayList<Car> myCars = new ArrayList<Car>();    \n    myCars.add(new Car(\"BMW\", \"X5\", 1999));\n    myCars.add(new Car(\"Honda\", \"Accord\", 2006));\n    myCars.add(new Car(\"Ford\", \"Mustang\", 1970));\n\n// Use a comparator to sort the cars\n    Comparator myComparator = new SortByYear();\n    Collections.sort(myCars, myComparator);\n\n// Display the cars\n    for (Car c : myCars) {\n      System.out.println(c.brand + \" \" + c.model + \" \" + c.year);\n    }\n  } \n}\n\nUsing a Lambda Expression\nTo make the code shorter, the comparator can be replaced with a lambda expression which has the same arguments and return value as the\ncompare()\nmethod:\nExample\nUse a lambda expression as a comparator:\nCollections.sort(myCars, (obj1, obj2) -> {\n  Car a = (Car) obj1;\n  Car b = (Car) obj2;\n  if (a.year < b.year) return -1;\n  if (a.year > b.year) return 1;\n  return 0;\n});\n\nSpecial Sorting Rules\nComparators can also be used to make special sorting rules for strings and numbers. In this example we use a comparator to list all of the even numbers before the odd ones:\nExample\nimport java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.Comparator;\n\nclass SortEvenFirst implements Comparator {\n  public int compare(Object obj1, Object obj2) {\n    // Make sure the objects are integers\n    Integer a = (Integer)obj1;\n    Integer b = (Integer)obj2;\n\n// Check each number to see if it is even\n    // A number is even if the remainder when dividing by 2 is 0\n    boolean aIsEven = (a % 2) == 0;\n    boolean bIsEven = (b % 2) == 0;\n\nif (aIsEven == bIsEven) {\n\n// If both numbers are even or both are odd then use normal sorting rules\n      if (a < b) return -1;\n      if (a > b) return 1;\n      return 0;\n\n} else {\n\n// If a is even then it goes first, otherwise b goes first\n      if (aIsEven) {\n      \treturn -1;\n      } else {\n        return 1;\n      }\n    }\n  }\n}\n\npublic class Main {\n  public static void main(String[] args) {\n    ArrayList<Integer> myNumbers = new ArrayList<Integer>();\n    myNumbers.add(33);\n    myNumbers.add(15);\n    myNumbers.add(20);\n    myNumbers.add(34);\n    myNumbers.add(8);\n    myNumbers.add(12);\n\nComparator myComparator = new SortEvenFirst();\n    Collections.sort(myNumbers, myComparator);\n\nfor (int i : myNumbers) {\n      System.out.println(i);\n    }\n  }\n}\n\nThe Comparable Interface\nThe\nComparable\ninterface allows an object to specify its own sorting rule with a\ncompareTo()\nmethod.\nThe\ncompareTo()\nmethod takes an object as an argument and compares the comparable with the argument to decide which one should go first in a list.\nLike the comparator, the\ncompareTo()\nmethod returns a number which is:\nNegative if the comparable should go first in a list.\nPositive if the other object should go first in a list.\nZero if the order does not matter.\nMany native Java classes implement the\nComparable\ninterface, such as\nString\nand\nInteger\n.\nThis is why strings and numbers do not need a comparator to be sorted.\nAn object that implements the\nComparable\ninterface might look something like this:\nclass Car implements Comparable {\n  public String brand;\n  public String model;\n  public int year;\n\n// Decide how this object compares to other objects\n  public int compareTo(Object obj) {\n  \tCar other = (Car)obj;\n    if(year < other.year) return -1; // This object is smaller than the other one\n    if(year > other.year) return 1;  // This object is larger than the other one\n    return 0; // Both objects are the same\n  }\n}\nHere is the same example as before but using the\nComparable\ninterface instead of a comparator:\nExample\nimport java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.Comparator;\n\n// Define a Car class which is comparable\nclass Car implements Comparable {\n  public String brand;\n  public String model;\n  public int year;\n\npublic Car(String b, String m, int y) {\n    brand = b;\n    model = m;\n    year = y;\n  }\n\n// Decide how this object compares to other objects\n  public int compareTo(Object obj) {\n  \tCar other = (Car)obj;\n    if(year < other.year) return -1; // This object is smaller than the other one\n    if(year > other.year) return 1;  // This object is larger than the other one\n    return 0; // Both objects are the same\n  }\n}\n\npublic class Main { \n  public static void main(String[] args) { \n    // Create a list of cars\n    ArrayList<Car> myCars = new ArrayList<Car>();    \n    myCars.add(new Car(\"BMW\", \"X5\", 1999));\n    myCars.add(new Car(\"Honda\", \"Accord\", 2006));\n    myCars.add(new Car(\"Ford\", \"Mustang\", 1970));\n\n// Sort the cars\n    Collections.sort(myCars);\n\n// Display the cars\n    for (Car c : myCars) {\n      System.out.println(c.brand + \" \" + c.model + \" \" + c.year);\n    }\n  } \n}\n\nA Common Sorting Trick\nThe most obvious way to sort two numbers naturally is to write something like this:\nif(a.year < b.year) return -1; // a is less than b\nif(a.year > b.year) return 1; // a is greater than b\nreturn 0; // a is equal to b\nBut it can actually be done with just a single line:\nreturn a.year - b.year;\nThis trick can also be used to easily sort things in reverse:\nreturn b.year - a.year;\nComparator vs. Comparable\nA comparator is an object with one method that is used to compare two different objects.\nA comparable is an object which can compare itself with other objects.\nIt is easier to use the\nComparable\ninterface when possible, but the\nComparator\ninterface is more powerful because it allows you to sort any kind of object even if you cannot change its code.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your java function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "806b749c-7f4b-4b80-8a7d-828c63e5b276",
+      "title": "Java Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e078610c-ccce-4142-9ccd-337172c426b7",
+      "title": "Java Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "a3bf0797-e0d2-40bd-b5b4-c3ec40375419",
+      "title": "Java Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The\nComparator\nand\nComparable\ninterfaces allow you to specify what rule?",
+      "options": [
+        "sorted",
+        "None of the above.",
+        "used to sort objects",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The\nComparator\nand\nComparable\ninterfaces allow you to specify what rule is 'used to sort objects'."
+    },
+    {
+      "question": "What is Being able to specify a sorting rule also allows you to change how strings and numbers?",
+      "options": [
+        "None of the above.",
+        "sorted",
+        "used to sort objects",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Being able to specify a sorting rule also allows you to change how strings and numbers is 'sorted'."
+    }
+  ],
+  "summary": "This tutorial covers JavaAdvanced Sorting (Comparator and Comparable) concepts and techniques. You'll learn how to use JavaAdvanced Sorting (Comparator and Comparable) effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JavaAdvanced Sorting (Comparator and Comparable) and how to apply it in your projects."
+}

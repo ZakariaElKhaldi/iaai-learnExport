@@ -1,0 +1,241 @@
+{
+  "id": "105f4e00-3dc7-4a36-8aae-8f2a321dcf1f",
+  "title": "RMatrices",
+  "slug": "rmatrices",
+  "metadata": {
+    "description": "Learn about RMatrices with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "matrix",
+      "thismatrix",
+      "nrow",
+      "ncol",
+      "example",
+      "apple",
+      "banana",
+      "cherry",
+      "orange",
+      "columns"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnR",
+    "subcategory": "R Matrices"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "R\nMatrices",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Matrices\nA matrix is a two dimensional data set with columns and rows.\nA column is a vertical representation of data, while a row is a horizontal representation of data.\nA matrix can be created with the\nmatrix()\nfunction. Specify the\nnrow\nand\nncol\nparameters to get the amount of rows and columns:\nExample\n# Create a matrix\nthismatrix <- matrix(c(1,2,3,4,5,6), nrow = 3, ncol = 2)\n# Print the \n  matrix\nthismatrix\n\nNote:\nRemember the\nc()\nfunction is used to concatenate \nitems together.\nYou can also create a matrix with strings:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix\n\nAccess Matrix Items\nYou can access the items by using\n[ ]\nbrackets. The first number \"1\" in the bracket specifies the row-position, while \nthe second number \"2\" specifies the column-position:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix[1, 2]\n\nThe whole row can be accessed if you specify a comma\nafter\nthe number in the bracket:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix[2,]\n\nThe whole column can be accessed if you specify a comma\nbefore\nthe number in the bracket:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix[,2]\n\nAccess More Than One Row\nMore than one row can be accessed if you use the\nc()\nfunction:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\",\"grape\", \n  \"pineapple\", \"pear\", \"melon\", \"fig\"), nrow = 3, ncol = 3)\nthismatrix[c(1,2),]\n\nAccess More Than One Column\nMore than one column can be accessed if you use the\nc()\nfunction:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\",\"grape\", \n  \"pineapple\", \"pear\", \"melon\", \"fig\"), nrow = 3, ncol = 3)\nthismatrix[, \n  c(1,2)]\n\nAdd Rows and Columns\nUse the\ncbind()\nfunction to add additional columns in a Matrix:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\",\"grape\", \n  \"pineapple\", \"pear\", \"melon\", \"fig\"), nrow = 3, ncol = 3)\nnewmatrix <- \n  cbind(thismatrix, c(\"strawberry\", \"blueberry\", \"raspberry\"))\n# Print the new matrix\nnewmatrix\n\nNote:\nThe cells in the new column must be of the same length as the existing matrix.\nUse the\nrbind()\nfunction to add additional rows in a Matrix:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\",\"grape\", \n  \"pineapple\", \"pear\", \"melon\", \"fig\"), nrow = 3, ncol = 3)\nnewmatrix <- \n  rbind(thismatrix, c(\"strawberry\", \"blueberry\", \"raspberry\"))\n# Print the new matrix\nnewmatrix\n\nNote:\nThe cells in the new row must be of the same length as the existing matrix.\nRemove Rows and Columns\nUse the\nc()\nfunction to remove rows and columns in a Matrix:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\", \"mango\", \"pineapple\"), \n  nrow = 3, ncol =2)\n#Remove the first row and the first column\nthismatrix <- thismatrix[-c(1), -c(1)]\nthismatrix\n\nCheck if an Item Exists\nTo find out if a specified item is present in a matrix, use the\n%in%\noperator:\nExample\nCheck if \"apple\" is present in the matrix:\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\n\"apple\" %in% thismatrix\n\nNumber of Rows and Columns\nUse the\ndim()\nfunction to find the number of rows and columns in a Matrix:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\ndim(thismatrix)\n\nMatrix Length\nUse the\nlength()\nfunction to find the dimension of a Matrix:\nExample\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nlength(thismatrix)\n\nTotal cells in the matrix is the number of rows multiplied by number of columns.\nIn the example above: Dimension = 2*2 =\n4\n.\nLoop Through a Matrix\nYou can loop through a Matrix using a\nfor\nloop. The loop will start at the \nfirst row, moving right:\nExample\nLoop through the matrix items and print them:\nthismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nfor (rows in 1:nrow(thismatrix)) {\nfor (columns in \n  1:ncol(thismatrix)) {\nprint(thismatrix[rows, columns])\n}\n}\n\nCombine two Matrices\nAgain, you can use the\nrbind()\nor\ncbind()\nfunction to combine two or more matrices together:\nExample\n# Combine matrices\nMatrix1 <- matrix(c(\"apple\", \"banana\", \"cherry\", \n  \"grape\"), nrow = 2, ncol = 2)\nMatrix2 <- matrix(c(\"orange\", \"mango\", \n  \"pineapple\", \"watermelon\"), nrow = 2, ncol = 2)\n# Adding it as a rows\nMatrix_Combined <- rbind(Matrix1, Matrix2)\nMatrix_Combined\n# Adding it as a columns\nMatrix_Combined <- cbind(Matrix1, Matrix2)\nMatrix_Combined\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "# Create a matrix\nthismatrix <- matrix(c(1,2,3,4,5,6), nrow = 3, ncol = 2)\n# Print the \n  matrix\nthismatrix",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix[1, 2]",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix[2,]",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix[,2]",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\",\"grape\", \n  \"pineapple\", \"pear\", \"melon\", \"fig\"), nrow = 3, ncol = 3)\nthismatrix[c(1,2),]",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\",\"grape\", \n  \"pineapple\", \"pear\", \"melon\", \"fig\"), nrow = 3, ncol = 3)\nthismatrix[, \n  c(1,2)]",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\",\"grape\", \n  \"pineapple\", \"pear\", \"melon\", \"fig\"), nrow = 3, ncol = 3)\nnewmatrix <- \n  cbind(thismatrix, c(\"strawberry\", \"blueberry\", \"raspberry\"))\n# Print the new matrix\nnewmatrix",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\",\"grape\", \n  \"pineapple\", \"pear\", \"melon\", \"fig\"), nrow = 3, ncol = 3)\nnewmatrix <- \n  rbind(thismatrix, c(\"strawberry\", \"blueberry\", \"raspberry\"))\n# Print the new matrix\nnewmatrix",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\", \"mango\", \"pineapple\"), \n  nrow = 3, ncol =2)\n#Remove the first row and the first column\nthismatrix <- thismatrix[-c(1), -c(1)]\nthismatrix",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\n\"apple\" %in% thismatrix",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\ndim(thismatrix)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 15,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nlength(thismatrix)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 16,
+      "code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nfor (rows in 1:nrow(thismatrix)) {\nfor (columns in \n  1:ncol(thismatrix)) {\nprint(thismatrix[rows, columns])\n}\n}",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 17,
+      "code": "# Combine matrices\nMatrix1 <- matrix(c(\"apple\", \"banana\", \"cherry\", \n  \"grape\"), nrow = 2, ncol = 2)\nMatrix2 <- matrix(c(\"orange\", \"mango\", \n  \"pineapple\", \"watermelon\"), nrow = 2, ncol = 2)\n# Adding it as a rows\nMatrix_Combined <- rbind(Matrix1, Matrix2)\nMatrix_Combined\n# Adding it as a columns\nMatrix_Combined <- cbind(Matrix1, Matrix2)\nMatrix_Combined",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "# Create a matrix\nthismatrix <- matrix(c(1,2,3,4,5,6), nrow = 3, ncol = 2)\n# Print the \n  matrix\n# TODO: Complete this line",
+      "solution": "# Create a matrix\nthismatrix <- matrix(c(1,2,3,4,5,6), nrow = 3, ncol = 2)\n# Print the \n  matrix\nthismatrix"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n# TODO: Complete this line\nthismatrix",
+      "solution": "thismatrix <- matrix(c(\"apple\", \"banana\", \"cherry\", \"orange\"), nrow = 2, ncol \n  = 2)\nthismatrix"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "99e7b9b6-8412-4a94-bf10-20eda192c5f7",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2f2d0773-1d4c-4f7c-9934-3c8da948ed20",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "8edc1ddd-ead9-4627-bcc2-c3cf75d8c4a7",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is R\nMatrices\n\nMatrices\nA matrix?",
+      "options": [
+        "a vertical representation of data",
+        "None of the above.",
+        "None of the above.",
+        "a two dimensional data set with columns and rows"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of R\nMatrices\n\nMatrices\nA matrix is 'a two dimensional data set with columns and rows'."
+    },
+    {
+      "question": "What is A column?",
+      "options": [
+        "a two dimensional data set with columns and rows",
+        "a vertical representation of data",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of A column is 'a vertical representation of data'."
+    }
+  ],
+  "summary": "This tutorial covers RMatrices concepts and techniques. You'll learn how to use RMatrices effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of RMatrices and how to apply it in your projects."
+}

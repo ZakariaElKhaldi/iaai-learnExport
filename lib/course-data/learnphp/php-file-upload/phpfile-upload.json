@@ -1,0 +1,169 @@
+{
+  "id": "68116e91-2d6a-4708-9b02-62f6fb9c3c70",
+  "title": "PHPFile Upload",
+  "slug": "phpfile-upload",
+  "metadata": {
+    "description": "Learn about PHPFile Upload with clear explanations and practical examples.",
+    "keywords": [
+      "php",
+      "file",
+      "uploadok",
+      "check",
+      "upload",
+      "echo",
+      "image",
+      "form",
+      "filetoupload",
+      "imagefiletype",
+      "sorry"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "PHP File Upload"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nFile Upload",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "With PHP, it is easy to upload files to the server.\nHowever, with ease comes danger, so always be careful when \nallowing file uploads!\nConfigure The \"php.ini\" File\nFirst, ensure that PHP is configured to allow file uploads.\nIn your \"php.ini\" file, search for the\nfile_uploads\ndirective, and set it to On:\nfile_uploads = On\nCreate The HTML Form\n\n<!DOCTYPE html>\n<html>\n<body>\n<form action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\">\nSelect image to upload:\n<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">\n<input type=\"submit\" value=\"Upload Image\" name=\"submit\">\n</form>\n</body>\n</html>\nSome rules to follow for the HTML form above:\nMake sure that the form uses method=\"post\"\nThe form also needs the following attribute: enctype=\"multipart/form-data\". It specifies which content-type to use when submitting the form\nWithout the requirements above, the file upload will not work.\nOther things to notice:\nThe type=\"file\" attribute of the <input> tag shows the input field as a file-select control, with a \"Browse\" button \nThe form above sends data to a file called \"upload.php\", which we will create \nCreate The Upload File PHP Script\nThe \"upload.php\" file contains the code for uploading a file:\n<?php\n$target_dir = \"uploads/\";\n$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);\n$uploadOk = 1;\n$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));\n// Check if image file is a actual image or fake image\nif(isset($_POST[\"submit\"])) {\n$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\nif($check !== false) {\necho \"File is an image - \" . $check[\"mime\"] . \".\";\n$uploadOk = 1;\n} else {\necho \"File is not an image.\";\n$uploadOk = 0;\n}\n}\n?>\nPHP script explained:\n$target_dir = \"uploads/\" - specifies the directory where the file is going to be placed\n$target_file specifies the path of the file to be uploaded\n$uploadOk=1 is not used yet (will be used later)\n$imageFileType holds the file extension of the file (in lower case)\n\nNote:\nYou will need to create a new directory called \n\"uploads\" in the \ndirectory where \"upload.php\" file resides. The uploaded files \nwill be saved there.\nCheck if File Already Exists\nNow we can add some restrictions.\nFirst, we will check if the file already exists in the \"uploads\" folder. If \nit does, an error message is displayed, and $uploadOk is set to 0:\n// Check if file already exists\nif (file_exists($target_file)) {\necho \"Sorry, file already exists.\";\n$uploadOk = 0;\n}\nLimit File Size\nThe file input field in our HTML form above is named \"fileToUpload\".\nNow, we want to check the size of the file. If the file is larger than 500KB, an error message is displayed, and $uploadOk is set to 0:\n// Check file size\nif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\necho \"Sorry, your file is too large.\";\n$uploadOk = 0;\n}\nLimit File Type\nThe code below only allows users to upload JPG, JPEG, PNG, and GIF files. All other \nfile types gives an error message before setting $uploadOk to 0:\n// Allow certain file formats\nif($imageFileType != \"jpg\" && $imageFileType  != \"png\" && $imageFileType != \"jpeg\"\n&& $imageFileType != \"gif\" ) {\necho \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\n$uploadOk = 0;\n}\nComplete Upload File PHP Script\nThe complete \"upload.php\" file now looks like this:\n<?php\n$target_dir = \"uploads/\";\n$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);\n$uploadOk = 1;\n$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));\n// Check if image file is a actual image or fake image\nif(isset($_POST[\"submit\"])) {\n$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\nif($check !== false) {\necho \"File is an image - \" . $check[\"mime\"] . \".\";\n$uploadOk = 1;\n} else {\necho \"File is not an image.\";\n$uploadOk = 0;\n}\n}\n// Check if file already exists\nif (file_exists($target_file)) {\necho \"Sorry, file already exists.\";\n$uploadOk = 0;\n}\n// Check file size\nif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\necho \"Sorry, your file is too large.\";\n$uploadOk = 0;\n}\n// Allow certain file formats\nif($imageFileType != \"jpg\" && $imageFileType != \"png\" && $imageFileType != \"jpeg\"\n&& $imageFileType != \"gif\" ) {\necho \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\n$uploadOk = 0;\n}\n// Check if $uploadOk is set to 0 by an error\nif ($uploadOk == 0) {\necho \"Sorry, your file was not uploaded.\";\n// if everything is ok, try to upload file\n} else {\nif (move_uploaded_file($_FILES[\"fileToUpload\"][\"tmp_name\"], $target_file)) {\necho \"The file \". htmlspecialchars( basename( $_FILES[\"fileToUpload\"][\"name\"])). \n  \" has been uploaded.\";\n} else {\necho \"Sorry, there was an error uploading your file.\";\n}\n}\n?>\nComplete PHP Filesystem Reference\nFor a complete reference of filesystem functions, go to our complete\nPHP Filesystem Reference\n.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "file_uploads = On",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<!DOCTYPE html>\n<html>\n<body>\n<form action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\">\nSelect image to upload:\n<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">\n<input type=\"submit\" value=\"Upload Image\" name=\"submit\">\n</form>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$target_dir = \"uploads/\";\n$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);\n$uploadOk = 1;\n$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));\n// Check if image file is a actual image or fake image\nif(isset($_POST[\"submit\"])) {\n$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\nif($check !== false) {\necho \"File is an image - \" . $check[\"mime\"] . \".\";\n$uploadOk = 1;\n} else {\necho \"File is not an image.\";\n$uploadOk = 0;\n}\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "// Check if file already exists\nif (file_exists($target_file)) {\necho \"Sorry, file already exists.\";\n$uploadOk = 0;\n}",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "// Check file size\nif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\necho \"Sorry, your file is too large.\";\n$uploadOk = 0;\n}",
+      "language": "php",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "// Allow certain file formats\nif($imageFileType != \"jpg\" && $imageFileType  != \"png\" && $imageFileType != \"jpeg\"\n&& $imageFileType != \"gif\" ) {\necho \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\n$uploadOk = 0;\n}",
+      "language": "php",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<?php\n$target_dir = \"uploads/\";\n$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);\n$uploadOk = 1;\n$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));\n// Check if image file is a actual image or fake image\nif(isset($_POST[\"submit\"])) {\n$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\nif($check !== false) {\necho \"File is an image - \" . $check[\"mime\"] . \".\";\n$uploadOk = 1;\n} else {\necho \"File is not an image.\";\n$uploadOk = 0;\n}\n}\n// Check if file already exists\nif (file_exists($target_file)) {\necho \"Sorry, file already exists.\";\n$uploadOk = 0;\n}\n// Check file size\nif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\necho \"Sorry, your file is too large.\";\n$uploadOk = 0;\n}\n// Allow certain file formats\nif($imageFileType != \"jpg\" && $imageFileType != \"png\" && $imageFileType != \"jpeg\"\n&& $imageFileType != \"gif\" ) {\necho \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\n$uploadOk = 0;\n}\n// Check if $uploadOk is set to 0 by an error\nif ($uploadOk == 0) {\necho \"Sorry, your file was not uploaded.\";\n// if everything is ok, try to upload file\n} else {\nif (move_uploaded_file($_FILES[\"fileToUpload\"][\"tmp_name\"], $target_file)) {\necho \"The file \". htmlspecialchars( basename( $_FILES[\"fileToUpload\"][\"name\"])). \n  \" has been uploaded.\";\n} else {\necho \"Sorry, there was an error uploading your file.\";\n}\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "file_uploads = On"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<html>\n<body>\n<form action=\"upload.php\" method=\"post\"\n# TODO: Complete this line\nSelect image to upload:\n<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">\n<input type=\"submit\" value=\"Upload Image\" name=\"submit\">\n</form>\n</body>\n</html>",
+      "solution": "<!DOCTYPE html>\n<html>\n<body>\n<form action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\">\nSelect image to upload:\n<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">\n<input type=\"submit\" value=\"Upload Image\" name=\"submit\">\n</form>\n</body>\n</html>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "27c5aa79-6b70-486f-8ef9-0deda87d508f",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2251daf0-0154-46d7-b8e7-139582d0b8bb",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "d1212176-be8c-45a7-ac5c-51dbd7ee0a05",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is it?",
+      "options": [
+        "None of the above.",
+        "configured to allow file uploads",
+        "easy to upload files to the server",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of it is 'easy to upload files to the server'."
+    },
+    {
+      "question": "What is ensure that PHP?",
+      "options": [
+        "configured to allow file uploads",
+        "None of the above.",
+        "easy to upload files to the server",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of ensure that PHP is 'configured to allow file uploads'."
+    }
+  ],
+  "summary": "This tutorial covers PHPFile Upload concepts and techniques. You'll learn how to use PHPFile Upload effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPFile Upload and how to apply it in your projects."
+}

@@ -1,0 +1,123 @@
+{
+  "id": "48cad32e-eaf9-4e72-85f6-9942ad8c10fe",
+  "title": "ASP.NET Web Pages- HTML Forms",
+  "slug": "aspnet-web-pages-html-forms",
+  "metadata": {
+    "description": "Learn about ASP.NET Web Pages- HTML Forms with clear explanations and practical examples.",
+    "keywords": [
+      "html",
+      "name",
+      "value",
+      "images",
+      "example",
+      "choice",
+      "imagepath",
+      "input",
+      "page",
+      "image"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Html Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "WebPages Forms"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ASP.NET Web Pages\n- HTML Forms",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A form is a section of an HTML document where you put input \ncontrols (text boxes, check boxes, radio buttons, and pull-down lists).\nCreating an HTML Input Page\nRazor Example\n<html>\n<body>\n@{\nif (IsPost) {\nstring companyname = Request[\"CompanyName\"];\nstring contactname = Request[\"ContactName\"];\n<p>You entered: <br />\nCompany Name:\n@companyname\n<br />\nContact Name:\n@contactname\n</p>\n}\nelse\n{\n<form method=\"post\" action=\"\">\nCompany Name:<br />\n<input type=\"text\" name=\"CompanyName\" value=\"\" /><br />\nContact Name:<br />\n<input type=\"text\" name=\"ContactName\" value=\"\" /><br /><br />\n<input type=\"submit\" value=\"Submit\" class=\"submit\" />\n</form>\n}\n}\n</body>\n</html>\nRun example \u00bb\nRazor Example - Displaying Images\nSuppose you have 3 images in your image folder, and you want to display images dynamically \nby the users choice.\nThis is easily done by a little Razor code.\nIf you have an image called \"Photo1.jpg\" in your images folder on your web \nsite, you can display the image using an HTML \n<img> element like this:\n<img src=\"images/Photo1.jpg\" alt=\"Sample\" />\nThe example below shows how to display a selected \npicture which the user selects \nfrom a drop-down list:\nRazor Example\n@{\nvar imagePath=\"\";\nif (Request[\"Choice\"] != null)\n{imagePath=\"images/\" + Request[\"Choice\"];}\n}\n<!DOCTYPE html>\n<html>\n<body>\n<h1>Display Images</h1>\n<form method=\"post\" action=\"\">\nI want to see:\n<select name=\"Choice\">\n<option value=\"Photo1.jpg\">Photo 1</option>\n<option value=\"Photo2.jpg\">Photo 2</option>\n<option value=\"Photo3.jpg\">Photo 3</option>\n</select>\n<input type=\"submit\" value=\"Submit\" />\n@if (imagePath != \"\")\n{\n<p>\n<img src=\"\n@imagePath\n\" alt=\"Sample\" />\n</p>\n}\n</form>\n</body>\n</html>\nRun example \u00bb\nExample explained\nThe server creates a variable called\nimagePath\n.\nThe HTML page has a\ndrop-down list\n(a <select> element) named\nChoice\n. \nIt lets the user select a friendly name (like\nPhoto 1\n), and passes a file \nname (like\nPhoto1.jpg\n) when the page is submitted to the web server.\nThe Razor code reads the value of Choice by\nRequest[\"Choice\"]\n. If it has a value the \ncode constructs a path to the image images/Photo1.jpg, and stores it in the \nvariable\nimagePath\n.\nIn the HTML page there is an <img>\nelement to display the image. The src attribute is set to the value of the imagePath \nvariable when the page displays.\nThe <img> element is in an if block to \nprevent trying to display an image with no name (like the first time the page is \ndisplayed).\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Razor Example",
+      "content": "",
+      "order": 3,
+      "code": "<html>\n<body>\n@{\nif (IsPost) {\nstring companyname = Request[\"CompanyName\"];\nstring contactname = Request[\"ContactName\"];\n<p>You entered: <br />\nCompany Name:\n@companyname\n<br />\nContact Name:\n@contactname\n</p>\n}\nelse\n{\n<form method=\"post\" action=\"\">\nCompany Name:<br />\n<input type=\"text\" name=\"CompanyName\" value=\"\" /><br />\nContact Name:<br />\n<input type=\"text\" name=\"ContactName\" value=\"\" /><br /><br />\n<input type=\"submit\" value=\"Submit\" class=\"submit\" />\n</form>\n}\n}\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of razor example"
+    },
+    {
+      "type": "code_example",
+      "title": "Razor Example",
+      "content": "",
+      "order": 4,
+      "code": "@{\nvar imagePath=\"\";\nif (Request[\"Choice\"] != null)\n{imagePath=\"images/\" + Request[\"Choice\"];}\n}\n<!DOCTYPE html>\n<html>\n<body>\n<h1>Display Images</h1>\n<form method=\"post\" action=\"\">\nI want to see:\n<select name=\"Choice\">\n<option value=\"Photo1.jpg\">Photo 1</option>\n<option value=\"Photo2.jpg\">Photo 2</option>\n<option value=\"Photo3.jpg\">Photo 3</option>\n</select>\n<input type=\"submit\" value=\"Submit\" />\n@if (imagePath != \"\")\n{\n<p>\n<img src=\"\n@imagePath\n\" alt=\"Sample\" />\n</p>\n}\n</form>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of razor example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n# TODO: Complete this line\n@{\nif (IsPost) {\nstring companyname = Request[\"CompanyName\"];\nstring contactname = Request[\"ContactName\"];\n<p>You entered: <br />\nCompany Name:\n@companyname\n<br />\nContact Name:\n@contactname\n</p>\n}\nelse\n{\n<form method=\"post\" action=\"\">\nCompany Name:<br />\n<input type=\"text\" name=\"CompanyName\" value=\"\" /><br />\nContact Name:<br />\n<input type=\"text\" name=\"ContactName\" value=\"\" /><br /><br />\n<input type=\"submit\" value=\"Submit\" class=\"submit\" />\n</form>\n}\n}\n</body>\n</html>",
+      "solution": "<html>\n<body>\n@{\nif (IsPost) {\nstring companyname = Request[\"CompanyName\"];\nstring contactname = Request[\"ContactName\"];\n<p>You entered: <br />\nCompany Name:\n@companyname\n<br />\nContact Name:\n@contactname\n</p>\n}\nelse\n{\n<form method=\"post\" action=\"\">\nCompany Name:<br />\n<input type=\"text\" name=\"CompanyName\" value=\"\" /><br />\nContact Name:<br />\n<input type=\"text\" name=\"ContactName\" value=\"\" /><br /><br />\n<input type=\"submit\" value=\"Submit\" class=\"submit\" />\n</form>\n}\n}\n</body>\n</html>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "@{\nvar imagePath=\"\";\nif (Request[\"Choice\"] != null)\n{imagePath=\"images/\" + Request[\"Choice\"];}\n}\n<!DOCTYPE html>\n<html>\n<body>\n<h1>Display Images</h1>\n<form method=\"post\" action=\"\">\nI want to see:\n<select name=\"Choice\">\n<option value=\"Photo1.jpg\">Photo 1</option>\n<option value=\"Photo2.jpg\">Photo 2</option>\n<option value=\"Photo3.jpg\">Photo 3</option>\n</select>\n# TODO: Complete this line\n@if (imagePath != \"\")\n{\n<p>\n<img src=\"\n@imagePath\n\" alt=\"Sample\" />\n</p>\n}\n</form>\n</body>\n</html>",
+      "solution": "@{\nvar imagePath=\"\";\nif (Request[\"Choice\"] != null)\n{imagePath=\"images/\" + Request[\"Choice\"];}\n}\n<!DOCTYPE html>\n<html>\n<body>\n<h1>Display Images</h1>\n<form method=\"post\" action=\"\">\nI want to see:\n<select name=\"Choice\">\n<option value=\"Photo1.jpg\">Photo 1</option>\n<option value=\"Photo2.jpg\">Photo 2</option>\n<option value=\"Photo3.jpg\">Photo 3</option>\n</select>\n<input type=\"submit\" value=\"Submit\" />\n@if (imagePath != \"\")\n{\n<p>\n<img src=\"\n@imagePath\n\" alt=\"Sample\" />\n</p>\n}\n</form>\n</body>\n</html>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c7c571b7-6cf2-484e-8094-fe7fcbe47055",
+      "title": "Html Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "1d692cdb-c86f-45b9-b91e-1ff1172828ce",
+      "title": "Html Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "6a2515a0-2263-41ac-a056-cc8a0004f6cc",
+      "title": "Html Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is HTML Forms\n\nA form?",
+      "options": [
+        "None of the above.",
+        "a section of an HTML document where you put input \ncontrols (text boxes",
+        "None of the above.",
+        "easily done by a little Razor code"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of HTML Forms\n\nA form is 'a section of an HTML document where you put input \ncontrols (text boxes'."
+    },
+    {
+      "question": "What is This?",
+      "options": [
+        "None of the above.",
+        "easily done by a little Razor code",
+        "None of the above.",
+        "a section of an HTML document where you put input \ncontrols (text boxes"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of This is 'easily done by a little Razor code'."
+    }
+  ],
+  "summary": "This tutorial covers ASP.NET Web Pages- HTML Forms concepts and techniques. You'll learn how to use ASP.NET Web Pages- HTML Forms effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ASP.NET Web Pages- HTML Forms and how to apply it in your projects."
+}

@@ -1,0 +1,98 @@
+{
+  "id": "f5b18d75-4fd8-4257-a49f-f298b0aac114",
+  "title": "Vue v-for Directive",
+  "slug": "vue-v-for-directive",
+  "metadata": {
+    "description": "Learn about Vue v-for Directive with clear explanations and practical examples.",
+    "keywords": [
+      "directive",
+      "example",
+      "index",
+      "using",
+      "template",
+      "array",
+      "data",
+      "list",
+      "object",
+      "based"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "v-for"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue v-for Directive",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Vue Directives Reference\n\nExample\nUsing the\nv-for\ndirective to create a list of mammals, based on an array:\n<template>\n  <h2>Example v-for Directive</h2>\n  <p>Using the v-for directive to create a list of mammals based on an array.</p>\n  <ul>\n    <li v-for=\"x in animals\">{{ x }}</li>\n  </ul>\n</template>\nRun Example \u00bb\nSee more examples below.\nDefinition and Usage\nThe\nv-for\ndirective is used to render multiple elements based on a data source.\nThe\nv-for\ndirective is used with a syntax\n\"(item, key, index)\nin\ndataSource\"\n, where:\nThe\n\"item\"\nalias represents an element inside the\n\"dataSource\"\n.\nThe\n\"key\"\nalias can be used to get the property names if the data source is an object.\nThe\n\"index\"\nalias can be used if the data source is an array or an object.\nThe\n\"dataSource\"\nmust be the name of the actual data source you are looping through.\nYou can choose the names of the\n\"item\"\n,\n\"key\"\nand\n\"index\"\naliases yourself, but the order is\n\"item, key, index\"\n.\nThese are the data sources that can be used by the\nv-for\ndirective:\nData Source Type\nDetails\nArray\nv-for\nloops through the array, and the element and the index of each element can be picked out and used.\nRun Example \u00bb\nObject\nv-for\nloops through the Object. The property names, values and indexes can be picked out and used.\nRun Example \u00bb\nnumber\nv-for\nrenders a list, where each item is a number from one, and last number is the number provided. The index of each element can also be picked out.\nRun Example \u00bb\nstring\nv-for\nloops through the string. Each character and its index can be picked out and used.\nRun Example \u00bb\nIterable\nv-for\ncan also loop through iterables. Iterables are values that use the Iterable Protocol, like Map and Set.\nRun Example \u00bb\nNote:\nTo optimize performance, Vue reuses elements created with\nv-for\nwhen the data source gets manipulated. This can lead strange results (\nexplained here\n). To prevent Vue from reusing elements wrongfully when using\nv-for\n, you should always use the special\nkey\nattribute with\nv-bind\n, to mark each element uniquely (\nsee Example 6\n).\nMore Examples\nExample 1\nUsing the\nv-for\ndirective to render a list of mammals, based on an array, and also picking the index of each element in the array:\n<template>\n  <h2>Example v-for Directive</h2>\n  <p>Using the v-for directive to create a list of mammals, and the index of each mammal, based on an array.</p>\n  <ul>\n    <li v-for=\"(x, index) in animals\">On index {{ index }}: \"{{ x }}\"</li>\n  </ul>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      animals: ['Tiger','Zebra','Wolf','Crocodile','Seal']\n    };\n  }\n};\n</script>\nRun Example \u00bb\nExample 2\nUsing the\nv-for\ndirective to render a list of properties, picking out the property name and value for every property in an object:\n<template>\n  <h2>Example v-for Directive</h2>\n  <p>Using the v-for directive on an Object to create a list of the object properties and the respective property values.</p>\n  <ul>\n    <li v-for=\"(x, key) in animal\">(Property name: value) = ({{ key }}: {{ x }})</li>\n  </ul>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      animal: {\n        name: 'Lion',\n        heightCM: 110,\n        weightKG: 150\n      }\n    };\n  }\n};\n</script>\nRun Example \u00bb\nExample 3\nUsing the\nv-for\ndirective to render a list based on a number:\n<template>\n  <h2>Example v-for Directive</h2>\n  <p>Using the v-for directive with number to render a list with that number of elements.</p>\n  <ul>\n    <li v-for=\"(x, index) in 10\">Item: {{ x }}, index: {{ index }}</li>\n  </ul>\n</template>\nRun Example \u00bb\nExample 4\nUsing the\nv-for\ndirective to loop through a string of characters:\n<template>\n  <h2>Example v-for Directive</h2>\n  <p>Using the v-for directive to loop through the characters in a string.</p>\n  <ul>\n    <li v-for=\"(x, index) in 'Ice cream'\">Item: \"{{ x }}\", index: {{ index }}</li>\n  </ul>\n</template>\nRun Example \u00bb\nExample 5\nUsing the\nv-for\ndirective to loop through an object created with the Iterable Protocol:\n<template>\n  <h2>Example v-for Directive</h2>\n  <p>Using the v-for directive  to render a list, based on an object created with the Iterable Protocol.</p>\n  <ul>\n    <li v-for=\"value in iterableObject\">{{ value }}</li>\n  </ul>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      iterableObject: this.createIterable(['City', 'Park', 'River'])\n    };\n  },\n  methods: {\n    createIterable(array) {\n      let currentIndex = -1;\n      return {\n        [Symbol.iterator]: function () {\n          return {\n\nif (currentIndex < array.length - 1) {\n                currentIndex++;\n                return { value: array[currentIndex], done: false };\n              } else {\n                return { done: true };\n              }\n            }\n          };\n        }\n      };\n    }\n  }\n};\n</script>\nRun Example \u00bb\nExample 6\nUsing the\nv-for\ndirective to render one\ndiv\nelement for every character in a string. It is always recommended tu use\nv-bind:key\nwith the\nv-for\ndirective:\n<template>\n  <h2>Example v-for Directive</h2>\n  <p>Using the v-for directive with 'v-bind:key' to render DIV elements, based on a string of characters.</p>\n  <div id=\"wrapper\">\n    <div v-for=\"x in text\" v-bind:key=\"x\">{{ x }}</div>\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      text: 'I love ice cream.'\n    };\n  }\n};\n</script>\n\n<style>\n#wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  width: 280px;\n}\n#wrapper > div {\n  margin: 5px;\n  padding: 5px 10px;\n  border: solid black 1px;\n  background-color: lightgreen;\n}\n</style>\nRun Example \u00bb\nRelated Pages\nJavaScript Tutorial:\nJS Iterrables\nVue Tutorial:\nVue v-for Directive\nVue Tutorial:\nVue v-for Components\nVue Tutorial:\nVue Animations with v-for\nVue Reference:\nVue 'key' Attribute\n\nVue Directives Reference\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "fd50bb99-5bd4-42c1-8790-7ae82aedaf26",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "eb7b2306-e26c-4c30-87d3-4cbaba2dc916",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ba57717d-81c7-4625-adea-01f49d78415a",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is for\ndirective?",
+      "options": [
+        "None of the above.",
+        "used to render multiple elements based on a data source",
+        "None of the above.",
+        "used with a syntax\n\"(item"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of for\ndirective is 'used to render multiple elements based on a data source'."
+    },
+    {
+      "question": "What is for\ndirective?",
+      "options": [
+        "used to render multiple elements based on a data source",
+        "None of the above.",
+        "None of the above.",
+        "used with a syntax\n\"(item"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of for\ndirective is 'used with a syntax\n\"(item'."
+    }
+  ],
+  "summary": "This tutorial covers Vue v-for Directive concepts and techniques. You'll learn how to use Vue v-for Directive effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue v-for Directive and how to apply it in your projects."
+}

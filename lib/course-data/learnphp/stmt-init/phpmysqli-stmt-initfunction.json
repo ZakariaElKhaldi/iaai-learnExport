@@ -1,0 +1,124 @@
+{
+  "id": "5dcdc3f2-e7c1-4b85-bb55-a276a188b39f",
+  "title": "PHPmysqli stmt_init()Function",
+  "slug": "phpmysqli-stmt-initfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli stmt_init()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "stmt",
+      "mysqli",
+      "city",
+      "district",
+      "statement",
+      "object",
+      "style",
+      "bind",
+      "close",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "stmt_init"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli stmt_init()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nInitialize a statement and return an object to use with \nstmt_prepare():\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$city=\"Sandnes\";\n// Create a prepared statement\n$stmt = $mysqli -> stmt_init();\nif ($stmt \n  -> prepare(\"SELECT District FROM City WHERE Name=?\")) {\n// Bind parameters\n$stmt -> bind_param(\"s\", $city);\n// Execute query\n$stmt -> execute();\n// Bind result variables\n$stmt -> bind_result($district);\n// Fetch value\n$stmt -> fetch();\nprintf(\"%s is in district %s\", $city, $district);\n// Close statement\n$stmt -> close();\n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe stmt_init() / mysqli_stmt_init() function initializes a statement and returns an object suitable for mysqli_stmt_prepare().\nSyntax\nObject oriented style:\n$mysqli -> stmt_init()\nProcedural style:\nmysqli_stmt_init(\nconnection\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nTechnical Details\nReturn Value:\nReturns an object\nPHP Version:\n5+\nExample - Procedural style\nInitialize a statement and return an object to use with \nmysqli_stmt_prepare():\n<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n$city=\"Sandnes\";\n// Create a prepared statement\n$stmt = mysqli_stmt_init($con);\nif (mysqli_stmt_prepare($stmt, \"SELECT District FROM City WHERE Name=?\")) {\n// Bind parameters\nmysqli_stmt_bind_param($stmt, \"s\", $city);\n// Execute query\nmysqli_stmt_execute($stmt);\n// Bind result variables\nmysqli_stmt_bind_result($stmt, $district);\n// Fetch value\nmysqli_stmt_fetch($stmt);\nprintf(\"%s is in district %s\", $city, $district);\n// Close statement\nmysqli_stmt_close($stmt);\n}\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$city=\"Sandnes\";\n// Create a prepared statement\n$stmt = $mysqli -> stmt_init();\nif ($stmt \n  -> prepare(\"SELECT District FROM City WHERE Name=?\")) {\n// Bind parameters\n$stmt -> bind_param(\"s\", $city);\n// Execute query\n$stmt -> execute();\n// Bind result variables\n$stmt -> bind_result($district);\n// Fetch value\n$stmt -> fetch();\nprintf(\"%s is in district %s\", $city, $district);\n// Close statement\n$stmt -> close();\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n$city=\"Sandnes\";\n// Create a prepared statement\n$stmt = mysqli_stmt_init($con);\nif (mysqli_stmt_prepare($stmt, \"SELECT District FROM City WHERE Name=?\")) {\n// Bind parameters\nmysqli_stmt_bind_param($stmt, \"s\", $city);\n// Execute query\nmysqli_stmt_execute($stmt);\n// Bind result variables\nmysqli_stmt_bind_result($stmt, $district);\n// Fetch value\nmysqli_stmt_fetch($stmt);\nprintf(\"%s is in district %s\", $city, $district);\n// Close statement\nmysqli_stmt_close($stmt);\n}\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$city=\"Sandnes\";\n// Create a prepared statement\n$stmt = $mysqli -> stmt_init();\nif ($stmt \n# TODO: Complete this line\n// Bind parameters\n$stmt -> bind_param(\"s\", $city);\n// Execute query\n$stmt -> execute();\n// Bind result variables\n$stmt -> bind_result($district);\n// Fetch value\n$stmt -> fetch();\nprintf(\"%s is in district %s\", $city, $district);\n// Close statement\n$stmt -> close();\n}\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n$city=\"Sandnes\";\n// Create a prepared statement\n$stmt = $mysqli -> stmt_init();\nif ($stmt \n  -> prepare(\"SELECT District FROM City WHERE Name=?\")) {\n// Bind parameters\n$stmt -> bind_param(\"s\", $city);\n// Execute query\n$stmt -> execute();\n// Bind result variables\n$stmt -> bind_result($district);\n// Fetch value\n$stmt -> fetch();\nprintf(\"%s is in district %s\", $city, $district);\n// Close statement\n$stmt -> close();\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n# TODO: Complete this line\n$city=\"Sandnes\";\n// Create a prepared statement\n$stmt = mysqli_stmt_init($con);\nif (mysqli_stmt_prepare($stmt, \"SELECT District FROM City WHERE Name=?\")) {\n// Bind parameters\nmysqli_stmt_bind_param($stmt, \"s\", $city);\n// Execute query\nmysqli_stmt_execute($stmt);\n// Bind result variables\nmysqli_stmt_bind_result($stmt, $district);\n// Fetch value\nmysqli_stmt_fetch($stmt);\nprintf(\"%s is in district %s\", $city, $district);\n// Close statement\nmysqli_stmt_close($stmt);\n}\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con=mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit;\n}\n$city=\"Sandnes\";\n// Create a prepared statement\n$stmt = mysqli_stmt_init($con);\nif (mysqli_stmt_prepare($stmt, \"SELECT District FROM City WHERE Name=?\")) {\n// Bind parameters\nmysqli_stmt_bind_param($stmt, \"s\", $city);\n// Execute query\nmysqli_stmt_execute($stmt);\n// Bind result variables\nmysqli_stmt_bind_result($stmt, $district);\n// Fetch value\nmysqli_stmt_fetch($stmt);\nprintf(\"%s is in district %s\", $city, $district);\n// Close statement\nmysqli_stmt_close($stmt);\n}\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "6bc406c2-3b85-4ac8-bd65-063addfa280d",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "49a6a069-23da-47e2-bcde-a5fc6ab7cc83",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "fd875b6f-ec1f-4a9a-a213-fff2f185b8f5",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is s?",
+      "options": [
+        "None of the above.",
+        "in district %s\"",
+        "in district %s\"",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of s is 'in district %s\"'."
+    },
+    {
+      "question": "What is s?",
+      "options": [
+        "in district %s\"",
+        "None of the above.",
+        "in district %s\"",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of s is 'in district %s\"'."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli stmt_init()Function concepts and techniques. You'll learn how to use PHPmysqli stmt_init()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli stmt_init()Function and how to apply it in your projects."
+}

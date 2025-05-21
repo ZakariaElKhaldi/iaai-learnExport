@@ -1,0 +1,142 @@
+{
+  "id": "8c85c68e-f5ea-4a12-9603-8a33157028d3",
+  "title": "PHPMySQL Get Last Inserted ID",
+  "slug": "phpmysql-get-last-inserted-id",
+  "metadata": {
+    "description": "Learn about PHPMySQL Get Last Inserted ID with clear explanations and practical examples.",
+    "keywords": [
+      "php",
+      "conn",
+      "username",
+      "password",
+      "last",
+      "inserted",
+      "echo",
+      "dbname",
+      "record",
+      "example",
+      "servername"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "MySQL Get Last ID"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nMySQL Get Last Inserted ID",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Get ID of The Last Inserted Record\nIf we perform an INSERT or UPDATE on a table with an AUTO_INCREMENT field, we can \nget the ID of the last inserted/updated record immediately.\nIn the table \"MyGuests\", the \"id\" column is an AUTO_INCREMENT \nfield:\nCREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\nThe following examples are equal to the examples from the \nPHP Insert Data Into \nMySQL\n), except that we have added one single line of code to retrieve the ID \nof the last inserted record. We also echo the last inserted ID:\nExample (MySQLi Object-oriented)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\n$last_id = $conn->insert_id;\necho \"New record created successfully. Last inserted ID is: \" . $last_id;\n} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;\n}\n$conn->close();\n?>\nExample (MySQLi Procedural)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif (mysqli_query($conn, $sql)) {\n$last_id = mysqli_insert_id($conn);\necho \"New record created successfully. Last inserted ID is: \" . $last_id;\n} else {\necho \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>\nExample (PDO)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\n// use exec() because no results are returned\n$conn->exec($sql);\n$last_id = $conn->lastInsertId();\necho \"New record created successfully. Last inserted ID is: \" . $last_id;\n} catch(PDOException $e) {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Object-oriented)",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\n$last_id = $conn->insert_id;\necho \"New record created successfully. Last inserted ID is: \" . $last_id;\n} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;\n}\n$conn->close();\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli object-oriented)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Procedural)",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif (mysqli_query($conn, $sql)) {\n$last_id = mysqli_insert_id($conn);\necho \"New record created successfully. Last inserted ID is: \" . $last_id;\n} else {\necho \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli procedural)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (PDO)",
+      "content": "",
+      "order": 6,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\n// use exec() because no results are returned\n$conn->exec($sql);\n$last_id = $conn->lastInsertId();\necho \"New record created successfully. Last inserted ID is: \" . $last_id;\n} catch(PDOException $e) {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>",
+      "language": "html",
+      "explanation": "Example of example (pdo)"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\n# TODO: Complete this line\nemail VARCHAR(50),\nreg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)",
+      "solution": "CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n# TODO: Complete this line\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\n$last_id = $conn->insert_id;\necho \"New record created successfully. Last inserted ID is: \" . $last_id;\n} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;\n}\n$conn->close();\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\n$last_id = $conn->insert_id;\necho \"New record created successfully. Last inserted ID is: \" . $last_id;\n} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;\n}\n$conn->close();\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b7ac277d-c46e-472f-9fe4-fe3ff57a2bc7",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "2d5aee0b-c9c8-4f67-bb08-b0bbbbb6b9a5",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ec7fc3a1-c736-49cc-aa99-2ab1681e7904",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is column?",
+      "options": [
+        "an AUTO_INCREMENT \nfield:\nCREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY",
+        "Not a column.",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of column is 'an AUTO_INCREMENT \nfield:\nCREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPMySQL Get Last Inserted ID concepts and techniques. You'll learn how to use PHPMySQL Get Last Inserted ID effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPMySQL Get Last Inserted ID and how to apply it in your projects."
+}

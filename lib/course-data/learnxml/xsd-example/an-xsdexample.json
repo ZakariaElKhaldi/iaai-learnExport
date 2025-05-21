@@ -1,0 +1,211 @@
+{
+  "id": "37dcbf49-062b-4293-8a18-a841514cbf0e",
+  "title": "An XSDExample",
+  "slug": "an-xsdexample",
+  "metadata": {
+    "description": "Learn about An XSDExample with clear explanations and practical examples.",
+    "keywords": [
+      "element",
+      "name",
+      "type",
+      "string",
+      "schema",
+      "sequence",
+      "complextype",
+      "shiporder",
+      "item",
+      "attribute"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 6,
+    "category": "LearnXML",
+    "subcategory": "XSD Example"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "An XSD\nExample",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "This chapter will demonstrate how to write an XML Schema. You will also learn that a schema can be written in different ways.\nAn XML Document\nLet's have a look at this XML document called \"shiporder.xml\":\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<shiporder orderid=\"889923\"\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\nxsi:noNamespaceSchemaLocation=\"shiporder.xsd\">\n<orderperson>John Smith</orderperson>\n<shipto>\n<name>Ola Nordmann</name>\n<address>Langgt 23</address>\n<city>4000 Stavanger</city>\n<country>Norway</country>\n</shipto>\n<item>\n<title>Empire Burlesque</title>\n<note>Special Edition</note>\n<quantity>1</quantity>\n<price>10.90</price>\n</item>\n<item>\n<title>Hide your heart</title>\n<quantity>1</quantity>\n<price>9.90</price>\n</item>\n</shiporder>\nThe XML document above consists of a root element, \"shiporder\", \nthat contains a required attribute called \"orderid\". The \"shiporder\" element contains three \ndifferent child elements: \"orderperson\", \"shipto\" and \"item\". The \"item\" element\nappears twice, and it contains a \"title\", an optional \"note\" element, a \"quantity\", and a \"price\" \nelement.\nThe line above: xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" tells the XML parser that this document should be validated against a schema. \nThe line: xsi:noNamespaceSchemaLocation=\"shiporder.xsd\" specifies WHERE the schema resides (here it is in the same folder as \"shiporder.xml\").\nCreate an XML Schema\nNow we want to create a schema for the XML document above.\nWe start by opening a new file that we will call \"shiporder.xsd\". To create the schema we could simply follow \nthe structure in the XML document and define each element as we find it. We will start with the standard XML declaration followed by the xs:schema element that defines a schema:\n<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n...\n</xs:schema>\nIn the schema above we use the standard namespace (xs), and the URI \nassociated with this namespace is the Schema language definition, which has the \nstandard value of http://www.w3.org/2001/XMLSchema.\n\nattribute and it contains other elements, therefore we consider it as a complex \ntype. The child elements of the \"shiporder\" element is surrounded by a \nxs:sequence element that defines an ordered sequence of sub elements:\n<xs:element name=\"shiporder\">\n<xs:complexType>\n<xs:sequence>\n...\n</xs:sequence>\n</xs:complexType>\n</xs:element>\nThen we have to define the \"orderperson\" element as a simple type (because it does \nnot contain any attributes or other elements). The type (xs:string) is prefixed \nwith the namespace prefix associated with XML Schema that indicates a predefined \nschema data type:\n<xs:element name=\"orderperson\" type=\"xs:string\"/>\n\n\"item\". We start by defining the \"shipto\" element:\n<xs:element name=\"shipto\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"name\" type=\"xs:string\"/>\n<xs:element name=\"address\" type=\"xs:string\"/>\n<xs:element name=\"city\" type=\"xs:string\"/>\n<xs:element name=\"country\" type=\"xs:string\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\nWith schemas we can define the number of possible occurrences for an element \nwith the maxOccurs and minOccurs attributes. maxOccurs specifies the maximum \nnumber of occurrences for an element and minOccurs specifies the minimum number \nof occurrences for an element. The default value for both maxOccurs and \nminOccurs is 1!\nNow we can define the \"item\" element. This element can appear multiple times \ninside a \"shiporder\" element. This is specified by setting the maxOccurs \nattribute of the \"item\" element to \"unbounded\" which means that there can be as \nmany occurrences of the \"item\" element as the author wishes. Notice that the \n\"note\" element is optional. We have specified this by setting the minOccurs \nattribute to zero:\n<xs:element name=\"item\" maxOccurs=\"unbounded\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"title\" type=\"xs:string\"/>\n<xs:element name=\"note\" type=\"xs:string\" minOccurs=\"0\"/>\n<xs:element name=\"quantity\" type=\"xs:positiveInteger\"/>\n<xs:element name=\"price\" type=\"xs:decimal\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\nWe can now declare the attribute of the \"shiporder\" element. Since \nthis is a required attribute we specify use=\"required\".\nNote:\nThe attribute declarations must always come last:\n<xs:attribute name=\"orderid\" type=\"xs:string\" use=\"required\"/>\nHere is the complete listing of the schema file called \"shiporder.xsd\":\n<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n<xs:element name=\"shiporder\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"orderperson\" type=\"xs:string\"/>\n<xs:element name=\"shipto\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"name\" type=\"xs:string\"/>\n<xs:element name=\"address\" type=\"xs:string\"/>\n<xs:element name=\"city\" type=\"xs:string\"/>\n<xs:element name=\"country\" type=\"xs:string\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n<xs:element name=\"item\" maxOccurs=\"unbounded\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"title\" type=\"xs:string\"/>\n<xs:element name=\"note\" type=\"xs:string\" minOccurs=\"0\"/>\n<xs:element name=\"quantity\" type=\"xs:positiveInteger\"/>\n<xs:element name=\"price\" type=\"xs:decimal\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n</xs:sequence>\n<xs:attribute name=\"orderid\" type=\"xs:string\" use=\"required\"/>\n</xs:complexType>\n</xs:element>\n</xs:schema>\nDivide the Schema\nThe \nThe \nHere is the new design of the schema file (\"shiporder.xsd\"):\n<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n<!-- definition of simple elements -->\n<xs:element name=\"orderperson\" type=\"xs:string\"/>\n<xs:element name=\"name\" type=\"xs:string\"/>\n<xs:element name=\"address\" type=\"xs:string\"/>\n<xs:element name=\"city\" type=\"xs:string\"/>\n<xs:element name=\"country\" type=\"xs:string\"/>\n<xs:element name=\"title\" type=\"xs:string\"/>\n<xs:element name=\"note\" type=\"xs:string\"/>\n<xs:element name=\"quantity\" type=\"xs:positiveInteger\"/>\n<xs:element name=\"price\" type=\"xs:decimal\"/>\n<!-- definition of attributes -->\n<xs:attribute name=\"orderid\" type=\"xs:string\"/>\n<!-- definition of complex elements -->\n<xs:element name=\"shipto\">\n<xs:complexType>\n<xs:sequence>\n<xs:element ref=\"name\"/>\n<xs:element ref=\"address\"/>\n<xs:element ref=\"city\"/>\n<xs:element ref=\"country\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n<xs:element name=\"item\">\n<xs:complexType>\n<xs:sequence>\n<xs:element ref=\"title\"/>\n<xs:element ref=\"note\" minOccurs=\"0\"/>\n<xs:element ref=\"quantity\"/>\n<xs:element ref=\"price\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n<xs:element name=\"shiporder\">\n<xs:complexType>\n<xs:sequence>\n<xs:element ref=\"orderperson\"/>\n<xs:element ref=\"shipto\"/>\n<xs:element ref=\"item\" maxOccurs=\"unbounded\"/>\n</xs:sequence>\n<xs:attribute ref=\"orderid\" use=\"required\"/>\n</xs:complexType>\n</xs:element>\n</xs:schema>\nUsing Named Types\nThe third design method defines classes or types, that enables us to reuse element \ndefinitions. This is done by naming the simpleTypes and complexTypes elements, \nand then point to them through the type attribute of the element.\nHere is the third design of the schema file (\"shiporder.xsd\"):\n<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n<xs:simpleType name=\"stringtype\">\n<xs:restriction base=\"xs:string\"/>\n</xs:simpleType>\n<xs:simpleType name=\"inttype\">\n<xs:restriction base=\"xs:positiveInteger\"/>\n</xs:simpleType>\n<xs:simpleType name=\"dectype\">\n<xs:restriction base=\"xs:decimal\"/>\n</xs:simpleType>\n<xs:simpleType name=\"orderidtype\">\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[0-9]{6}\"/>\n</xs:restriction>\n</xs:simpleType>\n<xs:complexType name=\"shiptotype\">\n<xs:sequence>\n<xs:element name=\"name\" type=\"stringtype\"/>\n<xs:element name=\"address\" type=\"stringtype\"/>\n<xs:element name=\"city\" type=\"stringtype\"/>\n<xs:element name=\"country\" type=\"stringtype\"/>\n</xs:sequence>\n</xs:complexType>\n<xs:complexType name=\"itemtype\">\n<xs:sequence>\n<xs:element name=\"title\" type=\"stringtype\"/>\n<xs:element name=\"note\" type=\"stringtype\" minOccurs=\"0\"/>\n<xs:element name=\"quantity\" type=\"inttype\"/>\n<xs:element name=\"price\" type=\"dectype\"/>\n</xs:sequence>\n</xs:complexType>\n<xs:complexType name=\"shipordertype\">\n<xs:sequence>\n<xs:element name=\"orderperson\" type=\"stringtype\"/>\n<xs:element name=\"shipto\" type=\"shiptotype\"/>\n<xs:element name=\"item\" maxOccurs=\"unbounded\" type=\"itemtype\"/>\n</xs:sequence>\n<xs:attribute name=\"orderid\" type=\"orderidtype\" use=\"required\"/>\n</xs:complexType>\n<xs:element name=\"shiporder\" type=\"shipordertype\"/>\n</xs:schema>\nThe restriction element indicates that the datatype is derived from a W3C XML \nSchema namespace datatype. So, the following fragment means that the value of \nthe element or attribute must be a string value:\n<xs:restriction base=\"xs:string\">\nThe restriction element is more often used to apply restrictions to elements. \nLook at the following lines from the schema above:\n<xs:simpleType name=\"orderidtype\">\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[0-9]{6}\"/>\n</xs:restriction>\n</xs:simpleType>\nThis indicates that the value of the element or attribute must be a string, it must be exactly six characters in a row, and those characters must be a \nnumber from 0 to 9.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<shiporder orderid=\"889923\"\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\nxsi:noNamespaceSchemaLocation=\"shiporder.xsd\">\n<orderperson>John Smith</orderperson>\n<shipto>\n<name>Ola Nordmann</name>\n<address>Langgt 23</address>\n<city>4000 Stavanger</city>\n<country>Norway</country>\n</shipto>\n<item>\n<title>Empire Burlesque</title>\n<note>Special Edition</note>\n<quantity>1</quantity>\n<price>10.90</price>\n</item>\n<item>\n<title>Hide your heart</title>\n<quantity>1</quantity>\n<price>9.90</price>\n</item>\n</shiporder>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n...\n</xs:schema>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<xs:element name=\"shiporder\">\n<xs:complexType>\n<xs:sequence>\n...\n</xs:sequence>\n</xs:complexType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<xs:element name=\"orderperson\" type=\"xs:string\"/>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<xs:element name=\"shipto\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"name\" type=\"xs:string\"/>\n<xs:element name=\"address\" type=\"xs:string\"/>\n<xs:element name=\"city\" type=\"xs:string\"/>\n<xs:element name=\"country\" type=\"xs:string\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<xs:element name=\"item\" maxOccurs=\"unbounded\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"title\" type=\"xs:string\"/>\n<xs:element name=\"note\" type=\"xs:string\" minOccurs=\"0\"/>\n<xs:element name=\"quantity\" type=\"xs:positiveInteger\"/>\n<xs:element name=\"price\" type=\"xs:decimal\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<xs:attribute name=\"orderid\" type=\"xs:string\" use=\"required\"/>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n<xs:element name=\"shiporder\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"orderperson\" type=\"xs:string\"/>\n<xs:element name=\"shipto\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"name\" type=\"xs:string\"/>\n<xs:element name=\"address\" type=\"xs:string\"/>\n<xs:element name=\"city\" type=\"xs:string\"/>\n<xs:element name=\"country\" type=\"xs:string\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n<xs:element name=\"item\" maxOccurs=\"unbounded\">\n<xs:complexType>\n<xs:sequence>\n<xs:element name=\"title\" type=\"xs:string\"/>\n<xs:element name=\"note\" type=\"xs:string\" minOccurs=\"0\"/>\n<xs:element name=\"quantity\" type=\"xs:positiveInteger\"/>\n<xs:element name=\"price\" type=\"xs:decimal\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n</xs:sequence>\n<xs:attribute name=\"orderid\" type=\"xs:string\" use=\"required\"/>\n</xs:complexType>\n</xs:element>\n</xs:schema>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n<!-- definition of simple elements -->\n<xs:element name=\"orderperson\" type=\"xs:string\"/>\n<xs:element name=\"name\" type=\"xs:string\"/>\n<xs:element name=\"address\" type=\"xs:string\"/>\n<xs:element name=\"city\" type=\"xs:string\"/>\n<xs:element name=\"country\" type=\"xs:string\"/>\n<xs:element name=\"title\" type=\"xs:string\"/>\n<xs:element name=\"note\" type=\"xs:string\"/>\n<xs:element name=\"quantity\" type=\"xs:positiveInteger\"/>\n<xs:element name=\"price\" type=\"xs:decimal\"/>\n<!-- definition of attributes -->\n<xs:attribute name=\"orderid\" type=\"xs:string\"/>\n<!-- definition of complex elements -->\n<xs:element name=\"shipto\">\n<xs:complexType>\n<xs:sequence>\n<xs:element ref=\"name\"/>\n<xs:element ref=\"address\"/>\n<xs:element ref=\"city\"/>\n<xs:element ref=\"country\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n<xs:element name=\"item\">\n<xs:complexType>\n<xs:sequence>\n<xs:element ref=\"title\"/>\n<xs:element ref=\"note\" minOccurs=\"0\"/>\n<xs:element ref=\"quantity\"/>\n<xs:element ref=\"price\"/>\n</xs:sequence>\n</xs:complexType>\n</xs:element>\n<xs:element name=\"shiporder\">\n<xs:complexType>\n<xs:sequence>\n<xs:element ref=\"orderperson\"/>\n<xs:element ref=\"shipto\"/>\n<xs:element ref=\"item\" maxOccurs=\"unbounded\"/>\n</xs:sequence>\n<xs:attribute ref=\"orderid\" use=\"required\"/>\n</xs:complexType>\n</xs:element>\n</xs:schema>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n<xs:simpleType name=\"stringtype\">\n<xs:restriction base=\"xs:string\"/>\n</xs:simpleType>\n<xs:simpleType name=\"inttype\">\n<xs:restriction base=\"xs:positiveInteger\"/>\n</xs:simpleType>\n<xs:simpleType name=\"dectype\">\n<xs:restriction base=\"xs:decimal\"/>\n</xs:simpleType>\n<xs:simpleType name=\"orderidtype\">\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[0-9]{6}\"/>\n</xs:restriction>\n</xs:simpleType>\n<xs:complexType name=\"shiptotype\">\n<xs:sequence>\n<xs:element name=\"name\" type=\"stringtype\"/>\n<xs:element name=\"address\" type=\"stringtype\"/>\n<xs:element name=\"city\" type=\"stringtype\"/>\n<xs:element name=\"country\" type=\"stringtype\"/>\n</xs:sequence>\n</xs:complexType>\n<xs:complexType name=\"itemtype\">\n<xs:sequence>\n<xs:element name=\"title\" type=\"stringtype\"/>\n<xs:element name=\"note\" type=\"stringtype\" minOccurs=\"0\"/>\n<xs:element name=\"quantity\" type=\"inttype\"/>\n<xs:element name=\"price\" type=\"dectype\"/>\n</xs:sequence>\n</xs:complexType>\n<xs:complexType name=\"shipordertype\">\n<xs:sequence>\n<xs:element name=\"orderperson\" type=\"stringtype\"/>\n<xs:element name=\"shipto\" type=\"shiptotype\"/>\n<xs:element name=\"item\" maxOccurs=\"unbounded\" type=\"itemtype\"/>\n</xs:sequence>\n<xs:attribute name=\"orderid\" type=\"orderidtype\" use=\"required\"/>\n</xs:complexType>\n<xs:element name=\"shiporder\" type=\"shipordertype\"/>\n</xs:schema>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "<xs:restriction base=\"xs:string\">",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "<xs:simpleType name=\"orderidtype\">\n<xs:restriction base=\"xs:string\">\n<xs:pattern value=\"[0-9]{6}\"/>\n</xs:restriction>\n</xs:simpleType>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<shiporder orderid=\"889923\"\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\nxsi:noNamespaceSchemaLocation=\"shiporder.xsd\">\n# TODO: Complete this line\n<shipto>\n<name>Ola Nordmann</name>\n<address>Langgt 23</address>\n<city>4000 Stavanger</city>\n<country>Norway</country>\n</shipto>\n<item>\n<title>Empire Burlesque</title>\n<note>Special Edition</note>\n<quantity>1</quantity>\n<price>10.90</price>\n</item>\n<item>\n<title>Hide your heart</title>\n<quantity>1</quantity>\n<price>9.90</price>\n</item>\n</shiporder>",
+      "solution": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<shiporder orderid=\"889923\"\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\nxsi:noNamespaceSchemaLocation=\"shiporder.xsd\">\n<orderperson>John Smith</orderperson>\n<shipto>\n<name>Ola Nordmann</name>\n<address>Langgt 23</address>\n<city>4000 Stavanger</city>\n<country>Norway</country>\n</shipto>\n<item>\n<title>Empire Burlesque</title>\n<note>Special Edition</note>\n<quantity>1</quantity>\n<price>10.90</price>\n</item>\n<item>\n<title>Hide your heart</title>\n<quantity>1</quantity>\n<price>9.90</price>\n</item>\n</shiporder>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n# TODO: Complete this line\n...\n</xs:schema>",
+      "solution": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n...\n</xs:schema>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "8c889292-ef2c-4de7-9657-bdf3685b8430",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "7158cae6-4f0f-4afa-ac48-82e1a0395850",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "02707779-a843-423c-b83f-85bd2dbcc101",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is here it?",
+      "options": [
+        "the Schema language definition",
+        "in the same folder as \"shiporder",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of here it is 'in the same folder as \"shiporder'."
+    },
+    {
+      "question": "What is and the URI \nassociated with this namespace?",
+      "options": [
+        "None of the above.",
+        "in the same folder as \"shiporder",
+        "the Schema language definition",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of and the URI \nassociated with this namespace is 'the Schema language definition'."
+    }
+  ],
+  "summary": "This tutorial covers An XSDExample concepts and techniques. You'll learn how to use An XSDExample effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of An XSDExample and how to apply it in your projects."
+}

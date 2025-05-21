@@ -1,0 +1,169 @@
+{
+  "id": "ca732661-364f-42df-8b80-79a41b83a4b1",
+  "title": "XMLWeb Services",
+  "slug": "xmlweb-services",
+  "metadata": {
+    "description": "Learn about XMLWeb Services with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "services",
+      "class",
+      "function",
+      "fahrenheit",
+      "celsius",
+      "fahr",
+      "service",
+      "tempconvert",
+      "application",
+      "applications"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnXML",
+    "subcategory": "XML Services"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "XML\nWeb Services",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Web services are web application components.\nWeb services can be published, found, and used on the Web.\nThis tutorial introduces WSDL, SOAP, RDF, and RSS.\nWSDL\nWSDL stands for Web Services Description Language\nWSDL is an XML-based language for describing Web services.\nWSDL is a W3C recommendation\nSOAP\nSOAP stands for Simple Object Access Protocol\nSOAP is an XML based protocol for accessing Web Services.\nSOAP is based on XML\nSOAP is a W3C recommendation\nRDF\nRDF stands for Resource Description Framework\nRDF is a framework for describing resources on the web\nRDF is written in XML\nRDF is a W3C Recommendation\nRSS\nRSS stands for Really Simple Syndication\nRSS allows you to syndicate your site content\nRSS defines an easy way to share and view headlines and content\nRSS files can be automatically updated\nRSS allows personalized views for different sites\nRSS is written in XML\nWhat You Should Already Know\nBefore you study web services you should have a basic understanding of XML and XML Namespaces.\nIf you want to study these subjects first, please read our\nXML Tutorial\n.\nWeb Services\nWeb services are application components\nWeb services communicate using open protocols\nWeb services are self-contained and self-describing\nWeb services can be discovered using UDDI\nWeb services can be used by other applications\nHTTP and XML is the basis for Web services\nInteroperability has Highest Priority\nWhen all major platforms could access the Web using Web browsers, different \nplatforms couldn't interact. For these platforms to work together, Web-applications \nwere developed.\nWeb-applications are simply applications that run on the web. These are built \naround the Web browser standards and can be used by any browser on any \nplatform.\nWeb Services take Web-applications to the \nBy using Web services, your application can publish its function or message to \nthe rest of the world.\nWeb services use XML to code and to decode data, and SOAP to transport it \n(using open protocols).\nWith Web services, your accounting department's Win 2k server's billing system \ncan connect with your IT supplier's UNIX server.\nWeb Services have Two Types of Uses\nReusable application-components.\nThere are things applications need very often. \nSo why make these over and over again?\nWeb services can offer application-components like: currency conversion, \nweather reports, or even language translation as services.\nConnect existing software.\nWeb services can help to solve the interoperability problem \nby giving different applications a way to link their data.\nWith Web services you can exchange data between different applications and \ndifferent platforms.\nAny application can have a Web Service component.\nWeb Services can be created regardless of programming language.\nA Web Service Example\nIn the following example we will use ASP.NET to create a simple Web Service \nthat converts the temperature from Fahrenheit to Celsius, and vice versa:\n<%@ WebService Language=\"VBScript\" Class=\"TempConvert\" %>\nImports System\nImports System.Web.Services\nPublic Class TempConvert :Inherits WebService\n<WebMethod()> Public Function FahrenheitToCelsius(ByVal Fahrenheit As String) As String\ndim fahr\nfahr=trim(replace(Fahrenheit,\",\",\".\"))\nif fahr=\"\" or IsNumeric(fahr)=false then return \"Error\"\nreturn ((((fahr) - 32) / 9) * 5)\nend function\n<WebMethod()> Public Function CelsiusToFahrenheit(ByVal Celsius As String) As String\ndim cel\ncel=trim(replace(Celsius,\",\",\".\"))\nif cel=\"\" or IsNumeric(cel)=false then return \"Error\"\nreturn ((((cel) * 9) / 5) + 32)\nend function\nend class\nThis document is saved as an .asmx file. This is the ASP.NET file extension for XML Web Services.\nExample Explained\nNote:\nTo run this example, you will need a .NET server.\nThe first line in the example states that this is a Web Service, written in VBScript, and has the class name \"TempConvert\":\n<%@ WebService Language=\"VBScript\" Class=\"TempConvert\" %>\nThe \nImports System\nImports System.Web.Services\nThe \nPublic Class TempConvert :Inherits WebService\nThe \nThe only difference from a normal application is that this function is defined as a \"WebMethod()\".\nUse \"WebMethod()\" to convert the functions in your application into web services:\n<WebMethod()> Public Function FahrenheitToCelsius(ByVal Fahrenheit As String) As String\ndim fahr\nfahr=trim(replace(Fahrenheit,\",\",\".\"))\nif fahr=\"\" or IsNumeric(fahr)=false then return \"Error\"\nreturn ((((fahr) - 32) / 9) * 5)\nend function\n<WebMethod()> Public Function CelsiusToFahrenheit(ByVal Celsius As String) As String\ndim cel\ncel=trim(replace(Celsius,\",\",\".\"))\nif cel=\"\" or IsNumeric(cel)=false then return \"Error\"\nreturn ((((cel) * 9) / 5) + 32)\nend function\nThen, end the class:\nend class\nPublish the .asmx file on a server with .NET support, and you will have your first working Web Service.\nPut the Web Service on Your Web Site\nUsing a form and the HTTP POST method, you can put the web service on your site, like this:\nFahrenheit to Celsius:\nCelsius to Fahrenheit:\nHow To Do It\nHere is the code to add the Web Service to a web page:\n<form\naction='tempconvert.asmx/FahrenheitToCelsius'\nmethod=\"post\" target=\"_blank\">\n<table>\n<tr>\n<td>Fahrenheit to Celsius:</td>\n<td>\n<input class=\"frmInput\" type=\"text\"\n    size=\"30\" name=\"Fahrenheit\">\n</td>\n</tr>\n<tr>\n<td></td>\n<td align=\"right\">\n<input type=\"submit\"\n    value=\"Submit\" class=\"button\">\n</td>\n</tr>\n</table>\n</form>\n<form\naction='tempconvert.asmx/CelsiusToFahrenheit'\nmethod=\"post\" target=\"_blank\">\n<table>\n<tr>\n<td>Celsius to Fahrenheit:</td>\n<td>\n<input class=\"frmInput\" type=\"text\"\n    size=\"30\" name=\"Celsius\">\n</td>\n</tr>\n<tr>\n<td></td>\n<td align=\"right\">\n<input type=\"submit\"\n    value=\"Submit\" class=\"button\">\n</td>\n</tr>\n</table>\n</form>\nSubstitute the \"tempconvert.asmx\" with the address \nof your web service like:\nhttp://www.example.com/xml/tempconvert.asmx\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<%@ WebService Language=\"VBScript\" Class=\"TempConvert\" %>\nImports System\nImports System.Web.Services\nPublic Class TempConvert :Inherits WebService\n<WebMethod()> Public Function FahrenheitToCelsius(ByVal Fahrenheit As String) As String\ndim fahr\nfahr=trim(replace(Fahrenheit,\",\",\".\"))\nif fahr=\"\" or IsNumeric(fahr)=false then return \"Error\"\nreturn ((((fahr) - 32) / 9) * 5)\nend function\n<WebMethod()> Public Function CelsiusToFahrenheit(ByVal Celsius As String) As String\ndim cel\ncel=trim(replace(Celsius,\",\",\".\"))\nif cel=\"\" or IsNumeric(cel)=false then return \"Error\"\nreturn ((((cel) * 9) / 5) + 32)\nend function\nend class",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<%@ WebService Language=\"VBScript\" Class=\"TempConvert\" %>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "Imports System\nImports System.Web.Services",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "Public Class TempConvert :Inherits WebService",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<WebMethod()> Public Function FahrenheitToCelsius(ByVal Fahrenheit As String) As String\ndim fahr\nfahr=trim(replace(Fahrenheit,\",\",\".\"))\nif fahr=\"\" or IsNumeric(fahr)=false then return \"Error\"\nreturn ((((fahr) - 32) / 9) * 5)\nend function\n<WebMethod()> Public Function CelsiusToFahrenheit(ByVal Celsius As String) As String\ndim cel\ncel=trim(replace(Celsius,\",\",\".\"))\nif cel=\"\" or IsNumeric(cel)=false then return \"Error\"\nreturn ((((cel) * 9) / 5) + 32)\nend function",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "end class",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<form\naction='tempconvert.asmx/FahrenheitToCelsius'\nmethod=\"post\" target=\"_blank\">\n<table>\n<tr>\n<td>Fahrenheit to Celsius:</td>\n<td>\n<input class=\"frmInput\" type=\"text\"\n    size=\"30\" name=\"Fahrenheit\">\n</td>\n</tr>\n<tr>\n<td></td>\n<td align=\"right\">\n<input type=\"submit\"\n    value=\"Submit\" class=\"button\">\n</td>\n</tr>\n</table>\n</form>\n<form\naction='tempconvert.asmx/CelsiusToFahrenheit'\nmethod=\"post\" target=\"_blank\">\n<table>\n<tr>\n<td>Celsius to Fahrenheit:</td>\n<td>\n<input class=\"frmInput\" type=\"text\"\n    size=\"30\" name=\"Celsius\">\n</td>\n</tr>\n<tr>\n<td></td>\n<td align=\"right\">\n<input type=\"submit\"\n    value=\"Submit\" class=\"button\">\n</td>\n</tr>\n</table>\n</form>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<%@ WebService Language=\"VBScript\" Class=\"TempConvert\" %>\n# TODO: Complete this line\nImports System.Web.Services\nPublic Class TempConvert :Inherits WebService\n<WebMethod()> Public Function FahrenheitToCelsius(ByVal Fahrenheit As String) As String\ndim fahr\nfahr=trim(replace(Fahrenheit,\",\",\".\"))\nif fahr=\"\" or IsNumeric(fahr)=false then return \"Error\"\nreturn ((((fahr) - 32) / 9) * 5)\nend function\n<WebMethod()> Public Function CelsiusToFahrenheit(ByVal Celsius As String) As String\ndim cel\ncel=trim(replace(Celsius,\",\",\".\"))\nif cel=\"\" or IsNumeric(cel)=false then return \"Error\"\nreturn ((((cel) * 9) / 5) + 32)\nend function\nend class",
+      "solution": "<%@ WebService Language=\"VBScript\" Class=\"TempConvert\" %>\nImports System\nImports System.Web.Services\nPublic Class TempConvert :Inherits WebService\n<WebMethod()> Public Function FahrenheitToCelsius(ByVal Fahrenheit As String) As String\ndim fahr\nfahr=trim(replace(Fahrenheit,\",\",\".\"))\nif fahr=\"\" or IsNumeric(fahr)=false then return \"Error\"\nreturn ((((fahr) - 32) / 9) * 5)\nend function\n<WebMethod()> Public Function CelsiusToFahrenheit(ByVal Celsius As String) As String\ndim cel\ncel=trim(replace(Celsius,\",\",\".\"))\nif cel=\"\" or IsNumeric(cel)=false then return \"Error\"\nreturn ((((cel) * 9) / 5) + 32)\nend function\nend class"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "<%@ WebService Language=\"VBScript\" Class=\"TempConvert\" %>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "5d4d6e9c-9479-4368-b4e5-61691c68ec59",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "73fe1fc3-4290-4e4f-b9ef-00e033b8b5ca",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "17dee987-9c5f-4f4e-a2af-f683df950382",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is XML\nWeb Services\n\nWeb services?",
+      "options": [
+        "an XML-based language for describing Web services",
+        "web application components",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of XML\nWeb Services\n\nWeb services is 'web application components'."
+    },
+    {
+      "question": "What is WSDL\nWSDL stands for Web Services Description Language\nWSDL?",
+      "options": [
+        "None of the above.",
+        "an XML-based language for describing Web services",
+        "web application components",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of WSDL\nWSDL stands for Web Services Description Language\nWSDL is 'an XML-based language for describing Web services'."
+    }
+  ],
+  "summary": "This tutorial covers XMLWeb Services concepts and techniques. You'll learn how to use XMLWeb Services effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of XMLWeb Services and how to apply it in your projects."
+}

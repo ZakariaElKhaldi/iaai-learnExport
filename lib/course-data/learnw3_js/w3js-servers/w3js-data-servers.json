@@ -1,0 +1,160 @@
+{
+  "id": "9b83490c-1c37-49d4-8c60-63d6c5764ae0",
+  "title": "W3.JS Data Servers",
+  "slug": "w3js-data-servers",
+  "metadata": {
+    "description": "Learn about W3.JS Data Servers with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "outp",
+      "city",
+      "country",
+      "conn",
+      "server",
+      "data",
+      "companyname",
+      "customers",
+      "access",
+      "running"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnW3.JS",
+    "subcategory": "W3.JS Servers"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "W3.JS Data Servers",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Dynamic Data\nThe data used in the \nThe server code for fetching dynamic data from a database can be written in many different languages.\nHere are some examples:\nServer Running PHP and MySQL\n<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: \napplication/json; charset=UTF-8\");\n$conn = \nnew mysqli(\"myServer\", \"user\", \"pass\", \"myDB\");\n$result = $conn->query(\"SELECT \nCompanyName, City, Country FROM Customers\");\n$outp = \"\";\nwhile($rs = $result->fetch_array(MYSQLI_ASSOC)) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n}\n$outp ='{\"customers\":['.$outp.']}';\n$conn->close();\necho($outp);\n?>\nCross-Site HTTP Requests\nRequests for data from a different server (other than the requesting page), are \ncalled\ncross-site\nHTTP requests.\nCross-site requests are common on the web. Many pages load css, images, \nor scripts from different servers.\nHowever, in modern browsers, HTTP requests\nfrom scripts\nare restricted to the\nsame site\nfor security reasons.\nThe following line (in the PHP example above) allows access \nto the page from a cross-site:\nheader(\"Access-Control-Allow-Origin: *\");\nServer Running Node.js and MySQL\nvar express = require('express');\nvar app = express();\napp.get('/', \nfunction (req, res) {\nvar sql = require(\"mssql\");\nvar config = {user:'user', password:'pass',\nserver:'myServer', database:'myDB'};\nsql.connect(config, function (err) {\nif (err) \nconsole.log(err);\nvar request = new \nsql.Request();\nrequest.query('SELECT CompanyName, City, Country FROM Customers', function (err, recordset) {\nif \n(err) console.log(err)\nres.send(recordset);\n});\n});\n});\nvar server = app.listen(5000, function () {\nconsole.log('Server is running..');\n});\nServer Running ASP.NET, Razor and SQL Lite\n@{\nResponse.AppendHeader(\"Access-Control-Allow-Origin\", \"*\")\nResponse.AppendHeader(\"Content-type\", \n \"application/json\")\nvar db = \nDatabase.Open(\"myDB\");\nvar query = db.Query(\"SELECT CompanyName, \nCity, Country FROM Customers\");\nvar outp =\"\"\nvar\nc = chr(34)\n}\n@foreach(var row in \nquery)\n{\nif outp <> \"\" then outp = outp + \",\"\noutp = outp + \"{\" + c + \"Name\"\u00a0\u00a0\u00a0 + c + \":\" + c \n+ @row.CompanyName + c + \",\"\noutp = outp +\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c \n+ \"City\"\u00a0\u00a0\u00a0 + c + \":\" + c \n+ @row.City\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 + c + \",\"\noutp = outp \n+\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c + \"Country\" + c \n+ \":\" + c + @row.Country\u00a0\u00a0\u00a0\u00a0 + c + \"}\"\n}\noutp =\"{\" + c \n + \"customers\" + c + \":[\" + outp + \"]}\"\n@outp\nServer Running PHP and MS Access\n<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: \n application/json; charset=ISO-8859-1\");\n$conn = new COM(\"ADODB.Connection\");\n$conn->open(\"PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=myDB.mdb\");\n$rs = $conn->execute(\"SELECT CompanyName, City, Country FROM \nCustomers\");\n$outp = \"\";\nwhile (!$rs->EOF) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n$rs->Move\n}\n$outp ='{\"customers\":['.$outp.']}';\n$conn->close();\necho ($outp);\n?>\nServer Running ASP.NET, VB and MS Access\n<%@ Import Namespace=\"System.IO\"%>\n<%@ Import Namespace=\"System.Data\"%>\n<%@ Import Namespace=\"System.Data.OleDb\"%>\n<%\nResponse.AppendHeader(\"Access-Control-Allow-Origin\", \"*\")\nResponse.AppendHeader(\"Content-type\", \n \"application/json\")\nDim conn As \nOleDbConnection\nDim objAdapter As OleDbDataAdapter\nDim objTable As \nDataTable\nDim objRow As DataRow\nDim objDataSet As New DataSet()\nDim outp\nDim c\nconn = New OledbConnection(\"Provider=Microsoft.Jet.OLEDB.4.0;data \nsource=myDB.mdb\")\nobjAdapter = New OledbDataAdapter(\"SELECT \nCompanyName, City, Country FROM Customers\", conn)\nobjAdapter.Fill(objDataSet, \n\"myTable\")\nobjTable=objDataSet.Tables(\"myTable\")\noutp = \"\"\nc = chr(34)\nfor each x in objTable.Rows\nif outp <> \"\" then outp = outp & \",\"\noutp = outp & \"{\" & c & \"Name\"\u00a0\u00a0\u00a0 & c & \":\" & c & x(\"CompanyName\") \n& c & \",\"\noutp = outp &\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c & \"City\"\u00a0\u00a0\u00a0 & c & \":\" & c \n& x(\"City\")\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 & c & \",\"\noutp = outp &\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c & \"Country\" & c \n& \":\" & c & x(\"Country\")\u00a0\u00a0\u00a0\u00a0 & c & \"}\"\n\noutp \n =\"{\" & c & \"customers\" & c & \":[\" & outp & \"]}\"\nconn.close\nresponse.write(outp)\n%>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: \napplication/json; charset=UTF-8\");\n$conn = \nnew mysqli(\"myServer\", \"user\", \"pass\", \"myDB\");\n$result = $conn->query(\"SELECT \nCompanyName, City, Country FROM Customers\");\n$outp = \"\";\nwhile($rs = $result->fetch_array(MYSQLI_ASSOC)) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n}\n$outp ='{\"customers\":['.$outp.']}';\n$conn->close();\necho($outp);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "header(\"Access-Control-Allow-Origin: *\");",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "var express = require('express');\nvar app = express();\napp.get('/', \nfunction (req, res) {\nvar sql = require(\"mssql\");\nvar config = {user:'user', password:'pass',\nserver:'myServer', database:'myDB'};\nsql.connect(config, function (err) {\nif (err) \nconsole.log(err);\nvar request = new \nsql.Request();\nrequest.query('SELECT CompanyName, City, Country FROM Customers', function (err, recordset) {\nif \n(err) console.log(err)\nres.send(recordset);\n});\n});\n});\nvar server = app.listen(5000, function () {\nconsole.log('Server is running..');\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "@{\nResponse.AppendHeader(\"Access-Control-Allow-Origin\", \"*\")\nResponse.AppendHeader(\"Content-type\", \n \"application/json\")\nvar db = \nDatabase.Open(\"myDB\");\nvar query = db.Query(\"SELECT CompanyName, \nCity, Country FROM Customers\");\nvar outp =\"\"\nvar\nc = chr(34)\n}\n@foreach(var row in \nquery)\n{\nif outp <> \"\" then outp = outp + \",\"\noutp = outp + \"{\" + c + \"Name\"\u00a0\u00a0\u00a0 + c + \":\" + c \n+ @row.CompanyName + c + \",\"\noutp = outp +\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c \n+ \"City\"\u00a0\u00a0\u00a0 + c + \":\" + c \n+ @row.City\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 + c + \",\"\noutp = outp \n+\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c + \"Country\" + c \n+ \":\" + c + @row.Country\u00a0\u00a0\u00a0\u00a0 + c + \"}\"\n}\noutp =\"{\" + c \n + \"customers\" + c + \":[\" + outp + \"]}\"\n@outp",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: \n application/json; charset=ISO-8859-1\");\n$conn = new COM(\"ADODB.Connection\");\n$conn->open(\"PROVIDER=Microsoft.Jet.OLEDB.4.0;Data Source=myDB.mdb\");\n$rs = $conn->execute(\"SELECT CompanyName, City, Country FROM \nCustomers\");\n$outp = \"\";\nwhile (!$rs->EOF) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n$rs->MoveNext();\n}\n$outp ='{\"customers\":['.$outp.']}';\n$conn->close();\necho ($outp);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<%@ Import Namespace=\"System.IO\"%>\n<%@ Import Namespace=\"System.Data\"%>\n<%@ Import Namespace=\"System.Data.OleDb\"%>\n<%\nResponse.AppendHeader(\"Access-Control-Allow-Origin\", \"*\")\nResponse.AppendHeader(\"Content-type\", \n \"application/json\")\nDim conn As \nOleDbConnection\nDim objAdapter As OleDbDataAdapter\nDim objTable As \nDataTable\nDim objRow As DataRow\nDim objDataSet As New DataSet()\nDim outp\nDim c\nconn = New OledbConnection(\"Provider=Microsoft.Jet.OLEDB.4.0;data \nsource=myDB.mdb\")\nobjAdapter = New OledbDataAdapter(\"SELECT \nCompanyName, City, Country FROM Customers\", conn)\nobjAdapter.Fill(objDataSet, \n\"myTable\")\nobjTable=objDataSet.Tables(\"myTable\")\noutp = \"\"\nc = chr(34)\nfor each x in objTable.Rows\nif outp <> \"\" then outp = outp & \",\"\noutp = outp & \"{\" & c & \"Name\"\u00a0\u00a0\u00a0 & c & \":\" & c & x(\"CompanyName\") \n& c & \",\"\noutp = outp &\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c & \"City\"\u00a0\u00a0\u00a0 & c & \":\" & c \n& x(\"City\")\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 & c & \",\"\noutp = outp &\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 c & \"Country\" & c \n& \":\" & c & x(\"Country\")\u00a0\u00a0\u00a0\u00a0 & c & \"}\"\nnext\noutp \n =\"{\" & c & \"customers\" & c & \":[\" & outp & \"]}\"\nconn.close\nresponse.write(outp)\n%>",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: \napplication/json; charset=UTF-8\");\n$conn = \nnew mysqli(\"myServer\", \"user\", \"pass\", \"myDB\");\n$result = $conn->query(\"SELECT \nCompanyName, City, Country FROM Customers\");\n$outp = \"\";\nwhile($rs = $result->fetch_array(MYSQLI_ASSOC)) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n# TODO: Complete this line\n$outp ='{\"customers\":['.$outp.']}';\n$conn->close();\necho($outp);\n?>",
+      "solution": "<?php\nheader(\"Access-Control-Allow-Origin: *\");\nheader(\"Content-Type: \napplication/json; charset=UTF-8\");\n$conn = \nnew mysqli(\"myServer\", \"user\", \"pass\", \"myDB\");\n$result = $conn->query(\"SELECT \nCompanyName, City, Country FROM Customers\");\n$outp = \"\";\nwhile($rs = $result->fetch_array(MYSQLI_ASSOC)) {\nif ($outp != \"\") {$outp .= \",\";}\n$outp .= '{\"Name\":\"'\u00a0 . $rs[\"CompanyName\"] . '\",';\n$outp .= '\"City\":\"'\u00a0\u00a0 . $rs[\"City\"]\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 . '\",';\n$outp .= '\"Country\":\"'. $rs[\"Country\"]\u00a0\u00a0\u00a0\u00a0 . '\"}';\n}\n$outp ='{\"customers\":['.$outp.']}';\n$conn->close();\necho($outp);\n?>"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "header(\"Access-Control-Allow-Origin: *\");"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "1835ce55-225e-4ce9-9b4c-4ceb13801961",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ba64f24d-bb04-417a-9594-da66012fbb0e",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4084be82-d2fd-48db-8a39-71a5ec6921a8",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Here?",
+      "options": [
+        "None of the above.",
+        "some examples:\nServer Running PHP and MySQL\n<",
+        "None of the above.",
+        "Not a Here."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Here is 'some examples:\nServer Running PHP and MySQL\n<'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers W3.JS Data Servers concepts and techniques. You'll learn how to use W3.JS Data Servers effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of W3.JS Data Servers and how to apply it in your projects."
+}

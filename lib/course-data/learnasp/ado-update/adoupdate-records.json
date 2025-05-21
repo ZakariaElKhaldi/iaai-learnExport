@@ -1,0 +1,98 @@
+{
+  "id": "86b2e601-9a6b-493f-a7c9-75833c9ac264",
+  "title": "ADOUpdate Records",
+  "slug": "adoupdate-records",
+  "metadata": {
+    "description": "Learn about ADOUpdate Records with clear explanations and practical examples.",
+    "keywords": [
+      "form",
+      "conn",
+      "update",
+      "table",
+      "record",
+      "request",
+      "name",
+      "customerid",
+      "value",
+      "customers"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "ADO Update"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ADO\nUpdate Records",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "We may use the SQL UPDATE command to update a record in a \ntable in a database.\nUpdate a Record in a Table\nWe want to update a record in the Customers table in the Northwind database. \nWe first create a table that lists all records in the Customers table:\n<html>\n<body>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\nset rs=Server.CreateObject(\"ADODB.Recordset\")\nrs.open \"SELECT * FROM customers\",conn\n%>\n<h2>List Database</h2>\n<table border=\"1\" width=\"100%\">\n<tr>\n<%\nfor each x in rs.Fields\nresponse.write(\"<th>\" & ucase(x.name) & \"</th>\")\n\n%>\n</tr>\n<% do until rs.EOF %>\n<tr>\n<form method=\"post\" action=\"demo_update.asp\">\n<%\nfor each x in rs.Fields\nif lcase(x.name)=\"customerid\" then%>\n<td>\n<input type=\"submit\" name=\"customerID\" value=\"<%=x.value%>\">\n</td>\n<%else%>\n<td><%Response.Write(x.value)%></td>\n<%end if\n\n%>\n</form>\n<%rs.Move\n</tr>\n<%\nloop\nconn.close\n%>\n</table>\n</body>\n</html>\nIf the user clicks on the button in the \"customerID\" column he or she will be \ntaken to a new file called \"demo_update.asp\". The \"demo_update.asp\" file \ncontains the source code on how to create input fields based on the fields from \none record in the database table. It also contains a \"Update record\" button \nthat will save your changes:\n<html>\n<body>\n<h2>Update Record</h2>\n<%\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open \"c:/webdata/northwind.mdb\"\ncid=Request.Form(\"customerID\")\nif Request.form(\"companyname\")=\"\" then\nset rs=Server.CreateObject(\"ADODB.Recordset\")\nrs.open \"SELECT * FROM customers WHERE customerID='\" & cid & \"'\",conn\n%>\n<form method=\"post\" action=\"demo_update.asp\">\n<table>\n<%for each x in rs.Fields%>\n<tr>\n<td><%=x.name%></td>\n<td><input name=\"<%=x.name%>\" value=\"<%=x.value%>\"></td>\n<%\n</tr>\n</table>\n<br><br>\n<input type=\"submit\" value=\"Update record\">\n</form>\n<%\nelse\nsql=\"UPDATE customers SET \"\nsql=sql & \"companyname='\" & Request.Form(\"companyname\") & \"',\"\nsql=sql & \"contactname='\" & Request.Form(\"contactname\") & \"',\"\nsql=sql & \"address='\" & Request.Form(\"address\") & \"',\"\nsql=sql & \"city='\" & Request.Form(\"city\") & \"',\"\nsql=sql & \"postalcode='\" & Request.Form(\"postalcode\") & \"',\"\nsql=sql & \"country='\" & Request.Form(\"country\") & \"'\"\nsql=sql & \" WHERE customerID='\" & cid & \"'\"\non error resume \nconn.Execute sql\nif err<>0 then\nresponse.write(\"No update permissions!\")\nelse\nresponse.write(\"Record \" & cid & \" was updated!\")\nend if\nend if\nconn.close\n%>\n</body>\n</html>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "f90e9a5f-1c08-4ffb-88d3-a44016c271eb",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "0ef84484-48e1-444d-b43d-51c4c21434dd",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "dca0cd39-acfb-4370-9298-373f4a764887",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers ADOUpdate Records concepts and techniques. You'll learn how to use ADOUpdate Records effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ADOUpdate Records and how to apply it in your projects."
+}

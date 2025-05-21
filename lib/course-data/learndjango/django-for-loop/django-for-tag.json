@@ -1,0 +1,98 @@
+{
+  "id": "f9477374-a3ef-4934-92ee-72679f3771ad",
+  "title": "Django for Tag",
+  "slug": "django-for-tag",
+  "metadata": {
+    "description": "Learn about Django for Tag with clear explanations and practical examples.",
+    "keywords": [
+      "example",
+      "forloop",
+      "endfor",
+      "loop",
+      "firstname",
+      "refsnes",
+      "lastname",
+      "iteration",
+      "fruits",
+      "phone"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "Django For Loop"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Django for Tag",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "For Loops\nA\nfor\nloop is used for iterating over a sequence, like looping over items in an \narray, a list, or a dictionary.\nExample\nLoop through the items of a list:\n{% for x in fruits %}\n  <h1>{{ x }}</h1>\n{% endfor %}\nRun Example \u00bb\nExample\nLoop through a list of dictionaries:\n{% for x in cars %}\n  <h1>{{ x.brand }}</h1>\n  <p>{{ x.model }}</p>\n  <p>{{ x.year }}</p>\n{% endfor %}\nRun Example \u00bb\nData From a Model\nData in a model is like a table with rows and columns.\nThe\nMember\nmodel we created earlier has five rows, and each row has \nthree columns:\nid\nfirstname\nlastname\nphone\njoined_date\n1\nEmil\nRefsnes\n5551234\n2022-01-05\n2\nTobias\nRefsnes\n5557777\n2022-04-01\n3\nLinus\nRefsnes\n5554321\n2021-12-24\n4\nLene\nRefsnes\n5551234\n2021-05-01\n5\nStalikken\nRefsnes\n5559876\n2022-09-29\nWhen we fetch data from the model, it comes as a QuerySet object, with a similar format as the \ncars example above: a list with dictionaries:\n<QuerySet [\n  {\n    'id': 1,\n    'firstname': 'Emil',\n    'lastname': 'Refsnes',\n    'phone': 5551234,\n    'joined_date': datetime.date(2022, 1, 5)\n  },\n  {\n    'id': 2,\n    'firstname': 'Tobias',\n    'lastname': 'Refsnes'\n    'phone': 5557777,\n    'joined_date': datetime.date(2021, 4, 1)\n  },\n  {\n    'id': 3,\n    'firstname': 'Linus',\n    'lastname': 'Refsnes'\n    'phone': 5554321,\n    'joined_date': datetime.date(2021, 12, 24)\n  },\n  {\n    'id': 4,\n    'firstname': 'Lene',\n    'lastname': 'Refsnes'\n    'phone': 5551234,\n    'joined_date': datetime.date(2021, 5, 1)\n  },\n  {\n    'id': 5,\n    'firstname': 'Stalikken',\n    'lastname': 'Refsnes'\n    'phone': 5559876,\n    'joined_date': datetime.date(2022, 9, 29)\n  }\n]>\nExample\nLoop through items fetched from a database:\n{% for x in members %}\n  <h1>{{ x.id }}</h1>\n  <p>\n    {{ x.firstname }}\n    {{ x.lastname }}\n  </p>\n{% endfor %}\nRun Example \u00bb\nReversed\nThe\nreversed\nkeyword is used when you want \nto do the loop in reversed order.\nExample\n{% for x in members reversed %}\n  <h1>{{ x.id }}</h1>\n  <p>\n    {{ x.firstname }}\n    {{ x.lastname }}\n  </p>\n{% endfor %}\nRun Example \u00bb\nEmpty\nThe\nempty\nkeyword can be used if you want to \ndo something special if the object is empty.\nExample\n<ul>\n  {% for x in emptytestobject %}\n    <li>{{ x.firstname }}</li>\n  {% empty %}\n    <li>No members</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\nThe\nempty\nkeyword can also be used if the object does not exist:\nExample\n<ul>\n  {% for x in myobject %}\n    <li>{{ x.firstname }}</li>\n  {% empty %}\n    <li>No members</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\nLoop Variables\nDjango has some variables that are available for you inside a loop:\nforloop.counter\nforloop.counter0\nforloop.first\nforloop.last\nforloop.parentloop\nforloop.revcounter\nforloop.revcounter0\nforloop.counter\nThe current iteration, starting at 1.\nExample\n<ul>\n  {% for x in fruits %}\n    <li>{{ forloop.counter }}</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\nforloop.counter0\nThe current iteration, starting at 0.\nExample\n<ul>\n  {% for x in fruits %}\n    <li>{{ forloop.counter0 }}</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\nforloop.first\nAllows you to test if the loop is on its first iteration.\nExample\nDraw a blue background for the first iteration of the loop:\n<ul>\n  {% for x in fruits %}\n    <li\n      {% if forloop.first %}\n        style='background-color:lightblue;'\n      {% endif %}\n    >{{ x }}</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\nforloop.last\nAllows you to test if the loop is on its last iteration.\nExample\nDraw a blue background for the last iteration of the loop:\n<ul>\n  {% for x in fruits %}\n    <li\n      {% if forloop.last %}\n        style='background-color:lightblue;'\n      {% endif %}\n    >{{ x }}</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\nforloop.revcounter\nThe current iteration if you start at the end and count backwards, ending up at 1.\nExample\n<ul>\n  {% for x in fruits %}\n    <li>{{ forloop.revcounter }}</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\nforloop.revcounter0\nThe current iteration if you start at the end and count backwards, ending up at \n0.\nExample\n<ul>\n  {% for x in fruits %}\n    <li>{{ forloop.revcounter0 }}</li>\n  {% endfor %}\n</ul>\nRun Example \u00bb\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "a38ffe77-06ba-4536-ad94-99f45127c131",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9b8c3194-6a34-4869-a0d6-ed7d7b714419",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "9b40c54f-b37d-4b0d-a486-bed35ab0e28f",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Django for Tag\n\nFor Loops\nA\nfor\nloop?",
+      "options": [
+        "used for iterating over a sequence",
+        "None of the above.",
+        "None of the above.",
+        "like a table with rows and columns"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Django for Tag\n\nFor Loops\nA\nfor\nloop is 'used for iterating over a sequence'."
+    },
+    {
+      "question": "What is Data From a Model\nData in a model?",
+      "options": [
+        "like a table with rows and columns",
+        "None of the above.",
+        "used for iterating over a sequence",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Data From a Model\nData in a model is 'like a table with rows and columns'."
+    }
+  ],
+  "summary": "This tutorial covers Django for Tag concepts and techniques. You'll learn how to use Django for Tag effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django for Tag and how to apply it in your projects."
+}

@@ -1,0 +1,196 @@
+{
+  "id": "10df3225-11c8-42a7-a0a5-9f4c6ffb51fb",
+  "title": "Pandas -Cleaning Empty Cells",
+  "slug": "pandas-cleaning-empty-cells",
+  "metadata": {
+    "description": "Learn about Pandas -Cleaning Empty Cells with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "empty",
+      "values",
+      "cells",
+      "data",
+      "replace",
+      "pandas",
+      "example",
+      "inplace",
+      "true",
+      "calories"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPandas",
+    "subcategory": "Cleaning Empty Cells"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Pandas -\nCleaning Empty Cells",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Pandas",
+      "content": "-\nCleaning Empty Cells\n\nEmpty Cells\nEmpty cells can potentially give you a wrong result when you analyze data.\nRemove Rows\nOne way to deal with empty cells is to remove rows that contain empty cells.\nThis is usually OK, since data sets can be very big, and removing a few rows \nwill not have a big impact on the result.\nExample\nReturn a new Data Frame with no empty cells:\nimport pandas as pd\ndf = pd.read_csv('data.csv')\nnew_df = df.dropna()\nprint(new_df.to_string())\n\nNote:\nBy default, the\ndropna()\nmethod returns \n  a\nnew\nDataFrame, and will not change the original.\nIf you want to change the original DataFrame, use the\ninplace = True\nargument:\nExample\nRemove all rows with NULL values:\nimport pandas as pd\ndf = pd.read_csv('data.csv')\ndf.dropna(inplace = True)\nprint(df.to_string())\n\nNote:\nNow, the\ndropna(inplace = True)\nwill NOT return a new DataFrame, but it will remove all rows containing NULL values from the original DataFrame.\nReplace Empty Values\nAnother way of dealing with empty cells is to insert a\nnew\nvalue instead.\nThis way you do not have to delete entire rows just because of some empty \ncells.\nThe\nfillna()\nmethod allows us to replace empty \ncells with a value:\nExample\nReplace NULL values with the number 130:\nimport pandas as pd\ndf = pd.read_csv('data.csv')\ndf.fillna(130, inplace = True)\n\nReplace Only For Specified Columns\nThe example above replaces all empty cells in the whole Data Frame.\nTo only replace empty values for one column,\nspecify the\ncolumn name\nfor the DataFrame:\nExample\nReplace NULL values in the \"Calories\" columns with the number 130:\nimport pandas as pd\ndf = pd.read_csv('data.csv')\ndf.fillna({\"Calories\": 130}, inplace=True)\n\nReplace Using Mean, Median, or Mode\nA common way to replace empty cells, is to calculate the mean, median or mode value of the \ncolumn.\nPandas uses the\nmean()\nmedian()\nand\nmode()\nmethods to \ncalculate the respective values for a specified column:\nExample\nCalculate the MEAN, and replace any empty values with it:\nimport pandas as pd\ndf = pd.read_csv('data.csv')\nx = df[\"Calories\"].mean()\ndf.fillna({\"Calories\": x}, \n  inplace=True)",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Mean",
+      "content": "= the average value (the sum of all values divided by number of values).\nExample\nCalculate the MEDIAN, and replace any empty values with it:\nimport pandas as pd\ndf = pd.read_csv('data.csv')\nx = df[\"Calories\"].median()\ndf.fillna({\"Calories\": x}, \n  inplace=True)",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Median",
+      "content": "= the value in the middle, after you have sorted all values \n  ascending.\nExample\nCalculate the MODE, and replace any empty values with it:\nimport pandas as pd\ndf = pd.read_csv('data.csv')\nx = df[\"Calories\"].mode()[0]\ndf.fillna({\"Calories\": x}, \n  inplace=True)",
+      "order": 4,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Mode",
+      "content": "= the value that appears most frequently.\n\n\u2605\n+1",
+      "order": 5,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import pandas as pd\ndf = pd.read_csv('data.csv')\nnew_df = df.dropna()\nprint(new_df.to_string())",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import pandas as pd\ndf = pd.read_csv('data.csv')\ndf.dropna(inplace = True)\nprint(df.to_string())",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "import pandas as pd\ndf = pd.read_csv('data.csv')\ndf.fillna(130, inplace = True)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "import pandas as pd\ndf = pd.read_csv('data.csv')\ndf.fillna({\"Calories\": 130}, inplace=True)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "import pandas as pd\ndf = pd.read_csv('data.csv')\nx = df[\"Calories\"].mean()\ndf.fillna({\"Calories\": x}, \n  inplace=True)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "import pandas as pd\ndf = pd.read_csv('data.csv')\nx = df[\"Calories\"].median()\ndf.fillna({\"Calories\": x}, \n  inplace=True)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "import pandas as pd\ndf = pd.read_csv('data.csv')\nx = df[\"Calories\"].mode()[0]\ndf.fillna({\"Calories\": x}, \n  inplace=True)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas as pd\ndf = pd.read_csv('data.csv')\nnew_df = df.dropna()\n# TODO: Complete this line",
+      "solution": "import pandas as pd\ndf = pd.read_csv('data.csv')\nnew_df = df.dropna()\nprint(new_df.to_string())"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas as pd\ndf = pd.read_csv('data.csv')\n# TODO: Complete this line\nprint(df.to_string())",
+      "solution": "import pandas as pd\ndf = pd.read_csv('data.csv')\ndf.dropna(inplace = True)\nprint(df.to_string())"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b88b24fe-5d4c-4dfe-9ab9-5634040d2e48",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e8c17a39-2ae5-4a3b-aac3-35aa7adef4d5",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "16c45746-6bd0-44ee-ada1-3fbdf0a94208",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Remove Rows\nOne way to deal with empty cells?",
+      "options": [
+        "None of the above.",
+        "to remove rows that contain empty cells",
+        "usually OK",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Remove Rows\nOne way to deal with empty cells is 'to remove rows that contain empty cells'."
+    },
+    {
+      "question": "What is This?",
+      "options": [
+        "to remove rows that contain empty cells",
+        "usually OK",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of This is 'usually OK'."
+    }
+  ],
+  "summary": "This tutorial covers Pandas -Cleaning Empty Cells concepts and techniques. You'll learn how to use Pandas -Cleaning Empty Cells effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Pandas -Cleaning Empty Cells and how to apply it in your projects."
+}

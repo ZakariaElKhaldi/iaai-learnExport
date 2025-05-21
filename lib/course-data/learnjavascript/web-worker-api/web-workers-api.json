@@ -1,0 +1,112 @@
+{
+  "id": "c77f2e89-b938-4227-8e6a-7e8f0b11857a",
+  "title": "Web Workers API",
+  "slug": "web-workers-api",
+  "metadata": {
+    "description": "Learn about Web Workers API with clear explanations and practical examples.",
+    "keywords": [
+      "worker",
+      "code",
+      "page",
+      "html",
+      "event",
+      "workers",
+      "script",
+      "undefined",
+      "object",
+      "support"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnJavaScript",
+    "subcategory": "Web Worker API"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Web Workers API",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A web worker is a JavaScript running in the background, without affecting the performance of the page.\nWhat is a Web Worker?\nWhen executing scripts in an HTML page, the page becomes unresponsive until the script is finished.\nA web worker is a JavaScript that runs in the background, independently \nof other scripts, without affecting the performance of the page. You can continue to do whatever you want: \nclicking, selecting things, etc., while the web worker runs in the background.\nBrowser Support\nThe numbers in the table specify the first browser versions that fully support Web Workers:\nChrome 4\nIE 10\nFirefox 3.5\nSafari 4\nOpera 11.5\nJan 2010\nSep 2012\nJun 2009\nJun 2009\nJun 2011\nWeb Workers Example\nThe example below creates a simple web worker that count numbers in the background:\nExample\nCount numbers:\nStart Worker\nStop Worker\n\nCheck Web Worker Support\nBefore creating a web worker, check whether the user's browser supports it:\nif (typeof(Worker) !== \"undefined\") {\n// Yes! Web worker support!\n//\nSome code.....\n}\n else {\n// Sorry! No Web Worker support..\n}\nCreate a Web Worker File\nNow, let's create our web worker in an external JavaScript.\nHere, we create a script that counts. The script is stored in the \"demo_workers.js\" file:\nlet i = 0;\nfunction timedCount()\n{\ni ++;\npostMessage(i);\nsetTimeout(\"timedCount()\",500);\n}\ntimedCount();\nThe important part of the code above is the\npostMessage()\nmethod - which is used to post a message back to the HTML page.\nNote:\nNormally web workers are not used for such simple scripts, but for more CPU intensive tasks.\nCreate a Web Worker Object\nNow that we have the web worker file, we need to call it from an HTML page.\nThe following lines checks if the worker already exists, if not - it creates a new web worker object and runs the code in \n\"demo_workers.js\":\nif (typeof(w) == \"undefined\") {\nw = new Worker(\"demo_workers.js\");\n}\nThen we can send and receive messages from the web worker.\nAdd an \"onmessage\" event listener to the web worker.\nw.onmessage = function(event){\ndocument.getElementById(\"result\").innerHTML = event.data;\n};\nWhen the web worker posts a message, the code within the event listener is executed. The data \nfrom the web worker is stored in event.data.\nTerminate a Web Worker\nWhen a web worker object is created, it will continue to listen for messages (even after the external script is finished) until it is terminated.\nTo terminate a web worker, and free browser/computer resources, use the\nterminate()\nmethod:\nw.terminate();\nReuse the Web Worker\nIf you set the worker variable to undefined, after it has been terminated, \nyou can reuse the code:\nw = undefined;\nFull Web Worker Example Code\nWe have already seen the Worker code in the .js file. Below is the code for the HTML page:\nExample\n<!DOCTYPE html>\n<html>\n<body>\n<p>Count numbers: <output id=\"result\"></output></p>\n<button onclick=\"startWorker()\">Start Worker</button>\n<button onclick=\"stopWorker()\">Stop Worker</button>\n<script>\nlet w;\nfunction startWorker()\n{\nif (typeof(w) == \"undefined\") {\nw = new Worker(\"demo_workers.js\");\n}\nw.onmessage = function(event) {\ndocument.getElementById(\"result\").innerHTML = event.data;\n};\n}\nfunction stopWorker()\n{\nw.terminate();\nw = undefined;\n}\n</script>\n</body>\n</html>\n\nWeb Workers and the DOM\nSince web workers are in external files, they do not have access to the following JavaScript objects:\nThe window object\nThe document object\nThe parent object\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<!DOCTYPE html>\n<html>\n<body>\n<p>Count numbers: <output id=\"result\"></output></p>\n<button onclick=\"startWorker()\">Start Worker</button>\n<button onclick=\"stopWorker()\">Stop Worker</button>\n<script>\nlet w;\nfunction startWorker()\n{\nif (typeof(w) == \"undefined\") {\nw = new Worker(\"demo_workers.js\");\n}\nw.onmessage = function(event) {\ndocument.getElementById(\"result\").innerHTML = event.data;\n};\n}\nfunction stopWorker()\n{\nw.terminate();\nw = undefined;\n}\n</script>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<html>\n<body>\n<p>Count numbers: <output id=\"result\"></output></p>\n<button onclick=\"startWorker()\">Start Worker</button>\n<button onclick=\"stopWorker()\">Stop Worker</button>\n<script>\nlet w;\nfunction startWorker()\n{\n# TODO: Complete this line\nw = new Worker(\"demo_workers.js\");\n}\nw.onmessage = function(event) {\ndocument.getElementById(\"result\").innerHTML = event.data;\n};\n}\nfunction stopWorker()\n{\nw.terminate();\nw = undefined;\n}\n</script>\n</body>\n</html>",
+      "solution": "<!DOCTYPE html>\n<html>\n<body>\n<p>Count numbers: <output id=\"result\"></output></p>\n<button onclick=\"startWorker()\">Start Worker</button>\n<button onclick=\"stopWorker()\">Stop Worker</button>\n<script>\nlet w;\nfunction startWorker()\n{\nif (typeof(w) == \"undefined\") {\nw = new Worker(\"demo_workers.js\");\n}\nw.onmessage = function(event) {\ndocument.getElementById(\"result\").innerHTML = event.data;\n};\n}\nfunction stopWorker()\n{\nw.terminate();\nw = undefined;\n}\n</script>\n</body>\n</html>"
+    },
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your javascript function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "08a181d0-3278-4a87-8d82-bf8196f42868",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "44574cd8-553e-434c-a588-8a8a49cb0b74",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "01d509f0-88e9-423a-96a2-ab87c8dd67a9",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Web Workers API\n\nA web worker?",
+      "options": [
+        "a JavaScript running in the background",
+        "None of the above.",
+        "a Web Worker",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Web Workers API\n\nA web worker is 'a JavaScript running in the background'."
+    },
+    {
+      "question": "What is What?",
+      "options": [
+        "None of the above.",
+        "a Web Worker",
+        "None of the above.",
+        "a JavaScript running in the background"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of What is 'a Web Worker'."
+    }
+  ],
+  "summary": "This tutorial covers Web Workers API concepts and techniques. You'll learn how to use Web Workers API effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Web Workers API and how to apply it in your projects."
+}

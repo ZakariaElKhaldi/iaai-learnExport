@@ -1,0 +1,115 @@
+{
+  "id": "44135f57-2743-4785-abcf-1a3a721ac7e3",
+  "title": "HTMLServer-Sent Events API",
+  "slug": "htmlserver-sent-events-api",
+  "metadata": {
+    "description": "Learn about HTMLServer-Sent Events API with clear explanations and practical examples.",
+    "keywords": [
+      "html",
+      "server",
+      "event",
+      "sent",
+      "events",
+      "data",
+      "support",
+      "updates",
+      "page",
+      "eventsource",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Html Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnHTML",
+    "subcategory": "HTML SSE"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "HTML\nServer-Sent Events API",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The Server-Sent Events (SSE) API enables pushing \nmessages/updates from a server to the web page via HTTP connection.\nServer-Sent Events - One Way Messaging\nA server-sent event is when a web page automatically gets messages/updates from a server.\nNormally, a web page has to request data from the server, but with server-sent events, the updates \nare pushed automatically.\nExamples: Facebook/Twitter updates, stock market updates, news feeds, sport results, etc.\nBrowser Support\nThe numbers in the table specify the first browser version that fully support \nthe Server-Sent Events API.\nAPI\nSSE\n6.0\n79.0\n6.0\n5.0\n11.5\nReceive Server-Sent Event Notifications\nThe\nEventSource\nobject is used to receive server-sent event notifications:\nExample\n<script>\nconst x = document.getElementById(\"result\");\n// Check browser support for SSE\nif(typeof(EventSource) \n  !== \"undefined\") {\nvar source = new EventSource(\"demo_sse.php\");\nsource.onmessage = function(event) {\nx.innerHTML += \n  event.data + \"<br>\";\n};\n} else {\nx.innerHTML = \"Sorry, \n  no support for server-sent events.\";\n}\n</script>\n\nExample explained:\nCreate a new\nEventSource\nobject, and specify the URL of the page sending the updates (in this example \"demo_sse.php\")\nEach time an update is received, the\nonmessage\nevent occurs\nWhen an\nonmessage\nevent occurs, put the received data into the element with id=\"result\"\nCheck Browser Support\nIn the tryit example above there were some extra lines of code to check browser support for server-sent events:\nif(typeof(EventSource) !== \"undefined\") {\n// Yes! Server-sent events support!\n//\nSome code.....\n}\n else {\n// Sorry! No server-sent events support..\n}\nServer-Side Code Example\nFor the example above to work, you need a server capable of sending data updates (like PHP or ASP).\nThe server-side event stream syntax is simple. Set the \"Content-Type\" header to \n\"text/event-stream\". Now you can start sending event streams.\nCode in PHP (demo_sse.php):\n<?php\nheader('Content-Type: text/event-stream');\nheader('Cache-Control: no-cache');\n$time = date('r');\necho \"data: The server time is: {$time}\\n\\n\";\nflush();\n?>\nCode in ASP (VB) (demo_sse.asp):\n<%\nResponse.ContentType = \"text/event-stream\"\nResponse.Expires = -1\nResponse.Write(\"data: The server time is: \" & now())\nResponse.Flush()\n%>\nCode explained:\nSet the \"Content-Type\" header to \n\"text/event-stream\"\nSpecify that the page should not cache\nOutput the data to send (\nAlways\nstart with \"data: \")\nFlush the output data back to the web page\nThe EventSource Object\nIn the examples above we used the onmessage event to get messages. But other events are also available:\nEvents\nDescription\nonopen\nWhen a connection to the server is opened\nonmessage\nWhen a message is received\nonerror\nWhen an error occurs\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<script>\nconst x = document.getElementById(\"result\");\n// Check browser support for SSE\nif(typeof(EventSource) \n  !== \"undefined\") {\nvar source = new EventSource(\"demo_sse.php\");\nsource.onmessage = function(event) {\nx.innerHTML += \n  event.data + \"<br>\";\n};\n} else {\nx.innerHTML = \"Sorry, \n  no support for server-sent events.\";\n}\n</script>",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<script>\nconst x = document.getElementById(\"result\");\n// Check browser support for SSE\nif(typeof(EventSource) \n  !== \"undefined\") {\n# TODO: Complete this line\nsource.onmessage = function(event) {\nx.innerHTML += \n  event.data + \"<br>\";\n};\n} else {\nx.innerHTML = \"Sorry, \n  no support for server-sent events.\";\n}\n</script>",
+      "solution": "<script>\nconst x = document.getElementById(\"result\");\n// Check browser support for SSE\nif(typeof(EventSource) \n  !== \"undefined\") {\nvar source = new EventSource(\"demo_sse.php\");\nsource.onmessage = function(event) {\nx.innerHTML += \n  event.data + \"<br>\";\n};\n} else {\nx.innerHTML = \"Sorry, \n  no support for server-sent events.\";\n}\n</script>"
+    },
+    {
+      "title": "Create a Layout",
+      "description": "Build a simple layout using the techniques from this tutorial.",
+      "difficulty": "easy",
+      "starter_code": "<!-- Add your code here -->",
+      "solution": "<!-- Example solution would go here -->"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "a0a6c76d-f6b0-45b4-a1f4-24857e4f70b9",
+      "title": "Html Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "46d6ebb7-318c-410d-8645-5d7c9003cd4f",
+      "title": "Html Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "226a2c5a-1e0a-4947-87a5-5d9ae89c0bbc",
+      "title": "Html Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is sent event?",
+      "options": [
+        "pushed automatically",
+        "when a web page automatically gets messages/updates from a server",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of sent event is 'when a web page automatically gets messages/updates from a server'."
+    },
+    {
+      "question": "What is the updates?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "when a web page automatically gets messages/updates from a server",
+        "pushed automatically"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of the updates is 'pushed automatically'."
+    }
+  ],
+  "summary": "This tutorial covers HTMLServer-Sent Events API concepts and techniques. You'll learn how to use HTMLServer-Sent Events API effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of HTMLServer-Sent Events API and how to apply it in your projects."
+}

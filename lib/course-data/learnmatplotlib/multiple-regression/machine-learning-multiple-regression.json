@@ -1,0 +1,133 @@
+{
+  "id": "3eb271c5-dd91-4c94-91f8-0eabb5a2a749",
+  "title": "Machine Learning - Multiple Regression",
+  "slug": "machine-learning-multiple-regression",
+  "metadata": {
+    "description": "Learn about Machine Learning - Multiple Regression with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "weight",
+      "volume",
+      "pandas",
+      "regr",
+      "values",
+      "regression",
+      "import",
+      "example",
+      "predict",
+      "data"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMatplotlib",
+    "subcategory": "Multiple Regression"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Machine Learning - Multiple Regression",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Multiple Regression\nMultiple regression is like\nlinear regression\n, but with more than one \nindependent value, meaning that we try to predict a value based on\ntwo \nor more\nvariables.\nTake a look at the data set below, it contains some information about cars.\nCar\nModel\nVolume\nWeight\nCO2\nToyota\nAygo\n1000\n790\n99\nMitsubishi\nSpace Star\n1200\n1160\n95\nSkoda\nCitigo\n1000\n929\n95\nFiat\n500\n900\n865\n90\nMini\nCooper\n1500\n1140\n105\nVW\nUp!\n1000\n929\n105\nSkoda\nFabia\n1400\n1109\n90\nMercedes\nA-Class\n1500\n1365\n92\nFord\nFiesta\n1500\n1112\n98\nAudi\nA1\n1600\n1150\n99\nHyundai\nI20\n1100\n980\n99\nSuzuki\nSwift\n1300\n990\n101\nFord\nFiesta\n1000\n1112\n99\nHonda\nCivic\n1600\n1252\n94\nHundai\nI30\n1600\n1326\n97\nOpel\nAstra\n1600\n1330\n97\nBMW\n1\n1600\n1365\n99\nMazda\n3\n2200\n1280\n104\nSkoda\nRapid\n1600\n1119\n104\nFord\nFocus\n2000\n1328\n105\nFord\nMondeo\n1600\n1584\n94\nOpel\nInsignia\n2000\n1428\n99\nMercedes\nC-Class\n2100\n1365\n99\nSkoda\nOctavia\n1600\n1415\n99\nVolvo\nS60\n2000\n1415\n99\nMercedes\nCLA\n1500\n1465\n102\nAudi\nA4\n2000\n1490\n104\nAudi\nA6\n2000\n1725\n114\nVolvo\nV70\n1600\n1523\n109\nBMW\n5\n2000\n1705\n114\nMercedes\nE-Class\n2100\n1605\n115\nVolvo\nXC70\n2000\n1746\n117\nFord\nB-Max\n1600\n1235\n104\nBMW\n2\n1600\n1390\n108\nOpel\nZafira\n1600\n1405\n109\nMercedes\nSLK\n2500\n1395\n120\nWe can predict the CO2 emission of a car based on \nthe size of the engine, but with multiple regression we can throw in more \nvariables, like the weight of the car, to make the prediction more accurate.\nHow Does it Work?\nIn Python we have modules that will do the work for us. Start by importing \nthe Pandas module.\nimport pandas\nLearn about the Pandas module in our\nPandas Tutorial\n.\nThe Pandas module allows us to read csv files and return a DataFrame object.\nThe file is meant for testing purposes only, you can download it here:\ndata.csv\ndf = pandas.read_csv(\"data.csv\")\nThen make a list of the independent values and call this \nvariable\nX\n.\nPut the dependent values in a variable called\ny\n.\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nTip:\nIt is common to name the list of independent values with a upper \ncase X, and the list of dependent values with a lower case y.\nWe will use some methods from the sklearn module, so we will have to import that module as well:\nfrom sklearn import linear_model\nFrom the sklearn module we will use the\nLinearRegression()\nmethod \nto create a linear regression object.\nThis object has a method called\nfit()\nthat takes \nthe independent and dependent values as parameters and fills the regression object with data that describes the relationship:\nregr = linear_model.LinearRegression()\nregr.fit(X, y)\nNow we have a regression object that are ready to predict CO2 values based on \na car's weight and volume:\n#predict the CO2 emission of a car where the weight \n  is 2300kg, and the volume is 1300cm\n3\n:\npredictedCO2 = regr.predict([[2300, 1300]])\nExample\nSee the whole example in action:\nimport pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\n#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm\n3\n:\npredictedCO2 = regr.predict([[2300, 1300]])\nprint(predictedCO2)\nResult:\n[107.2087328]\nRun example \u00bb\nWe have predicted that a car with 1.3 liter engine, and a weight of 2300 kg, will release approximately 107 grams of CO2 for every \nkilometer it drives.\nCoefficient\nThe coefficient is a factor that describes the relationship \nwith an unknown variable.\nExample: if\nx\nis a variable, then\n2x\nis\nx\ntwo \ntimes.\nx\nis the unknown variable, and the \nnumber\n2\nis the coefficient.\nIn this case, we can ask for the coefficient value of weight against CO2, and \nfor volume against CO2. The answer(s) we get tells us what would happen if we \nincrease, or decrease, one of the independent values.\nExample\nPrint the coefficient values of the regression object:\nimport pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\nprint(regr.coef_)\nResult:\n[0.00755095 0.00780526]\nRun example \u00bb\nResult Explained\nThe result array represents the coefficient values of weight and volume.\nWeight: 0.00755095\nVolume: 0.00780526\nThese values tell us that if the weight increase by 1kg, the CO2 \nemission increases by 0.00755095g.\nAnd if the engine size (Volume) increases by 1cm\n3\n, the CO2 emission \nincreases by 0.00780526g.\nI think that is a fair guess, but let test it!\nWe have already predicted that if a car with a 1300cm\n3\nengine weighs 2300kg, the CO2 emission will be approximately 107g.\nWhat if we increase the weight with 1000kg?\nExample\nCopy the example from before, but change the weight from 2300 to 3300:\nimport pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\npredictedCO2 = regr.predict([[3300, 1300]])\nprint(predictedCO2)\nResult:\n[114.75968007]\nRun example \u00bb\nWe have predicted that a car with 1.3 liter engine, and a weight of \n3300 kg, will release approximately 115 grams of CO2 for every kilometer it drives.\nWhich shows that the coefficient of 0.00755095 is correct:\n107.2087328 + (1000 * 0.00755095) = 114.75968\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\n#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm\n3\n:\npredictedCO2 = regr.predict([[2300, 1300]])\nprint(predictedCO2)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\nprint(regr.coef_)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\npredictedCO2 = regr.predict([[3300, 1300]])\nprint(predictedCO2)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\n#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm\n3\n:\npredictedCO2 = regr.predict([[2300, 1300]])\n# TODO: Complete this line",
+      "solution": "import pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\n#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm\n3\n:\npredictedCO2 = regr.predict([[2300, 1300]])\nprint(predictedCO2)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\n# TODO: Complete this line",
+      "solution": "import pandas\nfrom sklearn import linear_model\ndf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]\ny = df['CO2']\nregr = \n  linear_model.LinearRegression()\nregr.fit(X, y)\nprint(regr.coef_)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "b55c6b55-8eda-4dc6-90ae-88ca9b1f1452",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "fd78db61-0d94-487b-a938-a5c7146861a0",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "3fe5fe2c-0e20-444a-8368-6056a4bbc0d4",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Multiple Regression\n\nMultiple Regression\nMultiple regression?",
+      "options": [
+        "None of the above.",
+        "meant for testing purposes only",
+        "like\nlinear regression",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Multiple Regression\n\nMultiple Regression\nMultiple regression is 'like\nlinear regression'."
+    },
+    {
+      "question": "What is The file?",
+      "options": [
+        "like\nlinear regression",
+        "None of the above.",
+        "meant for testing purposes only",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The file is 'meant for testing purposes only'."
+    }
+  ],
+  "summary": "This tutorial covers Machine Learning - Multiple Regression concepts and techniques. You'll learn how to use Machine Learning - Multiple Regression effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Machine Learning - Multiple Regression and how to apply it in your projects."
+}

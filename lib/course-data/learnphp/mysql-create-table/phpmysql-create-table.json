@@ -1,0 +1,142 @@
+{
+  "id": "c39f22e5-041a-4a51-805b-d77d12f50f88",
+  "title": "PHPMySQL Create Table",
+  "slug": "phpmysql-create-table",
+  "metadata": {
+    "description": "Learn about PHPMySQL Create Table with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "table",
+      "create",
+      "conn",
+      "varchar",
+      "null",
+      "username",
+      "password",
+      "myguests",
+      "primary",
+      "dbname"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "MySQL Create Table"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nMySQL Create Table",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A database table has its own unique name and consists of \ncolumns and rows.\nCreate a MySQL Table Using MySQLi and PDO\nThe CREATE TABLE statement is used to create a table in MySQL.\nWe will create a table named \"MyGuests\", with \nfive columns: \"id\", \"firstname\", \"lastname\", \"email\" and \"reg_date\":\nCREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\nNotes on the table above:\nThe data type specifies what type of data the column can hold. For a complete \nreference of all the available data types, go to our\nData Types reference\n.\nAfter the data type, you can specify other optional attributes for each \ncolumn:\nNOT NULL - Each row must contain a value for that column, null values are not allowed\nDEFAULT value - Set a default value that is added when no other value is passed\nUNSIGNED - Used for number types, limits the stored data to positive numbers and zero\nAUTO INCREMENT - MySQL automatically increases the value of the field by 1 each time a new record is added\nPRIMARY KEY - Used to uniquely identify the rows in a table. The column with PRIMARY KEY setting is often an ID number, and is often used with AUTO_INCREMENT\nEach table should have a primary key column (in this case: the \"id\" column). \nIts value must be unique for each record in the table.\nThe following examples shows how to create the table in PHP:\nExample (MySQLi Object-oriented)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// sql to create table\n$sql = \"CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP \n  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\";\nif ($conn->query($sql) === TRUE) {\necho \"Table MyGuests created successfully\";\n} else {\necho \"Error creating table: \" . $conn->error;\n}\n$conn->close();\n?>\nExample (MySQLi Procedural)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// sql to create table\n$sql = \"CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP \n  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\";\nif (mysqli_query($conn, $sql)) {\necho \"Table MyGuests created successfully\";\n} else {\necho \"Error creating table: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>\nExample (PDO)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n// sql to create table\n$sql = \"CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP \n  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\";\n// use exec() because no results are returned\n$conn->exec($sql);\necho \"Table MyGuests created successfully\";\n} catch(PDOException $e) \n  {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Object-oriented)",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// sql to create table\n$sql = \"CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP \n  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\";\nif ($conn->query($sql) === TRUE) {\necho \"Table MyGuests created successfully\";\n} else {\necho \"Error creating table: \" . $conn->error;\n}\n$conn->close();\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli object-oriented)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Procedural)",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// sql to create table\n$sql = \"CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP \n  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\";\nif (mysqli_query($conn, $sql)) {\necho \"Table MyGuests created successfully\";\n} else {\necho \"Error creating table: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli procedural)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (PDO)",
+      "content": "",
+      "order": 6,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDBPDO\";\ntry {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n// sql to create table\n$sql = \"CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP \n  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\";\n// use exec() because no results are returned\n$conn->exec($sql);\necho \"Table MyGuests created successfully\";\n} catch(PDOException $e) \n  {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>",
+      "language": "html",
+      "explanation": "Example of example (pdo)"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n# TODO: Complete this line",
+      "solution": "CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\n# TODO: Complete this line\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// sql to create table\n$sql = \"CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP \n  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\";\nif ($conn->query($sql) === TRUE) {\necho \"Table MyGuests created successfully\";\n} else {\necho \"Error creating table: \" . $conn->error;\n}\n$conn->close();\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n$dbname = \"myDB\";\n// Create connection\n$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// sql to create table\n$sql = \"CREATE TABLE MyGuests (\nid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\nfirstname VARCHAR(30) NOT NULL,\nlastname VARCHAR(30) NOT NULL,\nemail VARCHAR(50),\nreg_date TIMESTAMP \n  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n)\";\nif ($conn->query($sql) === TRUE) {\necho \"Table MyGuests created successfully\";\n} else {\necho \"Error creating table: \" . $conn->error;\n}\n$conn->close();\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "23df1250-0ab3-4470-844d-96e51f5da536",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "1bedf0ff-cbae-4e6a-aafa-c30183d461ca",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "1955288f-d4e2-449c-8612-afa4b480f58d",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Create a MySQL Table Using MySQLi and PDO\nThe CREATE TABLE statement?",
+      "options": [
+        "not allowed\nDEFAULT value - Set a default value that is added when no other value is passed\nUNSIGNED - Used for number types",
+        "used to create a table in MySQL",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Create a MySQL Table Using MySQLi and PDO\nThe CREATE TABLE statement is 'used to create a table in MySQL'."
+    },
+    {
+      "question": "What is null values?",
+      "options": [
+        "None of the above.",
+        "not allowed\nDEFAULT value - Set a default value that is added when no other value is passed\nUNSIGNED - Used for number types",
+        "used to create a table in MySQL",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of null values is 'not allowed\nDEFAULT value - Set a default value that is added when no other value is passed\nUNSIGNED - Used for number types'."
+    }
+  ],
+  "summary": "This tutorial covers PHPMySQL Create Table concepts and techniques. You'll learn how to use PHPMySQL Create Table effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPMySQL Create Table and how to apply it in your projects."
+}

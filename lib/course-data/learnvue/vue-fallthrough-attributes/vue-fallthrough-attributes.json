@@ -1,0 +1,96 @@
+{
+  "id": "9d5cf4a9-7c49-42bb-9cd5-c8ebc417851a",
+  "title": "Vue Fallthrough Attributes",
+  "slug": "vue-fallthrough-attributes",
+  "metadata": {
+    "description": "Learn about Vue Fallthrough Attributes with clear explanations and practical examples.",
+    "keywords": [
+      "attributes",
+      "component",
+      "element",
+      "template",
+      "style",
+      "example",
+      "class",
+      "list",
+      "item",
+      "todoitem"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue Fallthrough Attributes"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue Fallthrough Attributes",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A component can be called with attributes that are not declared as props, and they will simply\nfall through\nto the root element in the component.\nWith\nfallthrough attributes\nyou get a better overview from the parent where the component is created, and it simplifies our code because we don't need to declare the attribute as a prop.\nTypical attributes used to fall through are\nclass\n,\nstyle\nand\nv-on\n.\nFallthrough Attributes\nIt can be nice to for example control the component styling from the parent rather than having the styling hidden away inside the component.\nLet's create a new example, a basic to-do list in Vue, and see how the style attribute falls through to the components representing things to do.\nSo, our\nApp.vue\nshould contain the list of things to do, and an\n<input>\nelement and a\n<button>\nto add new things to do. Each list item is a\n<todo-item />\ncomponent.\nApp.vue\n:\n<template>\n\u00a0 <h3>Todo List</h3>  \n\u00a0 <ul>\n\u00a0 \u00a0 <todo-item\n\u00a0 \u00a0 \u00a0 v-for=\"x in items\"\n\u00a0 \u00a0 \u00a0 :key=\"x\"\n\u00a0 \u00a0 \u00a0 :item-name=\"x\"\n\u00a0 \u00a0 />\n\u00a0 </ul>\n\u00a0 <input v-model=\"newItem\">\n\u00a0 <button @click=\"addItem\">Add</button>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 newItem: '',\n\u00a0 \u00a0 \u00a0 \u00a0 items: ['Buy apples','Make pizza','Mow the lawn']\n\u00a0 \u00a0 \u00a0 };\n\u00a0 \u00a0 },\n\u00a0 \u00a0 methods: {\n\u00a0 \u00a0 \u00a0 addItem() {\n\u00a0 \u00a0 \u00a0 \u00a0 this.items.push(this.newItem),\n\u00a0 \u00a0 \u00a0 \u00a0 this.newItem = '';\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nAnd\nTodoItem.vue\njust receives the description of what to do as a prop:\nTodoItem.vue\n:\n<template>\n\u00a0 <li>{{ itemName }}</li>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 props: ['itemName']\n\u00a0 }\n</script>\nTo build our application correctly we also need the right setup in\nmain.js\n:\nmain.js\n:\nimport { createApp } from 'vue'\n\nimport App from './App.vue'\nimport TodoItem from './components/TodoItem.vue'\n\nconst app = createApp(App)\napp.component('todo-item', TodoItem)\napp.mount('#app')\nTo see the point of this section, that properties can fall through to the root element inside the\n<template>\nof our component, we can give the list items some styling from\nApp.vue\n:\nExample\nWe give styling to the\n<li>\nelements inside the component, from\nApp.vue\n:\n<template>\n\u00a0 <h3>Todo List</h3>\n\u00a0 <ul>\n\u00a0 \u00a0 <todo-item\n\u00a0 \u00a0 \u00a0 v-for=\"x in items\"\n\u00a0 \u00a0 \u00a0 :key=\"x\"\n\u00a0 \u00a0 \u00a0 :item-name=\"x\"\nstyle=\"background-color: lightgreen;\"\n/>\n\u00a0 </ul>\n\u00a0 <input v-model=\"newItem\">\n\u00a0 <button @click=\"addItem\">Add</button>\n</template>\nRun Example \u00bb\nTo confirm that the style attribute has actually fallen through\nwe can right click an\n<li>\nelement in our \nto-do list in the browser, choose 'Inspect', and we can see the style attribute is now on the\n<li>\nelement:\nMerging 'class' and 'style' Attributes\nIf 'class' or 'style' attributes are already set, and 'class' or 'style' attributes also comes from the parent as fallthrough attributes, the attributes will be merged.\nExample\nIn addition to the existing styling from the parent, we add a margin to the\n<li>\nelements inside the\nTodoItem.vue\ncomponent:\n<template>\n\u00a0 <li\nstyle=\"margin: 5px 0;\"\n>{{ itemName }}</li>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 props: ['itemName']\n\u00a0 }\n</script>\nRun Example \u00bb\nIf we right click an\n<li>\nelement in the browser we can see that the attributes have been merged. Margin is set directly on the\n<li>\nelement inside the component, and is merged with the background-color that falls through from the parent:\n$attrs\nIf we have more than one element on the root level of the component, it is no longer clear which element the attributes should fall through to.\nTo define which root element gets the fallthrough attributes we can mark the element with the built-in\n$attrs\nobject, like this:\nExample\nTodoItem.vue\n:\n<template>\n\u00a0 <div class=\"pinkBall\"></div>\n\u00a0 <li\nv-bind=\"$attrs\"\n>{{ itemName }}</li>\n\u00a0 <div class=\"pinkBall\"></div>\n</template>\nRun Example \u00bb\nVue Exercises\nTest Yourself With Exercises\nExercise:\nSet the root element of the 'fish-type' component to belong to the 'blue' CSS class (create a fallthrough attribute).\n<fish-type\n/>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Create a Layout",
+      "description": "Build a simple layout using the techniques from this tutorial.",
+      "difficulty": "easy",
+      "starter_code": "<!-- Add your code here -->",
+      "solution": "<!-- Example solution would go here -->"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "0954ba5d-e72c-4a9d-a9b6-813687a5c9ff",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ef5a8b2d-40c3-49c0-8d91-cb0c8cb06b89",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4ec76913-c7b4-4fa2-a7bc-4955a0e958f3",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Vue Fallthrough Attributes\n\nA component can be called with attributes that?",
+      "options": [
+        "None of the above.",
+        "not declared as props",
+        "None of the above.",
+        "created"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Vue Fallthrough Attributes\n\nA component can be called with attributes that is 'not declared as props'."
+    },
+    {
+      "question": "What is With\nfallthrough attributes\nyou get a better overview from the parent where the component?",
+      "options": [
+        "None of the above.",
+        "created",
+        "None of the above.",
+        "not declared as props"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of With\nfallthrough attributes\nyou get a better overview from the parent where the component is 'created'."
+    }
+  ],
+  "summary": "This tutorial covers Vue Fallthrough Attributes concepts and techniques. You'll learn how to use Vue Fallthrough Attributes effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue Fallthrough Attributes and how to apply it in your projects."
+}

@@ -1,0 +1,151 @@
+{
+  "id": "40149368-e09e-46ca-b450-84c65ca7a498",
+  "title": "Vuev-onDirective",
+  "slug": "vuev-ondirective",
+  "metadata": {
+    "description": "Learn about Vuev-onDirective with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "script",
+      "event",
+      "click",
+      "button",
+      "lighton",
+      "data",
+      "input",
+      "directive",
+      "example",
+      "return"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue v-on"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue\nv-on\nDirective",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Like event handling in plain JavaScript, the\nv-on\ndirective in Vue tells the browser:\nwhich event to listen to ('click', 'keydown', 'mouseover', etc)\nwhat to do when that event occurs\nExamples using\nv-on\nLet's take a look at some examples to see how\nv-on\ncan be used with different events and different code to run when these events occur.\nNote:\nTo run more advanced code when an event occurs we need to introduce Vue methods. Learn about Vue methods on the \nonclick Event\nThe v-on directive allows us to perform actions based on specified events.\nUse\nv-on:click\nto perform action when the element is clicked.\nExample\nThe\nv-on\ndirective is used on the <button> tag to listen to the 'click' event. When the 'click' event occurs the 'lightOn' data property is toggled between 'true' and 'false', making the yellow <div> behind the lightbulb visible/hidden.\n<div id=\"app\">\n<div id=\"lightDiv\">\n<div v-show=\"lightOn\"></div>\n<img src=\"img_lightBulb.svg\">\n</div>\n<button v-on:click=\"lightOn = !lightOn\">Switch light</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nlightOn: false\n}\n}\n})\napp.mount('#app')\n</script>\n\noninput Event\nUse\nv-on:input\nto perform action when the element gets an input, like a keystroke inside a text field.\nExample\nCount the number of keystroke for a input text field:\n<div id=\"app\">\n<input v-on:input=\"inpCount++\">\n<p>{{ 'Input events occured: ' + inpCount }}</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ninpCount: 0\n}\n}\n})\napp.mount('#app')\n</script>\n\nmousemove Event\nUse\nv-on:mousemove\nto perform action when the mouse pointer moves over an element.\nExample\nChange the background color of a <div> element whenever the mouse pointer moves over it:\n<div id=\"app\">\n<p>Move the mouse pointer over the box below</p>\n<div v-on:mousemove=\"colorVal=Math.floor(Math.random()*360)\"\nv-bind:style=\"{backgroundColor:'hsl('+colorVal+',80%,80%)'}\">\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ncolorVal: 50\n}\n}\n})\napp.mount('#app')\n</script>\n\nUse v-on in a v-for Loop\nYou can also use the\nv-on\ndirective inside a\nv-for\nloop.\nThe items of the array are available for each iteration inside the\nv-on\nvalue.\nExample\nDisplay a list based on the food array and add an click event for each item that will use a value from the array item to change the source of an image.\n<div id=\"app\">\n<img v-bind:src=\"imgUrl\">\n<ol>\n<li v-for=\"food in manyFoods\" v-on:click=\"imgUrl=food.url\">\n{{ food.name }}\n</li>\n</ol>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nimgUrl: 'img_salad.svg',\nmanyFoods: [\n{name: 'Burrito', url: 'img_burrito.svg'},\n{name: 'Salad', url: 'img_salad.svg'},\n{name: 'Cake', url: 'img_cake.svg'},\n{name: 'Soup', url: 'img_soup.svg'}\n]\n}\n}\n})\napp.mount('#app')\n</script>\n\nShorthand for\nv-on\nThe shorthand for '\nv-on\n' is simply '\n@\n'.\nExample\nHere we just write '\n@\n' instead of '\nv-on\n':\n<button\n@:click\n=\"lightOn = !lightOn\">Switch light</button>\n\nWe will start using\n@\nsyntax a little later in this tutorial.\nVue Exercises\nTest Yourself With Exercises\nExercise:\nComplete the code so that the image toggles when the button is clicked.\n<template>\n  <button\n=\"showImg = !showImg\">\n    Toggle image\n  </button>\n  <img src=\"flower.jpg\" alt=\"flower\" v-show=\"showImg\">\n</template>\n\n<script>\n  export default {\n    data() {\n      return {\n: true\n      }\n    }\n  }\n</script>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<div id=\"app\">\n<div id=\"lightDiv\">\n<div v-show=\"lightOn\"></div>\n<img src=\"img_lightBulb.svg\">\n</div>\n<button v-on:click=\"lightOn = !lightOn\">Switch light</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nlightOn: false\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<div id=\"app\">\n<input v-on:input=\"inpCount++\">\n<p>{{ 'Input events occured: ' + inpCount }}</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ninpCount: 0\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<div id=\"app\">\n<p>Move the mouse pointer over the box below</p>\n<div v-on:mousemove=\"colorVal=Math.floor(Math.random()*360)\"\nv-bind:style=\"{backgroundColor:'hsl('+colorVal+',80%,80%)'}\">\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ncolorVal: 50\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<div id=\"app\">\n<img v-bind:src=\"imgUrl\">\n<ol>\n<li v-for=\"food in manyFoods\" v-on:click=\"imgUrl=food.url\">\n{{ food.name }}\n</li>\n</ol>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nimgUrl: 'img_salad.svg',\nmanyFoods: [\n{name: 'Burrito', url: 'img_burrito.svg'},\n{name: 'Salad', url: 'img_salad.svg'},\n{name: 'Cake', url: 'img_cake.svg'},\n{name: 'Soup', url: 'img_soup.svg'}\n]\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<button\n@:click\n=\"lightOn = !lightOn\">Switch light</button>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div id=\"app\">\n# TODO: Complete this line\n<div v-show=\"lightOn\"></div>\n<img src=\"img_lightBulb.svg\">\n</div>\n<button v-on:click=\"lightOn = !lightOn\">Switch light</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nlightOn: false\n}\n}\n})\napp.mount('#app')\n</script>",
+      "solution": "<div id=\"app\">\n<div id=\"lightDiv\">\n<div v-show=\"lightOn\"></div>\n<img src=\"img_lightBulb.svg\">\n</div>\n<button v-on:click=\"lightOn = !lightOn\">Switch light</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nlightOn: false\n}\n}\n})\napp.mount('#app')\n</script>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div id=\"app\">\n<input v-on:input=\"inpCount++\">\n<p>{{ 'Input events occured: ' + inpCount }}</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\n# TODO: Complete this line\nreturn {\ninpCount: 0\n}\n}\n})\napp.mount('#app')\n</script>",
+      "solution": "<div id=\"app\">\n<input v-on:input=\"inpCount++\">\n<p>{{ 'Input events occured: ' + inpCount }}</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ninpCount: 0\n}\n}\n})\napp.mount('#app')\n</script>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "20220d36-2637-42ed-8406-018584ce7e35",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "a855e15d-a10c-4dcb-86dd-c50e8304d492",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "00d0cba5-36f7-4090-a3a0-e6050f55908e",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is click\nto perform action when the element?",
+      "options": [
+        "None of the above.",
+        "used on the <button> tag to listen to the 'click' event",
+        "clicked",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of click\nto perform action when the element is 'clicked'."
+    },
+    {
+      "question": "What is on\ndirective?",
+      "options": [
+        "used on the <button> tag to listen to the 'click' event",
+        "None of the above.",
+        "None of the above.",
+        "clicked"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of on\ndirective is 'used on the <button> tag to listen to the 'click' event'."
+    }
+  ],
+  "summary": "This tutorial covers Vuev-onDirective concepts and techniques. You'll learn how to use Vuev-onDirective effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vuev-onDirective and how to apply it in your projects."
+}

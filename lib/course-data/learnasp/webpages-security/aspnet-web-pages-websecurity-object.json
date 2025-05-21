@@ -1,0 +1,115 @@
+{
+  "id": "7932eb01-837c-4761-82a9-f1912d915794",
+  "title": "ASP.NET Web Pages- WebSecurity Object",
+  "slug": "aspnet-web-pages-websecurity-object",
+  "metadata": {
+    "description": "Learn about ASP.NET Web Pages- WebSecurity Object with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "user",
+      "websecurity",
+      "database",
+      "name",
+      "object",
+      "true",
+      "membership",
+      "password",
+      "token",
+      "gets"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "WebPages Security"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ASP.NET Web Pages\n- WebSecurity Object",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Description\nThe\nWebSecurity Object\nprovides security and authentication for \nASP.NET Web Pages applications.\nWith the WebSecurity object you can create user accounts, login and logout users, \nreset or change passwords, and more.\nWebSecurity Object Reference - Properties\nProperties\nDescription\nCurrentUserId\nGets the ID for the current user\nCurrentUserName\nGets the name of the current user\nHasUserId\nReturns true if the current has a user ID\nIsAuthenticated\nReturns true if the current user is logged in\nWebSecurity Object Reference - Methods\nMethod\nDescription\nChangePassword()\nChanges the password for a user\nConfirmAccount()\nConfirms an account using a confirmation token\nCreateAccount()\nCreates a new user account\nCreateUserAndAccount()\nCreates a new user account\nGeneratePasswordResetToken()\nGenerates a token that can be sent to as user by email\nGetCreateDate()\nGets the time the specified membership was created\nGetPasswordChangeDate()\nGets the date and time when password was changed\nGetUserId()\nGets a user ID from a user name\nInitializeDatabaseConnection()\nInitializes the WebSecurity system (database)\nIsConfirmed()\nChecks if a user is confirmed\nIsCurrentUser()\nChecks if the current user matches a user name\nLogin()\nLogs the user in by setting a token in the cookie\nLogout()\nLogs the user out by removing the token cookie\nRequireAuthenticatedUser()\nExits the page if the user is not an authenticated user\nRequireRoles()\nExits the page if the user is not a part of the specified roles\nRequireUser()\nExits the page if the user is not the specified user\nResetPassword()\nChanges a user's password using a token\nUserExists()\nChecks if a given user exists\nInitializing the WebSecurity Database\nYou must create or initialize an WebSecurity database before you can use the WebSecurity \nobject in your code.\nIn the root of your web, create a page (or edit the page ) named\n_AppStart.cshtml\n.\nPut the following code inside the file:\n_AppStart.cshtml\n@{\nWebSecurity.InitializeDatabaseConnection(\"Users\", \"UserProfile\", \n\"UserId\", \"Email\", true);\n}\nThe code above will run each time the web site (application) starts. It \ninitializes the WebSecurity database.\n\"Users\"\nis the name of the WebSecurity database (Users.sdf).\n\"UserProfile\"\nis the name of the database table that \ncontains the user profile information.\n\"UserId\"\nis the name of the column that \ncontains the user IDs (primary key).\n\"Email\"\nis the name of the column that contains \nuser names.\nThe last parameter\ntrue\nis a boolean value indicating that \nthe user profile and \nmembership tables should be created automatically if they don't exist, otherwise\nfalse\n.\nAlthough\ntrue\nindicates automatic creation of the database\ntables,\nthe \ndatabase itself \nwill not be created automatically. It must exist.\nThe WebSecurity Database\nThe\nUserProfile\ntable contains one record for each user, \nwith a user ID (primary key) and the user's name (email):\nUserId\nEmail\n1\njohn@johnson.net\n2\npeter@peterson.com\n3\nlars@larson.eut\nThe\nMembership table\nwill contain membership information \nabout when the user was created and if (and when) the membership was confirmed.\nMuch like this (some columns are not shown):\nUser\nId\nCreate\nDate\nConfirmation\nToken\nIs\nConfirmed\nLast\nPassword\nFailure\nPassword\nPassword\nChange\n1\n12.04.2012 16:12:17\nNULL\nTrue\nNULL\nAFNQhWfy....\n12.04.2012 16:12:17\nSimple Membership Configuration\nYou might get errors using the WebSecurity object, if your site is not configured to use the ASP.NET \nWeb Pages membership system\nSimpleMembership\n.\nThis can occur if a \nhosting provider's server is configured differently than your local server. To \nfix this, add the following element to the site's Web.config file:\n<appSettings>\n<add key=\"enableSimpleMembership\" value=\"true\" />\n</appSettings>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "_AppStart.cshtml",
+      "content": "",
+      "order": 3,
+      "code": "@{\nWebSecurity.InitializeDatabaseConnection(\"Users\", \"UserProfile\", \n\"UserId\", \"Email\", true);\n}",
+      "language": "unknown",
+      "explanation": "Example of _appstart.cshtml"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "@{\nWebSecurity.InitializeDatabaseConnection(\"Users\", \"UserProfile\", \n\"UserId\", \"Email\", true);\n# TODO: Complete this line",
+      "solution": "@{\nWebSecurity.InitializeDatabaseConnection(\"Users\", \"UserProfile\", \n\"UserId\", \"Email\", true);\n}"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "80523568-c9bf-49d5-bac1-a62549beb29a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9fb29754-68f8-4204-81c7-cf3da40e526f",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "4e006f45-26e5-47fb-a595-ead7c85e7dff",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Properties\nProperties\nDescription\nCurrentUserId\nGets the ID for the current user\nCurrentUserName\nGets the name of the current user\nHasUserId\nReturns true if the current has a user ID\nIsAuthenticated\nReturns true if the current user?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "logged in\nWebSecurity Object Reference - Methods\nMethod\nDescription\nChangePassword()\nChanges the password for a user\nConfirmAccount()\nConfirms an account using a confirmation token\nCreateAccount()\nCreates a new user account\nCreateUserAndAccount()\nCreates a new user account\nGeneratePasswordResetToken()\nGenerates a token that can be sent to as user by email\nGetCreateDate()\nGets the time the specified membership was created\nGetPasswordChangeDate()\nGets the date and time when password was changed\nGetUserId()\nGets a user ID from a user name\nInitializeDatabaseConnection()\nInitializes the WebSecurity system (database)\nIsConfirmed()\nChecks if a user is confirmed\nIsCurrentUser()\nChecks if the current user matches a user name\nLogin()\nLogs the user in by setting a token in the cookie\nLogout()\nLogs the user out by removing the token cookie\nRequireAuthenticatedUser()\nExits the page if the user is not an authenticated user\nRequireRoles()\nExits the page if the user is not a part of the specified roles\nRequireUser()\nExits the page if the user is not the specified user\nResetPassword()\nChanges a user's password using a token\nUserExists()\nChecks if a given user exists\nInitializing the WebSecurity Database\nYou must create or initialize an WebSecurity database before you can use the WebSecurity \nobject in your code",
+        "Not a Properties\nProperties\nDescription\nCurrentUserId\nGets the ID for the current user\nCurrentUserName\nGets the name of the current user\nHasUserId\nReturns true if the current has a user ID\nIsAuthenticated\nReturns true if the current user."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Properties\nProperties\nDescription\nCurrentUserId\nGets the ID for the current user\nCurrentUserName\nGets the name of the current user\nHasUserId\nReturns true if the current has a user ID\nIsAuthenticated\nReturns true if the current user is 'logged in\nWebSecurity Object Reference - Methods\nMethod\nDescription\nChangePassword()\nChanges the password for a user\nConfirmAccount()\nConfirms an account using a confirmation token\nCreateAccount()\nCreates a new user account\nCreateUserAndAccount()\nCreates a new user account\nGeneratePasswordResetToken()\nGenerates a token that can be sent to as user by email\nGetCreateDate()\nGets the time the specified membership was created\nGetPasswordChangeDate()\nGets the date and time when password was changed\nGetUserId()\nGets a user ID from a user name\nInitializeDatabaseConnection()\nInitializes the WebSecurity system (database)\nIsConfirmed()\nChecks if a user is confirmed\nIsCurrentUser()\nChecks if the current user matches a user name\nLogin()\nLogs the user in by setting a token in the cookie\nLogout()\nLogs the user out by removing the token cookie\nRequireAuthenticatedUser()\nExits the page if the user is not an authenticated user\nRequireRoles()\nExits the page if the user is not a part of the specified roles\nRequireUser()\nExits the page if the user is not the specified user\nResetPassword()\nChanges a user's password using a token\nUserExists()\nChecks if a given user exists\nInitializing the WebSecurity Database\nYou must create or initialize an WebSecurity database before you can use the WebSecurity \nobject in your code'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers ASP.NET Web Pages- WebSecurity Object concepts and techniques. You'll learn how to use ASP.NET Web Pages- WebSecurity Object effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ASP.NET Web Pages- WebSecurity Object and how to apply it in your projects."
+}

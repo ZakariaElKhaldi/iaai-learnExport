@@ -1,0 +1,98 @@
+{
+  "id": "8b6a5c01-71d9-48de-94d2-037f6e885e04",
+  "title": "Django QuerySet - Get Data",
+  "slug": "django-queryset-get-data",
+  "metadata": {
+    "description": "Learn about Django QuerySet - Get Data with clear explanations and practical examples.",
+    "keywords": [
+      "template",
+      "return",
+      "import",
+      "django",
+      "example",
+      "httpresponse",
+      "loader",
+      "member",
+      "request",
+      "mydata"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Go Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnDjango",
+    "subcategory": "QuerySet Get"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Django QuerySet - Get Data",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Get Data\nThere are different methods to get data from a model into a QuerySet.\nThe values() Method\nThe\nvalues()\nmethod allows you to return \neach object as a Python dictionary, with the names and values as key/value \npairs:\nExample\nviews.py\n:\nfrom django.http import HttpResponse\nfrom django.template import loader\nfrom .models import Member\n\ndef testing(request):\n  mydata = Member.objects.all().values()\n  template = loader.get_template('template.html')\n  context = {\n    'mymembers': mydata,\n  }\n  return HttpResponse(template.render(context, request))\nRun Example \u00bb\nReturn Specific Columns\nThe\nvalues_list()\nmethod allows you to return \nonly the columns that you specify.\nExample\nReturn only the\nfirstname\ncolumns:\nviews.py\n:\nfrom django.http import HttpResponse\nfrom django.template import loader\nfrom .models import Member\n\ndef testing(request):\n  mydata = Member.objects.values_list('firstname')\n  template = loader.get_template('template.html')\n  context = {\n    'mymembers': mydata,\n  }\n  return HttpResponse(template.render(context, request))\nRun Example \u00bb\nReturn Specific Rows\nYou can filter the search to only return specific rows/records, by using the\nfilter()\nmethod.\nExample\nReturn only the records where\nfirstname\nis \n  'Emil'\nviews.py\n:\nfrom django.http import HttpResponse\nfrom django.template import loader\nfrom .models import Member\n\ndef testing(request):\n  mydata = Member.objects.filter(firstname='Emil').values()\n  template = loader.get_template('template.html')\n  context = {\n    'mymembers': mydata,\n  }\n  return HttpResponse(template.render(context, request))\nRun Example \u00bb\nYou will learn more about the\nfilter()\nmethod in the\n\n.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "9e3729da-fb16-49a8-961a-1910994c88bd",
+      "title": "Go Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ce71dec6-b34a-45f9-82d9-cc27396b1305",
+      "title": "Go Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "704d4a93-c9d8-42e3-b349-66e5419feac0",
+      "title": "Go Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Get Data\n\nGet Data\nThere?",
+      "options": [
+        "different methods to get data from a model into a QuerySet",
+        "'Emil'\nviews",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Get Data\n\nGet Data\nThere is 'different methods to get data from a model into a QuerySet'."
+    },
+    {
+      "question": "What is Example\nReturn only the records where\nfirstname?",
+      "options": [
+        "None of the above.",
+        "'Emil'\nviews",
+        "different methods to get data from a model into a QuerySet",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Example\nReturn only the records where\nfirstname is ''Emil'\nviews'."
+    }
+  ],
+  "summary": "This tutorial covers Django QuerySet - Get Data concepts and techniques. You'll learn how to use Django QuerySet - Get Data effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Django QuerySet - Get Data and how to apply it in your projects."
+}

@@ -1,0 +1,142 @@
+{
+  "id": "80fedc93-b2da-4839-89eb-5ac5fdad0e4f",
+  "title": "PostgreSQL FULL JOIN",
+  "slug": "postgresql-full-join",
+  "metadata": {
+    "description": "Learn about PostgreSQL FULL JOIN with clear explanations and practical examples.",
+    "keywords": [
+      "sql",
+      "join",
+      "full",
+      "testproducts",
+      "table",
+      "categories",
+      "match",
+      "rows",
+      "records",
+      "tables",
+      "example"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Sql Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPostgreSQL",
+    "subcategory": "PostgreSQL FULL JOIN"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PostgreSQL FULL JOIN",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "FULL JOIN\nThe\nFULL JOIN\nkeyword selects ALL records from \nboth tables, even if there is not a match. For rows with a match the values from \nboth tables are available, if there is not a match the empty fields will get the \nvalue\nNULL\n.\nLet's look at an example using our dummy\ntestproducts\ntable:\ntestproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_id\n----------------+------------------------+-------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    3\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    9\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    10\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    11\n5 | Elisabeths Best Apples |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    12\n6 | Janes Favorite Cheese\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    4\n7 | Billys Home Made Pizza |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    13\n8 | Ellas Special Salmon\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    8\n9 | Roberts Rich Spaghetti |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    5\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    14\n(10 rows)\nWe will try to join the\ntestproducts\ntable \nwith the\ncategories\ntable:\ncategory_id | category_name\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    description\n-------------+----------------+------------------------------------------------------------\n1 | Beverages\u00a0\u00a0\u00a0\u00a0\u00a0 | Soft drinks, coffees, teas, \n    beers, and ales\n2 | Condiments\u00a0\u00a0\u00a0\u00a0 | Sweet and savory sauces, relishes, \n    spreads, and seasonings\n3 | Confections\u00a0\u00a0\u00a0 | Desserts, candies, and sweet breads\n4 | Dairy Products | Cheeses\n5 | Grains/Cereals | Breads, crackers, pasta, and cereal\n6 | Meat/Poultry\u00a0\u00a0 | Prepared meats\n7 | Produce\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dried fruit and bean \n    curd\n8 | \n    Seafood\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seaweed and fish\n(8 \n    rows)\nNote:\nMany of the products in\ntestproducts\nhave a\ncategory_id\nthat does not match any of the \ncategories in the\ncategories\ntable.\nBy using\nFULL JOIN\nwe will get all \nrecords from both the\ncategories\ntable and the\ntestproducts\ntable:\nExample\nJoin\ntestproducts\nto\ncategories\nusing the\ncategory_id\ncolumn:\nSELECT \n        testproduct_id, product_name, category_name\nFROM testproducts\nFULL JOIN categories ON testproducts.category_id = categories.category_id;\nRun Example \u00bb\nResult\nAll records from both tables are returned.\nRows with no match will get a\nNULL\nvalue \n  in fields from the opposite table:\ntestproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_name\n----------------+-------------------------+----------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Confections\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0\u00a0 |\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0\u00a0 |\n5 | Elisabeths Best Apples\u00a0 |\n6 | Janes Favorite Cheese\u00a0\u00a0 | Dairy Products\n7 | Billys Home Made Pizza\u00a0 |\n8 | Ellas Special Salmon\u00a0\u00a0\u00a0 | Seafood\n9 | Roberts Rich Spaghetti\u00a0 | Grains/Cereals\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\n|\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | Condiments\n|\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | Meat/Poultry\n|\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | Beverages\n|\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | Produce\n(14 rows)\nNote:\nFULL JOIN\nand\nFULL OUTER JOIN\nwill give the same result.\nOUTER\nis the default join type for\nFULL JOIN\n, so when you write\nFULL JOIN\nthe parser actually writes\nFULL OUTER JOIN\n.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "testproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_id\n----------------+------------------------+-------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    3\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    9\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    10\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    11\n5 | Elisabeths Best Apples |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    12\n6 | Janes Favorite Cheese\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    4\n7 | Billys Home Made Pizza |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    13\n8 | Ellas Special Salmon\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    8\n9 | Roberts Rich Spaghetti |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    5\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    14\n(10 rows)",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "category_id | category_name\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    description\n-------------+----------------+------------------------------------------------------------\n1 | Beverages\u00a0\u00a0\u00a0\u00a0\u00a0 | Soft drinks, coffees, teas, \n    beers, and ales\n2 | Condiments\u00a0\u00a0\u00a0\u00a0 | Sweet and savory sauces, relishes, \n    spreads, and seasonings\n3 | Confections\u00a0\u00a0\u00a0 | Desserts, candies, and sweet breads\n4 | Dairy Products | Cheeses\n5 | Grains/Cereals | Breads, crackers, pasta, and cereal\n6 | Meat/Poultry\u00a0\u00a0 | Prepared meats\n7 | Produce\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dried fruit and bean \n    curd\n8 | \n    Seafood\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seaweed and fish\n(8 \n    rows)",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "SELECT \n        testproduct_id, product_name, category_name\nFROM testproducts\nFULL JOIN categories ON testproducts.category_id = categories.category_id;",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Result",
+      "content": "",
+      "order": 6,
+      "code": "testproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_name\n----------------+-------------------------+----------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Confections\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0\u00a0 |\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0\u00a0 |\n5 | Elisabeths Best Apples\u00a0 |\n6 | Janes Favorite Cheese\u00a0\u00a0 | Dairy Products\n7 | Billys Home Made Pizza\u00a0 |\n8 | Ellas Special Salmon\u00a0\u00a0\u00a0 | Seafood\n9 | Roberts Rich Spaghetti\u00a0 | Grains/Cereals\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\n|\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | Condiments\n|\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | Meat/Poultry\n|\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | Beverages\n|\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | Produce\n(14 rows)",
+      "language": "unknown",
+      "explanation": "Example of result"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "testproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_id\n----------------+------------------------+-------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    3\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    9\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    10\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    11\n5 | Elisabeths Best Apples |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    12\n6 | Janes Favorite Cheese\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    4\n7 | Billys Home Made Pizza |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    13\n8 | Ellas Special Salmon\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    8\n9 | Roberts Rich Spaghetti |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n# TODO: Complete this line\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    14\n(10 rows)",
+      "solution": "testproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_id\n----------------+------------------------+-------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    3\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    9\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    10\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    11\n5 | Elisabeths Best Apples |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    12\n6 | Janes Favorite Cheese\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    4\n7 | Billys Home Made Pizza |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    13\n8 | Ellas Special Salmon\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    8\n9 | Roberts Rich Spaghetti |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    5\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    14\n(10 rows)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "category_id | category_name\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    description\n-------------+----------------+------------------------------------------------------------\n# TODO: Complete this line\n    beers, and ales\n2 | Condiments\u00a0\u00a0\u00a0\u00a0 | Sweet and savory sauces, relishes, \n    spreads, and seasonings\n3 | Confections\u00a0\u00a0\u00a0 | Desserts, candies, and sweet breads\n4 | Dairy Products | Cheeses\n5 | Grains/Cereals | Breads, crackers, pasta, and cereal\n6 | Meat/Poultry\u00a0\u00a0 | Prepared meats\n7 | Produce\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dried fruit and bean \n    curd\n8 | \n    Seafood\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seaweed and fish\n(8 \n    rows)",
+      "solution": "category_id | category_name\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    description\n-------------+----------------+------------------------------------------------------------\n1 | Beverages\u00a0\u00a0\u00a0\u00a0\u00a0 | Soft drinks, coffees, teas, \n    beers, and ales\n2 | Condiments\u00a0\u00a0\u00a0\u00a0 | Sweet and savory sauces, relishes, \n    spreads, and seasonings\n3 | Confections\u00a0\u00a0\u00a0 | Desserts, candies, and sweet breads\n4 | Dairy Products | Cheeses\n5 | Grains/Cereals | Breads, crackers, pasta, and cereal\n6 | Meat/Poultry\u00a0\u00a0 | Prepared meats\n7 | Produce\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dried fruit and bean \n    curd\n8 | \n    Seafood\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seaweed and fish\n(8 \n    rows)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "548cde4c-4f13-4e88-b298-a262516fb655",
+      "title": "Sql Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "b276a85d-7d18-4384-939c-0adc658c0224",
+      "title": "Sql Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "1d7971d4-c842-42c9-b7cc-9a189ff489f1",
+      "title": "Sql Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is even if there?",
+      "options": [
+        "not a match",
+        "available",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of even if there is 'not a match'."
+    },
+    {
+      "question": "What is For rows with a match the values from \nboth tables?",
+      "options": [
+        "available",
+        "None of the above.",
+        "None of the above.",
+        "not a match"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of For rows with a match the values from \nboth tables is 'available'."
+    }
+  ],
+  "summary": "This tutorial covers PostgreSQL FULL JOIN concepts and techniques. You'll learn how to use PostgreSQL FULL JOIN effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PostgreSQL FULL JOIN and how to apply it in your projects."
+}

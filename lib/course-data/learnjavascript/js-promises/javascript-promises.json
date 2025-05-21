@@ -1,0 +1,169 @@
+{
+  "id": "a7f59df1-14d7-40aa-9273-81e83178d166",
+  "title": "JavaScript Promises",
+  "slug": "javascript-promises",
+  "metadata": {
+    "description": "Learn about JavaScript Promises with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "promise",
+      "function",
+      "code",
+      "error",
+      "value",
+      "object",
+      "result",
+      "mypromise",
+      "myresolve",
+      "myreject"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnJavaScript",
+    "subcategory": "JS Promises"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "JavaScript Promises",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "\"I Promise a Result!\"\n\"Producing code\" is code that can take some time\n\"Consuming code\" is code that must wait for the result\nA Promise is an Object that links Producing code and Consuming code\nJavaScript Promise Object\nA Promise contains both the producing code and calls to the consuming code:\nPromise Syntax\nlet myPromise = new Promise(function(myResolve, myReject) {\n// \"Producing Code\" (May take some time)\nmyResolve(); // when successful\nmyReject(); \u00a0// when error\n});\n// \"Consuming Code\" (Must wait for a fulfilled Promise)\nmyPromise.then(\nfunction(value) { /* code if successful */ },\nfunction(error) { /* code if some error */ }\n);\nWhen the producing code obtains the result, it should call one of the two callbacks:\nWhen\nCall\nSuccess\nmyResolve(result value)\nError\nmyReject(error object)\nPromise Object Properties\nA JavaScript Promise object can be:\nPending\nFulfilled\nRejected\nThe Promise object supports two properties:\nstate\nand\nresult\n.\nWhile a Promise object is \"pending\" (working), the result is undefined.\nWhen a Promise object is \"fulfilled\", the result is a value.\nWhen a Promise object is \"rejected\", the result is an error object.\nmyPromise.state\nmyPromise.result\n\"pending\"\nundefined\n\"fulfilled\"\na result value\n\"rejected\"\nan error object\nYou cannot access the Promise properties\nstate\nand\nresult\n.\nYou must use a Promise method to handle promises.\nPromise How To\nHere is how to use a Promise:\nmyPromise.then(\nfunction(value) { /* code if successful */ },\nfunction(error) { /* code if some error */ }\n);\nPromise.then() takes two arguments, a callback for success and another for failure.\nBoth are optional, so you can add a callback for success or failure only.\nExample\nfunction myDisplayer(some) {\ndocument.getElementById(\"demo\").innerHTML = some;\n}\nlet myPromise = new Promise(function(myResolve, myReject) {\nlet x = 0;\n// The producing code (this may take some time)\nif (x == 0) {\nmyResolve(\"OK\");\n} else {\nmyReject(\"Error\");\n}\n});\nmyPromise.then(\nfunction(value) {myDisplayer(value);},\nfunction(error) {myDisplayer(error);}\n);\n\nJavaScript Promise Examples\nTo demonstrate the use of promises, we will use the callback examples from the \nWaiting for a Timeout\nWaiting for a File\nWaiting for a Timeout\nExample Using Callback\nsetTimeout(function() { myFunction(\"I love You !!!\"); }, 3000);\nfunction myFunction(value) {\ndocument.getElementById(\"demo\").innerHTML = value;\n}\n\nExample Using Promise\nlet myPromise = new Promise(function(myResolve, myReject) {\nsetTimeout(function() { myResolve(\"I love You !!\"); }, 3000);\n});\nmyPromise.then(function(value) {\ndocument.getElementById(\"demo\").innerHTML = value;\n});\n\nWaiting for a file\nExample using Callback\nfunction getFile(myCallback) {\nlet req = new XMLHttpRequest();\nreq.open('GET', \"mycar.html\");\nreq.onload = function() {\nif (req.status == 200) {\nmyCallback(req.responseText);\n} else {\nmyCallback(\"Error: \" + req.status);\n}\n}\nreq.send();\n}\ngetFile(myDisplayer);\n\nExample using Promise\nlet myPromise = new Promise(function(myResolve, myReject) {\nlet req = new XMLHttpRequest();\nreq.open('GET', \"mycar.html\");\nreq.onload = function() {\nif (req.status == 200) {\nmyResolve(req.response);\n} else {\nmyReject(\"File not Found\");\n}\n};\nreq.send();\n});\nmyPromise.then(\nfunction(value) {myDisplayer(value);},\nfunction(error) {myDisplayer(error);}\n);\n\nBrowser Support\nECMAScript 2015, also known as ES6, introduced the JavaScript Promise object.\nThe following table defines the first browser version with full support for Promise objects:\nChrome 33\nEdge 12\nFirefox 29\nSafari 7.1\nOpera 20\nFeb, 2014\nJul, 2015\nApr, 2014\nSep, 2014\nMar, 2014\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Promise Syntax",
+      "content": "",
+      "order": 3,
+      "code": "let myPromise = new Promise(function(myResolve, myReject) {\n// \"Producing Code\" (May take some time)\nmyResolve(); // when successful\nmyReject(); \u00a0// when error\n});\n// \"Consuming Code\" (Must wait for a fulfilled Promise)\nmyPromise.then(\nfunction(value) { /* code if successful */ },\nfunction(error) { /* code if some error */ }\n);",
+      "language": "javascript",
+      "explanation": "Example of promise syntax"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "myPromise.then(\nfunction(value) { /* code if successful */ },\nfunction(error) { /* code if some error */ }\n);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "function myDisplayer(some) {\ndocument.getElementById(\"demo\").innerHTML = some;\n}\nlet myPromise = new Promise(function(myResolve, myReject) {\nlet x = 0;\n// The producing code (this may take some time)\nif (x == 0) {\nmyResolve(\"OK\");\n} else {\nmyReject(\"Error\");\n}\n});\nmyPromise.then(\nfunction(value) {myDisplayer(value);},\nfunction(error) {myDisplayer(error);}\n);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example Using Callback",
+      "content": "",
+      "order": 6,
+      "code": "setTimeout(function() { myFunction(\"I love You !!!\"); }, 3000);\nfunction myFunction(value) {\ndocument.getElementById(\"demo\").innerHTML = value;\n}",
+      "language": "javascript",
+      "explanation": "Example of example using callback"
+    },
+    {
+      "type": "code_example",
+      "title": "Example Using Promise",
+      "content": "",
+      "order": 7,
+      "code": "let myPromise = new Promise(function(myResolve, myReject) {\nsetTimeout(function() { myResolve(\"I love You !!\"); }, 3000);\n});\nmyPromise.then(function(value) {\ndocument.getElementById(\"demo\").innerHTML = value;\n});",
+      "language": "javascript",
+      "explanation": "Example of example using promise"
+    },
+    {
+      "type": "code_example",
+      "title": "Example using Callback",
+      "content": "",
+      "order": 8,
+      "code": "function getFile(myCallback) {\nlet req = new XMLHttpRequest();\nreq.open('GET', \"mycar.html\");\nreq.onload = function() {\nif (req.status == 200) {\nmyCallback(req.responseText);\n} else {\nmyCallback(\"Error: \" + req.status);\n}\n}\nreq.send();\n}\ngetFile(myDisplayer);",
+      "language": "javascript",
+      "explanation": "Example of example using callback"
+    },
+    {
+      "type": "code_example",
+      "title": "Example using Promise",
+      "content": "",
+      "order": 9,
+      "code": "let myPromise = new Promise(function(myResolve, myReject) {\nlet req = new XMLHttpRequest();\nreq.open('GET', \"mycar.html\");\nreq.onload = function() {\nif (req.status == 200) {\nmyResolve(req.response);\n} else {\nmyReject(\"File not Found\");\n}\n};\nreq.send();\n});\nmyPromise.then(\nfunction(value) {myDisplayer(value);},\nfunction(error) {myDisplayer(error);}\n);",
+      "language": "javascript",
+      "explanation": "Example of example using promise"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "let myPromise = new Promise(function(myResolve, myReject) {\n// \"Producing Code\" (May take some time)\nmyResolve(); // when successful\n# TODO: Complete this line\n});\n// \"Consuming Code\" (Must wait for a fulfilled Promise)\nmyPromise.then(\nfunction(value) { /* code if successful */ },\nfunction(error) { /* code if some error */ }\n);",
+      "solution": "let myPromise = new Promise(function(myResolve, myReject) {\n// \"Producing Code\" (May take some time)\nmyResolve(); // when successful\nmyReject(); \u00a0// when error\n});\n// \"Consuming Code\" (Must wait for a fulfilled Promise)\nmyPromise.then(\nfunction(value) { /* code if successful */ },\nfunction(error) { /* code if some error */ }\n);"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "myPromise.then(\nfunction(value) { /* code if successful */ },\n# TODO: Complete this line\n);",
+      "solution": "myPromise.then(\nfunction(value) { /* code if successful */ },\nfunction(error) { /* code if some error */ }\n);"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "16228dc4-7a3f-4d0f-a102-fed1b2cb9865",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "49bba801-7582-4804-92b9-d3bf4c0242ee",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "0f77a978-29af-462e-a54c-78fca7f1c1f3",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is is code that must wait for the result\nA Promise?",
+      "options": [
+        "None of the above.",
+        "an Object that links Producing code and Consuming code\nJavaScript Promise Object\nA Promise contains both the producing code and calls to the consuming code:\nPromise Syntax\nlet myPromise = new Promise(function(myResolve",
+        "\"pending\" (working)",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of is code that must wait for the result\nA Promise is 'an Object that links Producing code and Consuming code\nJavaScript Promise Object\nA Promise contains both the producing code and calls to the consuming code:\nPromise Syntax\nlet myPromise = new Promise(function(myResolve'."
+    },
+    {
+      "question": "What is While a Promise object?",
+      "options": [
+        "\"pending\" (working)",
+        "None of the above.",
+        "None of the above.",
+        "an Object that links Producing code and Consuming code\nJavaScript Promise Object\nA Promise contains both the producing code and calls to the consuming code:\nPromise Syntax\nlet myPromise = new Promise(function(myResolve"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of While a Promise object is '\"pending\" (working)'."
+    }
+  ],
+  "summary": "This tutorial covers JavaScript Promises concepts and techniques. You'll learn how to use JavaScript Promises effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JavaScript Promises and how to apply it in your projects."
+}

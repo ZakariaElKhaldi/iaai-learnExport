@@ -1,0 +1,96 @@
+{
+  "id": "49a1e9b9-d338-4fb8-a490-7c86f2dae85f",
+  "title": "Memoization",
+  "slug": "memoization",
+  "metadata": {
+    "description": "Learn about Memoization with clear explanations and practical examples.",
+    "keywords": [
+      "memoization",
+      "number",
+      "memo",
+      "fibonacci",
+      "computations",
+      "using",
+      "example",
+      "print",
+      "stored",
+      "return"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnDSA",
+    "subcategory": "DSA Memoization"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Memoization",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Memoization\nMemoization is a technique where results are stored to avoid doing the same computations many times.\nWhen Memoization is used to improve recursive algorithms, it is called a \"top-down\" approach because of how it starts with the main problem and breaks it down into smaller subproblems.\nMemoization is used in\nDynamic Programming\n.\nUsing Memoization To Find The \\(n\\)th Fibonacci Number\nThe \\(n\\)th Fibonacci number can be found using recursion. Read more about how that is done on\nthis page\n.\nThe problem with this implementation is that the number of computations and recursive calls \"explodes\" when trying to find a higher Fibonacci number, because the same computations are done over and over again.\nExample\nFind the 6th Fibonacci number with recursion:\ndef F(n):\n    print('Computing F('+str(n)+')')\n    if n <= 1:\n        return n\n    else:\n        return F(n - 1) + F(n - 2)\n\nprint('F(6) = ',F(6))\nRun Example \u00bb\nAs you can see from running the example above, there are 25 computations, with the same computations done many times, even for just finding the 6th Fibonacci number.\nBut using memoization can help finding the \\(n\\)th Fibonacci number using recursion much more effectively.\nWe use memoization by creating an array\nmemo\nto hold the Fibonacci numbers, so that Fibonacci number\nn\ncan be found as element\nmemo[n]\n. And we only compute the Fibonacci number if it does not already exist in the\nmemo\narray.\nExample\nFind the 6th Fibonacci number with recursion, but using memoization to avoid unnecessary recursive calls:\ndef F(n):\n    if memo[n] != None: # Already computed\n        return memo[n]\n    else: # Computation needed\n        print('Computing F('+str(n)+')')\n        if n <= 1:\n            memo[n] = n\n        else:\n            memo[n] = F(n - 1) + F(n - 2)\n        return memo[n]\n\nmemo = [None]*7\nprint('F(6) = ',F(6))\nprint('memo = ',memo)\nRun Example \u00bb\nAs you can see by running the examples above, memoization is very helpful to reduce the number of computations.\nThe number of computations is reduced from 25 in the initial code, to just 7 in the last example using memoization, and the benefit of using memoization increases really fast by how high the Fibonacci number we want to find is.\nFinding the 30th Fibonacci number requires 2,692,537 computations in the initial code, but it just requires 31 computations in the algorithm implemented using memoization!\nYou get this result by running the code below.\nExample\nSee the difference in calculations for finding the 30th Fibonacci number, with and without memoization:\ncomputation_count = 0\ndef F(n):\n    global computation_count\n    computation_count += 1\n    if n <= 1:\n        return n\n    else:\n        return F(n - 1) + F(n - 2)\n\ncomputation_count_mem = 0\ndef F_mem(n):\n    if memo[n] != None: # Already computed\n        return memo[n]\n    else: # Computation needed\n        global computation_count_mem\n        computation_count_mem += 1\n        if n <= 1:\n            memo[n] = n\n        else:\n            memo[n] = F_mem(n - 1) + F_mem(n - 2)\n        return memo[n]\n\nprint('F(30) = ',F(30))\nprint(f'Number of computations: {computation_count}')\nprint('\\nUsing memoization:')\nmemo = [None]*31\nprint('F(30) = ',F_mem(30))\nprint(f'Number of computations with memoiztion: {computation_count_mem}')\nRun Example \u00bb\nMemoization in AVL Trees\nFor more details about what an AVL Tree is, please see\nthis page\n.\nAn AVL tree is a type of Binary Tree that is self-balancing.\nEvery time a node is inserted or deleted from an AVL tree, the balancing factor must be calculated for all ancestors, using the height of the left and right subtrees to find out if a rotation is needed to restore balance.\nTo avoid calculating the height of each node (going all the way down to the leaf nodes) to calculate the balancing factors, each node has its subtree height stored.\nExample\nclass TreeNode:\n    def __init__(self, data):\n        self.data = data\n        self.left = None\n        self.right = None\n        self.height = 1\nRun Example \u00bb\nThis means that to find the balance factor for a node, the already stored left child's height is subtracted from the already stored right child's height, no other calculations needed.\nStoring height in AVL trees is a form of memoization, because values are stored to avoid re-calculating them. In AVL trees, when the height is stored like this, it is called an\naugmented property\n.\nAn augmented property is a property of an element that does not have to be stored, but is stored to make operations more efficient.\nThe node heights must be calculated at some point of course, but that is only done when strictly needed, using\nretracing\n.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "187459ac-e004-4cec-b23f-749be8cc9a62",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "39a77fba-ac06-4eeb-8d63-6ef0c4d596d9",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "9fc0480c-5012-4cb5-8795-f6e018e066cb",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Memoization\n\nMemoization\nMemoization is a technique where results?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "used to improve recursive algorithms",
+        "stored to avoid doing the same computations many times"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Memoization\n\nMemoization\nMemoization is a technique where results is 'stored to avoid doing the same computations many times'."
+    },
+    {
+      "question": "What is When Memoization?",
+      "options": [
+        "stored to avoid doing the same computations many times",
+        "None of the above.",
+        "None of the above.",
+        "used to improve recursive algorithms"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of When Memoization is 'used to improve recursive algorithms'."
+    }
+  ],
+  "summary": "This tutorial covers Memoization concepts and techniques. You'll learn how to use Memoization effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Memoization and how to apply it in your projects."
+}

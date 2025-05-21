@@ -1,0 +1,133 @@
+{
+  "id": "eb2b2f38-995d-42cf-946f-2eac9d96bb53",
+  "title": "PHPCreate a MySQL Database",
+  "slug": "phpcreate-a-mysql-database",
+  "metadata": {
+    "description": "Learn about PHPCreate a MySQL Database with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "database",
+      "create",
+      "conn",
+      "username",
+      "password",
+      "servername",
+      "echo",
+      "mysqli",
+      "connection",
+      "mysql"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "MySQL Create DB"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nCreate a MySQL Database",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A database consists of one or more tables.\nYou will need special CREATE privileges to create or to delete a MySQL \ndatabase.\nCreate a MySQL Database Using MySQLi and PDO\nThe CREATE DATABASE statement is used to create a database in MySQL.\nThe following examples create a database named \"myDB\":\nExample (MySQLi Object-oriented)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = new mysqli($servername, $username, $password);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// Create database\n$sql = \"CREATE DATABASE myDB\";\nif ($conn->query($sql) === TRUE) {\necho \"Database created successfully\";\n} else {\necho \"Error creating database: \" . $conn->error;\n}\n$conn->close();\n?>\nNote:\nWhen you create a new database, you must only specify \nthe first three arguments to the mysqli object (servername, username and \npassword).\nTip:\nIf you have to use a specific port,\nadd an empty string for the database-name argument, like this: new mysqli(\"localhost\", \n\"username\", \"password\", \"\", port)\nExample (MySQLi Procedural)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// Create database\n$sql = \"CREATE DATABASE myDB\";\nif (mysqli_query($conn, $sql)) {\necho \"Database created successfully\";\n} else {\necho \"Error creating database: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>\nNote:\nThe following PDO example create a database named \"myDBPDO\":\nExample (PDO)\n<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\ntry {\n$conn = new PDO(\"mysql:host=$servername\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$sql = \"CREATE DATABASE myDBPDO\";\n// use exec() because no results are returned\n$conn->exec($sql);\necho \"Database created successfully<br>\";\n} catch(PDOException $e) \n  {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>\nTip:\nA great benefit of PDO is that it has exception class to handle any problems that may \noccur in our database queries. If an exception is thrown within the try{ } block, \nthe script stops executing and flows directly to the first catch(){ } block. In the catch block above we echo the SQL statement and \nthe generated error message.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Object-oriented)",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = new mysqli($servername, $username, $password);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// Create database\n$sql = \"CREATE DATABASE myDB\";\nif ($conn->query($sql) === TRUE) {\necho \"Database created successfully\";\n} else {\necho \"Error creating database: \" . $conn->error;\n}\n$conn->close();\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli object-oriented)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (MySQLi Procedural)",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// Create database\n$sql = \"CREATE DATABASE myDB\";\nif (mysqli_query($conn, $sql)) {\necho \"Database created successfully\";\n} else {\necho \"Error creating database: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>",
+      "language": "html",
+      "explanation": "Example of example (mysqli procedural)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (PDO)",
+      "content": "",
+      "order": 5,
+      "code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\ntry {\n$conn = new PDO(\"mysql:host=$servername\", $username, $password);\n// set the PDO error mode to exception\n$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$sql = \"CREATE DATABASE myDBPDO\";\n// use exec() because no results are returned\n$conn->exec($sql);\necho \"Database created successfully<br>\";\n} catch(PDOException $e) \n  {\necho $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>",
+      "language": "html",
+      "explanation": "Example of example (pdo)"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = new mysqli($servername, $username, $password);\n# TODO: Complete this line\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// Create database\n$sql = \"CREATE DATABASE myDB\";\nif ($conn->query($sql) === TRUE) {\necho \"Database created successfully\";\n} else {\necho \"Error creating database: \" . $conn->error;\n}\n$conn->close();\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = new mysqli($servername, $username, $password);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);\n}\n// Create database\n$sql = \"CREATE DATABASE myDB\";\nif ($conn->query($sql) === TRUE) {\necho \"Database created successfully\";\n} else {\necho \"Error creating database: \" . $conn->error;\n}\n$conn->close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// Create database\n$sql = \"CREATE DATABASE myDB\";\nif (mysqli_query($conn, $sql)) {\necho \"Database created successfully\";\n} else {\necho \"Error creating database: \" . mysqli_error($conn);\n# TODO: Complete this line\nmysqli_close($conn);\n?>",
+      "solution": "<?php\n$servername = \"localhost\";\n$username = \"username\";\n$password = \"password\";\n// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());\n}\n// Create database\n$sql = \"CREATE DATABASE myDB\";\nif (mysqli_query($conn, $sql)) {\necho \"Database created successfully\";\n} else {\necho \"Error creating database: \" . mysqli_error($conn);\n}\nmysqli_close($conn);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "665c55b0-54fb-4c4d-8983-457708812eb8",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "3d574ebd-8a35-46a7-b0a3-f636d9e000e4",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "b76e2162-42d9-4a4c-9c93-7a636fc61b46",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Create a MySQL Database Using MySQLi and PDO\nThe CREATE DATABASE statement?",
+      "options": [
+        "returned\n$conn->exec($sql);\necho \"Database created successfully<br>\";\n} catch(PDOException $e) \n  {\necho $sql",
+        "used to create a database in MySQL",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Create a MySQL Database Using MySQLi and PDO\nThe CREATE DATABASE statement is 'used to create a database in MySQL'."
+    },
+    {
+      "question": "What is because no results?",
+      "options": [
+        "None of the above.",
+        "returned\n$conn->exec($sql);\necho \"Database created successfully<br>\";\n} catch(PDOException $e) \n  {\necho $sql",
+        "None of the above.",
+        "used to create a database in MySQL"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of because no results is 'returned\n$conn->exec($sql);\necho \"Database created successfully<br>\";\n} catch(PDOException $e) \n  {\necho $sql'."
+    }
+  ],
+  "summary": "This tutorial covers PHPCreate a MySQL Database concepts and techniques. You'll learn how to use PHPCreate a MySQL Database effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPCreate a MySQL Database and how to apply it in your projects."
+}

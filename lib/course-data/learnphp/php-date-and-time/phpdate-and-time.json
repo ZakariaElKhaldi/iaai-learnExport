@@ -1,0 +1,187 @@
+{
+  "id": "d7fa6ddc-7cd0-49a3-821a-692ac8a6d25a",
+  "title": "PHPDate and Time",
+  "slug": "phpdate-and-time",
+  "metadata": {
+    "description": "Learn about PHPDate and Time with clear explanations and practical examples.",
+    "keywords": [
+      "php",
+      "date",
+      "time",
+      "example",
+      "echo",
+      "function",
+      "strtotime",
+      "timestamp",
+      "format",
+      "startdate",
+      "used"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "PHP Date and Time"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nDate and Time",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The PHP\ndate()\nfunction is used to format a date and/or a time.\nThe PHP Date() Function\nThe PHP\ndate()\nfunction formats a timestamp to a more readable date and time.\nSyntax\ndate(\nformat\n,\ntimestamp\n)\nParameter\nDescription\nformat\nRequired. Specifies the format of the timestamp\ntimestamp\nOptional. Specifies a timestamp. Default is the current date and time\nA timestamp is a sequence of \ncharacters, denoting the date and/or time at which a certain event occurred.\nGet a Date\nThe required\nformat\nparameter of the date() function specifies how to format the date \n(or time).\nHere are some characters that are commonly used for dates:\nd - Represents the day of the month (01 to 31)\nm - Represents a month (01 to 12)\nY - Represents a year (in four digits)\nl (lowercase 'L') - Represents the day of the week\nOther characters, like\"/\", \".\", or \"-\" can also be inserted between the \ncharacters to add additional formatting.\nThe example below formats today's date in three different ways:\nExample\n<?php\necho \"Today is \" . date(\"Y/m/d\") . \"<br>\";\necho \"Today is \" . date(\"Y.m.d\") . \"<br>\";\necho \"Today is \" . date(\"Y-m-d\") . \"<br>\";\necho \"Today is \" . date(\"l\");\n?>\n\nPHP Tip - Automatic Copyright Year\nUse the\ndate()\nfunction to automatically update the copyright year on your \nwebsite:\nExample\n&copy; 2010-<?php echo date(\"Y\");?>\n\nGet a Time\nHere are some characters that are commonly used for times:\nH - 24-hour format of an hour (00 to 23)\nh - 12-hour format of an hour with leading zeros (01 to 12)\ni - Minutes with leading zeros (00 to 59)\ns - Seconds with leading zeros (00 to 59)\na - Lowercase Ante meridiem and Post meridiem (am or pm)\nThe example below outputs the current time in the specified format:\nExample\n<?php\necho \"The time is \" . date(\"h:i:sa\");\n?>\n\nNote that the PHP date() function will return the current date/time of the \nserver!\nGet Your Time Zone\nIf the time you got back from the code is not correct, it's probably because your server is in another country or set up \nfor a different timezone.\nSo, if you need the time to be correct according to a specific \nlocation, you can set the timezone you want to use.\nThe example below sets the timezone to \"America/New_York\", then outputs the current time in the specified format:\nExample\n<?php\ndate_default_timezone_set(\"America/New_York\");\necho \"The time is \" . date(\"h:i:sa\");\n?>\n\nCreate a Date With mktime()\nThe optional\ntimestamp\nparameter in the date() function specifies a timestamp. If \nomitted, the current date and time will be used (as in the \nexamples above).\nThe PHP\nmktime()\nfunction returns the Unix timestamp for a date. The Unix timestamp contains the number of seconds between the Unix Epoch \n(January 1 1970 00:00:00 GMT) and the time specified.\nSyntax\nmktime(\nhour, minute, second, month, day, year\n)\nThe example below creates a date and time with the\ndate()\nfunction from a number of parameters in the\nmktime()\nfunction:\nExample\n<?php\n$d=mktime(11, 14, 54, 8, 12, 2014);\necho \"Created date is \" . date(\"Y-m-d h:i:sa\", $d);\n?>\n\nCreate a Date From a String With strtotime()\nThe PHP\nstrtotime()\nfunction is used to convert a human readable \ndate string into a \nUnix timestamp (the number of seconds since January 1 1970 00:00:00 GMT).\nSyntax\nstrtotime(\ntime, now\n)\nThe example below creates a date and time from the\nstrtotime()\nfunction:\nExample\n<?php\n$d=strtotime(\"10:30pm April 15 2014\");\necho \"Created date is \" . date(\"Y-m-d h:i:sa\", $d);\n?>\n\nPHP is quite clever about converting a string to a date, so you can put in \nvarious values:\nExample\n<?php\n$d=strtotime(\"tomorrow\");\necho date(\"Y-m-d h:i:sa\", $d) . \"<br>\";\n$d=strtotime(\"\necho date(\"Y-m-d h:i:sa\", $d) . \"<br>\";\n$d=strtotime(\"+3 Months\");\necho date(\"Y-m-d h:i:sa\", $d) . \"<br>\";\n?>\n\nHowever,\nstrtotime()\nis not perfect, so remember to check the strings you put in there.\nMore Date Examples\nThe example below outputs the dates for the \nExample\n<?php\n$startdate = strtotime(\"Saturday\");\n$enddate = strtotime(\"+6 weeks\", $startdate);\nwhile ($startdate < $enddate) {\necho date(\"M d\", $startdate) . \"<br>\";\n$startdate = strtotime(\"+1 week\", $startdate);\n}\n?>\n\nThe example below outputs the number of days until 4th of July:\nExample\n<?php\n$d1=strtotime(\"July 04\");\n$d2=ceil(($d1-time())/60/60/24);\necho \"There are \" . $d2 .\" days until 4th of July.\";\n?>\n\nComplete PHP Date Reference\nFor a complete reference of all date functions, go to our complete\nPHP Date Reference\n.\nThe reference contains a brief description, and examples of use, for each function!\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\necho \"Today is \" . date(\"Y/m/d\") . \"<br>\";\necho \"Today is \" . date(\"Y.m.d\") . \"<br>\";\necho \"Today is \" . date(\"Y-m-d\") . \"<br>\";\necho \"Today is \" . date(\"l\");\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "&copy; 2010-<?php echo date(\"Y\");?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<?php\necho \"The time is \" . date(\"h:i:sa\");\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<?php\ndate_default_timezone_set(\"America/New_York\");\necho \"The time is \" . date(\"h:i:sa\");\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<?php\n$d=mktime(11, 14, 54, 8, 12, 2014);\necho \"Created date is \" . date(\"Y-m-d h:i:sa\", $d);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<?php\n$d=strtotime(\"10:30pm April 15 2014\");\necho \"Created date is \" . date(\"Y-m-d h:i:sa\", $d);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<?php\n$d=strtotime(\"tomorrow\");\necho date(\"Y-m-d h:i:sa\", $d) . \"<br>\";\n$d=strtotime(\"next Saturday\");\necho date(\"Y-m-d h:i:sa\", $d) . \"<br>\";\n$d=strtotime(\"+3 Months\");\necho date(\"Y-m-d h:i:sa\", $d) . \"<br>\";\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "<?php\n$startdate = strtotime(\"Saturday\");\n$enddate = strtotime(\"+6 weeks\", $startdate);\nwhile ($startdate < $enddate) {\necho date(\"M d\", $startdate) . \"<br>\";\n$startdate = strtotime(\"+1 week\", $startdate);\n}\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<?php\n$d1=strtotime(\"July 04\");\n$d2=ceil(($d1-time())/60/60/24);\necho \"There are \" . $d2 .\" days until 4th of July.\";\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\necho \"Today is \" . date(\"Y/m/d\") . \"<br>\";\n# TODO: Complete this line\necho \"Today is \" . date(\"Y-m-d\") . \"<br>\";\necho \"Today is \" . date(\"l\");\n?>",
+      "solution": "<?php\necho \"Today is \" . date(\"Y/m/d\") . \"<br>\";\necho \"Today is \" . date(\"Y.m.d\") . \"<br>\";\necho \"Today is \" . date(\"Y-m-d\") . \"<br>\";\necho \"Today is \" . date(\"l\");\n?>"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "&copy; 2010-<?php echo date(\"Y\");?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "59f56e3a-4b70-472c-b46d-3d5de0415bb6",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "81c75fa7-9c43-446b-9c5d-29ef39238f4e",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "5e3ffc0c-5e77-4de3-abfc-c2c754c4dcaa",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is function?",
+      "options": [
+        "None of the above.",
+        "a sequence of \ncharacters",
+        "None of the above.",
+        "used to format a date and/or a time"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of function is 'used to format a date and/or a time'."
+    },
+    {
+      "question": "What is Default is the current date and time\nA timestamp?",
+      "options": [
+        "None of the above.",
+        "a sequence of \ncharacters",
+        "used to format a date and/or a time",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Default is the current date and time\nA timestamp is 'a sequence of \ncharacters'."
+    }
+  ],
+  "summary": "This tutorial covers PHPDate and Time concepts and techniques. You'll learn how to use PHPDate and Time effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPDate and Time and how to apply it in your projects."
+}

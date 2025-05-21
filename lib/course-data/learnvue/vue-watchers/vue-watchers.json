@@ -1,0 +1,142 @@
+{
+  "id": "25a4b024-d765-4838-92ee-6a9a0e59bf78",
+  "title": "Vue Watchers",
+  "slug": "vue-watchers",
+  "metadata": {
+    "description": "Learn about Vue Watchers with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "data",
+      "watcher",
+      "watchers",
+      "property",
+      "value",
+      "input",
+      "methods",
+      "computed",
+      "rangeval",
+      "properties"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue Watchers"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue Watchers",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A\nwatcher\nis a method that watches a data property with the same name.\nA\nwatcher\nruns every time the data property value changes.\nUse a\nwatcher\nif a certain data property value requires an action.\nThe Watcher Concept\nWatchers is the fourth configuration option in the Vue instance that we will learn. The first three configuration options we have already looked at are 'data', 'methods' and 'computed'.\nAs with 'data', 'methods' and 'computed' watchers also has a reserved name in the Vue instance: '\nwatch\n'.\nSyntax\nconst app = Vue.createApp({\ndata() {\n...\n},\nwatch\n: {\n...\n},\ncomputed: {\n...\n},\nmethods: {\n...\n}\n})\nAs mentioned in the green area at the top, a watcher monitors a data property with the same name.\nWe never call a watcher method. It is only called automatically when the property value changes.\nThe new property value is always available as an input argument to the watcher method, and so is the old value.\nExample\nAn\n<input type=\"range\">\nelement is used to change a value 'rangeVal'. A watcher is used to prevent the user from choosing values between 20 and 60 that are considered illegal.\n<input type=\"range\" v-model=\"rangeVal\">\n<p>{{ rangeVal }}</p>\nconst app = Vue.createApp({\ndata() {\nrangeVal: 70\n},\nwatch: {\nrangeVal(val){\nif( val>20 && val<60) {\nif(val<40){\nthis.rangeVal = 20;\n}\nelse {\nthis.rangeVal = 60;\n}\n}\n}\n}\n})\n\nA Watcher with New and Old Values\nIn addition to the new property value, the \nExample\nWe set up click event on a\n<div>\nelement to record mouse pointer x-position 'xPos' with a method 'updatePos'. A watcher calculates the difference in pixels between the new x-position and the \n<div v-on:click=\"updatePos\"></div>\n<p>{{ xDiff }}</p>\nconst app = Vue.createApp({\ndata() {\nxPos: 0,\nxDiff: 0\n},\nwatch: {\nxPos(\nnewVal,oldVal\n){\nthis.xDiff = newVal-oldVal\n}\n},\nmethods: {\nupdatePos(evt) {\nthis.xPos = evt.offsetX\n}\n}\n})\n\nWe can also use new and old values to give feedback to the user the exact moment the input goes from being invalid to valid:\nExample\nThe value from an\n<input>\nelement is connected to a watcher. If the value includes a '@' it is considered a valid e-mail address. The user gets a feedback text to inform if the input is valid, invalid, or if it just got valid with the last keystroke.\n<input v-type=\"email\" v-model=\"inpAddress\">\n<p v-bind:class=\"myClass\">{{ feedbackText }}</p>\nconst app = Vue.createApp({\ndata() {\ninpAddress: '',\nfeedbackText: '',\nmyClass: 'invalid'\n},\nwatch: {\ninpAddress(newVal,oldVal) {\nif( !newVal.includes('@') ) {\nthis.feedbackText = 'The e-mail address is NOT valid';\nthis.myClass = 'invalid';\n}\nelse if( !oldVal.includes('@') && newVal.includes('@') ) {\nthis.feedbackText = 'Perfect! You fixed it!';\nthis.myClass = 'valid';\n}\nelse {\nthis.feedbackText = 'The e-mail address is valid :)';\n}\n}\n}\n})\n\nWatchers vs. Methods\nWatchers and methods are both written as functions, but there are many differences:\nMethods\nare called from HTML.\nMethods\nare often called when an event happens.\nMethods\nautomatically receives the event object as an input.\nWe can also send other values we choose as an input to a\nmethod\n.\nWatchers\nare only called when the watched data property value changes, and this happens automatically.\nWatchers\nautomatically receives the new and old value from the watched property.\nWe cannot choose to send any other values with a\nwatcher\nas an input.\nWatchers vs. Computed Properties\nWatchers and computed properties are both written as functions.\nWatchers and computed properties are both called automatically when a dependency change, and never called from HTML.\nHere are some differences between computed properties and watchers:\nWatchers\nonly depend on one property, the property they are set up to watch.\nComputed properties\ncan depend on many properties.\nComputed properties\nare used like data properties, except they are dynamic.\nWatchers\nare not referred to from HTML.\nVue Exercises\nTest Yourself With Exercises\nExercise:\nThe watcher in this exercise is supposed to increment the 'count' data property by one every time 'rangeVal' data property changes.\nWhat must the watcher be called?\n<script>\n  const app = Vue.createApp({\n    data() {\n      return {\n      \trangeVal: 70,\n        count: 0\n      }\n    },\n    watch: {\n() {\n        this.count++\n      }\n    }\n  })\n app.mount('#app')\n</script>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Syntax",
+      "content": "",
+      "order": 3,
+      "code": "const app = Vue.createApp({\ndata() {\n...\n},\nwatch\n: {\n...\n},\ncomputed: {\n...\n},\nmethods: {\n...\n}\n})",
+      "language": "javascript",
+      "explanation": "Example of syntax"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<input type=\"range\" v-model=\"rangeVal\">\n<p>{{ rangeVal }}</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<div v-on:click=\"updatePos\"></div>\n<p>{{ xDiff }}</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<input v-type=\"email\" v-model=\"inpAddress\">\n<p v-bind:class=\"myClass\">{{ feedbackText }}</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "const app = Vue.createApp({\ndata() {\n...\n},\nwatch\n: {\n...\n},\ncomputed: {\n# TODO: Complete this line\n},\nmethods: {\n...\n}\n})",
+      "solution": "const app = Vue.createApp({\ndata() {\n...\n},\nwatch\n: {\n...\n},\ncomputed: {\n...\n},\nmethods: {\n...\n}\n})"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "<input type=\"range\" v-model=\"rangeVal\">\n<p>{{ rangeVal }}</p>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "5c0b818a-83bd-4a48-9aca-f435dbc91c7d",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "d0ce0f9b-b36b-4f50-a748-c2d116c8ef7d",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "03b57ff8-96bf-4807-8dc3-c876acd171d9",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Vue Watchers\n\nA\nwatcher?",
+      "options": [
+        "the fourth configuration option in the Vue instance that we will learn",
+        "None of the above.",
+        "a method that watches a data property with the same name",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Vue Watchers\n\nA\nwatcher is 'a method that watches a data property with the same name'."
+    },
+    {
+      "question": "What is The Watcher Concept\nWatchers?",
+      "options": [
+        "None of the above.",
+        "the fourth configuration option in the Vue instance that we will learn",
+        "None of the above.",
+        "a method that watches a data property with the same name"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The Watcher Concept\nWatchers is 'the fourth configuration option in the Vue instance that we will learn'."
+    }
+  ],
+  "summary": "This tutorial covers Vue Watchers concepts and techniques. You'll learn how to use Vue Watchers effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue Watchers and how to apply it in your projects."
+}

@@ -1,0 +1,115 @@
+{
+  "id": "4eb2a22c-f250-4497-8efe-4444becb28c5",
+  "title": "PHPftp_nb_fget()Function",
+  "slug": "phpftp-nb-fgetfunction",
+  "metadata": {
+    "description": "Learn about PHPftp_nb_fget()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "file",
+      "local",
+      "specifies",
+      "server",
+      "open",
+      "mode",
+      "function",
+      "download",
+      "downloading",
+      "parameter"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "ftp_nb_fget()"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nftp_nb_fget()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example\nDownload a file from the FTP server, and save it to an open local file \n(non-blocking):\n<?php\n// connect and login to FTP server\n$ftp_server = \"ftp.example.com\";\n$ftp_conn = ftp_connect($ftp_server) or die(\"Could not connect to $ftp_server\");\n$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);\n$server_file = \"somefile.txt\";\n// open local file to write to\n$local_file = \"local.txt\";\n$fp = fopen($local_file,\"w\");\n// initiate download\n$d = ftp_nb_fget($ftp_conn, $fp, $server_file, FTP_BINARY)\nwhile ($d == FTP_MOREDATA)\n{\n// do whatever you want\n// continue downloading\n$d = ftp_nb_continue($ftp_conn);\n}\nif ($d != FTP_FINISHED)\n{\necho \"Error downloading $server_file\";\nexit(1);\n}\n// close connection and file handler\nftp_close($ftp_conn);\nfclose($fp);\n?>\nDefinition and Usage\nThe ftp_nb_fget() function gets (downloads) a file from the FTP server, and saves it \ninto an open local file (non-blocking).\nTip:\nThis function (as opposite to\nftp_fget()\n) \nretrieves the file asynchronously, so you can perform other operations \nwhile the file is being downloaded.\nSyntax\nftp_nb_fget(\nftp_conn, open_file, server_file, mode, startpos\n);\nParameter Values\nParameter\nDescription\nftp_conn\nRequired. Specifies the FTP connection to use\nopen_file\nRequired. Specifies an open local file in which we store the data\nserver_file\nRequired. Specifies the server file to download\nmode\nOptional. Specifies the transfer mode. Possible values: FTP_ASCII or FTP_BINARY\nstartpos\nOptional. Specifies the position in the remote file to start downloading from\nTechnical Details\nReturn Value:\nOne of the following values:\nFTP_FAILED (send/receive failed)\nFTP_FINISHED (send/receive completed)\nFTP_MOREDATA (send/receive in progress)\nPHP Version:\n4.3+\nPHP Changelog:\nPHP 7.3 - The\nmode\nparameter was made optional.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n// connect and login to FTP server\n$ftp_server = \"ftp.example.com\";\n$ftp_conn = ftp_connect($ftp_server) or die(\"Could not connect to $ftp_server\");\n$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);\n$server_file = \"somefile.txt\";\n// open local file to write to\n$local_file = \"local.txt\";\n$fp = fopen($local_file,\"w\");\n// initiate download\n$d = ftp_nb_fget($ftp_conn, $fp, $server_file, FTP_BINARY)\nwhile ($d == FTP_MOREDATA)\n{\n// do whatever you want\n// continue downloading\n$d = ftp_nb_continue($ftp_conn);\n}\nif ($d != FTP_FINISHED)\n{\necho \"Error downloading $server_file\";\nexit(1);\n}\n// close connection and file handler\nftp_close($ftp_conn);\nfclose($fp);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n// connect and login to FTP server\n$ftp_server = \"ftp.example.com\";\n$ftp_conn = ftp_connect($ftp_server) or die(\"Could not connect to $ftp_server\");\n$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);\n$server_file = \"somefile.txt\";\n// open local file to write to\n# TODO: Complete this line\n$fp = fopen($local_file,\"w\");\n// initiate download\n$d = ftp_nb_fget($ftp_conn, $fp, $server_file, FTP_BINARY)\nwhile ($d == FTP_MOREDATA)\n{\n// do whatever you want\n// continue downloading\n$d = ftp_nb_continue($ftp_conn);\n}\nif ($d != FTP_FINISHED)\n{\necho \"Error downloading $server_file\";\nexit(1);\n}\n// close connection and file handler\nftp_close($ftp_conn);\nfclose($fp);\n?>",
+      "solution": "<?php\n// connect and login to FTP server\n$ftp_server = \"ftp.example.com\";\n$ftp_conn = ftp_connect($ftp_server) or die(\"Could not connect to $ftp_server\");\n$login = ftp_login($ftp_conn, $ftp_username, $ftp_userpass);\n$server_file = \"somefile.txt\";\n// open local file to write to\n$local_file = \"local.txt\";\n$fp = fopen($local_file,\"w\");\n// initiate download\n$d = ftp_nb_fget($ftp_conn, $fp, $server_file, FTP_BINARY)\nwhile ($d == FTP_MOREDATA)\n{\n// do whatever you want\n// continue downloading\n$d = ftp_nb_continue($ftp_conn);\n}\nif ($d != FTP_FINISHED)\n{\necho \"Error downloading $server_file\";\nexit(1);\n}\n// close connection and file handler\nftp_close($ftp_conn);\nfclose($fp);\n?>"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "34e40c36-d5c5-4636-ab3b-fbd426bac186",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ce007620-2414-4a96-aa0b-540e98f261b2",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "38d36d88-50eb-4439-97fc-c6c3ed1e3e27",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is so you can perform other operations \nwhile the file?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "being downloaded",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of so you can perform other operations \nwhile the file is 'being downloaded'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPftp_nb_fget()Function concepts and techniques. You'll learn how to use PHPftp_nb_fget()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPftp_nb_fget()Function and how to apply it in your projects."
+}

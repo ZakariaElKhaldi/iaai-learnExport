@@ -1,0 +1,112 @@
+{
+  "id": "286cbc70-19f7-4d3b-bf3a-a793c6098a93",
+  "title": "ASP.NET Web Pages- Databases",
+  "slug": "aspnet-web-pages-databases",
+  "metadata": {
+    "description": "Learn about ASP.NET Web Pages- Databases with clear explanations and practical examples.",
+    "keywords": [
+      "database",
+      "file",
+      "name",
+      "sqlstatement",
+      "parameters",
+      "connection",
+      "string",
+      "open",
+      "returns",
+      "connect"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "WebPages Databases"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ASP.NET Web Pages\n- Databases",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "This chapter is about working with databases.\nWhat We Will Do\nIn this chapter we will:\nCreate a web page to list data from a database\nDisplaying Data from Database\nWith Web Pages, you can easily display data from a database.\nYou can connect to an existing database, or create a new database from scratch.\nIn this example we will connect to an existing SQL Server Compact database.\nAdding a Customers Page\nIn the \"DemoWebPages\" folder, create a new CSHTML file named \"Products.cshtml\".\nReplace the code in the file with the code from the example below:\nProducts.cshtml\n@{\nvar db = Database.Open(\"SmallBakery\");\nvar selectQueryString = \"SELECT * FROM Product ORDER BY Name\";\n}\n<html>\n<body>\n<h1>Small Bakery Products</h1>\n<table>\n<tr>\n<th>Id</th>\n<th>Product</th>\n<th>Description</th>\n<th>Price</th>\n</tr>\n@foreach(var row in db.Query(selectQueryString))\n{\n<tr>\n<td>\n@row.Id\n</td>\n<td>\n@row.Name\n</td>\n<td>\n@row.Description\n</td>\n<td align=\"right\">\n@row.Price\n</td>\n</tr>\n}\n</table>\n</body>\n</html>\nRun example \u00bb\nExample Explained\nThe Database.Open(\nname\n) method will connect to a database in two \nsteps:\nFirst, it searches the application's App_Data folder for a database that \nmatches the\nname\nparameter without the file-name extension.\nIf no file is found, it looks for a \"connection string\" in the \napplication's Web.config file.\n(A connection string contains information about how to connect to a database. It can include a file path, or the name of an SQL database, with full user name and password)\nThis two-step search makes it possible to test the application with a local \ndatabase, and run the application on a web host using a connection string.\nASP.NET Database Object Reference\nMethod\nDescription\nDatabase.Execute(\nSQLstatement [\n,\nparameters])\nExecutes\nSQLstatement\n(with optional parameters) such as \nINSERT, DELETE, or UPDATE and returns a count of \naffected records.\nDatabase.GetLastInsertId()\nReturns the identity column from the most recently \ninserted row.\nDatabase.Open(\nfilename\n)\nDatabase.Open(\nconnectionStringName\n)\nOpens either the specified database file or the \ndatabase specified using a named connection string \nfrom the\nWeb.config\nfile.\nDatabase.OpenConnectionString(\nconnectionString\n)\nOpens a database using the connection string. (This \ncontrasts with Database.Open, which \nuses a connection string name.)\nDatabase.Query(\nSQLstatement[, \nparameters]\n)\nQueries the database \nusing\nSQLstatement\n(optionally passing \nparameters) and returns the results as a collection.\nDatabase.QuerySingle(\nSQLstatement\n[, parameters]\n)\nExecutes\nSQLstatement\n(with optional parameters) and \nreturns a single record.\nDatabase.QueryValue(\nSQLstatement\n[, parameters]\n)\nExecutes\nSQLstatement\n(with optional parameters) and \nreturns a single value.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Products.cshtml",
+      "content": "",
+      "order": 3,
+      "code": "@{\nvar db = Database.Open(\"SmallBakery\");\nvar selectQueryString = \"SELECT * FROM Product ORDER BY Name\";\n}\n<html>\n<body>\n<h1>Small Bakery Products</h1>\n<table>\n<tr>\n<th>Id</th>\n<th>Product</th>\n<th>Description</th>\n<th>Price</th>\n</tr>\n@foreach(var row in db.Query(selectQueryString))\n{\n<tr>\n<td>\n@row.Id\n</td>\n<td>\n@row.Name\n</td>\n<td>\n@row.Description\n</td>\n<td align=\"right\">\n@row.Price\n</td>\n</tr>\n}\n</table>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of products.cshtml"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "@{\nvar db = Database.Open(\"SmallBakery\");\nvar selectQueryString = \"SELECT * FROM Product ORDER BY Name\";\n# TODO: Complete this line\n<html>\n<body>\n<h1>Small Bakery Products</h1>\n<table>\n<tr>\n<th>Id</th>\n<th>Product</th>\n<th>Description</th>\n<th>Price</th>\n</tr>\n@foreach(var row in db.Query(selectQueryString))\n{\n<tr>\n<td>\n@row.Id\n</td>\n<td>\n@row.Name\n</td>\n<td>\n@row.Description\n</td>\n<td align=\"right\">\n@row.Price\n</td>\n</tr>\n}\n</table>\n</body>\n</html>",
+      "solution": "@{\nvar db = Database.Open(\"SmallBakery\");\nvar selectQueryString = \"SELECT * FROM Product ORDER BY Name\";\n}\n<html>\n<body>\n<h1>Small Bakery Products</h1>\n<table>\n<tr>\n<th>Id</th>\n<th>Product</th>\n<th>Description</th>\n<th>Price</th>\n</tr>\n@foreach(var row in db.Query(selectQueryString))\n{\n<tr>\n<td>\n@row.Id\n</td>\n<td>\n@row.Name\n</td>\n<td>\n@row.Description\n</td>\n<td align=\"right\">\n@row.Price\n</td>\n</tr>\n}\n</table>\n</body>\n</html>"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "0a559a00-a8f7-426b-9749-31d71cfe3f73",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ce421e8f-1289-4580-9211-acabb5365273",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "a6c60b8c-69c6-49a1-8429-ef859f15017d",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Databases\n\nThis chapter?",
+      "options": [
+        "found",
+        "None of the above.",
+        "about working with databases",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Databases\n\nThis chapter is 'about working with databases'."
+    },
+    {
+      "question": "What is If no file?",
+      "options": [
+        "found",
+        "about working with databases",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of If no file is 'found'."
+    }
+  ],
+  "summary": "This tutorial covers ASP.NET Web Pages- Databases concepts and techniques. You'll learn how to use ASP.NET Web Pages- Databases effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ASP.NET Web Pages- Databases and how to apply it in your projects."
+}

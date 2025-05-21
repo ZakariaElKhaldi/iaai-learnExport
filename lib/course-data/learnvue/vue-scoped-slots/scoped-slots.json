@@ -1,0 +1,98 @@
+{
+  "id": "83209848-cbc0-488c-86c3-3ace3b22801b",
+  "title": "Scoped Slots",
+  "slug": "scoped-slots",
+  "metadata": {
+    "description": "Learn about Scoped Slots with clear explanations and practical examples.",
+    "keywords": [
+      "slot",
+      "data",
+      "template",
+      "example",
+      "comp",
+      "text",
+      "scoped",
+      "name",
+      "component",
+      "script"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue Scoped Slots"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Scoped Slots",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A\nScoped slot\nprovides local data from the component so that the parent can choose how to render it.\nSend Data to Parent\nWe use\nv-bind\nin the component slot to send local data to the parent:\nSlotComp.vue\n:\n<template>\n\u00a0 <slot v-bind:lclData=\"data\"></slot>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 data: 'This is local data'\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nThe data inside the component can be referred to as 'local' because it is not accessible to the parent unless it is sent up to the parent like we do here with\nv-bind\n.\nReceive Data from Scoped Slot\nThe local data in the component is sent with\nv-bind\n, and it can be received in the parent with\nv-slot\n:\nExample\nApp.vue\n:\n<slot-comp\nv-slot:\"dataFromSlot\"\n>\n\u00a0 <h2>{{ dataFromSlot.lclData }}</h2>\n</slot-comp>\nRun Example \u00bb\nIn the example above, 'dataFromSlot' is just a name we can choose ourselves to represent the data object we receive from the scoped slot. We get the text string from the slot by using the 'lclData' property, and we use interpolation to finally render the text in an\n<h2>\ntag.\nScoped Slot with an Array\nA scoped slot can send data from an array by using\nv-for\n, but the code in\nApp.vue\nis basically the same:\nExample\nSlotComp.vue\n:\n<template>\n\u00a0 <slot\n\u00a0 \u00a0 v-for=\"x in foods\"\n\u00a0 \u00a0 :key=\"x\"\n:foodName=\"x\"\n></slot>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 foods: ['Apple','Pizza','Rice','Fish','Cake']\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nApp.vue\n:\n<slot-comp\nv-slot=\"food\"\n>\n\u00a0 <h2>{{ food.foodName }}</h2>\n</slot-comp>\nRun Example \u00bb\nScoped Slot with an Array of Objects\nA scoped slot can send data from an array of objects by using\nv-for\n:\nExample\nSlotComp.vue\n:\n<template>\n\u00a0 <slot\n\u00a0 \u00a0 v-for=\"x in foods\"\n\u00a0 \u00a0 :key=\"x.name\"\n:foodName=\"x.name\"\n:foodDesc=\"x.desc\"\n:foodUrl=\"x.url\"\n></slot>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 foods: [\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Apple', desc: 'Apples are a type of fruit that grow on trees.', url: 'img_apple.svg' },\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Pizza', desc: 'Pizza has a bread base with tomato sauce, cheese, and toppings on top.', url: 'img_pizza.svg' },\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Rice', desc: 'Rice is a type of grain that people like to eat.', url: 'img_rice.svg' },\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Fish', desc: 'Fish is an animal that lives in water.', url: 'img_fish.svg' },\n\u00a0 \u00a0 \u00a0 \u00a0 \u00a0 { name: 'Cake', desc: 'Cake is something sweet that tastes good but is not considered healthy.', url: 'img_cake.svg' }\n\u00a0 \u00a0 \u00a0 \u00a0]\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nApp.vue\n:\n<slot-comp v-slot=\"food\">\n\u00a0 <hr>\n\u00a0 <h2>{{\nfood.foodName\n}}<img :src=\nfood.foodUrl\n></h2>\n\u00a0 <p>{{\nfood.foodDesc\n}}</p>\n</slot-comp>\nRun Example \u00bb\nStatic Data from a Scoped Slot\nA scoped slot can also send static data, that is data that does not belong to the data property of the Vue instance.\nWhen sending static data we do not use\nv-bind\n.\nIn the example below we send one static text, and one text bound dynamically to the data instance so that we can see the difference.\nExample\nSlotComp.vue\n:\n<template>\n\u00a0 <slot\n\u00a0 \u00a0 staticText=\"This text is static\"\n\u00a0 \u00a0 :dynamicText=\"text\"\n\u00a0 ></slot>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 text: 'This text is from the data property'\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nApp.vue\n:\n<slot-comp v-slot=\"texts\">\n\u00a0 <h2>{{ texts.staticText }}</h2>\n\u00a0 <p>{{ texts.dynamicText }}</p>\n</slot-comp>\nRun Example \u00bb\nNamed Scoped Slots\nScoped slots can be named.\nTo use named scoped slots we need to name the slots inside the component with the 'name' attribute.\nAnd to receive data from a named slot we need to refer to that name in the parent where we use the component, with the\nv-slot\ndirective, or shorthand\n#\n.\nExample\nIn this example the component is created one time referring to the slot \"leftSlot\", and one time referring to the slot \"rightSlot\".\nSlotComp.vue\n:\n<template>\n\u00a0 <slot\n\u00a0 \u00a0 name=\"leftSlot\"\n\u00a0 \u00a0 :text=\"leftText\"\n\u00a0 ></slot>\n\u00a0 <slot\n\u00a0 \u00a0 name=\"rightSlot\"\n\u00a0 \u00a0 :text=\"rightText\"\n\u00a0 ></slot>\n</template>\n\n<script>\n\u00a0 export default {\n\u00a0 \u00a0 data() {\n\u00a0 \u00a0 \u00a0 return {\n\u00a0 \u00a0 \u00a0 \u00a0 leftText: 'This text belongs to the LEFT slot.',\n\u00a0 \u00a0 \u00a0 \u00a0 rightText: 'This text belongs to the RIGHT slot.'\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nApp.vue\n:\n<slot-comp #leftSlot=\"leftProps\">\n\u00a0 <div>{{ leftProps.text }}</div>\n</slot-comp>\n<slot-comp #rightSlot=\"rightProps\">\n\u00a0 <div>{{ rightProps.text }}</div>\n</slot-comp>\nRun Example \u00bb\nAlternatively, we can create the component one time, with two different\n\"template\"\ntags, each\n\"template\"\ntag referring to a different slot.\nExample\nIn this example the component is created only one time, but with two\n\"template\"\ntags, each referring to a different slot.\nSlotComp.vue\nis exactly the same as in the \nApp.vue\n:\n<slot-comp>\n\n<template #leftSlot=\"leftProps\">\n\u00a0 \u00a0 <div>{{ leftProps.text }}</div>\n\u00a0 </template>\n\n<template #rightSlot=\"rightProps\">\n\u00a0 \u00a0 <div>{{ rightProps.text }}</div>\n\u00a0 </template>\n\n</slot-comp>\nRun Example \u00bb\nVue Exercises\nTest Yourself With Exercises\nExercise:\nWhat directives are needed to provide data from a components slot to the parent?\nLocal data in a component is sent from a slot with\n, \nand it can be received in the parent with\n.\n\nCompOne.vue:\n<slot\n:lclData=\"data\"></slot>\n\nApp.vue:\n<comp-one\n:\"dataFromSlot\">\n  <h2>{{ dataFromSlot.lclData }}</h2>\n</comp-one>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "38e8c2d4-93ee-47d3-aeac-d96232bad0f6",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "3bf88f86-12db-48a0-a94e-f91a8697816a",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "02aff4de-771e-441e-98cb-79f1f142cafb",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is This?",
+      "options": [
+        "local data'\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nThe data inside the component can be referred to as 'local' because it is not accessible to the parent unless it is sent up to the parent like we do here with\nv-bind",
+        "None of the above.",
+        "None of the above.",
+        "sent with\nv-bind"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of This is 'local data'\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nThe data inside the component can be referred to as 'local' because it is not accessible to the parent unless it is sent up to the parent like we do here with\nv-bind'."
+    },
+    {
+      "question": "What is Receive Data from Scoped Slot\nThe local data in the component?",
+      "options": [
+        "local data'\n\u00a0 \u00a0 \u00a0 }\n\u00a0 \u00a0 }\n\u00a0 }\n</script>\nThe data inside the component can be referred to as 'local' because it is not accessible to the parent unless it is sent up to the parent like we do here with\nv-bind",
+        "None of the above.",
+        "sent with\nv-bind",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Receive Data from Scoped Slot\nThe local data in the component is 'sent with\nv-bind'."
+    }
+  ],
+  "summary": "This tutorial covers Scoped Slots concepts and techniques. You'll learn how to use Scoped Slots effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Scoped Slots and how to apply it in your projects."
+}

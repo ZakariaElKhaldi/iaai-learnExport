@@ -1,0 +1,151 @@
+{
+  "id": "0243a48f-8f4b-4ccb-83aa-550f4020f179",
+  "title": "TypeScript Basic Generics",
+  "slug": "typescript-basic-generics",
+  "metadata": {
+    "description": "Learn about TypeScript Basic Generics with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "value",
+      "type",
+      "string",
+      "generics",
+      "return",
+      "number",
+      "public",
+      "example",
+      "console",
+      "typescript"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnTypeScript",
+    "subcategory": "TS Basic Generics"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "TypeScript Basic Generics",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Generics allow creating 'type variables' which can be used to create classes, functions & type aliases that don't need to explicitly define the types that they use.\nGenerics makes it easier to write reusable code.\nFunctions\nGenerics with functions help make more generalized methods which more accurately represent the types used and returned.\nExample\nfunction createPair<S, T>(v1: S, v2: T): [S, T] {\nreturn [v1, v2];\n}\nconsole.log(createPair<string, number>('hello', 42)); // ['hello', 42]\n\nTypeScript can also infer the type of the generic parameter from the function parameters.\nClasses\nGenerics can be used to create generalized classes, like\nMap\n.\nExample\nclass NamedValue<T> {\nprivate _value: T | undefined;\nconstructor(private name: string) {}\npublic setValue(value: T) {\nthis._value = value;\n}\npublic getValue(): T | undefined {\nreturn this._value;\n}\npublic toString(): string {\nreturn `${this.name}: ${this._value}`;\n}\n}\nlet value = new NamedValue<number>('myNumber');\nvalue.setValue(10);\nconsole.log(value.toString()); // myNumber: 10\n\nTypeScript can also infer the type of the generic parameter if it's used in a constructor parameter.\nType Aliases\nGenerics in type aliases allow creating types that are more reusable.\nExample\ntype Wrapped<T> = { value: T };\nconst wrappedValue: Wrapped<number> = { value: 10 };\nThis also works with interfaces with the following syntax:\ninterface Wrapped<T> {\nDefault Value\nGenerics can be assigned default values which apply if no other value is specified or inferred.\nExample\nclass NamedValue<T = string> {\nprivate _value: T | undefined;\nconstructor(private name: string) {}\npublic setValue(value: T) {\nthis._value = value;\n}\npublic getValue(): T | undefined {\nreturn this._value;\n}\npublic toString(): string {\nreturn `${this.name}: ${this._value}`;\n}\n}\nlet value = new NamedValue('myNumber');\nvalue.setValue('myValue');\nconsole.log(value.toString()); // myNumber: myValue\nExtends\nConstraints can be added to generics to limit what's allowed. The constraints make it possible to rely on a more specific type when using the generic type.\nExample\nfunction createLoggedPair<S extends string | number, T extends string | number>(v1: S, v2: T): [S, T] {\nconsole.log(`creating pair: v1='${v1}', v2='${v2}'`);\nreturn [v1, v2];\n}\nThis can be combined with a default value.\nTypeScript Exercises\nTest Yourself With Exercises\nExercise:\nComplete the Generic:\nfunction createPair\n,\n(x: typeX, y: typeY): [typeX, typeY] {\n return [x, y];\n}\nconsole.log(createPair<string, number>('Meaning', 42));\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "function createPair<S, T>(v1: S, v2: T): [S, T] {\nreturn [v1, v2];\n}\nconsole.log(createPair<string, number>('hello', 42)); // ['hello', 42]",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "class NamedValue<T> {\nprivate _value: T | undefined;\nconstructor(private name: string) {}\npublic setValue(value: T) {\nthis._value = value;\n}\npublic getValue(): T | undefined {\nreturn this._value;\n}\npublic toString(): string {\nreturn `${this.name}: ${this._value}`;\n}\n}\nlet value = new NamedValue<number>('myNumber');\nvalue.setValue(10);\nconsole.log(value.toString()); // myNumber: 10",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "type Wrapped<T> = { value: T };\nconst wrappedValue: Wrapped<number> = { value: 10 };",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "class NamedValue<T = string> {\nprivate _value: T | undefined;\nconstructor(private name: string) {}\npublic setValue(value: T) {\nthis._value = value;\n}\npublic getValue(): T | undefined {\nreturn this._value;\n}\npublic toString(): string {\nreturn `${this.name}: ${this._value}`;\n}\n}\nlet value = new NamedValue('myNumber');\nvalue.setValue('myValue');\nconsole.log(value.toString()); // myNumber: myValue",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "function createLoggedPair<S extends string | number, T extends string | number>(v1: S, v2: T): [S, T] {\nconsole.log(`creating pair: v1='${v1}', v2='${v2}'`);\nreturn [v1, v2];\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function createPair<S, T>(v1: S, v2: T): [S, T] {\nreturn [v1, v2];\n# TODO: Complete this line\nconsole.log(createPair<string, number>('hello', 42)); // ['hello', 42]",
+      "solution": "function createPair<S, T>(v1: S, v2: T): [S, T] {\nreturn [v1, v2];\n}\nconsole.log(createPair<string, number>('hello', 42)); // ['hello', 42]"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "class NamedValue<T> {\nprivate _value: T | undefined;\nconstructor(private name: string) {}\npublic setValue(value: T) {\nthis._value = value;\n}\npublic getValue(): T | undefined {\nreturn this._value;\n}\npublic toString(): string {\nreturn `${this.name}: ${this._value}`;\n}\n}\nlet value = new NamedValue<number>('myNumber');\n# TODO: Complete this line\nconsole.log(value.toString()); // myNumber: 10",
+      "solution": "class NamedValue<T> {\nprivate _value: T | undefined;\nconstructor(private name: string) {}\npublic setValue(value: T) {\nthis._value = value;\n}\npublic getValue(): T | undefined {\nreturn this._value;\n}\npublic toString(): string {\nreturn `${this.name}: ${this._value}`;\n}\n}\nlet value = new NamedValue<number>('myNumber');\nvalue.setValue(10);\nconsole.log(value.toString()); // myNumber: 10"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "ae4bdf63-8cba-48e6-b2a0-54f5515fa9e1",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "ba7de6d0-9433-429b-b791-62e806b1509a",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ecbfc0da-feaf-4c49-9317-165dd52bc860",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Type Aliases\nGenerics in type aliases allow creating types that?",
+      "options": [
+        "None of the above.",
+        "specified or inferred",
+        "more reusable",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Type Aliases\nGenerics in type aliases allow creating types that is 'more reusable'."
+    },
+    {
+      "question": "What is Default Value\nGenerics can be assigned default values which apply if no other value?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "more reusable",
+        "specified or inferred"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Default Value\nGenerics can be assigned default values which apply if no other value is 'specified or inferred'."
+    }
+  ],
+  "summary": "This tutorial covers TypeScript Basic Generics concepts and techniques. You'll learn how to use TypeScript Basic Generics effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of TypeScript Basic Generics and how to apply it in your projects."
+}

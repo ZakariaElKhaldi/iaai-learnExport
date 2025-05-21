@@ -1,0 +1,115 @@
+{
+  "id": "24ad06b2-cff8-49fe-a08d-9b93e9a6a23e",
+  "title": "Node.jsRaspberry Pi GPIO - Blinking LED",
+  "slug": "nodejsraspberry-pi-gpio-blinking-led",
+  "metadata": {
+    "description": "Learn about Node.jsRaspberry Pi GPIO - Blinking LED with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "gpio",
+      "raspberry",
+      "breadboard",
+      "column",
+      "example",
+      "node",
+      "turn",
+      "connect",
+      "blinking",
+      "blink"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnNode.js",
+    "subcategory": "RasPi Blinking LED"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nRaspberry Pi GPIO - Blinking LED",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Using the GPIO for Output\nIn this chapter we will use a Raspberry Pi and its GPIO to \nmake a LED blink.\nWe use Node.js with the onoff module to control the GPIO.\nTo get a LED light to turn on, we use a GPIO pin as \"Output\", and create a \nscript to turn it on and off (blinking).\nWhat do we need?\nIn this chapter we will create a simple example where \nwe control a LED light.\nFor this you need:\nA Raspberry Pi with Raspian, internet, SSH, with Node.js installed\nThe\nonoff module\nfor Node.js\n1 x\nBreadboard\n1 x\n68 Ohm resistor\n1 x\nThrough Hole LED\n2 x\nFemale to male jumper wires\nClick the links in the list above for descriptions of the different \ncomponents.\nNote:\nThe resistor you need can be different from what we use depending on the type of LED you use. Most small LEDs only need a small resistor, around 200-500 ohms. It is generally not critical what exact value you use, but the smaller the value of the resistor, the brighter the LED will\nshine.\nBuilding the Circuit\nNow it is time to build the circuit on our Breadboard.\nIf you are new to electronics, we recommend you turn off the power for \nthe Raspberry Pi. And use an anti-static mat or a grounding strap to avoid \ndamaging it.\nShut down the Raspberry Pi properly with the command:\npi@w3demopi:~ $ sudo shutdown -h now\nAfter the LEDs stop blinking on the Raspberry Pi, then pull out the power \nplug from the Raspberry Pi (or turn off the power strip it is connected to).\nJust pulling the plug without shutting down properly may cause corruption of the memory card.\nLook at the above illustration of the circuit.\nOn the Raspberry Pi, connect the female leg of the first jumper wire to\nGround\n. You can use any\nGND\npin. In this example we used Physical Pin 9 (\nGND\n, \n    row 5, left column)\nOn the Breadboard, connect the male leg of the first jumper wire to \n    the\nGround Bus\ncolumn on the right. That entire \n    column of your breadboard is connected, so it doesn't matter which row. In \n    this example we have attached it to row 1\nOn the Raspberry Pi, connect the female leg of the second jumper cable \n    to a\nGPIO\npin. In this example we used Physical Pin \n    7 (\nGPIO 4\n, row 4, left \n    column)\nOn the Breadboard, connect the male leg of the second jumper wire to the \n    Tie-Point row of your choice. In this example we connected it to row 5, \n    column A\nOn the Breadboard, connect one leg of the resistor to the\nGround Bus\ncolumn on the right side. That entire column of your breadboard is \n    connected, so it doesn't matter which row. In this example we have attached \n    it to row 5\nOn the Breadboard, connect the other leg of the resistor to the right \n    side Tie-Point row of your choice. In this example we have used row 5, \n    column J\nOn the Breadboard, connect the cathode leg (the shortest leg) of the \n    LED to the same Tie-Point row that you connected the resistor from\nGND\nto. In this example we used row 5, column F\nOn the Breadboard, connect the anode leg (the longest leg) of the \n    LED to the same Tie-Point row that you connected the jumper from \n    the\nGPIO\npin to. In this example we used row \n    5, column E\nYour circuit should now be complete, and your connections should look \n  pretty similar to the illustration above.\nNow it is time to boot up the Raspberry Pi, and write the Node.js script to \n  interact with it.\nRaspberry Pi and Node.js Blinking LED Script\nNow that we have everything set up, we can write a script to turn the LED on and off.\nStart by making a directory where we can keep our Node.js scripts:\npi@w3demopi:~ $ mkdir nodetest\nGo to our new directory:\npi@w3demopi:~ $ cd nodetest\nNow we will create a new file called \"\nblink.js\n\" using the Nano Editor:\npi@w3demopi:~ $ nano blink.js\nThe file is now open and can be edited with the built in Nano Editor.\nWrite, or paste the following code:\nblink.js\nvar Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar LED = new Gpio(4, 'out'); \n  //use GPIO pin 4, and specify that it is output\nvar \n  blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every \n  250ms\nfunction blinkLED() { //function to start blinking\nif (LED.readSync() === \n  0) { //check the pin state, if the state is 0 (or off)\nLED.writeSync(1); \n  //set pin state to 1 (turn LED on)\n} else {\nLED.writeSync(0); \n  //set pin state to 0 (turn LED off)\n}\n}\nfunction endBlink() \n  { //function to stop blinking\nclearInterval(blinkInterval); // Stop blink intervals\nLED.writeSync(0); // Turn LED off\nLED.unexport(); // Unexport GPIO \n  to free resources\n}\nsetTimeout(endBlink, 5000); //stop blinking \n  after 5 seconds\nPress \"\nCtrl+x\n\" to save the code. Confirm with \"\ny\n\", and confirm the name with \"\nEnter\n\".\nRun the code:\npi@w3demopi:~ $ node blink.js\nNow the LED should blink for 5 seconds (10 times) before turning off again!\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "blink.js",
+      "content": "",
+      "order": 3,
+      "code": "var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar LED = new Gpio(4, 'out'); \n  //use GPIO pin 4, and specify that it is output\nvar \n  blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every \n  250ms\nfunction blinkLED() { //function to start blinking\nif (LED.readSync() === \n  0) { //check the pin state, if the state is 0 (or off)\nLED.writeSync(1); \n  //set pin state to 1 (turn LED on)\n} else {\nLED.writeSync(0); \n  //set pin state to 0 (turn LED off)\n}\n}\nfunction endBlink() \n  { //function to stop blinking\nclearInterval(blinkInterval); // Stop blink intervals\nLED.writeSync(0); // Turn LED off\nLED.unexport(); // Unexport GPIO \n  to free resources\n}\nsetTimeout(endBlink, 5000); //stop blinking \n  after 5 seconds",
+      "language": "javascript",
+      "explanation": "Example of blink.js"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar LED = new Gpio(4, 'out'); \n  //use GPIO pin 4, and specify that it is output\nvar \n  blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every \n  250ms\nfunction blinkLED() { //function to start blinking\nif (LED.readSync() === \n# TODO: Complete this line\nLED.writeSync(1); \n  //set pin state to 1 (turn LED on)\n} else {\nLED.writeSync(0); \n  //set pin state to 0 (turn LED off)\n}\n}\nfunction endBlink() \n  { //function to stop blinking\nclearInterval(blinkInterval); // Stop blink intervals\nLED.writeSync(0); // Turn LED off\nLED.unexport(); // Unexport GPIO \n  to free resources\n}\nsetTimeout(endBlink, 5000); //stop blinking \n  after 5 seconds",
+      "solution": "var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar LED = new Gpio(4, 'out'); \n  //use GPIO pin 4, and specify that it is output\nvar \n  blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every \n  250ms\nfunction blinkLED() { //function to start blinking\nif (LED.readSync() === \n  0) { //check the pin state, if the state is 0 (or off)\nLED.writeSync(1); \n  //set pin state to 1 (turn LED on)\n} else {\nLED.writeSync(0); \n  //set pin state to 0 (turn LED off)\n}\n}\nfunction endBlink() \n  { //function to stop blinking\nclearInterval(blinkInterval); // Stop blink intervals\nLED.writeSync(0); // Turn LED off\nLED.unexport(); // Unexport GPIO \n  to free resources\n}\nsetTimeout(endBlink, 5000); //stop blinking \n  after 5 seconds"
+    },
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your javascript function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "765cd40f-2003-4432-be00-e411efc76e28",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "4eb87870-d851-46ab-a755-200cc373cdbe",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e5cbf7d8-25b8-4502-871e-19292b2cd77a",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is It?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "time to build the circuit on our Breadboard",
+        "generally not critical what exact value you use"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of It is 'generally not critical what exact value you use'."
+    },
+    {
+      "question": "What is Building the Circuit\nNow it?",
+      "options": [
+        "time to build the circuit on our Breadboard",
+        "None of the above.",
+        "None of the above.",
+        "generally not critical what exact value you use"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Building the Circuit\nNow it is 'time to build the circuit on our Breadboard'."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsRaspberry Pi GPIO - Blinking LED concepts and techniques. You'll learn how to use Node.jsRaspberry Pi GPIO - Blinking LED effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsRaspberry Pi GPIO - Blinking LED and how to apply it in your projects."
+}

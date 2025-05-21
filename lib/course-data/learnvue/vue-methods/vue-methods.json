@@ -1,0 +1,220 @@
+{
+  "id": "ef1daf1b-974d-4e20-905e-7f861889e038",
+  "title": "Vue Methods",
+  "slug": "vue-methods",
+  "metadata": {
+    "description": "Learn about Vue Methods with clear explanations and practical examples.",
+    "keywords": [
+      "event",
+      "button",
+      "script",
+      "method",
+      "click",
+      "text",
+      "example",
+      "methods",
+      "object",
+      "data"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 6,
+    "category": "LearnVue",
+    "subcategory": "Vue Methods"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue Methods",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Vue methods are functions that belong to the Vue instance under the 'methods' property.\nVue methods are great to use with event handling (\nv-on\n) to do more complex things.\nVue methods can also be used to do other things than event handling.\nThe Vue 'methods' Property\nWe have already used one Vue property in this tutorial, the 'data' property, where we can store values.\nThere is another Vue property called 'methods' where we can store functions that belong to the Vue instance. A method can be stored in the Vue instance like this:\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: ''\n}\n},\nmethods:\n{\nwriteText() {\nthis.text = 'Hello World!'\n}\n}\n})\nTip:\nWe need to write\nthis.\nas prefix to refer to a data property from inside a method.\nTo call the 'writeText' method when we click the\n<div>\nelement we can write the code below:\n<div v-on:click=\"writeText\"></div>\nThe example looks like this:\nExample\nThe\nv-on\ndirective is used on the\n<div>\nelement to listen to the 'click' event. When the 'click' event occurs the 'writeText' method is called and the text is changed.\n<div id=\"app\">\n<p>Click on the box below:</p>\n<div v-on:click=\"writeText\">\n{{ text }}\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: ''\n}\n},\nmethods: {\nwriteText() {\nthis.text = 'Hello World!'\n}\n}\n})\napp.mount('#app')\n</script>\n\nCall a Method with the Event Object\nWhen an event occurs so that a method is called, the\nevent object\nis passed with the method by default. This is very convenient because the event object contains a lot of useful data, like for example the target object, the event type, or the mouse position when the 'click' or 'mousemove' event \noccurred.\nExample\nThe\nv-on\ndirective is used on the\n<div>\nelement to listen to the 'mousemove' event. When the 'mousemove' event occurs the 'mousePos' method is called and the event object is sent with the method by default so we can get the mouse pointer position.\nWe must use the\nthis.\nprefix to refer to \"xPos\" inside the Vue instance data property from the method.\n<div id=\"app\">\n<p>Move the mouse pointer over the box below:</p>\n<div v-on:mousemove=\"mousePos\"></div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nxPos: 0,\nyPos: 0\n}\n},\nmethods: {\nmousePos(event) {\nthis.xPos = event.offsetX\nthis.yPos = event.offsetY\n}\n}\n})\napp.mount('#app')\n</script>\n\nIf we expand the example above by just one line, we can also make the background color change based on the mouse pointer position in the x-direction. The only thing we need to add is\nv-bind\nto change the \nbackground-color in the style attribute:\nExample\nThe difference here from the example above is that the background color is bound to 'xPos' with\nv-bind\nso that hsl 'hue' value is set equal to 'xPos'.\n<div\nv-on:mousemove=\"mousePos\"\nv-bind:style=\"{backgroundColor:'hsl('+xPos+',80%,80%)'}\">\n</div>\n\nIn the example below the event object carries a text from the\n<textarea>\ntag to make it look like we are writing inside a notebook.\nExample\nThe\nv-on\ndirective is used on the\n<textarea>\ntag to listen to the 'input' event which occurs whenever there is a change in the text inside the textarea element.\nWhen the 'input' event occurs the 'writeText' method is called and the event object is sent with the method by default so we can get the text from the\n<textarea>\ntag. The 'text' property in the Vue instance is updated by the 'writeText' method. A span element is set up to show the 'text' value with the double curly braces syntax, and this is updated automatically by Vue.\n<div id=\"app\">\n<textarea v-on:input=\"writeText\" placeholder=\"Start writing..\"></textarea>\n<span>{{ text }}</span>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: ''\n}\n},\nmethods: {\nwriteText(event) {\nthis.text = event.target.value\n}\n}\n})\napp.mount('#app')\n</script>\n\nPassing Arguments\nSometimes we want to pass an argument with the method when an event occurs.\nLets say you work as a forest ranger, and you want to keep count of moose sightings. Sometimes one or two moose are seen, other times over 10 moose might be seen during a day. We add buttons to count sightings '+1' and '+5', and a '-1' button in case we have counted too many.\nIn this case we can use the same method for all three buttons, and just call the method with a different number as an argument from the different buttons. This is how we can call a method with an argument:\n<button v-on:click=\"addMoose(5)\">+5</button>\nAnd this is how the 'addMoose' method looks like:\nmethods: {\naddMoose(number) {\nthis.count = this.count + number\n}\n}\nLets see how passing an argument with a method works in a full example.\nExample\n<div id=\"app\">\n<img src=\"img_moose.jpg\">\n<p>{{ \"Moose count: \" + count }}</p>\n<button v-on:click=\"addMoose(+1)\">+1</button>\n<button v-on:click=\"addMoose(+5)\">+5</button>\n<button v-on:click=\"addMoose(-1)\">-1</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ncount: 0\n}\n},\nmethods: {\naddMoose(number) {\nthis.count+=number\n}\n}\n})\napp.mount('#app')\n</script>\n\nPassing both an Argument and The Event Object\nIf we want to pass both the event object and another argument, there is a reserved name '\n$event\n' we can use where the method is called, like this:\n<button v-on:click=\"addAnimal($event, 5)\">+5</button>\nAnd this is how the method in the Vue instance looks like:\nmethods: {\naddAnimal(e, number) {\nif(e.target.parentElement.id===\"tigers\"){\nthis.tigers = this.tigers + number\n}\n}\n}\nNow let us look at an example to see how to pass both the event object and another argument with a method.\nExample\nIn this example our method receives both the event object and a text.\n<div id=\"app\">\n<img\nsrc=\"img_tiger.jpg\"\nid=\"tiger\"\nv-on:click=\"myMethod($event,'Hello')\">\n<p>\"{{ msgAndId }}\"</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nmsgAndId: ''\n}\n},\nmethods: {\nmyMethod(e,msg) {\nthis.msgAndId =   msg + ', '\nthis.msgAndId +=  e.target.id\n}\n}\n})\napp.mount('#app')\n</script>\n\nLarger Example\nIn this example we see that it is possible to use only one method to count three different animals with three different increments for each animal. We \nachieve this by passing both the event object and the increment number:\nExample\nBoth the increment size and the event object are passed as arguments with the method when a button is clicked. The reserved word '\n$event\n' is used to pass the event object with the method to tell what animal to count.\n<div id=\"app\">\n<div id=\"tigers\">\n<img src=\"img_tiger.jpg\">\n<button v-on:click=\"addAnimal($event,1)\">+1</button>\n<button v-on:click=\"addAnimal($event,5)\">+5</button>\n<button v-on:click=\"addAnimal($event,-1)\">-1</button>\n</div>\n<div id=\"moose\">\n<img src=\"img_moose.jpg\">\n<button v-on:click=\"addAnimal($event,1)\">+1</button>\n<button v-on:click=\"addAnimal($event,5)\">+5</button>\n<button v-on:click=\"addAnimal($event,-1)\">-1</button>\n</div>\n<div id=\"kangaroos\">\n<img src=\"img_kangaroo.jpg\">\n<button v-on:click=\"addAnimal($event,1)\">+1</button>\n<button v-on:click=\"addAnimal($event,5)\">+5</button>\n<button v-on:click=\"addAnimal($event,-1)\">-1</button>\n</div>\n<ul>\n<li>Tigers: {{ tigers }} </li>\n<li>Moose: {{ moose }} </li>\n<li>Kangaroos: {{ kangaroos }} </li>\n</ul>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntigers: 0,\nmoose: 0,\nkangaroos: 0\n}\n},\nmethods: {\naddAnimal(e,number) {\nif(e.target.parentElement.id===\"tigers\") {\nthis.tigers+=number\n}\nelse if(e.target.parentElement.id===\"moose\") {\nthis.moose+=number\n}\nelse {\nthis.kangaroos+=number\n}\n}\n}\n})\napp.mount('#app')\n</script>\n\nVue Exercises\nTest Yourself With Exercises\nExercise:\nWrite the missing code so that the 'writeText' method is called when the <div> tag is clicked.\n<div id=\"app\">\n  <p>Click on the box below:</p>\n  <div\n=\n>\n    {{ text }}\n  </div>\n</div>\n\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\n  const app = Vue.createApp({\n    data() {\n      return {\n        text: ''\n      }\n    },\n: {\n      writeText() {\n        this.\n= 'Hello World!'\n      }\n    }\n  })\n  app.mount('#app')\n</script>\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "const app = Vue.createApp({\ndata() {\nreturn {\ntext: ''\n}\n},\nmethods:\n{\nwriteText() {\nthis.text = 'Hello World!'\n}\n}\n})",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<div v-on:click=\"writeText\"></div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<div id=\"app\">\n<p>Click on the box below:</p>\n<div v-on:click=\"writeText\">\n{{ text }}\n</div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: ''\n}\n},\nmethods: {\nwriteText() {\nthis.text = 'Hello World!'\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<div id=\"app\">\n<p>Move the mouse pointer over the box below:</p>\n<div v-on:mousemove=\"mousePos\"></div>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nxPos: 0,\nyPos: 0\n}\n},\nmethods: {\nmousePos(event) {\nthis.xPos = event.offsetX\nthis.yPos = event.offsetY\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "<div\nv-on:mousemove=\"mousePos\"\nv-bind:style=\"{backgroundColor:'hsl('+xPos+',80%,80%)'}\">\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "<div id=\"app\">\n<textarea v-on:input=\"writeText\" placeholder=\"Start writing..\"></textarea>\n<span>{{ text }}</span>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntext: ''\n}\n},\nmethods: {\nwriteText(event) {\nthis.text = event.target.value\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "<button v-on:click=\"addMoose(5)\">+5</button>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "methods: {\naddMoose(number) {\nthis.count = this.count + number\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<div id=\"app\">\n<img src=\"img_moose.jpg\">\n<p>{{ \"Moose count: \" + count }}</p>\n<button v-on:click=\"addMoose(+1)\">+1</button>\n<button v-on:click=\"addMoose(+5)\">+5</button>\n<button v-on:click=\"addMoose(-1)\">-1</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ncount: 0\n}\n},\nmethods: {\naddMoose(number) {\nthis.count+=number\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "<button v-on:click=\"addAnimal($event, 5)\">+5</button>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "methods: {\naddAnimal(e, number) {\nif(e.target.parentElement.id===\"tigers\"){\nthis.tigers = this.tigers + number\n}\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "<div id=\"app\">\n<img\nsrc=\"img_tiger.jpg\"\nid=\"tiger\"\nv-on:click=\"myMethod($event,'Hello')\">\n<p>\"{{ msgAndId }}\"</p>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\nmsgAndId: ''\n}\n},\nmethods: {\nmyMethod(e,msg) {\nthis.msgAndId =   msg + ', '\nthis.msgAndId +=  e.target.id\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 15,
+      "code": "<div id=\"app\">\n<div id=\"tigers\">\n<img src=\"img_tiger.jpg\">\n<button v-on:click=\"addAnimal($event,1)\">+1</button>\n<button v-on:click=\"addAnimal($event,5)\">+5</button>\n<button v-on:click=\"addAnimal($event,-1)\">-1</button>\n</div>\n<div id=\"moose\">\n<img src=\"img_moose.jpg\">\n<button v-on:click=\"addAnimal($event,1)\">+1</button>\n<button v-on:click=\"addAnimal($event,5)\">+5</button>\n<button v-on:click=\"addAnimal($event,-1)\">-1</button>\n</div>\n<div id=\"kangaroos\">\n<img src=\"img_kangaroo.jpg\">\n<button v-on:click=\"addAnimal($event,1)\">+1</button>\n<button v-on:click=\"addAnimal($event,5)\">+5</button>\n<button v-on:click=\"addAnimal($event,-1)\">-1</button>\n</div>\n<ul>\n<li>Tigers: {{ tigers }} </li>\n<li>Moose: {{ moose }} </li>\n<li>Kangaroos: {{ kangaroos }} </li>\n</ul>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script>\nconst app = Vue.createApp({\ndata() {\nreturn {\ntigers: 0,\nmoose: 0,\nkangaroos: 0\n}\n},\nmethods: {\naddAnimal(e,number) {\nif(e.target.parentElement.id===\"tigers\") {\nthis.tigers+=number\n}\nelse if(e.target.parentElement.id===\"moose\") {\nthis.moose+=number\n}\nelse {\nthis.kangaroos+=number\n}\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "const app = Vue.createApp({\n# TODO: Complete this line\nreturn {\ntext: ''\n}\n},\nmethods:\n{\nwriteText() {\nthis.text = 'Hello World!'\n}\n}\n})",
+      "solution": "const app = Vue.createApp({\ndata() {\nreturn {\ntext: ''\n}\n},\nmethods:\n{\nwriteText() {\nthis.text = 'Hello World!'\n}\n}\n})"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your html code here",
+      "solution": "<div v-on:click=\"writeText\"></div>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "f994c449-32bf-4b90-be80-fb204471634b",
+      "title": "Advanced Unknown Techniques",
+      "relationship": "next_topic"
+    },
+    {
+      "id": "c41711b5-f541-483d-822b-4fb93e8a8e67",
+      "title": "Unknown Project: Build a Real-World Application",
+      "relationship": "suggested_next"
+    },
+    {
+      "id": "e4bf1a4c-54b9-4500-b4ad-5b1281f4b84e",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Vue Methods\n\nVue methods?",
+      "options": [
+        "None of the above.",
+        "great to use with event handling (\nv-on\n) to do more complex things",
+        "None of the above.",
+        "functions that belong to the Vue instance under the 'methods' property"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Vue Methods\n\nVue methods is 'functions that belong to the Vue instance under the 'methods' property'."
+    },
+    {
+      "question": "What is Vue methods?",
+      "options": [
+        "functions that belong to the Vue instance under the 'methods' property",
+        "None of the above.",
+        "None of the above.",
+        "great to use with event handling (\nv-on\n) to do more complex things"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Vue methods is 'great to use with event handling (\nv-on\n) to do more complex things'."
+    }
+  ],
+  "summary": "This tutorial covers Vue Methods concepts and techniques. You'll learn how to use Vue Methods effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue Methods and how to apply it in your projects."
+}

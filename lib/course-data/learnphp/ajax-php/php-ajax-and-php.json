@@ -1,0 +1,98 @@
+{
+  "id": "3ee03565-15a4-431e-a18a-d6067f71ca84",
+  "title": "PHP -AJAX and PHP",
+  "slug": "php-ajax-and-php",
+  "metadata": {
+    "description": "Learn about PHP -AJAX and PHP with clear explanations and practical examples.",
+    "keywords": [
+      "name",
+      "input",
+      "example",
+      "field",
+      "hint",
+      "function",
+      "txthint",
+      "xmlhttp",
+      "gethint",
+      "ajax"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "AJAX PHP"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP -\nAJAX and PHP",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AJAX is used to create more interactive applications.\nAJAX PHP Example\nThe following example will demonstrate how a web page can communicate with a \nweb server while a user type characters in an input field:\nExample\nStart typing a name in the input field below:\nFirst name:\nSuggestions:\nExample Explained\nIn the example above, when a user types a character in the input field, a function \ncalled\nshowHint()\nis executed.\nThe function is triggered by the onkeyup event.\nHere is the HTML code:\nExample\n<html>\n<head>\n<script>\nfunction showHint(str) {\n  if (str.length == 0) {\n    document.getElementById(\"txtHint\").innerHTML = \"\";\n    return;\n  } else {\n    var xmlhttp = new XMLHttpRequest();\n    xmlhttp.onreadystatechange = function() {\n      if (this.readyState == 4 && this.status == 200) {\n        document.getElementById(\"txtHint\").innerHTML = this.responseText;\n      }\n    };\n    xmlhttp.open(\"GET\", \"gethint.php?q=\" + str, true);\n    xmlhttp.send();\n  }\n}\n</script>\n</head>\n<body>\n\n<p><b>Start typing a name in the input field below:</b></p>\n<form action=\"\">\n  <label for=\"fname\">First name:</label>\n  <input type=\"text\" id=\"fname\" name=\"fname\" onkeyup=\"showHint(this.value)\">\n</form>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n</body>\n</html>\nRun example \u00bb\nCode explanation:\nFirst, check if the input field is empty (str.length == 0). If it is, clear the \ncontent of the txtHint placeholder and exit the function.\nHowever, if the input field is not empty, do the following:\nCreate an\nXMLHttpRequest\nobject\nCreate the function to be executed when the server response is ready\nSend the request off to a PHP file (gethint.php) on the server\nNotice that\nq\nparameter is added to the url\n(gethint.php?q=\" + str)\nAnd the\nstr\nvariable holds the content of the input field\nThe PHP File - \"gethint.php\"\nThe PHP file checks an array of names, and returns the corresponding name(s) to the \nbrowser:\n// Array with names\n$a[] = \"Anna\";\n$a[] = \"Brittany\";\n$a[] = \"Cinderella\";\n$a[] = \"Diana\";\n$a[] = \"Eva\";\n$a[] = \"Fiona\";\n$a[] = \"Gunda\";\n$a[] = \"Hege\";\n$a[] = \"Inga\";\n$a[] = \"Johanna\";\n$a[] = \"Kitty\";\n$a[] = \"Linda\";\n$a[] = \"Nina\";\n$a[] = \"Ophelia\";\n$a[] = \"Petunia\";\n$a[] = \"Amanda\";\n$a[] = \"Raquel\";\n$a[] = \"Cindy\";\n$a[] = \"Doris\";\n$a[] = \"Eve\";\n$a[] = \"Evita\";\n$a[] = \"Sunniva\";\n$a[] = \"Tove\";\n$a[] = \"Unni\";\n$a[] = \"Violet\";\n$a[] = \"Liza\";\n$a[] = \"Elizabeth\";\n$a[] = \"Ellen\";\n$a[] = \"Wenche\";\n$a[] = \"Vicky\";\n\n// get the q parameter from URL\n$q = $_REQUEST[\"q\"];\n\n$hint = \"\";\n\n// lookup all hints from array if $q is different from \"\"\nif ($q !== \"\") {\n  $q = strtolower($q);\n  $len=strlen($q);\n  foreach($a as $name) {\n    if (stristr($q, substr($name, 0, $len))) {\n      if ($hint === \"\") {\n        $hint = $name;\n      } else {\n        $hint .= \", $name\";\n      }\n    }\n  }\n}\n\n// Output \"no suggestion\" if no hint was found or output correct values\necho $hint === \"\" ? \"no suggestion\" : $hint;\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "7cb89944-af2e-48d2-aaf2-3abe6d6a79c7",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "13bb3341-557f-40d4-ae35-715a01384c36",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "193e846a-64c2-4c2e-a4fc-6574ea2f8c4f",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is AJAX and PHP\n\nAJAX?",
+      "options": [
+        "Not a AJAX and PHP\n\nAJAX.",
+        "None of the above.",
+        "None of the above.",
+        "used to create more interactive applications"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of AJAX and PHP\n\nAJAX is 'used to create more interactive applications'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHP -AJAX and PHP concepts and techniques. You'll learn how to use PHP -AJAX and PHP effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHP -AJAX and PHP and how to apply it in your projects."
+}

@@ -1,0 +1,223 @@
+{
+  "id": "559b9530-94bd-4e7d-b46d-9ab258d58e40",
+  "title": "The JavaScriptthisKeyword",
+  "slug": "the-javascriptthiskeyword",
+  "metadata": {
+    "description": "Learn about The JavaScriptthisKeyword with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "object",
+      "function",
+      "method",
+      "example",
+      "firstname",
+      "refers",
+      "fullname",
+      "person",
+      "lastname",
+      "global"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAJAX",
+    "subcategory": "JS this Keyword"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "The JavaScript\nthis\nKeyword",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Example\nconst\nperson",
+      "content": "= {\nfirstName: \"John\",\nlastName : \"Doe\",\nid\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 :\u00a05566,\nfullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}\n};\n\nWhat is\nthis\n?\nIn JavaScript, the\nthis\nkeyword refers to an\nobject\n.\nThe\nthis\nkeyword refers to\ndifferent objects\ndepending on how it is used:\nIn an object method,\nthis\nrefers to the\nobject\n.\nAlone,\nthis\nrefers to the\nglobal object\n.\nIn a function,\nthis\nrefers to the\nglobal object\n.\nIn a function, in strict mode,\nthis\nis\nundefined\n.\nIn an event,\nthis\nrefers to the\nelement\nthat received the event.\nMethods like\ncall()\n,\napply()\n,\nand\nbind()\ncan refer\nthis\nto\nany object\n.\nNote\nthis\nis not a variable. It is a keyword.\nYou cannot change the value of\nthis\n.\nthis\nin a Method\nWhen used in an object method,\nthis\nrefers to the\nobject\n.\nIn the example on top of this page,\nthis\nrefers to the\nperson\nobject.\nBecause the\nfullName\nmethod is a method of the\nperson\nobject.\nfullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}\n\nthis\nAlone\nWhen used alone,\nthis\nrefers to the\nglobal object\n.\nBecause\nthis\nis running in the global scope.\nIn a browser window the global object is\n[object Window]\n:\nExample\nlet x = this;\n\nIn\nstrict mode\n, when used alone,\nthis\nalso refers to the\nglobal object\n:\nExample\n\"use strict\";\nlet x = this;\n\nthis\nin a Function (Default)\nIn a function, the\nglobal object\nis the default binding for\nthis\n.\nIn a browser window the global object is\n[object Window]\n:\nExample\nfunction myFunction() {\nreturn this;\n}\n\nthis\nin a Function (Strict)\nJavaScript\nstrict mode\ndoes not allow default binding.\nSo, when used in a function, in strict mode,\nthis\nis\nundefined\n.\nExample\n\"use strict\";\nfunction myFunction() {\nreturn this;\n}\n\nthis\nin Event Handlers\nIn HTML event handlers,\nthis\nrefers to the HTML element that received the \nevent:\nExample\n<button onclick=\"this.style.display='none'\">\nClick to \n  Remove Me!\n</button>\n\nObject Method Binding\nIn these examples,\nthis\nis the\nperson object\n:",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Example\nconst\nperson",
+      "content": "= {\nfirstName\u00a0 : \"John\",\nlastName\u00a0\u00a0 : \"Doe\",\nid\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 :\u00a05566,\nmyFunction : function() {\nreturn\nthis\n;\n}\n};",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Example\nconst\nperson",
+      "content": "= {\nfirstName: \"John\",\nlastName : \"Doe\",\nid\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 :\u00a05566,\nfullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}\n};\n\ni.e.\nthis.firstName\nis the\nfirstName\nproperty of\nthis\n(the person object).\nExplicit Function Binding\nThe\ncall()\nand\napply()\nmethods are predefined JavaScript methods.\nThey can both be used to call an object method with another object as argument.\nSee Also:\nThe Function call() Method\nThe Function apply() Method\nThe Function bind() Method\nThe example below calls person1.fullName with person2 as an argument,\nthis\nrefers to person2,\neven if fullName is a method of person1:\nExample\nconst person1 = {\nfullName: function() {\nreturn this.firstName + \" \" + this.lastName;\n}\n}\nconst person2 = {\nfirstName:\"John\",\nlastName: \"Doe\",\n}\n// Return \"John Doe\":\nperson1.fullName.call(person2);\n\nFunction Borrowing\nWith the\nbind()\nmethod, an object can borrow a method from another object.\nThis example creates 2 objects (person and member).\nThe member object borrows the fullname method from the person object:\nExample\nconst person = {\nfirstName:\"John\",\nlastName: \"Doe\",\nfullName: function () {\nreturn this.firstName + \" \" + this.lastName;\n}\n}\nconst member = {\nfirstName:\"Hege\",\nlastName: \"Nilsen\",\n}\nlet fullName = person.fullName.bind(member);\n\nThis\nPrecedence\nTo determine which object\nthis\nrefers to; use the following precedence of order.\nPrecedence\nObject\n1\nbind()\n2\napply() and call()\n3\nObject method\n4\nGlobal scope\nIs\nthis\nin a function being called using bind()?\nIs\nthis\nin a function being called using apply()?\nIs\nthis\nin a function being called using call()?\nIs\nthis\nin an object function (method)?\nIs\nthis\nin a function in the global scope.\n\n\u2605\n+1",
+      "order": 4,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "const\nperson\n= {\nfirstName: \"John\",\nlastName : \"Doe\",\nid\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 :\u00a05566,\nfullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}\n};",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "fullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "let x = this;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "\"use strict\";\nlet x = this;",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "function myFunction() {\nreturn this;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "\"use strict\";\nfunction myFunction() {\nreturn this;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<button onclick=\"this.style.display='none'\">\nClick to \n  Remove Me!\n</button>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "const\nperson\n= {\nfirstName\u00a0 : \"John\",\nlastName\u00a0\u00a0 : \"Doe\",\nid\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 :\u00a05566,\nmyFunction : function() {\nreturn\nthis\n;\n}\n};",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "const\nperson\n= {\nfirstName: \"John\",\nlastName : \"Doe\",\nid\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 :\u00a05566,\nfullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}\n};",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "const person1 = {\nfullName: function() {\nreturn this.firstName + \" \" + this.lastName;\n}\n}\nconst person2 = {\nfirstName:\"John\",\nlastName: \"Doe\",\n}\n// Return \"John Doe\":\nperson1.fullName.call(person2);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 15,
+      "code": "const person = {\nfirstName:\"John\",\nlastName: \"Doe\",\nfullName: function () {\nreturn this.firstName + \" \" + this.lastName;\n}\n}\nconst member = {\nfirstName:\"Hege\",\nlastName: \"Nilsen\",\n}\nlet fullName = person.fullName.bind(member);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "const\nperson\n= {\n# TODO: Complete this line\nlastName : \"Doe\",\nid\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 :\u00a05566,\nfullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}\n};",
+      "solution": "const\nperson\n= {\nfirstName: \"John\",\nlastName : \"Doe\",\nid\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 :\u00a05566,\nfullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}\n};"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "fullName : function() {\nreturn\nthis\n# TODO: Complete this line\nthis\n.lastName;\n}",
+      "solution": "fullName : function() {\nreturn\nthis\n.firstName + \" \" +\nthis\n.lastName;\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "6a269e9f-7729-4cc6-9c64-cfc506823057",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e749fb20-9b23-46c5-8589-45643c5c0e03",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "3f56fd11-4216-4509-a51b-e0f93222e3c2",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is What?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "used:\nIn an object method",
+        "this"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of What is 'this'."
+    },
+    {
+      "question": "What is The\nthis\nkeyword refers to\ndifferent objects\ndepending on how it?",
+      "options": [
+        "None of the above.",
+        "used:\nIn an object method",
+        "this",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The\nthis\nkeyword refers to\ndifferent objects\ndepending on how it is 'used:\nIn an object method'."
+    }
+  ],
+  "summary": "This tutorial covers The JavaScriptthisKeyword concepts and techniques. You'll learn how to use The JavaScriptthisKeyword effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of The JavaScriptthisKeyword and how to apply it in your projects."
+}

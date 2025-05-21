@@ -1,0 +1,98 @@
+{
+  "id": "13ba4bcf-d4e2-4e8a-964b-28a5299e5a1f",
+  "title": "Vue 'errorCaptured' Lifecycle Hook",
+  "slug": "vue-errorcaptured-lifecycle-hook",
+  "metadata": {
+    "description": "Learn about Vue 'errorCaptured' Lifecycle Hook with clear explanations and practical examples.",
+    "keywords": [
+      "error",
+      "errorcaptured",
+      "component",
+      "console",
+      "lifecycle",
+      "hook",
+      "script",
+      "template",
+      "example",
+      "default"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "errorCaptured"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue 'errorCaptured' Lifecycle Hook",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Vue Lifecycle Hooks Reference\n\nExample\nUsing the\nerrorCaptured\nlifecycle hook to catch an error from a child component and create an alert to the user.\n<script>\nexport default {\n  errorCaptured() {\n    alert(\"An error occurred\");\n  }\n}\n</script>\nRun Example \u00bb\nSee more examples below.\nDefinition and Usage\nThe\nerrorCaptured\nlifecycle hook is called when an error happens in a child/descendant component.\nThis hook can be used for error handling, logging, or to display the error to the user.\nWhen using the\nerrorCaptured\nhook, it is important not to trigger a render of the component where the error comes from, because that will most likely cause an infinite loop.\nInformation about the error is available to us as three arguments in the\nerrorCaptured()\nfunction:\nThe error\nThe component that triggered the error\nThe error source type\nDefault behavior for an error that occurs, is to propagate, or 'bubble up', from the component the error occurred in. An error that occurs in a component will move up to the parent component, and continue to move further up, and eventually ends up as an error message in the console.\nBy running\nreturn false;\nfrom inside the\nerrorCaptured()\nfunction, the error will not end up in the parent component (stop propagating), and the error will also not end up as an error message in console.\nError handling can also set up using the\napp.config.errorHandler\nfunction.\nMore Examples\nExample 1\nUsing the\nerrorCaptured\nlifecycle hook to catch an error and write information about the error to the console.\nApp.vue\n:\n<template>\n  <h1>The 'errorCaptured' Lifecycle Hook</h1>\n  <p>Whenever there is an error in a child component, the errorCaptured() function is called on the parent.</p>\n  <p>Open the browser console to see the captured error details.</p>\n  <div>\n    <comp-one></comp-one>\n  </div>\n</template>\n\n<script>\nexport default {\n  errorCaptured(error,compInst,errorInfo) {\n    console.log(\"error: \", error);\n    console.log(\"compInst: \", compInst);\n    console.log(\"errorInfo: \", errorInfo);\n  }\n}\n</script>\n\n<style>\n#app > div {\n  border: dashed black 1px;\n  border-radius: 10px;\n  padding: 10px;\n  margin-top: 10px;\n  background-color: lightgreen;\n}\n</style>\nComOne.vue\n:\n<template>\n  <h2>Component</h2>\n  <p>This is the component</p>\n  <button @click=\"generateError\">Generate Error</button>\n</template>\n\n<script>\nexport default {\n  methods: {\n    generateError() {\n      this.$refs.objEl.innerHTML = \"hi\";\n    }\n  }\n}\n</script>\nRun Example \u00bb\nExample 2\nUsing the\nerrorCaptured\nlifecycle hook with\nreturn false;\nto stop the error from propagating.\nApp.vue\n:\n<template>\n  <h1>The 'errorCaptured' Lifecycle Hook</h1>\n  <p>Whenever there is an error in a child component, the errorCaptured() function is called on the parent.</p>\n  <p>Open the browser console to see the captured error details.</p>\n  <div>\n    <comp-one></comp-one>\n  </div>\n</template>\n\n<script>\nexport default {\n  errorCaptured(error,compInst,errorInfo) {\n    console.log(\"error: \", error);\n    console.log(\"compInst: \", compInst);\n    console.log(\"errorInfo: \", errorInfo);\n    return false;\n  }\n}\n</script>\n\n<style>\n#app > div {\n  border: dashed black 1px;\n  border-radius: 10px;\n  padding: 10px;\n  margin-top: 10px;\n  background-color: lightgreen;\n}\n</style>\nComOne.vue\n:\n<template>\n  <h2>Component</h2>\n  <p>This is the component</p>\n  <button @click=\"generateError\">Generate Error</button>\n</template>\n\n<script>\nexport default {\n  methods: {\n    generateError() {\n      this.$refs.objEl.innerHTML = \"hi\";\n    }\n  }\n}\n</script>\nRun Example \u00bb\nRelated Pages\nVue Tutorial:\nVue Lifecycle Hooks\nVue Tutorial:\nThe 'errorCaptured' Hook\n\nVue Lifecycle Hooks Reference\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "4e2ad2a8-b549-4c16-b9dc-83f28c4a2ac2",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "86417474-5bb7-4a87-9ba9-682733df28f5",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "44bb0cd4-44ea-46e0-a34d-ad4245810a1a",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Definition and Usage\nThe\nerrorCaptured\nlifecycle hook?",
+      "options": [
+        "None of the above.",
+        "called when an error happens in a child/descendant component",
+        "None of the above.",
+        "important not to trigger a render of the component where the error comes from"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Definition and Usage\nThe\nerrorCaptured\nlifecycle hook is 'called when an error happens in a child/descendant component'."
+    },
+    {
+      "question": "What is it?",
+      "options": [
+        "called when an error happens in a child/descendant component",
+        "None of the above.",
+        "None of the above.",
+        "important not to trigger a render of the component where the error comes from"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of it is 'important not to trigger a render of the component where the error comes from'."
+    }
+  ],
+  "summary": "This tutorial covers Vue 'errorCaptured' Lifecycle Hook concepts and techniques. You'll learn how to use Vue 'errorCaptured' Lifecycle Hook effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue 'errorCaptured' Lifecycle Hook and how to apply it in your projects."
+}

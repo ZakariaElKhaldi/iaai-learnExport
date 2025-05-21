@@ -1,0 +1,187 @@
+{
+  "id": "cde1b28a-468c-4f9b-9410-c907cac106f7",
+  "title": "MatplotlibScatter",
+  "slug": "matplotlibscatter",
+  "metadata": {
+    "description": "Learn about MatplotlibScatter with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "array",
+      "scatter",
+      "import",
+      "colors",
+      "color",
+      "matplotlib",
+      "example",
+      "colormap",
+      "pyplot",
+      "result"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 8,
+    "category": "LearnMachine Learning",
+    "subcategory": "Matplotlib Scatter"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Matplotlib\nScatter",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Creating Scatter Plots\nWith Pyplot, you can use the\nscatter()\nfunction \nto draw a scatter plot.\nThe\nscatter()\nfunction plots one dot for \neach observation. It needs two arrays of the same length, one for the values of \nthe x-axis, and one for values on the y-axis:\nExample\nA simple scatter plot:\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, y)\nplt.show()\nResult:\n\nThe observation in the example above is the result of 13 cars passing by.\nThe X-axis shows how old the car is.\nThe Y-axis shows the speed of the car when it passes.\nAre there any relationships between the observations?\nIt seems that the newer the car, the faster it drives, but that could be a coincidence, after all we only registered 13 cars.\nCompare Plots\nIn the example above, there seems to be a relationship between speed and age,\nbut what if we plot the observations from another day as well?\nWill the scatter plot tell us something else?\nExample\nDraw two plots on the same figure:\nimport matplotlib.pyplot as plt\nimport numpy as np\n#day one, the age \n  and speed of 13 cars:\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, \n  y)\n#day two, the age and speed of 15 cars:\nx = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])\ny = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])\nplt.scatter(x, y)\nplt.show()\nResult:\n\nNote:\nThe two plots are plotted with two different colors, by default blue and orange, you will learn how to change colors later in this chapter.\nBy comparing the two plots, I think it is safe to say that they both gives us the same conclusion: the newer the car, the faster it drives.\nColors\nYou can set your own color for each scatter plot with the\ncolor\nor the\nc\nargument:\nExample\nSet your own color of the markers:\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, \n  y, color = 'hotpink')\nx = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])\ny = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])\nplt.scatter(x, y, color = '#88c999')\nplt.show()\nResult:\n\nColor Each Dot\nYou can even set a specific color for each dot by using an array of colors as value for the\nc\nargument:\nNote:\nYou\ncannot\nuse the\ncolor\nargument for this, only the\nc\nargument.\nExample\nSet your own color of the markers:\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([\"red\",\"green\",\"blue\",\"yellow\",\"pink\",\"black\",\"orange\",\"purple\",\"beige\",\"brown\",\"gray\",\"cyan\",\"magenta\"])\nplt.scatter(x, y, c=colors)\nplt.show()\nResult:\n\nColorMap\nThe Matplotlib module has a number of available colormaps.\nA colormap is like a list of colors, where each color has a value that ranges \nfrom 0 to 100.\nHere is an example of a colormap:\nThis colormap is called 'viridis' and as you can see it ranges from 0, which \nis a purple color, up to 100, which is a yellow color.\nHow to Use the ColorMap\nYou can specify the colormap with the keyword argument\ncmap\nwith the value of the colormap, in this \ncase\n'viridis'\nwhich is one of the \nbuilt-in colormaps available in Matplotlib.\nIn addition you have to create an array with values (from 0 to 100), one value for each point in the scatter plot:\nExample\nCreate a color array, and specify a colormap in the scatter plot:\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([0, \n  10, 20, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100])\nplt.scatter(x, y, c=colors, cmap='viridis')\nplt.show()\nResult:\n\nYou can include the colormap in the drawing by including the\nplt.colorbar()\nstatement:\nExample\nInclude the actual colormap:\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([0, \n  10, 20, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100])\nplt.scatter(x, y, c=colors, cmap='viridis')\nplt.colorbar()\nplt.show()\nResult:\n\nAvailable ColorMaps\nYou can choose any of the built-in colormaps:\nName\nReverse\nAccent\nTry it  \u00bb\nAccent_r\nTry it  \u00bb\nBlues\nTry it  \u00bb\nBlues_r\nTry it  \u00bb\nBrBG\nTry it  \u00bb\nBrBG_r\nTry it  \u00bb\nBuGn\nTry it  \u00bb\nBuGn_r\nTry it  \u00bb\nBuPu\nTry it  \u00bb\nBuPu_r\nTry it  \u00bb\nCMRmap\nTry it  \u00bb\nCMRmap_r\nTry it  \u00bb\nDark2\nTry it  \u00bb\nDark2_r\nTry it  \u00bb\nGnBu\nTry it  \u00bb\nGnBu_r\nTry it  \u00bb\nGreens\nTry it  \u00bb\nGreens_r\nTry it  \u00bb\nGreys\nTry it  \u00bb\nGreys_r\nTry it  \u00bb\nOrRd\nTry it  \u00bb\nOrRd_r\nTry it  \u00bb\nOranges\nTry it  \u00bb\nOranges_r\nTry it  \u00bb\nPRGn\nTry it  \u00bb\nPRGn_r\nTry it  \u00bb\nPaired\nTry it  \u00bb\nPaired_r\nTry it  \u00bb\nPastel1\nTry it  \u00bb\nPastel1_r\nTry it  \u00bb\nPastel2\nTry it  \u00bb\nPastel2_r\nTry it  \u00bb\nPiYG\nTry it  \u00bb\nPiYG_r\nTry it  \u00bb\nPuBu\nTry it  \u00bb\nPuBu_r\nTry it  \u00bb\nPuBuGn\nTry it  \u00bb\nPuBuGn_r\nTry it  \u00bb\nPuOr\nTry it  \u00bb\nPuOr_r\nTry it  \u00bb\nPuRd\nTry it  \u00bb\nPuRd_r\nTry it  \u00bb\nPurples\nTry it  \u00bb\nPurples_r\nTry it  \u00bb\nRdBu\nTry it  \u00bb\nRdBu_r\nTry it  \u00bb\nRdGy\nTry it  \u00bb\nRdGy_r\nTry it  \u00bb\nRdPu\nTry it  \u00bb\nRdPu_r\nTry it  \u00bb\nRdYlBu\nTry it  \u00bb\nRdYlBu_r\nTry it  \u00bb\nRdYlGn\nTry it  \u00bb\nRdYlGn_r\nTry it  \u00bb\nReds\nTry it  \u00bb\nReds_r\nTry it  \u00bb\nSet1\nTry it  \u00bb\nSet1_r\nTry it  \u00bb\nSet2\nTry it  \u00bb\nSet2_r\nTry it  \u00bb\nSet3\nTry it  \u00bb\nSet3_r\nTry it  \u00bb\nSpectral\nTry it  \u00bb\nSpectral_r\nTry it  \u00bb\nWistia\nTry it  \u00bb\nWistia_r\nTry it  \u00bb\nYlGn\nTry it  \u00bb\nYlGn_r\nTry it  \u00bb\nYlGnBu\nTry it  \u00bb\nYlGnBu_r\nTry it  \u00bb\nYlOrBr\nTry it  \u00bb\nYlOrBr_r\nTry it  \u00bb\nYlOrRd\nTry it  \u00bb\nYlOrRd_r\nTry it  \u00bb\nafmhot\nTry it  \u00bb\nafmhot_r\nTry it  \u00bb\nautumn\nTry it  \u00bb\nautumn_r\nTry it  \u00bb\nbinary\nTry it  \u00bb\nbinary_r\nTry it  \u00bb\nbone\nTry it  \u00bb\nbone_r\nTry it  \u00bb\nbrg\nTry it  \u00bb\nbrg_r\nTry it  \u00bb\nbwr\nTry it  \u00bb\nbwr_r\nTry it  \u00bb\ncividis\nTry it  \u00bb\ncividis_r\nTry it  \u00bb\ncool\nTry it  \u00bb\ncool_r\nTry it  \u00bb\ncoolwarm\nTry it  \u00bb\ncoolwarm_r\nTry it  \u00bb\ncopper\nTry it  \u00bb\ncopper_r\nTry it  \u00bb\ncubehelix\nTry it  \u00bb\ncubehelix_r\nTry it  \u00bb\nflag\nTry it  \u00bb\nflag_r\nTry it  \u00bb\ngist_earth\nTry it  \u00bb\ngist_earth_r\nTry it  \u00bb\ngist_gray\nTry it  \u00bb\ngist_gray_r\nTry it  \u00bb\ngist_heat\nTry it  \u00bb\ngist_heat_r\nTry it  \u00bb\ngist_ncar\nTry it  \u00bb\ngist_ncar_r\nTry it  \u00bb\ngist_rainbow\nTry it  \u00bb\ngist_rainbow_r\nTry it  \u00bb\ngist_stern\nTry it  \u00bb\ngist_stern_r\nTry it  \u00bb\ngist_yarg\nTry it  \u00bb\ngist_yarg_r\nTry it  \u00bb\ngnuplot\nTry it  \u00bb\ngnuplot_r\nTry it  \u00bb\ngnuplot2\nTry it  \u00bb\ngnuplot2_r\nTry it  \u00bb\ngray\nTry it  \u00bb\ngray_r\nTry it  \u00bb\nhot\nTry it  \u00bb\nhot_r\nTry it  \u00bb\nhsv\nTry it  \u00bb\nhsv_r\nTry it  \u00bb\ninferno\nTry it  \u00bb\ninferno_r\nTry it  \u00bb\njet\nTry it  \u00bb\njet_r\nTry it  \u00bb\nmagma\nTry it  \u00bb\nmagma_r\nTry it  \u00bb\nnipy_spectral\nTry it  \u00bb\nnipy_spectral_r\nTry it  \u00bb\nocean\nTry it  \u00bb\nocean_r\nTry it  \u00bb\npink\nTry it  \u00bb\npink_r\nTry it  \u00bb\nplasma\nTry it  \u00bb\nplasma_r\nTry it  \u00bb\nprism\nTry it  \u00bb\nprism_r\nTry it  \u00bb\nrainbow\nTry it  \u00bb\nrainbow_r\nTry it  \u00bb\nseismic\nTry it  \u00bb\nseismic_r\nTry it  \u00bb\nspring\nTry it  \u00bb\nspring_r\nTry it  \u00bb\nsummer\nTry it  \u00bb\nsummer_r\nTry it  \u00bb\ntab10\nTry it  \u00bb\ntab10_r\nTry it  \u00bb\ntab20\nTry it  \u00bb\ntab20_r\nTry it  \u00bb\ntab20b\nTry it  \u00bb\ntab20b_r\nTry it  \u00bb\ntab20c\nTry it  \u00bb\ntab20c_r\nTry it  \u00bb\nterrain\nTry it  \u00bb\nterrain_r\nTry it  \u00bb\ntwilight\nTry it  \u00bb\ntwilight_r\nTry it  \u00bb\ntwilight_shifted\nTry it  \u00bb\ntwilight_shifted_r\nTry it  \u00bb\nviridis\nTry it  \u00bb\nviridis_r\nTry it  \u00bb\nwinter\nTry it  \u00bb\nwinter_r\nTry it  \u00bb\nSize\nYou can change the size of the dots with the\ns\nargument.\nJust like colors, make sure the array for sizes has the same length as the arrays for the x- and y-axis:\nExample\nSet your own size for the markers:\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nsizes = \n  np.array([20,50,100,200,500,1000,60,90,10,300,600,800,75])\nplt.scatter(x, \n  y, s=sizes)\nplt.show()\nResult:\n\nAlpha\nYou can adjust the transparency of the dots with the\nalpha\nargument.\nJust like colors, make sure the array for sizes has the same length as the arrays for the x- and y-axis:\nExample\nSet your own size for the markers:\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nsizes = \n  np.array([20,50,100,200,500,1000,60,90,10,300,600,800,75])\nplt.scatter(x, \n  y, s=sizes, alpha=0.5)\nplt.show()\nResult:\n\nCombine Color Size and Alpha\nYou can combine a colormap with different sizes of the dots. This is best visualized if the dots are transparent:\nExample\nCreate random arrays with 100 values for x-points, y-points, colors and \nsizes:\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = \n  np.random.randint(100, size=(100))\ny = np.random.randint(100, size=(100))\ncolors = np.random.randint(100, size=(100))\nsizes = 10 * np.random.randint(100, \n  size=(100))\nplt.scatter(x, y, c=colors, s=sizes, alpha=0.5, cmap='nipy_spectral')\nplt.colorbar()\nplt.show()\nResult:\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, y)\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\n#day one, the age \n  and speed of 13 cars:\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, \n  y)\n#day two, the age and speed of 15 cars:\nx = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])\ny = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])\nplt.scatter(x, y)\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, \n  y, color = 'hotpink')\nx = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])\ny = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])\nplt.scatter(x, y, color = '#88c999')\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([\"red\",\"green\",\"blue\",\"yellow\",\"pink\",\"black\",\"orange\",\"purple\",\"beige\",\"brown\",\"gray\",\"cyan\",\"magenta\"])\nplt.scatter(x, y, c=colors)\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([0, \n  10, 20, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100])\nplt.scatter(x, y, c=colors, cmap='viridis')\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\ncolors = np.array([0, \n  10, 20, 30, 40, 45, 50, 55, 60, 70, 80, 90, 100])\nplt.scatter(x, y, c=colors, cmap='viridis')\nplt.colorbar()\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nsizes = \n  np.array([20,50,100,200,500,1000,60,90,10,300,600,800,75])\nplt.scatter(x, \n  y, s=sizes)\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nsizes = \n  np.array([20,50,100,200,500,1000,60,90,10,300,600,800,75])\nplt.scatter(x, \n  y, s=sizes, alpha=0.5)\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "import matplotlib.pyplot as plt\nimport numpy as np\nx = \n  np.random.randint(100, size=(100))\ny = np.random.randint(100, size=(100))\ncolors = np.random.randint(100, size=(100))\nsizes = 10 * np.random.randint(100, \n  size=(100))\nplt.scatter(x, y, c=colors, s=sizes, alpha=0.5, cmap='nipy_spectral')\nplt.colorbar()\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import matplotlib.pyplot as plt\nimport numpy as np\n# TODO: Complete this line\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, y)\nplt.show()",
+      "solution": "import matplotlib.pyplot as plt\nimport numpy as np\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, y)\nplt.show()"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import matplotlib.pyplot as plt\nimport numpy as np\n#day one, the age \n  and speed of 13 cars:\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\n# TODO: Complete this line\n  y)\n#day two, the age and speed of 15 cars:\nx = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])\ny = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])\nplt.scatter(x, y)\nplt.show()",
+      "solution": "import matplotlib.pyplot as plt\nimport numpy as np\n#day one, the age \n  and speed of 13 cars:\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\nplt.scatter(x, \n  y)\n#day two, the age and speed of 15 cars:\nx = np.array([2,2,8,1,15,8,12,9,7,3,11,4,7,14,12])\ny = np.array([100,105,84,105,90,99,90,95,94,100,79,112,91,80,85])\nplt.scatter(x, y)\nplt.show()"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "efa3b576-84a5-47a4-b2f7-1b57d8725cb6",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "7e8772b8-807a-4a7b-a33a-9c78c39d3eb1",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "49ab74e9-8be2-4247-9bcb-dd8b39a4d5df",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The observation in the example above?",
+      "options": [
+        "None of the above.",
+        "Not a The observation in the example above.",
+        "None of the above.",
+        "the result of 13 cars passing by"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of The observation in the example above is 'the result of 13 cars passing by'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers MatplotlibScatter concepts and techniques. You'll learn how to use MatplotlibScatter effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of MatplotlibScatter and how to apply it in your projects."
+}

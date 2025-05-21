@@ -1,0 +1,304 @@
+{
+  "id": "cf668048-e3c9-445c-a9e3-8abaffed12ff",
+  "title": "JavaScriptSorting Arrays",
+  "slug": "javascriptsorting-arrays",
+  "metadata": {
+    "description": "Learn about JavaScriptSorting Arrays with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "array",
+      "sort",
+      "function",
+      "points",
+      "method",
+      "example",
+      "value",
+      "math",
+      "const",
+      "return"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 6,
+    "category": "LearnAJAX",
+    "subcategory": "JS Array Sort"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "JavaScript\nSorting Arrays",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Array Sort Methods\nAlphabetic Sort\nArray sort()\nArray reverse\n()\nArray toSorted()\nArray toReversed()\nSorting Objects\nSee Also:\nBasic Methods\nSearch Methods\nIteration Methods\nNumeric Sort\nNumeric Sort\nRandom Sort\nMath.min()\nMath.max()\nHome made Min()\nHome made Max()\nSorting an Array\nThe\nsort()\nmethod sorts an array alphabetically:\nExample\nconst fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\nfruits.sort();\n\nReversing an Array\nThe\nreverse()\nmethod reverses the elements in an array:\nExample\nconst fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\nfruits.reverse();\n\nBy combining\nsort()\nand\nreverse()\n,\nyou can sort an array in descending order:\nExample\nconst fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\nfruits.sort();\nfruits.reverse();\n\nJavaScript Array toSorted() Method\nES2023\nadded the\ntoSorted()\nmethod as a safe way\nto sort an array without altering the original array.\nThe difference between\ntoSorted()\nand\nsort()\nis that the first method creates a new array, keeping the original array unchanged, while the last method alters the original array.\nExample\nconst months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\"];\nconst sorted = months.toSorted();\n\nJavaScript Array toReversed() Method\nES2023\nadded the\ntoReversed()\nmethod as a safe way\nto reverse an array without altering the original array.\nThe difference between\ntoReversed()\nand\nreverse()\nis that the first method\ncreates a new array, keeping the original array unchanged, while the last method alters the original array.\nExample\nconst months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\"];\nconst reversed = months.toReversed();\n\nNumeric Sort\nBy default, the\nsort()\nfunction sorts values as\nstrings\n.\nThis works well for strings (\"Apple\" comes before \"Banana\").\nIf numbers are sorted as strings, \"25\" is bigger than \"100\", \nbecause \"2\" is bigger than \"1\".\nBecause of this, the\nsort()\nmethod will produce incorrect result when sorting \nnumbers.\nYou can fix this by providing a\ncompare function\n:\nExample\nconst points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(a, b){return a - b});\n\nUse the same trick to sort an array descending:\nExample\nconst points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(a, b){return b - a});\n\nThe Compare Function\nThe purpose of the compare function is to define an alternative sort \norder.\nThe compare function should return a negative, zero, or positive value, depending on \nthe arguments:\nfunction(a, b){return a - b}\nWhen the\nsort()\nfunction compares two values, it sends the values to the \ncompare function, and sorts the values according to the returned (negative, \nzero, positive) value.\nIf the result is negative,\na\nis sorted before\nb\n.\nIf the result is positive,\nb\nis sorted \nbefore\na\n.\nIf the result is 0, no changes are done with the sort order of the two \nvalues.\nExample:\nThe compare function compares all the values in the array, two values at a \ntime\n(a, b)\n.\nWhen comparing 40 and 100, the\nsort()\nmethod calls the compare function(40, 100).\nThe function calculates 40 - 100\n(a - b)\n, and \nsince the result is negative (-60),\u00a0 the sort function will sort 40 as a value lower than 100.\nYou can use this code snippet to experiment with numerically and \nalphabetically sorting:\n<button onclick=\"myFunction1()\">Sort Alphabetically</button>\n<button \n onclick=\"myFunction2()\">Sort Numerically</button>\n<p id=\"demo\"></p>\n<script>\nconst points = [40, 100, 1, 5, 25, 10];\ndocument.getElementById(\"demo\").innerHTML = points;\nfunction \n myFunction1() {\npoints.sort();\ndocument.getElementById(\"demo\").innerHTML \n = points;\n}\nfunction myFunction2() {\npoints.sort(function(a, b){return \n a - b});\ndocument.getElementById(\"demo\").innerHTML = points;\n}\n</script>\n\nSorting an Array in Random Order\nUsing a sort function, like explained above, you can sort an numeric array in random order\nExample\nconst points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(){return 0.5 - Math.random()});\n\nThe Fisher Yates Method\nThe points.sort() method in the example above is not accurate. It will favor some \nnumbers over others.\nThe most popular correct method, is called the Fisher Yates shuffle, and was \nintroduced in data science as early as 1938!\nIn JavaScript the method can be translated to this:\nExample\nconst points = [40, 100, 1, 5, 25, 10];\nfor (let i = points.length -1; i > 0; i--) {\nlet j = Math.floor(Math.random() * (i+1));\nlet k = points[i];\npoints[i] = points[j];\npoints[j] = k;\n}\n\nFind the Lowest (or Highest) Array Value\nThere are no built-in functions for finding the max or min \nvalue in an array.\nTo find the lowest or highest value you have 3 options:\nSort the array and read the first or last element\nUse Math.min() or Math.max()\nWrite a home made function\nFind Min or Max with sort()\nAfter you have sorted an array, you can use the \nindex to obtain the highest and lowest values.\nSort Ascending:\nExample\nconst points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(a, b){return a - b});\n// now points[0] contains the lowest value\n// and points[points.length-1] contains the highest value\n\nSort Descending:\nExample\nconst points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(a, b){return b - a});\n// now points[0] contains the highest value\n// and points[points.length-1] contains the lowest value\n\nNote\nSorting a whole array is a very inefficient method if you only want to find the highest (or lowest) value.\nUsing Math.min() on an Array\nYou can use\nMath.min.apply\nto find the lowest number in an array:\nExample\nfunction myArrayMin(arr) {\nreturn Math.min.apply(null, arr);\n}\n\nMath.min.apply(null, [1, 2, 3])\nis equivalent to\nMath.min(1, 2, 3)\n.\nUsing Math.max() on an Array\nYou can use\nMath.max.apply\nto find the highest number in an array:\nExample\nfunction myArrayMax(arr) {\nreturn Math.max.apply(null, arr);\n}\n\nMath.max.apply(null, [1, 2, 3])\nis equivalent to\nMath.max(1, 2, 3)\n.\nJavaScript Array Minimum Method\nThere is no built-in function for finding the lowest value in a JavaScript array.\nThe fastest code to find the lowest number is to use a\nhome made\nmethod.\nThis function loops through an array comparing each value with the lowest value found:\nExample (Find Min)\nfunction myArrayMin(arr) {\nlet len = arr.length;\nlet min = Infinity;\nwhile (len--) {\nif (arr[len] < min) {\nmin = arr[len];\n}\n}\nreturn min;\n}\n\nJavaScript Array Maximum Method\nThere is no built-in function for finding the highest value in a JavaScript array.\nThe fastest code to find the highest number is to use a\nhome made\nmethod.\nThis function loops through an array comparing each value with the highest value found:\nExample (Find Max)\nfunction myArrayMax(arr) {\nlet len = arr.length;\nlet max = -Infinity;\nwhile (len--) {\nif (arr[len] > max) {\nmax = arr[len];\n}\n}\nreturn max;\n}\n\nSorting Object Arrays\nJavaScript arrays often contain objects:\nExample\nconst cars = [\n{type:\"Volvo\", year:2016},\n{type:\"Saab\", year:2001},\n{type:\"BMW\", year:2010}\n];\nEven if objects have properties of different data types, the\nsort()\nmethod \ncan be used to sort the array.\nThe solution is to write a compare function to compare the property values:\nExample\ncars.sort(function(a, b){return a.year - b.year});\n\nComparing string properties is a little more complex:\nExample\ncars.sort(function(a, b){\nlet x = a.type.toLowerCase();\nlet y = b.type.toLowerCase();\nif (x < y) {return -1;}\nif (x > y) {return 1;}\nreturn 0;\n});\n\nStable Array sort()\nES2019\nrevised\nthe Array\nsort()\nmethod.\nBefore 2019, the specification allowed unstable sorting algorithms such as QuickSort.\nAfter ES2019, browsers must use a stable sorting algorithm:\nWhen sorting elements on a value, the elements must keep their relative position to other elements with the same value.\nExample\nconst myArr = [\n{name:\"X00\",price:100 },\n{name:\"X01\",price:100 },\n{name:\"X02\",price:100 },\n{name:\"X03\",price:100 },\n{name:\"X04\",price:110 },\n{name:\"X05\",price:110 },\n{name:\"X06\",price:110 },\n{name:\"X07\",price:110 }\n];\n\nIn the example above, when sorting on price, the result is not allowed to come out with the names\nin an other relative position like this:\nX01 100\nX03 100\nX00 100\nX03 100\nX05 110\nX04 110\nX06 110\nX07 110\nComplete Array Reference\nFor a complete Array reference, go to our:\nComplete JavaScript Array Reference\n.\nThe reference contains descriptions and examples of all Array \nproperties and methods.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "const fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\nfruits.sort();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "const fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\nfruits.reverse();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "const fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\nfruits.sort();\nfruits.reverse();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "const months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\"];\nconst sorted = months.toSorted();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "const months = [\"Jan\", \"Feb\", \"Mar\", \"Apr\"];\nconst reversed = months.toReversed();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "const points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(a, b){return a - b});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "const points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(a, b){return b - a});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "function(a, b){return a - b}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 11,
+      "code": "<button onclick=\"myFunction1()\">Sort Alphabetically</button>\n<button \n onclick=\"myFunction2()\">Sort Numerically</button>\n<p id=\"demo\"></p>\n<script>\nconst points = [40, 100, 1, 5, 25, 10];\ndocument.getElementById(\"demo\").innerHTML = points;\nfunction \n myFunction1() {\npoints.sort();\ndocument.getElementById(\"demo\").innerHTML \n = points;\n}\nfunction myFunction2() {\npoints.sort(function(a, b){return \n a - b});\ndocument.getElementById(\"demo\").innerHTML = points;\n}\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 12,
+      "code": "const points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(){return 0.5 - Math.random()});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 13,
+      "code": "const points = [40, 100, 1, 5, 25, 10];\nfor (let i = points.length -1; i > 0; i--) {\nlet j = Math.floor(Math.random() * (i+1));\nlet k = points[i];\npoints[i] = points[j];\npoints[j] = k;\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 14,
+      "code": "const points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(a, b){return a - b});\n// now points[0] contains the lowest value\n// and points[points.length-1] contains the highest value",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 15,
+      "code": "const points = [40, 100, 1, 5, 25, 10];\npoints.sort(function(a, b){return b - a});\n// now points[0] contains the highest value\n// and points[points.length-1] contains the lowest value",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 16,
+      "code": "function myArrayMin(arr) {\nreturn Math.min.apply(null, arr);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 17,
+      "code": "function myArrayMax(arr) {\nreturn Math.max.apply(null, arr);\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (Find Min)",
+      "content": "",
+      "order": 18,
+      "code": "function myArrayMin(arr) {\nlet len = arr.length;\nlet min = Infinity;\nwhile (len--) {\nif (arr[len] < min) {\nmin = arr[len];\n}\n}\nreturn min;\n}",
+      "language": "javascript",
+      "explanation": "Example of example (find min)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example (Find Max)",
+      "content": "",
+      "order": 19,
+      "code": "function myArrayMax(arr) {\nlet len = arr.length;\nlet max = -Infinity;\nwhile (len--) {\nif (arr[len] > max) {\nmax = arr[len];\n}\n}\nreturn max;\n}",
+      "language": "javascript",
+      "explanation": "Example of example (find max)"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 20,
+      "code": "const cars = [\n{type:\"Volvo\", year:2016},\n{type:\"Saab\", year:2001},\n{type:\"BMW\", year:2010}\n];",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 21,
+      "code": "cars.sort(function(a, b){return a.year - b.year});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 22,
+      "code": "cars.sort(function(a, b){\nlet x = a.type.toLowerCase();\nlet y = b.type.toLowerCase();\nif (x < y) {return -1;}\nif (x > y) {return 1;}\nreturn 0;\n});",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 23,
+      "code": "const myArr = [\n{name:\"X00\",price:100 },\n{name:\"X01\",price:100 },\n{name:\"X02\",price:100 },\n{name:\"X03\",price:100 },\n{name:\"X04\",price:110 },\n{name:\"X05\",price:110 },\n{name:\"X06\",price:110 },\n{name:\"X07\",price:110 }\n];",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 24,
+      "code": "X01 100\nX03 100\nX00 100\nX03 100\nX05 110\nX04 110\nX06 110\nX07 110",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "const fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\nfruits.sort();"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "const fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\nfruits.reverse();"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "0fc3b13b-accf-42dc-9bf5-50c89b6f30ad",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "26c8fa97-1b68-40b9-abed-d49d7000f5dd",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e8ec4dab-850e-4948-9a5c-d55726e48f5d",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers JavaScriptSorting Arrays concepts and techniques. You'll learn how to use JavaScriptSorting Arrays effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JavaScriptSorting Arrays and how to apply it in your projects."
+}

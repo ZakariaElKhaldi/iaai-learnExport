@@ -1,0 +1,178 @@
+{
+  "id": "38b680cf-5661-4846-aa4d-42bf002d4ff1",
+  "title": "Node.jsURL Module",
+  "slug": "nodejsurl-module",
+  "metadata": {
+    "description": "Learn about Node.jsURL Module with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "html",
+      "node",
+      "require",
+      "http",
+      "returns",
+      "file",
+      "parse",
+      "module",
+      "address",
+      "localhost"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnRaspberry Pi",
+    "subcategory": "Node.js URL Module"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Node.js\nURL Module",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The Built-in URL Module\nThe URL module splits up a web address into readable parts.\nTo include the URL module, use the\nrequire()\nmethod:\nvar url = require('url');\nParse an address with the\nurl.parse()\nmethod, and it will return a URL object with each part of the address as \nproperties:\nExample\nSplit a web address into readable parts:\nvar url = require('url');\nvar adr = 'http://localhost:8080/default.htm?year=2017&month=february';\nvar q = url.parse(adr, true);\nconsole.log(q.host); //returns 'localhost:8080'\nconsole.log(q.pathname); //returns '/default.htm'\nconsole.log(q.search); //returns '?year=2017&month=february'\nvar qdata = q.query; //returns an object: { year: 2017, month: 'february' }\nconsole.log(qdata.month); //returns 'february'\nRun example \u00bb\nNode.js File Server\nNow we know how to parse the query string, and in the \nlearned how to make Node.js behave as a file \nserver. Let us combine the two, and serve the file requested by the client.\nCreate two html files and save them in the same folder as your node.js files.\nsummer.html\n<!DOCTYPE html>\n<html>\n<body>\n<h1>Summer</h1>\n<p>I love \n  the sun!</p>\n</body>\n</html>\nwinter.html\n<!DOCTYPE html>\n<html>\n<body>\n<h1>Winter</h1>\n<p>I love \n  the snow!</p>\n</body>\n</html>\nCreate a Node.js file that opens the requested file and returns the content \nto the client. If anything goes wrong, throw a 404 error:\ndemo_fileserver.js:\nvar http = require('http');\nvar url = require('url');\nvar fs = require('fs');\nhttp.createServer(function \n  (req, res) {\nvar q = url.parse(req.url, true);\nvar \n    filename = \".\" + q.pathname;\nfs.readFile(filename, \n    function(err, data) {\nif (err) {\nres.writeHead(404, {'Content-Type': 'text/html'});\nreturn res.end(\"404 Not Found\");\n}\nres.writeHead(200, {'Content-Type': 'text/html'});\nres.write(data);\nreturn res.end();\n});\n}).listen(8080);\nRemember to initiate the file:\nInitiate demo_fileserver.js:\nC:\\Users\\\nYour Name\n>node demo_fileserver.js\nIf you have followed the same steps on your computer, you should see two \ndifferent results when opening these two addresses:\nhttp://localhost:8080/summer.html\nWill produce this result:\nSummer\nI love the sun!\nhttp://localhost:8080/winter.html\nWill produce this result:\nWinter\nI love the snow!\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "var url = require('url');",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "var url = require('url');\nvar adr = 'http://localhost:8080/default.htm?year=2017&month=february';\nvar q = url.parse(adr, true);\nconsole.log(q.host); //returns 'localhost:8080'\nconsole.log(q.pathname); //returns '/default.htm'\nconsole.log(q.search); //returns '?year=2017&month=february'\nvar qdata = q.query; //returns an object: { year: 2017, month: 'february' }\nconsole.log(qdata.month); //returns 'february'",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<!DOCTYPE html>\n<html>\n<body>\n<h1>Summer</h1>\n<p>I love \n  the sun!</p>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<!DOCTYPE html>\n<html>\n<body>\n<h1>Winter</h1>\n<p>I love \n  the snow!</p>\n</body>\n</html>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "var http = require('http');\nvar url = require('url');\nvar fs = require('fs');\nhttp.createServer(function \n  (req, res) {\nvar q = url.parse(req.url, true);\nvar \n    filename = \".\" + q.pathname;\nfs.readFile(filename, \n    function(err, data) {\nif (err) {\nres.writeHead(404, {'Content-Type': 'text/html'});\nreturn res.end(\"404 Not Found\");\n}\nres.writeHead(200, {'Content-Type': 'text/html'});\nres.write(data);\nreturn res.end();\n});\n}).listen(8080);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "C:\\Users\\\nYour Name\n>node demo_fileserver.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "Summer\nI love the sun!",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "Winter\nI love the snow!",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your javascript code here",
+      "solution": "var url = require('url');"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "var url = require('url');\nvar adr = 'http://localhost:8080/default.htm?year=2017&month=february';\nvar q = url.parse(adr, true);\n# TODO: Complete this line\nconsole.log(q.pathname); //returns '/default.htm'\nconsole.log(q.search); //returns '?year=2017&month=february'\nvar qdata = q.query; //returns an object: { year: 2017, month: 'february' }\nconsole.log(qdata.month); //returns 'february'",
+      "solution": "var url = require('url');\nvar adr = 'http://localhost:8080/default.htm?year=2017&month=february';\nvar q = url.parse(adr, true);\nconsole.log(q.host); //returns 'localhost:8080'\nconsole.log(q.pathname); //returns '/default.htm'\nconsole.log(q.search); //returns '?year=2017&month=february'\nvar qdata = q.query; //returns an object: { year: 2017, month: 'february' }\nconsole.log(qdata.month); //returns 'february'"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "edd87812-77a5-46e4-8c0b-85bd108ec927",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "0096e09a-90b6-41fa-9699-39499ab8b9b0",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ce71fc62-20a2-42d7-849f-3a33194c4f0b",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers Node.jsURL Module concepts and techniques. You'll learn how to use Node.jsURL Module effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Node.jsURL Module and how to apply it in your projects."
+}

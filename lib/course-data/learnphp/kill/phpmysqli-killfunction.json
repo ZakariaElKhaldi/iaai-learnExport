@@ -1,0 +1,124 @@
+{
+  "id": "e9e75285-9f21-4660-8af9-6d2743531f8e",
+  "title": "PHPmysqli kill()Function",
+  "slug": "phpmysqli-killfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli kill()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "mysqli",
+      "kill",
+      "connection",
+      "thread",
+      "style",
+      "mysql",
+      "processid",
+      "example",
+      "return",
+      "parameter"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "kill"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli kill()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nReturn the thread ID for the current connection, then kill the connection:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Get thread id\n$t_id = $mysqli -> thread_id;\n// Kill \n  connection\n$mysqli -> kill($t_id);\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe kill() / mysqli_kill() function asks the server to kill a MySQL thread specified by the\nprocessid\nparameter.\nSyntax\nObject oriented style:\n$mysqli -> \n  kill(\nprocessid\n)\nProcedural style:\nmysqli_kill(\nconnection, processid\n)\nParameter Values\nParameter\nDescription\nconnection\nRequired. Specifies the MySQL connection to use\nprocessid\nRequired. The thread ID returned from\nthread_id()\nTechnical Details\nReturn Value:\nTRUE on success. FALSE on failure\nPHP Version:\n5+\nExample\nReturn the thread ID for the current connection, then kill the connection:\n<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Get thread id\n$t_id=mysqli_thread_id($con);\n// Kill connection\nmysqli_kill($con, $t_id);\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Get thread id\n$t_id = $mysqli -> thread_id;\n// Kill \n  connection\n$mysqli -> kill($t_id);\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Get thread id\n$t_id=mysqli_thread_id($con);\n// Kill connection\nmysqli_kill($con, $t_id);\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Get thread id\n# TODO: Complete this line\n// Kill \n  connection\n$mysqli -> kill($t_id);\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . $mysqli -> connect_error;\nexit();\n}\n// Get thread id\n$t_id = $mysqli -> thread_id;\n// Kill \n  connection\n$mysqli -> kill($t_id);\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n# TODO: Complete this line\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Get thread id\n$t_id=mysqli_thread_id($con);\n// Kill connection\nmysqli_kill($con, $t_id);\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno())\u00a0{\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n// Get thread id\n$t_id=mysqli_thread_id($con);\n// Kill connection\nmysqli_kill($con, $t_id);\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "62e985d3-ef85-40a8-bf79-4ded16ed939f",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "a1ee077b-aaf2-4ab1-afb6-3f1659486c03",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "24097ae3-969b-4b5a-9235-a66ee24ad6e2",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli kill()Function concepts and techniques. You'll learn how to use PHPmysqli kill()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli kill()Function and how to apply it in your projects."
+}

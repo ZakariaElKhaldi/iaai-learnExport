@@ -1,0 +1,112 @@
+{
+  "id": "2fe61ee2-1bf4-4ddc-9697-fe0c671c691e",
+  "title": "ASP AJAX",
+  "slug": "asp-ajax",
+  "metadata": {
+    "description": "Learn about ASP AJAX with clear explanations and practical examples.",
+    "keywords": [
+      "ajax",
+      "server",
+      "function",
+      "page",
+      "example",
+      "xmlhttp",
+      "response",
+      "input",
+      "html",
+      "txthint"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnASP",
+    "subcategory": "ASP AJAX"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ASP AJAX",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "AJAX is about updating parts of a web page, without reloading the whole page.\nWhat is AJAX?\nAJAX = Asynchronous JavaScript and XML.\nAJAX is a technique for creating fast and dynamic web pages.\nAJAX allows web pages to be updated asynchronously by exchanging small \namounts of data with the server behind the scenes. This means that it is \npossible to update parts of a web page, without reloading the whole page.\nClassic web pages, (which do not use AJAX) must reload the entire page if the \ncontent should change.\nExamples of applications using AJAX: Google Maps, Gmail, Youtube, and \nFacebook tabs.\nHow AJAX Works\nAJAX is Based on Internet Standards\nAJAX is based on internet standards, and uses a combination of:\nXMLHttpRequest object (to exchange data asynchronously with a server)\nJavaScript/DOM (to display/interact with the information)\nCSS (to style the data)\nXML (often used as the format for transferring data)\nAJAX applications are browser- and platform-independent!\nGoogle Suggest\nAJAX was made popular in 2005 by Google, with Google Suggest.\nGoogle Suggest\nis using AJAX to create a very dynamic web interface: \nWhen you start typing in Google's search box, a JavaScript sends the letters off \nto a server and the server returns a list of suggestions.\nStart Using AJAX Today\nIn our ASP tutorial, we will demonstrate how AJAX can update parts of a web \npage, without reloading the whole page. The server script will be written in ASP.\nIf you want to learn more about AJAX, visit our\nAJAX tutorial\n.\nAJAX ASP Example\nThe following example will demonstrate how a web page can communicate with a \nweb server while a user type characters in an input field:\nExample\nStart typing a name in the input field below:\nFirst name:\nSuggestions:\nExample Explained\nIn the example above, when a user types a character in the input field, a function \ncalled \"showHint()\" is executed.\nThe function is triggered by the onkeyup event.\nHere is the HTML code:\nExample\n<html>\n<head>\n<script>\nfunction showHint(str) {\nif (str.length == 0) {\ndocument.getElementById(\"txtHint\").innerHTML = \"\";\nreturn;\n} else {\nvar xmlhttp = new \n    XMLHttpRequest();\nxmlhttp.onreadystatechange = function() \n    {\nif (this.readyState == 4 && \n    this.status == 200) {\ndocument.getElementById(\"txtHint\").innerHTML = \n    this.responseText;\n}\n};\nxmlhttp.open(\"GET\", \"gethint.asp?q=\" + str, true);\nxmlhttp.send();\n}\n}\n</script>\n</head>\n<body>\n<p><b>Start typing a name in the \n    input field below:</b></p>\n<form>\nFirst name: <input type=\"text\" \n    onkeyup=\"showHint(this.value)\">\n</form>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n</body>\n</html>\n\nCode explanation:\nFirst, check if the input field is empty (str.length == 0). If it is, clear the \ncontent of the txtHint placeholder and exit the function.\nHowever, if the input field is not empty, do the following:\nCreate an XMLHttpRequest object\nCreate the function to be executed when the server response is ready\nSend the request off to an ASP file (gethint.asp) on the server\nNotice that q parameter is added gethint.asp?q=\"+str\nThe str variable holds the content of the input field\nThe ASP File - \"gethint.asp\"\nThe ASP file checks an array of names, and returns the corresponding name(s) to the \nbrowser:\n<%\nresponse.expires=-1\ndim a(30)\n'Fill up array with names\na(1)=\"Anna\"\na(2)=\"Brittany\"\na(3)=\"Cinderella\"\na(4)=\"Diana\"\na(5)=\"Eva\"\na(6)=\"Fiona\"\na(7)=\"Gunda\"\na(8)=\"Hege\"\na(9)=\"Inga\"\na(10)=\"Johanna\"\na(11)=\"Kitty\"\na(12)=\"Linda\"\na(13)=\"Nina\"\na(14)=\"Ophelia\"\na(15)=\"Petunia\"\na(16)=\"Amanda\"\na(17)=\"Raquel\"\na(18)=\"Cindy\"\na(19)=\"Doris\"\na(20)=\"Eve\"\na(21)=\"Evita\"\na(22)=\"Sunniva\"\na(23)=\"Tove\"\na(24)=\"Unni\"\na(25)=\"Violet\"\na(26)=\"Liza\"\na(27)=\"Elizabeth\"\na(28)=\"Ellen\"\na(29)=\"Wenche\"\na(30)=\"Vicky\"\n'get the q parameter from URL\nq=ucase(request.querystring(\"q\"))\n'lookup all hints from array if length of q>0\nif len(q)>0 then\nhint=\"\"\nfor i=1 to 30\nif q=ucase(mid(a(i),1,len(q))) then\nif hint=\"\" then\nhint=a(i)\nelse\nhint=hint & \" , \" & a(i)\nend if\nend if\n\nend if\n'Output \"no suggestion\" if no hint were found\n'or output the correct values\nif hint=\"\" then\nresponse.write(\"no suggestion\")\nelse\nresponse.write(hint)\nend if\n%>\nAJAX can be used for interactive communication with a database.\nAJAX Database Example\nThe following example will demonstrate how a web page can fetch \ninformation from a database with AJAX:\nExample\nSelect a customer:\nAlfreds Futterkiste\nNorth/South\nWolski Zajazd\nCustomer info will be listed here...\n\nExample Explained - The HTML Page\nWhen a user selects a customer in the dropdown list above, a function called \"showCustomer()\" is executed. The \nfunction is triggered by the \"onchange\" event:\n<!DOCTYPE html>\n<html>\n<head>\n<script>\nfunction showCustomer(str)\n{\nif (str==\"\")\n{\ndocument.getElementById(\"txtHint\").innerHTML=\"\";\nreturn;\n}\nif (window.XMLHttpRequest)\n{// code for IE7+, Firefox, Chrome, Opera, Safari\nxmlhttp=new XMLHttpRequest();\n}\nelse\n{// code for IE6, IE5\nxmlhttp=new ActiveXObject(\"Microsoft.XMLHTTP\");\n}\nxmlhttp.onreadystatechange=function()\n{\nif (this.readyState==4 && this.status==200)\n{\ndocument.getElementById(\"txtHint\").innerHTML=this.responseText;\n}\n}\nxmlhttp.open(\"GET\",\"getcustomer.asp?q=\"+str,true);\nxmlhttp.send();\n}\n</script>\n</head\n<body>\n<form>\n<select name=\"customers\" onchange=\"showCustomer(this.value)\">\n<option value=\"\">Select a customer:</option>\n<option value=\"ALFKI\">Alfreds Futterkiste</option>\n<option value=\"NORTS \">North/South</option>\n<option value=\"WOLZA\">Wolski Zajazd</option>\n</select>\n</form>\n<\n<div id=\"txtHint\">Customer info will be listed here...</div>\n</body>\n</html>\nSource code explanation:\nIf no customer is selected (str.length==0), the function clears the \ncontent of the txtHint placeholder and exits the function.\nIf a customer is selected, the showCustomer() function executes the following:\nCreate an XMLHttpRequest object\nCreate the function to be executed when the server response is ready\nSend the request off to a file on the server\nNotice that a parameter (q) is added to the URL (with the content of the \n    dropdown list)\nThe ASP File\nThe page on the server called by the JavaScript above is an ASP file called \"getcustomer.asp\".\nThe source code in \"getcustomer.asp\" runs a query against a database, and returns the result in an HTML \ntable:\n<%\nresponse.expires=-1\nsql=\"SELECT * FROM CUSTOMERS WHERE CUSTOMERID=\"\nsql=sql & \"'\" & request.querystring(\"q\") & \"'\"\nset conn=Server.CreateObject(\"ADODB.Connection\")\nconn.Provider=\"Microsoft.Jet.OLEDB.4.0\"\nconn.Open(Server.Mappath(\"/\ndatafolder\n/northwind.mdb\"))\nset rs=Server.CreateObject(\"ADODB.recordset\")\nrs.Open sql,conn\nresponse.write(\"<table>\")\ndo until rs.EOF\nfor each x in rs.Fields\nresponse.write(\"<tr><td><b>\" & x.name & \"</b></td>\")\nresponse.write(\"<td>\" & x.value & \"</td></tr>\")\n\nrs.Move\nloop\nresponse.write(\"</table>\")\n%>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<html>\n<head>\n<script>\nfunction showHint(str) {\nif (str.length == 0) {\ndocument.getElementById(\"txtHint\").innerHTML = \"\";\nreturn;\n} else {\nvar xmlhttp = new \n    XMLHttpRequest();\nxmlhttp.onreadystatechange = function() \n    {\nif (this.readyState == 4 && \n    this.status == 200) {\ndocument.getElementById(\"txtHint\").innerHTML = \n    this.responseText;\n}\n};\nxmlhttp.open(\"GET\", \"gethint.asp?q=\" + str, true);\nxmlhttp.send();\n}\n}\n</script>\n</head>\n<body>\n<p><b>Start typing a name in the \n    input field below:</b></p>\n<form>\nFirst name: <input type=\"text\" \n    onkeyup=\"showHint(this.value)\">\n</form>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n</body>\n</html>",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<html>\n<head>\n<script>\nfunction showHint(str) {\nif (str.length == 0) {\ndocument.getElementById(\"txtHint\").innerHTML = \"\";\nreturn;\n} else {\nvar xmlhttp = new \n    XMLHttpRequest();\nxmlhttp.onreadystatechange = function() \n    {\nif (this.readyState == 4 && \n    this.status == 200) {\ndocument.getElementById(\"txtHint\").innerHTML = \n    this.responseText;\n}\n};\nxmlhttp.open(\"GET\", \"gethint.asp?q=\" + str, true);\nxmlhttp.send();\n}\n}\n</script>\n</head>\n<body>\n<p><b>Start typing a name in the \n    input field below:</b></p>\n# TODO: Complete this line\nFirst name: <input type=\"text\" \n    onkeyup=\"showHint(this.value)\">\n</form>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n</body>\n</html>",
+      "solution": "<html>\n<head>\n<script>\nfunction showHint(str) {\nif (str.length == 0) {\ndocument.getElementById(\"txtHint\").innerHTML = \"\";\nreturn;\n} else {\nvar xmlhttp = new \n    XMLHttpRequest();\nxmlhttp.onreadystatechange = function() \n    {\nif (this.readyState == 4 && \n    this.status == 200) {\ndocument.getElementById(\"txtHint\").innerHTML = \n    this.responseText;\n}\n};\nxmlhttp.open(\"GET\", \"gethint.asp?q=\" + str, true);\nxmlhttp.send();\n}\n}\n</script>\n</head>\n<body>\n<p><b>Start typing a name in the \n    input field below:</b></p>\n<form>\nFirst name: <input type=\"text\" \n    onkeyup=\"showHint(this.value)\">\n</form>\n<p>Suggestions: <span id=\"txtHint\"></span></p>\n</body>\n</html>"
+    },
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your javascript function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "0fd97432-ac17-45cf-a6e5-310adfa8b0fb",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "65c9968b-f51c-4829-bf01-e0ac88b8840a",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "a2a6dc66-9546-4453-8a81-18798e55dd8d",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is ASP AJAX\n\nAJAX?",
+      "options": [
+        "AJAX",
+        "about updating parts of a web page",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of ASP AJAX\n\nAJAX is 'about updating parts of a web page'."
+    },
+    {
+      "question": "What is What?",
+      "options": [
+        "about updating parts of a web page",
+        "None of the above.",
+        "AJAX",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of What is 'AJAX'."
+    }
+  ],
+  "summary": "This tutorial covers ASP AJAX concepts and techniques. You'll learn how to use ASP AJAX effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ASP AJAX and how to apply it in your projects."
+}

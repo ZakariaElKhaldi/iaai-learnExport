@@ -1,0 +1,142 @@
+{
+  "id": "9878ffe8-e05a-44d0-8d6c-9d1b9063def5",
+  "title": "ChatGPT-4 Code Debug",
+  "slug": "chatgpt-4-code-debug",
+  "metadata": {
+    "description": "Learn about ChatGPT-4 Code Debug with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "code",
+      "class",
+      "chatgpt",
+      "html",
+      "body",
+      "width",
+      "href",
+      "https",
+      "style",
+      "background"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnChatGPT-4",
+    "subcategory": "ChatGPT Debug Code"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "ChatGPT-4 Code Debug",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Using ChatGPT-4 to Debug Code\nUsing ChatGPT-4 to write code is like having an experienced programmer go through your code.\nIt can be difficult to spot the error in your own code, and even more difficult in code written by others.\nChatGPT can save you a lot of time debugging code.\nNarrow Down the Problem\nBefore using Generative AI to help you, see if you can narrow down the problem and collect more information.\nFigure out (if you can):\nWhich part of the code is causing the error?\nAre there any error messages?\nWhat happens, and what was supposed to happen?\nChatGPT can more accurately find the problem with more information.\nProblem Code\nLast chapter, we got ChatGPT to write us some code for a web page. Now we have added a new design to the page, and the code no longer functions:\nExample\n<!DOCTYPE html>\n<html>\n<head>\n<title>W3.CSS Template</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"https://www..com/w3css/4/w3.css\">\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Raleway\">\n<style>\nbody,h1 {font-family: \"Raleway\", sans-serif}\nbody, html {height: 100%}\n.bgimg {\nbackground-image: url('/w3images/forestbridge.jpg');\nmin-height: 100%;\nbackground-position: center;\nbackground-size: cover;\n}\n</style>\n</head>\n<body>\n<div class=\"bgimg w3-display-container w3-animate-opacity w3-text-white\">\n<div class=\"w3-display-middle\">\n<h1 class=\"w3-jumbo w3-animate-top\">WEEKEND</h1>\n<hr class=\"w3-border-grey\" style=\"margin:auto;width:40%\">\n<p class=\"w3-large w3-center\">35 days left</p>\n</div>\n<div class=\"w3-display-bottomleft w3-padding-large\">\nPowered by <a href=\"https://www..com/w3css/default.asp\" target=\"_blank\">w3.css</a>\n</div>\n</div>\n\nWe know which part of the code we changed, and if we press F12 (or go into developer mode for our browser), we can see the error in \"Console\":\nUncaught TypeError: Cannot set properties of null (setting 'innerText')\nat countdownToSaturday\nWith that information, lets ask ChatGPT to debug.\nExample\nWith the following prompt:\nThe countdown function of the following page no longer functions.\n<!DOCTYPE html>\n<html>\n<head>\n<title>W3.CSS Template</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"https://www..com/w3css/4/w3.css\">\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Raleway\">\n<style>\nbody,h1 {font-family: \"Raleway\", sans-serif}\nbody, html {height: 100%}\n.bgimg {\nbackground-image: url('/w3images/forestbridge.jpg');\nmin-height: 100%;\nbackground-position: center;\nbackground-size: cover;\n}\n</style>\n</head>\n<body>\n<div class=\"bgimg w3-display-container w3-animate-opacity w3-text-white\">\n<div class=\"w3-display-middle\">\n<h1 class=\"w3-jumbo w3-animate-top\">WEEKEND</h1>\n<hr class=\"w3-border-grey\" style=\"margin:auto;width:40%\">\n<p class=\"w3-large w3-center\">35 days left</p>\n</div>\n<div class=\"w3-display-bottomleft w3-padding-large\">\nPowered by <a href=\"https://www..com/w3css/default.asp\" target=\"_blank\">w3.css</a>\n</div>\n</div>\n<script>\nfunction countdownToSaturday() {\nvar now = new Date();\nvar dayOfWeek = now.getDay(); //0-6 where 0 is Sunday, 6 is Saturday\nvar daysToSaturday = (dayOfWeek < 6) ? (6 - dayOfWeek) : 0; // if it's already Saturday, no days remain\nvar currentHour = now.getHours();\nvar hoursToSaturday = 0;\n// If it's not Saturday or if it's Saturday but before 12:00 (noon),\n// consider the remaining hours to Saturday noon\nif (daysToSaturday > 0 || (daysToSaturday === 0 && currentHour < 12)) {\nhoursToSaturday = (24 - currentHour + 12) % 24;\n}\nvar days = daysToSaturday > 0 ? daysToSaturday + \" day(s), \" : \"\";\nvar hours = hoursToSaturday > 0 ? hoursToSaturday + \" hour(s)\" : \"\";\n// if it's Saturday and past 12:00 (noon), the countdown should return \"The Weekend has landed\".\nif (daysToSaturday === 0 && currentHour >= 12) {\ndocument.getElementById('weekend_coundown').innerText = \"The Weekend has landed\";\n} else {\ndocument.getElementById('weekend_coundown').innerText = days + hours;\n}\n}\ncountdownToSaturday();\nsetInterval(countdownToSaturday, 1000 * 60 * 60); // update the countdown every hour\n</script>\n</body>\n</html>\nI get the following error:\nUncaught TypeError: Cannot set properties of null (setting 'innerText')\nat countdownToSaturday\nA response from ChatGPT-4 could be:\nReview the Code\nGoing through the response from ChatGPT, it seems likely to work.\nWe accidentally removed the element which should show the text. Adding the correct ID to the new element should work.\nTest\nAdd the fix to the code and test it:\nExample\n<p id=\"weekend_coundown\" class=\"w3-large w3-center\">35 days left</p>\n\nIt works!\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<!DOCTYPE html>\n<html>\n<head>\n<title>W3.CSS Template</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Raleway\">\n<style>\nbody,h1 {font-family: \"Raleway\", sans-serif}\nbody, html {height: 100%}\n.bgimg {\nbackground-image: url('/w3images/forestbridge.jpg');\nmin-height: 100%;\nbackground-position: center;\nbackground-size: cover;\n}\n</style>\n</head>\n<body>\n<div class=\"bgimg w3-display-container w3-animate-opacity w3-text-white\">\n<div class=\"w3-display-middle\">\n<h1 class=\"w3-jumbo w3-animate-top\">WEEKEND</h1>\n<hr class=\"w3-border-grey\" style=\"margin:auto;width:40%\">\n<p class=\"w3-large w3-center\">35 days left</p>\n</div>\n<div class=\"w3-display-bottomleft w3-padding-large\">\nPowered by <a href=\"https://www.w3schools.com/w3css/default.asp\" target=\"_blank\">w3.css</a>\n</div>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "Uncaught TypeError: Cannot set properties of null (setting 'innerText')\nat countdownToSaturday",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "The countdown function of the following page no longer functions.\n<!DOCTYPE html>\n<html>\n<head>\n<title>W3.CSS Template</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Raleway\">\n<style>\nbody,h1 {font-family: \"Raleway\", sans-serif}\nbody, html {height: 100%}\n.bgimg {\nbackground-image: url('/w3images/forestbridge.jpg');\nmin-height: 100%;\nbackground-position: center;\nbackground-size: cover;\n}\n</style>\n</head>\n<body>\n<div class=\"bgimg w3-display-container w3-animate-opacity w3-text-white\">\n<div class=\"w3-display-middle\">\n<h1 class=\"w3-jumbo w3-animate-top\">WEEKEND</h1>\n<hr class=\"w3-border-grey\" style=\"margin:auto;width:40%\">\n<p class=\"w3-large w3-center\">35 days left</p>\n</div>\n<div class=\"w3-display-bottomleft w3-padding-large\">\nPowered by <a href=\"https://www.w3schools.com/w3css/default.asp\" target=\"_blank\">w3.css</a>\n</div>\n</div>\n<script>\nfunction countdownToSaturday() {\nvar now = new Date();\nvar dayOfWeek = now.getDay(); //0-6 where 0 is Sunday, 6 is Saturday\nvar daysToSaturday = (dayOfWeek < 6) ? (6 - dayOfWeek) : 0; // if it's already Saturday, no days remain\nvar currentHour = now.getHours();\nvar hoursToSaturday = 0;\n// If it's not Saturday or if it's Saturday but before 12:00 (noon),\n// consider the remaining hours to Saturday noon\nif (daysToSaturday > 0 || (daysToSaturday === 0 && currentHour < 12)) {\nhoursToSaturday = (24 - currentHour + 12) % 24;\n}\nvar days = daysToSaturday > 0 ? daysToSaturday + \" day(s), \" : \"\";\nvar hours = hoursToSaturday > 0 ? hoursToSaturday + \" hour(s)\" : \"\";\n// if it's Saturday and past 12:00 (noon), the countdown should return \"The Weekend has landed\".\nif (daysToSaturday === 0 && currentHour >= 12) {\ndocument.getElementById('weekend_coundown').innerText = \"The Weekend has landed\";\n} else {\ndocument.getElementById('weekend_coundown').innerText = days + hours;\n}\n}\ncountdownToSaturday();\nsetInterval(countdownToSaturday, 1000 * 60 * 60); // update the countdown every hour\n</script>\n</body>\n</html>\nI get the following error:\nUncaught TypeError: Cannot set properties of null (setting 'innerText')\nat countdownToSaturday",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "<p id=\"weekend_coundown\" class=\"w3-large w3-center\">35 days left</p>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!DOCTYPE html>\n<html>\n<head>\n<title>W3.CSS Template</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Raleway\">\n<style>\nbody,h1 {font-family: \"Raleway\", sans-serif}\nbody, html {height: 100%}\n.bgimg {\nbackground-image: url('/w3images/forestbridge.jpg');\nmin-height: 100%;\nbackground-position: center;\nbackground-size: cover;\n# TODO: Complete this line\n</style>\n</head>\n<body>\n<div class=\"bgimg w3-display-container w3-animate-opacity w3-text-white\">\n<div class=\"w3-display-middle\">\n<h1 class=\"w3-jumbo w3-animate-top\">WEEKEND</h1>\n<hr class=\"w3-border-grey\" style=\"margin:auto;width:40%\">\n<p class=\"w3-large w3-center\">35 days left</p>\n</div>\n<div class=\"w3-display-bottomleft w3-padding-large\">\nPowered by <a href=\"https://www.w3schools.com/w3css/default.asp\" target=\"_blank\">w3.css</a>\n</div>\n</div>",
+      "solution": "<!DOCTYPE html>\n<html>\n<head>\n<title>W3.CSS Template</title>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Raleway\">\n<style>\nbody,h1 {font-family: \"Raleway\", sans-serif}\nbody, html {height: 100%}\n.bgimg {\nbackground-image: url('/w3images/forestbridge.jpg');\nmin-height: 100%;\nbackground-position: center;\nbackground-size: cover;\n}\n</style>\n</head>\n<body>\n<div class=\"bgimg w3-display-container w3-animate-opacity w3-text-white\">\n<div class=\"w3-display-middle\">\n<h1 class=\"w3-jumbo w3-animate-top\">WEEKEND</h1>\n<hr class=\"w3-border-grey\" style=\"margin:auto;width:40%\">\n<p class=\"w3-large w3-center\">35 days left</p>\n</div>\n<div class=\"w3-display-bottomleft w3-padding-large\">\nPowered by <a href=\"https://www.w3schools.com/w3css/default.asp\" target=\"_blank\">w3.css</a>\n</div>\n</div>"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "Uncaught TypeError: Cannot set properties of null (setting 'innerText')\nat countdownToSaturday"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "fc69207e-9665-4fad-8ce8-bd8b5f1e152e",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "27be62e0-c063-4bfe-911e-67c68a98ebd8",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "da9cdf43-1249-45b8-be54-e5af91f22aa6",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is to write code?",
+      "options": [
+        "None of the above.",
+        "like having an experienced programmer go through your code",
+        "causing the error",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of to write code is 'like having an experienced programmer go through your code'."
+    },
+    {
+      "question": "What is Which part of the code?",
+      "options": [
+        "None of the above.",
+        "causing the error",
+        "like having an experienced programmer go through your code",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Which part of the code is 'causing the error'."
+    }
+  ],
+  "summary": "This tutorial covers ChatGPT-4 Code Debug concepts and techniques. You'll learn how to use ChatGPT-4 Code Debug effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of ChatGPT-4 Code Debug and how to apply it in your projects."
+}

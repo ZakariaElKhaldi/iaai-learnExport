@@ -1,0 +1,178 @@
+{
+  "id": "db301ba6-0f69-468f-add3-169e9ef2facd",
+  "title": "TypeScript Classes",
+  "slug": "typescript-classes",
+  "metadata": {
+    "description": "Learn about TypeScript Classes with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "class",
+      "name",
+      "public",
+      "person",
+      "number",
+      "width",
+      "string",
+      "constructor",
+      "members",
+      "return"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnTypeScript",
+    "subcategory": "TS Classes"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "TypeScript Classes",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "TypeScript adds types and visibility modifiers to JavaScript classes.\nLearn more about JavaScript classes\nhere\n.\nMembers: Types\nThe members of a class (properties & methods) are typed using type annotations, similar to variables.\nExample\nclass Person {\nname: string;\n}\nconst person = new Person();\nperson.name = \"Jane\";\n\nMembers: Visibility\nClass members also be given special modifiers which affect visibility.\nThere are three main visibility modifiers in TypeScript.\npublic\n- (default) allows access to the class member from anywhere\nprivate\n- only allows access to the class member from within the class\nprotected\n- allows access to the class member from itself and any classes that inherit it, which is covered in the inheritance section below\nExample\nclass Person {\nprivate name: string;\npublic constructor(name: string) {\nthis.name = name;\n}\npublic getName(): string {\nreturn this.name;\n}\n}\nconst person = new Person(\"Jane\");\nconsole.log(person.getName()); // person.name isn't accessible from outside the class since it's private\n\nThe\nthis\nkeyword in a class usually refers to the instance of the class.\n    Read more about\nthis\nhere\n.\nParameter Properties\nTypeScript provides a convenient way to define class members in the constructor, by adding a visibility modifiers to the parameter.\nExample\nclass Person {\n// name is a private member variable\npublic constructor(private name: string) {}\npublic getName(): string {\nreturn this.name;\n}\n}\nconst person = new Person(\"Jane\");\nconsole.log(person.getName());\n\nReadonly\nSimilar to arrays, the\nreadonly\nkeyword can prevent class members from being changed.\nExample\nclass Person {\nprivate readonly name: string;\npublic constructor(name: string) {\n// name cannot be changed after this initial definition, which has to be either at it's declaration or in the constructor.\nthis.name = name;\n}\npublic getName(): string {\nreturn this.name;\n}\n}\nconst person = new Person(\"Jane\");\nconsole.log(person.getName());\n\nInheritance: Implements\nInterfaces (covered\nhere\n) can be used to define the type a class must follow through the\nimplements\nkeyword.\nExample\ninterface Shape {\ngetArea: () => number;\n}\nclass Rectangle implements Shape {\npublic constructor(protected readonly width: number, protected readonly height: number) {}\npublic getArea(): number {\nreturn this.width * this.height;\n}\n}\n\nA class can implement multiple interfaces by listing each one after\nimplements\n, separated by a comma like so:\nclass Rectangle implements Shape, Colored {\nInheritance: Extends\nClasses can extend each other through the\nextends\nkeyword. A class can only extends one other class.\nExample\ninterface Shape {\ngetArea: () => number;\n}\nclass Rectangle implements Shape {\npublic constructor(protected readonly width: number, protected readonly height: number) {}\npublic getArea(): number {\nreturn this.width * this.height;\n}\n}\nclass Square extends Rectangle {\npublic constructor(width: number) {\nsuper(width, width);\n}\n// getArea gets inherited from Rectangle\n}\n\nOverride\nWhen a class extends another class, it can replace the members of the parent class with the same name.\nNewer versions of TypeScript allow explicitly marking this with the\noverride\nkeyword.\nExample\ninterface Shape {\ngetArea: () => number;\n}\nclass Rectangle implements Shape {\n// using protected for these members allows access from classes that extend from this class, such as Square\npublic constructor(protected readonly width: number, protected readonly height: number) {}\npublic getArea(): number {\nreturn this.width * this.height;\n}\npublic toString(): string {\nreturn `Rectangle[width=${this.width}, height=${this.height}]`;\n}\n}\nclass Square extends Rectangle {\npublic constructor(width: number) {\nsuper(width, width);\n}\n// this toString replaces the toString from Rectangle\npublic override toString(): string {\nreturn `Square[width=${this.width}]`;\n}\n}\n\nBy default the\noverride\nkeyword is optional when overriding a method, and only helps to prevent accidentally overriding a method that does not exist.\n    Use the setting\nnoImplicitOverride\nto force it to be used when overriding.\nAbstract Classes\nClasses can be written in a way that allows them to be used as a base class for other classes without having to implement all the members.\n    This is done by using the\nabstract\nkeyword.\n    Members that are left unimplemented also use the\nabstract\nkeyword.\nExample\nabstract class Polygon {\npublic abstract getArea(): number;\npublic toString(): string {\nreturn `Polygon[area=${this.getArea()}]`;\n}\n}\nclass Rectangle extends Polygon {\npublic constructor(protected readonly width: number, protected readonly height: number) {\nsuper();\n}\npublic getArea(): number {\nreturn this.width * this.height;\n}\n}\n\nAbstract classes cannot be directly instantiated, as they do not have all their members implemented.\nTypeScript Exercises\nTest Yourself With Exercises\nExercise:\nSpecify that Person.name can only be accessed within the class, but that the method Person.getName() can be accessed anywhere:\nclass Person {\nname: string;\n\npublic constructor(name: string) {\n  this.name = name;\n }\ngetName(): string {\n  return this.name;\n }\n}\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "class Person {\nname: string;\n}\nconst person = new Person();\nperson.name = \"Jane\";",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "class Person {\nprivate name: string;\npublic constructor(name: string) {\nthis.name = name;\n}\npublic getName(): string {\nreturn this.name;\n}\n}\nconst person = new Person(\"Jane\");\nconsole.log(person.getName()); // person.name isn't accessible from outside the class since it's private",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "class Person {\n// name is a private member variable\npublic constructor(private name: string) {}\npublic getName(): string {\nreturn this.name;\n}\n}\nconst person = new Person(\"Jane\");\nconsole.log(person.getName());",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "class Person {\nprivate readonly name: string;\npublic constructor(name: string) {\n// name cannot be changed after this initial definition, which has to be either at it's declaration or in the constructor.\nthis.name = name;\n}\npublic getName(): string {\nreturn this.name;\n}\n}\nconst person = new Person(\"Jane\");\nconsole.log(person.getName());",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "interface Shape {\ngetArea: () => number;\n}\nclass Rectangle implements Shape {\npublic constructor(protected readonly width: number, protected readonly height: number) {}\npublic getArea(): number {\nreturn this.width * this.height;\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "interface Shape {\ngetArea: () => number;\n}\nclass Rectangle implements Shape {\npublic constructor(protected readonly width: number, protected readonly height: number) {}\npublic getArea(): number {\nreturn this.width * this.height;\n}\n}\nclass Square extends Rectangle {\npublic constructor(width: number) {\nsuper(width, width);\n}\n// getArea gets inherited from Rectangle\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 9,
+      "code": "interface Shape {\ngetArea: () => number;\n}\nclass Rectangle implements Shape {\n// using protected for these members allows access from classes that extend from this class, such as Square\npublic constructor(protected readonly width: number, protected readonly height: number) {}\npublic getArea(): number {\nreturn this.width * this.height;\n}\npublic toString(): string {\nreturn `Rectangle[width=${this.width}, height=${this.height}]`;\n}\n}\nclass Square extends Rectangle {\npublic constructor(width: number) {\nsuper(width, width);\n}\n// this toString replaces the toString from Rectangle\npublic override toString(): string {\nreturn `Square[width=${this.width}]`;\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 10,
+      "code": "abstract class Polygon {\npublic abstract getArea(): number;\npublic toString(): string {\nreturn `Polygon[area=${this.getArea()}]`;\n}\n}\nclass Rectangle extends Polygon {\npublic constructor(protected readonly width: number, protected readonly height: number) {\nsuper();\n}\npublic getArea(): number {\nreturn this.width * this.height;\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "class Person {\nname: string;\n}\nconst person = new Person();\n# TODO: Complete this line",
+      "solution": "class Person {\nname: string;\n}\nconst person = new Person();\nperson.name = \"Jane\";"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "class Person {\nprivate name: string;\npublic constructor(name: string) {\n# TODO: Complete this line\n}\npublic getName(): string {\nreturn this.name;\n}\n}\nconst person = new Person(\"Jane\");\nconsole.log(person.getName()); // person.name isn't accessible from outside the class since it's private",
+      "solution": "class Person {\nprivate name: string;\npublic constructor(name: string) {\nthis.name = name;\n}\npublic getName(): string {\nreturn this.name;\n}\n}\nconst person = new Person(\"Jane\");\nconsole.log(person.getName()); // person.name isn't accessible from outside the class since it's private"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "32628612-88d5-4e9c-9851-9d130687bf3d",
+      "title": "Advanced C Techniques",
+      "relationship": "next_topic"
+    },
+    {
+      "id": "2f74e640-15ca-4073-8737-5f75995a86c2",
+      "title": "C Project: Build a Real-World Application",
+      "relationship": "suggested_next"
+    },
+    {
+      "id": "3b546d47-01ab-4550-b1e5-7ebb8fd72a7f",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is There?",
+      "options": [
+        "None of the above.",
+        "three main visibility modifiers in TypeScript",
+        "None of the above.",
+        "Not a There."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of There is 'three main visibility modifiers in TypeScript'."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers TypeScript Classes concepts and techniques. You'll learn how to use TypeScript Classes effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of TypeScript Classes and how to apply it in your projects."
+}

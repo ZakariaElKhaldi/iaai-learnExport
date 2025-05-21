@@ -1,0 +1,124 @@
+{
+  "id": "29ced006-7158-427c-8b07-76c0eb5d8aae",
+  "title": "PHPmysqli fetch_object()Function",
+  "slug": "phpmysqli-fetch-objectfunction",
+  "metadata": {
+    "description": "Learn about PHPmysqli fetch_object()Function with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "result",
+      "mysqli",
+      "lastname",
+      "object",
+      "style",
+      "return",
+      "classname",
+      "function",
+      "example",
+      "current"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "fetch_object"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nmysqli fetch_object()\nFunction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Example - Object Oriented style\nReturn the current row of a result set, then print each field's value:\n<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = $mysqli -> query($sql)) {\nwhile ($obj = $result -> fetch_object()) {\nprintf(\"%s (%s)\\n\", $obj->Lastname, $obj->Age);\n}\n$result \n  -> free_result();\n}\n$mysqli -> close();\n?>\nLook at example of procedural style at the bottom.\nDefinition and Usage\nThe fetch_object() / mysqli_fetch_object() function returns the current row of a result-set, as an object.\nNote:\nFieldnames returned from this function are case-sensitive.\nSyntax\nObject oriented style:\n$mysqli_result -> fetch_object(\nclassname\n,\nparams\n)\nProcedural style:\nmysqli_fetch_object(\nresult\n,\nclassname\n,\nparams\n)\nParameter Values\nParameter\nDescription\nresult\nRequired. Specifies a result set identifier returned by mysqli_query(), mysqli_store_result() or mysqli_use_result()\nclassname\nOptional. Specifies the name of the class to instantiate, set the properties of, and return\nparams\nOptional. Specifies an array of parameters to pass to the constructor for\nclassname\nobjects\nTechnical Details\nReturn Value:\nReturns an object with string properties for the fetched row. NULL if there are no more rows in the result set\nPHP Version:\n5+\nChangelog:\nThe ability to return as a different object was added in PHP 5.0.0\nExample - Procedural style\nReturn the current row of a result set, then print each field's value:\n<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = mysqli_query($con, $sql)) {\nwhile ($obj = mysqli_fetch_object($result)) {\nprintf(\"%s (%s)\\n\", $obj->Lastname, $obj->Age);\n}\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Object Oriented style",
+      "content": "",
+      "order": 3,
+      "code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = $mysqli -> query($sql)) {\nwhile ($obj = $result -> fetch_object()) {\nprintf(\"%s (%s)\\n\", $obj->Lastname, $obj->Age);\n}\n$result \n  -> free_result();\n}\n$mysqli -> close();\n?>",
+      "language": "html",
+      "explanation": "Example of example - object oriented style"
+    },
+    {
+      "type": "code_example",
+      "title": "Example - Procedural style",
+      "content": "",
+      "order": 4,
+      "code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = mysqli_query($con, $sql)) {\nwhile ($obj = mysqli_fetch_object($result)) {\nprintf(\"%s (%s)\\n\", $obj->Lastname, $obj->Age);\n}\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>",
+      "language": "html",
+      "explanation": "Example of example - procedural style"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = $mysqli -> query($sql)) {\nwhile ($obj = $result -> fetch_object()) {\nprintf(\"%s (%s)\\n\", $obj->Lastname, $obj->Age);\n# TODO: Complete this line\n$result \n  -> free_result();\n}\n$mysqli -> close();\n?>",
+      "solution": "<?php\n$mysqli = new mysqli(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif ($mysqli -> connect_errno) {\necho \"Failed to connect to MySQL: \" . \n  $mysqli -> connect_error;\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = $mysqli -> query($sql)) {\nwhile ($obj = $result -> fetch_object()) {\nprintf(\"%s (%s)\\n\", $obj->Lastname, $obj->Age);\n}\n$result \n  -> free_result();\n}\n$mysqli -> close();\n?>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\n# TODO: Complete this line\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = mysqli_query($con, $sql)) {\nwhile ($obj = mysqli_fetch_object($result)) {\nprintf(\"%s (%s)\\n\", $obj->Lastname, $obj->Age);\n}\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>",
+      "solution": "<?php\n$con = mysqli_connect(\"localhost\",\"my_user\",\"my_password\",\"my_db\");\nif (mysqli_connect_errno()) {\necho \"Failed to connect to MySQL: \" . mysqli_connect_error();\nexit();\n}\n$sql = \"SELECT Lastname, Age FROM Persons ORDER BY Lastname\";\nif ($result = mysqli_query($con, $sql)) {\nwhile ($obj = mysqli_fetch_object($result)) {\nprintf(\"%s (%s)\\n\", $obj->Lastname, $obj->Age);\n}\nmysqli_free_result($result);\n}\nmysqli_close($con);\n?>"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "066306bb-b380-461e-9518-ddb4df0f13ba",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "c8749e57-cb04-45ee-966f-0012f57d13b2",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "c9428abe-9184-4299-af49-82f5aa51bc7d",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Fieldnames returned from this function?",
+      "options": [
+        "None of the above.",
+        "no more rows in the result set\nPHP Version:\n5+\nChangelog:\nThe ability to return as a different object was added in PHP 5",
+        "case-sensitive",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Fieldnames returned from this function is 'case-sensitive'."
+    },
+    {
+      "question": "What is NULL if there?",
+      "options": [
+        "case-sensitive",
+        "no more rows in the result set\nPHP Version:\n5+\nChangelog:\nThe ability to return as a different object was added in PHP 5",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of NULL if there is 'no more rows in the result set\nPHP Version:\n5+\nChangelog:\nThe ability to return as a different object was added in PHP 5'."
+    }
+  ],
+  "summary": "This tutorial covers PHPmysqli fetch_object()Function concepts and techniques. You'll learn how to use PHPmysqli fetch_object()Function effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPmysqli fetch_object()Function and how to apply it in your projects."
+}

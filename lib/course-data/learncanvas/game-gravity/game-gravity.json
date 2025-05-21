@@ -1,0 +1,130 @@
+{
+  "id": "4111673a-4f7a-4b5c-8ead-34b7bfb13b14",
+  "title": "Game Gravity",
+  "slug": "game-gravity",
+  "metadata": {
+    "description": "Learn about Game Gravity with clear explanations and practical examples.",
+    "keywords": [
+      "gravity",
+      "function",
+      "game",
+      "gravityspeed",
+      "height",
+      "accelerate",
+      "component",
+      "example",
+      "width",
+      "pulls"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnCanvas",
+    "subcategory": "Game Gravity"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Game Gravity",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Some games have forces that pulls the game component in one direction, like gravity pulls objects to the ground.\nRESTART\nGravity\nTo add this functionality to our component constructor, first add a\ngravity\nproperty, which sets the current gravity.\nThen add a\ngravitySpeed\nproperty, which increases everytime we update the frame:\nExample\nfunction component(width, height, color, x, y, type) {\nthis.type = type;\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.gravity = 0.05;\nthis.gravitySpeed = 0;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.newPos = function() {\nthis.gravitySpeed += this.gravity;\nthis.x += this.speedX;\nthis.y += this.speedY\n+ this.gravitySpeed\n;\n}\n}\n\nHit the Bottom\nTo prevent the red square from falling forever, stop the falling when it hits the bottom of the game area:\nExample\nthis.newPos = function() {\nthis.gravitySpeed += this.gravity;\nthis.x += this.speedX;\nthis.y += this.speedY + this.gravitySpeed;\nthis.hitBottom();\n}\nthis.hitBottom = function() {\nvar rockbottom = myGameArea.canvas.height - this.height;\nif (this.y > rockbottom) {\nthis.y = rockbottom;\n}\n}\n\nAccelerate Up\nIn a game, when you have a force that pulls you down, you should have a method to force the component to accelerate up.\nTrigger a function when someone clicks a button, and make the red square fly up in the air:\nExample\n<script>\nfunction accelerate(n) {\nmyGamePiece.gravity = n;\n}\n</script>\n<button onmousedown=\"accelerate(-0.2)\" onmouseup=\"accelerate(0.1)\">ACCELERATE</button>\n\nA Game\nMake a game based on what we have learned so far:\nExample\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "function component(width, height, color, x, y, type) {\nthis.type = type;\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.gravity = 0.05;\nthis.gravitySpeed = 0;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.newPos = function() {\nthis.gravitySpeed += this.gravity;\nthis.x += this.speedX;\nthis.y += this.speedY\n+ this.gravitySpeed\n;\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "this.newPos = function() {\nthis.gravitySpeed += this.gravity;\nthis.x += this.speedX;\nthis.y += this.speedY + this.gravitySpeed;\nthis.hitBottom();\n}\nthis.hitBottom = function() {\nvar rockbottom = myGameArea.canvas.height - this.height;\nif (this.y > rockbottom) {\nthis.y = rockbottom;\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "<script>\nfunction accelerate(n) {\nmyGamePiece.gravity = n;\n}\n</script>\n<button onmousedown=\"accelerate(-0.2)\" onmouseup=\"accelerate(0.1)\">ACCELERATE</button>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "function component(width, height, color, x, y, type) {\nthis.type = type;\n# TODO: Complete this line\nthis.height = height;\nthis.x = x;\nthis.y = y;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.gravity = 0.05;\nthis.gravitySpeed = 0;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.newPos = function() {\nthis.gravitySpeed += this.gravity;\nthis.x += this.speedX;\nthis.y += this.speedY\n+ this.gravitySpeed\n;\n}\n}",
+      "solution": "function component(width, height, color, x, y, type) {\nthis.type = type;\nthis.width = width;\nthis.height = height;\nthis.x = x;\nthis.y = y;\nthis.speedX = 0;\nthis.speedY = 0;\nthis.gravity = 0.05;\nthis.gravitySpeed = 0;\nthis.update = function() {\nctx = myGameArea.context;\nctx.fillStyle = color;\nctx.fillRect(this.x, this.y, this.width, this.height);\n}\nthis.newPos = function() {\nthis.gravitySpeed += this.gravity;\nthis.x += this.speedX;\nthis.y += this.speedY\n+ this.gravitySpeed\n;\n}\n}"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "this.newPos = function() {\nthis.gravitySpeed += this.gravity;\nthis.x += this.speedX;\nthis.y += this.speedY + this.gravitySpeed;\nthis.hitBottom();\n}\nthis.hitBottom = function() {\nvar rockbottom = myGameArea.canvas.height - this.height;\nif (this.y > rockbottom) {\nthis.y = rockbottom;\n}\n# TODO: Complete this line",
+      "solution": "this.newPos = function() {\nthis.gravitySpeed += this.gravity;\nthis.x += this.speedX;\nthis.y += this.speedY + this.gravitySpeed;\nthis.hitBottom();\n}\nthis.hitBottom = function() {\nvar rockbottom = myGameArea.canvas.height - this.height;\nif (this.y > rockbottom) {\nthis.y = rockbottom;\n}\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "4214a64c-fa2b-448e-9641-8888335c6eb8",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "a8be98d2-cd77-43e8-a780-ed833e8409af",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ab4a6c2f-872f-4f4b-9b63-23c49329bbaf",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers Game Gravity concepts and techniques. You'll learn how to use Game Gravity effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Game Gravity and how to apply it in your projects."
+}

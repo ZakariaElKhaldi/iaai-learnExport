@@ -1,0 +1,134 @@
+{
+  "id": "5f04c30e-dd91-4612-8fa9-59c4ca1e7ec9",
+  "title": "BashpingCommand - Send Request to Network Hosts",
+  "slug": "bashpingcommand-send-request-to-network-hosts",
+  "metadata": {
+    "description": "Learn about BashpingCommand - Send Request to Network Hosts with clear explanations and practical examples.",
+    "keywords": [
+      "ping",
+      "bytes",
+      "time",
+      "packet",
+      "google",
+      "packets",
+      "number",
+      "round",
+      "trip",
+      "data"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnBash",
+    "subcategory": "Bash Ping"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Bash\nping\nCommand",
+      "content": "- Send Request to Network Hosts\n\nUsing the\nping\nCommand\nThe\nping\ncommand is used to send ICMP ECHO_REQUEST to network hosts.\nIt's a useful tool for checking network connectivity and diagnosing network issues.\nBasic Usage\nTo ping a host, use\nping hostname\n:\nExample\nping google.com\nPinging google.com [142.250.74.110] with 32 bytes of data:\nReply from 142.250.74.110: bytes=32 time=79ms TTL=57\nReply from 142.250.74.110: bytes=32 time=52ms TTL=57\nReply from 142.250.74.110: bytes=32 time=48ms TTL=57\nReply from 142.250.74.110: bytes=32 time=38ms TTL=57\n\nPing statistics for 142.250.74.110:\n    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),\nApproximate round trip times in milli-seconds:\n    Minimum = 38ms, Maximum = 79ms, Average = 54ms\nOptions\nThe\nping\ncommand has options to change how it works:\n-c\n- Send a specific number of ping requests\n-i\n- Wait a specific number of seconds between sending each packet\n-t\n- Set the IP Time to Live (TTL)\n-q\n- Quiet output, only show summary\n-s\n- Specify the number of data bytes to be sent",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-c\noption allows you to send a specific number of ping requests.\nThis is useful for limiting the number of packets sent.\nExample: Send a Specific Number of Ping Requests\nping -c 4 google.com\nPING google.com (172.217.14.206): 56 data bytes\n64 bytes from 172.217.14.206: icmp_seq=0 ttl=118 time=14.5 ms\n64 bytes from 172.217.14.206: icmp_seq=1 ttl=118 time=14.2 ms\n64 bytes from 172.217.14.206: icmp_seq=2 ttl=118 time=14.3 ms\n64 bytes from 172.217.14.206: icmp_seq=3 ttl=118 time=14.4 ms\n\n--- google.com ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 14.2/14.3/14.5/0.1 ms\nUnderstanding Ping Results\nThe output of the\nping\ncommand provides several key pieces of information:\nBytes:\nThe size of the ICMP packet sent\nTime:\nThe round-trip time it took for the packet to reach the host and return, measured in milliseconds\nTTL (Time to Live):\nThe remaining lifespan of the packet, which decreases by one for each hop\nPacket Loss:\nThe percentage of packets that were lost during transmission\nRound-Trip Time Statistics:\nIncludes minimum, average, maximum, and standard deviation of the round-trip times\nIn the example above:\nEach packet is 64 bytes\nThe round-trip times vary slightly, indicating network latency\nThe TTL value is 118, showing the packet's remaining lifespan\nThere is 0.0% packet loss, indicating a stable connection\nThe round-trip time statistics provide insights into network performance",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-i\noption allows you to wait a specific number of seconds between sending each packet.\nThis can be useful for reducing network traffic when using\nping\n.\nExample: Wait a Specific Number of Seconds Between Sending Each Packet\nping -i 2 google.com\nPING google.com (172.217.14.206): 56 data bytes\n64 bytes from 172.217.14.206: icmp_seq=0 ttl=118 time=14.5 ms\n64 bytes from 172.217.14.206: icmp_seq=1 ttl=118 time=14.2 ms\n\n--- google.com ping statistics ---\n2 packets transmitted, 2 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 14.2/14.3/14.5/0.1 ms\nSet the IP Time to Live (TTL)",
+      "order": 3,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-t\noption allows you to set the IP Time to Live (TTL).\nThis determines the maximum number of hops a packet can take before being discarded.\nExample: Set the IP Time to Live (TTL)\nping -t 64 google.com\nPING google.com (172.217.14.206): 56 data bytes\n64 bytes from 172.217.14.206: icmp_seq=0 ttl=64 time=14.5 ms\n\n--- google.com ping statistics ---\n1 packets transmitted, 1 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 14.5/14.5/14.5/0.0 ms",
+      "order": 4,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-q\noption enables quiet output, only showing the summary of the ping results.\nThis is useful for scripts or when you only need the final statistics.\nExample: Quiet Output\nping -c 4 -q google.com\n--- google.com ping statistics ---\n4 packets transmitted, 4 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 14.2/14.3/14.5/0.1 ms",
+      "order": 5,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "The",
+      "content": "-s\noption allows you to specify the number of data bytes to be sent.\nThis can be useful for testing network performance with different packet sizes.\nExample: Specify Data Bytes\nping -s 128 google.com\nPING google.com (172.217.14.206): 128 data bytes\n136 bytes from 172.217.14.206: icmp_seq=0 ttl=118 time=14.5 ms\n\n--- google.com ping statistics ---\n1 packets transmitted, 1 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 14.5/14.5/14.5/0.0 ms\n\n\u2605\n+1",
+      "order": 6,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "1366eb2c-0940-4af6-8992-9d7da9404527",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "0d24ad6a-f8e5-4f57-bc2f-4bc94cf9b991",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "c8b93bcd-8e4f-42cc-9dfc-e53c94e12f7a",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Send Request to Network Hosts\n\nUsing the\nping\nCommand\nThe\nping\ncommand?",
+      "options": [
+        "useful for limiting the number of packets sent",
+        "used to send ICMP ECHO_REQUEST to network hosts",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Send Request to Network Hosts\n\nUsing the\nping\nCommand\nThe\nping\ncommand is 'used to send ICMP ECHO_REQUEST to network hosts'."
+    },
+    {
+      "question": "What is This?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "used to send ICMP ECHO_REQUEST to network hosts",
+        "useful for limiting the number of packets sent"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of This is 'useful for limiting the number of packets sent'."
+    }
+  ],
+  "summary": "This tutorial covers BashpingCommand - Send Request to Network Hosts concepts and techniques. You'll learn how to use BashpingCommand - Send Request to Network Hosts effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of BashpingCommand - Send Request to Network Hosts and how to apply it in your projects."
+}

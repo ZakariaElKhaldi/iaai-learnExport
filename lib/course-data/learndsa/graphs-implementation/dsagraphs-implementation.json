@@ -1,0 +1,96 @@
+{
+  "id": "c49e8285-aeac-4d63-ae0c-3bcbf68d0060",
+  "title": "DSAGraphs Implementation",
+  "slug": "dsagraphs-implementation",
+  "metadata": {
+    "description": "Learn about DSAGraphs Implementation with clear explanations and practical examples.",
+    "keywords": [
+      "self",
+      "graph",
+      "size",
+      "matrix",
+      "vertex",
+      "print",
+      "data",
+      "weight",
+      "edges",
+      "vertices"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnDSA",
+    "subcategory": "Graphs Implementation"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "DSA\nGraphs Implementation",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "A Basic Graph Implementation\nBefore we can run algorithms on a Graph, we must first implement it somehow.\nTo implement a Graph we will use an\nAdjacency Matrix\n, like the one below.\nA\nB\nC\nD\nA\nB\nC\nD\nA\nB\nC\nD\n1\n1\n1\n1\n1\n1\n1\n1\nAn undirected Graph\nand its adjacency matrix\nTo store data for each vertex, in this case the letters A, B, C, and D, the data is put in a separate array that matches the indexes in the adjacency matrix, like this:\nvertexData = [ 'A', 'B', 'C', 'D']\nFor an undirected and not weighted Graph, like in the image above, an edge between vertices\ni\nand\nj\nis stored with value\n1\n. It is stored as\n1\non both places\n(j,i)\nand\n(i,j)\nbecause the edge goes in both directions. As you can see, the matrix becomes diagonally symmetric for such undirected Graphs.\nLet's look at something more specific. In the adjacency matrix above, vertex A is on index\n0\n, and vertex D is on index\n3\n, so we get the edge between A and D stored as value\n1\nin position\n(0,3)\nand\n(3,0)\n, because the edge goes in both directions.\nBelow is a basic implementation of the undirected Graph from the image above.\nExample\nPython:\nvertexData = ['A', 'B', 'C', 'D']\n\nadjacency_matrix = [\n    [0, 1, 1, 1],  # Edges for A\n    [1, 0, 1, 0],  # Edges for B\n    [1, 1, 0, 0],  # Edges for C\n    [1, 0, 0, 0]   # Edges for D\n]\n\ndef print_adjacency_matrix(matrix):\n    print(\"\\nAdjacency Matrix:\")\n    for row in matrix:\n        print(row)\n\nprint('vertexData:',vertexData)\nprint_adjacency_matrix(adjacency_matrix)\nRun Example \u00bb\nThis implementation is basically just a two dimensional array, but to get a better sense of how the vertices are connected by edges in the Graph we have just implemented, we can run this function:\nExample\nPython:\ndef print_connections(matrix, vertices):\n    print(\"\\nConnections for each vertex:\")\n    for i in range(len(vertices)):\n        print(f\"{vertices[i]}: \", end=\"\")\n        for j in range(len(vertices)):\n            if matrix[i][j]:  # if there is a connection\n                print(vertices[j], end=\" \")\n        print()  # new line\nRun Example \u00bb\nGraph Implementation Using Classes\nA more proper way to store a Graph is to add an abstraction layer using classes so that a Graph's vertices, edges, and relevant methods, like algorithms that we will implement later, are contained in one place.\nProgramming languages with built-in object-oriented functionality like Python and Java, make implementation of Graphs using classes much easier than languages like C, without this built-in functionality.\nA\nB\nC\nD\nA\nB\nC\nD\nA\nB\nC\nD\n1\n1\n1\n1\n1\n1\n1\n1\nAn undirected Graph\nand its adjacency matrix\nHere is how the undirected Graph above can be implemented using classes.\nExample\nPython:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[0] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n\ndef add_edge(self, u, v):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.adj_matrix[u][v] = 1\n            self.adj_matrix[v][u] = 1\n\ndef add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\n\ndef print_graph(self):\n        print(\"Adjacency Matrix:\")\n        for row in self.adj_matrix:\n            print(' '.join(map(str, row)))\n        print(\"\\nVertex Data:\")\n        for vertex, data in enumerate(self.vertex_data):\n            print(f\"Vertex {vertex}: {data}\")\n\ng = Graph(4)\ng.add_vertex_data(0, 'A')\ng.add_vertex_data(1, 'B')\ng.add_vertex_data(2, 'C')\ng.add_vertex_data(3, 'D')\ng.add_edge(0, 1)  # A - B\ng.add_edge(0, 2)  # A - C\ng.add_edge(0, 3)  # A - D\ng.add_edge(1, 2)  # B - C\n\ng.print_graph()\nRun Example \u00bb\nIn the code above, the matrix symmetry we get for undirected Graphs is provided for on line 9 and 10, and this saves us some code when initializing the edges in the Graph on lines 29-32.\nImplementation of Directed and Weighted Graphs\nTo implement a Graph that is directed and weighted, we just need to do a few changes to \nTo create directed Graphs, we just need to remove line 10 in the \nThe second change we need to do is to add a\nweight\nargument to the\nadd_edge()\nmethod, so that instead of just having value\n1\nto indicate that there is an edge between two vertices, we use the actual weight value to define the edge.\nA\nB\n1\n3\nC\n4\n2\nD\nA\nB\nC\nD\nA\nB\nC\nD\n3\n2\n1\n4\nA directed and weighted Graph,\nand its adjacency matrix.\nBelow is the implementation of the directed and weighted Graph above.\nExample\nPython:\nclass Graph:\n    def __init__(self, size):\n        self.adj_matrix = [[None] * size for _ in range(size)]\n        self.size = size\n        self.vertex_data = [''] * size\n\ndef add_edge(self, u, v, weight):\n        if 0 <= u < self.size and 0 <= v < self.size:\n            self.adj_matrix[u][v] = weight\nself.adj_matrix[v][u] = weight\ndef add_vertex_data(self, vertex, data):\n        if 0 <= vertex < self.size:\n            self.vertex_data[vertex] = data\n\ndef print_graph(self):\n        print(\"Adjacency Matrix:\")\n        for row in self.adj_matrix:\n            print(' '.join(map(lambda x: str(x) if x is not None else '0', row)))\n        print(\"\\nVertex Data:\")\n        for vertex, data in enumerate(self.vertex_data):\n            print(f\"Vertex {vertex}: {data}\")\n\ng = Graph(4)\ng.add_vertex_data(0, 'A')\ng.add_vertex_data(1, 'B')\ng.add_vertex_data(2, 'C')\ng.add_vertex_data(3, 'D')\ng.add_edge(0, 1, 3)  # A -> B with weight 3\ng.add_edge(0, 2, 2)  # A -> C with weight 2\ng.add_edge(3, 0, 4)  # D -> A with weight 4\ng.add_edge(2, 1, 1)  # C -> B with weight 1\n\ng.print_graph()\nRun Example \u00bb\nLine 3:\nAll edges are set to\nNone\ninitially.\nLine 7:\nThe weight can now be added to an edge with the additional\nweight\nargument.\nLine 10:\nBy removing line 10, the Graph can now be set up as being directed.\nOn the \nDSA Exercises\nTest Yourself With Exercises\nExercise:\nHow are the edges in a graph implemented?\nThe edges, and edge weights, \nin a graph are normally \nimplemented in an\nmatrix.\nSubmit Answer \u00bb\nStart the Exercise\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your python function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "89d7e063-d6b3-41c7-adae-ea75b82bff2f",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "fe654b32-70ae-45de-9683-6f5547063a3e",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "94b75d77-9b51-47a2-9dad-6ecf71a61e5b",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is the data?",
+      "options": [
+        "put in a separate array that matches the indexes in the adjacency matrix",
+        "None of the above.",
+        "None of the above.",
+        "stored as\n1\non both places\n(j"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of the data is 'put in a separate array that matches the indexes in the adjacency matrix'."
+    },
+    {
+      "question": "What is It?",
+      "options": [
+        "put in a separate array that matches the indexes in the adjacency matrix",
+        "None of the above.",
+        "None of the above.",
+        "stored as\n1\non both places\n(j"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of It is 'stored as\n1\non both places\n(j'."
+    }
+  ],
+  "summary": "This tutorial covers DSAGraphs Implementation concepts and techniques. You'll learn how to use DSAGraphs Implementation effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of DSAGraphs Implementation and how to apply it in your projects."
+}

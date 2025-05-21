@@ -1,0 +1,160 @@
+{
+  "id": "05cb5b18-a2e7-4623-aaa8-44768eca691e",
+  "title": "Machine Learning - Decision Tree",
+  "slug": "machine-learning-decision-tree",
+  "metadata": {
+    "description": "Learn about Machine Learning - Decision Tree with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "means",
+      "comedians",
+      "samples",
+      "tree",
+      "example",
+      "decision",
+      "left",
+      "gini",
+      "comedian",
+      "nationality"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 6,
+    "category": "LearnMatplotlib",
+    "subcategory": "Decision Tree"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Machine Learning - Decision Tree",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Decision Tree\nIn this chapter we will show you how to make a \"Decision Tree\". A Decision \nTree is a Flow Chart, and can help you make decisions based on \nIn the example, a person will try to decide if he/she should go to a comedy show or \nnot.\nLuckily our example person has registered every time there was a comedy show \nin town, and registered some information about the comedian, and also \nregistered if he/she went or not.\nAge\nExperience\nRank\nNationality\nGo\n36\n10\n9\nUK\nNO\n42\n12\n4\nUSA\nNO\n23\n4\n6\nN\nNO\n52\n4\n4\nUSA\nNO\n43\n21\n8\nUSA\nYES\n44\n14\n5\nUK\nNO\n66\n3\n7\nN\nYES\n35\n14\n9\nUK\nYES\n52\n13\n7\nN\nYES\n35\n5\n9\nN\nYES\n24\n3\n5\nUSA\nNO\n18\n3\n7\nUK\nYES\n45\n9\n9\nUK\nYES\nNow, based on this data set, Python can create a decision tree that can be used to decide \nif any new shows are worth attending to.\nHow Does it Work?\nFirst, read the dataset with pandas:\nExample\nRead and print the data set:\nimport pandas\ndf = pandas.read_csv(\"data.csv\")\nprint(df)\nRun example \u00bb\nTo make a decision tree, all data has to be numerical.\nWe have to convert the non numerical columns 'Nationality' and 'Go' into numerical values.\nPandas has a\nmap()\nmethod that takes a dictionary with information on how to \nconvert the values.\n{'UK': 0, 'USA': 1, 'N': 2}\nMeans convert the values 'UK' to 0, 'USA' to 1, and 'N' to 2.\nExample\nChange string values into numerical values:\nd = {'UK': 0, \n  'USA': 1, 'N': 2}\ndf['Nationality'] = df['Nationality'].map(d)\nd = \n  {'YES': 1, 'NO': 0}\ndf['Go'] = df['Go'].map(d)\nprint(df)\nRun example \u00bb\nThen we have to separate the\nfeature\ncolumns from the\ntarget\ncolumn.\nThe feature columns are the columns that we try to predict\nfrom\n, and \nthe target column is the column with the values we try to predict.\nExample\nX\nis the feature columns,\ny\nis the target column:\nfeatures = ['Age', 'Experience', 'Rank', 'Nationality']\nX = df[features]\ny = df['Go']\nprint(X)\nprint(y)\nRun example \u00bb\nNow we can create the actual decision tree, fit it with our details. Start by \nimporting the modules we need:\nExample\nCreate and display a Decision Tree:\nimport pandas\nfrom sklearn import tree\nfrom sklearn.tree import \n  DecisionTreeClassifier\nimport matplotlib.pyplot as plt\ndf = \n  pandas.read_csv(\"data.csv\")\nd = {'UK': 0, 'USA': 1, 'N': 2}\ndf['Nationality'] \n  = df['Nationality'].map(d)\nd = {'YES': 1, 'NO': 0}\ndf['Go'] = df['Go'].map(d)\nfeatures = ['Age', 'Experience', 'Rank', 'Nationality']\nX = df[features]\ny = df['Go']\ndtree = DecisionTreeClassifier()\ndtree = dtree.fit(X, \n  y)\ntree.plot_tree(dtree, feature_names=features)\nRun example \u00bb\nResult Explained\nThe decision tree uses your earlier decisions to calculate the odds for you to wanting to go see \na comedian or not.\nLet us read the different aspects of the decision tree:\nRank\nRank <= 6.5\nmeans that every comedian with a rank of 6.5 or \nlower will follow the\nTrue\narrow (to the left), and the rest will \nfollow the\nFalse\narrow (to the right).\ngini = 0.497\nrefers to the quality of the \nsplit, and is always a number between 0.0 and 0.5, where 0.0 would mean all of \nthe samples got the same result, and 0.5 would mean that the split is done \nexactly in the middle.\nsamples = 13\nmeans that there are 13 \ncomedians left at this point in the decision, which is all of them since this is \nthe first step.\nvalue = [6, 7]\nmeans that of these 13 \ncomedians, 6 will get a \"NO\", and 7 will get a \n\"GO\".\nGini\nThere are many ways to split the samples, we use the GINI method in this tutorial.\nThe Gini method uses this formula:\nGini = 1 - (x/n)\n2\n- (y/n)\n2\nWhere\nx\nis the number of positive answers(\"GO\"),\nn\nis the number of samples, and\ny\nis the number of negative answers (\"NO\"), \nwhich gives us this calculation:\n1 - (7 / 13)\n2\n- (6 / 13)\n2\n= 0.497\nThe \n6.5 or lower, and one box with the rest.\nTrue - 5 Comedians End Here:\ngini = 0.0\nmeans all of the samples got the \nsame result.\nsamples = 5\nmeans that there are 5 comedians \nleft in this branch (5 comedian with a Rank of 6.5 or lower).\nvalue = [5, 0]\nmeans that 5 will get a \"NO\" \nand 0 will get a \"GO\".\nFalse - 8 Comedians Continue:\nNationality\nNationality <= 0.5\nmeans that the comedians \nwith a nationality value of less than 0.5 will follow the arrow to the left \n(which means everyone from the UK, ), and the rest will follow the arrow to the \nright.\ngini = 0.219\nmeans that about 22% of the \nsamples would go in one direction.\nsamples = 8\nmeans that there are 8 comedians \nleft in this branch (8 comedian with a Rank higher than 6.5).\nvalue = [1, 7]\nmeans that of these 8 \ncomedians, 1 will get a \"NO\" and 7 will get a \"GO\".\nTrue - 4 Comedians Continue:\nAge\nAge <= 35.5\nmeans that comedians \nat the age of 35.5 or younger will follow the arrow to the left, and the rest will follow the arrow to the \nright.\ngini = 0.375\nmeans that about 37,5% of the \nsamples would go in one direction.\nsamples = 4\nmeans that there are 4 comedians \nleft in this branch (4 comedians from the UK).\nvalue = [1, 3]\nmeans that of these 4 \ncomedians, 1 will get a \"NO\" and 3 will get a \"GO\".\nFalse - 4 Comedians End Here:\ngini = 0.0\nmeans all of the samples got the \nsame result.\nsamples = 4\nmeans that there are 4 comedians \nleft in this branch (4 comedians not from the UK).\nvalue = [0, 4]\nmeans that of these 4 \ncomedians, 0 will get a \"NO\" and 4 will get a \"GO\".\nTrue - 2 Comedians End Here:\ngini = 0.0\nmeans all of the samples got the \nsame result.\nsamples = 2\nmeans that there are 2 comedians \nleft in this branch (2 comedians at the age 35.5 or younger).\nvalue = [0, 2]\nmeans that of these 2 \ncomedians, 0 will get a \"NO\" and 2 will get a \"GO\".\nFalse - 2 Comedians Continue:\nExperience\nExperience <= 9.5\nmeans that comedians \nwith 9.5 years of experience, or less, will follow the arrow to the left, and the rest will follow the arrow to the \nright.\ngini = 0.5\nmeans that 50% of the samples \nwould go in one direction.\nsamples = 2\nmeans that there are 2 comedians \nleft in this branch (2 comedians older than 35.5).\nvalue = [1, 1]\nmeans that of these 2 \ncomedians, 1 will get a \"NO\" and 1 will get a \"GO\".\nTrue - 1 Comedian Ends Here:\ngini = 0.0\nmeans all of the samples got the \nsame result.\nsamples = 1\nmeans that there is 1 comedian \nleft in this branch (1 comedian with 9.5 years of experience or less).\nvalue = [0, 1]\nmeans that 0 will get a \"NO\" and \n1 will get a \"GO\".\nFalse - 1 Comedian Ends Here:\ngini = 0.0\nmeans all of the samples got the \nsame result.\nsamples = 1\nmeans that there is 1 comedians \nleft in this branch (1 comedian with more than 9.5 years of experience).\nvalue = [1, 0]\nmeans that 1 will get a \"NO\" and \n0 will get a \"GO\".\nPredict Values\nWe can use the Decision Tree to predict new values.\nExample: Should I go see a show starring a 40 years old American comedian, with 10 years of experience, \nand a comedy ranking of 7?\nExample\nUse predict() method to predict new values:\nprint(dtree.predict([[40, 10, 7, 1]]))\nRun example \u00bb\nExample\nWhat would the answer be if the comedy rank was 6?\nprint(dtree.predict([[40, 10, 6, 1]]))\nRun example \u00bb\nDifferent Results\nYou will see that the Decision Tree gives you different results if you run \n  it enough times, even if you feed it with the same data.\nThat is because the Decision Tree does not give us a 100% certain answer. It is based on the \n  probability of an outcome, and the answer will vary.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import pandas\ndf = pandas.read_csv(\"data.csv\")\nprint(df)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "d = {'UK': 0, \n  'USA': 1, 'N': 2}\ndf['Nationality'] = df['Nationality'].map(d)\nd = \n  {'YES': 1, 'NO': 0}\ndf['Go'] = df['Go'].map(d)\nprint(df)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "features = ['Age', 'Experience', 'Rank', 'Nationality']\nX = df[features]\ny = df['Go']\nprint(X)\nprint(y)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import pandas\nfrom sklearn import tree\nfrom sklearn.tree import \n  DecisionTreeClassifier\nimport matplotlib.pyplot as plt\ndf = \n  pandas.read_csv(\"data.csv\")\nd = {'UK': 0, 'USA': 1, 'N': 2}\ndf['Nationality'] \n  = df['Nationality'].map(d)\nd = {'YES': 1, 'NO': 0}\ndf['Go'] = df['Go'].map(d)\nfeatures = ['Age', 'Experience', 'Rank', 'Nationality']\nX = df[features]\ny = df['Go']\ndtree = DecisionTreeClassifier()\ndtree = dtree.fit(X, \n  y)\ntree.plot_tree(dtree, feature_names=features)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 7,
+      "code": "print(dtree.predict([[40, 10, 7, 1]]))",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 8,
+      "code": "print(dtree.predict([[40, 10, 6, 1]]))",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas\ndf = pandas.read_csv(\"data.csv\")\n# TODO: Complete this line",
+      "solution": "import pandas\ndf = pandas.read_csv(\"data.csv\")\nprint(df)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "d = {'UK': 0, \n  'USA': 1, 'N': 2}\ndf['Nationality'] = df['Nationality'].map(d)\n# TODO: Complete this line\n  {'YES': 1, 'NO': 0}\ndf['Go'] = df['Go'].map(d)\nprint(df)",
+      "solution": "d = {'UK': 0, \n  'USA': 1, 'N': 2}\ndf['Nationality'] = df['Nationality'].map(d)\nd = \n  {'YES': 1, 'NO': 0}\ndf['Go'] = df['Go'].map(d)\nprint(df)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "d9c4c439-1911-4066-b430-1e04b7c21a51",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "6e81bee6-13af-4080-88ae-e59aab870631",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "809fc485-fd0f-47cd-a177-ad54b4f45571",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is A Decision \nTree?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "worth attending to",
+        "a Flow Chart"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of A Decision \nTree is 'a Flow Chart'."
+    },
+    {
+      "question": "What is Python can create a decision tree that can be used to decide \nif any new shows?",
+      "options": [
+        "None of the above.",
+        "worth attending to",
+        "a Flow Chart",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Python can create a decision tree that can be used to decide \nif any new shows is 'worth attending to'."
+    }
+  ],
+  "summary": "This tutorial covers Machine Learning - Decision Tree concepts and techniques. You'll learn how to use Machine Learning - Decision Tree effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Machine Learning - Decision Tree and how to apply it in your projects."
+}

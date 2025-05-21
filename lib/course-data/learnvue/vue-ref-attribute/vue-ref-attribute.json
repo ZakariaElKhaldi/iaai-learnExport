@@ -1,0 +1,112 @@
+{
+  "id": "d753ac95-aef1-441a-870c-1b34ec074019",
+  "title": "Vue 'ref' Attribute",
+  "slug": "vue-ref-attribute",
+  "metadata": {
+    "description": "Learn about Vue 'ref' Attribute with clear explanations and practical examples.",
+    "keywords": [
+      "refs",
+      "example",
+      "script",
+      "button",
+      "text",
+      "template",
+      "element",
+      "click",
+      "object",
+      "methods"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "estimated_time": 5,
+    "category": "LearnVue",
+    "subcategory": "Vue 'ref' Attribute"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Vue 'ref' Attribute",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Vue Built-in Attributes Reference\n\nExample\nUsing the\nref\nattribute to change the text inside the\n<p>\ntag:\n<div id=\"app\">\n<p ref=\"pEl\">Initial text.</p>\n<button v-on:click=\"changeText\">Change text</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script type=\"module\">\nconst app = Vue.createApp({\nmethods: {\nchangeText(){\nthis.$refs.pEl.innerHTML = \"Hello!\";\n}\n}\n})\napp.mount('#app')\n</script>\n\nSee more examples below.\nDefinition and Usage\nThe\nref\nattribute is used to mark elements in\n<template>\n, so that they can be accessed from the\n$refs\nobject inside\n<script>\n.\nWe can use the\nref\nattribute and the\n$refs\nobject in Vue as an alternative to methods in plain JavaScript like\ngetElementById()\nor\nquerySelector()\n.\nIf HTML elements created with\nv-for\nhave the\nref\nattribute, the resulting DOM elements will be added to the\n$refs\nobject as an array, like demonstrated in this example:\nExample\n<ul>\n  <li v-for=\"x in liTexts\" ref=\"liEl\">{{ x }}</li>\n</ul>\nRun Example \u00bb\nMore Examples\nExample 1\nThe text inside a\n<p>\nelement is changed.\n<template>\n  <h1>Example</h1>\n  <p>Click the button to put \"Hello!\" as the text in the green p element.</p>\n  <button @click=\"changeVal\">Change Text</button><br>\n  <p ref=\"pEl\" id=\"pEl\">This is the initial text</p>\n</template>\n\n<script>\n  export default {\n    methods: {\n      changeVal() { \n        this.$refs.pEl.innerHTML = \"Hello!\";\n      }\n    }\n  };\n</script>\n\n<style>\n#pEl {\n  background-color: lightgreen;\n  display: inline-block;\n}\n</style>\nRun Example \u00bb\nExample 2\nThe text from the first\n<p>\ntag is copied into the second\n<p>\ntag.\n<template>\n  <h1>Example</h1>\n  <p ref=\"p1\">Click the button to copy this text into the paragraph below.</p>\n  <button @click=\"transferText\">Transfer text</button>\n  <p ref=\"p2\">...</p>\n</template>\n\n<script>\n  export default {\n    methods: {\n      transferText() { \n        this.$refs.p2.innerHTML = this.$refs.p1.innerHTML;\n      }\n    }\n  };\n</script>\nRun Example \u00bb\nExample 3\nA\n<p>\nelement gets the same content as what's being written in the input field.\n<template>\n  <h1>Example</h1>\n  <p>Start writing inside the input element, and the text will be copied into the last paragraph by the use of the '$refs' object.</p>\n  <input ref=\"inputEl\" @input=\"getRefs\" placeholder=\"Write something..\">\n  <p ref=\"pEl\"></p>\n</template>\n\n<script>\n  export default {\n    methods: {\n      getRefs() { \n        this.$refs.pEl.innerHTML = this.$refs.inputEl.value;\n      }\n    }\n  };\n</script>\nRun Example \u00bb\nExample 4\nThe button reveals the the third list element stored as an array element inside the\n$refs\nobject.\n<template>\n  <h1>Example</h1>\n  <p>Click the button to reveal the 3rd list element stored as an array element in the $refs object.</p>\n  <button @click=\"getValue\">Get the 3rd list element</button><br>\n  <ul>\n    <li v-for=\"x in liTexts\" ref=\"liEl\">{{ x }}</li>\n  </ul>\n  <pre>{{ thirdEl }}</pre>\n</template>\n\n<script>\n  export default {\n    data() {\n      return {\n        thirdEl: ' ',\n        liTexts: ['Apple','Banana','Kiwi','Tomato','Lichi']\n      }\n    },\n    methods: {\n      getValue() { \n        this.thirdEl = this.$refs.liEl[2].innerHTML;\n        console.log(\"this.$refs.liEl = \",this.$refs.liEl);\n      }\n    }\n  };\n</script>\n\n<style>\npre {\n  background-color: lightgreen;\n  display: inline-block;\n}\n</style>\nRun Example \u00bb\nRelated Pages\nVue Tutorial:\nVue Template Refs\nVue Tutorial:\nVue v-for Directive\nVue Reference:\nVue $refs Object\n\nVue Built-in Attributes Reference\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<div id=\"app\">\n<p ref=\"pEl\">Initial text.</p>\n<button v-on:click=\"changeText\">Change text</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script type=\"module\">\nconst app = Vue.createApp({\nmethods: {\nchangeText(){\nthis.$refs.pEl.innerHTML = \"Hello!\";\n}\n}\n})\napp.mount('#app')\n</script>",
+      "language": "html",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<div id=\"app\">\n<p ref=\"pEl\">Initial text.</p>\n<button v-on:click=\"changeText\">Change text</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script type=\"module\">\nconst app = Vue.createApp({\nmethods: {\nchangeText(){\n# TODO: Complete this line\n}\n}\n})\napp.mount('#app')\n</script>",
+      "solution": "<div id=\"app\">\n<p ref=\"pEl\">Initial text.</p>\n<button v-on:click=\"changeText\">Change text</button>\n</div>\n<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n<script type=\"module\">\nconst app = Vue.createApp({\nmethods: {\nchangeText(){\nthis.$refs.pEl.innerHTML = \"Hello!\";\n}\n}\n})\napp.mount('#app')\n</script>"
+    },
+    {
+      "title": "Implement a Function",
+      "description": "Create a function that demonstrates the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Write your javascript function here\n",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "4574b42f-7eac-478f-a092-25054b1bbd8c",
+      "title": "Unknown Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "c7cc1d3e-6510-478a-ac21-0bd1d277b62a",
+      "title": "Unknown Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "646864a1-745e-4932-8cdc-b3d721064518",
+      "title": "Unknown Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Definition and Usage\nThe\nref\nattribute?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "used to mark elements in\n<template>",
+        "changed"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Definition and Usage\nThe\nref\nattribute is 'used to mark elements in\n<template>'."
+    },
+    {
+      "question": "What is element?",
+      "options": [
+        "None of the above.",
+        "used to mark elements in\n<template>",
+        "None of the above.",
+        "changed"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of element is 'changed'."
+    }
+  ],
+  "summary": "This tutorial covers Vue 'ref' Attribute concepts and techniques. You'll learn how to use Vue 'ref' Attribute effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Vue 'ref' Attribute and how to apply it in your projects."
+}

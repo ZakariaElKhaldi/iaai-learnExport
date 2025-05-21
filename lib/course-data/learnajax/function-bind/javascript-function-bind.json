@@ -1,0 +1,142 @@
+{
+  "id": "43d6fcd1-6fdd-4eea-91dc-a8c34cc543bb",
+  "title": "JavaScript Function bind()",
+  "slug": "javascript-function-bind",
+  "metadata": {
+    "description": "Learn about JavaScript Function bind() with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "person",
+      "display",
+      "object",
+      "function",
+      "bind",
+      "method",
+      "example",
+      "firstname",
+      "lastname",
+      "refers"
+    ],
+    "difficulty": "intermediate",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnAJAX",
+    "subcategory": "Function Bind"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "JavaScript Function bind()",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Function Borrowing\nWith the\nbind()\nmethod, an object can borrow a method from another object.\nThe example below creates 2 objects (person and member).\nThe member object borrows the fullname method from the person object:\nExample\nconst person = {\nfirstName:\"John\",\nlastName: \"Doe\",\nfullName: function () {\nreturn this.firstName + \" \" + this.lastName;\n}\n}\nconst member = {\nfirstName:\"Hege\",\nlastName: \"Nilsen\",\n}\nlet fullName = person.fullName.bind(member);\n\nPreserving\nthis\nSometimes the\nbind()\nmethod has to be used to prevent losing\nthis\n.\nIn the following example, the person object has a display method. In the display method,\nthis\nrefers to the person object:\nExample\nconst person = {\nfirstName:\"John\",\nlastName: \"Doe\",\ndisplay: function () {\nlet x = document.getElementById(\"demo\");\nx.innerHTML = this.firstName + \" \" + this.lastName;\n}\n}\nperson.display();\n\nWhen a function is used as a callback,\nthis\nis lost.\nThis example will try to display the person name after 3 seconds, but it will display\nundefined\ninstead:\nExample\nconst person = {\nfirstName:\"John\",\nlastName: \"Doe\",\ndisplay: function () {\nlet x = document.getElementById(\"demo\");\nx.innerHTML = this.firstName + \" \" + this.lastName;\n}\n}\nsetTimeout(person.display, 3000);\n\nThe\nbind()\nmethod solves this problem.\nIn the following example, the\nbind()\nmethod is used to bind person.display to person.\nThis example will display the person name after 3 seconds:\nExample\nconst person = {\nfirstName:\"John\",\nlastName: \"Doe\",\ndisplay: function () {\nlet x = document.getElementById(\"demo\");\nx.innerHTML = this.firstName + \" \" + this.lastName;\n}\n}\nlet display = person.display.bind(person);\nsetTimeout(display, 3000);\n\nWhat is\nthis\n?\nIn JavaScript, the\nthis\nkeyword refers to an\nobject\n.\nThe\nthis\nkeyword refers to\ndifferent objects\ndepending on how it is used:\nIn an object method,\nthis\nrefers to the\nobject\n.\nAlone,\nthis\nrefers to the\nglobal object\n.\nIn a function,\nthis\nrefers to the\nglobal object\n.\nIn a function, in strict mode,\nthis\nis\nundefined\n.\nIn an event,\nthis\nrefers to the\nelement\nthat received the event.\nMethods like\ncall()\n,\napply()\n,\nand\nbind()\ncan refer\nthis\nto\nany object\n.\nNote\nthis\nis not a variable. It is a keyword.\nYou cannot change the value of\nthis\n.\nSee Also:\nThe JavaScript\nthis\nTutorial\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "const person = {\nfirstName:\"John\",\nlastName: \"Doe\",\nfullName: function () {\nreturn this.firstName + \" \" + this.lastName;\n}\n}\nconst member = {\nfirstName:\"Hege\",\nlastName: \"Nilsen\",\n}\nlet fullName = person.fullName.bind(member);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "const person = {\nfirstName:\"John\",\nlastName: \"Doe\",\ndisplay: function () {\nlet x = document.getElementById(\"demo\");\nx.innerHTML = this.firstName + \" \" + this.lastName;\n}\n}\nperson.display();",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "const person = {\nfirstName:\"John\",\nlastName: \"Doe\",\ndisplay: function () {\nlet x = document.getElementById(\"demo\");\nx.innerHTML = this.firstName + \" \" + this.lastName;\n}\n}\nsetTimeout(person.display, 3000);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "const person = {\nfirstName:\"John\",\nlastName: \"Doe\",\ndisplay: function () {\nlet x = document.getElementById(\"demo\");\nx.innerHTML = this.firstName + \" \" + this.lastName;\n}\n}\nlet display = person.display.bind(person);\nsetTimeout(display, 3000);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "const person = {\nfirstName:\"John\",\nlastName: \"Doe\",\nfullName: function () {\nreturn this.firstName + \" \" + this.lastName;\n}\n# TODO: Complete this line\nconst member = {\nfirstName:\"Hege\",\nlastName: \"Nilsen\",\n}\nlet fullName = person.fullName.bind(member);",
+      "solution": "const person = {\nfirstName:\"John\",\nlastName: \"Doe\",\nfullName: function () {\nreturn this.firstName + \" \" + this.lastName;\n}\n}\nconst member = {\nfirstName:\"Hege\",\nlastName: \"Nilsen\",\n}\nlet fullName = person.fullName.bind(member);"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "const person = {\n# TODO: Complete this line\nlastName: \"Doe\",\ndisplay: function () {\nlet x = document.getElementById(\"demo\");\nx.innerHTML = this.firstName + \" \" + this.lastName;\n}\n}\nperson.display();",
+      "solution": "const person = {\nfirstName:\"John\",\nlastName: \"Doe\",\ndisplay: function () {\nlet x = document.getElementById(\"demo\");\nx.innerHTML = this.firstName + \" \" + this.lastName;\n}\n}\nperson.display();"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "c9176e36-f8b5-4e3f-8794-228e57234c03",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "d5ab2799-ea6f-474f-9dd4-046d1457e2c9",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "ae21c719-7a7b-4ab1-b129-faa95b58fed2",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is When a function?",
+      "options": [
+        "used as a callback",
+        "used to bind person",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of When a function is 'used as a callback'."
+    },
+    {
+      "question": "What is method?",
+      "options": [
+        "used to bind person",
+        "used as a callback",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of method is 'used to bind person'."
+    }
+  ],
+  "summary": "This tutorial covers JavaScript Function bind() concepts and techniques. You'll learn how to use JavaScript Function bind() effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of JavaScript Function bind() and how to apply it in your projects."
+}

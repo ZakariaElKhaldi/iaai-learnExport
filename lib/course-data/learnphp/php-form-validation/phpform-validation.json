@@ -1,0 +1,98 @@
+{
+  "id": "5d997c87-f9a0-4e7a-b572-f5915dea169d",
+  "title": "PHPForm Validation",
+  "slug": "phpform-validation",
+  "metadata": {
+    "description": "Learn about PHPForm Validation with clear explanations and practical examples.",
+    "keywords": [
+      "form",
+      "data",
+      "code",
+      "name",
+      "script",
+      "user",
+      "input",
+      "function",
+      "html",
+      "gender"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Php Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPHP",
+    "subcategory": "PHP Form Validation"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PHP\nForm Validation",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "This and the \nPHP Form Validation\nThink SECURITY when processing PHP forms!\nThese pages will show how to process PHP forms with security in mind. Proper validation of form data is important \nto protect your form from hackers and spammers!\nThe HTML form we will be working at in these chapters, contains various input fields: \nrequired and optional text fields, radio buttons, and a submit button:\nThe validation rules for the form above are as follows:\nField\nValidation Rules\nName\nRequired. + Must only contain letters and whitespace\nE-mail\nRequired. + Must contain a valid email address (with @ and .)\nWebsite\nOptional. If present, it must contain a valid URL\nComment\nOptional. Multi-line input field (textarea)\nGender\nRequired. Must select one\nFirst we will look at the plain HTML code for the form:\nText Fields\nThe name, email, and website fields are text input elements, and the comment \nfield is a textarea.\nThe HTML code looks like this:\nName: <input type=\"text\" name=\"name\">\nE-mail: <input type=\"text\" name=\"email\">\nWebsite: <input type=\"text\" name=\"website\">\nComment: <textarea name=\"comment\" rows=\"5\" cols=\"40\"></textarea>\nRadio Buttons\nThe gender fields are radio buttons and the HTML code looks like this:\nGender:\n<input type=\"radio\" name=\"gender\" value=\"female\">Female\n<input type=\"radio\" name=\"gender\" value=\"male\">Male\n<input type=\"radio\" name=\"gender\" value=\"other\">Other\nThe Form Element\nThe HTML code of the form looks like this:\n<form method=\"post\" action=\"<?php echo htmlspecialchars($_SERVER[\"PHP_SELF\"]);?>\">\nWhen the form is submitted, the form data is sent with method=\"post\".\nWhat is the\n$_SERVER[\"PHP_SELF\"]\nvariable?\nThe\n$_SERVER[\"PHP_SELF\"]\nis a super global variable that returns the filename of the \ncurrently executing script.\nSo, the\n$_SERVER[\"PHP_SELF\"]\nsends the submitted form data to the page itself, instead of jumping to a different page. \nThis way, the user will get error messages on the same page as the form.\nWhat is the\nhtmlspecialchars()\nfunction?\nThe\nhtmlspecialchars()\nfunction converts special characters into HTML entities. \nThis means that it will replace HTML characters like\n<\nand\n>\nwith\n&lt;\nand\n&gt;\n. \nThis prevents attackers from exploiting the code by injecting HTML or Javascript code\n(Cross-site Scripting attacks) in forms.\nWarning!\nThe\n$_SERVER[\"PHP_SELF\"]\nvariable can be used by hackers!\nIf PHP_SELF is used in your page then a user can enter a slash\n/\nand then\nsome Cross Site Scripting (XSS) commands to execute.\nCross-site scripting (XSS) is a type of computer security vulnerability \ntypically found in Web applications. XSS enables attackers to inject client-side \nscript into Web pages viewed by other users.\nAssume we have the following form in a page named \"test_form.php\":\n<form method=\"post\" action=\"<?php echo $_SERVER[\"PHP_SELF\"];?>\">\nNow, if a user enters the normal URL in the address bar like \n\"\", the above code will be translated to:\n<form method=\"post\" action=\"test_form.php\">\nSo far, so good.\nHowever, consider that a user enters the following URL in the address bar:\n\nIn this case, the above code will be translated to:\n<form method=\"post\" action=\"test_form.php/\"><script>alert('hacked')</script>\nThis code adds a script tag and an alert command. And when the page loads, the \nJavaScript code will be executed (the user will see an alert box). This is just a simple \nand harmless example how the PHP_SELF variable can be exploited.\nBe aware of that\nany JavaScript code can be added inside the  \n<script> tag!\nA hacker can redirect the user to a file on another server, \nand that file can hold malicious code \nthat can alter the global variables or submit the form to another \naddress to save the user data, for example.\nHow To Avoid $_SERVER[\"PHP_SELF\"] Exploits?\n$_SERVER[\"PHP_SELF\"]\nexploits can be avoided by using the\nhtmlspecialchars()\nfunction.\nThe form code should look like this:\n<form method=\"post\" action=\"<?php echo htmlspecialchars($_SERVER[\"PHP_SELF\"]);?>\">\nThe\nhtmlspecialchars()\nfunction converts special characters to HTML entities.\nNow if the user tries to exploit the PHP_SELF variable, it will result in the following output:\n<form method=\"post\" action=\"test_form.php/&quot;&gt;&lt;script&gt;alert('hacked')&lt;/script&gt;\">\nThe exploit attempt fails, and no harm is done!\nValidate Form Data With PHP\nThe first thing we will do is to pass all variables through PHP's\nhtmlspecialchars()\nfunction.\nWhen we use the\nhtmlspecialchars()\nfunction;\nthen if a user tries to submit the following in a text field:\n<script>location.href('</script>\n- this would not be executed, because it would be saved as HTML escaped code, like this:\n&lt;script&gt;location.href('\nThe code is now safe to be displayed on a page or inside an e-mail.\nWe will also do two more things when the user submits the form:\nStrip unnecessary characters (extra space, tab, newline) from the user input data (with the PHP\ntrim()\nfunction)\nRemove backslashes\n\\\nfrom the user input data (with the PHP\nstripslashes()\nfunction)\nThe \n(which is much more convenient than writing the same code over and over again).\nWe will name the function\ntest_input()\n.\nNow, we can \ncheck each\n$_POST\nvariable with the\ntest_input()\nfunction, and the script looks like this:\nExample\n// define variables and set to empty values\n$name = $email = $gender = $comment = $website = \"\";\n\nif ($_SERVER[\"REQUEST_METHOD\"] == \"POST\") {\n  $name = test_input($_POST[\"name\"]);\n  $email = test_input($_POST[\"email\"]);\n  $website = test_input($_POST[\"website\"]);\n  $comment = test_input($_POST[\"comment\"]);\n  $gender = test_input($_POST[\"gender\"]);\n}\n\nfunction test_input($data) {\n  $data = trim($data);\n  $data = stripslashes($data);\n  $data = htmlspecialchars($data);\n  return $data;\n}\nRun Example \u00bb\nNotice that at the start of the script, we check whether the form has been \nsubmitted using\n$_SERVER[\"REQUEST_METHOD\"]\n.\nIf the\nREQUEST_METHOD\nis\nPOST\n, then \nthe form has been submitted - and it \nshould be validated. If it has not been submitted, skip the validation and \ndisplay a blank form.\nHowever, in the example above, all input fields are optional. The script \nworks fine even if the user does not enter any data.\nThe \nneeded.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "104dc318-cce7-4582-b714-64f6d2682233",
+      "title": "Php Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "9d785ef4-e3dd-4b0f-b136-1f5353e94bdc",
+      "title": "Php Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "00e2a8cc-7c05-4e19-a731-fd09d9537db3",
+      "title": "Php Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Proper validation of form data?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "important \nto protect your form from hackers and spammers",
+        "as follows:\nField\nValidation Rules\nName\nRequired"
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of Proper validation of form data is 'important \nto protect your form from hackers and spammers'."
+    },
+    {
+      "question": "What is The validation rules for the form above?",
+      "options": [
+        "None of the above.",
+        "as follows:\nField\nValidation Rules\nName\nRequired",
+        "important \nto protect your form from hackers and spammers",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of The validation rules for the form above is 'as follows:\nField\nValidation Rules\nName\nRequired'."
+    }
+  ],
+  "summary": "This tutorial covers PHPForm Validation concepts and techniques. You'll learn how to use PHPForm Validation effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PHPForm Validation and how to apply it in your projects."
+}

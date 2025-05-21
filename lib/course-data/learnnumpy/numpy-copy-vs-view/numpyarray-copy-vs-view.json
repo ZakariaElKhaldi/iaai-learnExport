@@ -1,0 +1,142 @@
+{
+  "id": "da1b8e0d-da08-4568-8c62-32f0095c4e07",
+  "title": "NumPyArray Copy vs View",
+  "slug": "numpyarray-copy-vs-view",
+  "metadata": {
+    "description": "Learn about NumPyArray Copy vs View with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "array",
+      "view",
+      "copy",
+      "original",
+      "print",
+      "changes",
+      "data",
+      "made",
+      "numpy",
+      "owns"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnNumPy",
+    "subcategory": "NumPy Copy vs View"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "NumPy\nArray Copy vs View",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "The Difference Between Copy and View\nThe main difference between a copy and a view of an array is that\nthe copy is a new array, and the view is just a view of the original array.\nThe copy\nowns\nthe data and any changes made to the copy will not \naffect original array, and any changes made to the original array will not \naffect the copy.\nThe view\ndoes not own\nthe data and any changes made to the view will \naffect the original array, and any changes made to the original array will \naffect the view.\nCOPY:\nExample\nMake a copy, change the original array, and display both arrays:\nimport numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.copy()\narr[0] = 42\nprint(arr)\nprint(x)\n\nThe copy SHOULD NOT be affected by the changes made to the original array.\nVIEW:\nExample\nMake a view, change the original array, and display both arrays:\nimport numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.view()\narr[0] = 42\nprint(arr)\nprint(x)\n\nThe view SHOULD be affected by the changes made to the original array.\nMake Changes in the VIEW:\nExample\nMake a view, change the view, and display both arrays:\nimport numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.view()\nx[0] = 31\nprint(arr)\nprint(x)\n\nThe original array SHOULD be affected by the changes made to the view.\nCheck if Array Owns its Data\nAs mentioned above, copies\nowns\nthe data, and views\ndoes not own\nthe data, but how can we check this?\nEvery NumPy array has the attribute\nbase\nthat \nreturns\nNone\nif the array owns the data.\nOtherwise, the\nbase\nattribute refers to the original object.\nExample\nPrint the value of the base attribute to check if an array owns it's data or \nnot:\nimport numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.copy()\ny = arr.view()\nprint(x.base)\nprint(y.base)\n\nThe copy returns\nNone\n.\nThe view returns the original array.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.copy()\narr[0] = 42\nprint(arr)\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.view()\narr[0] = 42\nprint(arr)\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.view()\nx[0] = 31\nprint(arr)\nprint(x)",
+      "language": "python",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 6,
+      "code": "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.copy()\ny = arr.view()\nprint(x.base)\nprint(y.base)",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.copy()\narr[0] = 42\nprint(arr)\n# TODO: Complete this line",
+      "solution": "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.copy()\narr[0] = 42\nprint(arr)\nprint(x)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import numpy as np\n# TODO: Complete this line\nx = arr.view()\narr[0] = 42\nprint(arr)\nprint(x)",
+      "solution": "import numpy as np\narr = np.array([1, 2, 3, 4, 5])\nx = arr.view()\narr[0] = 42\nprint(arr)\nprint(x)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "20a221cb-c590-41f9-ac03-5546f5140d27",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "95a9505d-e7b7-494e-b9eb-95c05fb50b5e",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "d2252ecc-d748-42c3-87e7-d39798e6ca0b",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is NumPy\nArray Copy vs View\n\nThe Difference Between Copy and View\nThe main difference between a copy and a view of an array is that\nthe copy?",
+      "options": [
+        "None of the above.",
+        "a new array",
+        "None of the above.",
+        "None of the above."
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of NumPy\nArray Copy vs View\n\nThe Difference Between Copy and View\nThe main difference between a copy and a view of an array is that\nthe copy is 'a new array'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers NumPyArray Copy vs View concepts and techniques. You'll learn how to use NumPyArray Copy vs View effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of NumPyArray Copy vs View and how to apply it in your projects."
+}

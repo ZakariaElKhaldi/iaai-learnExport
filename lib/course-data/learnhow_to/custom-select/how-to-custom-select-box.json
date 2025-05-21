@@ -1,0 +1,133 @@
+{
+  "id": "7f37daaa-4145-4bbd-a97c-633da9ae9a63",
+  "title": "How TO - Custom Select Box",
+  "slug": "how-to-custom-select-box",
+  "metadata": {
+    "description": "Learn about How TO - Custom Select Box with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "select",
+      "option",
+      "value",
+      "selected",
+      "custom",
+      "transparent",
+      "items",
+      "document",
+      "innerhtml",
+      "color"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnHow To",
+    "subcategory": "Custom Select"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "How TO - Custom Select Box",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Learn how to create custom select boxes with CSS and JavaScript.\nCustom Select Box\nDefault:\nSelect car:\nAudi\nBMW\nCitroen\nFord\nHonda\nJaguar\nLand Rover\nMercedes\nMini\nNissan\nToyota\nVolvo\nCustom:\nSelect car:\nAudi\nBMW\nCitroen\nFord\nHonda\nJaguar\nLand Rover\nMercedes\nMini\nNissan\nToyota\nVolvo\n\nCreate a Custom Select Menu\nStep 1) Add HTML:\nExample\n<!-- Wrap the select box in a \".custom-select\" DIV element.\nRemember \n  to set the width: -->\n<div class=\"custom-select\" style=\"width:200px;\">\n<select>\n<option value=\"0\">Select car:</option>\n<option value=\"1\">Audi</option>\n<option \n  value=\"2\">BMW</option>\n<option \n  value=\"3\">Citroen</option>\n<option \n  value=\"4\">Ford</option>\n<option value=\"5\">Honda</option>\n<option value=\"6\">Jaguar</option>\n<option value=\"7\">Land \n  Rover</option>\n<option value=\"8\">Mercedes</option>\n<option value=\"9\">Mini</option>\n<option \n  value=\"10\">Nissan</option>\n<option \n  value=\"11\">Toyota</option>\n<option \n  value=\"12\">Volvo</option>\n</select>\n</div>\nStep 2) Add CSS:\nExample\n/* The container must be positioned relative: */\n.custom-select {\nposition: relative;\nfont-family: Arial;\n}\n.custom-select select {\ndisplay: none; /*hide original SELECT element: */\n}\n.select-selected {\nbackground-color: DodgerBlue;\n}\n/* Style the arrow inside the select \n  element: */\n.select-selected:after {\nposition: absolute;\ncontent: \"\";\ntop: 14px;\nright: 10px;\nwidth: 0;\nheight: 0;\nborder: 6px solid transparent;\nborder-color: #fff \n  transparent transparent transparent;\n}\n/* Point the arrow upwards when the select box is open (active): */\n.select-selected.select-arrow-active:after \n  {\nborder-color: transparent transparent #fff transparent;\ntop: 7px;\n}\n/* style the items (options), including the selected item: */\n.select-items \n  div,.select-selected {\ncolor: #ffffff;\npadding: 8px 16px;\nborder: 1px solid transparent;\nborder-color: transparent transparent \n  rgba(0, 0, 0, 0.1) transparent;\ncursor: pointer;\n}\n/* Style items (options): */\n.select-items {\nposition: absolute;\nbackground-color: \n  DodgerBlue;\ntop: 100%;\nleft: 0;\nright: 0;\nz-index: 99;\n}\n/* Hide the items \n  when the select box is closed: */\n.select-hide {\ndisplay: none;\n}\n.select-items div:hover, .same-as-selected {\nbackground-color: rgba(0, 0, 0, 0.1);\n}\nStep 3) Add JavaScript:\nExample\nvar x, i, j, l, ll, selElmnt, a, b, c;\n/* Look for any elements with the class \n  \"custom-select\": */\nx = document.getElementsByClassName(\"custom-select\");\nl = x.length;\nfor (i = 0; i < l; i++) {\nselElmnt = x[i].getElementsByTagName(\"select\")[0];\nll = selElmnt.length;\n/* \n  For each element, create a new \n  DIV that will act as the selected item: */\na = document.createElement(\"DIV\");\na.setAttribute(\"class\", \n  \"select-selected\");\na.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;\nx[i].appendChild(a);\n/* For each element, create a new DIV that will \n  contain the option list: */\nb = document.createElement(\"DIV\");\nb.setAttribute(\"class\", \"select-items select-hide\");\nfor (j = \n  1; j < ll; j++) {\n/* For each option in the \n  original select element,\ncreate a new DIV that will act \n  as an option item: */\nc = document.createElement(\"DIV\");\nc.innerHTML = selElmnt.options[j].innerHTML;\nc.addEventListener(\"click\", function(e) {\n/* When an item is clicked, update the original select box,\nand the selected item: */\nvar y, \n  i, k, s, h, sl, yl;\ns = \n  this.parentNode.parentNode.getElementsByTagName(\"select\")[0];\nsl = s.length;\nh = this.parentNode.\nfor (i = 0; i < sl; i++) {\nif (s.options[i].innerHTML == this.innerHTML) {\ns.selectedIndex = i;\nh.innerHTML = this.innerHTML;\ny = this.parentNode.getElementsByClassName(\"same-as-selected\");\nyl = y.length;\nfor (k = 0; k < yl; k++) {\ny[k].removeAttribute(\"class\");\n}\nthis.setAttribute(\"class\", \"same-as-selected\");\nbreak;\n}\n}\nh.click();\n});\nb.appendChild(c);\n}\nx[i].appendChild(b);\na.addEventListener(\"click\", function(e) {\n/* When the select box is clicked, close any other select boxes,\nand open/close the current select box: */\ne.stopPropagation();\ncloseAllSelect(this);\nthis.\nthis.classList.toggle(\"select-arrow-active\");\n});\n}\nfunction closeAllSelect(elmnt) {\n/* \n  A function that will \n  close all select boxes in the document,\nexcept the current select \n  box: */\nvar x, y, i, xl, yl, arrNo = [];\nx = \n  document.getElementsByClassName(\"select-items\");\ny = \n  document.getElementsByClassName(\"select-selected\");\nxl = \n  x.length;\nyl = y.length;\nfor (i = 0; i < \n  yl; i++) {\nif (elmnt == y[i]) {\narrNo.push(i)\n} else {\ny[i].classList.remove(\"select-arrow-active\");\n}\n}\nfor (i = 0; i < xl; i++) {\nif (arrNo.indexOf(i)) \n  {\nx[i].classList.add(\"select-hide\");\n}\n}\n}\n/* If the user clicks anywhere outside the select box,\nthen \n  close all select boxes: */\ndocument.addEventListener(\"click\", closeAllSelect);\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<!-- Wrap the select box in a \".custom-select\" DIV element.\nRemember \n  to set the width: -->\n<div class=\"custom-select\" style=\"width:200px;\">\n<select>\n<option value=\"0\">Select car:</option>\n<option value=\"1\">Audi</option>\n<option \n  value=\"2\">BMW</option>\n<option \n  value=\"3\">Citroen</option>\n<option \n  value=\"4\">Ford</option>\n<option value=\"5\">Honda</option>\n<option value=\"6\">Jaguar</option>\n<option value=\"7\">Land \n  Rover</option>\n<option value=\"8\">Mercedes</option>\n<option value=\"9\">Mini</option>\n<option \n  value=\"10\">Nissan</option>\n<option \n  value=\"11\">Toyota</option>\n<option \n  value=\"12\">Volvo</option>\n</select>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "/* The container must be positioned relative: */\n.custom-select {\nposition: relative;\nfont-family: Arial;\n}\n.custom-select select {\ndisplay: none; /*hide original SELECT element: */\n}\n.select-selected {\nbackground-color: DodgerBlue;\n}\n/* Style the arrow inside the select \n  element: */\n.select-selected:after {\nposition: absolute;\ncontent: \"\";\ntop: 14px;\nright: 10px;\nwidth: 0;\nheight: 0;\nborder: 6px solid transparent;\nborder-color: #fff \n  transparent transparent transparent;\n}\n/* Point the arrow upwards when the select box is open (active): */\n.select-selected.select-arrow-active:after \n  {\nborder-color: transparent transparent #fff transparent;\ntop: 7px;\n}\n/* style the items (options), including the selected item: */\n.select-items \n  div,.select-selected {\ncolor: #ffffff;\npadding: 8px 16px;\nborder: 1px solid transparent;\nborder-color: transparent transparent \n  rgba(0, 0, 0, 0.1) transparent;\ncursor: pointer;\n}\n/* Style items (options): */\n.select-items {\nposition: absolute;\nbackground-color: \n  DodgerBlue;\ntop: 100%;\nleft: 0;\nright: 0;\nz-index: 99;\n}\n/* Hide the items \n  when the select box is closed: */\n.select-hide {\ndisplay: none;\n}\n.select-items div:hover, .same-as-selected {\nbackground-color: rgba(0, 0, 0, 0.1);\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "var x, i, j, l, ll, selElmnt, a, b, c;\n/* Look for any elements with the class \n  \"custom-select\": */\nx = document.getElementsByClassName(\"custom-select\");\nl = x.length;\nfor (i = 0; i < l; i++) {\nselElmnt = x[i].getElementsByTagName(\"select\")[0];\nll = selElmnt.length;\n/* \n  For each element, create a new \n  DIV that will act as the selected item: */\na = document.createElement(\"DIV\");\na.setAttribute(\"class\", \n  \"select-selected\");\na.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;\nx[i].appendChild(a);\n/* For each element, create a new DIV that will \n  contain the option list: */\nb = document.createElement(\"DIV\");\nb.setAttribute(\"class\", \"select-items select-hide\");\nfor (j = \n  1; j < ll; j++) {\n/* For each option in the \n  original select element,\ncreate a new DIV that will act \n  as an option item: */\nc = document.createElement(\"DIV\");\nc.innerHTML = selElmnt.options[j].innerHTML;\nc.addEventListener(\"click\", function(e) {\n/* When an item is clicked, update the original select box,\nand the selected item: */\nvar y, \n  i, k, s, h, sl, yl;\ns = \n  this.parentNode.parentNode.getElementsByTagName(\"select\")[0];\nsl = s.length;\nh = this.parentNode.previousSibling;\nfor (i = 0; i < sl; i++) {\nif (s.options[i].innerHTML == this.innerHTML) {\ns.selectedIndex = i;\nh.innerHTML = this.innerHTML;\ny = this.parentNode.getElementsByClassName(\"same-as-selected\");\nyl = y.length;\nfor (k = 0; k < yl; k++) {\ny[k].removeAttribute(\"class\");\n}\nthis.setAttribute(\"class\", \"same-as-selected\");\nbreak;\n}\n}\nh.click();\n});\nb.appendChild(c);\n}\nx[i].appendChild(b);\na.addEventListener(\"click\", function(e) {\n/* When the select box is clicked, close any other select boxes,\nand open/close the current select box: */\ne.stopPropagation();\ncloseAllSelect(this);\nthis.nextSibling.classList.toggle(\"select-hide\");\nthis.classList.toggle(\"select-arrow-active\");\n});\n}\nfunction closeAllSelect(elmnt) {\n/* \n  A function that will \n  close all select boxes in the document,\nexcept the current select \n  box: */\nvar x, y, i, xl, yl, arrNo = [];\nx = \n  document.getElementsByClassName(\"select-items\");\ny = \n  document.getElementsByClassName(\"select-selected\");\nxl = \n  x.length;\nyl = y.length;\nfor (i = 0; i < \n  yl; i++) {\nif (elmnt == y[i]) {\narrNo.push(i)\n} else {\ny[i].classList.remove(\"select-arrow-active\");\n}\n}\nfor (i = 0; i < xl; i++) {\nif (arrNo.indexOf(i)) \n  {\nx[i].classList.add(\"select-hide\");\n}\n}\n}\n/* If the user clicks anywhere outside the select box,\nthen \n  close all select boxes: */\ndocument.addEventListener(\"click\", closeAllSelect);",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!-- Wrap the select box in a \".custom-select\" DIV element.\nRemember \n  to set the width: -->\n<div class=\"custom-select\" style=\"width:200px;\">\n<select>\n<option value=\"0\">Select car:</option>\n<option value=\"1\">Audi</option>\n<option \n  value=\"2\">BMW</option>\n<option \n  value=\"3\">Citroen</option>\n<option \n  value=\"4\">Ford</option>\n<option value=\"5\">Honda</option>\n<option value=\"6\">Jaguar</option>\n<option value=\"7\">Land \n  Rover</option>\n<option value=\"8\">Mercedes</option>\n<option value=\"9\">Mini</option>\n<option \n  value=\"10\">Nissan</option>\n<option \n  value=\"11\">Toyota</option>\n<option \n# TODO: Complete this line\n</select>\n</div>",
+      "solution": "<!-- Wrap the select box in a \".custom-select\" DIV element.\nRemember \n  to set the width: -->\n<div class=\"custom-select\" style=\"width:200px;\">\n<select>\n<option value=\"0\">Select car:</option>\n<option value=\"1\">Audi</option>\n<option \n  value=\"2\">BMW</option>\n<option \n  value=\"3\">Citroen</option>\n<option \n  value=\"4\">Ford</option>\n<option value=\"5\">Honda</option>\n<option value=\"6\">Jaguar</option>\n<option value=\"7\">Land \n  Rover</option>\n<option value=\"8\">Mercedes</option>\n<option value=\"9\">Mini</option>\n<option \n  value=\"10\">Nissan</option>\n<option \n  value=\"11\">Toyota</option>\n<option \n  value=\"12\">Volvo</option>\n</select>\n</div>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "/* The container must be positioned relative: */\n.custom-select {\nposition: relative;\nfont-family: Arial;\n}\n.custom-select select {\ndisplay: none; /*hide original SELECT element: */\n}\n.select-selected {\nbackground-color: DodgerBlue;\n}\n/* Style the arrow inside the select \n  element: */\n.select-selected:after {\nposition: absolute;\ncontent: \"\";\ntop: 14px;\nright: 10px;\nwidth: 0;\nheight: 0;\nborder: 6px solid transparent;\nborder-color: #fff \n  transparent transparent transparent;\n# TODO: Complete this line\n/* Point the arrow upwards when the select box is open (active): */\n.select-selected.select-arrow-active:after \n  {\nborder-color: transparent transparent #fff transparent;\ntop: 7px;\n}\n/* style the items (options), including the selected item: */\n.select-items \n  div,.select-selected {\ncolor: #ffffff;\npadding: 8px 16px;\nborder: 1px solid transparent;\nborder-color: transparent transparent \n  rgba(0, 0, 0, 0.1) transparent;\ncursor: pointer;\n}\n/* Style items (options): */\n.select-items {\nposition: absolute;\nbackground-color: \n  DodgerBlue;\ntop: 100%;\nleft: 0;\nright: 0;\nz-index: 99;\n}\n/* Hide the items \n  when the select box is closed: */\n.select-hide {\ndisplay: none;\n}\n.select-items div:hover, .same-as-selected {\nbackground-color: rgba(0, 0, 0, 0.1);\n}",
+      "solution": "/* The container must be positioned relative: */\n.custom-select {\nposition: relative;\nfont-family: Arial;\n}\n.custom-select select {\ndisplay: none; /*hide original SELECT element: */\n}\n.select-selected {\nbackground-color: DodgerBlue;\n}\n/* Style the arrow inside the select \n  element: */\n.select-selected:after {\nposition: absolute;\ncontent: \"\";\ntop: 14px;\nright: 10px;\nwidth: 0;\nheight: 0;\nborder: 6px solid transparent;\nborder-color: #fff \n  transparent transparent transparent;\n}\n/* Point the arrow upwards when the select box is open (active): */\n.select-selected.select-arrow-active:after \n  {\nborder-color: transparent transparent #fff transparent;\ntop: 7px;\n}\n/* style the items (options), including the selected item: */\n.select-items \n  div,.select-selected {\ncolor: #ffffff;\npadding: 8px 16px;\nborder: 1px solid transparent;\nborder-color: transparent transparent \n  rgba(0, 0, 0, 0.1) transparent;\ncursor: pointer;\n}\n/* Style items (options): */\n.select-items {\nposition: absolute;\nbackground-color: \n  DodgerBlue;\ntop: 100%;\nleft: 0;\nright: 0;\nz-index: 99;\n}\n/* Hide the items \n  when the select box is closed: */\n.select-hide {\ndisplay: none;\n}\n.select-items div:hover, .same-as-selected {\nbackground-color: rgba(0, 0, 0, 0.1);\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "81a8f10d-7357-41a0-98f8-d11b6df71610",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "e4c2a3c0-5e87-4549-a905-ebf4fd3e2313",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "9b85ffe8-0460-43c3-ac95-33869f1e25ad",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Point the arrow upwards when the select box?",
+      "options": [
+        "open (active): */",
+        "None of the above.",
+        "closed: */",
+        "None of the above."
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Point the arrow upwards when the select box is 'open (active): */'."
+    },
+    {
+      "question": "What is Hide the items \n  when the select box?",
+      "options": [
+        "closed: */",
+        "None of the above.",
+        "None of the above.",
+        "open (active): */"
+      ],
+      "correct_answer": 0,
+      "explanation": "The correct definition of Hide the items \n  when the select box is 'closed: */'."
+    }
+  ],
+  "summary": "This tutorial covers How TO - Custom Select Box concepts and techniques. You'll learn how to use How TO - Custom Select Box effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of How TO - Custom Select Box and how to apply it in your projects."
+}

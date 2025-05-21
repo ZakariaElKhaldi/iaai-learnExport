@@ -1,0 +1,142 @@
+{
+  "id": "adaaffcc-9aad-49e6-9c5e-b8a8ac936e45",
+  "title": "PostgreSQL CROSS JOIN",
+  "slug": "postgresql-cross-join",
+  "metadata": {
+    "description": "Learn about PostgreSQL CROSS JOIN with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "beverages",
+      "condiments",
+      "confections",
+      "dairy",
+      "products",
+      "grains",
+      "cereals",
+      "meat",
+      "poultry",
+      "produce"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnPostgreSQL",
+    "subcategory": "PostgreSQL CROSS JOIN"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "PostgreSQL CROSS JOIN",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "CROSS JOIN\nThe\nCROSS JOIN\nkeyword matches ALL records from \nthe \"left\" table with EACH record from the \"right\" table.\nThat means that all records from the \"right\" table will be returned for each \nrecord in the \"left\" table.\nThis way of joining can potentially return very large table, and you should \nnot use it if you do not have to.\nLet's look at an example using our dummy\ntestproducts\ntable:\ntestproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_id\n----------------+------------------------+-------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    3\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    9\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    10\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    11\n5 | Elisabeths Best Apples |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    12\n6 | Janes Favorite Cheese\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    4\n7 | Billys Home Made Pizza |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    13\n8 | Ellas Special Salmon\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    8\n9 | Roberts Rich Spaghetti |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    5\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    14\n(10 rows)\nWe will try to join the\ntestproducts\ntable \nwith the\ncategories\ntable:\ncategory_id | category_name\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    description\n-------------+----------------+------------------------------------------------------------\n1 | Beverages\u00a0\u00a0\u00a0\u00a0\u00a0 | Soft drinks, coffees, teas, \n    beers, and ales\n2 | Condiments\u00a0\u00a0\u00a0\u00a0 | Sweet and savory sauces, relishes, \n    spreads, and seasonings\n3 | Confections\u00a0\u00a0\u00a0 | Desserts, candies, and sweet breads\n4 | Dairy Products | Cheeses\n5 | Grains/Cereals | Breads, crackers, pasta, and cereal\n6 | Meat/Poultry\u00a0\u00a0 | Prepared meats\n7 | Produce\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dried fruit and bean \n    curd\n8 | \n    Seafood\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seaweed and fish\n(8 \n    rows)\nNote:\nThe\nCROSS JOIN\nmethod will \nreturn ALL\ncategories\nfor EACH\ntestproduct\n, meaning that it will return 80 \nrows (10 * 8).\nExample\nJoin\ntestproducts\nto\ncategories\nusing the\nCROSS JOIN\nkeyword:\nSELECT \n        testproduct_id, product_name, category_name\nFROM testproducts\nCROSS JOIN categories;\nRun Example \u00bb\nResult\nAll\ncategories\nfor each\ntestproduct\nwill be returned:\ntestproduct_id \n    |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 | \n    category_name\n----------------+------------------------+----------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Beverages\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Condiments\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Confections\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Produce\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seafood\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Beverages\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Condiments\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Confections\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Produce\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Seafood\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Beverages\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Condiments\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Confections\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Produce\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Seafood\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Beverages\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Condiments\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Confections\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Produce\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Seafood\n5 | Elisabeths Best Apples | Beverages\n5 | Elisabeths Best Apples | Condiments\n5 | Elisabeths Best Apples | Confections\n5 | Elisabeths Best Apples | Dairy Products\n5 | Elisabeths Best Apples | Grains/Cereals\n5 | Elisabeths Best Apples | Meat/Poultry\n5 | Elisabeths Best Apples | Produce\n5 | Elisabeths Best Apples | Seafood\n6 | Janes Favorite Cheese\u00a0 | Beverages\n6 | Janes Favorite Cheese\u00a0 | Condiments\n6 | Janes Favorite Cheese\u00a0 | Confections\n6 | Janes Favorite Cheese\u00a0 | Dairy Products\n6 | Janes Favorite Cheese\u00a0 | Grains/Cereals\n6 | Janes Favorite Cheese\u00a0 | Meat/Poultry\n6 | Janes Favorite Cheese\u00a0 | Produce\n6 | Janes Favorite Cheese\u00a0 | Seafood\n7 | Billys Home Made Pizza | Beverages\n7 | Billys Home Made Pizza | Condiments\n7 | Billys Home Made Pizza | Confections\n7 | Billys Home Made Pizza | Dairy Products\n7 | Billys Home Made Pizza | Grains/Cereals\n7 | Billys Home Made Pizza | Meat/Poultry\n7 | Billys Home Made Pizza | Produce\n7 | Billys Home Made Pizza | Seafood\n8 | Ellas Special Salmon\u00a0\u00a0 | Beverages\n8 | Ellas Special Salmon\u00a0\u00a0 | Condiments\n8 | Ellas Special Salmon\u00a0\u00a0 | Confections\n8 | Ellas Special Salmon\u00a0\u00a0 | Dairy Products\n8 | Ellas Special Salmon\u00a0\u00a0 | Grains/Cereals\n8 | Ellas Special Salmon\u00a0\u00a0 | Meat/Poultry\n8 | Ellas Special Salmon\u00a0\u00a0 | Produce\n8 | Ellas Special Salmon\u00a0\u00a0 | Seafood\n9 | Roberts Rich Spaghetti | Beverages\n9 | Roberts Rich Spaghetti | Condiments\n9 | Roberts Rich Spaghetti | Confections\n9 | Roberts Rich Spaghetti | Dairy Products\n9 | Roberts Rich Spaghetti | Grains/Cereals\n9 | Roberts Rich Spaghetti | Meat/Poultry\n9 | Roberts Rich Spaghetti | Produce\n9 | Roberts Rich Spaghetti | Seafood\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Beverages\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Condiments\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Confections\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Produce\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seafood\n(80 \n    rows)\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "testproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_id\n----------------+------------------------+-------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    3\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    9\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    10\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    11\n5 | Elisabeths Best Apples |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    12\n6 | Janes Favorite Cheese\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    4\n7 | Billys Home Made Pizza |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    13\n8 | Ellas Special Salmon\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    8\n9 | Roberts Rich Spaghetti |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    5\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    14\n(10 rows)",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "category_id | category_name\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    description\n-------------+----------------+------------------------------------------------------------\n1 | Beverages\u00a0\u00a0\u00a0\u00a0\u00a0 | Soft drinks, coffees, teas, \n    beers, and ales\n2 | Condiments\u00a0\u00a0\u00a0\u00a0 | Sweet and savory sauces, relishes, \n    spreads, and seasonings\n3 | Confections\u00a0\u00a0\u00a0 | Desserts, candies, and sweet breads\n4 | Dairy Products | Cheeses\n5 | Grains/Cereals | Breads, crackers, pasta, and cereal\n6 | Meat/Poultry\u00a0\u00a0 | Prepared meats\n7 | Produce\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dried fruit and bean \n    curd\n8 | \n    Seafood\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seaweed and fish\n(8 \n    rows)",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "SELECT \n        testproduct_id, product_name, category_name\nFROM testproducts\nCROSS JOIN categories;",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Result",
+      "content": "",
+      "order": 6,
+      "code": "testproduct_id \n    |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 | \n    category_name\n----------------+------------------------+----------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Beverages\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Condiments\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Confections\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Produce\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seafood\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Beverages\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Condiments\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Confections\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Produce\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 | Seafood\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Beverages\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Condiments\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Confections\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Produce\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 | Seafood\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Beverages\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Condiments\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Confections\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Produce\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 | Seafood\n5 | Elisabeths Best Apples | Beverages\n5 | Elisabeths Best Apples | Condiments\n5 | Elisabeths Best Apples | Confections\n5 | Elisabeths Best Apples | Dairy Products\n5 | Elisabeths Best Apples | Grains/Cereals\n5 | Elisabeths Best Apples | Meat/Poultry\n5 | Elisabeths Best Apples | Produce\n5 | Elisabeths Best Apples | Seafood\n6 | Janes Favorite Cheese\u00a0 | Beverages\n6 | Janes Favorite Cheese\u00a0 | Condiments\n6 | Janes Favorite Cheese\u00a0 | Confections\n6 | Janes Favorite Cheese\u00a0 | Dairy Products\n6 | Janes Favorite Cheese\u00a0 | Grains/Cereals\n6 | Janes Favorite Cheese\u00a0 | Meat/Poultry\n6 | Janes Favorite Cheese\u00a0 | Produce\n6 | Janes Favorite Cheese\u00a0 | Seafood\n7 | Billys Home Made Pizza | Beverages\n7 | Billys Home Made Pizza | Condiments\n7 | Billys Home Made Pizza | Confections\n7 | Billys Home Made Pizza | Dairy Products\n7 | Billys Home Made Pizza | Grains/Cereals\n7 | Billys Home Made Pizza | Meat/Poultry\n7 | Billys Home Made Pizza | Produce\n7 | Billys Home Made Pizza | Seafood\n8 | Ellas Special Salmon\u00a0\u00a0 | Beverages\n8 | Ellas Special Salmon\u00a0\u00a0 | Condiments\n8 | Ellas Special Salmon\u00a0\u00a0 | Confections\n8 | Ellas Special Salmon\u00a0\u00a0 | Dairy Products\n8 | Ellas Special Salmon\u00a0\u00a0 | Grains/Cereals\n8 | Ellas Special Salmon\u00a0\u00a0 | Meat/Poultry\n8 | Ellas Special Salmon\u00a0\u00a0 | Produce\n8 | Ellas Special Salmon\u00a0\u00a0 | Seafood\n9 | Roberts Rich Spaghetti | Beverages\n9 | Roberts Rich Spaghetti | Condiments\n9 | Roberts Rich Spaghetti | Confections\n9 | Roberts Rich Spaghetti | Dairy Products\n9 | Roberts Rich Spaghetti | Grains/Cereals\n9 | Roberts Rich Spaghetti | Meat/Poultry\n9 | Roberts Rich Spaghetti | Produce\n9 | Roberts Rich Spaghetti | Seafood\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Beverages\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Condiments\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Confections\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dairy Products\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Grains/Cereals\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Meat/Poultry\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Produce\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seafood\n(80 \n    rows)",
+      "language": "unknown",
+      "explanation": "Example of result"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "testproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_id\n----------------+------------------------+-------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    3\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    9\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    10\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    11\n5 | Elisabeths Best Apples |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    12\n6 | Janes Favorite Cheese\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n# TODO: Complete this line\n7 | Billys Home Made Pizza |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    13\n8 | Ellas Special Salmon\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    8\n9 | Roberts Rich Spaghetti |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    5\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    14\n(10 rows)",
+      "solution": "testproduct_id |\u00a0\u00a0\u00a0\u00a0\u00a0 product_name\u00a0\u00a0\u00a0\u00a0\u00a0 \n    | category_id\n----------------+------------------------+-------------\n1 | Johns Fruit Cake\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    3\n2 | Marys Healthy Mix\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    9\n3 | Peters Scary Stuff\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    10\n4 | Jims Secret Recipe\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    11\n5 | Elisabeths Best Apples |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    12\n6 | Janes Favorite Cheese\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    4\n7 | Billys Home Made Pizza |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    13\n8 | Ellas Special Salmon\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    8\n9 | Roberts Rich Spaghetti |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    5\n10 | Mias Popular Ice\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    14\n(10 rows)"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "category_id | category_name\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    description\n-------------+----------------+------------------------------------------------------------\n1 | Beverages\u00a0\u00a0\u00a0\u00a0\u00a0 | Soft drinks, coffees, teas, \n    beers, and ales\n2 | Condiments\u00a0\u00a0\u00a0\u00a0 | Sweet and savory sauces, relishes, \n    spreads, and seasonings\n3 | Confections\u00a0\u00a0\u00a0 | Desserts, candies, and sweet breads\n4 | Dairy Products | Cheeses\n5 | Grains/Cereals | Breads, crackers, pasta, and cereal\n6 | Meat/Poultry\u00a0\u00a0 | Prepared meats\n7 | Produce\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dried fruit and bean \n    curd\n8 | \n    Seafood\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seaweed and fish\n# TODO: Complete this line\n    rows)",
+      "solution": "category_id | category_name\u00a0 |\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n    description\n-------------+----------------+------------------------------------------------------------\n1 | Beverages\u00a0\u00a0\u00a0\u00a0\u00a0 | Soft drinks, coffees, teas, \n    beers, and ales\n2 | Condiments\u00a0\u00a0\u00a0\u00a0 | Sweet and savory sauces, relishes, \n    spreads, and seasonings\n3 | Confections\u00a0\u00a0\u00a0 | Desserts, candies, and sweet breads\n4 | Dairy Products | Cheeses\n5 | Grains/Cereals | Breads, crackers, pasta, and cereal\n6 | Meat/Poultry\u00a0\u00a0 | Prepared meats\n7 | Produce\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Dried fruit and bean \n    curd\n8 | \n    Seafood\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 | Seaweed and fish\n(8 \n    rows)"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "52d551b0-c8bf-4751-bda4-a457ac2e935a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "4cbbe8e0-17f7-4e4a-89a5-0313925c36e8",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "e793b77c-b269-4952-8677-150daefca212",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is That?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "None of the above.",
+        "that all records from the \"right\" table will be returned for each \nrecord in the \"left\" table"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of That is 'that all records from the \"right\" table will be returned for each \nrecord in the \"left\" table'."
+    },
+    {
+      "question": "Which best describes the main purpose of this c feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers PostgreSQL CROSS JOIN concepts and techniques. You'll learn how to use PostgreSQL CROSS JOIN effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of PostgreSQL CROSS JOIN and how to apply it in your projects."
+}

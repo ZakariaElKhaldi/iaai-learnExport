@@ -1,0 +1,115 @@
+{
+  "id": "89905157-b1c5-4d0c-a8ba-a8746820fee5",
+  "title": "Data Science- Linear Regression",
+  "slug": "data-science-linear-regression",
+  "metadata": {
+    "description": "Learn about Data Science- Linear Regression with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "regression",
+      "linear",
+      "data",
+      "slope",
+      "intercept",
+      "duration",
+      "predict",
+      "line",
+      "import",
+      "values"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnData Science",
+    "subcategory": "DS Linear Regression"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Data Science\n- Linear Regression",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "We are missing one important variable that affects Calorie_Burnage, which is the Duration of the training session.\nDuration in combination with Average_Pulse will together explain Calorie_Burnage more precisely.\nLinear Regression\nThe term regression is used when you try to find the relationship between variables.\nIn Machine Learning and in statistical modeling, that relationship is used to predict the outcome of events.\nIn this module, we will cover the following questions:\nCan we conclude that Average_Pulse and Duration are related to Calorie_Burnage?\nCan we use Average_Pulse and Duration to predict Calorie_Burnage?\nLeast Square Method\nLinear regression uses the least square method.\nThe concept is to draw a line through all the plotted data points. The line \nis positioned in a way that it minimizes the distance to all of the data points.\nThe distance is called \"residuals\" or \"errors\".\nThe red dashed lines represents the distance from the data points to the drawn mathematical function.\nLinear Regression Using One Explanatory Variable\nIn this example, we will try to predict Calorie_Burnage with Average_Pulse using Linear Regression:\nExample\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom scipy \n  import stats\nfull_health_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nx = full_health_data[\"Average_Pulse\"]\ny = full_health_data [\"Calorie_Burnage\"]\nslope, intercept, r, p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn \n  slope * x + intercept\nmymodel = list(map(myfunc, x))\nplt.scatter(x, y)\nplt.plot(x, slope * x + intercept)\nplt.ylim(ymin=0, ymax=2000)\nplt.xlim(xmin=0, xmax=200)\nplt.xlabel(\"Average_Pulse\")\nplt.ylabel (\"Calorie_Burnage\")\nplt.show()\n\nExample Explained:\nImport \nthe modules you need: Pandas, matplotlib and Scipy\nIsolate Average_Pulse as x. Isolate Calorie_burnage as y\nGet important key values with: slope, intercept, r, p, std_err = stats.linregress(x, y)\nCreate a function that uses the slope and intercept values to return a new value. This new value represents where on the y-axis the corresponding x value \n  will be placed\nRun each value of the x array through the function. This will result in a new array with new values for the y-axis: mymodel = list(map(myfunc, x))\nDraw the original scatter plot: plt.scatter(x, y)\nDraw the line of linear regression: plt.plot(x, mymodel)\nDefine maximum and minimum values of the axis\nLabel the axis: \"Average_Pulse\" and \"Calorie_Burnage\"\nOutput:\nDo you think that the line is able to predict Calorie_Burnage precisely?\nWe will show that the variable Average_Pulse alone is not enough to make precise prediction of Calorie_Burnage.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom scipy \n  import stats\nfull_health_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nx = full_health_data[\"Average_Pulse\"]\ny = full_health_data [\"Calorie_Burnage\"]\nslope, intercept, r, p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn \n  slope * x + intercept\nmymodel = list(map(myfunc, x))\nplt.scatter(x, y)\nplt.plot(x, slope * x + intercept)\nplt.ylim(ymin=0, ymax=2000)\nplt.xlim(xmin=0, xmax=200)\nplt.xlabel(\"Average_Pulse\")\nplt.ylabel (\"Calorie_Burnage\")\nplt.show()",
+      "language": "python",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom scipy \n  import stats\nfull_health_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nx = full_health_data[\"Average_Pulse\"]\ny = full_health_data [\"Calorie_Burnage\"]\nslope, intercept, r, p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn \n  slope * x + intercept\nmymodel = list(map(myfunc, x))\nplt.scatter(x, y)\n# TODO: Complete this line\nplt.ylim(ymin=0, ymax=2000)\nplt.xlim(xmin=0, xmax=200)\nplt.xlabel(\"Average_Pulse\")\nplt.ylabel (\"Calorie_Burnage\")\nplt.show()",
+      "solution": "import pandas as pd\nimport matplotlib.pyplot as plt\nfrom scipy \n  import stats\nfull_health_data = pd.read_csv(\"data.csv\", header=0, sep=\",\")\nx = full_health_data[\"Average_Pulse\"]\ny = full_health_data [\"Calorie_Burnage\"]\nslope, intercept, r, p, std_err = stats.linregress(x, y)\ndef myfunc(x):\nreturn \n  slope * x + intercept\nmymodel = list(map(myfunc, x))\nplt.scatter(x, y)\nplt.plot(x, slope * x + intercept)\nplt.ylim(ymin=0, ymax=2000)\nplt.xlim(xmin=0, xmax=200)\nplt.xlabel(\"Average_Pulse\")\nplt.ylabel (\"Calorie_Burnage\")\nplt.show()"
+    },
+    {
+      "title": "Practice Exercise",
+      "description": "Create an example that applies the concepts from this tutorial.",
+      "difficulty": "medium",
+      "starter_code": "# Add your code here",
+      "solution": "# Example solution would go here"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "f481178b-c3b9-4e42-b29b-109bebc63668",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "a1f9eca5-ee2e-4572-8e05-cd670953d255",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "2a3bcad1-5888-48f3-95d9-0fae61063a5b",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is Linear Regression\n\nWe?",
+      "options": [
+        "None of the above.",
+        "None of the above.",
+        "used when you try to find the relationship between variables",
+        "missing one important variable that affects Calorie_Burnage"
+      ],
+      "correct_answer": 3,
+      "explanation": "The correct definition of Linear Regression\n\nWe is 'missing one important variable that affects Calorie_Burnage'."
+    },
+    {
+      "question": "What is Linear Regression\nThe term regression?",
+      "options": [
+        "None of the above.",
+        "used when you try to find the relationship between variables",
+        "None of the above.",
+        "missing one important variable that affects Calorie_Burnage"
+      ],
+      "correct_answer": 1,
+      "explanation": "The correct definition of Linear Regression\nThe term regression is 'used when you try to find the relationship between variables'."
+    }
+  ],
+  "summary": "This tutorial covers Data Science- Linear Regression concepts and techniques. You'll learn how to use Data Science- Linear Regression effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of Data Science- Linear Regression and how to apply it in your projects."
+}

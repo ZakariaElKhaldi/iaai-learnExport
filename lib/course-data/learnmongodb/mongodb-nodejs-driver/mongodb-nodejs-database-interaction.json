@@ -1,0 +1,124 @@
+{
+  "id": "e91e97a7-c13d-4046-8c71-42424fa4bccf",
+  "title": "MongoDB Node.js Database Interaction",
+  "slug": "mongodb-nodejs-database-interaction",
+  "metadata": {
+    "description": "Learn about MongoDB Node.js Database Interaction with clear explanations and practical examples.",
+    "keywords": [
+      "javascript",
+      "mongodb",
+      "database",
+      "node",
+      "const",
+      "string",
+      "atlas",
+      "connect",
+      "index",
+      "connection",
+      "collection"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "Javascript Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnMongoDB",
+    "subcategory": "MongoDB Node.js Driver"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "MongoDB Node.js Database Interaction",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Node.js Database Interaction\nFor this tutorial, we will use a MongoDB Atlas database.\nIf you don't already have a MongoDB Atlas account,\nyou can create one for free at\nMongoDB Atlas\n.\nWe will also use the \"sample_mflix\" database loaded from our sample data in the\nIntro to Aggregations\nsection.\nMongoDB Node.js Driver Installation\nTo use MongoDB with Node.js, you will need to install the\nmongodb\npackage in your Node.js project.\nUse the following command in your terminal to install the\nmongodb\npackage:\nnpm install mongodb\nWe can now use this package to connect to a MongoDB database.\nCreate an\nindex.js\nfile in your project directory.\nindex.js\nconst { MongoClient } = require('mongodb');\nConnection String\nIn order to connect to our MongoDB Atlas database, we'll need to get our connection string from the Atlas dashboard.\nGo to\nDatabase\nthen click the\nCONNECT\nbutton on your Cluster.\nChoose\nConnect your application\nthen copy your connection string.\nExample:\nmongodb+srv://<username>:<password>@<cluster.string>.mongodb.net/myFirstDatabase?retryWrites=true&w=majority\nYou will need to replace the\n<username>\n,\n<password>\n,\nand\n<cluster.string>\nwith your MongoDB Atlas username, password, and cluster string.\nConnecting to MongoDB\nLet's add to our\nindex.js\nfile.\nindex.js\nconst { MongoClient } = require('mongodb');\n\nconst uri = \"<Your Connection String>\";\nconst client = new MongoClient(uri);\n\nasync function run() {\n  try {\n    await client.connect();\n    const db = client.db('sample_mflix');\n    const collection = db.collection('movies');\n\n// Find the first document in the collection\n    const first = await collection.findOne();\n    console.log(first);\n  } finally {\n    // Close the database connection when finished or an error occurs\n    await client.close();\n  }\n}\nrun().catch(console.error);\n\nRun this file in your terminal.\nnode index.js\nYou should see the first document logged to the console.\nCRUD & Document Aggregation\nJust as we did using\nmongosh\n,\nwe can use the MongoDB Node.js language driver to create, read, update, delete, and aggregate documents in the database.\nExpanding on the \ncollection.findOne()\nwith\nfind()\n,\ninsertOne()\n,\ninsertMany()\n,\nupdateOne()\n,\nupdateMany()\n,\ndeleteOne()\n,\ndeleteMany()\n, or\naggregate()\n.\nGive some of those a try.\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "npm install mongodb",
+      "language": "unknown",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "node index.js",
+      "language": "unknown",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Practice Exercise 1",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "npm install mongodb"
+    },
+    {
+      "title": "Practice Exercise 2",
+      "description": "Write code that implements similar functionality.",
+      "difficulty": "easy",
+      "starter_code": "# Write your unknown code here",
+      "solution": "node index.js"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "e8ca4d9d-c456-4d56-8937-94d0f8aad674",
+      "title": "Javascript Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "3e3193eb-4148-4a23-9f0f-b4d71d345abf",
+      "title": "Javascript Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "3be50ba7-cdb0-4795-8a30-699c7c568a13",
+      "title": "Javascript Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    },
+    {
+      "question": "Which best describes the main purpose of this javascript feature?",
+      "options": [
+        "To organize and structure code",
+        "To improve code readability",
+        "To enhance performance",
+        "All of the above"
+      ],
+      "correct_answer": 3,
+      "explanation": "This feature serves multiple purposes in software development."
+    }
+  ],
+  "summary": "This tutorial covers MongoDB Node.js Database Interaction concepts and techniques. You'll learn how to use MongoDB Node.js Database Interaction effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of MongoDB Node.js Database Interaction and how to apply it in your projects."
+}

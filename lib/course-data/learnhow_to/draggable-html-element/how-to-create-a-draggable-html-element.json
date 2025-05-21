@@ -1,0 +1,133 @@
+{
+  "id": "dac76fe6-5433-4eb8-a07d-5b2459a9887d",
+  "title": "How TO - Create a Draggable HTML Element",
+  "slug": "how-to-create-a-draggable-html-element",
+  "metadata": {
+    "description": "Learn about How TO - Create a Draggable HTML Element with clear explanations and practical examples.",
+    "keywords": [
+      "c",
+      "elmnt",
+      "draggable",
+      "move",
+      "document",
+      "element",
+      "header",
+      "position",
+      "function",
+      "cursor",
+      "create"
+    ],
+    "difficulty": "beginner",
+    "prerequisites": [
+      "C Basics"
+    ],
+    "estimated_time": 5,
+    "category": "LearnHow To",
+    "subcategory": "Draggable HTML Element"
+  },
+  "content_sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "How TO - Create a Draggable HTML Element",
+      "order": 1,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "concept",
+      "title": "Details",
+      "content": "Learn how to create a draggable HTML element with JavaScript and CSS.\nDraggable DIV Element\nClick here to move\nMove\nthis\nDIV\nCreate a Draggable DIV Element\nStep 1) Add HTML:\nExample\n<!-- Draggable DIV -->\n<div id=\"mydiv\">\n<!-- Include a header \n  DIV with the same name as the draggable DIV, followed by \"header\" -->\n<div id=\"mydivheader\">Click \n  here to move</div>\n<p>Move</p>\n<p>this</p>\n<p>DIV</p>\n</div>\nStep 2) Add CSS:\nThe only important style is\nposition: absolute\n, \nthe rest is up to you:\nExample\n#mydiv {\nposition: absolute;\nz-index: 9;\nbackground-color: #f1f1f1;\nborder: 1px solid #d3d3d3;\ntext-align: center;\n}\n#mydivheader {\npadding: 10px;\ncursor: move;\nz-index: 10;\nbackground-color: #2196F3;\ncolor: #fff;\n}\nStep 3) Add JavaScript:\nExample\n// Make the DIV element draggable:\ndragElement(document.getElementById(\"mydiv\"));\nfunction dragElement(elmnt) {\nvar pos1 = 0, pos2 = 0, pos3 = 0, \n  pos4 = 0;\nif (document.getElementById(elmnt.id + \"header\")) {\n// if present, the header is where you move the DIV from:\ndocument.getElementById(elmnt.id + \"header\").onmousedown = dragMouseDown;\n} else {\n// otherwise, move the DIV from anywhere inside \n  the DIV:\nelmnt.onmousedown = dragMouseDown;\n}\nfunction dragMouseDown(e) {\ne = e || \n  window.event;\ne.preventDefault();\n// get the mouse cursor position at \n  startup:\npos3 = e.clientX;\npos4 = \n  e.clientY;\ndocument.onmouseup = closeDragElement;\n// call a function whenever the cursor moves:\ndocument.onmousemove = elementDrag;\n}\nfunction \n  elementDrag(e) {\ne = e || window.event;\ne.preventDefault();\n// calculate the new cursor position:\npos1 = pos3 - \n  e.clientX;\npos2 = pos4 - e.clientY;\npos3 = e.clientX;\npos4 = e.clientY;\n// set the element's new position:\nelmnt.style.top = (elmnt.offsetTop \n  - pos2) + \"px\";\nelmnt.style.left = (elmnt.offsetLeft - \n  pos1) + \"px\";\n}\nfunction closeDragElement() {\n// stop moving when mouse button is released:\ndocument.onmouseup = null;\ndocument.onmousemove = null;\n}\n}\n\n\u2605\n+1",
+      "order": 2,
+      "code": null,
+      "language": null,
+      "explanation": null
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 3,
+      "code": "<!-- Draggable DIV -->\n<div id=\"mydiv\">\n<!-- Include a header \n  DIV with the same name as the draggable DIV, followed by \"header\" -->\n<div id=\"mydivheader\">Click \n  here to move</div>\n<p>Move</p>\n<p>this</p>\n<p>DIV</p>\n</div>",
+      "language": "html",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 4,
+      "code": "#mydiv {\nposition: absolute;\nz-index: 9;\nbackground-color: #f1f1f1;\nborder: 1px solid #d3d3d3;\ntext-align: center;\n}\n#mydivheader {\npadding: 10px;\ncursor: move;\nz-index: 10;\nbackground-color: #2196F3;\ncolor: #fff;\n}",
+      "language": "css",
+      "explanation": "Example of example"
+    },
+    {
+      "type": "code_example",
+      "title": "Example",
+      "content": "",
+      "order": 5,
+      "code": "// Make the DIV element draggable:\ndragElement(document.getElementById(\"mydiv\"));\nfunction dragElement(elmnt) {\nvar pos1 = 0, pos2 = 0, pos3 = 0, \n  pos4 = 0;\nif (document.getElementById(elmnt.id + \"header\")) {\n// if present, the header is where you move the DIV from:\ndocument.getElementById(elmnt.id + \"header\").onmousedown = dragMouseDown;\n} else {\n// otherwise, move the DIV from anywhere inside \n  the DIV:\nelmnt.onmousedown = dragMouseDown;\n}\nfunction dragMouseDown(e) {\ne = e || \n  window.event;\ne.preventDefault();\n// get the mouse cursor position at \n  startup:\npos3 = e.clientX;\npos4 = \n  e.clientY;\ndocument.onmouseup = closeDragElement;\n// call a function whenever the cursor moves:\ndocument.onmousemove = elementDrag;\n}\nfunction \n  elementDrag(e) {\ne = e || window.event;\ne.preventDefault();\n// calculate the new cursor position:\npos1 = pos3 - \n  e.clientX;\npos2 = pos4 - e.clientY;\npos3 = e.clientX;\npos4 = e.clientY;\n// set the element's new position:\nelmnt.style.top = (elmnt.offsetTop \n  - pos2) + \"px\";\nelmnt.style.left = (elmnt.offsetLeft - \n  pos1) + \"px\";\n}\nfunction closeDragElement() {\n// stop moving when mouse button is released:\ndocument.onmouseup = null;\ndocument.onmousemove = null;\n}\n}",
+      "language": "javascript",
+      "explanation": "Example of example"
+    }
+  ],
+  "practice_exercises": [
+    {
+      "title": "Complete the Code 1",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "<!-- Draggable DIV -->\n<div id=\"mydiv\">\n<!-- Include a header \n  DIV with the same name as the draggable DIV, followed by \"header\" -->\n# TODO: Complete this line\n  here to move</div>\n<p>Move</p>\n<p>this</p>\n<p>DIV</p>\n</div>",
+      "solution": "<!-- Draggable DIV -->\n<div id=\"mydiv\">\n<!-- Include a header \n  DIV with the same name as the draggable DIV, followed by \"header\" -->\n<div id=\"mydivheader\">Click \n  here to move</div>\n<p>Move</p>\n<p>this</p>\n<p>DIV</p>\n</div>"
+    },
+    {
+      "title": "Complete the Code 2",
+      "description": "Fill in the missing line to make this code work.",
+      "difficulty": "medium",
+      "starter_code": "#mydiv {\nposition: absolute;\nz-index: 9;\nbackground-color: #f1f1f1;\nborder: 1px solid #d3d3d3;\ntext-align: center;\n}\n#mydivheader {\npadding: 10px;\ncursor: move;\nz-index: 10;\nbackground-color: #2196F3;\ncolor: #fff;\n# TODO: Complete this line",
+      "solution": "#mydiv {\nposition: absolute;\nz-index: 9;\nbackground-color: #f1f1f1;\nborder: 1px solid #d3d3d3;\ntext-align: center;\n}\n#mydivheader {\npadding: 10px;\ncursor: move;\nz-index: 10;\nbackground-color: #2196F3;\ncolor: #fff;\n}"
+    }
+  ],
+  "related_topics": [
+    {
+      "id": "223e15fa-11fe-4312-a725-9db34a3f7c6a",
+      "title": "C Best Practices",
+      "relationship": "related_topic"
+    },
+    {
+      "id": "d9af35d7-f32a-4b3f-bc97-dfc3f7c167f1",
+      "title": "C Common Pitfalls and How to Avoid Them",
+      "relationship": "suggested_reading"
+    },
+    {
+      "id": "acb40747-1fad-4856-af66-8324524775ef",
+      "title": "C Fundamentals",
+      "relationship": "prerequisite"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is The only important style?",
+      "options": [
+        "where you move the DIV from:\ndocument",
+        "None of the above.",
+        "position: absolute",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of The only important style is 'position: absolute'."
+    },
+    {
+      "question": "What is the header?",
+      "options": [
+        "None of the above.",
+        "position: absolute",
+        "where you move the DIV from:\ndocument",
+        "None of the above."
+      ],
+      "correct_answer": 2,
+      "explanation": "The correct definition of the header is 'where you move the DIV from:\ndocument'."
+    }
+  ],
+  "summary": "This tutorial covers How TO - Create a Draggable HTML Element concepts and techniques. You'll learn how to use How TO - Create a Draggable HTML Element effectively, including key principles, common patterns, and practical examples. By the end of this tutorial, you'll have a solid understanding of How TO - Create a Draggable HTML Element and how to apply it in your projects."
+}
