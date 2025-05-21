@@ -49,53 +49,6 @@ const IconMap: { [key: string]: React.ComponentType<any> } = {
   LineChart
 };
 
-// Use our new hook for dynamic data
-const initialCategories = [
-  {
-    id: "javascript",
-    name: "JavaScript",
-    color: "#F7DF1E",
-    icon: "Code",
-    difficulty: "beginner",
-    tutorials: [
-      { id: "javascript", name: "JavaScript", slug: "javascript", icon: "Code", description: "The language for programming web pages", level: "beginner", popular: true, category: "javascript" },
-      { id: "react", name: "React", slug: "react", icon: "Layers", description: "A JavaScript library for building user interfaces", level: "intermediate", popular: true, category: "javascript" },
-      { id: "nodejs", name: "Node.js", slug: "nodejs", icon: "Server", description: "JavaScript runtime for server-side programming", level: "intermediate", popular: false, category: "javascript" },
-      { id: "typescript", name: "TypeScript", slug: "typescript", icon: "Code", description: "JavaScript with added type safety", level: "intermediate", popular: false, category: "javascript" },
-      { id: "jquery", name: "jQuery", slug: "jquery", icon: "Code", description: "Fast and feature-rich JavaScript library", level: "beginner", popular: false, category: "javascript" },
-    ]
-  },
-  {
-    id: "backend",
-    name: "Backend",
-    color: "#3776AB",
-    icon: "Database",
-    difficulty: "intermediate",
-    tutorials: [
-      { id: "python", name: "Python", slug: "python", icon: "Code", description: "A popular programming language", level: "beginner", popular: true, category: "backend" },
-      { id: "sql", name: "SQL", slug: "sql", icon: "Database", description: "Language for managing databases", level: "beginner", popular: true, category: "backend" },
-      { id: "php", name: "PHP", slug: "php", icon: "Code", description: "Server scripting language for web development", level: "intermediate", popular: false, category: "backend" },
-      { id: "phpdelete", name: "PHP Delete", slug: "phpdelete", icon: "Code", description: "Removing records from a database with PHP", level: "intermediate", popular: false, category: "backend" },
-      { id: "java", name: "Java", slug: "java", icon: "Code", description: "Object-oriented programming language", level: "intermediate", popular: false, category: "backend" },
-      { id: "csharp", name: "C#", slug: "csharp", icon: "Code", description: "Language for building Windows applications", level: "intermediate", popular: false, category: "backend" },
-    ]
-  },
-  {
-    id: "data-analytics",
-    name: "Data Analytics",
-    color: "#4CAF50",
-    icon: "LineChart",
-    difficulty: "intermediate",
-    tutorials: [
-      { id: "data-science", name: "Data Science", slug: "data-science", icon: "LineChart", description: "Extracting knowledge from data", level: "intermediate", popular: false, category: "data-analytics" },
-      { id: "machine-learning", name: "Machine Learning", slug: "machine-learning", icon: "BookOpen", description: "Making computers learn from data", level: "advanced", popular: false, category: "data-analytics" },
-      { id: "numpy", name: "NumPy", slug: "numpy", icon: "LineChart", description: "Library for scientific computing in Python", level: "intermediate", popular: false, category: "data-analytics" },
-      { id: "pandas", name: "Pandas", slug: "pandas", icon: "LineChart", description: "Data analysis library for Python", level: "intermediate", popular: false, category: "data-analytics" },
-      { id: "statistics", name: "Statistics", slug: "statistics", icon: "LineChart", description: "Collection and analysis of data", level: "beginner", popular: false, category: "data-analytics" },
-    ]
-  }
-];
-
 // Function to get level badge
 const getLevelBadge = (level: string) => {
   const colors = {
