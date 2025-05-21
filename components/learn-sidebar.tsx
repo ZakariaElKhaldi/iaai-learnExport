@@ -44,10 +44,10 @@ import {
   Clock,
   Star,
   History,
+  ChevronRight,
   type LucideIcon
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
@@ -59,6 +59,7 @@ import {
 } from "@/components/ui/sidebar"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useLearningProgress } from "@/hooks/use-learning-progress"
+import { Badge } from "@/components/ui/badge" 
 
 // User data - this could be fetched from an API in the future
 const userData = {
@@ -120,6 +121,7 @@ const IconMap: { [key: string]: LucideIcon } = {
   Clock,
   Star,
   History,
+  ChevronRight,
 };
 
 // Define types based on API response
@@ -165,6 +167,7 @@ type NavItem = {
   items?: {
     title: string;
     url: string;
+    icon?: LucideIcon;
     isActive?: boolean;
     badge?: string;
     items?: {
@@ -183,6 +186,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { progress } = useLearningProgress();
   const [recentlyViewed, setRecentlyViewed] = React.useState<Tutorial[]>([]);
   const [favorites, setFavorites] = React.useState<MainTopic[]>([]);
+  const [expandedTopics, setExpandedTopics] = React.useState<string[]>([]);
   
   // Fetch topics data
   React.useEffect(() => {
@@ -194,13 +198,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         }
         const data = await response.json();
         setMainTopics(data);
+        
+        // Auto-expand the active topic if any
+        const topicParam = searchParams.get('topic');
+        if (topicParam) {
+          setExpandedTopics([topicParam]);
+        }
       } catch (err) {
         console.error('Error fetching main topics:', err);
       }
     };
 
     fetchMainTopics();
-  }, []);
+  }, [searchParams]);
 
   // Get recently viewed tutorials
   React.useEffect(() => {
@@ -211,7 +221,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       // Find and set the recently viewed tutorial
       const lastViewed = allTutorials.filter(
         tutorial => progress.completedTutorials.includes(tutorial.id)
-      ).slice(0, 5);
+      ).slice(0, 3); // Limit to top 3 for less clutter
       
       setRecentlyViewed(lastViewed);
     }
@@ -226,6 +236,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       setFavorites(userFavorites);
     }
   }, [mainTopics, progress]);
+  
+  // Toggle topic expansion
+  const toggleTopicExpansion = (topicId: string) => {
+    setExpandedTopics(prev => 
+      prev.includes(topicId) 
+        ? prev.filter(id => id !== topicId)
+        : [...prev, topicId]
+    );
+  };
   
   // Simple function to check if a URL is part of the current path
   const isActive = (url: string): boolean => {
@@ -258,103 +277,178 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   // Convert API data to sidebar-compatible format
   const getNavItems = (): NavItem[] => {
+    // Sidebar Items
     const navItems: NavItem[] = [
       {
         title: "Learning Home",
         url: "/learn",
         icon: Home,
-        isActive: isActive("/learn"),
-      }
-    ];
-
-    // Add recently viewed section if available
+        isActive: isActive("/learn") && !searchParams.has('topic'),
+      },
+    ]
+    
+    // Add recently viewed items if available
     if (recentlyViewed.length > 0) {
       navItems.push({
         title: "Recently Viewed",
-        url: "#recent",
+        url: "#",
         icon: History,
-        isActive: false,
         items: recentlyViewed.map(tutorial => ({
           title: tutorial.name,
           url: `/learn/${tutorial.slug}`,
           isActive: isActive(`/learn/${tutorial.slug}`),
+          badge: getCourseCompletionStatus(tutorial.id, progress)
         }))
       });
     }
-
+    
     // Add favorite topics if available
     if (favorites.length > 0) {
       navItems.push({
         title: "Favorites",
-        url: "#favorites",
+        url: "#",
         icon: Star,
-        isActive: false,
         items: favorites.map(topic => ({
           title: topic.name,
           url: `/learn?topic=${topic.id}`,
           isActive: isActive(`/learn?topic=${topic.id}`),
+          badge: `${topic.tutorialCount}`
         }))
       });
     }
-
-    // Add "Continue Learning" if there's a last visited tutorial
-    if (progress.lastVisited) {
-      const lastVisitedTutorial = mainTopics
-        .flatMap(topic => topic.tutorials)
-        .find(tutorial => tutorial.id === progress.lastVisited);
-
-      if (lastVisitedTutorial) {
-        navItems.push({
-          title: "Continue Learning",
-          url: `/learn/${lastVisitedTutorial.slug}`,
-          icon: Clock,
-          isActive: isActive(`/learn/${lastVisitedTutorial.slug}`),
-          badge: "Resume",
-        });
-      }
-    }
-
-    // Add a section delimiter
-    navItems.push({
-      title: "All Topics",
-      url: "#all-topics",
-      icon: Layers,
-      isActive: false,
-    });
-
-    // Map the main topics from API to sidebar format with subcategories
-    const topicsFromApi: NavItem[] = mainTopics.map(topic => {
-      // Group tutorials by subcategory
-      const subCategoryItems = topic.subCategories.map(subcat => {
-        // Only show subcategories with tutorials
-        if (!subcat.tutorialCount) return null;
-        
-        return {
-          title: subcat.name,
-          url: `/learn?topic=${topic.id}&subcategory=${subcat.id}`,
-          isActive: isActive(`/learn?topic=${topic.id}&subcategory=${subcat.id}`),
-          badge: subcat.tutorialCount.toString(),
-          icon: IconMap[subcat.icon] || BookOpen,
-          items: subcat.tutorials.map(tutorial => ({
-            title: tutorial.name,
-            url: `/learn/${tutorial.slug}`,
-            isActive: isActive(`/learn/${tutorial.slug}`),
-            badge: progress.completedTutorials.includes(tutorial.id) ? "✓" : undefined,
-          }))
-        };
-      }).filter(Boolean) as NavItem[];
-
-      return {
+    
+    // Add main topics with their subcategories - more organized approach
+    mainTopics.forEach(topic => {
+      // Check if this topic is expanded or active
+      const isTopicActive = isActive(`/learn?topic=${topic.id}`);
+      const isExpanded = expandedTopics.includes(topic.id) || isTopicActive;
+      
+      // Get the Icon component for the main topic
+      const IconName = topic.icon || "BookOpen";
+      const TopicIcon = IconMap[IconName] || BookOpen;
+      
+      // Create subcategory navigation items - only if topic is expanded
+      const subCategoryItems = isExpanded ? topic.subCategories
+        .filter(subCat => subCat.tutorialCount > 0) // Only show non-empty subcategories
+        .map(subCat => {
+          // Get the Icon component if one has been assigned
+          const subIconName = subCat.icon || "FileText";
+          const SubIcon = IconMap[subIconName] || FileText;
+          
+          // Only show "View All" link instead of individual courses to reduce clutter
+          return {
+            title: subCat.name,
+            url: `/learn?topic=${topic.id}&subcategory=${subCat.id}`,
+            isActive: isActive(`/learn?topic=${topic.id}&subcategory=${subCat.id}`),
+            badge: subCat.tutorialCount > 0 ? `${subCat.tutorialCount}` : undefined,
+            icon: SubIcon
+          };
+        }) : [];
+      
+      // Add the main topic with its subcategories
+      navItems.push({
         title: topic.name,
-        url: `/learn?topic=${topic.id}`,
-        icon: IconMap[topic.icon] || BookOpen,
-        isActive: isActive(`/learn?topic=${topic.id}`),
-        badge: topic.tutorialCount.toString(),
+        url: `#${topic.id}`, // Use anchor to handle expansion logic
+        icon: TopicIcon,
+        isActive: isTopicActive && !searchParams.has('subcategory'),
+        badge: `${topic.tutorialCount}`,
         items: subCategoryItems
-      };
+      });
     });
-
-    return [...navItems, ...topicsFromApi];
+    
+    return navItems;
+  };
+  
+  // Custom NavMain rendering to handle topic expansion
+  const renderCustomNav = () => {
+    const navItems = getNavItems();
+    
+    return (
+      <div className="space-y-1">
+        {navItems.map((item, index) => (
+          <React.Fragment key={index}>
+            <div 
+              className={`flex items-center justify-between px-3 py-2 rounded-md cursor-pointer transition-colors ${
+                item.isActive 
+                  ? 'bg-muted font-medium' 
+                  : 'hover:bg-muted/50'
+              }`}
+              onClick={() => {
+                // Handle main topics expansion differently
+                if (item.url.startsWith('#')) {
+                  const topicId = item.url.substring(1);
+                  toggleTopicExpansion(topicId);
+                } else {
+                  window.location.href = item.url;
+                }
+              }}
+            >
+              <div className="flex items-center gap-3">
+                {item.icon && <item.icon className="w-4 h-4" />}
+                <span className={item.isActive ? 'font-medium' : ''}>{item.title}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                {item.badge && (
+                  <Badge variant="outline" className="text-xs font-normal">
+                    {item.badge}
+                  </Badge>
+                )}
+                {item.items && item.items.length > 0 && item.url.startsWith('#') && (
+                  <ChevronRight className={`w-4 h-4 transition-transform ${
+                    expandedTopics.includes(item.url.substring(1)) ? 'rotate-90' : ''
+                  }`} />
+                )}
+              </div>
+            </div>
+            
+            {/* Render subitems if this is expanded or a non-topic item */}
+            {item.items && item.items.length > 0 && 
+             (!item.url.startsWith('#') || expandedTopics.includes(item.url.substring(1))) && (
+              <div className="ml-6 my-1 space-y-1 border-l pl-2 border-muted">
+                {item.items.map((subitem, subindex) => (
+                  <div 
+                    key={subindex}
+                    className={`flex items-center justify-between px-3 py-1.5 rounded-md cursor-pointer ${
+                      subitem.isActive 
+                        ? 'bg-muted/70 font-medium' 
+                        : 'hover:bg-muted/30'
+                    }`}
+                    onClick={() => window.location.href = subitem.url}
+                  >
+                    <div className="flex items-center gap-3 text-sm">
+                      {subitem.icon && <subitem.icon className="w-3.5 h-3.5" />}
+                      <span>{subitem.title}</span>
+                    </div>
+                    {subitem.badge && (
+                      <Badge variant="outline" className="text-xs font-normal">
+                        {subitem.badge}
+                      </Badge>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  };
+  
+  // Helper function to get course completion status for badges
+  const getCourseCompletionStatus = (courseId: string, progressData: { 
+    completedTutorials: string[]; 
+    lastVisited: string | null;
+    favoriteTopics: string[];
+    streakDays: number;
+    lastActive: string | null;
+  }): string | undefined => {
+    if (progressData.completedTutorials && progressData.completedTutorials.includes(courseId)) {
+      return "✓";
+    }
+    if (progressData.lastVisited === courseId) {
+      return "▶";
+    }
+    return undefined;
   };
 
   return (
@@ -363,7 +457,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher teams={userData.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={getNavItems()} />
+        {renderCustomNav()}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={userData.user} />

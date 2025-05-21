@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getCoursesByCategory } from '@/lib/course-utils';
+import { getCoursesByCategory, CourseMetadata, getUnifiedCoursesData } from '@/lib/course-utils';
 
 // Define types for our data structure
 type Tutorial = {
@@ -215,206 +215,351 @@ const mappedCategories = new Set<string>();
 // Helper function to assign a tutorial to a subcategory based on keywords
 function assignToSubcategory(tutorialTitle: string, categoryName: string, mainTopic: MainTopicResponse) {
     // Default to the first subcategory if no match is found
-    let targetSubcategory = mainTopic.subCategories[0];
+    const targetSubcategory = mainTopic.subCategories[0];
     
     const titleLower = tutorialTitle.toLowerCase();
     const categoryLower = categoryName.toLowerCase();
     
-    for (const subcat of mainTopic.subCategories) {
-        // Create a simple keyword mapping for subcategories based on their names
-        const subcatKeywords = subcat.name.toLowerCase().split(/[^\w]+/);
+    // Special case mappings for specific categories/courses
+    
+    // C Programming Family
+    if (mainTopic.id === "c-programming-family") {
+        if (titleLower.includes("c++") || titleLower.includes("cpp") || categoryLower.includes("cpp")) {
+            return mainTopic.subCategories.find(sc => sc.id === "cpp")?.id || targetSubcategory.id;
+        }
+        if (titleLower.includes("c#") || titleLower.includes("csharp") || titleLower.includes("c sharp") || 
+            categoryLower.includes("csharp") || categoryLower.includes("c#")) {
+            return mainTopic.subCategories.find(sc => sc.id === "csharp")?.id || targetSubcategory.id;
+        }
+        // If it doesn't match C++ or C#, it's likely basic C
+        return mainTopic.subCategories.find(sc => sc.id === "c-basics")?.id || targetSubcategory.id;
+    }
+    
+    // Python Programming
+    if (mainTopic.id === "python-programming") {
+        if (titleLower.includes("django") || categoryLower.includes("django")) {
+            return mainTopic.subCategories.find(sc => sc.id === "python-web")?.id || targetSubcategory.id;
+        }
+        if (titleLower.includes("data") || titleLower.includes("pandas") || 
+            titleLower.includes("numpy") || titleLower.includes("matplotlib") || 
+            categoryLower.includes("data") || categoryLower.includes("pandas") || 
+            categoryLower.includes("numpy") || categoryLower.includes("matplotlib")) {
+            return mainTopic.subCategories.find(sc => sc.id === "python-data-science")?.id || targetSubcategory.id;
+        }
+        if (titleLower.includes("automat") || titleLower.includes("script") || 
+            categoryLower.includes("automat") || categoryLower.includes("script")) {
+            return mainTopic.subCategories.find(sc => sc.id === "python-automation")?.id || targetSubcategory.id;
+        }
+        return mainTopic.subCategories.find(sc => sc.id === "python-basics")?.id || targetSubcategory.id;
+    }
+    
+    // Data Science & ML
+    if (mainTopic.id === "data-science-ml") {
+        if (titleLower.includes("statistic") || categoryLower.includes("statistic")) {
+            return mainTopic.subCategories.find(sc => sc.id === "statistics-fundamentals")?.id || targetSubcategory.id;
+        }
+        if (titleLower.includes("deep") || titleLower.includes("neural") || 
+            categoryLower.includes("deep") || categoryLower.includes("neural")) {
+            return mainTopic.subCategories.find(sc => sc.id === "deep-learning")?.id || targetSubcategory.id;
+        }
+        if (titleLower.includes("generate") || titleLower.includes("generative") || 
+            titleLower.includes("gpt") || titleLower.includes("chatgpt") || 
+            titleLower.includes("bard") || categoryLower.includes("generative") || 
+            categoryLower.includes("gpt") || categoryLower.includes("chatgpt") || 
+            categoryLower.includes("bard")) {
+            return mainTopic.subCategories.find(sc => sc.id === "generative-ai")?.id || targetSubcategory.id;
+        }
+        return mainTopic.subCategories.find(sc => sc.id === "ml-basics")?.id || targetSubcategory.id;
+    }
+    
+    // For other categories, match keywords in the title or category
+    for (const subCat of mainTopic.subCategories) {
+        const subCategoryId = subCat.id;
+        const nameParts = subCat.name.toLowerCase().split(/[\s-&]+/); // Split by spaces, dashes, or ampersand
         
-        // Check if title or category contains any of the subcategory keywords
-        if (subcatKeywords.some(keyword => 
-            titleLower.includes(keyword) || 
-            categoryLower.includes(keyword))) {
-            targetSubcategory = subcat;
-            break;
+        // Check if any part of the subcategory name exists in the title or category
+        for (const part of nameParts) {
+            if (part.length > 3 && (titleLower.includes(part) || categoryLower.includes(part))) { // Only check parts with decent length
+                return subCategoryId;
+            }
         }
     }
     
+    // Default to first subcategory if no match
     return targetSubcategory.id;
+}
+
+function isPopularCourse(course: CourseMetadata, category: string): boolean {
+    const popularCourses: { [key: string]: string[] } = {
+        "web-development": [
+            "html", "css", "javascript", "responsive", "bootstrap"
+        ],
+        "python-programming": [
+            "python basics", "python intro", "introduction to python", "django"
+        ],
+        "java-programming": [
+            "java intro", "introduction to java", "java basics"
+        ],
+        "data-science-ml": [
+            "machine learning intro", "introduction to data science", "statistics intro"
+        ],
+        "databases": [
+            "sql basics", "mysql", "nosql"
+        ],
+        "c-programming-family": [
+            "c basics", "c++ intro", "c# basics"
+        ],
+    };
+    
+    // If the title contains certain popular terms for the category
+    const title = course.title.toLowerCase();
+    const relevantPopularTerms = popularCourses[category] || [];
+    
+    if (relevantPopularTerms.some(term => title.includes(term))) {
+        return true;
+    }
+    
+    // If it's a beginner level course in a core technology
+    if (course.difficulty?.toLowerCase().includes('beginner') && 
+        (title.includes('intro') || title.includes('basic') || title.includes('fundamental'))) {
+        return true;
+    }
+    
+    // Default to not popular
+    return false;
 }
 
 export async function GET() {
     try {
-        // Get courses grouped by category
-        const coursesByCategory = await getCoursesByCategory();
+        // First attempt to use the unified courses data
+        const unifiedData = await getUnifiedCoursesData();
         
-        const groupedTopics = new Map<string, MainTopicResponse>();
-
-        // Initialize main topics
-        mainTopicConfigurations.forEach(config => {
-            groupedTopics.set(config.id, {
-                ...config,
-                tutorialCount: 0,
-                tutorials: [],
-                color: getColorForCategory(config.name),
-                subCategories: config.subCategories.map(sc => ({
-                    ...sc,
-                    tutorials: []
-                }))
-            });
-        });
-
-        // Process each course category
-        Object.entries(coursesByCategory).forEach(([category, courses]) => {
-            // Skip empty categories or undefined categories
-            if (!category || !courses || courses.length === 0) {
-                return;
+        if (unifiedData) {
+            // Process unified data
+            const mainTopicsResponse: MainTopicResponse[] = [];
+            
+            for (const mainConfig of mainTopicConfigurations) {
+                // Find corresponding category in unified data
+                const unifiedCategory = unifiedData.main_categories.find(cat => {
+                    // Match by name (case-insensitive)
+                    return cat.name.toLowerCase() === mainConfig.name.toLowerCase();
+                });
+                
+                if (unifiedCategory) {
+                    // Create response object for this category
+                    const mainTopicResponse: MainTopicResponse = {
+                        id: mainConfig.id,
+                        name: mainConfig.name,
+                        description: mainConfig.description,
+                        icon: mainConfig.icon,
+                        difficulty: mainConfig.difficulty,
+                        color: getColorForCategory(mainConfig.name),
+                        tutorialCount: unifiedCategory.courses_count,
+                        tutorials: [],
+                        subCategories: []
+                    };
+                    
+                    // Initialize subcategories from config
+                    mainTopicResponse.subCategories = mainConfig.subCategories.map(sc => ({
+                        id: sc.id,
+                        name: sc.name,
+                        icon: sc.icon || getIconForCategory(sc.name),
+                        tutorials: [],
+                        tutorialCount: 0
+                    }));
+                    
+                    // Process courses from unified subcategories
+                    for (const unifiedSubcat of unifiedCategory.subcategories) {
+                        // Find matching subcategory in our configuration
+                        let targetSubcat = mainTopicResponse.subCategories.find(
+                            sc => sc.id.toLowerCase() === unifiedSubcat.id.toLowerCase()
+                        );
+                        
+                        // If no exact match, create a new subcategory
+                        if (!targetSubcat) {
+                            targetSubcat = {
+                                id: unifiedSubcat.id,
+                                name: unifiedSubcat.name,
+                                icon: getIconForCategory(unifiedSubcat.name),
+                                tutorials: [],
+                                tutorialCount: 0
+                            };
+                            mainTopicResponse.subCategories.push(targetSubcat);
+                        }
+                        
+                        // Add courses to this subcategory
+                        for (const course of unifiedSubcat.courses) {
+                            const tutorial: Tutorial = {
+                                id: course.id,
+                                name: course.title,
+                                slug: course.slug,
+                                description: course.description || `Learn about ${course.title}`,
+                                level: course.difficulty || 'beginner',
+                                icon: getIconForCategory(course.subcategory || ''),
+                                popular: isPopularCourse(course, mainConfig.id),
+                                category: course.original_category || '',
+                                subcategoryId: unifiedSubcat.id
+                            };
+                            
+                            // Add to subcategory tutorials
+                            targetSubcat.tutorials.push(tutorial);
+                            targetSubcat.tutorialCount = (targetSubcat.tutorialCount || 0) + 1;
+                            
+                            // Add popular courses to main topic's tutorials list
+                            if (tutorial.popular) {
+                                mainTopicResponse.tutorials.push(tutorial);
+                            }
+                        }
+                    }
+                    
+                    // Add this main topic to the response
+                    mainTopicsResponse.push(mainTopicResponse);
+                }
             }
             
-            const categoryNameLower = category.toLowerCase();
-            let matched = false;
-
-            // Try to match category with a main topic
-            mainTopicConfigurations.forEach(config => {
-                // Check if any keyword matches the category name
-                if (config.keywords.some(keyword => 
-                    categoryNameLower.includes(keyword.toLowerCase()) || 
-                    keyword.toLowerCase().includes(categoryNameLower)
-                )) {
-                    const mainTopic = groupedTopics.get(config.id);
-                    if (mainTopic) {
-                        courses.forEach(course => {
-                            // Skip courses without necessary data
-                            if (!course || !course.id || !course.title) {
-                                return;
-                            }
-                            
-                            // Choose appropriate subcategory for this course
-                            const subcategoryId = assignToSubcategory(course.title, category, mainTopic);
-                            
-                            // Find the subcategory object
-                            const subcategory = mainTopic.subCategories.find((sc: SubCategory) => sc.id === subcategoryId);
-                            
-                            if (subcategory && !subcategory.tutorials.find((t: Tutorial) => t.id === course.id)) {
-                                const tutorialObject: Tutorial = {
-                                    id: course.id,
-                                    name: course.title || `Unnamed Course`,
-                                    slug: course.slug || course.id,
-                                    icon: getIconForCategory(category),
-                                    description: course.description || `Learn ${course.title || 'this topic'}.`,
-                                    level: course.difficulty || 'beginner',
-                                    popular: false,
-                                    category: category,
-                                    subcategoryId: subcategoryId
-                                };
-                                
-                                // Add to subcategory
-                                subcategory.tutorials.push(tutorialObject);
-                                
-                                // Also add to main category (for backward compatibility)
-                                if (!mainTopic.tutorials.find((t: Tutorial) => t.id === course.id)) {
-                                    mainTopic.tutorials.push(tutorialObject);
-                                }
-                            }
-                        });
-                        matched = true;
+            return NextResponse.json(mainTopicsResponse);
+        } else {
+            // Fall back to the old method if unified data is not available
+            const coursesByCategory = await getCoursesByCategory();
+            const mainTopicsResponse: MainTopicResponse[] = [];
+            
+            for (const mainTopic of mainTopicConfigurations) {
+                const mainTopicResponse: MainTopicResponse = {
+                    id: mainTopic.id,
+                    name: mainTopic.name,
+                    description: mainTopic.description,
+                    icon: mainTopic.icon,
+                    difficulty: mainTopic.difficulty,
+                    color: getColorForCategory(mainTopic.name),
+                    tutorialCount: 0,
+                    tutorials: [],
+                    subCategories: mainTopic.subCategories.map(sc => ({
+                        id: sc.id,
+                        name: sc.name,
+                        icon: sc.icon,
+                        tutorials: [],
+                        tutorialCount: 0
+                    }))
+                };
+                
+                // Find courses that belong to this main topic based on keywords
+                const categoryKeywords = mainTopic.keywords;
+                
+                // Process each category and assign its courses to the appropriate main topic
+                for (const [category, courses] of Object.entries(coursesByCategory)) {
+                    // Check if this category belongs to this main topic
+                    const categoryLower = category.toLowerCase();
+                    const isMatch = categoryKeywords.some(keyword => categoryLower.includes(keyword.toLowerCase()));
+                    
+                    if (isMatch) {
+                        // Process the courses in this category
+                        processCoursesForTopic(courses, category, mainTopicResponse);
                     }
                 }
-            });
-
-            if (!matched) {
-                // If no match was found, try to place it in the most appropriate fallback category
-                let fallbackCategory = "web-development"; // default fallback
                 
-                // Try to determine a better fallback based on the category name
-                if (categoryNameLower.includes("learn") || 
-                    categoryNameLower.includes("introduction") ||
-                    categoryNameLower.includes("how_to") ||
-                    categoryNameLower.includes("start")) {
-                    fallbackCategory = "learning-resources";
-                }
-                
-                const fallbackTopic = groupedTopics.get(fallbackCategory);
-                if (fallbackTopic) {
-                    // Only log if we haven't seen this category before
-                    if (!mappedCategories.has(category)) {
-                        console.log(`Category "${category}" assigned to fallback topic: ${fallbackTopic.name}`);
-                        mappedCategories.add(category);
-                    }
-                    
-                    // Choose a default subcategory for this fallback
-                    const defaultSubcategory = fallbackTopic.subCategories[0];
-                    
-                    courses.forEach(course => {
-                        if (!course || !course.id || !course.title) return;
-                        
-                        const tutorialObject: Tutorial = {
-                            id: course.id,
-                            name: course.title,
-                            slug: course.slug || course.id,
-                            icon: getIconForCategory(category),
-                            description: course.description || `Learn ${course.title}.`,
-                            level: course.difficulty || 'beginner',
-                            popular: false,
-                            category: category,
-                            subcategoryId: defaultSubcategory.id
-                        };
-                        
-                        // Add to default subcategory
-                        defaultSubcategory.tutorials.push(tutorialObject);
-                        
-                        // Also add to main category (for backward compatibility)
-                        if (!fallbackTopic.tutorials.find((t: Tutorial) => t.id === course.id)) {
-                            fallbackTopic.tutorials.push(tutorialObject);
-                        }
-                    });
+                // Only include topics that have courses
+                if (mainTopicResponse.tutorialCount > 0) {
+                    mainTopicsResponse.push(mainTopicResponse);
                 }
             }
-        });
-
-        // Prepare response
-        const responseTopics: MainTopicResponse[] = [];
-        groupedTopics.forEach(topic => {
-            if (topic.tutorials.length > 0) {
-                topic.tutorialCount = topic.tutorials.length;
-                
-                // Update subcategory counts
-                topic.subCategories = topic.subCategories.map((sc: SubCategory) => ({
-                    ...sc,
-                    tutorialCount: sc.tutorials ? sc.tutorials.length : 0
-                }));
-                
-                responseTopics.push(topic);
-            }
-        });
-
-        responseTopics.sort((a, b) => a.name.localeCompare(b.name));
-
-        // Return the topics as JSON
-        return NextResponse.json(responseTopics);
+            
+            return NextResponse.json(mainTopicsResponse);
+        }
     } catch (error) {
-        console.error('Error generating topics:', error);
-        return NextResponse.json({ error: 'Failed to generate topics' }, { status: 500 });
+        console.error('Error in /api/learn route:', error);
+        return NextResponse.json(
+            { error: 'Failed to fetch learning content' },
+            { status: 500 }
+        );
+    }
+}
+
+function processCoursesForTopic(courses: CourseMetadata[], category: string, mainTopic: MainTopicResponse) {
+    try {
+        // Filter for unique courses only
+        for (const course of courses) {
+            // Create a tutorial object from the course metadata
+            const subcategoryId = course.subcategory_id || assignToSubcategory(course.title, category, mainTopic);
+            const isPopular = isPopularCourse(course, mainTopic.id);
+            
+            const tutorial: Tutorial = {
+                id: course.id,
+                name: course.title,
+                slug: course.slug,
+                description: course.description || `Learn about ${course.title}`,
+                level: course.difficulty || 'beginner',
+                icon: getIconForCategory(course.subcategory || ''),
+                popular: isPopular,
+                category: category,
+                subcategoryId: subcategoryId
+            };
+            
+            // Add to appropriate subcategory
+            const subcategory = mainTopic.subCategories.find(sc => sc.id === subcategoryId);
+            if (subcategory) {
+                subcategory.tutorials.push(tutorial);
+                subcategory.tutorialCount = (subcategory.tutorialCount || 0) + 1;
+                mainTopic.tutorialCount++;
+            } else if (!mappedCategories.has(category)) {
+                console.log(`Could not find subcategory ${subcategoryId} for course "${course.title}" in category "${category}"`);
+                mappedCategories.add(category);
+            }
+            
+            // Add popular tutorials to main topic tutorials list
+            if (isPopular) {
+                mainTopic.tutorials.push(tutorial);
+            }
+        }
+    } catch (error) {
+        console.error(`Error processing courses for topic ${mainTopic.name}:`, error);
     }
 }
 
 function getColorForCategory(categoryName: string): string {
-    let hash = 0;
-    for (let i = 0; i < categoryName.length; i++) {
-        hash = categoryName.charCodeAt(i) + ((hash << 5) - hash);
-    }
+    // Map categories to specific colors for consistent UI
+    const categoryColors: { [key: string]: string } = {
+        "Web Development": "blue",
+        "Frontend Frameworks": "sky",
+        "Python": "green",
+        "Java": "orange",
+        "C Language": "violet",
+        "Data Science & ML": "teal",
+        "Databases": "amber",
+        "Backend Development": "indigo",
+        "Other Programming Languages": "rose",
+        "Development Tools": "slate",
+        "Office & Productivity": "emerald",
+        "Learning Resources": "purple",
+        "Cyber Security": "red",
+        "Go": "cyan"
+    };
     
-    let color = '#';
-    for (let i = 0; i < 3; i++) {
-        const value = (hash >> (i * 8)) & 0xFF;
-        color += ('00' + value.toString(16)).substr(-2);
-    }
-    
-    return color;
+    return categoryColors[categoryName] || "gray";
 }
 
 function getIconForCategory(categoryName: string): string {
-    const categoryLower = categoryName.toLowerCase();
+    // Map subcategories to specific icons
+    const subcategoryIcons: { [key: string]: string } = {
+        "HTML": "Code",
+        "CSS": "PenTool",
+        "JavaScript": "FileCode",
+        "TypeScript": "FileCode",
+        "Python": "FileCode",
+        "Java": "Coffee",
+        "PHP": "FileCode",
+        "C": "Terminal",
+        "C++": "Terminal",
+        "C#": "Hash",
+        "Data Science": "BarChart",
+        "Machine Learning": "Brain",
+        "SQL": "Database",
+        "MongoDB": "Database",
+        "React": "Layers",
+        "Vue": "Layers",
+        "Angular": "Layers",
+        "Node.js": "Server",
+        "Django": "Globe"
+    };
     
-    if (categoryLower.includes('javascript') || categoryLower.includes('js')) return 'Code';
-    if (categoryLower.includes('html')) return 'Code';
-    if (categoryLower.includes('css')) return 'PenTool';
-    if (categoryLower.includes('python')) return 'Code';
-    if (categoryLower.includes('data')) return 'LineChart';
-    if (categoryLower.includes('sql') || categoryLower.includes('database')) return 'Database';
-    
-    return 'BookOpen';
+    return subcategoryIcons[categoryName] || "FileText";
 }
