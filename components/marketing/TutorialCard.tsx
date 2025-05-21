@@ -12,11 +12,11 @@ export type TutorialDifficulty = 'beginner' | 'intermediate' | 'advanced';
 interface TutorialCardProps {
   id: string;
   slug: string;
-  topicSlug: string;
+  topicSlug?: string;
   title: string;
   description: string;
   difficulty: TutorialDifficulty;
-  durationMinutes: number;
+  durationMinutes?: number;
   hasInteractiveExamples?: boolean;
   progress?: number; // 0-100 percentage
   isCompleted?: boolean;
@@ -55,14 +55,20 @@ const TutorialCard: React.FC<TutorialCardProps> = ({
   title,
   description,
   difficulty,
-  durationMinutes,
+  durationMinutes = 5, // Default to 5 minutes if not provided
   hasInteractiveExamples = false,
   progress,
   isCompleted = false,
   className,
 }) => {
   const hasProgress = typeof progress === 'number' && progress > 0;
-  const href = `/learn/topics/${topicSlug}/${slug}`;
+  
+  // Use a simpler URL structure that matches our [slug] page
+  const href = `/learn/${slug}`;
+  
+  // Add debugging log
+  console.log(`Tutorial card ${title} has slug: ${slug}, creating link to: ${href}`);
+  
   const formattedDuration = durationMinutes < 60 
     ? `${durationMinutes} min` 
     : `${Math.floor(durationMinutes / 60)}h ${durationMinutes % 60}m`;
@@ -83,7 +89,7 @@ const TutorialCard: React.FC<TutorialCardProps> = ({
           )}
         </div>
 
-        <Link href={href} className="hover:underline">
+        <Link href={href} className="hover:underline" onClick={() => console.log(`Clicked tutorial title link: ${href}`)}>
           <h3 className="text-lg font-semibold mb-2">{title}</h3>
         </Link>
         <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
@@ -109,7 +115,7 @@ const TutorialCard: React.FC<TutorialCardProps> = ({
           </div>
         ) : (
           <Button asChild className="w-full">
-            <Link href={href} className="flex items-center justify-center">
+            <Link href={href} className="flex items-center justify-center" onClick={() => console.log(`Clicked tutorial button link: ${href}`)}>
               <PlayCircle className="h-4 w-4 mr-1.5" />
               {hasProgress ? 'Continue' : 'Start'} Tutorial
             </Link>
