@@ -112,7 +112,8 @@ export function CodeEditor({
     let highlighted = code
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+      .replace(/>/g, '&gt;')
+      .replace(/\t/g, '  '); // Convert tabs to 2 spaces for consistent display
       
     // Language-specific highlighting - improved with more detailed syntax
     if (language === 'html') {
@@ -266,7 +267,10 @@ export function CodeEditor({
             style={{ 
               minHeight: isFullscreen ? '100%' : defaultHeight,
               fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-              lineHeight: 1.5
+              lineHeight: 1.5,
+              tabSize: 2,
+              whiteSpace: "pre",
+              overflowWrap: "normal"
             }}
           />
           <pre 
@@ -274,7 +278,10 @@ export function CodeEditor({
             style={{ 
               fontFamily: 'inherit',
               margin: 0,
-              lineHeight: 1.5
+              lineHeight: 1.5,
+              tabSize: 2,
+              whiteSpace: "pre",
+              overflowWrap: "normal"
             }}
             dangerouslySetInnerHTML={{ __html: getSyntaxHighlightedCode() }}
           />
@@ -299,7 +306,24 @@ export function CodeEditor({
               }}
             >
               <iframe 
-                srcDoc={previewHtml}
+                srcDoc={`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin: 0; padding: 10px; font-family: sans-serif; }
+    pre { 
+      white-space: pre;
+      word-wrap: normal;
+      overflow-x: auto;
+      tab-size: 2;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>${previewHtml}</body>
+</html>`}
                 title="Code Preview"
                 className="w-full h-full border-0"
                 sandbox="allow-scripts"
@@ -328,6 +352,14 @@ export function CodeEditor({
         .punctuation { color: var(--code-punctuation); }
         .function { color: var(--code-function); }
         .operator { color: var(--code-operator); }
+        
+        /* Ensure code doesn't wrap incorrectly */
+        pre, code {
+          white-space: pre;
+          overflow-wrap: normal;
+          overflow-x: auto;
+          tab-size: 2;
+        }
       `}</style>
     </div>
   );

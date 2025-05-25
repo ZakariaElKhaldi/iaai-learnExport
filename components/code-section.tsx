@@ -117,12 +117,21 @@ export function CodeSection({ code, codeHtml, language }: CodeSectionProps) {
                 <div 
                   dangerouslySetInnerHTML={{ __html: codeHtml }} 
                   className="bg-[var(--code-bg)] text-[var(--code-fg)] pt-10 pb-4 px-4 overflow-x-auto font-mono text-sm code-editor-theme"
-                  style={{ minHeight: isFullscreen ? "70vh" : "350px" }}
+                  style={{ 
+                    minHeight: isFullscreen ? "70vh" : "350px",
+                    whiteSpace: "pre",
+                    tabSize: 2
+                  }}
                 />
               ) : code ? (
                 <pre 
                   className="bg-[var(--code-bg)] text-[var(--code-fg)] pt-10 pb-4 px-4 overflow-x-auto font-mono text-sm code-editor-theme"
-                  style={{ minHeight: isFullscreen ? "70vh" : "350px" }}
+                  style={{ 
+                    minHeight: isFullscreen ? "70vh" : "350px",
+                    whiteSpace: "pre",
+                    tabSize: 2,
+                    overflowWrap: "normal"
+                  }}
                 >
                   <code className={language ? `language-${language}` : ''}>
                     {code}
