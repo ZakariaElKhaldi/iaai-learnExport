@@ -1,0 +1,3395 @@
+{
+  "title": "PHP AJAX Live Search",
+  "url": "https://www.w3schools.com/php/php_ajax_livesearch.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "PHP Example - AJAX Live Search",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "AJAX can be used to create more user-friendly and interactive searches.",
+      "html": "<p class=\"intro\">AJAX can be used to create more user-friendly and interactive searches.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "AJAX Live Search",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following example will demonstrate a live search, where you get search results while you type.",
+      "html": "<p>The following example will demonstrate a live search, where you get search results while you type.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Live search has many benefits compared to traditional searching:",
+      "html": "<p>Live search has many benefits compared to traditional searching:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Search for a W3Schools page in the input field below:",
+      "html": "<p>Search for a W3Schools page in the input field below:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "links.xml",
+          "href": "https://www.w3schools.com/links.xml",
+          "title": ""
+        }
+      ],
+      "text": "The results in the example above are found in an XML file ( links.xml ). To make this example small and simple, only six results are available.",
+      "html": "<p>The results in the example above are found in an XML file\n(<a href=\"links.xml\" target=\"_blank\">links.xml</a>). To make this \nexample small and simple, only six results are available.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Example Explained - The HTML Page",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When a user types a character in the input field above, the function \"showResult()\" is executed. The function is triggered by the \"onkeyup\" event:",
+      "html": "<p>When a user types a character in the input field above, the function \"showResult()\" is executed. The function is triggered by the \"onkeyup\" \nevent:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "html",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<html>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<head>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<script>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "\nfunction showResult(str)\n{\n\u00a0\nif (str.length==0) { \n\u00a0\n\u00a0\u00a0document.getElementById(\"livesearch\").innerHTML=\"\";\n\u00a0\u00a0\u00a0 document.getElementById(\"livesearch\").style.border=\"0px\";\n\u00a0\n\u00a0 return;\n\u00a0 }\n\u00a0 var xmlhttp=new XMLHttpRequest();\n\u00a0\nxmlhttp.onreadystatechange=function() {\n\u00a0\n\u00a0 if (this.readyState==4 && this.status==200) {\n\u00a0\n\u00a0\n\u00a0\u00a0document.getElementById(\"livesearch\").innerHTML=this.responseText;\n\u00a0\u00a0\u00a0 \u00a0 document.getElementById(\"livesearch\").style.border=\"1px solid #A5ACB2\";\n\u00a0\u00a0\u00a0 }\n\u00a0 }\n\u00a0\nxmlhttp.open(\"GET\",\"livesearch.php?q=\"+str,true);\n\u00a0\nxmlhttp.send();\n}\n",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "length==0",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"livesearch\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "innerHTML=\"\"",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"livesearch\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "style",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "border=\"0px\"",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "onreadystatechange=function",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "readyState==4",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "status==200",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"livesearch\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "innerHTML=this",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "responseText",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"livesearch\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "style",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "border=\"1px",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\";\n\u00a0\u00a0\u00a0 }\n\u00a0 }\n\u00a0\nxmlhttp.open(\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\",\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "php?q=\"",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "send",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "</script>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</head>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<body>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<form>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<input type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"text\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"30\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"showResult(this.value)\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<div id=\"livesearch\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " id=\"livesearch\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"livesearch\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</div>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</form>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</body>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</html>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<html>\n\n<head>\n\n<script>\nfunction showResult(str)\n{\n\nif (str.length==0) {\n\ndocument.getElementById(\"livesearch\").innerHTML=\"\";\ndocument.getElementById(\"livesearch\").style.border=\"0px\";\n\nreturn;\n}\nvar xmlhttp=new XMLHttpRequest();\n\nxmlhttp.onreadystatechange=function() {\n\nif (this.readyState==4 && this.status==200) {\n\n\ndocument.getElementById(\"livesearch\").innerHTML=this.responseText;\ndocument.getElementById(\"livesearch\").style.border=\"1px solid #A5ACB2\";\n}\n}\n\nxmlhttp.open(\"GET\",\"livesearch.php?q=\"+str,true);\n\nxmlhttp.send();\n}\n</script>\n\n</head>\n\n<body>\n\n\n\n<form>\n\n<input type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\">\n\n<div id=\"livesearch\"></div>\n\n</form>\n\n\n\n</body>\n\n</html>",
+      "syntax_highlighting": [
+        {
+          "text": "<html>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<head>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<script>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "\nfunction showResult(str)\n{\n\u00a0\nif (str.length==0) { \n\u00a0\n\u00a0\u00a0document.getElementById(\"livesearch\").innerHTML=\"\";\n\u00a0\u00a0\u00a0 document.getElementById(\"livesearch\").style.border=\"0px\";\n\u00a0\n\u00a0 return;\n\u00a0 }\n\u00a0 var xmlhttp=new XMLHttpRequest();\n\u00a0\nxmlhttp.onreadystatechange=function() {\n\u00a0\n\u00a0 if (this.readyState==4 && this.status==200) {\n\u00a0\n\u00a0\n\u00a0\u00a0document.getElementById(\"livesearch\").innerHTML=this.responseText;\n\u00a0\u00a0\u00a0 \u00a0 document.getElementById(\"livesearch\").style.border=\"1px solid #A5ACB2\";\n\u00a0\u00a0\u00a0 }\n\u00a0 }\n\u00a0\nxmlhttp.open(\"GET\",\"livesearch.php?q=\"+str,true);\n\u00a0\nxmlhttp.send();\n}\n",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "length==0",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"livesearch\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "innerHTML=\"\"",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"livesearch\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "style",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "border=\"0px\"",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "onreadystatechange=function",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "readyState==4",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "status==200",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"livesearch\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "innerHTML=this",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "responseText",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"livesearch\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "style",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "border=\"1px",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\";\n\u00a0\u00a0\u00a0 }\n\u00a0 }\n\u00a0\nxmlhttp.open(\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\",\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "php?q=\"",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "send",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "</script>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</head>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<body>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<form>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<input type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"text\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"30\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"showResult(this.value)\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<div id=\"livesearch\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " id=\"livesearch\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"livesearch\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</div>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</form>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</body>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</html>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>html<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>head<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>script<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"jscolor\" style=\"color:black\"><br/>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> showResult(str)<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>{<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (str.<span class=\"jspropertycolor\" style=\"color:black\">length==0</span>) { <br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"livesearch\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">innerHTML=\"\"</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"livesearch\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">style</span>.<span class=\"jspropertycolor\" style=\"color:black\">border=\"0px\"</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">return</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 }<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> xmlhttp=<span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> XMLHttpRequest();<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\nxmlhttp.<span class=\"jspropertycolor\" style=\"color:black\">onreadystatechange=function</span>() {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">readyState==4</span> &amp;&amp; <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">status==200</span>) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"livesearch\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">innerHTML=this</span>.<span class=\"jspropertycolor\" style=\"color:black\">responseText</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 \u00a0 document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"livesearch\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">style</span>.<span class=\"jspropertycolor\" style=\"color:black\">border=\"1px</span> solid #A5ACB2<span class=\"jsstringcolor\" style=\"color:green\">\";<br/>\n\u00a0\u00a0\u00a0 }<br/>\n\u00a0 }<br/>\n\u00a0\nxmlhttp.open(\"</span>GET<span class=\"jsstringcolor\" style=\"color:green\">\",\"</span>livesearch.<span class=\"jspropertycolor\" style=\"color:black\">php?q=\"</span>+str,<span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\nxmlhttp.<span class=\"jspropertycolor\" style=\"color:black\">send</span>();<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<br/>\n</span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/script<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/head<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>body<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>form<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>input<span class=\"attributecolor\" style=\"color:green\"> type<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"text\"</span> size<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"30\"</span> onkeyup<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"showResult(this.value)\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>div<span class=\"attributecolor\" style=\"color:green\"> id<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"livesearch\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/div<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/form<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/body<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/html<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<html>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<head>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<script>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "\nfunction showResult(str)\n{\n\u00a0\nif (str.length==0) { \n\u00a0\n\u00a0\u00a0document.getElementById(\"livesearch\").innerHTML=\"\";\n\u00a0\u00a0\u00a0 document.getElementById(\"livesearch\").style.border=\"0px\";\n\u00a0\n\u00a0 return;\n\u00a0 }\n\u00a0 var xmlhttp=new XMLHttpRequest();\n\u00a0\nxmlhttp.onreadystatechange=function() {\n\u00a0\n\u00a0 if (this.readyState==4 && this.status==200) {\n\u00a0\n\u00a0\n\u00a0\u00a0document.getElementById(\"livesearch\").innerHTML=this.responseText;\n\u00a0\u00a0\u00a0 \u00a0 document.getElementById(\"livesearch\").style.border=\"1px solid #A5ACB2\";\n\u00a0\u00a0\u00a0 }\n\u00a0 }\n\u00a0\nxmlhttp.open(\"GET\",\"livesearch.php?q=\"+str,true);\n\u00a0\nxmlhttp.send();\n}\n",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "length==0",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"livesearch\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "innerHTML=\"\"",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"livesearch\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "style",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "border=\"0px\"",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "onreadystatechange=function",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "readyState==4",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "status==200",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"livesearch\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "innerHTML=this",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "responseText",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"livesearch\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "style",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "border=\"1px",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\";\n\u00a0\u00a0\u00a0 }\n\u00a0 }\n\u00a0\nxmlhttp.open(\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\",\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "php?q=\"",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "send",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "</script>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</head>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<body>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<form>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<input type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " type=\"text\" size=\"30\" onkeyup=\"showResult(this.value)\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"text\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"30\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"showResult(this.value)\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<div id=\"livesearch\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " id=\"livesearch\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"livesearch\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</div>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</form>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</body>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</html>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Source code explanation:",
+      "html": "<p>Source code explanation:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If the input field is empty (str.length==0), the function clears the content of the livesearch placeholder and exits the function.",
+      "html": "<p>If the input field is empty (str.length==0), the function clears the \ncontent of the livesearch placeholder and exits the function.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If the input field is not empty, the showResult() function executes the following:",
+      "html": "<p>If the input field is not empty, the showResult() function executes the following:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The PHP File",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The page on the server called by the JavaScript above is a PHP file called \"livesearch.php\".",
+      "html": "<p>The page on the server called by the JavaScript above is a PHP file called \"livesearch.php\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The source code in \"livesearch.php\" searches an XML file for titles matching the search string and returns the result:",
+      "html": "<p>The source code in \"livesearch.php\" searches an XML file for titles matching the search string and returns the result:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php\n$xmlDoc=new DOMDocument();\n$xmlDoc->load(\"links.xml\");\n\n$x=$xmlDoc->getElementsByTagName('link');\n\n//get the q parameter from URL\n$q=$_GET[\"q\"];\n\n//lookup all links from the xml file if length of q>0\nif (strlen($q)>0)\n{\n\u00a0\n$hint=\"\";\n\u00a0\nfor($i=0; $i<($x->length); $i++)\u00a0{\n\u00a0\n\u00a0\u00a0$y=$x->item($i)->getElementsByTagName('title');\n\u00a0\u00a0\u00a0 $z=$x->item($i)->getElementsByTagName('url');\n\u00a0\n\u00a0\u00a0if ($y->item(0)->nodeType==1)\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0//find a link matching the search text\n\u00a0\u00a0\u00a0 \u00a0\u00a0if (stristr($y->item(0)->childNodes->item(0)->nodeValue,$q))\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0if ($hint==\"\")\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$hint=\"<a href='\" . \n\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$z->item(0)->childNodes->item(0)->nodeValue . \n\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\"' target='_blank'>\" . \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\u00a0else\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$hint=$hint . \"<br /><a href='\" . \n\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$z->item(0)->childNodes->item(0)->nodeValue . \n\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\"' target='_blank'>\" . \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0}\n}\n\n// Set output to \"no suggestion\" if no hint was found\n// or to the correct values\nif ($hint==\"\")\u00a0{\n\u00a0\u00a0$response=\"no suggestion\";\n }\nelse\u00a0{\n\u00a0\u00a0$response=$hint;\n }\n\n//output the response\necho $response;\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"links.xml\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "'link'",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "//get the q parameter from URL",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "$_GET",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"q\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "//lookup all links from the xml file if length of q>0",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "'title'",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "'url'",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "//find a link matching the search text",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"<a href='\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"' target='_blank'>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"</a>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"<br /><a href='\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"' target='_blank'>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"</a>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Set output to \"no suggestion\" if no hint was found",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// or to the correct values",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"no suggestion\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "//output the response",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php\n$xmlDoc=new DOMDocument();\n$xmlDoc->load(\"links.xml\");\n\n$x=$xmlDoc->getElementsByTagName('link');\n\n//get the q parameter from URL\n$q=$_GET[\"q\"];\n\n//lookup all links from the xml file if length of q>0\nif (strlen($q)>0)\n{\n\n$hint=\"\";\n\nfor($i=0; $i<($x->length); $i++)\u00a0{\n\n$y=$x->item($i)->getElementsByTagName('title');\n$z=$x->item($i)->getElementsByTagName('url');\n\nif ($y->item(0)->nodeType==1)\u00a0{\n\n//find a link matching the search text\nif (stristr($y->item(0)->childNodes->item(0)->nodeValue,$q))\u00a0{\n\nif ($hint==\"\")\u00a0{\n\n$hint=\"<a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\u00a0else\u00a0{\n\n$hint=$hint . \"<br /><a href='\" .\n$z->item(0)->childNodes->item(0)->nodeValue .\n\"' target='_blank'>\" .\n$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n}\n}\n}\n}\n}\n\n// Set output to \"no suggestion\" if no hint was found\n// or to the correct values\nif ($hint==\"\")\u00a0{\n$response=\"no suggestion\";\n}\nelse\u00a0{\n$response=$hint;\n}\n\n//output the response\necho $response;\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php\n$xmlDoc=new DOMDocument();\n$xmlDoc->load(\"links.xml\");\n\n$x=$xmlDoc->getElementsByTagName('link');\n\n//get the q parameter from URL\n$q=$_GET[\"q\"];\n\n//lookup all links from the xml file if length of q>0\nif (strlen($q)>0)\n{\n\u00a0\n$hint=\"\";\n\u00a0\nfor($i=0; $i<($x->length); $i++)\u00a0{\n\u00a0\n\u00a0\u00a0$y=$x->item($i)->getElementsByTagName('title');\n\u00a0\u00a0\u00a0 $z=$x->item($i)->getElementsByTagName('url');\n\u00a0\n\u00a0\u00a0if ($y->item(0)->nodeType==1)\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0//find a link matching the search text\n\u00a0\u00a0\u00a0 \u00a0\u00a0if (stristr($y->item(0)->childNodes->item(0)->nodeValue,$q))\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0if ($hint==\"\")\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$hint=\"<a href='\" . \n\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$z->item(0)->childNodes->item(0)->nodeValue . \n\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\"' target='_blank'>\" . \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\u00a0else\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$hint=$hint . \"<br /><a href='\" . \n\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$z->item(0)->childNodes->item(0)->nodeValue . \n\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\"' target='_blank'>\" . \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0}\n}\n\n// Set output to \"no suggestion\" if no hint was found\n// or to the correct values\nif ($hint==\"\")\u00a0{\n\u00a0\u00a0$response=\"no suggestion\";\n }\nelse\u00a0{\n\u00a0\u00a0$response=$hint;\n }\n\n//output the response\necho $response;\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"links.xml\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "'link'",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "//get the q parameter from URL",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "$_GET",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"q\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "//lookup all links from the xml file if length of q>0",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "'title'",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "'url'",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "//find a link matching the search text",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"<a href='\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"' target='_blank'>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"</a>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"<br /><a href='\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"' target='_blank'>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"</a>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Set output to \"no suggestion\" if no hint was found",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// or to the correct values",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"no suggestion\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "//output the response",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>\n$xmlDoc=<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> DOMDocument();<br/>\n$xmlDoc-&gt;load(<span class=\"phpstringcolor\" style=\"color:green\">\"links.xml\"</span>);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><br/>\n$x=$xmlDoc-&gt;getElementsByTagName(<span class=\"phpstringcolor\" style=\"color:green\">'link'</span>);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><span class=\"commentcolor\" style=\"color:slategray\">//get the q parameter from URL<br/></span>\n$q=<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_GET</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"q\"</span>];<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><span class=\"commentcolor\" style=\"color:slategray\">//lookup all links from the xml file if length of q&gt;0<br/></span>\n<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (strlen($q)&gt;<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\n$hint=<span class=\"phpstringcolor\" style=\"color:green\">\"\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\n<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">for</span>($i=<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>; $i&lt;($x-&gt;length); $i++)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0$y=$x-&gt;item($i)-&gt;getElementsByTagName(<span class=\"phpstringcolor\" style=\"color:green\">'title'</span>);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 $z=$x-&gt;item($i)-&gt;getElementsByTagName(<span class=\"phpstringcolor\" style=\"color:green\">'url'</span>);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($y-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;nodeType==<span class=\"phpnumbercolor\" style=\"color:#905\">1</span>)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"commentcolor\" style=\"color:slategray\">//find a link matching the search text<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 \u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (stristr($y-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;childNodes-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;nodeValue,$q))\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($hint==<span class=\"phpstringcolor\" style=\"color:green\">\"\"</span>)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$hint=<span class=\"phpstringcolor\" style=\"color:green\">\"&lt;a href='\"</span> . <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$z-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;childNodes-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;nodeValue . <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0<span class=\"phpstringcolor\" style=\"color:green\">\"' target='_blank'&gt;\"</span> . <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0$y-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;childNodes-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;nodeValue . <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;/a&gt;\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span>\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$hint=$hint . <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;br /&gt;&lt;a href='\"</span> . <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$z-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;childNodes-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;nodeValue . <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0<span class=\"phpstringcolor\" style=\"color:green\">\"' target='_blank'&gt;\"</span> . <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0$y-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;childNodes-&gt;item(<span class=\"phpnumbercolor\" style=\"color:#905\">0</span>)-&gt;nodeValue . <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;/a&gt;\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><span class=\"commentcolor\" style=\"color:slategray\">// Set output to \"no suggestion\" if no hint was found<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><span class=\"commentcolor\" style=\"color:slategray\">// or to the correct values<br/></span>\n<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($hint==<span class=\"phpstringcolor\" style=\"color:green\">\"\"</span>)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0$response=<span class=\"phpstringcolor\" style=\"color:green\">\"no suggestion\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> }\n<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span>\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0$response=$hint;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> }<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><span class=\"commentcolor\" style=\"color:slategray\">//output the response<br/></span>\n<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> $response;<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php\n$xmlDoc=new DOMDocument();\n$xmlDoc->load(\"links.xml\");\n\n$x=$xmlDoc->getElementsByTagName('link');\n\n//get the q parameter from URL\n$q=$_GET[\"q\"];\n\n//lookup all links from the xml file if length of q>0\nif (strlen($q)>0)\n{\n\u00a0\n$hint=\"\";\n\u00a0\nfor($i=0; $i<($x->length); $i++)\u00a0{\n\u00a0\n\u00a0\u00a0$y=$x->item($i)->getElementsByTagName('title');\n\u00a0\u00a0\u00a0 $z=$x->item($i)->getElementsByTagName('url');\n\u00a0\n\u00a0\u00a0if ($y->item(0)->nodeType==1)\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0//find a link matching the search text\n\u00a0\u00a0\u00a0 \u00a0\u00a0if (stristr($y->item(0)->childNodes->item(0)->nodeValue,$q))\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0if ($hint==\"\")\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$hint=\"<a href='\" . \n\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$z->item(0)->childNodes->item(0)->nodeValue . \n\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\"' target='_blank'>\" . \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\u00a0else\u00a0{\n\u00a0\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$hint=$hint . \"<br /><a href='\" . \n\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\u00a0\u00a0$z->item(0)->childNodes->item(0)->nodeValue . \n\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0\u00a0\u00a0\"' target='_blank'>\" . \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u00a0\u00a0$y->item(0)->childNodes->item(0)->nodeValue . \"</a>\";\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0\u00a0\u00a0}\n\u00a0\u00a0}\n}\n\n// Set output to \"no suggestion\" if no hint was found\n// or to the correct values\nif ($hint==\"\")\u00a0{\n\u00a0\u00a0$response=\"no suggestion\";\n }\nelse\u00a0{\n\u00a0\u00a0$response=$hint;\n }\n\n//output the response\necho $response;\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"links.xml\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "'link'",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "//get the q parameter from URL",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "$_GET",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"q\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "//lookup all links from the xml file if length of q>0",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "'title'",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "'url'",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "//find a link matching the search text",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"<a href='\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"' target='_blank'>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"</a>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"<br /><a href='\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"' target='_blank'>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"</a>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Set output to \"no suggestion\" if no hint was found",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// or to the correct values",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"no suggestion\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "//output the response",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If there is any text sent from the JavaScript (strlen($q) > 0), the following happens:",
+      "html": "<p>If there is any text sent from the JavaScript (strlen($q) &gt; 0), the following happens:</p>"
+    }
+  ]
+}

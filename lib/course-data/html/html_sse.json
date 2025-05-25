@@ -1,0 +1,1188 @@
+{
+  "title": "HTML Server-Sent Events API",
+  "url": "https://www.w3schools.com/html/html5_serversentevents.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "HTML Server-Sent Events API",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Server-Sent Events (SSE) API enables pushing messages/updates from a server to the web page via HTTP connection.",
+      "html": "<p class=\"intro\">The Server-Sent Events (SSE) API enables pushing \nmessages/updates from a server to the web page via HTTP connection.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Server-Sent Events - One Way Messaging",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A server-sent event is when a web page automatically gets messages/updates from a server.",
+      "html": "<p>A server-sent event is when a web page automatically gets messages/updates from a server.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Normally, a web page has to request data from the server, but with server-sent events, the updates are pushed automatically.",
+      "html": "<p>Normally, a web page has to request data from the server, but with server-sent events, the updates \nare pushed automatically.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Examples: Facebook/Twitter updates, stock market updates, news feeds, sport results, etc.",
+      "html": "<p>Examples: Facebook/Twitter updates, stock market updates, news feeds, sport results, etc.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Browser Support",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The numbers in the table specify the first browser version that fully support the Server-Sent Events API.",
+      "html": "<p>The numbers in the table specify the first browser version that fully support \nthe Server-Sent Events API.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "browserref",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"browserref notranslate\">\n<tbody><tr>\n<th style=\"width:14%;font-size:16px;text-align:left;\">API</th>\n<th class=\"bsChrome\" style=\"width:16%;\" title=\"Chrome\"></th>\n<th class=\"bsEdge\" style=\"width:16%;\" title=\"Internet Explorer / Edge\"></th>\n<th class=\"bsFirefox\" style=\"width:16%;\" title=\"Firefox\"></th>\n<th class=\"bsSafari\" style=\"width:16%;\" title=\"Safari\"></th>\n<th class=\"bsOpera\" style=\"width:16%;\" title=\"Opera\"></th>\n</tr>\n<tr>\n<td style=\"text-align:left;\">SSE</td>\n<td>6.0</td>\n<td>79.0</td>\n<td>6.0</td>\n<td>5.0</td>\n<td>11.5</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "browserref",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "browserref",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Receive Server-Sent Event Notifications",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The EventSource object is used to receive server-sent event notifications:",
+      "html": "<p>The <code>EventSource</code> object is used to receive server-sent event notifications:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_sse",
+        "syntaxHighlighting": [
+          {
+            "text": "\n  <script>const x = document.getElementById(\"result\");\n  // Check browser support for SSEif(typeof(EventSource) \n  !== \"undefined\") {\u00a0 var source = new EventSource(\"demo_sse.php\");\u00a0 \n  source.onmessage = function(event) {\u00a0\u00a0\u00a0 x.innerHTML += \n  event.data + \"<br>\";\u00a0 };} else {\u00a0 x.innerHTML = \"Sorry, \n  no support for server-sent events.\";}</script> ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"result\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Check browser support for SSE",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "typeof",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"undefined\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"demo_sse.php\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "onmessage",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "event",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "event",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"<br>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"Sorry, \n  no support for server-sent events.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<script>const x = document.getElementById(\"result\");\n// Check browser support for SSEif(typeof(EventSource)\n!== \"undefined\") {\u00a0 var source = new EventSource(\"demo_sse.php\");\nsource.onmessage = function(event) {\u00a0\u00a0\u00a0 x.innerHTML +=\nevent.data + \"<br>\";\u00a0 };} else {\u00a0 x.innerHTML = \"Sorry,\nno support for server-sent events.\";}</script>",
+      "syntax_highlighting": [
+        {
+          "text": "\n  <script>const x = document.getElementById(\"result\");\n // Check browser support for SSEif(typeof(EventSource) \n  !== \"undefined\") {\u00a0 var source = new EventSource(\"demo_sse.php\");\u00a0 \n  source.onmessage = function(event) {\u00a0\u00a0\u00a0 x.innerHTML += \n event.data + \"<br>\";\u00a0 };} else {\u00a0 x.innerHTML = \"Sorry, \n  no support for server-sent events.\";}</script> ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"result\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check browser support for SSE",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "typeof",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"demo_sse.php\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "onmessage",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "event",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "event",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"Sorry, \n  no support for server-sent events.\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  &lt;script&gt;<br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> x = document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"result\"</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Check browser support for SSE<br/></span><span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">typeof</span>(EventSource) <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  !== <span class=\"jsstringcolor\" style=\"color:green\">\"undefined\"</span>) {<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> source = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> EventSource(<span class=\"jsstringcolor\" style=\"color:green\">\"demo_sse.php\"</span>);<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  source.<span class=\"jspropertycolor\" style=\"color:black\">onmessage</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">event</span>) {<br/>\u00a0\u00a0\u00a0 x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> += <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">event</span>.<span class=\"jspropertycolor\" style=\"color:black\">data</span> + <span class=\"jsstringcolor\" style=\"color:green\">\"&lt;br&gt;\"</span>;<br/>\u00a0 };<br/>} <span class=\"jskeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0 x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> = <span class=\"jsstringcolor\" style=\"color:green\">\"Sorry, \n  no support for server-sent events.\"</span>;<br/>}<br/>&lt;/script&gt; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_sse",
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  <script>const x = document.getElementById(\"result\");\n  // Check browser support for SSEif(typeof(EventSource) \n  !== \"undefined\") {\u00a0 var source = new EventSource(\"demo_sse.php\");\u00a0 \n  source.onmessage = function(event) {\u00a0\u00a0\u00a0 x.innerHTML += \n  event.data + \"<br>\";\u00a0 };} else {\u00a0 x.innerHTML = \"Sorry, \n  no support for server-sent events.\";}</script> ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"result\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Check browser support for SSE",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "typeof",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"demo_sse.php\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "onmessage",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "event",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "event",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"Sorry, \n  no support for server-sent events.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Example explained:",
+      "html": "<p>Example explained:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Check Browser Support",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the tryit example above there were some extra lines of code to check browser support for server-sent events:",
+      "html": "<p>In the tryit example above there were some extra lines of code to check browser support for server-sent events:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nif(typeof(EventSource) !== \"undefined\") {\n  \u00a0 // Yes! Server-sent events support!\n  \u00a0 // Some code.....\n }\n else {\n  \u00a0 // Sorry! No server-sent events support..\n }\n\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "typeof",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"undefined\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Yes! Server-sent events support!",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Some code.....",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Sorry! No server-sent events support..",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "if(typeof(EventSource) !== \"undefined\") {\n// Yes! Server-sent events support!\n// Some code.....\n}\nelse {\n// Sorry! No server-sent events support..\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nif(typeof(EventSource) !== \"undefined\") {\n  \u00a0 // Yes! Server-sent events support!\n  \u00a0 // Some code.....\n }\n else {\n  \u00a0 // Sorry! No server-sent events support..\n }\n\n",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "typeof",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Yes! Server-sent events support!",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Some code.....",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Sorry! No server-sent events support..",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><div>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">typeof</span>(EventSource) !== <span class=\"jsstringcolor\" style=\"color:green\">\"undefined\"</span>) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Yes! Server-sent events support!<br/></span><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// <i>Some code.....</i><br/></span><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> }<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">else</span> {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Sorry! No server-sent events support..<br/></span><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> }\n</div>\n</span></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nif(typeof(EventSource) !== \"undefined\") {\n  \u00a0 // Yes! Server-sent events support!\n  \u00a0 // Some code.....\n }\n else {\n  \u00a0 // Sorry! No server-sent events support..\n }\n\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "typeof",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Yes! Server-sent events support!",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Some code.....",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Sorry! No server-sent events support..",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Server-Side Code Example",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For the example above to work, you need a server capable of sending data updates (like PHP or ASP).",
+      "html": "<p>For the example above to work, you need a server capable of sending data updates (like PHP or ASP).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The server-side event stream syntax is simple. Set the \"Content-Type\" header to \"text/event-stream\". Now you can start sending event streams.",
+      "html": "<p>The server-side event stream syntax is simple. Set the \"Content-Type\" header to \n\"text/event-stream\". Now you can start sending event streams.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Code in PHP (demo_sse.php):",
+      "html": "<p>Code in PHP (demo_sse.php):</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?phpheader('Content-Type: text/event-stream');\n header('Cache-Control: no-cache');$time = date('r');echo \"data: The server time is: {$time}\\n\\n\";flush();?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "'Content-Type: text/event-stream'",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "'Cache-Control: no-cache'",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "'r'",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"data: The server time is: {$time}\\n\\n\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "syntax_highlighting": [
+        {
+          "text": "<?phpheader('Content-Type: text/event-stream');\n header('Cache-Control: no-cache');$time = date('r');echo \"data: The server time is: {$time}\\n\\n\";flush();?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "'Content-Type: text/event-stream'",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "'Cache-Control: no-cache'",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "'r'",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"data: The server time is: {$time}\\n\\n\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate htmlHigh\"><div>\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>header(<span class=\"phpstringcolor\" style=\"color:green\">'Content-Type: text/event-stream'</span>);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> header(<span class=\"phpstringcolor\" style=\"color:green\">'Cache-Control: no-cache'</span>);<br/><br/>$time = date(<span class=\"phpstringcolor\" style=\"color:green\">'r'</span>);<br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"data: The server time is: {$time}\\n\\n\"</span>;<br/>flush();<br/><span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div> </div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?phpheader('Content-Type: text/event-stream');\n header('Cache-Control: no-cache');$time = date('r');echo \"data: The server time is: {$time}\\n\\n\";flush();?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "'Content-Type: text/event-stream'",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "'Cache-Control: no-cache'",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "'r'",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"data: The server time is: {$time}\\n\\n\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Code in ASP (VB) (demo_sse.asp):",
+      "html": "<p>Code in ASP (VB) (demo_sse.asp):</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate",
+          "spes_asp"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate spes_asp\"><div>\n &lt;%<br/>Response.ContentType = \"text/event-stream\"<br/>Response.Expires = -1<br/>\n Response.Write(\"data: The server time is: \" &amp; now())<br/>Response.Flush()<br/>%&gt;\n</div></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "spes_asp"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "spes_asp"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Code explained:",
+      "html": "<p>Code explained:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The EventSource Object",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the examples above we used the onmessage event to get messages. But other events are also available:",
+      "html": "<p>In the examples above we used the onmessage event to get messages. But other events are also available:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th style=\"width:20%\">Events</th>\n<th>Description</th>\n</tr>\n<tr>\n<td>onopen</td>\n<td>When a connection to the server is opened</td>\n</tr>\n<tr>\n<td>onmessage</td>\n<td>When a message is received</td>\n</tr>\n<tr>\n<td>onerror</td>\n<td>When an error occurs</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

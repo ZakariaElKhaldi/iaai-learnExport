@@ -1,0 +1,503 @@
+{
+  "title": "MySQL IFNULL() and COALESCE() Functions",
+  "url": "https://www.w3schools.com/mysql/mysql_ifnull.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "MySQL NULL Functions",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL IFNULL() and COALESCE() Functions",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the following \"Products\" table:",
+      "html": "<p>Look at the following \"Products\" table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th>P_Id</th>\n<th>ProductName</th>\n<th>UnitPrice</th>\n<th>UnitsInStock</th>\n<th>UnitsOnOrder</th>\n</tr>\n<tr>\n<td>1</td>\n<td>Jarlsberg</td>\n<td>10.45</td>\n<td>16</td>\n<td>15</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Mascarpone</td>\n<td>32.56</td>\n<td>23</td>\n<td>\u00a0</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Gorgonzola</td>\n<td>15.67</td>\n<td>9</td>\n<td>20</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Suppose that the \"UnitsOnOrder\" column is optional, and may contain NULL values.",
+      "html": "<p>Suppose that the \"UnitsOnOrder\" column is optional, and may contain NULL values.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the following SELECT statement:",
+      "html": "<p>Look at the following SELECT statement:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + UnitsOnOrder)\nFROM Products; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT ProductName, UnitPrice * (UnitsInStock + UnitsOnOrder)\nFROM Products;",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + UnitsOnOrder)\nFROM Products; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> ProductName, UnitPrice * (UnitsInStock + UnitsOnOrder)<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Products; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + UnitsOnOrder)\nFROM Products; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the example above, if any of the \"UnitsOnOrder\" values are NULL, the result will be NULL.",
+      "html": "<p>In the example above, if any of the \"UnitsOnOrder\" values are NULL, the result \nwill be NULL.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL IFNULL() Function",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "IFNULL()",
+          "href": "https://www.w3schools.com/func_mysql_ifnull.asp",
+          "title": ""
+        }
+      ],
+      "text": "The MySQL IFNULL() function lets you return an alternative value if an expression is NULL.",
+      "html": "<p>The MySQL <code><a href=\"func_mysql_ifnull.asp\">IFNULL()</a></code> function lets you \nreturn an alternative value if an expression is NULL.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The example below returns 0 if the value is NULL:",
+      "html": "<p>The example below returns 0 if the value is NULL:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))\nFROM Products; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))\nFROM Products;",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))\nFROM Products; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, <span class=\"sqlnumbercolor\" style=\"color:#905\">0</span>))<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Products; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))\nFROM Products; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL COALESCE() Function",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "COALESCE()",
+          "href": "https://www.w3schools.com/func_mysql_coalesce.asp",
+          "title": ""
+        }
+      ],
+      "text": "Or we can use the COALESCE() function, like this:",
+      "html": "<p>Or we can use the <code>\n<a href=\"func_mysql_coalesce.asp\">COALESCE()</a></code> function, like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + COALESCE(UnitsOnOrder, 0))\nFROM Products; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "COALESCE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT ProductName, UnitPrice * (UnitsInStock + COALESCE(UnitsOnOrder, 0))\nFROM Products;",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + COALESCE(UnitsOnOrder, 0))\nFROM Products; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "COALESCE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> ProductName, UnitPrice * (UnitsInStock + <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">COALESCE</span>(UnitsOnOrder, <span class=\"sqlnumbercolor\" style=\"color:#905\">0</span>))<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Products; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT ProductName, UnitPrice * (UnitsInStock + COALESCE(UnitsOnOrder, 0))\nFROM Products; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "COALESCE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise ? What is this? Test your skills by answering a few questions about the topics of this page",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which function in MySQL is used to handle NULL values by providing an alternative value?",
+      "html": "<p>Which function in MySQL is used to handle <code>NULL</code> values by providing an alternative value?</p>"
+    },
+    {
+      "type": "page_quiz",
+      "metadata": {
+        "type": "quiz",
+        "question": "Which function in MySQL is used to handle NULL values by providing an alternative value?",
+        "options": [
+          {
+            "value": "0",
+            "text": "NULL()"
+          },
+          {
+            "value": "1",
+            "text": "ISNULL()"
+          },
+          {
+            "value": "2",
+            "text": "IFNULL()"
+          },
+          {
+            "value": "3",
+            "text": "NVL()"
+          }
+        ],
+        "formAction": "exercise.asp?x=xrcise_ifnull1"
+      },
+      "quiz_type": "quiz",
+      "question": "Which function in MySQL is used to handle NULL values by providing an alternative value?",
+      "options": [
+        {
+          "value": "0",
+          "text": "NULL()"
+        },
+        {
+          "value": "1",
+          "text": "ISNULL()"
+        },
+        {
+          "value": "2",
+          "text": "IFNULL()"
+        },
+        {
+          "value": "3",
+          "text": "NVL()"
+        }
+      ],
+      "form_action": "exercise.asp?x=xrcise_ifnull1",
+      "html": "<form action=\"exercise.asp?x=xrcise_ifnull1\" method=\"post\" rel=\"opener\" target=\"_blank\"><div class=\"quizoption\"><input id=\"quizoption0\" name=\"quizoption\" type=\"radio\" value=\"0\"/><label for=\"quizoption0\">NULL()</label></div><div class=\"quizoption\"><input id=\"quizoption1\" name=\"quizoption\" type=\"radio\" value=\"1\"/><label for=\"quizoption1\">ISNULL()</label></div><div class=\"quizoption\"><input id=\"quizoption2\" name=\"quizoption\" type=\"radio\" value=\"2\"/><label for=\"quizoption2\">IFNULL()</label></div><div class=\"quizoption\"><input id=\"quizoption3\" name=\"quizoption\" type=\"radio\" value=\"3\"/><label for=\"quizoption3\">NVL()</label></div><br/><button class=\"ws-btn\" type=\"submit\">Submit Answer \u00bb</button></form>"
+    }
+  ]
+}

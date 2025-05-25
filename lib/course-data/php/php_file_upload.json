@@ -1,0 +1,2940 @@
+{
+  "title": "PHP File Upload",
+  "url": "https://www.w3schools.com/php/php_file_upload.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "PHP File Upload",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With PHP, it is easy to upload files to the server.",
+      "html": "<p class=\"intro\">With PHP, it is easy to upload files to the server.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "However, with ease comes danger, so always be careful when allowing file uploads!",
+      "html": "<p class=\"intro\">However, with ease comes danger, so always be careful when \nallowing file uploads!</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Configure The \"php.ini\" File",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "First, ensure that PHP is configured to allow file uploads.",
+      "html": "<p>First, ensure that PHP is configured to allow file uploads.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In your \"php.ini\" file, search for the file_uploads directive, and set it to On:",
+      "html": "<p>In your \"php.ini\" file, search for the <code>file_uploads</code> directive, and set it to On:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "file_uploads = On",
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\nfile_uploads = On\n </div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Create The HTML Form",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Next, create an HTML form that allow users to choose the image file they want to upload:",
+      "html": "<p>Next, create an HTML form that allow users to choose the image file they want to upload:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "html",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<!DOCTYPE html>",
+            "color": "rgb(112, 128, 144)",
+            "class": "doctypecolor"
+          },
+          {
+            "text": "<html>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<body>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<form action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"upload.php\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"post\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"multipart/form-data\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"file\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"fileToUpload\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"fileToUpload\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<input type=\"submit\" value=\"Upload Image\" name=\"submit\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " type=\"submit\" value=\"Upload Image\" name=\"submit\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"submit\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"Upload Image\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"submit\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</form>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</body>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</html>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<!DOCTYPE html>\n<html>\n<body>\n\n<form action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\">\n\u00a0\u00a0Select image to upload:\n\u00a0\u00a0<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">\n\n<input type=\"submit\" value=\"Upload Image\" name=\"submit\">\n\n</form>\n\n</body>\n</html>",
+      "syntax_highlighting": [
+        {
+          "text": "<!DOCTYPE html>",
+          "color": "slategray",
+          "class": [
+            "doctypecolor"
+          ]
+        },
+        {
+          "text": "<html>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<body>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<form action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"upload.php\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"post\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"multipart/form-data\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"file\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"fileToUpload\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"fileToUpload\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<input type=\"submit\" value=\"Upload Image\" name=\"submit\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " type=\"submit\" value=\"Upload Image\" name=\"submit\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"submit\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"Upload Image\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"submit\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</form>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</body>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</html>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"doctypecolor\" style=\"color:slategray\">&lt;!DOCTYPE html&gt;</span><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>html<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>body<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>form<span class=\"attributecolor\" style=\"color:green\"> action<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"upload.php\"</span> method<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"post\"</span>\nenctype<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"multipart/form-data\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\u00a0\u00a0Select image to upload:<br/>\u00a0\u00a0<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>input<span class=\"attributecolor\" style=\"color:green\"> type<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"file\"</span> name<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"fileToUpload\"</span> id<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"fileToUpload\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n  \u00a0 <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>input<span class=\"attributecolor\" style=\"color:green\"> type<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"submit\"</span> value<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"Upload Image\"</span> name<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"submit\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/form<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/body<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/html<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<!DOCTYPE html>",
+          "color": "rgb(112, 128, 144)",
+          "class": "doctypecolor"
+        },
+        {
+          "text": "<html>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<body>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<form action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " action=\"upload.php\" method=\"post\"\nenctype=\"multipart/form-data\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"upload.php\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"post\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"multipart/form-data\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"file\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"fileToUpload\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"fileToUpload\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<input type=\"submit\" value=\"Upload Image\" name=\"submit\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " type=\"submit\" value=\"Upload Image\" name=\"submit\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"submit\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"Upload Image\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"submit\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</form>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</body>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</html>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Some rules to follow for the HTML form above:",
+      "html": "<p>Some rules to follow for the HTML form above:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Without the requirements above, the file upload will not work.",
+      "html": "<p>Without the requirements above, the file upload will not work.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Other things to notice:",
+      "html": "<p>Other things to notice:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The form above sends data to a file called \"upload.php\", which we will create next.",
+      "html": "<p>The form above sends data to a file called \"upload.php\", which we will create next.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Create The Upload File PHP Script",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The \"upload.php\" file contains the code for uploading a file:",
+      "html": "<p>The \"upload.php\" file contains the code for uploading a file:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$target_dir = \"uploads/\";$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);$uploadOk = 1;$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));// Check if image file is a actual image or fake imageif(isset($_POST[\"submit\"])) {\n  \u00a0 $check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\u00a0 if($check !== false) {\u00a0\u00a0\u00a0 echo \"File is an image - \" . $check[\"mime\"] . \".\";\u00a0\u00a0\u00a0 $uploadOk = 1;\n  \u00a0 } else {\u00a0\u00a0\u00a0\u00a0echo \"File is not an image.\";\n  \u00a0\u00a0\u00a0 $uploadOk = 0;\u00a0\u00a0}}?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"uploads/\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "$_FILES",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"fileToUpload\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"name\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check if image file is a actual image or fake image",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "isset",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "$_POST",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"submit\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "$_FILES",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"fileToUpload\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"tmp_name\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"File is an image - \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"mime\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\".\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"File is not an image.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$target_dir = \"uploads/\";$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);$uploadOk = 1;$imageFileType = \nstrtolower(pathinfo($target_file,PATHINFO_EXTENSION));// Check if image file is a actual image or fake imageif(isset($_POST[\"submit\"])) {\n$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\u00a0 if($check !== false) {\u00a0\u00a0\u00a0 echo \"File is an image - \" . $check[\"mime\"] . \".\";\u00a0\u00a0\u00a0 $uploadOk = 1;\n} else {\u00a0\u00a0\u00a0\u00a0echo \"File is not an image.\";\n$uploadOk = 0;\u00a0\u00a0}}?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$target_dir = \"uploads/\";$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);$uploadOk = 1;$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));// Check if image file is a actual image or fake imageif(isset($_POST[\"submit\"])) {\n  \u00a0 $check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\u00a0 if($check !== false) {\u00a0\u00a0\u00a0 echo \"File is an image - \" . $check[\"mime\"] . \".\";\u00a0\u00a0\u00a0 $uploadOk = 1;\n  \u00a0 } else {\u00a0\u00a0\u00a0\u00a0echo \"File is not an image.\";\n  \u00a0\u00a0\u00a0 $uploadOk = 0;\u00a0\u00a0}}?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"uploads/\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "$_FILES",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"name\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check if image file is a actual image or fake image",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "isset",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "$_POST",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"submit\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "$_FILES",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"tmp_name\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"File is an image - \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"mime\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\".\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"File is not an image.\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$target_dir = <span class=\"phpstringcolor\" style=\"color:green\">\"uploads/\"</span>;<br/>$target_file = $target_dir . basename(<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_FILES</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"fileToUpload\"</span>][<span class=\"phpstringcolor\" style=\"color:green\">\"name\"</span>]);<br/>$uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">1</span>;<br/>$imageFileType = <span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));<br/><span class=\"commentcolor\" style=\"color:slategray\">// Check if image file is a actual image or fake image<br/></span><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span>(<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">isset</span>(<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_POST</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"submit\"</span>])) {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 $check = getimagesize(<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_FILES</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"fileToUpload\"</span>][<span class=\"phpstringcolor\" style=\"color:green\">\"tmp_name\"</span>]);<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span>($check !== false) {<br/>\u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"File is an image - \"</span> . $check[<span class=\"phpstringcolor\" style=\"color:green\">\"mime\"</span>] . <span class=\"phpstringcolor\" style=\"color:green\">\".\"</span>;<br/>\u00a0\u00a0\u00a0 $uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">1</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 } <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0\u00a0\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"File is not an image.\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 $uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>;<br/>\u00a0\u00a0}<br/>}<br/><span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$target_dir = \"uploads/\";$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);$uploadOk = 1;$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));// Check if image file is a actual image or fake imageif(isset($_POST[\"submit\"])) {\n  \u00a0 $check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\u00a0 if($check !== false) {\u00a0\u00a0\u00a0 echo \"File is an image - \" . $check[\"mime\"] . \".\";\u00a0\u00a0\u00a0 $uploadOk = 1;\n  \u00a0 } else {\u00a0\u00a0\u00a0\u00a0echo \"File is not an image.\";\n  \u00a0\u00a0\u00a0 $uploadOk = 0;\u00a0\u00a0}}?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"uploads/\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "$_FILES",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"name\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check if image file is a actual image or fake image",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "isset",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "$_POST",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"submit\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "$_FILES",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"tmp_name\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"File is an image - \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"mime\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\".\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"File is not an image.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "PHP script explained:",
+      "html": "<p>PHP script explained:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p>\n</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: You will need to create a new directory called \"uploads\" in the directory where \"upload.php\" file resides. The uploaded files will be saved there.",
+      "html": "<p><strong>Note:</strong> You will need to create a new directory called \n\"uploads\" in the \ndirectory where \"upload.php\" file resides. The uploaded files \nwill be saved there.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Check if File Already Exists",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now we can add some restrictions.",
+      "html": "<p>Now we can add some restrictions.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "First, we will check if the file already exists in the \"uploads\" folder. If it does, an error message is displayed, and $uploadOk is set to 0:",
+      "html": "<p>First, we will check if the file already exists in the \"uploads\" folder. If \nit does, an error message is displayed, and $uploadOk is set to 0:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Check if file already exists\nif (file_exists($target_file)) {\n\u00a0 echo \"Sorry, file already exists.\";\n\n$uploadOk = 0;\n\n}",
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n// Check if file already exists<br/>if (file_exists($target_file)) {<br/>\u00a0 echo \"Sorry, file already exists.\";<br/>\n  \u00a0 $uploadOk = 0;<br/>\n }  </div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Limit File Size",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The file input field in our HTML form above is named \"fileToUpload\".",
+      "html": "<p>The file input field in our HTML form above is named \"fileToUpload\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now, we want to check the size of the file. If the file is larger than 500KB, an error message is displayed, and $uploadOk is set to 0:",
+      "html": "<p>Now, we want to check the size of the file. If the file is larger than 500KB, an error message is displayed, and $uploadOk is set to 0:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "phpHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Check file size\nif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\n\necho \"Sorry, your file is too large.\";\n\u00a0 $uploadOk = 0;\n\n}",
+      "language": "html",
+      "code_html": "<div class=\"w3-code phpHigh notranslate\">\n// Check file size<br/>if ($_FILES[\"fileToUpload\"][\"size\"] &gt; 500000) {<br/>\n  \u00a0 echo \"Sorry, your file is too large.\";<br/>\u00a0 $uploadOk = 0;<br/>\n } </div>",
+      "code_classes": [
+        "w3-code",
+        "phpHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "phpHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Limit File Type",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The code below only allows users to upload JPG, JPEG, PNG, and GIF files. All other file types gives an error message before setting $uploadOk to 0:",
+      "html": "<p>The code below only allows users to upload JPG, JPEG, PNG, and GIF files. All other \nfile types gives an error message before setting $uploadOk to 0:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "phpHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Allow certain file formats\nif($imageFileType != \"jpg\" && $imageFileType  != \"png\" && $imageFileType != \"jpeg\"\n&& $imageFileType != \"gif\" ) {\n\u00a0\u00a0echo \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\n\u00a0\u00a0$uploadOk = 0;\n}",
+      "language": "html",
+      "code_html": "<div class=\"w3-code phpHigh notranslate\">\n// Allow certain file formats<br/>if($imageFileType != \"jpg\" &amp;&amp; $imageFileType  != \"png\" &amp;&amp; $imageFileType != \"jpeg\"<br/>&amp;&amp; $imageFileType != \"gif\" ) {<br/>\u00a0\u00a0echo \"Sorry, only JPG, JPEG, PNG &amp; GIF files are allowed.\";<br/>\u00a0\u00a0$uploadOk = 0;<br/>}\n</div>",
+      "code_classes": [
+        "w3-code",
+        "phpHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "phpHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Complete Upload File PHP Script",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The complete \"upload.php\" file now looks like this:",
+      "html": "<p>The complete \"upload.php\" file now looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$target_dir = \"uploads/\";$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);$uploadOk = 1;$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));// Check if image file is a actual image or fake imageif(isset($_POST[\"submit\"])) {\u00a0\u00a0$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\u00a0\u00a0if($check !== false) {\u00a0\u00a0\u00a0 echo \"File is an image - \" . $check[\"mime\"] . \".\";\n  \u00a0\u00a0\u00a0 $uploadOk = 1;\u00a0\u00a0} else {\u00a0\u00a0\u00a0 echo \"File is not an image.\";\n  \u00a0\u00a0\u00a0 $uploadOk = 0;\u00a0\u00a0}}// Check if file already existsif (file_exists($target_file)) {\n  \u00a0 echo \"Sorry, file already exists.\";\u00a0\u00a0$uploadOk = 0;}\n // Check file sizeif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\u00a0\u00a0echo \"Sorry, your file is too large.\";\u00a0\u00a0$uploadOk = 0;\n }// Allow certain file formatsif($imageFileType != \"jpg\" && $imageFileType != \"png\" && $imageFileType != \"jpeg\"&& $imageFileType != \"gif\" ) {\u00a0\u00a0echo \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\u00a0\u00a0$uploadOk = 0;}// Check if $uploadOk is set to 0 by an errorif ($uploadOk == 0) {\u00a0\u00a0echo \"Sorry, your file was not uploaded.\";// if everything is ok, try to upload file} else {\n  \u00a0 if (move_uploaded_file($_FILES[\"fileToUpload\"][\"tmp_name\"], $target_file)) {\n  \u00a0\u00a0\u00a0 echo \"The file \". htmlspecialchars( basename( $_FILES[\"fileToUpload\"][\"name\"])). \n  \" has been uploaded.\";\n  \u00a0 } else {\u00a0\u00a0\u00a0 echo \"Sorry, there was an error uploading your file.\";\n  \u00a0\u00a0}}?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"uploads/\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "$_FILES",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"fileToUpload\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"name\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check if image file is a actual image or fake image",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "isset",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "$_POST",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"submit\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "$_FILES",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"fileToUpload\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"tmp_name\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"File is an image - \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"mime\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\".\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"File is not an image.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check if file already exists",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Sorry, file already exists.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check file size",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "$_FILES",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"fileToUpload\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"size\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "500000",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Sorry, your file is too large.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Allow certain file formats",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"jpg\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"png\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"jpeg\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"gif\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check if $uploadOk is set to 0 by an error",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Sorry, your file was not uploaded.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// if everything is ok, try to upload file",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "$_FILES",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"fileToUpload\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"tmp_name\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"The file \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "$_FILES",
+            "color": "rgb(218, 165, 32)",
+            "class": "phpglobalcolor"
+          },
+          {
+            "text": "\"fileToUpload\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"name\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\" has been uploaded.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Sorry, there was an error uploading your file.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$target_dir = \"uploads/\";$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);$uploadOk = 1;$imageFileType = \nstrtolower(pathinfo($target_file,PATHINFO_EXTENSION));// Check if image file is a actual image or fake imageif(isset($_POST[\"submit\"])) {\u00a0\u00a0$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\u00a0\u00a0if($check !== false) {\u00a0\u00a0\u00a0 echo \"File is an image - \" . $check[\"mime\"] . \".\";\n$uploadOk = 1;\u00a0\u00a0} else {\u00a0\u00a0\u00a0 echo \"File is not an image.\";\n$uploadOk = 0;\u00a0\u00a0}}// Check if file already existsif (file_exists($target_file)) {\necho \"Sorry, file already exists.\";\u00a0\u00a0$uploadOk = 0;}\n// Check file sizeif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\u00a0\u00a0echo \"Sorry, your file is too large.\";\u00a0\u00a0$uploadOk = 0;\n}// Allow certain file formatsif($imageFileType != \"jpg\" && $imageFileType != \"png\" && $imageFileType != \"jpeg\"&& $imageFileType != \"gif\" ) {\u00a0\u00a0echo \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\u00a0\u00a0$uploadOk = 0;}// Check if $uploadOk is set to 0 by an errorif ($uploadOk == 0) {\u00a0\u00a0echo \"Sorry, your file was not uploaded.\";// if everything is ok, try to upload file} else {\nif (move_uploaded_file($_FILES[\"fileToUpload\"][\"tmp_name\"], $target_file)) {\necho \"The file \". htmlspecialchars( basename( $_FILES[\"fileToUpload\"][\"name\"])).\n\" has been uploaded.\";\n} else {\u00a0\u00a0\u00a0 echo \"Sorry, there was an error uploading your file.\";\n}}?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$target_dir = \"uploads/\";$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);$uploadOk = 1;$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));// Check if image file is a actual image or fake imageif(isset($_POST[\"submit\"])) {\u00a0\u00a0$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\u00a0\u00a0if($check !== false) {\u00a0\u00a0\u00a0 echo \"File is an image - \" . $check[\"mime\"] . \".\";\n  \u00a0\u00a0\u00a0 $uploadOk = 1;\u00a0\u00a0} else {\u00a0\u00a0\u00a0 echo \"File is not an image.\";\n  \u00a0\u00a0\u00a0 $uploadOk = 0;\u00a0\u00a0}}// Check if file already existsif (file_exists($target_file)) {\n  \u00a0 echo \"Sorry, file already exists.\";\u00a0\u00a0$uploadOk = 0;}\n // Check file sizeif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\u00a0\u00a0echo \"Sorry, your file is too large.\";\u00a0\u00a0$uploadOk = 0;\n }// Allow certain file formatsif($imageFileType != \"jpg\" && $imageFileType != \"png\" && $imageFileType != \"jpeg\"&& $imageFileType != \"gif\" ) {\u00a0\u00a0echo \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\u00a0\u00a0$uploadOk = 0;}// Check if $uploadOk is set to 0 by an errorif ($uploadOk == 0) {\u00a0\u00a0echo \"Sorry, your file was not uploaded.\";// if everything is ok, try to upload file} else {\n  \u00a0 if (move_uploaded_file($_FILES[\"fileToUpload\"][\"tmp_name\"], $target_file)) {\n  \u00a0\u00a0\u00a0 echo \"The file \". htmlspecialchars( basename( $_FILES[\"fileToUpload\"][\"name\"])). \n \" has been uploaded.\";\n  \u00a0 } else {\u00a0\u00a0\u00a0 echo \"Sorry, there was an error uploading your file.\";\n  \u00a0\u00a0}}?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"uploads/\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "$_FILES",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"name\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check if image file is a actual image or fake image",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "isset",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "$_POST",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"submit\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "$_FILES",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"tmp_name\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"File is an image - \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"mime\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\".\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"File is not an image.\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check if file already exists",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Sorry, file already exists.\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check file size",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "$_FILES",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"size\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "500000",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Sorry, your file is too large.\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Allow certain file formats",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"jpg\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"png\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"jpeg\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"gif\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check if $uploadOk is set to 0 by an error",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Sorry, your file was not uploaded.\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// if everything is ok, try to upload file",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "$_FILES",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"tmp_name\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"The file \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "$_FILES",
+          "color": "goldenrod",
+          "class": [
+            "phpglobalcolor"
+          ]
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"name\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\" has been uploaded.\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Sorry, there was an error uploading your file.\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$target_dir = <span class=\"phpstringcolor\" style=\"color:green\">\"uploads/\"</span>;<br/>$target_file = $target_dir . basename(<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_FILES</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"fileToUpload\"</span>][<span class=\"phpstringcolor\" style=\"color:green\">\"name\"</span>]);<br/>$uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">1</span>;<br/>$imageFileType = <span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Check if image file is a actual image or fake image<br/></span><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span>(<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">isset</span>(<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_POST</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"submit\"</span>])) {<br/>\u00a0\u00a0$check = getimagesize(<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_FILES</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"fileToUpload\"</span>][<span class=\"phpstringcolor\" style=\"color:green\">\"tmp_name\"</span>]);<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span>($check !== false) {<br/>\u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"File is an image - \"</span> . $check[<span class=\"phpstringcolor\" style=\"color:green\">\"mime\"</span>] . <span class=\"phpstringcolor\" style=\"color:green\">\".\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 $uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">1</span>;<br/>\u00a0\u00a0} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"File is not an image.\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 $uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>;<br/>\u00a0\u00a0}<br/>}<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Check if file already exists<br/></span><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (file_exists($target_file)) {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Sorry, file already exists.\"</span>;<br/>\u00a0\u00a0$uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>;<br/>}<br/><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Check file size<br/></span><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_FILES</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"fileToUpload\"</span>][<span class=\"phpstringcolor\" style=\"color:green\">\"size\"</span>] &gt; <span class=\"phpnumbercolor\" style=\"color:#905\">500000</span>) {<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Sorry, your file is too large.\"</span>;<br/>\u00a0\u00a0$uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> }<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Allow certain file formats<br/></span><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span>($imageFileType != <span class=\"phpstringcolor\" style=\"color:green\">\"jpg\"</span> &amp;&amp; $imageFileType != <span class=\"phpstringcolor\" style=\"color:green\">\"png\"</span> &amp;&amp; $imageFileType != <span class=\"phpstringcolor\" style=\"color:green\">\"jpeg\"</span><br/>&amp;&amp; $imageFileType != <span class=\"phpstringcolor\" style=\"color:green\">\"gif\"</span> ) {<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Sorry, only JPG, JPEG, PNG &amp; GIF files are allowed.\"</span>;<br/>\u00a0\u00a0$uploadOk = <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>;<br/>}<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Check if $uploadOk is set to 0 by an error<br/></span><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($uploadOk == <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>) {<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Sorry, your file was not uploaded.\"</span>;<br/><span class=\"commentcolor\" style=\"color:slategray\">// if everything is ok, try to upload file<br/></span>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (move_uploaded_file(<span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_FILES</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"fileToUpload\"</span>][<span class=\"phpstringcolor\" style=\"color:green\">\"tmp_name\"</span>], $target_file)) {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"The file \"</span>. htmlspecialchars( basename( <span class=\"phpglobalcolor\" style=\"color:goldenrod\">$_FILES</span>[<span class=\"phpstringcolor\" style=\"color:green\">\"fileToUpload\"</span>][<span class=\"phpstringcolor\" style=\"color:green\">\"name\"</span>])). <span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpstringcolor\" style=\"color:green\">\" has been uploaded.\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 } <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Sorry, there was an error uploading your file.\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0}<br/>}<br/><span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$target_dir = \"uploads/\";$target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);$uploadOk = 1;$imageFileType = \n  strtolower(pathinfo($target_file,PATHINFO_EXTENSION));// Check if image file is a actual image or fake imageif(isset($_POST[\"submit\"])) {\u00a0\u00a0$check = getimagesize($_FILES[\"fileToUpload\"][\"tmp_name\"]);\u00a0\u00a0if($check !== false) {\u00a0\u00a0\u00a0 echo \"File is an image - \" . $check[\"mime\"] . \".\";\n  \u00a0\u00a0\u00a0 $uploadOk = 1;\u00a0\u00a0} else {\u00a0\u00a0\u00a0 echo \"File is not an image.\";\n  \u00a0\u00a0\u00a0 $uploadOk = 0;\u00a0\u00a0}}// Check if file already existsif (file_exists($target_file)) {\n  \u00a0 echo \"Sorry, file already exists.\";\u00a0\u00a0$uploadOk = 0;}\n // Check file sizeif ($_FILES[\"fileToUpload\"][\"size\"] > 500000) {\u00a0\u00a0echo \"Sorry, your file is too large.\";\u00a0\u00a0$uploadOk = 0;\n }// Allow certain file formatsif($imageFileType != \"jpg\" && $imageFileType != \"png\" && $imageFileType != \"jpeg\"&& $imageFileType != \"gif\" ) {\u00a0\u00a0echo \"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\";\u00a0\u00a0$uploadOk = 0;}// Check if $uploadOk is set to 0 by an errorif ($uploadOk == 0) {\u00a0\u00a0echo \"Sorry, your file was not uploaded.\";// if everything is ok, try to upload file} else {\n  \u00a0 if (move_uploaded_file($_FILES[\"fileToUpload\"][\"tmp_name\"], $target_file)) {\n  \u00a0\u00a0\u00a0 echo \"The file \". htmlspecialchars( basename( $_FILES[\"fileToUpload\"][\"name\"])). \n  \" has been uploaded.\";\n  \u00a0 } else {\u00a0\u00a0\u00a0 echo \"Sorry, there was an error uploading your file.\";\n  \u00a0\u00a0}}?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"uploads/\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "$_FILES",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"name\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check if image file is a actual image or fake image",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "isset",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "$_POST",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"submit\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "$_FILES",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"tmp_name\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"File is an image - \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"mime\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\".\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"File is not an image.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check if file already exists",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Sorry, file already exists.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check file size",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "$_FILES",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"size\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "500000",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Sorry, your file is too large.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Allow certain file formats",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"jpg\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"png\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"jpeg\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"gif\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Sorry, only JPG, JPEG, PNG & GIF files are allowed.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check if $uploadOk is set to 0 by an error",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Sorry, your file was not uploaded.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// if everything is ok, try to upload file",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "$_FILES",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"tmp_name\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"The file \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "$_FILES",
+          "color": "rgb(218, 165, 32)",
+          "class": "phpglobalcolor"
+        },
+        {
+          "text": "\"fileToUpload\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"name\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\" has been uploaded.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Sorry, there was an error uploading your file.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Complete PHP Filesystem Reference",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "PHP Filesystem Reference",
+          "href": "https://www.w3schools.com/php_ref_filesystem.asp",
+          "title": ""
+        }
+      ],
+      "text": "For a complete reference of filesystem functions, go to our complete PHP Filesystem Reference .",
+      "html": "<p>For a complete reference of filesystem functions, go to our complete\n<a href=\"php_ref_filesystem.asp\">PHP Filesystem Reference</a>.</p>"
+    }
+  ]
+}

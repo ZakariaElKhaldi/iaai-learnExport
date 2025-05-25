@@ -1,0 +1,562 @@
+{
+  "title": "Django Update Model",
+  "url": "https://www.w3schools.com/django/django_update_model.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Django Update Model",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Add Fields in the Model",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To add a field to a table after it is created, open the models.py file, and make your changes:",
+      "html": "<p>To add a field to a table after it is created, open the\n<code>models.py</code> file, and make your changes:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": true
+      },
+      "code": "from\ndjango\n.\ndb\nimport\nmodels\n\n\nclass\n\nMember\n(\nmodels\n.\nModel\n)\n:\n\nfirstname\n=\nmodels\n.\nCharField\n(\nmax_length\n=\n255\n)\n\nlastname\n=\nmodels\n.\nCharField\n(\nmax_length\n=\n255\n)\n\nphone\n=\nmodels\n.\nIntegerField\n(\n)\n\njoined_date\n=\nmodels\n.\nDateField\n(\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-from\">from</span> django<span class=\"token punctuation\">.</span>db <span class=\"token keyword keyword-import\">import</span> models\n\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Member</span><span class=\"token punctuation\">(</span>models<span class=\"token punctuation\">.</span>Model<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n  firstname <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">CharField</span><span class=\"token punctuation\">(</span>max_length<span class=\"token operator\">=</span><span class=\"token number\">255</span><span class=\"token punctuation\">)</span>\n  lastname <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">CharField</span><span class=\"token punctuation\">(</span>max_length<span class=\"token operator\">=</span><span class=\"token number\">255</span><span class=\"token punctuation\">)</span>\n  phone <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">IntegerField</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\n  joined_date <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">DateField</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see, we want to add phone and joined_date to our Member Model.",
+      "html": "<p>As you can see, we want to add <code>phone</code> and\n<code>joined_date</code> to our Member Model.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is a change in the Model's structure, and therefor we have to make a migration to tell Django that it has to update the database:",
+      "html": "<p>This is a change in the Model's structure, and therefor we have to make a migration\nto tell Django that it has to update the database:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "python manage.py makemigrations members",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\npython manage.py makemigrations members\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: Make sure you are back in the virtual environment before running the command.",
+      "html": "<p><b>Note:</b> Make sure you are back in the virtual environment before running the command.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The command above will result in a prompt, because we try to add fields that are not allowed to be null, to a table that already contains records.",
+      "html": "<p>The command above will result in a prompt, because we try to add fields that \nare not allowed to be null, to a table that already contains records.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see, Django asks if we want to provide the fields with a specific value, or if we want to stop the migration and fix it in the model:",
+      "html": "<p>As you can see, Django asks if we want to provide the fields with a specific \nvalue, or if we want to stop the migration and fix it in the model:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "python manage.py makemigrations members\n\nYou are trying to add a non-nullable field 'joined_date' to members without a default;\nwe can't do that (the database needs something to populate existing rows).\n\nPlease select a fix:\n\n1) Provide a one-off default now (will be set on all existing rows with a null value for this column)\n\n2) Quit, and let me add a default in models.py\n\nSelect an option:",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\npython manage.py makemigrations members<br/>\nYou are trying to add a non-nullable field 'joined_date' to members without a default;\nwe can't do that (the database needs something to populate existing rows).<br/>\nPlease select a fix:<br/>\n\u00a01) Provide a one-off default now (will be set on all existing rows with a null value for this column)<br/>\n\u00a02) Quit, and let me add a default in models.py<br/>\nSelect an option: \n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "I will select option 2, and open the models.py file again and allow NULL values for the two new fields:",
+      "html": "<p>I will select option 2, and open the <code>models.py</code> file again and allow NULL values for the two new fields:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": true
+      },
+      "code": "from\ndjango\n.\ndb\nimport\nmodels\n\n\nclass\n\nMember\n(\nmodels\n.\nModel\n)\n:\n\nfirstname\n=\nmodels\n.\nCharField\n(\nmax_length\n=\n255\n)\n\nlastname\n=\nmodels\n.\nCharField\n(\nmax_length\n=\n255\n)\n\nphone\n=\nmodels\n.\nIntegerField\n(\nnull\n=\nTrue\n)\n\njoined_date\n=\nmodels\n.\nDateField\n(\nnull\n=\nTrue\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-from\">from</span> django<span class=\"token punctuation\">.</span>db <span class=\"token keyword keyword-import\">import</span> models\n\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Member</span><span class=\"token punctuation\">(</span>models<span class=\"token punctuation\">.</span>Model<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n  firstname <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">CharField</span><span class=\"token punctuation\">(</span>max_length<span class=\"token operator\">=</span><span class=\"token number\">255</span><span class=\"token punctuation\">)</span>\n  lastname <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">CharField</span><span class=\"token punctuation\">(</span>max_length<span class=\"token operator\">=</span><span class=\"token number\">255</span><span class=\"token punctuation\">)</span>\n  phone <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">IntegerField</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-null\">null</span><span class=\"token operator\">=</span>True<span class=\"token punctuation\">)</span>\n  joined_date <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">DateField</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-null\">null</span><span class=\"token operator\">=</span>True<span class=\"token punctuation\">)</span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And make the migration once again:",
+      "html": "<p>And make the migration once again:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "python manage.py makemigrations members",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\npython manage.py makemigrations members\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which will result in this:",
+      "html": "<p>Which will result in this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Migrations for 'members':\n\nmembers\\migrations\\0002_member_joined_date_member_phone.py\n\n- Add field\njoined_date to member\n\n- Add field\nphone to member",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\nMigrations for 'members':<br/>\n\u00a0\u00a0members\\migrations\\0002_member_joined_date_member_phone.py<br/>\n\u00a0\u00a0\u00a0\u00a0- Add field \n  joined_date to member<br/>\n\u00a0\u00a0\u00a0\u00a0- Add field \n  phone to member\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the migrate command:",
+      "html": "<p>Run the migrate command:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "python manage.py migrate",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\npython manage.py migrate\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which will result in this output:",
+      "html": "<p>Which will result in this output:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Operations to perform:\n\nApply all migrations: admin, auth, contenttypes, members, sessions\n\nRunning migrations:\n\nApplying members.0002_member_joined_date_member_phone... OK\n\n\n\n(myworld) C:\\Users\\\\myworld\\my_tennis_club>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\nOperations to perform:<br/>\n\u00a0\u00a0Apply all migrations: admin, auth, contenttypes, members, sessions<br/>\nRunning migrations:<br/>\n\u00a0\u00a0Applying members.0002_member_joined_date_member_phone... OK<br/>\n<br/>\n(myworld) C:\\Users\\<em>Your Name</em>\\myworld\\my_tennis_club&gt;\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Insert Data",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Update Data chapter",
+          "href": "https://www.w3schools.com/django_update_data.php",
+          "title": ""
+        }
+      ],
+      "text": "We can insert data to the two new fields with the same approach as we did in the Update Data chapter :",
+      "html": "<p>We can insert data to the two new fields with the same approach as we did in the <a href=\"django_update_data.php\">Update Data chapter</a>:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "First we enter the Python Shell:",
+      "html": "<p>First we enter the Python Shell:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "python manage.py shell",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\npython manage.py shell\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now we are in the shell, the result should be something like this:",
+      "html": "<p>Now we are in the shell, the result should be something like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Python 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)] on win32\n\nType \"help\", \"copyright\", \"credits\" or \"license\" for more information.\n\n(InteractiveConsole)\n\n>>>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\nPython 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)] on win32<br/>\nType \"help\", \"copyright\", \"credits\" or \"license\" for more information.<br/>\n(InteractiveConsole)<br/>\n&gt;&gt;&gt;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "At the bottom, after the three >>> write the following (and hit [enter] for each line):",
+      "html": "<p>At the bottom, after the three <code>&gt;&gt;&gt;</code> write the following (and hit [enter] for each line):</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": ">>> from members.models import Member\n\n>>> x = Member.objects.all()[0]\n\n>>> x.phone = 5551234\n\n>>> x.joined_date = '2022-01-05'\n\n>>> x.save()",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n&gt;&gt;&gt; from members.models import Member<br/>\n&gt;&gt;&gt; x = Member.objects.all()[0]<br/>\n&gt;&gt;&gt; x.phone = 5551234<br/>\n&gt;&gt;&gt; x.joined_date = '2022-01-05'<br/>\n&gt;&gt;&gt; x.save()\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This will insert a phone number and a date in the Member Model, at least for the first record, the four remaining records will for now be left empty. We will deal with them later in the tutorial.",
+      "html": "<p>This will insert a phone number and a date in the Member Model, at least for the first record, the four remaining\nrecords will for now be left empty. We will deal with them later in the tutorial.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Execute this command to see if the Member table got updated:",
+      "html": "<p>Execute this command to see if the Member table got updated:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": ">>> Member.objects.all().values()",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n&gt;&gt;&gt; Member.objects.all().values()\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The result should look like this:",
+      "html": "<p>The result should look like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<QuerySet [\n\n{'id': 1, 'firstname': 'Emil', 'lastname': 'Refsnes', 'phone': 5551234, 'joined_date': datetime.date(2022, 1, 5)},\n\n{'id': 2, 'firstname': 'Tobias', 'lastname': 'Refsnes', 'phone': None, 'joined_date': None},\n\n{'id': 3, 'firstname': 'Linus', 'lastname': 'Refsnes', 'phone': None, 'joined_date': None},\n\n{'id': 4, 'firstname': 'Lene', 'lastname': 'Refsnes', 'phone': None, 'joined_date': None},\n\n{'id': 5, 'firstname': 'Stalikken', 'lastname': 'Refsnes', 'phone': None, 'joined_date': None}]>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\" style=\"overflow:auto;white-space:nowrap;\">\n&lt;QuerySet [<br/>\n{'id': 1, 'firstname': 'Emil', 'lastname': 'Refsnes', 'phone': 5551234, 'joined_date': datetime.date(2022, 1, 5)},<br/>\n{'id': 2, 'firstname': 'Tobias', 'lastname': 'Refsnes', 'phone': None, 'joined_date': None},<br/>\n{'id': 3, 'firstname': 'Linus', 'lastname': 'Refsnes', 'phone': None, 'joined_date': None},<br/>\n{'id': 4, 'firstname': 'Lene', 'lastname': 'Refsnes', 'phone': None, 'joined_date': None},<br/>\n{'id': 5, 'firstname': 'Stalikken', 'lastname': 'Refsnes', 'phone': None, 'joined_date': None}]&gt;\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise ? What is this? Test your skills by answering a few questions about the topics of this page",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "What is a correct syntax for adding a field that allows NULL values?",
+      "html": "<p>What is a correct syntax for adding a field that allows NULL values?</p>"
+    }
+  ]
+}

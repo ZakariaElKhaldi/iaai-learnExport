@@ -1,0 +1,2983 @@
+{
+  "title": "PHP MySQL Select Data With ORDER BY Clause",
+  "url": "https://www.w3schools.com/php/php_mysql_select_orderby.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "PHP MySQL Use The ORDER BY Clause",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Select and Order Data From a MySQL Database",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The ORDER BY clause is used to sort the result-set in ascending or descending order.",
+      "html": "<p>The ORDER BY clause is used to sort the result-set in ascending or descending \norder.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The ORDER BY clause sorts the records in ascending order by default. To sort the records in descending order, use the DESC keyword.",
+      "html": "<p>The ORDER BY clause sorts the records in ascending order by default. To sort \nthe records in descending order, use the DESC keyword.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate\">\n<div>\nSELECT column_name(s)\nFROM table_name ORDER BY column_name(s) ASC|DESC\u00a0\n</div></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "SQL tutorial",
+          "href": "https://www.w3schools.com/sql/default.asp",
+          "title": ""
+        }
+      ],
+      "text": "To learn more about SQL, please visit our SQL tutorial .",
+      "html": "<p>To learn more about SQL, please visit our <a href=\"/sql/default.asp\">SQL tutorial</a>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Select and Order Data With MySQLi",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following example selects the id, firstname and lastname columns from the MyGuests table. The records will be ordered by the lastname column:",
+      "html": "<p>The following example selects the id, firstname and lastname columns from the MyGuests \ntable. The records will be ordered by the lastname column:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);// Check connectionif ($conn->connect_error) {\n  \u00a0 die(\"Connection failed: \" . $conn->connect_error);\n } $sql = \"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\";$result = $conn->query($sql);if ($result->num_rows > 0) {\u00a0\u00a0// output data of each row\u00a0\u00a0while($row = $result->fetch_assoc()) {\n  \u00a0\u00a0\u00a0 echo \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n  \u00a0 }} else {\u00a0 echo \"0 results\";}\n $conn->close();\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDB\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// output data of each row",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"id: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"id\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\" - Name: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"firstname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\" \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"lastname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"<br>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"0 results\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);// Check connectionif ($conn->connect_error) {\ndie(\"Connection failed: \" . $conn->connect_error);\n} $sql = \"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\";$result = $conn->query($sql);if ($result->num_rows > 0) {\u00a0\u00a0// output data of each row\u00a0\u00a0while($row = $result->fetch_assoc()) {\necho \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}} else {\u00a0 echo \"0 results\";}\n$conn->close();\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);// Check connectionif ($conn->connect_error) {\n  \u00a0 die(\"Connection failed: \" . $conn->connect_error);\n } $sql = \"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\";$result = $conn->query($sql);if ($result->num_rows > 0) {\u00a0\u00a0// output data of each row\u00a0\u00a0while($row = $result->fetch_assoc()) {\n  \u00a0\u00a0\u00a0 echo \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n  \u00a0 }} else {\u00a0 echo \"0 results\";}\n $conn->close();\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// output data of each row",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"id: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"id\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\" - Name: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"firstname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\" \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"lastname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"0 results\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDB\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>$conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> mysqli($servername, $username, $password, $dbname);<br/><span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($conn-&gt;connect_error) {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . $conn-&gt;connect_error);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> } <br/><br/>$sql = <span class=\"phpstringcolor\" style=\"color:green\">\"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\"</span>;<br/>$result = $conn-&gt;query($sql);<br/><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($result-&gt;num_rows &gt; <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>) {<br/>\u00a0\u00a0<span class=\"commentcolor\" style=\"color:slategray\">// output data of each row<br/></span>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">while</span>($row = $result-&gt;fetch_assoc()) {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"id: \"</span> . $row[<span class=\"phpstringcolor\" style=\"color:green\">\"id\"</span>]. <span class=\"phpstringcolor\" style=\"color:green\">\" - Name: \"</span> . $row[<span class=\"phpstringcolor\" style=\"color:green\">\"firstname\"</span>]. <span class=\"phpstringcolor\" style=\"color:green\">\" \"</span> . $row[<span class=\"phpstringcolor\" style=\"color:green\">\"lastname\"</span>]. <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;br&gt;\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 }<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"0 results\"</span>;<br/>}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> $conn-&gt;close();<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);// Check connectionif ($conn->connect_error) {\n  \u00a0 die(\"Connection failed: \" . $conn->connect_error);\n } $sql = \"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\";$result = $conn->query($sql);if ($result->num_rows > 0) {\u00a0\u00a0// output data of each row\u00a0\u00a0while($row = $result->fetch_assoc()) {\n  \u00a0\u00a0\u00a0 echo \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n  \u00a0 }} else {\u00a0 echo \"0 results\";}\n $conn->close();\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// output data of each row",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"id: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"id\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\" - Name: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"firstname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\" \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"lastname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"0 results\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Code lines to explain from the example above:",
+      "html": "<p>Code lines to explain from the example above:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "First, we set up the SQL query that selects the id, firstname and lastname columns from the MyGuests table. The records will be ordered by the lastname column. The next line of code runs the query and puts the resulting data into a variable called $result.",
+      "html": "<p>First, we set up the SQL query that selects the id, firstname and lastname columns from the MyGuests \ntable. The records will be ordered by the lastname column. The next line of code runs the query and puts the resulting data into a \nvariable called $result.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then, the function num_rows() checks if there are more than zero rows returned.",
+      "html": "<p>Then, the <code>function num_rows()</code> checks if there are more than zero \nrows returned.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If there are more than zero rows returned, the function fetch_assoc() puts all the results into an associative array that we can loop through. The while() loop loops through the result set and outputs the data from the id, firstname and lastname columns.",
+      "html": "<p>If there are more than zero rows returned, the \nfunction <code>fetch_assoc()</code> puts all the results into an associative array that we can loop \nthrough. The <code>while()</code> loop loops through the result set and outputs the data from \nthe id, firstname and lastname columns.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following example shows the same as the example above, in the MySQLi procedural way:",
+      "html": "<p>The following example shows the same as the example above, in the MySQLi procedural way:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\";$result = mysqli_query($conn, $sql);if (mysqli_num_rows($result) > 0) {\n  \u00a0 // output data of each row\u00a0 while($row = mysqli_fetch_assoc($result)) {\u00a0\u00a0\u00a0\u00a0echo \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n  \u00a0\u00a0}} else {\u00a0\u00a0echo \"0 results\";}\n mysqli_close($conn);\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDB\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// output data of each row",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"id: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"id\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\" - Name: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"firstname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\" \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"lastname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"<br>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"0 results\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());}$sql = \"SELECT id, firstname, lastname FROM MyGuests\nORDER BY lastname\";$result = mysqli_query($conn, $sql);if (mysqli_num_rows($result) > 0) {\n// output data of each row\u00a0 while($row = mysqli_fetch_assoc($result)) {\u00a0\u00a0\u00a0\u00a0echo \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n}} else {\u00a0\u00a0echo \"0 results\";}\nmysqli_close($conn);\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\";$result = mysqli_query($conn, $sql);if (mysqli_num_rows($result) > 0) {\n  \u00a0 // output data of each row\u00a0 while($row = mysqli_fetch_assoc($result)) {\u00a0\u00a0\u00a0\u00a0echo \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n  \u00a0\u00a0}} else {\u00a0\u00a0echo \"0 results\";}\n mysqli_close($conn);\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// output data of each row",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"id: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"id\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\" - Name: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"firstname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\" \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"lastname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"0 results\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDB\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>\n$conn = mysqli_connect($servername, $username, $password, $dbname);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (!$conn)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . mysqli_connect_error());<br/>}<br/><br/>$sql = <span class=\"phpstringcolor\" style=\"color:green\">\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"</span>;<br/>$result = mysqli_query($conn, $sql);<br/><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (mysqli_num_rows($result) &gt; <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>) {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// output data of each row<br/></span>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">while</span>($row = mysqli_fetch_assoc($result)) {<br/>\u00a0\u00a0\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"id: \"</span> . $row[<span class=\"phpstringcolor\" style=\"color:green\">\"id\"</span>]. <span class=\"phpstringcolor\" style=\"color:green\">\" - Name: \"</span> . $row[<span class=\"phpstringcolor\" style=\"color:green\">\"firstname\"</span>]. <span class=\"phpstringcolor\" style=\"color:green\">\" \"</span> . $row[<span class=\"phpstringcolor\" style=\"color:green\">\"lastname\"</span>]. <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;br&gt;\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0}<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"0 results\"</span>;<br/>}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>mysqli_close($conn);<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\";$result = mysqli_query($conn, $sql);if (mysqli_num_rows($result) > 0) {\n  \u00a0 // output data of each row\u00a0 while($row = mysqli_fetch_assoc($result)) {\u00a0\u00a0\u00a0\u00a0echo \"id: \" . $row[\"id\"]. \" - Name: \" . $row[\"firstname\"]. \" \" . $row[\"lastname\"]. \"<br>\";\n  \u00a0\u00a0}} else {\u00a0\u00a0echo \"0 results\";}\n mysqli_close($conn);\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// output data of each row",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"id: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"id\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\" - Name: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"firstname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\" \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"lastname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"0 results\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You can also put the result in an HTML table:",
+      "html": "<p>You can also put the result in an HTML table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);// Check connectionif ($conn->connect_error) {\n  \u00a0 die(\"Connection failed: \" . $conn->connect_error);\n } $sql = \"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\";$result = $conn->query($sql);if ($result->num_rows > 0) {\u00a0\u00a0echo \"<table><tr><th>ID</th><th>Name</th></tr>\";\n  \u00a0 // output data of each row\u00a0 while($row = $result->fetch_assoc()) {\u00a0\u00a0\u00a0 echo \"<tr><td>\".$row[\"id\"].\"</td><td>\".$row[\"firstname\"].\" \".$row[\"lastname\"].\"</td></tr>\";\n  \u00a0\u00a0}\u00a0\u00a0echo \"</table>\";} else {\u00a0 echo \"0 results\";}\n $conn->close();\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDB\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"<table><tr><th>ID</th><th>Name</th></tr>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// output data of each row",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"<tr><td>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"id\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"</td><td>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"firstname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\" \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"lastname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"</td></tr>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"</table>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"0 results\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);// Check connectionif ($conn->connect_error) {\ndie(\"Connection failed: \" . $conn->connect_error);\n} $sql = \"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\";$result = $conn->query($sql);if ($result->num_rows > 0) {\u00a0\u00a0echo \"<table><tr><th>ID</th><th>Name</th></tr>\";\n// output data of each row\u00a0 while($row = $result->fetch_assoc()) {\u00a0\u00a0\u00a0 echo \"<tr><td>\".$row[\"id\"].\"</td><td>\".$row[\"firstname\"].\" \".$row[\"lastname\"].\"</td></tr>\";\n}\u00a0\u00a0echo \"</table>\";} else {\u00a0 echo \"0 results\";}\n$conn->close();\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);// Check connectionif ($conn->connect_error) {\n  \u00a0 die(\"Connection failed: \" . $conn->connect_error);\n } $sql = \"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\";$result = $conn->query($sql);if ($result->num_rows > 0) {\u00a0\u00a0echo \"<table><tr><th>ID</th><th>Name</th></tr>\";\n  \u00a0 // output data of each row\u00a0 while($row = $result->fetch_assoc()) {\u00a0\u00a0\u00a0 echo \"<tr><td>\".$row[\"id\"].\"</td><td>\".$row[\"firstname\"].\" \".$row[\"lastname\"].\"</td></tr>\";\n  \u00a0\u00a0}\u00a0\u00a0echo \"</table>\";} else {\u00a0 echo \"0 results\";}\n $conn->close();\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<table><tr><th>ID</th><th>Name</th></tr>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// output data of each row",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<tr><td>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"id\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"</td><td>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"firstname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\" \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"lastname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"</td></tr>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"</table>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"0 results\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDB\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>$conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> mysqli($servername, $username, $password, $dbname);<br/><span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($conn-&gt;connect_error) {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . $conn-&gt;connect_error);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> } <br/><br/>$sql = <span class=\"phpstringcolor\" style=\"color:green\">\"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\"</span>;<br/>$result = $conn-&gt;query($sql);<br/><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($result-&gt;num_rows &gt; <span class=\"phpnumbercolor\" style=\"color:#905\">0</span>) {<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;table&gt;&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;/tr&gt;\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// output data of each row<br/></span>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">while</span>($row = $result-&gt;fetch_assoc()) {<br/>\u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;tr&gt;&lt;td&gt;\"</span>.$row[<span class=\"phpstringcolor\" style=\"color:green\">\"id\"</span>].<span class=\"phpstringcolor\" style=\"color:green\">\"&lt;/td&gt;&lt;td&gt;\"</span>.$row[<span class=\"phpstringcolor\" style=\"color:green\">\"firstname\"</span>].<span class=\"phpstringcolor\" style=\"color:green\">\" \"</span>.$row[<span class=\"phpstringcolor\" style=\"color:green\">\"lastname\"</span>].<span class=\"phpstringcolor\" style=\"color:green\">\"&lt;/td&gt;&lt;/tr&gt;\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0}<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;/table&gt;\"</span>;<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"0 results\"</span>;<br/>}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> $conn-&gt;close();<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);// Check connectionif ($conn->connect_error) {\n  \u00a0 die(\"Connection failed: \" . $conn->connect_error);\n } $sql = \"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\";$result = $conn->query($sql);if ($result->num_rows > 0) {\u00a0\u00a0echo \"<table><tr><th>ID</th><th>Name</th></tr>\";\n  \u00a0 // output data of each row\u00a0 while($row = $result->fetch_assoc()) {\u00a0\u00a0\u00a0 echo \"<tr><td>\".$row[\"id\"].\"</td><td>\".$row[\"firstname\"].\" \".$row[\"lastname\"].\"</td></tr>\";\n  \u00a0\u00a0}\u00a0\u00a0echo \"</table>\";} else {\u00a0 echo \"0 results\";}\n $conn->close();\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"SELECT id, firstname, lastname FROM MyGuests ORDER BY lastname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"<table><tr><th>ID</th><th>Name</th></tr>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// output data of each row",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"<tr><td>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"id\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"</td><td>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"firstname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\" \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"lastname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"</td></tr>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"</table>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"0 results\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Select Data With PDO (+ Prepared Statements)",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following example uses prepared statements.",
+      "html": "<p>The following example uses prepared statements.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here we select the id, firstname and lastname columns from the MyGuests table. The records will be ordered by the lastname column, and it will be displayed in an HTML table:",
+      "html": "<p>Here we select the id, firstname and lastname columns from the MyGuests table. \nThe records will be ordered by the lastname column, and it will be \ndisplayed in an HTML table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?phpecho \"<table style='border: solid 1px black;'>\";\n echo \"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\";class TableRows extends RecursiveIteratorIterator {\n \u00a0 function __construct($it) { \u00a0\u00a0\u00a0 parent::__construct($it, self::LEAVES_ONLY); \n  \u00a0\u00a0}\n \u00a0\u00a0function current() {\u00a0\u00a0\u00a0\u00a0return \"<td style='width:150px;border:1px solid black;'>\" . parent::current(). \"</td>\";\n  \u00a0\u00a0}\u00a0 function beginChildren() { \u00a0\u00a0\u00a0 echo \"<tr>\"; \n  \u00a0\u00a0} \u00a0\u00a0function endChildren() { \u00a0\u00a0\u00a0 echo \"</tr>\" . \"\\n\";\n  \u00a0\u00a0} } $servername = \"localhost\";\n $username = \"username\";$password = \"password\";$dbname = \"myDBPDO\";\n try {\u00a0 $conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\u00a0\u00a0$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 $stmt = $conn->prepare(\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"); \u00a0\u00a0$stmt->execute();\n \u00a0\u00a0// set the resulting array to associative\u00a0\u00a0$result = $stmt->setFetchMode(PDO::FETCH_ASSOC); \u00a0\u00a0foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { \n  \u00a0\u00a0\u00a0 echo $v;\u00a0\u00a0}} catch(PDOException $e) {\u00a0 echo \"Error: \" . $e->getMessage();}$conn = null;echo \"</table>\";?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"<table style='border: solid 1px black;'>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "class",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "extends",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"<td style='width:150px;border:1px solid black;'>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"</td>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"<tr>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"</tr>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"\\n\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDBPDO\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "try",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"mysql:host=$servername;dbname=$dbname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// set the resulting array to associative",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "foreach",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "as",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "catch",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Error: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"</table>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?phpecho \"<table style='border: solid 1px black;'>\";\necho \"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\";class TableRows extends RecursiveIteratorIterator {\nfunction __construct($it) { \u00a0\u00a0\u00a0 parent::__construct($it, self::LEAVES_ONLY);\n}\nfunction current() {\u00a0\u00a0\u00a0\u00a0return \"<td style='width:150px;border:1px solid black;'>\" . parent::current(). \"</td>\";\n}\u00a0 function beginChildren() { \u00a0\u00a0\u00a0 echo \"<tr>\";\n} \u00a0\u00a0function endChildren() { \u00a0\u00a0\u00a0 echo \"</tr>\" . \"\\n\";\n} } $servername = \"localhost\";\n$username = \"username\";$password = \"password\";$dbname = \"myDBPDO\";\ntry {\u00a0 $conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\u00a0\u00a0$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$stmt = $conn->prepare(\"SELECT id, firstname, lastname FROM MyGuests\nORDER BY lastname\"); \u00a0\u00a0$stmt->execute();\n// set the resulting array to associative\u00a0\u00a0$result = $stmt->setFetchMode(PDO::FETCH_ASSOC); \u00a0\u00a0foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {\necho $v;\u00a0\u00a0}} catch(PDOException $e) {\u00a0 echo \"Error: \" . $e->getMessage();}$conn = null;echo \"</table>\";?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?phpecho \"<table style='border: solid 1px black;'>\";\n echo \"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\";class TableRows extends RecursiveIteratorIterator {\n \u00a0 function __construct($it) { \u00a0\u00a0\u00a0 parent::__construct($it, self::LEAVES_ONLY); \n  \u00a0\u00a0}\n \u00a0\u00a0function current() {\u00a0\u00a0\u00a0\u00a0return \"<td style='width:150px;border:1px solid black;'>\" . parent::current(). \"</td>\";\n  \u00a0\u00a0}\u00a0 function beginChildren() { \u00a0\u00a0\u00a0 echo \"<tr>\"; \n  \u00a0\u00a0} \u00a0\u00a0function endChildren() { \u00a0\u00a0\u00a0 echo \"</tr>\" . \"\\n\";\n  \u00a0\u00a0} } $servername = \"localhost\";\n $username = \"username\";$password = \"password\";$dbname = \"myDBPDO\";\n try {\u00a0 $conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\u00a0\u00a0$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 $stmt = $conn->prepare(\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"); \u00a0\u00a0$stmt->execute();\n \u00a0\u00a0// set the resulting array to associative\u00a0\u00a0$result = $stmt->setFetchMode(PDO::FETCH_ASSOC); \u00a0\u00a0foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { \n  \u00a0\u00a0\u00a0 echo $v;\u00a0\u00a0}} catch(PDOException $e) {\u00a0 echo \"Error: \" . $e->getMessage();}$conn = null;echo \"</table>\";?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<table style='border: solid 1px black;'>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "class",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "extends",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<td style='width:150px;border:1px solid black;'>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"</td>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<tr>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"</tr>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"\\n\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDBPDO\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "try",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"mysql:host=$servername;dbname=$dbname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// set the resulting array to associative",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "foreach",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "as",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "catch",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Error: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"</table>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;table style='border: solid 1px black;'&gt;\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;tr&gt;&lt;th&gt;Id&lt;/th&gt;&lt;th&gt;Firstname&lt;/th&gt;&lt;th&gt;Lastname&lt;/th&gt;&lt;/tr&gt;\"</span>;<br/><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">class</span> TableRows <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">extends</span> RecursiveIteratorIterator {<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">function</span> __construct($it) { <br/>\u00a0\u00a0\u00a0 parent::__construct($it, self::LEAVES_ONLY); <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">function</span> current() {<br/>\u00a0\u00a0\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">return</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;td style='width:150px;border:1px solid black;'&gt;\"</span> . parent::current(). <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;/td&gt;\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0}<br/><br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">function</span> beginChildren() { <br/>\u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;tr&gt;\"</span>; <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0} <br/><br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">function</span> endChildren() { <br/>\u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;/tr&gt;\"</span> . <span class=\"phpstringcolor\" style=\"color:green\">\"\\n\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0} <br/>} <br/><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> $username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDBPDO\"</span>;<br/><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">try</span> {<br/>\u00a0 $conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> PDO(<span class=\"phpstringcolor\" style=\"color:green\">\"mysql:host=$servername;dbname=$dbname\"</span>, $username, $password);<br/>\u00a0\u00a0$conn-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 $stmt = $conn-&gt;prepare(<span class=\"phpstringcolor\" style=\"color:green\">\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"</span>); <br/>\u00a0\u00a0$stmt-&gt;execute();<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0\u00a0<span class=\"commentcolor\" style=\"color:slategray\">// set the resulting array to associative<br/></span>\u00a0\u00a0$result = $stmt-&gt;setFetchMode(PDO::FETCH_ASSOC); <br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">foreach</span>(<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> TableRows(<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> RecursiveArrayIterator($stmt-&gt;fetchAll())) <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">as</span> $k=&gt;$v) { <br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> $v;<br/>\u00a0\u00a0}<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">catch</span>(PDOException $e) {<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Error: \"</span> . $e-&gt;getMessage();<br/>}<br/>$conn = null;<br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;/table&gt;\"</span>;<br/><span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?phpecho \"<table style='border: solid 1px black;'>\";\n echo \"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\";class TableRows extends RecursiveIteratorIterator {\n \u00a0 function __construct($it) { \u00a0\u00a0\u00a0 parent::__construct($it, self::LEAVES_ONLY); \n  \u00a0\u00a0}\n \u00a0\u00a0function current() {\u00a0\u00a0\u00a0\u00a0return \"<td style='width:150px;border:1px solid black;'>\" . parent::current(). \"</td>\";\n  \u00a0\u00a0}\u00a0 function beginChildren() { \u00a0\u00a0\u00a0 echo \"<tr>\"; \n  \u00a0\u00a0} \u00a0\u00a0function endChildren() { \u00a0\u00a0\u00a0 echo \"</tr>\" . \"\\n\";\n  \u00a0\u00a0} } $servername = \"localhost\";\n $username = \"username\";$password = \"password\";$dbname = \"myDBPDO\";\n try {\u00a0 $conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\u00a0\u00a0$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 $stmt = $conn->prepare(\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"); \u00a0\u00a0$stmt->execute();\n \u00a0\u00a0// set the resulting array to associative\u00a0\u00a0$result = $stmt->setFetchMode(PDO::FETCH_ASSOC); \u00a0\u00a0foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { \n  \u00a0\u00a0\u00a0 echo $v;\u00a0\u00a0}} catch(PDOException $e) {\u00a0 echo \"Error: \" . $e->getMessage();}$conn = null;echo \"</table>\";?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"<table style='border: solid 1px black;'>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "class",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "extends",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"<td style='width:150px;border:1px solid black;'>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"</td>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"<tr>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"</tr>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"\\n\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDBPDO\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "try",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"mysql:host=$servername;dbname=$dbname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"SELECT id, firstname, lastname FROM MyGuests \n  ORDER BY lastname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// set the resulting array to associative",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "foreach",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "as",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "catch",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Error: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"</table>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

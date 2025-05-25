@@ -1,0 +1,255 @@
+{
+  "title": "DSA Array Implementation",
+  "url": "https://www.w3schools.com/dsa/dsa_data_binarytrees_arrayImpl.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Array Implementation",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Array Implementation of Binary Trees",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To avoid the cost of all the shifts in memory that we get from using Arrays, it is useful to implement Binary Trees with pointers from one element to the next, just like Binary Trees are implemented before this point, especially when the Binary Tree is modified often.",
+      "html": "<p>To avoid the cost of all the shifts in memory that we get from using Arrays, it is useful to implement Binary Trees with pointers from one element to the next, just like Binary Trees are implemented before this point, especially when the Binary Tree is modified often.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But in case we read from the Binary Tree a lot more than we modify it, an Array implementation of a Binary Tree can make sense as it needs less memory, it can be easier to implement, and it can be faster for certain operations due to cache locality.",
+      "html": "<p>But in case we read from the Binary Tree a lot more than we modify it, an Array implementation of a Binary Tree can make sense as it needs less memory, it can be easier to implement, and it can be faster for certain operations due to cache locality.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Cache Locality is when the fast cache memory in the computer stores parts of memory that was recently accessed, or when the cache stores parts of memory that is close to the address that is currently accessed. This happens because it is likely that the CPU needs something in the next cycle that is close to what it used in the previous cycle, either close in time or close in space.",
+      "html": "<p><strong>Cache Locality </strong>is when the fast cache memory in the computer stores parts of memory that was recently accessed, or when the cache stores parts of memory that is close to the address that is currently accessed. This happens because it is likely that the CPU needs something in the next cycle that is close to what it used in the previous cycle, either close in time or close in space.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Since Array elements are stored contiguously in memory, one element right after the other, computers are sometimes faster when reading from Arrays because the next element is already cached, available for fast access in case the CPU needs it in the next cycle.",
+      "html": "<p>Since Array elements are stored contiguously in memory, one element right after the other, computers are sometimes faster when reading from Arrays because the next element is already cached, available for fast access in case the CPU needs it in the next cycle.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "here",
+          "href": "https://www.w3schools.com/dsa_theory_linkedlists_memory.php#arraysInMemory",
+          "title": ""
+        }
+      ],
+      "text": "How arrays are stored in memory is explained more in detail here .",
+      "html": "<p>How arrays are stored in memory is explained more in detail <a href=\"dsa_theory_linkedlists_memory.php#arraysInMemory\">here</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Consider this Binary Tree:",
+      "html": "<p>Consider this Binary Tree:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This Binary Tree can be stored in an Array starting with the root node R on index 0. The rest of the tree can be built by taking a node stored on index i i , and storing its left child node on index 2 \u22c5 i + 1 2 \u22c5 i + 1 , and its right child node on index 2 \u22c5 i + 2 2 \u22c5 i + 2 .",
+      "html": "<p>This Binary Tree can be stored in an Array starting with the root node R on index 0. The rest of the tree can be built by taking a node stored on index <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-1-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-1\"><span class=\"mjx-mrow\" id=\"MJXc-Node-2\"><span class=\"mjx-mi\" id=\"MJXc-Node-3\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">i</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>i</mi></math></span></span>, and storing its left child node on index <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-2-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-4\"><span class=\"mjx-mrow\" id=\"MJXc-Node-5\"><span class=\"mjx-mn\" id=\"MJXc-Node-6\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-7\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-8\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">i</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-9\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">+</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-10\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mn>2</mn><mo>\u22c5</mo><mi>i</mi><mo>+</mo><mn>1</mn></math></span></span>, and its right child node on index <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-3-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-11\"><span class=\"mjx-mrow\" id=\"MJXc-Node-12\"><span class=\"mjx-mn\" id=\"MJXc-Node-13\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-14\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-15\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">i</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-16\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">+</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-17\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mn>2</mn><mo>\u22c5</mo><mi>i</mi><mo>+</mo><mn>2</mn></math></span></span>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Below is an Array implementation of the Binary Tree.",
+      "html": "<p>Below is an Array implementation of the Binary Tree.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "line-numbers",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "binary_tree_array\n=\n\n[\n'R'\n,\n\n'A'\n,\n\n'B'\n,\n\n'C'\n,\n\n'D'\n,\n\n'E'\n,\n\n'F'\n,\n\nNone\n,\n\nNone\n,\n\nNone\n,\n\nNone\n,\n\nNone\n,\n\nNone\n,\n\n'G'\n]\n\n\n\ndef\n\nleft_child_index\n(\nindex\n)\n:\n\n\nreturn\n\n2\n\n*\nindex\n+\n\n1\n\n\n\ndef\n\nright_child_index\n(\nindex\n)\n:\n\n\nreturn\n\n2\n\n*\nindex\n+\n\n2\n\n\n\ndef\n\nget_data\n(\nindex\n)\n:\n\n\nif\n\n0\n\n<=\nindex\n<\n\nlen\n(\nbinary_tree_array\n)\n:\n\n\nreturn\nbinary_tree_array\n[\nindex\n]\n\n\nreturn\n\nNone\n\n\nright_child\n=\nright_child_index\n(\n0\n)\n\nleft_child_of_right_child\n=\nleft_child_index\n(\nright_child\n)\n\ndata\n=\nget_data\n(\nleft_child_of_right_child\n)\n\n\n\nprint\n(\n\"root.right.left.data:\"\n,\ndata\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate line-numbers w3-white language-python\" tabindex=\"0\"><code class=\"language-python\">binary_tree_array <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'R'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'E'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'F'</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'G'</span><span class=\"token punctuation\">]</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">left_child_index</span><span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">2</span> <span class=\"token operator\">*</span> index <span class=\"token operator\">+</span> <span class=\"token number\">1</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">right_child_index</span><span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">2</span> <span class=\"token operator\">*</span> index <span class=\"token operator\">+</span> <span class=\"token number\">2</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">get_data</span><span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> index <span class=\"token operator\">&lt;</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>binary_tree_array<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-return\">return</span> binary_tree_array<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token boolean\">None</span>\n\nright_child <span class=\"token operator\">=</span> right_child_index<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span>\nleft_child_of_right_child <span class=\"token operator\">=</span> left_child_index<span class=\"token punctuation\">(</span>right_child<span class=\"token punctuation\">)</span>\ndata <span class=\"token operator\">=</span> get_data<span class=\"token punctuation\">(</span>left_child_of_right_child<span class=\"token punctuation\">)</span>\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"root.right.left.data:\"</span><span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this Array implementation, since the Binary Tree nodes are placed in an array, much of the code is about accessing nodes using indexes, and about how to find the correct indexes.",
+      "html": "<p>In this Array implementation, since the Binary Tree nodes are placed in an array, much of the code is about accessing nodes using indexes, and about how to find the correct indexes.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's say we want to find the left and right child nodes of node B. Because B is on index 2, B's left child is on index 2 \u22c5 2 + 1 = 5 2 \u22c5 2 + 1 = 5 , which is node E, right? And B's right child is on index 2 \u22c5 2 + 2 = 6 2 \u22c5 2 + 2 = 6 , which is node F, and that also fits with the drawing above, right?",
+      "html": "<p>Let's say we want to find the left and right child nodes of node B. Because B is on index 2, B's left child is on index <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;5&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-4-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-18\"><span class=\"mjx-mrow\" id=\"MJXc-Node-19\"><span class=\"mjx-mn\" id=\"MJXc-Node-20\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-21\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-22\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-23\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">+</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-24\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span><span class=\"mjx-mo MJXc-space3\" id=\"MJXc-Node-25\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.059em; padding-bottom: 0.339em;\">=</span></span><span class=\"mjx-mn MJXc-space3\" id=\"MJXc-Node-26\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">5</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mn>2</mn><mo>\u22c5</mo><mn>2</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>5</mn></math></span></span>, which is node E, right? And B's right child is on index <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;6&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-5-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-27\"><span class=\"mjx-mrow\" id=\"MJXc-Node-28\"><span class=\"mjx-mn\" id=\"MJXc-Node-29\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-30\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-31\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-32\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">+</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-33\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span><span class=\"mjx-mo MJXc-space3\" id=\"MJXc-Node-34\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.059em; padding-bottom: 0.339em;\">=</span></span><span class=\"mjx-mn MJXc-space3\" id=\"MJXc-Node-35\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">6</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mn>2</mn><mo>\u22c5</mo><mn>2</mn><mo>+</mo><mn>2</mn><mo>=</mo><mn>6</mn></math></span></span>, which is node F, and that also fits with the drawing above, right?</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see on line 1, this implementation requires empty array elements where nodes have no child nodes. So to avoid wasting space on empty Array elements, Binary Trees stored using Array implementation should be a \"perfect\" Binary Tree, or a nearly perfect one.",
+      "html": "<p>As you can see on line 1, this implementation requires empty array elements where nodes have no child nodes. So to avoid wasting space on empty Array elements, Binary Trees stored using Array implementation should be a \"perfect\" Binary Tree, or a nearly perfect one.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A perfect Binary Tree is when every internal node have exactly two child nodes, and all leaf nodes are on the same level.",
+      "html": "<p>A perfect Binary Tree is when every internal node have exactly two child nodes, and all leaf nodes are on the same level.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we remove the G node in the Binary Tree above, it looks like this:",
+      "html": "<p>If we remove the G node in the Binary Tree above, it looks like this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And the first line in the code above can be written without wasting space on empty Array elements:",
+      "html": "<p>And the first line in the code above can be written without wasting space on empty Array elements:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "line-numbers",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "binary_tree_array\n=\n\n[\n'R'\n,\n\n'A'\n,\n\n'B'\n,\n\n'C'\n,\n\n'D'\n,\n\n'E'\n,\n\n'F'\n]",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate line-numbers w3-white language-python\" tabindex=\"0\"><code class=\"language-python\">binary_tree_array <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'R'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'E'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'F'</span><span class=\"token punctuation\">]</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is how the three different DFS traversals can be done on an Array implementation of a Binary Tree.",
+      "html": "<p>This is how the three different DFS traversals can be done on an Array implementation of a Binary Tree.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "line-numbers",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "binary_tree_array\n=\n\n[\n'R'\n,\n\n'A'\n,\n\n'B'\n,\n\n'C'\n,\n\n'D'\n,\n\n'E'\n,\n\n'F'\n,\n\nNone\n,\n\nNone\n,\n\nNone\n,\n\nNone\n,\n\nNone\n,\n\nNone\n,\n\n'G'\n]\n\n\n\ndef\n\nleft_child_index\n(\nindex\n)\n:\n\n\nreturn\n\n2\n\n*\nindex\n+\n\n1\n\n\n\ndef\n\nright_child_index\n(\nindex\n)\n:\n\n\nreturn\n\n2\n\n*\nindex\n+\n\n2\n\n\n\ndef\n\npre_order\n(\nindex\n)\n:\n\n\nif\nindex\n>=\n\nlen\n(\nbinary_tree_array\n)\n\nor\nbinary_tree_array\n[\nindex\n]\n\nis\n\nNone\n:\n\n\nreturn\n\n[\n]\n\n\nreturn\n\n[\nbinary_tree_array\n[\nindex\n]\n]\n\n+\npre_order\n(\nleft_child_index\n(\nindex\n)\n)\n\n+\npre_order\n(\nright_child_index\n(\nindex\n)\n)\n\n\n\ndef\n\nin_order\n(\nindex\n)\n:\n\n\nif\nindex\n>=\n\nlen\n(\nbinary_tree_array\n)\n\nor\nbinary_tree_array\n[\nindex\n]\n\nis\n\nNone\n:\n\n\nreturn\n\n[\n]\n\n\nreturn\nin_order\n(\nleft_child_index\n(\nindex\n)\n)\n\n+\n\n[\nbinary_tree_array\n[\nindex\n]\n]\n\n+\nin_order\n(\nright_child_index\n(\nindex\n)\n)\n\n\n\ndef\n\npost_order\n(\nindex\n)\n:\n\n\nif\nindex\n>=\n\nlen\n(\nbinary_tree_array\n)\n\nor\nbinary_tree_array\n[\nindex\n]\n\nis\n\nNone\n:\n\n\nreturn\n\n[\n]\n\n\nreturn\npost_order\n(\nleft_child_index\n(\nindex\n)\n)\n\n+\npost_order\n(\nright_child_index\n(\nindex\n)\n)\n\n+\n\n[\nbinary_tree_array\n[\nindex\n]\n]\n\n\n\nprint\n(\n\"Pre-order Traversal:\"\n,\npre_order\n(\n0\n)\n)\n\n\nprint\n(\n\"In-order Traversal:\"\n,\nin_order\n(\n0\n)\n)\n\n\nprint\n(\n\"Post-order Traversal:\"\n,\npost_order\n(\n0\n)\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate line-numbers w3-white language-python\" tabindex=\"0\"><code class=\"language-python\">binary_tree_array <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'R'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'E'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'F'</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'G'</span><span class=\"token punctuation\">]</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">left_child_index</span><span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">2</span> <span class=\"token operator\">*</span> index <span class=\"token operator\">+</span> <span class=\"token number\">1</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">right_child_index</span><span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">2</span> <span class=\"token operator\">*</span> index <span class=\"token operator\">+</span> <span class=\"token number\">2</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">pre_order</span><span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-if\">if</span> index <span class=\"token operator\">&gt;=</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>binary_tree_array<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-or\">or</span> binary_tree_array<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span> <span class=\"token keyword keyword-is\">is</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">[</span>binary_tree_array<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> pre_order<span class=\"token punctuation\">(</span>left_child_index<span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">+</span> pre_order<span class=\"token punctuation\">(</span>right_child_index<span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">in_order</span><span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-if\">if</span> index <span class=\"token operator\">&gt;=</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>binary_tree_array<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-or\">or</span> binary_tree_array<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span> <span class=\"token keyword keyword-is\">is</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>\n    <span class=\"token keyword keyword-return\">return</span> in_order<span class=\"token punctuation\">(</span>left_child_index<span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">+</span> <span class=\"token punctuation\">[</span>binary_tree_array<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> in_order<span class=\"token punctuation\">(</span>right_child_index<span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">post_order</span><span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-if\">if</span> index <span class=\"token operator\">&gt;=</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>binary_tree_array<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-or\">or</span> binary_tree_array<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span> <span class=\"token keyword keyword-is\">is</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>\n    <span class=\"token keyword keyword-return\">return</span> post_order<span class=\"token punctuation\">(</span>left_child_index<span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">+</span> post_order<span class=\"token punctuation\">(</span>right_child_index<span class=\"token punctuation\">(</span>index<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">+</span> <span class=\"token punctuation\">[</span>binary_tree_array<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span><span class=\"token punctuation\">]</span>\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Pre-order Traversal:\"</span><span class=\"token punctuation\">,</span> pre_order<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"In-order Traversal:\"</span><span class=\"token punctuation\">,</span> in_order<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Post-order Traversal:\"</span><span class=\"token punctuation\">,</span> post_order<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "pre-order",
+          "href": "https://www.w3schools.com/dsa_algo_binarytrees_preorder.php",
+          "title": ""
+        },
+        {
+          "text": "in-order",
+          "href": "https://www.w3schools.com/dsa_algo_binarytrees_inorder.php",
+          "title": ""
+        },
+        {
+          "text": "post-order",
+          "href": "https://www.w3schools.com/dsa_algo_binarytrees_postorder.php",
+          "title": ""
+        }
+      ],
+      "text": "By comparing how these traversals are done in an array implementation to how the pointer implementation was traversed, you can see that the pre-order , in-order , and post-order traversals works in the same recursive way.",
+      "html": "<p>By comparing how these traversals are done in an array implementation to how the pointer implementation was traversed, you can see that the <a href=\"dsa_algo_binarytrees_preorder.php\">pre-order</a>, <a href=\"dsa_algo_binarytrees_inorder.php\">in-order</a>, and <a href=\"dsa_algo_binarytrees_postorder.php\">post-order</a> traversals works in the same recursive way.</p>"
+    }
+  ]
+}

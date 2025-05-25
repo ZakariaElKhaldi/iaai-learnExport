@@ -1,0 +1,512 @@
+{
+  "title": "DSA Linked Lists in Memory",
+  "url": "https://www.w3schools.com/dsa/dsa_theory_linkedlists_memory.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Linked Lists in Memory",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Computer Memory",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To explain what linked lists are, and how linked lists are different from arrays, we need to understand some basics about how computer memory works.",
+      "html": "<p>To explain what linked lists are, and how linked lists are different from arrays, we need to understand some basics about how computer memory works.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Computer memory is the storage your program uses when it is running. This is where your variables, arrays and linked lists are stored.",
+      "html": "<p>Computer memory is the storage your program uses when it is running. This is where your variables, arrays and linked lists are stored.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Variables in Memory",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's imagine that we want to store the integer \"17\" in a variable myNumber . For simplicity, let's assume the integer is stored as two bytes (16 bits), and the address in memory to myNumber is 0x7F25 .",
+      "html": "<p>Let's imagine that we want to store the integer \"17\" in a variable <span>myNumber</span>. For simplicity, let's assume the integer is stored as two bytes (16 bits), and the address in memory to <span>myNumber</span> is <span>0x7F25</span>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "0x7F25 is actually the address to the first of the two bytes of memory where the myNumber integer value is stored. When the computer goes to 0x7F25 to read an integer value, it knows that it must read both the first and the second byte, since integers are two bytes on this specific computer.",
+      "html": "<p><span>0x7F25</span> is actually the address to the first of the two bytes of memory where the <span>myNumber</span> integer value is stored. When the computer goes to <span>0x7F25</span> to read an integer value, it knows that it must read both the first and the second byte, since integers are two bytes on this specific computer.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The image below shows how the variable myNumber = 17 is stored in memory.",
+      "html": "<p>The image below shows how the variable <span>myNumber = 17</span> is stored in memory.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The example above shows how an integer value is stored on the simple, but popular, Arduino Uno microcontroller. This microcontroller has an 8 bit architecture with 16 bit address bus and uses two bytes for integers and two bytes for memory addresses. For comparison, personal computers and smart phones use 32 or 64 bits for integers and addresses, but the memory works basically in the same way.",
+      "html": "<p>The example above shows how an integer value is stored on the simple, but popular, Arduino Uno microcontroller. This microcontroller has an 8 bit architecture with 16 bit address bus and uses two bytes for integers and two bytes for memory addresses. For comparison, personal computers and smart phones use 32 or 64 bits for integers and addresses, but the memory works basically in the same way.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Arrays in Memory",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To understand linked lists, it is useful to first know how arrays are stored in memory.",
+      "html": "<p>To understand linked lists, it is useful to first know how arrays are stored in memory.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Elements in an array are stored contiguously in memory. That means that each element is stored right after the previous element.",
+      "html": "<p>Elements in an array are stored contiguously in memory. That means that each element is stored right after the previous element.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The image below shows how an array of integers myArray = [3,5,13,2] is stored in memory. We use a simple kind of memory here with two bytes for each integer, like in the previous example, just to get the idea.",
+      "html": "<p>The image below shows how an array of integers <span>myArray = [3,5,13,2]</span> is stored in memory. We use a simple kind of memory here with two bytes for each integer, like in the previous example, just to get the idea.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The computer has only got the address of the first byte of myArray , so to access the 3rd element with code myArray[2] the computer starts at 0x7F23 and jumps over the two first integers. The computer knows that an integer is stored in two bytes, so it jumps 2x2 bytes forward from 0x7F23 and reads value 13 starting at address 0x7F27 .",
+      "html": "<p>The computer has only got the address of the first byte of <span>myArray</span>, so to access the 3rd element with code <span>myArray[2]</span> the computer starts at <span>0x7F23</span> and jumps over the two first integers. The computer knows that an integer is stored in two bytes, so it jumps 2x2 bytes forward from <span>0x7F23</span> and reads value 13 starting at address <span>0x7F27</span>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When removing or inserting elements in an array, every element that comes after must be either shifted up to make place for the new element, or shifted down to take the removed element's place. Such shifting operations are time consuming and can cause problems in real-time systems for example.",
+      "html": "<p>When removing or inserting elements in an array, every element that comes after must be either shifted up to make place for the new element, or shifted down to take the removed element's place. Such shifting operations are time consuming and can cause problems in real-time systems for example.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The image below shows how elements are shifted when an array element is removed.",
+      "html": "<p>The image below shows how elements are shifted when an array element is removed.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Manipulating arrays is also something you must think about if you are programming in C, where you have to explicitly move other elements when inserting or removing an element. In C this does not happen in the background.",
+      "html": "<p>Manipulating arrays is also something you must think about if you are programming in C, where you have to explicitly move other elements when inserting or removing an element. In C this does not happen in the background.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In C you also need to make sure that you have allocated enough space for the array to start with, so that you can add more elements later.",
+      "html": "<p>In C you also need to make sure that you have allocated enough space for the array to start with, so that you can add more elements later.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "this previous DSA tutorial page",
+          "href": "https://www.w3schools.com/dsa_data_arrays.php",
+          "title": ""
+        }
+      ],
+      "text": "You can read more about arrays on this previous DSA tutorial page .",
+      "html": "<p>You can read more about arrays on <a href=\"dsa_data_arrays.php\">this previous DSA tutorial page</a>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Linked Lists in Memory",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Instead of storing a collection of data as an array, we can create a linked list.",
+      "html": "<p>Instead of storing a collection of data as an array, we can create a linked list.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Linked lists are used in many scenarios, like dynamic data storage, stack and queue implementation or graph representation, to mention some of them.",
+      "html": "<p>Linked lists are used in many scenarios, like dynamic data storage, stack and queue implementation or graph representation, to mention some of them.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A linked list consists of nodes with some sort of data, and at least one pointer, or link, to other nodes.",
+      "html": "<p>A linked list consists of nodes with some sort of data, and at least one pointer, or link, to other nodes.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A big benefit with using linked lists is that nodes are stored wherever there is free space in memory, the nodes do not have to be stored contiguously right after each other like elements are stored in arrays. Another nice thing with linked lists is that when adding or removing nodes, the rest of the nodes in the list do not have to be shifted.",
+      "html": "<p>A big benefit with using linked lists is that nodes are stored wherever there is free space in memory, the nodes do not have to be stored contiguously right after each other like elements are stored in arrays. Another nice thing with linked lists is that when adding or removing nodes, the rest of the nodes in the list do not have to be shifted.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The image below shows how a linked list can be stored in memory. The linked list has four nodes with values 3, 5, 13 and 2, and each node has a pointer to the next node in the list.",
+      "html": "<p>The image below shows how a linked list can be stored in memory. The linked list has four nodes with values 3, 5, 13 and 2, and each node has a pointer to the next node in the list.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Each node takes up four bytes. Two bytes are used to store an integer value, and two bytes are used to store the address to the next node in the list. As mentioned before, how many bytes that are needed to store integers and addresses depend on the architecture of the computer. This example, like the previous array example, fits with a simple 8-bit microcontroller architecture.",
+      "html": "<p>Each node takes up four bytes. Two bytes are used to store an integer value, and two bytes are used to store the address to the next node in the list. As mentioned before, how many bytes that are needed to store integers and addresses depend on the architecture of the computer. This example, like the previous array example, fits with a simple 8-bit microcontroller architecture.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To make it easier to see how the nodes relate to each other, we will display nodes in a linked list in a simpler way, less related to their memory location, like in the image below:",
+      "html": "<p>To make it easier to see how the nodes relate to each other, we will display nodes in a linked list in a simpler way, less related to their memory location, like in the image below:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we put the same four nodes from the previous example together using this new visualization, it looks like this:",
+      "html": "<p>If we put the same four nodes from the previous example together using this new visualization, it looks like this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see, the first node in a linked list is called the \"Head\", and the last node is called the \"Tail\".",
+      "html": "<p>As you can see, the first node in a linked list is called the \"Head\", and the last node is called the \"Tail\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Unlike with arrays, the nodes in a linked list are not placed right after each other in memory. This means that when inserting or removing a node, shifting of other nodes is not necessary, so that is a good thing.",
+      "html": "<p>Unlike with arrays, the nodes in a linked list are not placed right after each other in memory. This means that when inserting or removing a node, shifting of other nodes is not necessary, so that is a good thing.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Something not so good with linked lists is that we cannot access a node directly like we can with an array by just writing myArray[5] for example. To get to node number 5 in a linked list, we must start with the first node called \"head\", use that node's pointer to get to the next node, and do so while keeping track of the number of nodes we have visited until we reach node number 5.",
+      "html": "<p>Something not so good with linked lists is that we cannot access a node directly like we can with an array by just writing <span>myArray[5]</span> for example. To get to node number 5 in a linked list, we must start with the first node called \"head\", use that node's pointer to get to the next node, and do so while keeping track of the number of nodes we have visited until we reach node number 5.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Learning about linked lists helps us to better understand concepts like memory allocation and pointers.",
+      "html": "<p>Learning about linked lists helps us to better understand concepts like memory allocation and pointers.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Linked lists are also important to understand before learning about more complex data structures such as trees and graphs, that can be implemented using linked lists.",
+      "html": "<p>Linked lists are also important to understand before learning about more complex data structures such as trees and graphs, that can be implemented using linked lists.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Memory in Modern Computers",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "So far on this page we have used the memory in an 8 bit microcontroller as an example to keep it simple and easier to understand.",
+      "html": "<p>So far on this page we have used the memory in an 8 bit microcontroller as an example to keep it simple and easier to understand.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Memory in modern computers work in the same way in principle as memory in an 8 bit microcontroller, but more memory is used to store integers, and more memory is used to store memory addresses.",
+      "html": "<p>Memory in modern computers work in the same way in principle as memory in an 8 bit microcontroller, but more memory is used to store integers, and more memory is used to store memory addresses.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The code below gives us the size of an integer and the size of a memory address on the server we are running these examples on.",
+      "html": "<p>The code below gives us the size of an integer and the size of a memory address on the server we are running these examples on.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-c"
+        ],
+        "isNotranslate": true
+      },
+      "code": "#\ninclude\n\n<stdio.h>\n\n\n\nint\n\nmain\n(\n)\n\n{\n\n\n\nint\nmyVal\n=\n\n13\n;\n\n\n\nprintf\n(\n\"Value of integer 'myVal': %d\\n\"\n,\nmyVal\n)\n;\n\n\nprintf\n(\n\"Size of integer 'myVal': %lu bytes\\n\"\n,\n\nsizeof\n(\nmyVal\n)\n)\n;\n\n// 4 bytes\n\n\nprintf\n(\n\"Address to 'myVal': %p\\n\"\n,\n\n&\nmyVal\n)\n;\n\n\nprintf\n(\n\"Size of the address to 'myVal': %lu bytes\\n\"\n,\n\nsizeof\n(\n&\nmyVal\n)\n)\n;\n\n// 8 bytes\n\n\n\nreturn\n\n0\n;\n\n\n}",
+      "language": "c",
+      "code_html": "<pre class=\"notranslate w3-white language-c\" tabindex=\"0\"><code class=\"language-c\"><span class=\"token macro property\"><span class=\"token directive-hash\">#</span><span class=\"token directive keyword\">include</span> <span class=\"token string\">&lt;stdio.h&gt;</span></span>\n\n<span class=\"token keyword keyword-int\">int</span> <span class=\"token function\">main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n\n    <span class=\"token keyword keyword-int\">int</span> myVal <span class=\"token operator\">=</span> <span class=\"token number\">13</span><span class=\"token punctuation\">;</span>\n    \n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Value of integer 'myVal': %d\\n\"</span><span class=\"token punctuation\">,</span> myVal<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Size of integer 'myVal': %lu bytes\\n\"</span><span class=\"token punctuation\">,</span> <span class=\"token keyword keyword-sizeof\">sizeof</span><span class=\"token punctuation\">(</span>myVal<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// 4 bytes</span>\n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Address to 'myVal': %p\\n\"</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">&amp;</span>myVal<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Size of the address to 'myVal': %lu bytes\\n\"</span><span class=\"token punctuation\">,</span> <span class=\"token keyword keyword-sizeof\">sizeof</span><span class=\"token punctuation\">(</span><span class=\"token operator\">&amp;</span>myVal<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// 8 bytes</span>\n\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-c"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-c"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The code example above only runs in C because Java and Python runs on an abstraction level above specific/direct memory allocation.",
+      "html": "<p>The code example above only runs in C because Java and Python runs on an abstraction level above specific/direct memory allocation.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Linked List Implementation in C",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's implement this linked list from earlier:",
+      "html": "<p>Let's implement this linked list from earlier:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's implement this linked list in C to see a concrete example of how linked lists are stored in memory.",
+      "html": "<p>Let's implement this linked list in C to see a concrete example of how linked lists are stored in memory.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the code below, after including the libraries, we create a node struct which is like a class that represents what a node is: the node contains data and a pointer to the next node.",
+      "html": "<p>In the code below, after including the libraries, we create a node struct which is like a class that represents what a node is: the node contains data and a pointer to the next node.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The createNode() function allocates memory for a new node, fills in the data part of the node with an integer given as an argument to the function, and returns the pointer (memory address) to the new node.",
+      "html": "<p>The <code>createNode()</code> function allocates memory for a new node, fills in the data part of the node with an integer given as an argument to the function, and returns the pointer (memory address) to the new node.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The printList() function is just for going through the linked list and printing each node's value.",
+      "html": "<p>The <code>printList()</code> function is just for going through the linked list and printing each node's value.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Inside the main() function, four nodes are created, linked together, printed, and then the memory is freed. It is good practice to free memory after we are done using it to avoid memory leaks. Memory leak is when memory is not freed after use, gradually taking up more and more memory.",
+      "html": "<p>Inside the <code>main()</code> function, four nodes are created, linked together, printed, and then the memory is freed. It is good practice to free memory after we are done using it to avoid memory leaks. Memory leak is when memory is not freed after use, gradually taking up more and more memory.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-c"
+        ],
+        "isNotranslate": true
+      },
+      "code": "#\ninclude\n\n<stdio.h>\n\n\n#\ninclude\n\n<stdlib.h>\n\n\n\ntypedef\n\nstruct\n\nNode\n\n{\n\n\nint\ndata\n;\n\n\nstruct\n\nNode\n*\nnext\n;\n\n\n}\nNode\n;\n\n\nNode\n*\n\ncreateNode\n(\nint\ndata\n)\n\n{\n\nNode\n*\nnewNode\n=\n\n(\nNode\n*\n)\nmalloc\n(\nsizeof\n(\nNode\n)\n)\n;\n\n\nif\n\n(\n!\nnewNode\n)\n\n{\n\n\nprintf\n(\n\"Memory allocation failed!\\n\"\n)\n;\n\n\nexit\n(\n1\n)\n;\n\n\n}\n\nnewNode\n->\ndata\n=\ndata\n;\n\nnewNode\n->\nnext\n=\n\nNULL\n;\n\n\nreturn\nnewNode\n;\n\n\n}\n\n\n\nvoid\n\nprintList\n(\nNode\n*\nnode\n)\n\n{\n\n\nwhile\n\n(\nnode\n)\n\n{\n\n\nprintf\n(\n\"%d -> \"\n,\nnode\n->\ndata\n)\n;\n\nnode\n=\nnode\n->\nnext\n;\n\n\n}\n\n\nprintf\n(\n\"null\\n\"\n)\n;\n\n\n}\n\n\n\nint\n\nmain\n(\n)\n\n{\n\nNode\n*\nnode1\n=\n\ncreateNode\n(\n3\n)\n;\n\nNode\n*\nnode2\n=\n\ncreateNode\n(\n5\n)\n;\n\nNode\n*\nnode3\n=\n\ncreateNode\n(\n13\n)\n;\n\nNode\n*\nnode4\n=\n\ncreateNode\n(\n2\n)\n;\n\n\nnode1\n->\nnext\n=\nnode2\n;\n\nnode2\n->\nnext\n=\nnode3\n;\n\nnode3\n->\nnext\n=\nnode4\n;\n\n\n\nprintList\n(\nnode1\n)\n;\n\n\n\n// Free the memory\n\n\nfree\n(\nnode1\n)\n;\n\n\nfree\n(\nnode2\n)\n;\n\n\nfree\n(\nnode3\n)\n;\n\n\nfree\n(\nnode4\n)\n;\n\n\n\nreturn\n\n0\n;\n\n\n}",
+      "language": "c",
+      "code_html": "<pre class=\"notranslate w3-white language-c\" tabindex=\"0\"><code class=\"language-c\"><span class=\"token macro property\"><span class=\"token directive-hash\">#</span><span class=\"token directive keyword\">include</span> <span class=\"token string\">&lt;stdio.h&gt;</span></span>\n<span class=\"token macro property\"><span class=\"token directive-hash\">#</span><span class=\"token directive keyword\">include</span> <span class=\"token string\">&lt;stdlib.h&gt;</span></span>\n\n<span class=\"token keyword keyword-typedef\">typedef</span> <span class=\"token keyword keyword-struct\">struct</span> <span class=\"token class-name\">Node</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-int\">int</span> data<span class=\"token punctuation\">;</span>\n    <span class=\"token keyword keyword-struct\">struct</span> <span class=\"token class-name\">Node</span><span class=\"token operator\">*</span> next<span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span> Node<span class=\"token punctuation\">;</span>\n\nNode<span class=\"token operator\">*</span> <span class=\"token function\">createNode</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-int\">int</span> data<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    Node<span class=\"token operator\">*</span> newNode <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span>Node<span class=\"token operator\">*</span><span class=\"token punctuation\">)</span><span class=\"token function\">malloc</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-sizeof\">sizeof</span><span class=\"token punctuation\">(</span>Node<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span><span class=\"token operator\">!</span>newNode<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Memory allocation failed!\\n\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n        <span class=\"token function\">exit</span><span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    newNode<span class=\"token operator\">-&gt;</span>data <span class=\"token operator\">=</span> data<span class=\"token punctuation\">;</span>\n    newNode<span class=\"token operator\">-&gt;</span>next <span class=\"token operator\">=</span> <span class=\"token constant\">NULL</span><span class=\"token punctuation\">;</span>\n    <span class=\"token keyword keyword-return\">return</span> newNode<span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-void\">void</span> <span class=\"token function\">printList</span><span class=\"token punctuation\">(</span>Node<span class=\"token operator\">*</span> node<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-while\">while</span> <span class=\"token punctuation\">(</span>node<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"%d -&gt; \"</span><span class=\"token punctuation\">,</span> node<span class=\"token operator\">-&gt;</span>data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n        node <span class=\"token operator\">=</span> node<span class=\"token operator\">-&gt;</span>next<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token function\">printf</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"null\\n\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-int\">int</span> <span class=\"token function\">main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    Node<span class=\"token operator\">*</span> node1 <span class=\"token operator\">=</span> <span class=\"token function\">createNode</span><span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    Node<span class=\"token operator\">*</span> node2 <span class=\"token operator\">=</span> <span class=\"token function\">createNode</span><span class=\"token punctuation\">(</span><span class=\"token number\">5</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    Node<span class=\"token operator\">*</span> node3 <span class=\"token operator\">=</span> <span class=\"token function\">createNode</span><span class=\"token punctuation\">(</span><span class=\"token number\">13</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    Node<span class=\"token operator\">*</span> node4 <span class=\"token operator\">=</span> <span class=\"token function\">createNode</span><span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    node1<span class=\"token operator\">-&gt;</span>next <span class=\"token operator\">=</span> node2<span class=\"token punctuation\">;</span>\n    node2<span class=\"token operator\">-&gt;</span>next <span class=\"token operator\">=</span> node3<span class=\"token punctuation\">;</span>\n    node3<span class=\"token operator\">-&gt;</span>next <span class=\"token operator\">=</span> node4<span class=\"token punctuation\">;</span>\n\n    <span class=\"token function\">printList</span><span class=\"token punctuation\">(</span>node1<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Free the memory</span>\n    <span class=\"token function\">free</span><span class=\"token punctuation\">(</span>node1<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token function\">free</span><span class=\"token punctuation\">(</span>node2<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token function\">free</span><span class=\"token punctuation\">(</span>node3<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token function\">free</span><span class=\"token punctuation\">(</span>node4<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-c"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-c"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Linked Lists Oprations page",
+          "href": "https://www.w3schools.com/dsa_algo_linkedlists_operations.php",
+          "title": ""
+        }
+      ],
+      "text": "To print the linked list in the code above, the printList() function goes from one node to the next using the \"next\" pointers, and that is called \"traversing\" or \"traversal\" of the linked list. You will learn more about linked list traversal and other linked list operations on the Linked Lists Oprations page .",
+      "html": "<p>To print the linked list in the code above, the <code>printList()</code> function goes from one node to the next using the \"next\" pointers, and that is called \"traversing\" or \"traversal\" of the linked list. You will learn more about linked list traversal and other linked list operations on the <a href=\"dsa_algo_linkedlists_operations.php\">Linked Lists Oprations page</a>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Linked List Implementation in Python and Java",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We will now implement this same linked list using Python and Java instead.",
+      "html": "<p>We will now implement this same linked list using Python and Java instead.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the Python code below, the Node class represents what a node is: the node contains data and a link to the next node.",
+      "html": "<p>In the Python code below, the <code>Node</code> class represents what a node is: the node contains data and a link to the next node.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Node class is used to to create four nodes, the nodes are then linked together, and printed at the end.",
+      "html": "<p>The <code>Node</code> class is used to to create four nodes, the nodes are then linked together, and printed at the end.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see, the Python code is a lot shorter than the C code, and perhaps better if you just want to understand the concept of linked lists, and not how linked lists are stored in memory.",
+      "html": "<p>As you can see, the Python code is a lot shorter than the C code, and perhaps better if you just want to understand the concept of linked lists, and not how linked lists are stored in memory.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Java code is very similar to the Python code. Click the \"Run Example\" button below and choose the \"Java\" tab to see the Java code.",
+      "html": "<p>The Java code is very similar to the Python code. Click the \"Run Example\" button below and choose the \"Java\" tab to see the Java code.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class\n\nNode\n:\n\n\ndef\n\n__init__\n(\nself\n,\ndata\n)\n:\n\nself\n.\ndata\n=\ndata\nself\n.\nnext\n\n=\n\nNone\n\n\nnode1\n=\nNode\n(\n3\n)\n\nnode2\n=\nNode\n(\n5\n)\n\nnode3\n=\nNode\n(\n13\n)\n\nnode4\n=\nNode\n(\n2\n)\n\n\nnode1\n.\nnext\n\n=\nnode2\nnode2\n.\nnext\n\n=\nnode3\nnode3\n.\nnext\n\n=\nnode4\n\ncurrentNode\n=\nnode1\n\nwhile\ncurrentNode\n:\n\n\nprint\n(\ncurrentNode\n.\ndata\n,\nend\n=\n\" -> \"\n)\n\ncurrentNode\n=\ncurrentNode\n.\nnext\n\n\nprint\n(\n\"null\"\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Node</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">__init__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        self<span class=\"token punctuation\">.</span>data <span class=\"token operator\">=</span> data\n        self<span class=\"token punctuation\">.</span><span class=\"token builtin\">next</span> <span class=\"token operator\">=</span> <span class=\"token boolean\">None</span>\n    \nnode1 <span class=\"token operator\">=</span> Node<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">)</span>\nnode2 <span class=\"token operator\">=</span> Node<span class=\"token punctuation\">(</span><span class=\"token number\">5</span><span class=\"token punctuation\">)</span>\nnode3 <span class=\"token operator\">=</span> Node<span class=\"token punctuation\">(</span><span class=\"token number\">13</span><span class=\"token punctuation\">)</span>\nnode4 <span class=\"token operator\">=</span> Node<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">)</span>\n\nnode1<span class=\"token punctuation\">.</span><span class=\"token builtin\">next</span> <span class=\"token operator\">=</span> node2\nnode2<span class=\"token punctuation\">.</span><span class=\"token builtin\">next</span> <span class=\"token operator\">=</span> node3\nnode3<span class=\"token punctuation\">.</span><span class=\"token builtin\">next</span> <span class=\"token operator\">=</span> node4\n\ncurrentNode <span class=\"token operator\">=</span> node1\n<span class=\"token keyword keyword-while\">while</span> currentNode<span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span>currentNode<span class=\"token punctuation\">.</span>data<span class=\"token punctuation\">,</span> end<span class=\"token operator\">=</span><span class=\"token string\">\" -&gt; \"</span><span class=\"token punctuation\">)</span>\n    currentNode <span class=\"token operator\">=</span> currentNode<span class=\"token punctuation\">.</span><span class=\"token builtin\">next</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"null\"</span><span class=\"token punctuation\">)</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "DSA Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Yourself With Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise:",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "What is a benefit of using Linked Lists?",
+      "html": "<p>What is a benefit of using Linked Lists?</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "A good thing about Linked Lists\nis that when inserting or\nremoving a node, other elements\ndo not have to be\nin memory.",
+      "language": "unknown",
+      "code_html": "<pre style=\"overflow: auto;\">A good thing about Linked Lists \nis that when inserting or \nremoving a node, other elements \ndo not have to be <input maxlength=\"7\" name=\"ex1\" style=\"width: 8ch;\"/> in memory.\n</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Start the Exercise",
+          "href": "https://www.w3schools.com/exercise.php?filename=exercise_theory_linkedlists2",
+          "title": ""
+        }
+      ],
+      "text": "Start the Exercise",
+      "html": "<p><a href=\"exercise.php?filename=exercise_theory_linkedlists2\" target=\"_blank\">Start the Exercise</a></p>"
+    }
+  ]
+}

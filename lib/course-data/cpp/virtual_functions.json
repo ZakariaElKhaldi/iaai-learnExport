@@ -1,0 +1,1406 @@
+{
+  "title": "C++ Virtual Functions",
+  "url": "https://www.w3schools.com/cpp/cpp_virtual_functions.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "C++ Virtual Functions",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "C++ Virtual Functions",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A virtual function is a member function in the base class that can be overridden in derived classes.",
+      "html": "<p>A <b>virtual function</b> is a member function in the base class that can be <b>overridden</b> \nin derived classes.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "polymorphism",
+          "href": "https://www.w3schools.com/cpp_polymorphism.asp",
+          "title": ""
+        }
+      ],
+      "text": "Virtual functions are a key part of polymorphism in C++. They let different objects respond differently to the same function call.",
+      "html": "<p>Virtual functions are a key part of <a href=\"cpp_polymorphism.asp\">polymorphism</a> in C++. They let different objects respond differently to the same function call.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Why Use Virtual Functions?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Without virtual , C++ decides which function to call based on the pointer type, not the actual object type.",
+      "html": "<p>Without <code>virtual</code>, C++ decides which function to call based on the pointer type, not the actual object type.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With virtual , it checks the actual object the pointer is pointing to.",
+      "html": "<p>With <code>virtual</code>, it checks the actual object the pointer is pointing to.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Or to put it even more simply:",
+      "html": "<p>Or to put it even more simply: \n</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Without Virtual Function",
+      "level": "h2"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/cpp/trycpp.asp?filename=demo_virtual",
+        "syntaxHighlighting": [
+          {
+            "text": "\nclass Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Animal sound\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\n\nclass Dog : public Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Dog barks\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\n\nint main() {\n\u00a0\u00a0Animal* a;\u00a0 // Declare a pointer to the base class (Animal)\n\u00a0\u00a0Dog d;\u00a0 // Create an object of the derived class (Dog)\n\u00a0\u00a0a = &d;\u00a0 // Point the base class pointer to the Dog \n  object\n  \u00a0\u00a0a->sound(); // Call the sound() function using the pointer. Since sound() is \n  not virtual, this calls Animal's version\n\u00a0\u00a0return 0;\n}\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "class",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "public",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "void",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"Animal sound\\n\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "class",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "public",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "public",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "void",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"Dog barks\\n\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Declare a pointer to the base class (Animal)",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Create an object of the derived class (Dog)",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Point the base class pointer to the Dog \n  object",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Call the sound() function using the pointer. Since sound() is \n  not virtual, this calls Animal's version",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class Animal {\npublic:\nvoid sound() {\ncout << \"Animal sound\\n\";\n}\n};\nclass Dog : public Animal {\npublic:\nvoid sound() {\ncout << \"Dog barks\\n\";\n}\n};\nint main() {\nAnimal* a;\u00a0 // Declare a pointer to the base class (Animal)\nDog d;\u00a0 // Create an object of the derived class (Dog)\na = &d;\u00a0 // Point the base class pointer to the Dog\nobject\na->sound(); // Call the sound() function using the pointer. Since sound() is\nnot virtual, this calls Animal's version\nreturn 0;\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nclass Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Animal sound\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\nclass Dog : public Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Dog barks\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\nint main() {\n\u00a0\u00a0Animal* a;\u00a0 // Declare a pointer to the base class (Animal)\n\u00a0\u00a0Dog d;\u00a0 // Create an object of the derived class (Dog)\n\u00a0\u00a0a = &d;\u00a0 // Point the base class pointer to the Dog \n  object\n  \u00a0\u00a0a->sound(); // Call the sound() function using the pointer. Since sound() is \n  not virtual, this calls Animal's version\n\u00a0\u00a0return 0;\n}\n ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "class",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "public",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "void",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"Animal sound\\n\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "class",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "public",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "public",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "void",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"Dog barks\\n\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Declare a pointer to the base class (Animal)",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Create an object of the derived class (Dog)",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Point the base class pointer to the Dog \n  object",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Call the sound() function using the pointer. Since sound() is \n  not virtual, this calls Animal's version",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\">\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">class</span> Animal {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">public</span>:<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">void</span> sound() {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout &lt;&lt; <span class=\"javastringcolor\" style=\"color:green\">\"Animal sound\\n\"</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0}<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>};<br/><br/>\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">class</span> Dog : <span class=\"javakeywordcolor\" style=\"color:#005cc5\">public</span> Animal {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">public</span>:<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">void</span> sound() {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout &lt;&lt; <span class=\"javastringcolor\" style=\"color:green\">\"Dog barks\\n\"</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0}<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>};<br/><br/>\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> main() {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0Animal* a;\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Declare a pointer to the base class (Animal)<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0Dog d;\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Create an object of the derived class (Dog)<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0a = &amp;d;\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Point the base class pointer to the Dog \n  object<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0a-&gt;sound(); <span class=\"commentcolor\" style=\"color:slategray\">// Call the sound() function using the pointer. Since sound() is \n  not virtual, this calls Animal's version<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">return</span> <span class=\"javanumbercolor\" style=\"color:#905\">0</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>}<span class=\"javanumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/cpp/trycpp.asp?filename=demo_virtual",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nclass Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Animal sound\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\n\nclass Dog : public Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Dog barks\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\n\nint main() {\n\u00a0\u00a0Animal* a;\u00a0 // Declare a pointer to the base class (Animal)\n\u00a0\u00a0Dog d;\u00a0 // Create an object of the derived class (Dog)\n\u00a0\u00a0a = &d;\u00a0 // Point the base class pointer to the Dog \n  object\n  \u00a0\u00a0a->sound(); // Call the sound() function using the pointer. Since sound() is \n  not virtual, this calls Animal's version\n\u00a0\u00a0return 0;\n}\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "class",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "public",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "void",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"Animal sound\\n\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "class",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "public",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "public",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "void",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"Dog barks\\n\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Declare a pointer to the base class (Animal)",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Create an object of the derived class (Dog)",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Point the base class pointer to the Dog \n  object",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Call the sound() function using the pointer. Since sound() is \n  not virtual, this calls Animal's version",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Even though a points to a Dog , it still calls Animal::sound() because the function is not virtual.",
+      "html": "<p>Even though <code>a</code> points to a <code>Dog</code>, it still calls <code>Animal::sound()</code> because the function is not virtual.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "With Virtual Function",
+      "level": "h2"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/cpp/trycpp.asp?filename=demo_virtual2",
+        "syntaxHighlighting": [
+          {
+            "text": "\nclass Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0virtual void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Animal sound\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\n\nclass Dog : public Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() override {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Dog barks\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\n\nint main() {\n\u00a0\u00a0Animal* a;\n\u00a0\u00a0Dog d;\n\u00a0\u00a0a = &d;\n\u00a0\u00a0a->sound();  // Outputs: Dog barks\n\u00a0\u00a0return 0;\n}\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "class",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "public",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "void",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"Animal sound\\n\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "class",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "public",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "public",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "void",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"Dog barks\\n\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Outputs: Dog barks",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class Animal {\npublic:\nvirtual void sound() {\ncout << \"Animal sound\\n\";\n}\n};\nclass Dog : public Animal {\npublic:\nvoid sound() override {\ncout << \"Dog barks\\n\";\n}\n};\nint main() {\nAnimal* a;\nDog d;\na = &d;\na->sound();  // Outputs: Dog barks\nreturn 0;\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nclass Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0virtual void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Animal sound\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\nclass Dog : public Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() override {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Dog barks\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\nint main() {\n\u00a0\u00a0Animal* a;\n\u00a0\u00a0Dog d;\n\u00a0\u00a0a = &d;\n\u00a0\u00a0a->sound();  // Outputs: Dog barks\n\u00a0\u00a0return 0;\n}\n ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "class",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "public",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "void",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"Animal sound\\n\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "class",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "public",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "public",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "void",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"Dog barks\\n\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Outputs: Dog barks",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\">\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">class</span> Animal {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">public</span>:<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<strong>virtual</strong> <span class=\"javakeywordcolor\" style=\"color:#005cc5\">void</span> sound() {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout &lt;&lt; <span class=\"javastringcolor\" style=\"color:green\">\"Animal sound\\n\"</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0}<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>};<br/><br/>\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">class</span> Dog : <span class=\"javakeywordcolor\" style=\"color:#005cc5\">public</span> Animal {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">public</span>:<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">void</span> sound() override {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout &lt;&lt; <span class=\"javastringcolor\" style=\"color:green\">\"Dog barks\\n\"</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0}<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>};<br/><br/>\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> main() {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0Animal* a;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0Dog d;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0a = &amp;d;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0a-&gt;sound();  <span class=\"commentcolor\" style=\"color:slategray\">// Outputs: Dog barks<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"javakeywordcolor\" style=\"color:#005cc5\">return</span> <span class=\"javanumbercolor\" style=\"color:#905\">0</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>}<span class=\"javanumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/cpp/trycpp.asp?filename=demo_virtual2",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nclass Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0virtual void sound() {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Animal sound\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\n\nclass Dog : public Animal {\n\u00a0\u00a0public:\n\u00a0\u00a0\u00a0\u00a0void sound() override {\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0cout << \"Dog barks\\n\";\n\u00a0\u00a0\u00a0\u00a0}\n};\n\nint main() {\n\u00a0\u00a0Animal* a;\n\u00a0\u00a0Dog d;\n\u00a0\u00a0a = &d;\n\u00a0\u00a0a->sound();  // Outputs: Dog barks\n\u00a0\u00a0return 0;\n}\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "class",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "public",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "void",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"Animal sound\\n\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "class",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "public",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "public",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "void",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"Dog barks\\n\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Outputs: Dog barks",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now it works! Because sound() is virtual , the call uses the actual object's function and not just the pointer type.",
+      "html": "<p><b>Now it works!</b> Because <code>sound()</code> is <code>virtual</code>, the call uses the actual object's function and not just the pointer type.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The -> Operator in C++",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You might be wondering why we used -> in the examples above.",
+      "html": "<p>You might be wondering why we used <code>-&gt;</code> in the examples above.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "pointer",
+          "href": "https://www.w3schools.com/cpp_pointers.asp",
+          "title": ""
+        }
+      ],
+      "text": "The -> operator is used to access members (like functions or variables) through a pointer .",
+      "html": "<p>The <code>-&gt;</code> operator is used to access members (like functions or variables) through a <a href=\"cpp_pointers.asp\">pointer</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It's a shortcut for writing (*pointer).member :",
+      "html": "<p>It's a shortcut for writing <code>(*pointer).member</code>:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nAnimal* a = new Animal();\na->sound();  // Same as (*a).sound();\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "// Same as (*a).sound();\n ",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Animal* a = new Animal();\na->sound();  // Same as (*a).sound();",
+      "syntax_highlighting": [
+        {
+          "text": "\nAnimal* a = new Animal();\na->sound();  // Same as (*a).sound();\n ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "// Same as (*a).sound();\n ",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\">\nAnimal* a = <span class=\"javakeywordcolor\" style=\"color:#005cc5\">new</span> Animal();<br/>\na-&gt;sound();  <span class=\"commentcolor\" style=\"color:slategray\">// Same as (*a).sound();\n </span></span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nAnimal* a = new Animal();\na->sound();  // Same as (*a).sound();\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "// Same as (*a).sound();\n ",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Tip: If you are using a pointer to an object, use -> to access its members.",
+      "html": "<p><b>Tip:</b> If you are using a pointer to an object, use <code>-&gt;</code> to access its members.</p>"
+    }
+  ]
+}

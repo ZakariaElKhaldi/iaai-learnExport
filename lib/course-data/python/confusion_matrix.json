@@ -1,0 +1,1652 @@
+{
+  "title": "Python Machine Learning - Confusion Matrix",
+  "url": "https://www.w3schools.com/python/python_ml_confusion_matrix.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Machine Learning - Confusion Matrix",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "\nNYC Data Science Academy",
+          "href": "https://t.sidekickopen01.com/s3t/c/5/f18dQhb0S7kv8c7RP2W1z75qk59hl3kW7_k2847tBZxCVvfv0f1GTV9PW2RxlDT2bzNMYdZ8s8G01?te=W3R5hFj4cm2zwW41-DxM3zhrr_W3F7ZBj3F6bSSW43T4N94hMnzcW3F4Fvd3zbTMqW2fgYK73F7y_5W3Zp0KM3_Qh5fW4hLxLG2f1Dw_W3F7y_53Zp0KMW3_QgzD3H6xvkW2dTzCR3SYMmGW1mp5CL3ZWTYrW4cbSf23_Qh9QW49NMw73HdlCPW3Hbzjf4fKWwkW43TDjD41YtR1W3zbVlf1S1tRf38WL2&si=6321147182055424&pi=566c78b2-d5c2-45ad-ad0c-74291c07630b",
+          "title": ""
+        }
+      ],
+      "text": "On this page, W3schools.com collaborates with NYC Data Science Academy , to deliver digital training content to our students.",
+      "html": "<p>On this page, W3schools.com collaborates with <a href=\"https://t.sidekickopen01.com/s3t/c/5/f18dQhb0S7kv8c7RP2W1z75qk59hl3kW7_k2847tBZxCVvfv0f1GTV9PW2RxlDT2bzNMYdZ8s8G01?te=W3R5hFj4cm2zwW41-DxM3zhrr_W3F7ZBj3F6bSSW43T4N94hMnzcW3F4Fvd3zbTMqW2fgYK73F7y_5W3Zp0KM3_Qh5fW4hLxLG2f1Dw_W3F7y_53Zp0KMW3_QgzD3H6xvkW2dTzCR3SYMmGW1mp5CL3ZWTYrW4cbSf23_Qh9QW49NMw73HdlCPW3Hbzjf4fKWwkW43TDjD41YtR1W3zbVlf1S1tRf38WL2&amp;si=6321147182055424&amp;pi=566c78b2-d5c2-45ad-ad0c-74291c07630b\" target=\"_blank\">\nNYC Data Science Academy</a>, to deliver digital training content to our students.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "What is a confusion matrix?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It is a table that is used in classification problems to assess where errors in the model were made.",
+      "html": "<p>It is a table that is used in classification problems to assess where errors in the model were made.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The rows represent the actual classes the outcomes should have been. While the columns represent the predictions we have made. Using this table it is easy to see which predictions are wrong.",
+      "html": "<p>The rows represent the actual classes the outcomes should have been.\nWhile the columns represent the predictions we have made.\nUsing this table it is easy to see which predictions are wrong.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Creating a Confusion Matrix",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Confusion matrixes can be created by predictions made from a logistic regression.",
+      "html": "<p>Confusion matrixes can be created by predictions made from a logistic regression.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For now we will generate actual and predicted values by utilizing NumPy:",
+      "html": "<p>For now we will generate actual and predicted values by utilizing NumPy:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nimport numpy\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import numpy",
+      "language": "python",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nimport numpy\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Next we will need to generate the numbers for \"actual\" and \"predicted\" values.",
+      "html": "<p>Next we will need to generate the numbers for \"actual\" and \"predicted\" values.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nactual = numpy.random.binomial(1, 0.9, size = 1000)\npredicted = numpy.random.binomial(1, 0.9, size = 1000) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0.9",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1000",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0.9",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1000",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "actual = numpy.random.binomial( 1 , 0.9 , size = 1000 ) predicted = numpy.random.binomial( 1 , 0.9 , size = 1000 )",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nactual = numpy.random.binomial(1, 0.9, size = 1000)\npredicted = numpy.random.binomial(1, 0.9, size = 1000) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0.9",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1000",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0.9",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1000",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In order to create the confusion matrix we need to import metrics from the sklearn module.",
+      "html": "<p>In order to create the confusion matrix we need to import metrics from the sklearn module.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nfrom sklearn import metrics ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "from",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "from sklearn import metrics",
+      "language": "python",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nfrom sklearn import metrics ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "from",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Once metrics is imported we can use the confusion matrix function on our actual and predicted values.",
+      "html": "<p>Once metrics is imported we can use the confusion matrix function on our actual and predicted values.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nconfusion_matrix = metrics.confusion_matrix(actual, predicted) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "confusion_matrix = metrics.confusion_matrix(actual, predicted)",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nconfusion_matrix = metrics.confusion_matrix(actual, predicted) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To create a more interpretable visual display we need to convert the table into a confusion matrix display.",
+      "html": "<p>To create a more interpretable visual display we need to convert the table into a confusion matrix display.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\ncm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = [0, \n1]) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = [ 0 , 1 ])",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\ncm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = [0, \n1]) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Vizualizing the display requires that we import pyplot from matplotlib.",
+      "html": "<p>Vizualizing the display requires that we import pyplot from matplotlib.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nimport matplotlib.pyplot as plt ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "as",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import matplotlib.pyplot as plt",
+      "language": "python",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nimport matplotlib.pyplot as plt ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "as",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Finally to display the plot we can use the functions plot() and show() from pyplot.",
+      "html": "<p>Finally to display the plot we can use the functions plot() and show() from pyplot.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\ncm_display.plot()\nplt.show() ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "cm_display.plot() plt.show()",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\ncm_display.plot()\nplt.show() ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "See the whole example in action:",
+      "html": "<p>See the whole example in action:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  import matplotlib.pyplot as pltimport numpyfrom sklearn import metrics\n  actual = numpy.random.binomial(1,.9,size = 1000)predicted = \n  numpy.random.binomial(1,.9,size = 1000)confusion_matrix = \n  metrics.confusion_matrix(actual, predicted)cm_display = \n  metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, \n  display_labels = [0, 1])cm_display.plot()plt.show() ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "as",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "from",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".9",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1000",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".9",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1000",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "images": [
+        {
+          "src": "img_ml_confusion_matrix.png",
+          "alt": "",
+          "title": "",
+          "local_path": "/home/ziko/Dev/Scraper/assets/python/img_ml_confusion_matrix.png"
+        }
+      ],
+      "code": "import matplotlib.pyplot as pltimport numpyfrom sklearn import metrics\nactual = numpy.random.binomial(1,.9,size = 1000)predicted =\nnumpy.random.binomial(1,.9,size = 1000)confusion_matrix =\nmetrics.confusion_matrix(actual, predicted)cm_display =\nmetrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix,\ndisplay_labels = [0, 1])cm_display.plot()plt.show()",
+      "syntax_highlighting": [
+        {
+          "text": "\n import matplotlib.pyplot as pltimport numpyfrom sklearn import metrics\n actual = numpy.random.binomial(1,.9,size = 1000)predicted = \n  numpy.random.binomial(1,.9,size = 1000)confusion_matrix = \n  metrics.confusion_matrix(actual, predicted)cm_display = \n  metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, \n  display_labels = [0, 1])cm_display.plot()plt.show() ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "as",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "from",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".9",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1000",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".9",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1000",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\"><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> matplotlib.pyplot <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">as</span> plt<br/><span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> numpy<br/><span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">from</span> sklearn <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> metrics<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <br/>actual = numpy.random.binomial(<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>,<span class=\"pythonnumbercolor\" style=\"color:#905\">.9</span>,size = <span class=\"pythonnumbercolor\" style=\"color:#905\">1000</span>)<br/>predicted = <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  numpy.random.binomial(<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>,<span class=\"pythonnumbercolor\" style=\"color:#905\">.9</span>,size = <span class=\"pythonnumbercolor\" style=\"color:#905\">1000</span>)<br/><br/>confusion_matrix = <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  metrics.confusion_matrix(actual, predicted)<br/><br/>cm_display = <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  display_labels = [<span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>])<br/><br/>cm_display.plot()<br/>plt.show() </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  import matplotlib.pyplot as pltimport numpyfrom sklearn import metrics\n  actual = numpy.random.binomial(1,.9,size = 1000)predicted = \n  numpy.random.binomial(1,.9,size = 1000)confusion_matrix = \n  metrics.confusion_matrix(actual, predicted)cm_display = \n  metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, \n  display_labels = [0, 1])cm_display.plot()plt.show() ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "as",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "from",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".9",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1000",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".9",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1000",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Results Explained",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Confusion Matrix created has four different quadrants:",
+      "html": "<p>The Confusion Matrix created has four different quadrants:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "True Negative (Top-Left Quadrant) False Positive (Top-Right Quadrant) False Negative (Bottom-Left Quadrant) True Positive (Bottom-Right Quadrant)",
+      "html": "<p>\nTrue Negative (Top-Left Quadrant)<br/>\nFalse Positive (Top-Right Quadrant)<br/>\nFalse Negative (Bottom-Left Quadrant)<br/>\nTrue Positive (Bottom-Right Quadrant)<br/>\n</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "True means that the values were accurately predicted, False means that there was an error or wrong prediction.",
+      "html": "<p>True means that the values were accurately predicted, False means that there was an error or wrong prediction.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now that we have made a Confusion Matrix, we can calculate different measures to quantify the quality of the model. First, lets look at Accuracy.",
+      "html": "<p>Now that we have made a Confusion Matrix, we can calculate different measures to quantify the quality of the model. First, lets look at Accuracy.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "ADVERTISEMENT",
+      "html": "<p style=\"text-align:center;font-size:80%;\">ADVERTISEMENT</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Created Metrics",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The matrix provides us with many useful metrics that help us to evaluate our classification model.",
+      "html": "<p>The matrix provides us with many useful metrics that help us to evaluate our classification model.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The different measures include: Accuracy, Precision, Sensitivity (Recall), Specificity, and the F-score, explained below.",
+      "html": "<p>The different measures include: Accuracy, Precision, Sensitivity (Recall), Specificity, and the F-score, explained below.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Accuracy",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Accuracy measures how often the model is correct.",
+      "html": "<p>Accuracy measures how often the model is correct.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "How to Calculate",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "(True Positive + True Negative) / Total Predictions",
+      "html": "<p>(True Positive + True Negative) / Total Predictions</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nAccuracy = metrics.accuracy_score(actual, predicted)\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Accuracy = metrics.accuracy_score(actual, predicted)",
+      "syntax_highlighting": [
+        {
+          "text": "\nAccuracy = metrics.accuracy_score(actual, predicted)\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nAccuracy = metrics.accuracy_score(actual, predicted)<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nAccuracy = metrics.accuracy_score(actual, predicted)\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Precision",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Of the positives predicted, what percentage is truly positive?",
+      "html": "<p>Of the positives predicted, what percentage is truly positive?</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "How to Calculate",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "True Positive / (True Positive + False Positive)",
+      "html": "<p>True Positive / (True Positive + False Positive)</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Precision does not evaluate the correctly predicted negative cases:",
+      "html": "<p>Precision does not evaluate the correctly predicted negative cases:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nPrecision = metrics.precision_score(actual, predicted)\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Precision = metrics.precision_score(actual, predicted)",
+      "syntax_highlighting": [
+        {
+          "text": "\nPrecision = metrics.precision_score(actual, predicted)\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nPrecision = metrics.precision_score(actual, predicted)<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nPrecision = metrics.precision_score(actual, predicted)\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Sensitivity (Recall)",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Of all the positive cases, what percentage are predicted positive?",
+      "html": "<p>Of all the positive cases, what percentage are predicted positive?</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Sensitivity (sometimes called Recall) measures how good the model is at predicting positives.",
+      "html": "<p>Sensitivity (sometimes called Recall) measures how good the model is at predicting positives.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This means it looks at true positives and false negatives (which are positives that have been incorrectly predicted as negative).",
+      "html": "<p>This means it looks at true positives and false negatives (which are positives that have been incorrectly predicted as negative).</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "How to Calculate",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "True Positive / (True Positive + False Negative)",
+      "html": "<p>True Positive / (True Positive + False Negative)</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Sensitivity is good at understanding how well the model predicts something is positive:",
+      "html": "<p>Sensitivity is good at understanding how well the model predicts something is positive:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSensitivity_recall = metrics.recall_score(actual, predicted)\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Sensitivity_recall = metrics.recall_score(actual, predicted)",
+      "syntax_highlighting": [
+        {
+          "text": "\nSensitivity_recall = metrics.recall_score(actual, predicted)\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nSensitivity_recall = metrics.recall_score(actual, predicted)<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSensitivity_recall = metrics.recall_score(actual, predicted)\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Specificity",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How well the model is at prediciting negative results?",
+      "html": "<p>How well the model is at prediciting negative results?</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Specificity is similar to sensitivity, but looks at it from the persepctive of negative results.",
+      "html": "<p>Specificity is similar to sensitivity, but looks at it from the persepctive of negative results.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "How to Calculate",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "True Negative / (True Negative + False Positive)",
+      "html": "<p>True Negative / (True Negative + False Positive)</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Since it is just the opposite of Recall, we use the recall_score function, taking the opposite position label:",
+      "html": "<p>Since it is just the opposite of Recall, we use the recall_score function, taking the opposite position label:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSpecificity = metrics.recall_score(actual, predicted, pos_label=0)\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Specificity = metrics.recall_score(actual, predicted, pos_label=0)",
+      "syntax_highlighting": [
+        {
+          "text": "\nSpecificity = metrics.recall_score(actual, predicted, pos_label=0)\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nSpecificity = metrics.recall_score(actual, predicted, pos_label=<span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>)<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSpecificity = metrics.recall_score(actual, predicted, pos_label=0)\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "F-score",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "F-score is the \"harmonic mean\" of precision and sensitivity.",
+      "html": "<p>F-score is the \"harmonic mean\" of precision and sensitivity.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It considers both false positive and false negative cases and is good for imbalanced datasets.",
+      "html": "<p>It considers both false positive and false negative cases and is good for imbalanced datasets.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "How to Calculate",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "2 * ((Precision * Sensitivity) / (Precision + Sensitivity))",
+      "html": "<p>2 * ((Precision * Sensitivity) / (Precision + Sensitivity))</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This score does not take into consideration the True Negative values:",
+      "html": "<p>This score does not take into consideration the True Negative values:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nF1_score = metrics.f1_score(actual, predicted)\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "F1_score = metrics.f1_score(actual, predicted)",
+      "syntax_highlighting": [
+        {
+          "text": "\nF1_score = metrics.f1_score(actual, predicted)\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nF1_score = metrics.f1_score(actual, predicted)<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nF1_score = metrics.f1_score(actual, predicted)\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "All calulations in one:",
+      "html": "<p>All calulations in one:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n#metrics\nprint({\"Accuracy\":Accuracy,\"Precision\":Precision,\"Sensitivity_recall\":Sensitivity_recall,\"Specificity\":Specificity,\"F1_score\":F1_score}) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "#metrics",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"Accuracy\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\"Precision\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\"Sensitivity_recall\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\"Specificity\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\"F1_score\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "#metrics\nprint({\"Accuracy\":Accuracy,\"Precision\":Precision,\"Sensitivity_recall\":Sensitivity_recall,\"Specificity\":Specificity,\"F1_score\":F1_score})",
+      "syntax_highlighting": [
+        {
+          "text": "\n#metrics\nprint({\"Accuracy\":Accuracy,\"Precision\":Precision,\"Sensitivity_recall\":Sensitivity_recall,\"Specificity\":Specificity,\"F1_score\":F1_score}) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "#metrics",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Accuracy\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\"Precision\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\"Sensitivity_recall\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\"Specificity\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\"F1_score\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"commentcolor\" style=\"color:slategray\">#metrics<br/></span>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>({<span class=\"pythonstringcolor\" style=\"color:green\">\"Accuracy\"</span>:Accuracy,<span class=\"pythonstringcolor\" style=\"color:green\">\"Precision\"</span>:Precision,<span class=\"pythonstringcolor\" style=\"color:green\">\"Sensitivity_recall\"</span>:Sensitivity_recall,<span class=\"pythonstringcolor\" style=\"color:green\">\"Specificity\"</span>:Specificity,<span class=\"pythonstringcolor\" style=\"color:green\">\"F1_score\"</span>:F1_score}) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n#metrics\nprint({\"Accuracy\":Accuracy,\"Precision\":Precision,\"Sensitivity_recall\":Sensitivity_recall,\"Specificity\":Specificity,\"F1_score\":F1_score}) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "#metrics",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"Accuracy\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\"Precision\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\"Sensitivity_recall\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\"Specificity\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\"F1_score\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

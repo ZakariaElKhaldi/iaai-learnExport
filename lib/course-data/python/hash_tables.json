@@ -1,0 +1,2549 @@
+{
+  "title": "Hash Tables with Python",
+  "url": "https://www.w3schools.com/python/python_dsa_hashtables.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Hash Tables with Python",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Hash Table",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A Hash Table is a data structure designed to be fast to work with.",
+      "html": "<p>A Hash Table is a data structure designed to be fast to work with.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The reason Hash Tables are sometimes preferred instead of arrays or linked lists is because searching for, adding, and deleting data can be done really quickly, even for large amounts of data.",
+      "html": "<p>The reason Hash Tables are sometimes preferred instead of arrays or linked lists is because searching for, adding, and deleting data can be done really quickly, even for large amounts of data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Linked List",
+          "href": "https://www.w3schools.com/python_dsa_linkedlists.asp",
+          "title": ""
+        }
+      ],
+      "text": "In a Linked List , finding a person \"Bob\" takes time because we would have to go from one node to the next, checking each node, until the node with \"Bob\" is found.",
+      "html": "<p>In a <a href=\"python_dsa_linkedlists.asp\">Linked List</a>, finding a person \"Bob\" takes time because we would have to go from one node to the next, checking each node, until the node with \"Bob\" is found.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "list/array",
+          "href": "https://www.w3schools.com/python_dsa_lists.asp",
+          "title": ""
+        }
+      ],
+      "text": "And finding \"Bob\" in an list/array could be fast if we knew the index, but when we only know the name \"Bob\", we need to compare each element and that takes time.",
+      "html": "<p>And finding \"Bob\" in an <a href=\"python_dsa_lists.asp\">list/array</a> could be fast if we knew the index, but when we only know the name \"Bob\", we need to compare each element and that takes time.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With a Hash Table however, finding \"Bob\" is done really fast because there is a way to go directly to where \"Bob\" is stored, using something called a hash function.",
+      "html": "<p>With a Hash Table however, finding \"Bob\" is done really fast because there is a way to go directly to where \"Bob\" is stored, using something called a hash function.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Building A Hash Table from Scratch",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To get the idea of what a Hash Table is, let's try to build one from scratch, to store unique first names inside it.",
+      "html": "<p>To get the idea of what a Hash Table is, let's try to build one from scratch, to store unique first names inside it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We will build the Hash Table in 5 steps:",
+      "html": "<p>We will build the Hash Table in 5 steps:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 1: Create an Empty List",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To keep it simple, let's create a list with 10 empty elements.",
+      "html": "<p>To keep it simple, let's create a list with 10 empty elements.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nmy_list = [None, None, None, None, None, None, None, None, None, None]\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_list = [None, None, None, None, None, None, None, None, None, None]",
+      "syntax_highlighting": [
+        {
+          "text": "\nmy_list = [None, None, None, None, None, None, None, None, None, None]\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nmy_list = [None, None, None, None, None, None, None, None, None, None]<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nmy_list = [None, None, None, None, None, None, None, None, None, None]\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Each of these elements is called a bucket in a Hash Table.",
+      "html": "<p>Each of these elements is called a <strong>bucket</strong> in a Hash Table.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 2: Create a Hash Function",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now comes the special way we interact with Hash Tables.",
+      "html": "<p>Now comes the special way we interact with Hash Tables.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We want to store a name directly into its right place in the array, and this is where the hash function comes in.",
+      "html": "<p>We want to store a name directly into its right place in the array, and this is where the <strong>hash function</strong> comes in.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A hash function can be made in many ways, it is up to the creator of the Hash Table. A common way is to find a way to convert the value into a number that equals one of the Hash Table's index numbers, in this case a number from 0 to 9.",
+      "html": "<p>A hash function can be made in many ways, it is up to the creator of the Hash Table.\nA common way is to find a way to convert the value into a number that equals one of the Hash Table's index numbers, in this case a number from 0 to 9.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In our example we will use the Unicode number of each character, summarize them and do a modulo 10 operation to get index numbers 0-9.",
+      "html": "<p>In our example we will use the Unicode number of each character, summarize them and do a modulo 10 operation to get index numbers 0-9.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/python/trypython.asp?filename=demo_dsa_hashtable",
+        "syntaxHighlighting": [
+          {
+            "text": "\ndef hash_function(value):\n\u00a0\u00a0sum_of_chars = 0\n\u00a0\u00a0for char in value:\n\u00a0\u00a0\u00a0\u00a0sum_of_chars += ord(char)\n        \n\u00a0\u00a0return sum_of_chars % 10\n\nprint(\"'Bob' has hash code:\", hash_function('Bob'))\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "ord",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"'Bob' has hash code:\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Bob'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def hash_function(value):\nsum_of_chars = 0\nfor char in value:\nsum_of_chars += ord(char)\n\nreturn sum_of_chars % 10\n\nprint(\"'Bob' has hash code:\", hash_function('Bob'))",
+      "syntax_highlighting": [
+        {
+          "text": "\ndef hash_function(value):\n\u00a0\u00a0sum_of_chars = 0\n\u00a0\u00a0for char in value:\n\u00a0\u00a0\u00a0\u00a0sum_of_chars += ord(char)\n \n\u00a0\u00a0return sum_of_chars % 10\n\nprint(\"'Bob' has hash code:\", hash_function('Bob'))\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "ord",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"'Bob' has hash code:\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Bob'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> hash_function(value):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0sum_of_chars = <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> char <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> value:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0sum_of_chars += <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">ord</span>(char)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/> <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> sum_of_chars % <span class=\"pythonnumbercolor\" style=\"color:#905\">10</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(<span class=\"pythonstringcolor\" style=\"color:green\">\"'Bob' has hash code:\"</span>, hash_function(<span class=\"pythonstringcolor\" style=\"color:green\">'Bob'</span>))<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/python/trypython.asp?filename=demo_dsa_hashtable",
+      "syntax_highlighting_data": [
+        {
+          "text": "\ndef hash_function(value):\n\u00a0\u00a0sum_of_chars = 0\n\u00a0\u00a0for char in value:\n\u00a0\u00a0\u00a0\u00a0sum_of_chars += ord(char)\n        \n\u00a0\u00a0return sum_of_chars % 10\n\nprint(\"'Bob' has hash code:\", hash_function('Bob'))\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "ord",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"'Bob' has hash code:\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Bob'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The character B has Unicode number 66 , o has 111 , and b has 98 . Adding those together we get 275 . Modulo 10 of 275 is 5 , so \"Bob\" should be stored at index 5 .",
+      "html": "<p>The character <code>B</code> has Unicode number <code>66</code>,\n  <code>o</code> has <code>111</code>,\n  and <code>b</code> has <code>98</code>.\n  Adding those together we get <code>275</code>.\n  Modulo 10 of <code>275</code> is <code>5</code>,\n  so <code>\"Bob\"</code> should be stored at index <code>5</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The number returned by the hash function is called the hash code .",
+      "html": "<p>The number returned by the hash function is called the <strong>hash code</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Unicode number: Everything in our computers are stored as numbers, and the Unicode code number is a unique number that exist for every character. For example, the character A has Unicode number 65 .",
+      "html": "<p><strong>Unicode number: </strong>Everything in our computers are stored as numbers, and the Unicode code number is a unique number that exist for every character.\n  For example, the character <code>A</code> has Unicode number <code>65</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "this page",
+          "href": "https://www.w3schools.com/charsets/ref_utf_basic_latin.asp",
+          "title": ""
+        }
+      ],
+      "text": "See this page for more information about how characters are represented as numbers.",
+      "html": "<p>See <a href=\"/charsets/ref_utf_basic_latin.asp\">this page</a> for more information about how characters are represented as numbers.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Modulo: A modulo operation divides a number with another number, and gives us the resulting remainder. So for example, 7 % 3 will give us the remainder 1 . (Dividing 7 apples between 3 people, means that each person gets 2 apples, with 1 apple to spare.)",
+      "html": "<p><strong>Modulo: </strong>A modulo operation divides a number with another number, and gives us the resulting remainder.\n    So for example, <code>7 % 3</code> will give us the remainder <code>1</code>.\n    (Dividing 7 apples between 3 people, means that each person gets 2 apples, with 1 apple to spare.)</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In Python and most programming languages, the modolo operator is written as % .",
+      "html": "<p>In Python and most programming languages, the modolo operator is written as <code>%</code>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 3: Inserting an Element",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "According to our hash function, \"Bob\" should be stored at index 5.",
+      "html": "<p>According to our hash function, \"Bob\" should be stored at index 5.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Lets create a function that add items to our hash table:",
+      "html": "<p>Lets create a function that add items to our hash table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\ndef add(name):\n\u00a0\u00a0index = hash_function(name)\n\u00a0\u00a0my_list[index] = name\n\nadd('Bob')\nprint(my_list) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Bob'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def add(name):\nindex = hash_function(name)\nmy_list[index] = name\n\nadd('Bob')\nprint(my_list)",
+      "syntax_highlighting": [
+        {
+          "text": "\ndef add(name):\n\u00a0\u00a0index = hash_function(name)\n\u00a0\u00a0my_list[index] = name\n\nadd('Bob')\nprint(my_list) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Bob'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> add(name):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0index = hash_function(name)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0my_list[index] = name<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nadd(<span class=\"pythonstringcolor\" style=\"color:green\">'Bob'</span>)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(my_list) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\ndef add(name):\n\u00a0\u00a0index = hash_function(name)\n\u00a0\u00a0my_list[index] = name\n\nadd('Bob')\nprint(my_list) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Bob'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After storing \"Bob\" at index 5, our array now looks like this:",
+      "html": "<p>After storing \"Bob\" at index 5, our array now looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nmy_list = [None, None, None, None, None, 'Bob', None, None, None, None] ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "'Bob'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_list = [None, None, None, None, None, 'Bob', None, None, None, None]",
+      "syntax_highlighting": [
+        {
+          "text": "\nmy_list = [None, None, None, None, None, 'Bob', None, None, None, None] ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "'Bob'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nmy_list = [None, None, None, None, None, <span class=\"pythonstringcolor\" style=\"color:green\">'Bob'</span>, None, None, None, None] </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nmy_list = [None, None, None, None, None, 'Bob', None, None, None, None] ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "'Bob'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can use the same functions to store \"Pete\", \"Jones\", \"Lisa\", and \"Siri\" as well.",
+      "html": "<p>We can use the same functions to store \"Pete\", \"Jones\", \"Lisa\", and \"Siri\" as well.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  add('Pete')\n  add('Jones')\n  add('Lisa')\n  add('Siri')\n  print(my_list) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Pete'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Jones'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Lisa'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Siri'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "add('Pete')\nadd('Jones')\nadd('Lisa')\nadd('Siri')\nprint(my_list)",
+      "syntax_highlighting": [
+        {
+          "text": "\n  add('Pete')\n  add('Jones')\n  add('Lisa')\n  add('Siri')\n print(my_list) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Pete'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Jones'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Lisa'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Siri'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\"><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Pete'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Jones'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Lisa'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Siri'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(my_list) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  add('Pete')\n  add('Jones')\n  add('Lisa')\n  add('Siri')\n  print(my_list) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Pete'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Jones'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Lisa'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Siri'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After using the hash function to store those names in the correct position, our array looks like this:",
+      "html": "<p>After using the hash function to store those names in the correct position, our array looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n    my_list = [None, 'Jones', None, 'Lisa', None, 'Bob', None, 'Siri', 'Pete', None]\n   ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Jones'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Lisa'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Bob'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Siri'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Pete'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_list = [None, 'Jones', None, 'Lisa', None, 'Bob', None, 'Siri', 'Pete', None]",
+      "syntax_highlighting": [
+        {
+          "text": "\n    my_list = [None, 'Jones', None, 'Lisa', None, 'Bob', None, 'Siri', 'Pete', None]\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Jones'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Lisa'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Bob'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Siri'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Pete'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\"><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    my_list = [None, <span class=\"pythonstringcolor\" style=\"color:green\">'Jones'</span>, None, <span class=\"pythonstringcolor\" style=\"color:green\">'Lisa'</span>, None, <span class=\"pythonstringcolor\" style=\"color:green\">'Bob'</span>, None, <span class=\"pythonstringcolor\" style=\"color:green\">'Siri'</span>, <span class=\"pythonstringcolor\" style=\"color:green\">'Pete'</span>, None]<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n    my_list = [None, 'Jones', None, 'Lisa', None, 'Bob', None, 'Siri', 'Pete', None]\n   ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Jones'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Lisa'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Bob'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Siri'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Pete'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 4: Looking up a name",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now that we have a super basic Hash Table, let's see how we can look up a name from it.",
+      "html": "<p>Now that we have a super basic Hash Table, let's see how we can look up a name from it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To find \"Pete\" in the Hash Table, we give the name \"Pete\" to our hash function. The hash function returns 8 , meaning that \"Pete\" is stored at index 8.",
+      "html": "<p>To find \"Pete\" in the Hash Table, we give the name \"Pete\" to our hash function. The hash function returns <code>8</code>,\nmeaning that \"Pete\" is stored at index 8.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\ndef contains(name):\n\u00a0\u00a0index = hash_function(name)\n\u00a0\u00a0return my_list[index] == name\n\nprint(\"'Pete' is in the Hash Table:\", contains('Pete')) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"'Pete' is in the Hash Table:\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Pete'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def contains(name):\nindex = hash_function(name)\nreturn my_list[index] == name\n\nprint(\"'Pete' is in the Hash Table:\", contains('Pete'))",
+      "syntax_highlighting": [
+        {
+          "text": "\ndef contains(name):\n\u00a0\u00a0index = hash_function(name)\n\u00a0\u00a0return my_list[index] == name\n\nprint(\"'Pete' is in the Hash Table:\", contains('Pete')) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"'Pete' is in the Hash Table:\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Pete'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> contains(name):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0index = hash_function(name)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> my_list[index] == name<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(<span class=\"pythonstringcolor\" style=\"color:green\">\"'Pete' is in the Hash Table:\"</span>, contains(<span class=\"pythonstringcolor\" style=\"color:green\">'Pete'</span>)) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\ndef contains(name):\n\u00a0\u00a0index = hash_function(name)\n\u00a0\u00a0return my_list[index] == name\n\nprint(\"'Pete' is in the Hash Table:\", contains('Pete')) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"'Pete' is in the Hash Table:\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Pete'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Because we do not have to check element by element to find out if \"Pete\" is in there, we can just use the hash function to go straight to the right element!",
+      "html": "<p>Because we do not have to check element by element to find out if \"Pete\" is in there,\n  we can just use the hash function to go straight to the right element!</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 5: Handling collisions",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's also add \"Stuart\" to our Hash Table.",
+      "html": "<p>Let's also add \"Stuart\" to our Hash Table.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We give \"Stuart\" to our hash function, which returns 3 , meaning \"Stuart\" should be stored at index 3.",
+      "html": "<p>We give \"Stuart\" to our hash function, which returns <code>3</code>, meaning \"Stuart\" should be stored at index 3.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Trying to store \"Stuart\" in index 3, creates what is called a collision , because \"Lisa\" is already stored at index 3.",
+      "html": "<p>Trying to store \"Stuart\" in index 3, creates what is called a <strong>collision</strong>, because \"Lisa\" is already stored at index 3.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To fix the collision, we can make room for more elements in the same bucket. Solving the collision problem in this way is called chaining , and means giving room for more elements in the same bucket.",
+      "html": "<p>To fix the collision, we can make room for more elements in the same bucket.\n  Solving the collision problem in this way is called <strong>chaining</strong>, \n  and means giving room for more elements in the same bucket.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Start by creating a new list with the same size as the original list, but with empty buckets:",
+      "html": "<p>Start by creating a new list with the same size as the original list, but with empty buckets:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n    my_list = [\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[]\n    ] ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_list = [\n[],\n[],\n[],\n[],\n[],\n[],\n[],\n[],\n[],\n[]\n]",
+      "syntax_highlighting": [
+        {
+          "text": "\n    my_list = [\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[]\n    ] ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\"><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    my_list = [<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    \u00a0\u00a0[]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>    ] </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n    my_list = [\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[],\n    \u00a0\u00a0[]\n    ] ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Rewrite the add() function, and add the same names as before:",
+      "html": "<p>Rewrite the <code>add()</code> function, and add the same names as before:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  def add(name):\n  \u00a0\u00a0index = hash_function(name)\n  \u00a0\u00a0my_list[index].append(name)\n  \n  add('Bob')\n  add('Pete')\n  add('Jones')\n  add('Lisa')\n  add('Siri')\n  add('Stuart')\n  print(my_list) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Bob'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Pete'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Jones'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Lisa'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Siri'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Stuart'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def add(name):\nindex = hash_function(name)\nmy_list[index].append(name)\n\nadd('Bob')\nadd('Pete')\nadd('Jones')\nadd('Lisa')\nadd('Siri')\nadd('Stuart')\nprint(my_list)",
+      "syntax_highlighting": [
+        {
+          "text": "\n def add(name):\n  \u00a0\u00a0index = hash_function(name)\n  \u00a0\u00a0my_list[index].append(name)\n \n  add('Bob')\n  add('Pete')\n  add('Jones')\n  add('Lisa')\n  add('Siri')\n  add('Stuart')\n print(my_list) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Bob'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Pete'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Jones'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Lisa'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Siri'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Stuart'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\"><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> add(name):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0index = hash_function(name)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0my_list[index].append(name)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Bob'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Pete'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Jones'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Lisa'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Siri'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  add(<span class=\"pythonstringcolor\" style=\"color:green\">'Stuart'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(my_list) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  def add(name):\n  \u00a0\u00a0index = hash_function(name)\n  \u00a0\u00a0my_list[index].append(name)\n  \n  add('Bob')\n  add('Pete')\n  add('Jones')\n  add('Lisa')\n  add('Siri')\n  add('Stuart')\n  print(my_list) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Bob'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Pete'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Jones'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Lisa'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Siri'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Stuart'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After implementing each bucket as a list, \"Stuart\" can also be stored at index 3, and our Hash Set now looks like this:",
+      "html": "<p>After implementing each bucket as a list, \"Stuart\" can also be stored at index 3, and our Hash Set now looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nmy_list = [\n\u00a0\u00a0[None],\n\u00a0\u00a0['Jones'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Lisa', 'Stuart'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Bob'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Siri'],\n\u00a0\u00a0['Pete'],\n\u00a0\u00a0[None]\n] ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Jones'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Lisa'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Stuart'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Bob'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Siri'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Pete'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_list = [\n[None],\n['Jones'],\n[None],\n['Lisa', 'Stuart'],\n[None],\n['Bob'],\n[None],\n['Siri'],\n['Pete'],\n[None]\n]",
+      "syntax_highlighting": [
+        {
+          "text": "\nmy_list = [\n\u00a0\u00a0[None],\n\u00a0\u00a0['Jones'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Lisa', 'Stuart'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Bob'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Siri'],\n\u00a0\u00a0['Pete'],\n\u00a0\u00a0[None]\n] ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Jones'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Lisa'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Stuart'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Bob'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Siri'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Pete'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nmy_list = [<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[None],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[<span class=\"pythonstringcolor\" style=\"color:green\">'Jones'</span>],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[None],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[<span class=\"pythonstringcolor\" style=\"color:green\">'Lisa'</span>, <span class=\"pythonstringcolor\" style=\"color:green\">'Stuart'</span>],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[None],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[<span class=\"pythonstringcolor\" style=\"color:green\">'Bob'</span>],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[None],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[<span class=\"pythonstringcolor\" style=\"color:green\">'Siri'</span>],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[<span class=\"pythonstringcolor\" style=\"color:green\">'Pete'</span>],<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0[None]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>] </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nmy_list = [\n\u00a0\u00a0[None],\n\u00a0\u00a0['Jones'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Lisa', 'Stuart'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Bob'],\n\u00a0\u00a0[None],\n\u00a0\u00a0['Siri'],\n\u00a0\u00a0['Pete'],\n\u00a0\u00a0[None]\n] ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Jones'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Lisa'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Stuart'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Bob'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Siri'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Pete'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Searching for \"Stuart\" now takes a little bit longer time, because we also find \"Lisa\" in the same bucket, but still much faster than searching the entire Hash Table.",
+      "html": "<p>Searching for \"Stuart\" now takes a little bit longer time, because we also find \"Lisa\" in the same bucket, but still much faster than searching the entire Hash Table.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Uses of Hash Tables",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hash Tables are great for:",
+      "html": "<p>Hash Tables are great for:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The most important reason why Hash Tables are great for these things is that Hash Tables are very fast compared Arrays and Linked Lists, especially for large sets. Arrays and Linked Lists have time complexity O(n) for search and delete, while Hash Tables have just O(1) on average.",
+      "html": "<p>The most important reason why Hash Tables are great for these things is that Hash Tables are very fast compared Arrays and Linked Lists,\n  especially for large sets.\n  Arrays and Linked Lists have time complexity <code>O(n)</code> for search and delete,\n  while Hash Tables have just <code>O(1)</code> on average.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Hash Tables Summarized",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hash Table elements are stored in storage containers called buckets .",
+      "html": "<p>Hash Table elements are stored in storage containers called <strong>buckets</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A hash function takes the key of an element to generate a hash code .",
+      "html": "<p>A <strong>hash function</strong> takes the key of an element to generate a <strong>hash code</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The hash code says what bucket the element belongs to, so now we can go directly to that Hash Table element: to modify it, or to delete it, or just to check if it exists.",
+      "html": "<p>The hash code says what bucket the element belongs to, so now we can go directly to that Hash Table element: to modify it, or to delete it, or just to check if it exists.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A collision happens when two Hash Table elements have the same hash code, because that means they belong to the same bucket .",
+      "html": "<p>A <strong>collision</strong> happens when two Hash Table elements have the same hash code, because that means they belong to the same <strong>bucket</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Collision can be solved by Chaining by using lists to allow more than one element in the same bucket.",
+      "html": "<p>Collision can be solved by <strong>Chaining</strong> by using lists to allow more than one element in the same bucket.</p>"
+    }
+  ]
+}

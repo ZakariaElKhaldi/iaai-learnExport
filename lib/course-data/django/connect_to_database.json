@@ -1,0 +1,354 @@
+{
+  "title": "Django - Connect to PostgreSQL Database",
+  "url": "https://www.w3schools.com/django/django_db_connect.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Connect to Database",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Modify Settings",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To make Django able to connect to your database, you have to specify it in the DATABASES tuple in the settings.py file.",
+      "html": "<p>To make Django able to connect to your database, you have to specify it in the\n<code>DATABASES</code> tuple in the <code>settings.py</code> file.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Before, it looked like this:",
+      "html": "<p>Before, it looked like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": true
+      },
+      "code": ".\n\n\n.\n\n\nDATABASES\n\n=\n\n{\n\n\n'default'\n:\n\n{\n\n\n'ENGINE'\n:\n\n'django.db.backends.sqlite3'\n,\n\n\n'NAME'\n:\n\nBASE_DIR\n\n/\n\n'db.sqlite3'\n,\n\n\n}\n\n\n}\n\n\n.",
+      "language": "unknown",
+      "code_html": "<pre class=\"notranslate w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token punctuation\">.</span>\n<span class=\"token punctuation\">.</span>\n<span class=\"token constant\">DATABASES</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token string-property property\">'default'</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token string-property property\">'ENGINE'</span><span class=\"token operator\">:</span> <span class=\"token string\">'django.db.backends.sqlite3'</span><span class=\"token punctuation\">,</span>\n        <span class=\"token string-property property\">'NAME'</span><span class=\"token operator\">:</span> <span class=\"token constant\">BASE_DIR</span> <span class=\"token operator\">/</span> <span class=\"token string\">'db.sqlite3'</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">.</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now, you should change it to look like this:",
+      "html": "<p>Now, you should change it to look like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": true
+      },
+      "code": ".\n\n\n.\n\n\nDATABASES\n\n=\n\n{\n\n\n'default'\n:\n\n{\n\n\n'ENGINE'\n:\n\n'django.db.backends.postgresql'\n,\n\n\n'NAME'\n:\n\n'postgres'\n,\n\n\n'USER'\n:\n\n'masteruser'\n,\n\n\n'PASSWORD'\n:\n\n'12345678'\n,\n\n\n'HOST'\n:\n\n'w3-django-project.cdxmgq9zqqlr.us-east-1.rds.amazonaws.com'\n,\n\n\n'PORT'\n:\n\n'5432'\n\n\n}\n\n\n}\n\n\n.",
+      "language": "unknown",
+      "code_html": "<pre class=\"notranslate w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token punctuation\">.</span>\n<span class=\"token punctuation\">.</span>\n<span class=\"token constant\">DATABASES</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token string-property property\">'default'</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token string-property property\">'ENGINE'</span><span class=\"token operator\">:</span> <span class=\"token string\">'django.db.backends.postgresql'</span><span class=\"token punctuation\">,</span>\n        <span class=\"token string-property property\">'NAME'</span><span class=\"token operator\">:</span> <span class=\"token string\">'postgres'</span><span class=\"token punctuation\">,</span>\n        <span class=\"token string-property property\">'USER'</span><span class=\"token operator\">:</span> <span class=\"token string\">'masteruser'</span><span class=\"token punctuation\">,</span>\n        <span class=\"token string-property property\">'PASSWORD'</span><span class=\"token operator\">:</span> <span class=\"token string\">'12345678'</span><span class=\"token punctuation\">,</span>\n        <span class=\"token string-property property\">'HOST'</span><span class=\"token operator\">:</span> <span class=\"token string\">'w3-django-project.cdxmgq9zqqlr.us-east-1.rds.amazonaws.com'</span><span class=\"token punctuation\">,</span>\n        <span class=\"token string-property property\">'PORT'</span><span class=\"token operator\">:</span> <span class=\"token string\">'5432'</span>\n    <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">.</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: The values will be different for your project.",
+      "html": "<p><strong>Note:</strong> The values will be different for your project.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Engine?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see in the settings.py file, we insert postgresql instead of sqlite .",
+      "html": "<p>As you can see in the\n<code>settings.py</code> file,\nwe insert\n<code>postgresql</code>\ninstead of\n<code>sqlite</code>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Name?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The database does not have a name, but you have to assign one in order to access the database.",
+      "html": "<p>The database does not have a name, but you have to assign one in order to \naccess the database.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If no name is given, the provider accepts 'postgres' as the name of the database.",
+      "html": "<p>If no name is given, the provider accepts <code>'postgres'</code>\nas the name of the database.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Username and Password?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Insert the username and password that you specified when you created the database.",
+      "html": "<p>Insert the username and password that you specified when you created the database.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Host? Port?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see in the settings.py file, we insert postgresql instead of sqlite , and insert the username and password that we specified when we created the database.",
+      "html": "<p>As you can see in the\n<code>settings.py</code> file,\nwe insert\n<code>postgresql</code>\ninstead of\n<code>sqlite</code>,\nand insert the username and password that we specified when we created the database.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The HOST and PORT can be found under the \"Connectivity & security\" section in the RDS instance. They are described as \"Endpoint\" and \"Port\":",
+      "html": "<p>The \n<code>HOST</code>\nand\n<code>PORT</code>\ncan be found under the \"Connectivity &amp; security\" section in the RDS instance.\nThey are described as \"Endpoint\" and \"Port\":</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img src=\"screenshot_aws_rds_host_port.png\" style=\"max-width:100%;\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which for my project is this:",
+      "html": "<p>Which for my project is this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "'HOST': 'w3-django-project.cdxmgq9zqqlr.us-east-1.rds.amazonaws.com' 'PORT': '5432'",
+      "html": "<p><code>'HOST': 'w3-django-project.cdxmgq9zqqlr.us-east-1.rds.amazonaws.com'</code>\n<br/>\n<code>'PORT': '5432'</code>\n</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Migrate",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Once we have done the changes in settings.py , we must run a migration in our virtual environment, before the changes will take place:",
+      "html": "<p>Once we have done the changes in <code>settings.py</code>,\nwe must run a migration in our virtual environment, before the changes will take place:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "python manage.py migrate",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">python manage.py migrate\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which will give you this result:",
+      "html": "<p>Which will give you this result:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Operations to perform:\n\nApply all migrations: admin, auth, contenttypes, members, sessions\n\nRunning migrations:\n\nApplying contenttypes.0001_initial... OK\n\nApplying auth.0001_initial... OK\n\nApplying admin.0001_initial... OK\n\nApplying admin.0002_logentry_remove_auto_add... OK\n\nApplying admin.0003_logentry_add_action_flag_choices... OK\n\nApplying contenttypes.0002_remove_content_type_name... OK\n\nApplying auth.0002_alter_permission_name_max_length... OK\n\nApplying auth.0003_alter_user_email_max_length... OK\n\nApplying auth.0004_alter_user_username_opts... OK\n\nApplying auth.0005_alter_user_last_login_null... OK\n\nApplying auth.0006_require_contenttypes_0002... OK\n\nApplying auth.0007_alter_validators_add_error_messages... OK\n\nApplying auth.0008_alter_user_username_max_length... OK\n\nApplying auth.0009_alter_user_last_name_max_length... OK\n\nApplying auth.0010_alter_group_name_max_length... OK\n\nApplying auth.0011_update_proxy_permissions... OK\n\nApplying auth.0012_alter_user_first_name_max_length... OK\n\nApplying members.0001_initial... OK\n\nApplying members.0002_members_delete_member... OK\n\nApplying members.0003_rename_members_member... OK\n\nApplying sessions.0001_initial... OK",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\nOperations to perform:<br/>\n\u00a0\u00a0Apply all migrations: admin, auth, contenttypes, members, sessions<br/>\nRunning migrations:<br/>\n\u00a0\u00a0Applying contenttypes.0001_initial... OK<br/>\n\u00a0\u00a0Applying auth.0001_initial... OK<br/>\n\u00a0\u00a0Applying admin.0001_initial... OK<br/>\n\u00a0\u00a0Applying admin.0002_logentry_remove_auto_add... OK<br/>\n\u00a0\u00a0Applying admin.0003_logentry_add_action_flag_choices... OK<br/>\n\u00a0\u00a0Applying contenttypes.0002_remove_content_type_name... OK<br/>\n\u00a0\u00a0Applying auth.0002_alter_permission_name_max_length... OK<br/>\n\u00a0\u00a0Applying auth.0003_alter_user_email_max_length... OK<br/>\n\u00a0\u00a0Applying auth.0004_alter_user_username_opts... OK<br/>\n\u00a0\u00a0Applying auth.0005_alter_user_last_login_null... OK<br/>\n\u00a0\u00a0Applying auth.0006_require_contenttypes_0002... OK<br/>\n\u00a0\u00a0Applying auth.0007_alter_validators_add_error_messages... OK<br/>\n\u00a0\u00a0Applying auth.0008_alter_user_username_max_length... OK<br/>\n\u00a0\u00a0Applying auth.0009_alter_user_last_name_max_length... OK<br/>\n\u00a0\u00a0Applying auth.0010_alter_group_name_max_length... OK<br/>\n\u00a0\u00a0Applying auth.0011_update_proxy_permissions... OK<br/>\n\u00a0\u00a0Applying auth.0012_alter_user_first_name_max_length... OK<br/>\n\u00a0\u00a0Applying members.0001_initial... OK<br/>\n\u00a0\u00a0Applying members.0002_members_delete_member... OK<br/>\n\u00a0\u00a0Applying members.0003_rename_members_member... OK<br/>\n\u00a0\u00a0Applying sessions.0001_initial... OK</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now, if you run the project:",
+      "html": "<p>Now, if you run the project:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "python manage.py runserver",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\npython manage.py runserver\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "127.0.0.1:8000/",
+          "href": "http://127.0.0.1:8000/",
+          "title": ""
+        }
+      ],
+      "text": "And view it in your browser: 127.0.0.1:8000/ .",
+      "html": "<p>And view it in your browser: <code>\n<a href=\"http://127.0.0.1:8000/\" target=\"_blank\">127.0.0.1:8000/</a></code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You will get the home page of the project, but if you click on the \"members\" link, you will see that there are no members.",
+      "html": "<p>You will get the home page of the project, but if you click on the \"members\" link, you will see that\nthere are no members.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "next chapter",
+          "href": "https://www.w3schools.com/django_db_add_members.php",
+          "title": ""
+        }
+      ],
+      "text": "That is because the database is empty. In the next chapter we will fill the database with members.",
+      "html": "<p>That is because the database is empty.\nIn the <a href=\"django_db_add_members.php\">next chapter</a> we will fill the database with members.</p>"
+    }
+  ]
+}

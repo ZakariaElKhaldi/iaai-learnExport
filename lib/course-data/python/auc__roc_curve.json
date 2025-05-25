@@ -1,0 +1,2302 @@
+{
+  "title": "Python Machine Learning - AUC - ROC Curve",
+  "url": "https://www.w3schools.com/python/python_ml_auc_roc.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Machine Learning - AUC - ROC Curve",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "\nNYC Data Science Academy",
+          "href": "https://t.sidekickopen01.com/s3t/c/5/f18dQhb0S7kv8c7RP2W1z75qk59hl3kW7_k2847tBZxCVvfv0f1GTV9PW2RxlDT2bzNMYdZ8s8G01?te=W3R5hFj4cm2zwW41-DxM3zhrr_W3F7ZBj3F6bSSW43T4N94hMnzcW3F4Fvd3zbTMqW2fgYK73F7y_5W3Zp0KM3_Qh5fW4hLxLG2f1Dw_W3F7y_53Zp0KMW3_QgzD3H6xvkW2dTzCR3SYMmGW1mp5CL3ZWTYrW4cbSf23_Qh9QW49NMw73HdlCPW3Hbzjf4fKWwkW43TDjD41YtR1W3zbVlf1S1tRf38WL2&si=6321147182055424&pi=566c78b2-d5c2-45ad-ad0c-74291c07630b",
+          "title": ""
+        }
+      ],
+      "text": "On this page, W3schools.com collaborates with NYC Data Science Academy , to deliver digital training content to our students.",
+      "html": "<p>On this page, W3schools.com collaborates with <a href=\"https://t.sidekickopen01.com/s3t/c/5/f18dQhb0S7kv8c7RP2W1z75qk59hl3kW7_k2847tBZxCVvfv0f1GTV9PW2RxlDT2bzNMYdZ8s8G01?te=W3R5hFj4cm2zwW41-DxM3zhrr_W3F7ZBj3F6bSSW43T4N94hMnzcW3F4Fvd3zbTMqW2fgYK73F7y_5W3Zp0KM3_Qh5fW4hLxLG2f1Dw_W3F7y_53Zp0KMW3_QgzD3H6xvkW2dTzCR3SYMmGW1mp5CL3ZWTYrW4cbSf23_Qh9QW49NMw73HdlCPW3Hbzjf4fKWwkW43TDjD41YtR1W3zbVlf1S1tRf38WL2&amp;si=6321147182055424&amp;pi=566c78b2-d5c2-45ad-ad0c-74291c07630b\" target=\"_blank\">\nNYC Data Science Academy</a>, to deliver digital training content to our students.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "AUC - ROC Curve",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In classification, there are many different evaluation metrics. The most popular is accuracy , which measures how often the model is correct. This is a great metric because it is easy to understand and getting the most correct guesses is often desired. There are some cases where you might consider using another evaluation metric.",
+      "html": "<p>In classification, there are many different evaluation metrics. The most popular is <strong>accuracy</strong>, which measures how often the model is correct. This is a great metric because it is easy to understand and getting the most correct guesses is often desired. There are some cases where you might consider using another evaluation metric.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Another common metric is AUC , area under the receiver operating characteristic ( ROC ) curve. The Reciever operating characteristic curve plots the true positive ( TP ) rate versus the false positive ( FP ) rate at different classification thresholds. The thresholds are different probability cutoffs that separate the two classes in binary classification. It uses probability to tell us how well a model separates the classes.",
+      "html": "<p>Another common metric is <strong>AUC</strong>, area under the receiver operating characteristic (<strong>ROC</strong>) curve.\nThe Reciever operating characteristic curve plots the true positive (<strong>TP</strong>) rate versus the false positive (<strong>FP</strong>) rate at different classification thresholds. The thresholds are different probability cutoffs that separate the two classes in binary classification. It uses probability to tell us how well a model separates the classes.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Imbalanced Data",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Suppose we have an imbalanced data set where the majority of our data is of one value. We can obtain high accuracy for the model by predicting the majority class.",
+      "html": "<p>Suppose we have an imbalanced data set where the majority of our data is of one value. We can obtain high accuracy for the model by predicting the majority class.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nimport numpy as np\nfrom sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve\n\nn = 10000\nratio = .95\nn_0 = int((1-ratio) * n)\nn_1 = int(ratio * n)\n\ny = np.array([0] * n_0 + [1] * n_1)\n# below are the probabilities obtained from a hypothetical model that always predicts the majority class\n# probability of predicting class 1 is going to be 100%\ny_proba = np.array([1]*n)\ny_pred = y_proba > .5\n\nprint(f'accuracy score: {accuracy_score(y, y_pred)}')\ncf_mat = confusion_matrix(y, y_pred)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "as",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "from",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "10000",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".95",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "# below are the probabilities obtained from a hypothetical model that always predicts the majority class",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "# probability of predicting class 1 is going to be 100%",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".5",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'accuracy score: {accuracy_score(y, y_pred)}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'Confusion matrix'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'class 0 accuracy: {cf_mat[0][0]/n_0}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'class 1 accuracy: {cf_mat[1][1]/n_1}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "import numpy as np\nfrom sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve\n\nn = 10000\nratio = .95\nn_0 = int((1-ratio) * n)\nn_1 = int(ratio * n)\n\ny = np.array([0] * n_0 + [1] * n_1)\n# below are the probabilities obtained from a hypothetical model that always predicts the majority class\n# probability of predicting class 1 is going to be 100%\ny_proba = np.array([1]*n)\ny_pred = y_proba > .5\n\nprint(f'accuracy score: {accuracy_score(y, y_pred)}')\ncf_mat = confusion_matrix(y, y_pred)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')",
+      "syntax_highlighting": [
+        {
+          "text": "\nimport numpy as np\nfrom sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve\n\nn = 10000\nratio = .95\nn_0 = int((1-ratio) * n)\nn_1 = int(ratio * n)\n\ny = np.array([0] * n_0 + [1] * n_1)\n# below are the probabilities obtained from a hypothetical model that always predicts the majority class\n# probability of predicting class 1 is going to be 100%\ny_proba = np.array([1]*n)\ny_pred = y_proba > .5\n\nprint(f'accuracy score: {accuracy_score(y, y_pred)}')\ncf_mat = confusion_matrix(y, y_pred)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "as",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "from",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "10000",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".95",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "# below are the probabilities obtained from a hypothetical model that always predicts the majority class",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "# probability of predicting class 1 is going to be 100%",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".5",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'accuracy score: {accuracy_score(y, y_pred)}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'Confusion matrix'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'class 0 accuracy: {cf_mat[0][0]/n_0}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'class 1 accuracy: {cf_mat[1][1]/n_1}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> numpy <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">as</span> np<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">from</span> sklearn.metrics <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> accuracy_score, confusion_matrix, roc_auc_score, roc_curve<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nn = <span class=\"pythonnumbercolor\" style=\"color:#905\">10000</span><br/>\nratio = <span class=\"pythonnumbercolor\" style=\"color:#905\">.95</span><br/>\nn_0 = <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">int</span>((<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>-ratio) * n)<br/>\nn_1 = <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">int</span>(ratio * n)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\ny = np.array([<span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>] * n_0 + [<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>] * n_1)<br/>\n<span class=\"commentcolor\" style=\"color:slategray\"># below are the probabilities obtained from a hypothetical model that always predicts the majority class<br/></span>\n<span class=\"commentcolor\" style=\"color:slategray\"># probability of predicting class 1 is going to be 100%<br/></span>\ny_proba = np.array([<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>]*n)<br/>\ny_pred = y_proba &gt; <span class=\"pythonnumbercolor\" style=\"color:#905\">.5</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'accuracy score: {accuracy_score(y, y_pred)}'</span>)<br/>\ncf_mat = confusion_matrix(y, y_pred)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(<span class=\"pythonstringcolor\" style=\"color:green\">'Confusion matrix'</span>)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(cf_mat)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'class 0 accuracy: {cf_mat[0][0]/n_0}'</span>)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'class 1 accuracy: {cf_mat[1][1]/n_1}'</span>)<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nimport numpy as np\nfrom sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve\n\nn = 10000\nratio = .95\nn_0 = int((1-ratio) * n)\nn_1 = int(ratio * n)\n\ny = np.array([0] * n_0 + [1] * n_1)\n# below are the probabilities obtained from a hypothetical model that always predicts the majority class\n# probability of predicting class 1 is going to be 100%\ny_proba = np.array([1]*n)\ny_pred = y_proba > .5\n\nprint(f'accuracy score: {accuracy_score(y, y_pred)}')\ncf_mat = confusion_matrix(y, y_pred)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "as",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "from",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "10000",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".95",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "# below are the probabilities obtained from a hypothetical model that always predicts the majority class",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "# probability of predicting class 1 is going to be 100%",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".5",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'accuracy score: {accuracy_score(y, y_pred)}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'Confusion matrix'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'class 0 accuracy: {cf_mat[0][0]/n_0}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'class 1 accuracy: {cf_mat[1][1]/n_1}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "ADVERTISEMENT",
+      "html": "<p style=\"text-align:center;font-size:80%;\">ADVERTISEMENT</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Although we obtain a very high accuracy, the model provided no information about the data so it's not useful. We accurately predict class 1 100% of the time while inaccurately predict class 0 0% of the time. At the expense of accuracy, it might be better to have a model that can somewhat separate the two classes.",
+      "html": "<p>Although we obtain a very high accuracy, the model provided no information about the data so it's not useful. We accurately predict class 1 100% of the time while inaccurately predict class 0 0% of the time. At the expense of accuracy, it might be better to have a model that can somewhat separate the two classes.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode\ny_proba_2 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(0, .7, n_0).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, 1,  n_1).tolist()\n)\ny_pred_2 = y_proba_2 > .5\n\nprint(f'accuracy score: {accuracy_score(y, y_pred_2)}')\ncf_mat = confusion_matrix(y, y_pred_2)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}') ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".7",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".3",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".5",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'accuracy score: {accuracy_score(y, y_pred_2)}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'Confusion matrix'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'class 0 accuracy: {cf_mat[0][0]/n_0}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'class 1 accuracy: {cf_mat[1][1]/n_1}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode\ny_proba_2 = np.array(\nnp.random.uniform(0, .7, n_0).tolist() +\nnp.random.uniform(.3, 1,  n_1).tolist()\n)\ny_pred_2 = y_proba_2 > .5\n\nprint(f'accuracy score: {accuracy_score(y, y_pred_2)}')\ncf_mat = confusion_matrix(y, y_pred_2)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}')",
+      "syntax_highlighting": [
+        {
+          "text": "\n# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode\ny_proba_2 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(0, .7, n_0).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, 1,  n_1).tolist()\n)\ny_pred_2 = y_proba_2 > .5\n\nprint(f'accuracy score: {accuracy_score(y, y_pred_2)}')\ncf_mat = confusion_matrix(y, y_pred_2)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}') ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".7",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".3",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".5",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'accuracy score: {accuracy_score(y, y_pred_2)}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'Confusion matrix'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'class 0 accuracy: {cf_mat[0][0]/n_0}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'class 1 accuracy: {cf_mat[1][1]/n_1}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"commentcolor\" style=\"color:slategray\"># below are the probabilities obtained from a hypothetical model that doesn't always predict the mode<br/></span>\ny_proba_2 = np.array(<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0np.random.uniform(<span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">.7</span>, n_0).tolist() + <br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0np.random.uniform(<span class=\"pythonnumbercolor\" style=\"color:#905\">.3</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>,  n_1).tolist()<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>)<br/>\ny_pred_2 = y_proba_2 &gt; <span class=\"pythonnumbercolor\" style=\"color:#905\">.5</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'accuracy score: {accuracy_score(y, y_pred_2)}'</span>)<br/>\ncf_mat = confusion_matrix(y, y_pred_2)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(<span class=\"pythonstringcolor\" style=\"color:green\">'Confusion matrix'</span>)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(cf_mat)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'class 0 accuracy: {cf_mat[0][0]/n_0}'</span>)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'class 1 accuracy: {cf_mat[1][1]/n_1}'</span>) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode\ny_proba_2 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(0, .7, n_0).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, 1,  n_1).tolist()\n)\ny_pred_2 = y_proba_2 > .5\n\nprint(f'accuracy score: {accuracy_score(y, y_pred_2)}')\ncf_mat = confusion_matrix(y, y_pred_2)\nprint('Confusion matrix')\nprint(cf_mat)\nprint(f'class 0 accuracy: {cf_mat[0][0]/n_0}')\nprint(f'class 1 accuracy: {cf_mat[1][1]/n_1}') ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "# below are the probabilities obtained from a hypothetical model that doesn't always predict the mode",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".7",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".3",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".5",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'accuracy score: {accuracy_score(y, y_pred_2)}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'Confusion matrix'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'class 0 accuracy: {cf_mat[0][0]/n_0}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'class 1 accuracy: {cf_mat[1][1]/n_1}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For the second set of predictions, we do not have as high of an accuracy score as the first but the accuracy for each class is more balanced. Using accuracy as an evaluation metric we would rate the first model higher than the second even though it doesn't tell us anything about the data.",
+      "html": "<p>For the second set of predictions, we do not have as high of an accuracy score as the first but the accuracy for each class is more balanced. Using accuracy as an evaluation metric we would rate the first model higher than the second even though it doesn't tell us anything about the data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In cases like this, using another evaluation metric like AUC would be preferred.",
+      "html": "<p>In cases like this, using another evaluation metric like AUC would be preferred.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "import matplotlib.pyplot as plt\n\ndef plot_roc_curve(true_y, y_prob):\n\u00a0\u00a0\u00a0\u00a0\"\"\"\n\u00a0\u00a0\u00a0\u00a0plots the roc curve based of the probabilities\n\u00a0\u00a0\u00a0\u00a0\"\"\"\n    \n\u00a0\u00a0\u00a0\u00a0fpr, tpr, thresholds = roc_curve(true_y, y_prob)\n\u00a0\u00a0\u00a0\u00a0plt.plot(fpr, tpr)\n\u00a0\u00a0\u00a0\u00a0plt.xlabel('False Positive Rate')\n\u00a0\u00a0\u00a0\u00a0plt.ylabel('True Positive Rate') ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "as",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\"\n\u00a0\u00a0\u00a0\u00a0plots the roc curve based of the probabilities\n\u00a0\u00a0\u00a0\u00a0\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'False Positive Rate'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'True Positive Rate'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import matplotlib.pyplot as plt def plot_roc_curve(true_y, y_prob): \"\" \" plots the roc curve based of the probabilities \" \"\" fpr, tpr, thresholds = roc_curve(true_y, y_prob) plt.plot(fpr, tpr) plt.xlabel( 'False Positive Rate' ) plt.ylabel( 'True Positive Rate' )",
+      "language": "python",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "import matplotlib.pyplot as plt\n\ndef plot_roc_curve(true_y, y_prob):\n\u00a0\u00a0\u00a0\u00a0\"\"\"\n\u00a0\u00a0\u00a0\u00a0plots the roc curve based of the probabilities\n\u00a0\u00a0\u00a0\u00a0\"\"\"\n    \n\u00a0\u00a0\u00a0\u00a0fpr, tpr, thresholds = roc_curve(true_y, y_prob)\n\u00a0\u00a0\u00a0\u00a0plt.plot(fpr, tpr)\n\u00a0\u00a0\u00a0\u00a0plt.xlabel('False Positive Rate')\n\u00a0\u00a0\u00a0\u00a0plt.ylabel('True Positive Rate') ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "as",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\"\n\u00a0\u00a0\u00a0\u00a0plots the roc curve based of the probabilities\n\u00a0\u00a0\u00a0\u00a0\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'False Positive Rate'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'True Positive Rate'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nplot_roc_curve(y, y_proba)\nprint(f'model 1 AUC score: {roc_auc_score(y, y_proba)}')    \n     ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'model 1 AUC score: {roc_auc_score(y, y_proba)}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "images": [
+        {
+          "src": "img_ml_auc_roc3.png",
+          "alt": "",
+          "title": "",
+          "local_path": "/home/ziko/Dev/Scraper/assets/python/img_ml_auc_roc3.png"
+        }
+      ],
+      "code": "plot_roc_curve(y, y_proba)\nprint(f'model 1 AUC score: {roc_auc_score(y, y_proba)}')",
+      "syntax_highlighting": [
+        {
+          "text": "\nplot_roc_curve(y, y_proba)\nprint(f'model 1 AUC score: {roc_auc_score(y, y_proba)}')    \n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'model 1 AUC score: {roc_auc_score(y, y_proba)}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nplot_roc_curve(y, y_proba)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'model 1 AUC score: {roc_auc_score(y, y_proba)}'</span>)    <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nplot_roc_curve(y, y_proba)\nprint(f'model 1 AUC score: {roc_auc_score(y, y_proba)}')    \n     ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'model 1 AUC score: {roc_auc_score(y, y_proba)}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nplot_roc_curve(y, y_proba_2)\nprint(f'model 2 AUC score: {roc_auc_score(y, y_proba_2)}') \n     ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'model 2 AUC score: {roc_auc_score(y, y_proba_2)}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "images": [
+        {
+          "src": "img_ml_auc_roc4.png",
+          "alt": "",
+          "title": "",
+          "local_path": "/home/ziko/Dev/Scraper/assets/python/img_ml_auc_roc4.png"
+        }
+      ],
+      "code": "plot_roc_curve(y, y_proba_2)\nprint(f'model 2 AUC score: {roc_auc_score(y, y_proba_2)}')",
+      "syntax_highlighting": [
+        {
+          "text": "\nplot_roc_curve(y, y_proba_2)\nprint(f'model 2 AUC score: {roc_auc_score(y, y_proba_2)}') \n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'model 2 AUC score: {roc_auc_score(y, y_proba_2)}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nplot_roc_curve(y, y_proba_2)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'model 2 AUC score: {roc_auc_score(y, y_proba_2)}'</span>) <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nplot_roc_curve(y, y_proba_2)\nprint(f'model 2 AUC score: {roc_auc_score(y, y_proba_2)}') \n     ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'model 2 AUC score: {roc_auc_score(y, y_proba_2)}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "An AUC score of around .5 would mean that the model is unable to make a distinction between the two classes and the curve would look like a line with a slope of 1. An AUC score closer to 1 means that the model has the ability to separate the two classes and the curve would come closer to the top left corner of the graph.",
+      "html": "<p>An AUC score of around .5 would mean that the model is unable to make a distinction between the two classes and the curve would look like a line with a slope of 1. An AUC score closer to 1 means that the model has the ability to separate the two classes and the curve would come closer to the top left corner of the graph.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Probabilities",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Because AUC is a metric that utilizes probabilities of the class predictions, we can be more confident in a model that has a higher AUC score than one with a lower score even if they have similar accuracies.",
+      "html": "<p>Because AUC is a metric that utilizes probabilities of the class predictions, we can be more confident in a model that has a higher AUC score than one with a lower score even if they have similar accuracies.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the data below, we have two sets of probabilites from hypothetical models. The first has probabilities that are not as \"confident\" when predicting the two classes (the probabilities are close to .5). The second has probabilities that are more \"confident\" when predicting the two classes (the probabilities are close to the extremes of 0 or 1).",
+      "html": "<p>In the data below, we have two sets of probabilites from hypothetical models. The first has probabilities that are not as \"confident\" when predicting the two classes (the probabilities are close to .5). The second has probabilities that are more \"confident\" when predicting the two classes (the probabilities are close to the extremes of 0 or 1).</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nimport numpy as np\n\nn = 10000\ny = np.array([0] * n + [1] * n)\n# \ny_prob_1 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.25, .5, n//2).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, .7, n).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.5, .75, n//2).tolist()\n)\ny_prob_2 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(0, .4, n//2).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, .7, n).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.6, 1, n//2).tolist()\n)\n\nprint(f'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}')\nprint(f'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}')\n\nprint(f'model 1 AUC score: {roc_auc_score(y, y_prob_1)}')\nprint(f'model 2 AUC score: {roc_auc_score(y, y_prob_2)}') ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "as",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "10000",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "# \ny_prob_1 = np.array(",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".25",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".5",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".3",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".7",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".5",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".75",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".4",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".3",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".7",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": ".6",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'model 1 AUC score: {roc_auc_score(y, y_prob_1)}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "'model 2 AUC score: {roc_auc_score(y, y_prob_2)}'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "import numpy as np\n\nn = 10000\ny = np.array([0] * n + [1] * n)\n#\ny_prob_1 = np.array(\nnp.random.uniform(.25, .5, n//2).tolist() +\nnp.random.uniform(.3, .7, n).tolist() +\nnp.random.uniform(.5, .75, n//2).tolist()\n)\ny_prob_2 = np.array(\nnp.random.uniform(0, .4, n//2).tolist() +\nnp.random.uniform(.3, .7, n).tolist() +\nnp.random.uniform(.6, 1, n//2).tolist()\n)\n\nprint(f'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}')\nprint(f'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}')\n\nprint(f'model 1 AUC score: {roc_auc_score(y, y_prob_1)}')\nprint(f'model 2 AUC score: {roc_auc_score(y, y_prob_2)}')",
+      "syntax_highlighting": [
+        {
+          "text": "\nimport numpy as np\n\nn = 10000\ny = np.array([0] * n + [1] * n)\n# \ny_prob_1 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.25, .5, n//2).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, .7, n).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.5, .75, n//2).tolist()\n)\ny_prob_2 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(0, .4, n//2).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, .7, n).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.6, 1, n//2).tolist()\n)\n\nprint(f'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}')\nprint(f'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}')\n\nprint(f'model 1 AUC score: {roc_auc_score(y, y_prob_1)}')\nprint(f'model 2 AUC score: {roc_auc_score(y, y_prob_2)}') ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "as",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "10000",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "# \ny_prob_1 = np.array(",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".25",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".5",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".3",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".7",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".5",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".75",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".4",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".3",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".7",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": ".6",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'model 1 AUC score: {roc_auc_score(y, y_prob_1)}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "'model 2 AUC score: {roc_auc_score(y, y_prob_2)}'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> numpy <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">as</span> np<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nn = <span class=\"pythonnumbercolor\" style=\"color:#905\">10000</span><br/>\ny = np.array([<span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>] * n + [<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>] * n)<br/>\n<span class=\"commentcolor\" style=\"color:slategray\"># <br/>\ny_prob_1 = np.array(<br/></span><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0np.random.uniform(<span class=\"pythonnumbercolor\" style=\"color:#905\">.25</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">.5</span>, n//<span class=\"pythonnumbercolor\" style=\"color:#905\">2</span>).tolist() + <br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0np.random.uniform(<span class=\"pythonnumbercolor\" style=\"color:#905\">.3</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">.7</span>, n).tolist() + <br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0np.random.uniform(<span class=\"pythonnumbercolor\" style=\"color:#905\">.5</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">.75</span>, n//<span class=\"pythonnumbercolor\" style=\"color:#905\">2</span>).tolist()<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>)<br/>\ny_prob_2 = np.array(<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0np.random.uniform(<span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">.4</span>, n//<span class=\"pythonnumbercolor\" style=\"color:#905\">2</span>).tolist() + <br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0np.random.uniform(<span class=\"pythonnumbercolor\" style=\"color:#905\">.3</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">.7</span>, n).tolist() + <br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0np.random.uniform(<span class=\"pythonnumbercolor\" style=\"color:#905\">.6</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>, n//<span class=\"pythonnumbercolor\" style=\"color:#905\">2</span>).tolist()<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'model 1 accuracy score: {accuracy_score(y, y_prob_1&gt;.5)}'</span>)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'model 2 accuracy score: {accuracy_score(y, y_prob_2&gt;.5)}'</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'model 1 AUC score: {roc_auc_score(y, y_prob_1)}'</span>)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(f<span class=\"pythonstringcolor\" style=\"color:green\">'model 2 AUC score: {roc_auc_score(y, y_prob_2)}'</span>) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nimport numpy as np\n\nn = 10000\ny = np.array([0] * n + [1] * n)\n# \ny_prob_1 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.25, .5, n//2).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, .7, n).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.5, .75, n//2).tolist()\n)\ny_prob_2 = np.array(\n\u00a0\u00a0\u00a0\u00a0np.random.uniform(0, .4, n//2).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.3, .7, n).tolist() + \n\u00a0\u00a0\u00a0\u00a0np.random.uniform(.6, 1, n//2).tolist()\n)\n\nprint(f'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}')\nprint(f'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}')\n\nprint(f'model 1 AUC score: {roc_auc_score(y, y_prob_1)}')\nprint(f'model 2 AUC score: {roc_auc_score(y, y_prob_2)}') ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "as",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "10000",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "# \ny_prob_1 = np.array(",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".25",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".5",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".3",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".7",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".5",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".75",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".4",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".3",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".7",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": ".6",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'model 1 accuracy score: {accuracy_score(y, y_prob_1>.5)}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'model 2 accuracy score: {accuracy_score(y, y_prob_2>.5)}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'model 1 AUC score: {roc_auc_score(y, y_prob_1)}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "'model 2 AUC score: {roc_auc_score(y, y_prob_2)}'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nplot_roc_curve(y, y_prob_1) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "images": [
+        {
+          "src": "img_ml_auc_roc6.png",
+          "alt": "",
+          "title": "",
+          "local_path": "/home/ziko/Dev/Scraper/assets/python/img_ml_auc_roc6.png"
+        }
+      ],
+      "code": "plot_roc_curve(y, y_prob_1)",
+      "syntax_highlighting": [
+        {
+          "text": "\nplot_roc_curve(y, y_prob_1) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nplot_roc_curve(y, y_prob_1) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nplot_roc_curve(y, y_prob_1) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nfpr, tpr, thresholds = roc_curve(y, y_prob_2)\nplt.plot(fpr, tpr) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "images": [
+        {
+          "src": "img_ml_auc_roc7.png",
+          "alt": "",
+          "title": "",
+          "local_path": "/home/ziko/Dev/Scraper/assets/python/img_ml_auc_roc7.png"
+        }
+      ],
+      "code": "fpr, tpr, thresholds = roc_curve(y, y_prob_2)\nplt.plot(fpr, tpr)",
+      "syntax_highlighting": [
+        {
+          "text": "\nfpr, tpr, thresholds = roc_curve(y, y_prob_2)\nplt.plot(fpr, tpr) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nfpr, tpr, thresholds = roc_curve(y, y_prob_2)<br/>\nplt.plot(fpr, tpr) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nfpr, tpr, thresholds = roc_curve(y, y_prob_2)\nplt.plot(fpr, tpr) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Even though the accuracies for the two models are similar, the model with the higher AUC score will be more reliable because it takes into account the predicted probability. It is more likely to give you higher accuracy when predicting future data.",
+      "html": "<p>Even though the accuracies for the two models are similar, the model with the higher AUC score will be more reliable because it takes into account the predicted probability. It is more likely to give you higher accuracy when predicting future data.</p>"
+    }
+  ]
+}

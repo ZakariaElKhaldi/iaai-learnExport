@@ -1,0 +1,2990 @@
+{
+  "title": "HTML Web Workers API",
+  "url": "https://www.w3schools.com/html/html5_webworkers.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "HTML Web Workers API",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A web worker is an external JavaScript file that runs in the background, without affecting the performance of the page.",
+      "html": "<p class=\"intro\">A web worker is an external JavaScript file that runs in the background, without affecting the performance of the page.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "What is a Web Worker?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When executing scripts in an HTML page, the page becomes unresponsive until the script is finished.",
+      "html": "<p>When executing scripts in an HTML page, the page becomes unresponsive until the script is finished.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A web worker is an external JavaScript file that runs in the background, independently of other scripts, without affecting the performance of the page. You can continue to do whatever you want: clicking, selecting things, etc., while the web worker runs in the background.",
+      "html": "<p>A web worker is an external JavaScript file that runs in the background, independently \nof other scripts, without affecting the performance of the page. You can continue to do whatever you want: \nclicking, selecting things, etc., while the web worker runs in the background.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Web workers are useful for heavy code that can't be run on the main thread, without causing long tasks that make the page unresponsive.",
+      "html": "<p>Web workers are useful for heavy code that can't be run on the main thread, \nwithout causing long tasks that make the page unresponsive.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Browser Support",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The numbers in the table specify the first browser version that fully support the Web Workers API.",
+      "html": "<p>The numbers in the table specify the first browser version that fully support \nthe Web Workers API.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "browserref",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"browserref notranslate\">\n<tbody><tr>\n<th style=\"width:20%;font-size:16px;text-align:left;\">API</th>\n<th class=\"bsChrome\" style=\"width:16%;\" title=\"Chrome\"></th>\n<th class=\"bsEdge\" style=\"width:16%;\" title=\"Internet Explorer / Edge\"></th>\n<th class=\"bsFirefox\" style=\"width:16%;\" title=\"Firefox\"></th>\n<th class=\"bsSafari\" style=\"width:16%;\" title=\"Safari\"></th>\n<th class=\"bsOpera\" style=\"width:16%;\" title=\"Opera\"></th>\n</tr>\n<tr>\n<td style=\"text-align:left;\">Web Workers</td>\n<td>4.0</td>\n<td>10.0</td>\n<td>3.5</td>\n<td>4.0</td>\n<td>11.5</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "browserref",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "browserref",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Web Workers API Example",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The example below creates a simple web worker that count numbers in the background:",
+      "html": "<p>The example below creates a simple web worker that count numbers in the background:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webworker",
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-padding",
+          "w3-white",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Count numbers:",
+      "language": "unknown",
+      "code_html": "<div class=\"w3-padding w3-white notranslate\">\nCount numbers: <output id=\"result\"></output>\n<p>\n<button onclick=\"startWorker()\">Start Worker</button>\n<button onclick=\"stopWorker()\">Stop Worker</button>\n<script>\nvar w;\nfunction startWorker()\n{\nif(typeof(Worker)!==\"undefined\") {\n  if(typeof(w)==\"undefined\") {\n    w=new Worker(\"demo_workers.js\");\n  }\n  w.onmessage = function (event) {\n    document.getElementById(\"result\").innerHTML=event.data;\n  };\n} else {\n  document.getElementById(\"result\").innerHTML=\"Sorry, your browser does not support Web Workers...\";\n  }\n}\n\nfunction stopWorker()\n{ \nw.terminate();\nw = undefined;\n}\n</script>\n</p></div>",
+      "code_classes": [
+        "w3-padding",
+        "w3-white",
+        "notranslate"
+      ],
+      "tryItLink": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webworker",
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-padding",
+        "w3-white",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: Normally web workers are not used for such simple scripts, but for more CPU intensive tasks!",
+      "html": "<p><strong>Note:</strong> Normally web workers are not used for such simple scripts, but for more CPU intensive tasks!</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Check Web Worker API Support",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Before using web worker, we can quickly check browser support:",
+      "html": "<p>Before using web worker, we can quickly check browser support:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webworker_browsertest",
+        "syntaxHighlighting": [
+          {
+            "text": "\n  <script>const x = document.getElementById(\"result\");\n  if(typeof(Worker) !== \"undefined\") {\u00a0 x.innerHTML = \"Your browser \n  support Web Workers!\";} else {\u00a0 x.innerHTML = \"Sorry, your \n  browser does not support Web Workers.\";}\n  </script>  ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"result\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "typeof",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"undefined\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"Your browser \n  support Web Workers!\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"Sorry, your \n  browser does not support Web Workers.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<script>const x = document.getElementById(\"result\");\nif(typeof(Worker) !== \"undefined\") {\u00a0 x.innerHTML = \"Your browser\nsupport Web Workers!\";} else {\u00a0 x.innerHTML = \"Sorry, your\nbrowser does not support Web Workers.\";}\n</script>",
+      "syntax_highlighting": [
+        {
+          "text": "\n  <script>const x = document.getElementById(\"result\");\n if(typeof(Worker) !== \"undefined\") {\u00a0 x.innerHTML = \"Your browser \n  support Web Workers!\";} else {\u00a0 x.innerHTML = \"Sorry, your \n  browser does not support Web Workers.\";}\n  </script>  ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"result\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "typeof",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"Your browser \n  support Web Workers!\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"Sorry, your \n  browser does not support Web Workers.\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  &lt;script&gt;<br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> x = document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"result\"</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">typeof</span>(Worker) !== <span class=\"jsstringcolor\" style=\"color:green\">\"undefined\"</span>) {<br/>\u00a0 x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> = <span class=\"jsstringcolor\" style=\"color:green\">\"Your browser \n  support Web Workers!\"</span>;<br/>} <span class=\"jskeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0 x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> = <span class=\"jsstringcolor\" style=\"color:green\">\"Sorry, your \n  browser does not support Web Workers.\"</span>;<br/>}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  &lt;/script&gt;  </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webworker_browsertest",
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  <script>const x = document.getElementById(\"result\");\n  if(typeof(Worker) !== \"undefined\") {\u00a0 x.innerHTML = \"Your browser \n  support Web Workers!\";} else {\u00a0 x.innerHTML = \"Sorry, your \n  browser does not support Web Workers.\";}\n  </script>  ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"result\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "typeof",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"Your browser \n  support Web Workers!\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"Sorry, your \n  browser does not support Web Workers.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Create a .js Web Worker File",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now, let's create a web worker in an external JavaScript file.",
+      "html": "<p>Now, let's create a web worker in an external JavaScript file.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here we create a script that counts. The script is stored in the \"demo_workers.js\" file:",
+      "html": "<p>Here we create a script that counts. The script is stored in the \"demo_workers.js\" file:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n \nvar i = 0;\n\nfunction timedCount()\n{\n   \u00a0\ni = i + 1;\n   \u00a0\npostMessage(i);\n\u00a0\u00a0setTimeout(\"timedCount()\",500);\n}\n\ntimedCount();\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"timedCount()\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "500",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "var i = 0;\n\nfunction timedCount()\n{\n\ni = i + 1;\n\npostMessage(i);\nsetTimeout(\"timedCount()\",500);\n}\n\ntimedCount();",
+      "syntax_highlighting": [
+        {
+          "text": "\n \nvar i = 0;\n\nfunction timedCount()\n{\n   \u00a0\ni = i + 1;\n   \u00a0\npostMessage(i);\n\u00a0\u00a0setTimeout(\"timedCount()\",500);\n}\n\ntimedCount();\n ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"timedCount()\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "500",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <div>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> i = <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> timedCount()<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>{<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>   \u00a0\ni = i + <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>   \u00a0\npostMessage(i);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0setTimeout(<span class=\"jsstringcolor\" style=\"color:green\">\"timedCount()\"</span>,<span class=\"jsnumbercolor\" style=\"color:#905\">500</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span><br/>\ntimedCount();\n</div> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n \nvar i = 0;\n\nfunction timedCount()\n{\n   \u00a0\ni = i + 1;\n   \u00a0\npostMessage(i);\n\u00a0\u00a0setTimeout(\"timedCount()\",500);\n}\n\ntimedCount();\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"timedCount()\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "500",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: The important part of the code above is the postMessage() method - which is used to post messages back to the HTML page.",
+      "html": "<p><strong>Note:</strong> The important part of the code above is the <code>postMessage()</code> method - which is used to post messages back to the HTML page.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Create a Web Worker Object",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Once we have created the .js web worker file, we can call it from an HTML page.",
+      "html": "<p>Once we have created the .js web worker file, we can call it from an HTML page.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following lines checks if a worker (w) already exists, if not - it creates a new web worker object and points to the .js file: \"demo_workers.js\":",
+      "html": "<p>The following lines checks if a worker (w) already exists, if not - it creates a new web worker object and \npoints to the .js file: \n\"demo_workers.js\":</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nif (typeof(w) == \"undefined\") {\n  \u00a0 w = new Worker(\"demo_workers.js\");\n } ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "typeof",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"undefined\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"demo_workers.js\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "if (typeof(w) == \"undefined\") {\nw = new Worker(\"demo_workers.js\");\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nif (typeof(w) == \"undefined\") {\n  \u00a0 w = new Worker(\"demo_workers.js\");\n } ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "typeof",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"demo_workers.js\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><div>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (<span class=\"jskeywordcolor\" style=\"color:#005cc5\">typeof</span>(w) == <span class=\"jsstringcolor\" style=\"color:green\">\"undefined\"</span>) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 w = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Worker(<span class=\"jsstringcolor\" style=\"color:green\">\"demo_workers.js\"</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> }</div> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nif (typeof(w) == \"undefined\") {\n  \u00a0 w = new Worker(\"demo_workers.js\");\n } ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "typeof",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"demo_workers.js\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then we can SEND and RETRIEVE messages from the web worker.",
+      "html": "<p>Then we can SEND and RETRIEVE messages from the web worker.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Data is sent between web workers and the main thread via a system of messages - both sides send their messages using the postMessage() method, and respond to messages via the onmessage event handler.",
+      "html": "<p>Data is sent between web workers and the main thread via a system of messages \n- both sides send their messages using the <code>postMessage()</code> \nmethod, and respond to messages via the <code>onmessage</code> \nevent handler.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Add an onmessage event listener to the web worker object.",
+      "html": "<p>Add an <code>onmessage</code> event listener to the web worker \nobject.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nw.onmessage = function(event){\n\u00a0\u00a0document.getElementById(\"result\").innerHTML = event.data;\n };\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "onmessage",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "event",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"result\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "event",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "w.onmessage = function(event){\ndocument.getElementById(\"result\").innerHTML = event.data;\n};",
+      "syntax_highlighting": [
+        {
+          "text": "\nw.onmessage = function(event){\n\u00a0\u00a0document.getElementById(\"result\").innerHTML = event.data;\n };\n ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "onmessage",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "event",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"result\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "event",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><div>\nw.<span class=\"jspropertycolor\" style=\"color:black\">onmessage</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">event</span>){<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"result\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">event</span>.<span class=\"jspropertycolor\" style=\"color:black\">data</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> };\n</div> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nw.onmessage = function(event){\n\u00a0\u00a0document.getElementById(\"result\").innerHTML = event.data;\n };\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "onmessage",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "event",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"result\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "event",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When the web worker in the .js posts a message, the code within the event listener is executed. The data from the web worker is stored in event.data .",
+      "html": "<p>When the web worker in the .js posts a message, the code within the event listener is executed. The data \nfrom the web worker is stored in <code>event.data</code>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Terminate a Web Worker",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When a web worker object is created, it will continue to listen for messages until it is terminated.",
+      "html": "<p>When a web worker object is created, it will continue to listen for messages until it is terminated.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To terminate a web worker object, and free browser/computer resources, use the terminate() method:",
+      "html": "<p>To terminate a web worker object, and free browser/computer resources, use the \n<code>terminate()</code> method:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate\"><div>\nw.terminate();</div></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Reuse the Web Worker",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If you set the web worker variable to undefined, after it has been terminated, you can reuse the worker/code:",
+      "html": "<p>If you set the web worker variable to undefined, after it has been terminated, \nyou can reuse the worker/code:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate\"><div>\n w = undefined;</div></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Full Web Worker Example",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We have already seen the Web Worker code in the .js file.",
+      "html": "<p>We have already seen the Web Worker code in the .js file.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Below is the full code for the HTML page:",
+      "html": "<p>Below is the full code for the HTML page:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "html",
+        "tryItLink": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webworker",
+        "syntaxHighlighting": [
+          {
+            "text": "<!DOCTYPE html>",
+            "color": "rgb(112, 128, 144)",
+            "class": "doctypecolor"
+          },
+          {
+            "text": "<html>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<body>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<p>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<output id=\"result\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " id=\"result\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"result\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</output>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</p>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<button onclick=\"startWorker()\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " onclick=\"startWorker()\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"startWorker()\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</button>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<button onclick=\"stopWorker()\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " onclick=\"stopWorker()\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"stopWorker()\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</button>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<script>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "\n  let w;\n\nfunction startWorker()\n{\u00a0 const x = document.getElementById(\"result\");\n  \u00a0\nif (typeof(Worker) !== \"undefined\")\n{\n\u00a0\u00a0\u00a0 if (typeof(w) == \"undefined\") {\n  \u00a0\u00a0\u00a0\u00a0\u00a0 w = new Worker(\"demo_workers.js\");\n  \u00a0\u00a0\u00a0 }\n\u00a0\u00a0\u00a0\u00a0w.onmessage = function(event) {\n  \u00a0\u00a0\u00a0\u00a0\u00a0 x.innerHTML = event.data;\n\u00a0\u00a0\u00a0\u00a0};\n\u00a0\u00a0}\nelse\n{\n  \u00a0\u00a0\u00a0\n  x.innerHTML = \"Sorry! No Web Worker support.\";\n  \u00a0\u00a0}\n}\n\nfunction stopWorker()\n{ \n\u00a0\u00a0w.terminate();\u00a0\u00a0w = undefined;\n}\n",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"result\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "typeof",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"undefined\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "typeof",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"undefined\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"demo_workers.js\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "onmessage",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "event",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "event",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"Sorry! No Web Worker support.\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "terminate",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "</script>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</body>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</html>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<!DOCTYPE html>\n\n<html>\n\n<body>\n\n\n\n<p>Count numbers: <output id=\"result\"></output></p>\n\n<button onclick=\"startWorker()\">Start Worker</button> \n\n<button onclick=\"stopWorker()\">Stop Worker</button>\n\n\n\n<script>\nlet w;\n\nfunction startWorker()\n{\u00a0 const x = document.getElementById(\"result\");\n\nif (typeof(Worker) !== \"undefined\")\n{\nif (typeof(w) == \"undefined\") {\nw = new Worker(\"demo_workers.js\");\n}\nw.onmessage = function(event) {\nx.innerHTML = event.data;\n};\n}\nelse\n{\n\nx.innerHTML = \"Sorry! No Web Worker support.\";\n}\n}\n\nfunction stopWorker()\n{\nw.terminate();\u00a0\u00a0w = undefined;\n}\n</script>\n\n\n\n</body>\n\n</html>",
+      "syntax_highlighting": [
+        {
+          "text": "<!DOCTYPE html>",
+          "color": "slategray",
+          "class": [
+            "doctypecolor"
+          ]
+        },
+        {
+          "text": "<html>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<body>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<p>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<output id=\"result\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " id=\"result\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"result\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</output>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</p>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<button onclick=\"startWorker()\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " onclick=\"startWorker()\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"startWorker()\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</button>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<button onclick=\"stopWorker()\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " onclick=\"stopWorker()\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"stopWorker()\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</button>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<script>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "\n let w;\n\nfunction startWorker()\n{\u00a0 const x = document.getElementById(\"result\");\n  \u00a0\nif (typeof(Worker) !== \"undefined\")\n{\n\u00a0\u00a0\u00a0 if (typeof(w) == \"undefined\") {\n  \u00a0\u00a0\u00a0\u00a0\u00a0 w = new Worker(\"demo_workers.js\");\n  \u00a0\u00a0\u00a0 }\n\u00a0\u00a0\u00a0\u00a0w.onmessage = function(event) {\n  \u00a0\u00a0\u00a0\u00a0\u00a0 x.innerHTML = event.data;\n\u00a0\u00a0\u00a0\u00a0};\n\u00a0\u00a0}\nelse\n{\n  \u00a0\u00a0\u00a0\n  x.innerHTML = \"Sorry! No Web Worker support.\";\n  \u00a0\u00a0}\n}\n\nfunction stopWorker()\n{ \n\u00a0\u00a0w.terminate();\u00a0\u00a0w = undefined;\n}\n",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"result\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "typeof",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "typeof",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"demo_workers.js\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "onmessage",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "event",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "event",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"Sorry! No Web Worker support.\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "terminate",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "</script>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</body>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</html>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate htmlHigh\">\n<span class=\"doctypecolor\" style=\"color:slategray\">&lt;!DOCTYPE html&gt;</span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>html<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>body<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>p<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Count numbers: <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>output<span class=\"attributecolor\" style=\"color:green\"> id<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"result\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/output<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/p<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>button<span class=\"attributecolor\" style=\"color:green\"> onclick<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"startWorker()\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Start Worker<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/button<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span> <br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>button<span class=\"attributecolor\" style=\"color:green\"> onclick<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"stopWorker()\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Stop Worker<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/button<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>script<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"jscolor\" style=\"color:black\"><br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">let</span> w;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> startWorker()<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>{<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> x = document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"result\"</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (<span class=\"jskeywordcolor\" style=\"color:#005cc5\">typeof</span>(Worker) !== <span class=\"jsstringcolor\" style=\"color:green\">\"undefined\"</span>)<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>{<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (<span class=\"jskeywordcolor\" style=\"color:#005cc5\">typeof</span>(w) == <span class=\"jsstringcolor\" style=\"color:green\">\"undefined\"</span>) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0\u00a0\u00a0 w = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Worker(<span class=\"jsstringcolor\" style=\"color:green\">\"demo_workers.js\"</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 }<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0w.<span class=\"jspropertycolor\" style=\"color:black\">onmessage</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">event</span>) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0\u00a0\u00a0 x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">event</span>.<span class=\"jspropertycolor\" style=\"color:black\">data</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0};<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0}\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">else</span><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>{<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> = <span class=\"jsstringcolor\" style=\"color:green\">\"Sorry! No Web Worker support.\"</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> stopWorker()<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>{ <br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0w.<span class=\"jspropertycolor\" style=\"color:black\">terminate</span>();<br/>\u00a0\u00a0w = undefined;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<br/>\n</span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/script<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/body<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/html<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span> </div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webworker",
+      "syntax_highlighting_data": [
+        {
+          "text": "<!DOCTYPE html>",
+          "color": "rgb(112, 128, 144)",
+          "class": "doctypecolor"
+        },
+        {
+          "text": "<html>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<body>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<p>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<output id=\"result\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " id=\"result\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"result\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</output>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</p>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<button onclick=\"startWorker()\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " onclick=\"startWorker()\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"startWorker()\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</button>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<button onclick=\"stopWorker()\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " onclick=\"stopWorker()\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"stopWorker()\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</button>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<script>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "\n  let w;\n\nfunction startWorker()\n{\u00a0 const x = document.getElementById(\"result\");\n  \u00a0\nif (typeof(Worker) !== \"undefined\")\n{\n\u00a0\u00a0\u00a0 if (typeof(w) == \"undefined\") {\n  \u00a0\u00a0\u00a0\u00a0\u00a0 w = new Worker(\"demo_workers.js\");\n  \u00a0\u00a0\u00a0 }\n\u00a0\u00a0\u00a0\u00a0w.onmessage = function(event) {\n  \u00a0\u00a0\u00a0\u00a0\u00a0 x.innerHTML = event.data;\n\u00a0\u00a0\u00a0\u00a0};\n\u00a0\u00a0}\nelse\n{\n  \u00a0\u00a0\u00a0\n  x.innerHTML = \"Sorry! No Web Worker support.\";\n  \u00a0\u00a0}\n}\n\nfunction stopWorker()\n{ \n\u00a0\u00a0w.terminate();\u00a0\u00a0w = undefined;\n}\n",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"result\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "typeof",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "typeof",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"undefined\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"demo_workers.js\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "onmessage",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "event",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "event",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"Sorry! No Web Worker support.\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "terminate",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "</script>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</body>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</html>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Web Workers and the DOM",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Since web workers are in external .js files, they do not have access to the following JavaScript objects:",
+      "html": "<p>Since web workers are in external .js files, they do not have access to the following JavaScript objects:</p>"
+    }
+  ]
+}

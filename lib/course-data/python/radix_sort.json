@@ -1,0 +1,2396 @@
+{
+  "title": "DSA Radix Sort with Python",
+  "url": "https://www.w3schools.com/python/python_dsa_radixsort.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Radix Sort with Python",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Radix Sort",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Radix Sort algorithm sorts an array by individual digits, starting with the least significant digit (the rightmost one).",
+      "html": "<p>The Radix Sort algorithm sorts an array by individual digits, starting with the least significant digit (the rightmost one).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Click the button to do Radix Sort, one step (digit) at a time.",
+      "html": "<p>Click the button to do Radix Sort, one step (digit) at a time.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The radix (or base) is the number of unique digits in a number system. In the decimal system we normally use, there are 10 different digits from 0 till 9.",
+      "html": "<p>The radix (or base) is the number of unique digits in a number system. In the decimal system we normally use, there are 10 different digits from 0 till 9.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Radix Sort uses the radix so that decimal values are put into 10 different buckets (or containers) corresponding to the digit that is in focus, then put back into the array before moving on to the next digit.",
+      "html": "<p>Radix Sort uses the radix so that decimal values are put into 10 different buckets (or containers) corresponding to the digit that is in focus, then put back into the array before moving on to the next digit.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Radix Sort is a non comparative algorithm that only works with non negative integers.",
+      "html": "<p>Radix Sort is a non comparative algorithm that only works with non negative integers.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Radix Sort algorithm can be described like this:",
+      "html": "<p>The Radix Sort algorithm can be described like this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How it works:",
+      "html": "<p><strong>How it works:</strong></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Stable Sorting",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Radix Sort must sort the elements in a stable way for the result to be sorted correctly.",
+      "html": "<p>Radix Sort must sort the elements in a stable way for the result to be sorted correctly.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A stable sorting algorithm is an algorithm that keeps the order of elements with the same value before and after the sorting. Let's say we have two elements \"K\" and \"L\", where \"K\" comes before \"L\", and they both have value \"3\". A sorting algorithm is considered stable if element \"K\" still comes before \"L\" after the array is sorted.",
+      "html": "<p>A stable sorting algorithm is an algorithm that keeps the order of elements with the same value before and after the sorting. Let's say we have two elements \"K\" and \"L\", where \"K\" comes before \"L\", and they both have value \"3\". A sorting algorithm is considered stable if element \"K\" still comes before \"L\" after the array is sorted.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It makes little sense to talk about stable sorting algorithms for the previous algorithms we have looked at individually, because the result would be same if they are stable or not. But it is important for Radix Sort that the the sorting is done in a stable way because the elements are sorted by just one digit at a time.",
+      "html": "<p>It makes little sense to talk about stable sorting algorithms for the previous algorithms we have looked at individually, because the result would be same if they are stable or not. But it is important for Radix Sort that the the sorting is done in a stable way because the elements are sorted by just one digit at a time.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "So after sorting the elements on the least significant digit and moving to the next digit, it is important to not destroy the sorting work that has already been done on the previous digit position, and that is why we need to take care that Radix Sort does the sorting on each digit position in a stable way.",
+      "html": "<p>So after sorting the elements on the least significant digit and moving to the next digit, it is important to not destroy the sorting work that has already been done on the previous digit position, and that is why we need to take care that Radix Sort does the sorting on each digit position in a stable way.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the simulation below it is revealed how the underlying sorting into buckets is done. And to get a better understanding of how stable sorting works, you can also choose to sort in an unstable way, that will lead to an incorrect result. The sorting is made unstable by simply putting elements into buckets from the end of the array instead of from the start of the array.",
+      "html": "<p>In the simulation below it is revealed how the underlying sorting into buckets is done. And to get a better understanding of how stable sorting works, you can also choose to sort in an unstable way, that will lead to an incorrect result. The sorting is made unstable by simply putting elements into buckets from the end of the array instead of from the start of the array.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Stable sort? Yes",
+      "html": "<p>Stable sort? <label class=\"dsa_label\"><input type=\"checkbox\"/> Yes</label></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's try to do the sorting manually, just to get an even better understanding of how Radix Sort works before actually implementing it in a programming language.",
+      "html": "<p>Let's try to do the sorting manually, just to get an even better understanding of how Radix Sort works before actually implementing it in a programming language.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 1: We start with an unsorted array, and an empty array to fit values with corresponding radices 0 till 9.",
+      "html": "<p><strong>Step 1:</strong> We start with an unsorted array, and an empty array to fit values with corresponding radices 0 till 9.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">myArray = [ 33, 45, 40, 25, 17, 24]</code><br/>\n<code class=\"language-python w3-white\">radixArray = [ [], [], [], [], [], [], [], [], [], [] ]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 2: We start sorting by focusing on the least significant digit.",
+      "html": "<p><strong>Step 2:</strong> We start sorting by focusing on the least significant digit.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">myArray = [ 3<mark class=\"dsa_mark\">3</mark>, 4<mark class=\"dsa_mark\">5</mark>, 4<mark class=\"dsa_mark\">0</mark>, 2<mark class=\"dsa_mark\">5</mark>, 1<mark class=\"dsa_mark\">7</mark>, 2<mark class=\"dsa_mark\">4</mark>]</code><br/>\n<code class=\"language-python w3-white\">radixArray = [ [], [], [], [], [], [], [], [], [], [] ]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 3: Now we move the elements into the correct positions in the radix array according to the digit in focus. Elements are taken from the start of myArray and pushed into the correct position in the radixArray.",
+      "html": "<p><strong>Step 3:</strong> Now we move the elements into the correct positions in the radix array according to the digit in focus. Elements are taken from the start of myArray and pushed into the correct position in the radixArray.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">myArray = [ ]</code><br/>\n<code class=\"language-python w3-white\">radixArray = [ [4<mark class=\"dsa_mark\">0</mark>], [], [], [3<mark class=\"dsa_mark\">3</mark>], [2<mark class=\"dsa_mark\">4</mark>], [4<mark class=\"dsa_mark\">5</mark>, 2<mark class=\"dsa_mark\">5</mark>], [], [1<mark class=\"dsa_mark\">7</mark>], [], [] ]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 4: We move the elements back into the initial array, and the sorting is now done for the least significant digit. Elements are taken from the end radixArray, and put into the start of myArray.",
+      "html": "<p><strong>Step 4:</strong> We move the elements back into the initial array, and the sorting is now done for the least significant digit. Elements are taken from the end radixArray, and put into the start of myArray.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">myArray = [ 4<mark class=\"dsa_mark\">0</mark>, 3<mark class=\"dsa_mark\">3</mark>, 2<mark class=\"dsa_mark\">4</mark>, 4<mark class=\"dsa_mark\">5</mark>, 2<mark class=\"dsa_mark\">5</mark>, 1<mark class=\"dsa_mark\">7</mark> ]</code><br/>\n<code class=\"language-python w3-white\">radixArray = [ [], [], [], [], [], [], [], [], [], [] ]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 5: We move focus to the next digit. Notice that values 45 and 25 are still in the same order relative to each other as they were to start with, because we sort in a stable way.",
+      "html": "<p><strong>Step 5:</strong> We move focus to the next digit. Notice that values 45 and 25 are still in the same order relative to each other as they were to start with, because we sort in a stable way.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">myArray = [ <mark class=\"dsa_mark\">4</mark>0, <mark class=\"dsa_mark\">3</mark>3, <mark class=\"dsa_mark\">2</mark>4, <mark class=\"dsa_mark\">4</mark>5, <mark class=\"dsa_mark\">2</mark>5, <mark class=\"dsa_mark\">1</mark>7 ]</code><br/>\n<code class=\"language-python w3-white\">radixArray = [ [], [], [], [], [], [], [], [], [], [] ]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 6: We move elements into the radix array according to the focused digit.",
+      "html": "<p><strong>Step 6:</strong> We move elements into the radix array according to the focused digit.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">myArray = [ ]</code><br/>\n<code class=\"language-python w3-white\">radixArray = [ [], [<mark class=\"dsa_mark\">1</mark>7], [<mark class=\"dsa_mark\">2</mark>4, <mark class=\"dsa_mark\">2</mark>5], [<mark class=\"dsa_mark\">3</mark>3], [<mark class=\"dsa_mark\">4</mark>0, <mark class=\"dsa_mark\">4</mark>5], [], [], [], [], [] ]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 7: We move elements back into the start of myArray, from the back of radixArray.",
+      "html": "<p><strong>Step 7:</strong> We move elements back into the start of myArray, from the back of radixArray.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">myArray = [ <mark class=\"dsa_mark\">1</mark>7, <mark class=\"dsa_mark\">2</mark>4, <mark class=\"dsa_mark\">2</mark>5, <mark class=\"dsa_mark\">3</mark>3, <mark class=\"dsa_mark\">4</mark>0, <mark class=\"dsa_mark\">4</mark>5 ]</code><br/>\n<code class=\"language-python w3-white\">radixArray = [ [], [], [], [], [], [], [], [], [], [] ]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The sorting is finished!",
+      "html": "<p>The sorting is finished!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the simulation below to see the steps above animated:",
+      "html": "<p>Run the simulation below to see the steps above animated:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Implement Radix Sort in Python",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To implement the Radix Sort algorithm we need:",
+      "html": "<p>To implement the Radix Sort algorithm we need:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The resulting code looks like this:",
+      "html": "<p>The resulting code looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nmylist = [170, 45, 75, 90, 802, 24, 2, 66]\nprint(\"Original array:\", mylist)\nradixArray = [[], [], [], [], [], [], [], [], [], []]\nmaxVal = max(mylist)\nexp = 1\n\nwhile maxVal // exp > 0:\n\n\u00a0\u00a0while len(mylist) > 0:\n\u00a0\u00a0\u00a0\u00a0val = mylist.pop() \n\u00a0\u00a0\u00a0\u00a0radixIndex = (val // exp) % 10\n\u00a0\u00a0\u00a0\u00a0radixArray[radixIndex].append(val)\n\n\u00a0\u00a0for bucket in radixArray:\n\u00a0\u00a0\u00a0\u00a0while len(bucket) > 0:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0val = bucket.pop() \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0mylist.append(val)\n\n\u00a0\u00a0exp *= 10\n\nprint(mylist) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "170",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "45",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "75",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "90",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "802",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "24",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "66",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"Original array:\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "mylist = [170, 45, 75, 90, 802, 24, 2, 66]\nprint(\"Original array:\", mylist)\nradixArray = [[], [], [], [], [], [], [], [], [], []]\nmaxVal = max(mylist)\nexp = 1\n\nwhile maxVal // exp > 0:\n\nwhile len(mylist) > 0:\nval = mylist.pop()\nradixIndex = (val // exp) % 10\nradixArray[radixIndex].append(val)\n\nfor bucket in radixArray:\nwhile len(bucket) > 0:\nval = bucket.pop()\nmylist.append(val)\n\nexp *= 10\n\nprint(mylist)",
+      "syntax_highlighting": [
+        {
+          "text": "\nmylist = [170, 45, 75, 90, 802, 24, 2, 66]\nprint(\"Original array:\", mylist)\nradixArray = [[], [], [], [], [], [], [], [], [], []]\nmaxVal = max(mylist)\nexp = 1\n\nwhile maxVal // exp > 0:\n\n\u00a0\u00a0while len(mylist) > 0:\n\u00a0\u00a0\u00a0\u00a0val = mylist.pop() \n\u00a0\u00a0\u00a0\u00a0radixIndex = (val // exp) % 10\n\u00a0\u00a0\u00a0\u00a0radixArray[radixIndex].append(val)\n\n\u00a0\u00a0for bucket in radixArray:\n\u00a0\u00a0\u00a0\u00a0while len(bucket) > 0:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0val = bucket.pop() \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0mylist.append(val)\n\n\u00a0\u00a0exp *= 10\n\nprint(mylist) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "170",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "45",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "75",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "90",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "802",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "24",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "66",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Original array:\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\nmylist = [<span class=\"pythonnumbercolor\" style=\"color:#905\">170</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">45</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">75</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">90</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">802</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">24</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">2</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">66</span>]<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(<span class=\"pythonstringcolor\" style=\"color:green\">\"Original array:\"</span>, mylist)<br/>\nradixArray = [[], [], [], [], [], [], [], [], [], []]<br/>\nmaxVal = max(mylist)<br/>\nexp = <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">while</span> maxVal // exp &gt; <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">while</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(mylist) &gt; <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0val = mylist.pop() <br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0radixIndex = (val // exp) % <span class=\"pythonnumbercolor\" style=\"color:#905\">10</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0radixArray[radixIndex].append(val)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> bucket <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> radixArray:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">while</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(bucket) &gt; <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0val = bucket.pop() <br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0mylist.append(val)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0exp *= <span class=\"pythonnumbercolor\" style=\"color:#905\">10</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(mylist) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nmylist = [170, 45, 75, 90, 802, 24, 2, 66]\nprint(\"Original array:\", mylist)\nradixArray = [[], [], [], [], [], [], [], [], [], []]\nmaxVal = max(mylist)\nexp = 1\n\nwhile maxVal // exp > 0:\n\n\u00a0\u00a0while len(mylist) > 0:\n\u00a0\u00a0\u00a0\u00a0val = mylist.pop() \n\u00a0\u00a0\u00a0\u00a0radixIndex = (val // exp) % 10\n\u00a0\u00a0\u00a0\u00a0radixArray[radixIndex].append(val)\n\n\u00a0\u00a0for bucket in radixArray:\n\u00a0\u00a0\u00a0\u00a0while len(bucket) > 0:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0val = bucket.pop() \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0mylist.append(val)\n\n\u00a0\u00a0exp *= 10\n\nprint(mylist) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "170",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "45",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "75",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "90",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "802",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "24",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "66",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"Original array:\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On line 7 , we use floor division (\"//\") to divide the maximum value 802 by 1 the first time the while loop runs, the next time it is divided by 10, and the last time it is divided by 100. When using floor division \"//\", any number beyond the decimal point are disregarded, and an integer is returned.",
+      "html": "<p><strong>On line 7</strong>, we use floor division (\"//\") to divide the maximum value 802 by 1 the first time the while loop runs, the next time it is divided by 10, and the last time it is divided by 100. When using floor division \"//\", any number beyond the decimal point are disregarded, and an integer is returned.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On line 11 , it is decided where to put a value in the radixArray based on its radix, or digit in focus. For example, the second time the outer while loop runs exp will be 10. Value 170 divided by 10 will be 17. The \"%10\" operation divides by 10 and returns what is left. In this case 17 is divided by 10 one time, and 7 is left. So value 170 is placed in index 7 in the radixArray.",
+      "html": "<p><strong>On line 11</strong>, it is decided where to put a value in the radixArray based on its radix, or digit in focus. For example, the second time the outer while loop runs exp will be 10. Value 170 divided by 10 will be 17. The \"%10\" operation divides by 10 and returns what is left. In this case 17 is divided by 10 one time, and 7 is left. So value 170 is placed in index 7 in the radixArray.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Radix Sort Using Other Sorting Algorithms",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Radix Sort can actually be implemented together with any other sorting algorithm as long as it is stable. This means that when it comes down to sorting on a specific digit, any stable sorting algorithm will work, such as counting sort or bubble sort.",
+      "html": "<p>Radix Sort can actually be implemented together with any other sorting algorithm as long as it is stable. This means that when it comes down to sorting on a specific digit, any stable sorting algorithm will work, such as counting sort or bubble sort.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is an implementation of Radix Sort that uses Bubble Sort to sort on the individual digits:",
+      "html": "<p>This is an implementation of Radix Sort that uses Bubble Sort to sort on the individual digits:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\ndef bubbleSort(arr):\n\u00a0\u00a0n = len(arr)\n\u00a0\u00a0for i in range(n):\n\u00a0\u00a0\u00a0\u00a0for j in range(0, n - i - 1):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0if arr[j] > arr[j + 1]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[j], arr[j + 1] = arr[j + 1], arr[j]\n                \ndef radixSortWithBubbleSort(arr):\n\u00a0\u00a0max_val = max(arr)\n\u00a0\u00a0exp = 1\n\n\u00a0\u00a0while max_val // exp > 0:\n\u00a0\u00a0\u00a0\u00a0radixList = [[],[],[],[],[],[],[],[],[],[]]\n\n\u00a0\u00a0\u00a0\u00a0for num in arr:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0radixIndex = (num // exp) % 10\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0radixList[radixIndex].append(num)\n\n\u00a0\u00a0\u00a0\u00a0for bucket in radixList:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0bubbleSort(bucket)\n\n\u00a0\u00a0\u00a0\u00a0i = 0\n\u00a0\u00a0\u00a0\u00a0for bucket in radixList:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0for num in bucket:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[i] = num\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\n\u00a0\u00a0\u00a0\u00a0exp *= 10\n\nmylist = [170, 45, 75, 90, 802, 24, 2, 66]\n\nradixSortWithBubbleSort(mylist)\n\nprint(mylist)\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "range",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "range",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "170",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "45",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "75",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "90",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "802",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "24",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "66",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def bubbleSort(arr):\nn = len(arr)\nfor i in range(n):\nfor j in range(0, n - i - 1):\nif arr[j] > arr[j + 1]:\narr[j], arr[j + 1] = arr[j + 1], arr[j]\n\ndef radixSortWithBubbleSort(arr):\nmax_val = max(arr)\nexp = 1\n\nwhile max_val // exp > 0:\nradixList = [[],[],[],[],[],[],[],[],[],[]]\n\nfor num in arr:\nradixIndex = (num // exp) % 10\nradixList[radixIndex].append(num)\n\nfor bucket in radixList:\nbubbleSort(bucket)\n\ni = 0\nfor bucket in radixList:\nfor num in bucket:\narr[i] = num\ni += 1\n\nexp *= 10\n\nmylist = [170, 45, 75, 90, 802, 24, 2, 66]\n\nradixSortWithBubbleSort(mylist)\n\nprint(mylist)",
+      "syntax_highlighting": [
+        {
+          "text": "\ndef bubbleSort(arr):\n\u00a0\u00a0n = len(arr)\n\u00a0\u00a0for i in range(n):\n\u00a0\u00a0\u00a0\u00a0for j in range(0, n - i - 1):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0if arr[j] > arr[j + 1]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[j], arr[j + 1] = arr[j + 1], arr[j]\n\ndef radixSortWithBubbleSort(arr):\n\u00a0\u00a0max_val = max(arr)\n\u00a0\u00a0exp = 1\n\n\u00a0\u00a0while max_val // exp > 0:\n\u00a0\u00a0\u00a0\u00a0radixList = [[],[],[],[],[],[],[],[],[],[]]\n\n\u00a0\u00a0\u00a0\u00a0for num in arr:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0radixIndex = (num // exp) % 10\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0radixList[radixIndex].append(num)\n\n\u00a0\u00a0\u00a0\u00a0for bucket in radixList:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0bubbleSort(bucket)\n\n\u00a0\u00a0\u00a0\u00a0i = 0\n\u00a0\u00a0\u00a0\u00a0for bucket in radixList:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0for num in bucket:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[i] = num\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\n\u00a0\u00a0\u00a0\u00a0exp *= 10\n\nmylist = [170, 45, 75, 90, 802, 24, 2, 66]\n\nradixSortWithBubbleSort(mylist)\n\nprint(mylist)\n ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "range",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "range",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "170",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "45",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "75",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "90",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "802",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "24",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "66",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> bubbleSort(arr):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0n = <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(arr)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> i <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">range</span>(n):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> j <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">range</span>(<span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>, n - i - <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">if</span> arr[j] &gt; arr[j + <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>]:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[j], arr[j + <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>] = arr[j + <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>], arr[j]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> radixSortWithBubbleSort(arr):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0max_val = max(arr)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0exp = <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">while</span> max_val // exp &gt; <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0radixList = [[],[],[],[],[],[],[],[],[],[]]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> num <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> arr:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0radixIndex = (num // exp) % <span class=\"pythonnumbercolor\" style=\"color:#905\">10</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0radixList[radixIndex].append(num)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> bucket <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> radixList:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0bubbleSort(bucket)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0i = <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> bucket <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> radixList:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> num <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> bucket:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[i] = num<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0exp *= <span class=\"pythonnumbercolor\" style=\"color:#905\">10</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nmylist = [<span class=\"pythonnumbercolor\" style=\"color:#905\">170</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">45</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">75</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">90</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">802</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">24</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">2</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">66</span>]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nradixSortWithBubbleSort(mylist)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(mylist)<span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\ndef bubbleSort(arr):\n\u00a0\u00a0n = len(arr)\n\u00a0\u00a0for i in range(n):\n\u00a0\u00a0\u00a0\u00a0for j in range(0, n - i - 1):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0if arr[j] > arr[j + 1]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[j], arr[j + 1] = arr[j + 1], arr[j]\n                \ndef radixSortWithBubbleSort(arr):\n\u00a0\u00a0max_val = max(arr)\n\u00a0\u00a0exp = 1\n\n\u00a0\u00a0while max_val // exp > 0:\n\u00a0\u00a0\u00a0\u00a0radixList = [[],[],[],[],[],[],[],[],[],[]]\n\n\u00a0\u00a0\u00a0\u00a0for num in arr:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0radixIndex = (num // exp) % 10\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0radixList[radixIndex].append(num)\n\n\u00a0\u00a0\u00a0\u00a0for bucket in radixList:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0bubbleSort(bucket)\n\n\u00a0\u00a0\u00a0\u00a0i = 0\n\u00a0\u00a0\u00a0\u00a0for bucket in radixList:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0for num in bucket:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[i] = num\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\n\u00a0\u00a0\u00a0\u00a0exp *= 10\n\nmylist = [170, 45, 75, 90, 802, 24, 2, 66]\n\nradixSortWithBubbleSort(mylist)\n\nprint(mylist)\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "range",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "range",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "170",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "45",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "75",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "90",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "802",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "24",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "66",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Radix Sort Time Complexity",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The time complexity for Radix Sort is: O ( n \u22c5 k ) O ( n \u22c5 k )",
+      "html": "<p>The time complexity for Radix Sort is: <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-1-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-1\"><span class=\"mjx-mrow\" id=\"MJXc-Node-2\"><span class=\"mjx-mi\" id=\"MJXc-Node-3\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-4\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-5\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-6\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-7\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-8\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo>\u22c5</mo><mi>k</mi><mo stretchy=\"false\">)</mo></math></span></span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This means that Radix Sort depends both on the values that need to be sorted n n , and the number of digits in the highest value k k .",
+      "html": "<p>This means that Radix Sort depends both on the values that need to be sorted <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-2-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-9\"><span class=\"mjx-mrow\" id=\"MJXc-Node-10\"><span class=\"mjx-mi\" id=\"MJXc-Node-11\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>n</mi></math></span></span>, and the number of digits in the highest value <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-3-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-12\"><span class=\"mjx-mrow\" id=\"MJXc-Node-13\"><span class=\"mjx-mi\" id=\"MJXc-Node-14\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>k</mi></math></span></span>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A best case scenario for Radix Sort is if there are lots of values to sort, but the values have few digits. For example if there are more than a million values to sort, and the highest value is 999, with just three digits. In such a case the time complexity O ( n \u22c5 k ) O ( n \u22c5 k ) can be simplified to just O ( n ) O ( n ) .",
+      "html": "<p>A best case scenario for Radix Sort is if there are lots of values to sort, but the values have few digits. For example if there are more than a million values to sort, and the highest value is 999, with just three digits. In such a case the time complexity <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-4-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-15\"><span class=\"mjx-mrow\" id=\"MJXc-Node-16\"><span class=\"mjx-mi\" id=\"MJXc-Node-17\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-18\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-19\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-20\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-21\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-22\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo>\u22c5</mo><mi>k</mi><mo stretchy=\"false\">)</mo></math></span></span> can be simplified to just <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-5-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-23\"><span class=\"mjx-mrow\" id=\"MJXc-Node-24\"><span class=\"mjx-mi\" id=\"MJXc-Node-25\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-26\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-27\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-28\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A worst case scenario for Radix Sort would be if there are as many digits in the highest value as there are values to sort. This is perhaps not a common scenario, but the time complexity would be O ( n 2 ) O ( n 2 ) in this case.",
+      "html": "<p>A worst case scenario for Radix Sort would be if there are as many digits in the highest value as there are values to sort. This is perhaps not a common scenario, but the time complexity would be <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-6-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-29\"><span class=\"mjx-mrow\" id=\"MJXc-Node-30\"><span class=\"mjx-mi\" id=\"MJXc-Node-31\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-32\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-33\"><span class=\"mjx-base\"><span class=\"mjx-mi\" id=\"MJXc-Node-34\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span><span class=\"mjx-sup\" style=\"font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-35\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-36\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></math></span></span>in this case.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The most average or common case is perhaps if the number of digits k k is something like k ( n ) = log n k ( n ) = log \u2061 n . If so, Radix Sort gets time complexity O ( n \u22c5 log n ) O ( n \u22c5 log \u2061 n ) . An example of such a case would be if there are 1000000 values to sort, and the values have 6 digits.",
+      "html": "<p>The most average or common case is perhaps if the number of digits <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-7-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-37\"><span class=\"mjx-mrow\" id=\"MJXc-Node-38\"><span class=\"mjx-mi\" id=\"MJXc-Node-39\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>k</mi></math></span></span> is something like <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-8-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-40\"><span class=\"mjx-mrow\" id=\"MJXc-Node-41\"><span class=\"mjx-mi\" id=\"MJXc-Node-42\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-43\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-44\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-45\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span><span class=\"mjx-mo MJXc-space3\" id=\"MJXc-Node-46\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.059em; padding-bottom: 0.339em;\">=</span></span><span class=\"mjx-mi MJXc-space3\" id=\"MJXc-Node-47\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-48\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-49\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>k</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo stretchy=\"false\">)</mo><mo>=</mo><mi>log</mi><mo>\u2061</mo><mi>n</mi></math></span></span>. If so, Radix Sort gets time complexity <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-9-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-50\"><span class=\"mjx-mrow\" id=\"MJXc-Node-51\"><span class=\"mjx-mi\" id=\"MJXc-Node-52\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-53\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-54\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-55\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-56\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-57\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-58\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-59\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo>\u22c5</mo><mi>log</mi><mo>\u2061</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span>. An example of such a case would be if there are 1000000 values to sort, and the values have 6 digits.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "See different possible time complexities for Radix Sort in the image below.",
+      "html": "<p>See different possible time complexities for Radix Sort in the image below.</p>"
+    }
+  ]
+}

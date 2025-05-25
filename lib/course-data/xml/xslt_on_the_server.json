@@ -1,0 +1,2867 @@
+{
+  "title": "XSLT on the Server",
+  "url": "https://www.w3schools.com/xml/xsl_server.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "XSLT - On the Server",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To make XML data available to all kind of browsers, we can transform the XML document on the SERVER and send it back to the browser as XHTML.",
+      "html": "<p class=\"intro\">To make XML data available to all kind of browsers, we \ncan transform the XML document on the\nSERVER and send it\u00a0 back to the browser as XHTML.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "A Cross Browser Solution",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To make XML data available to all kind of browsers, we can transform the XML document on the server and send back to the browser as XHTML.",
+      "html": "<p>To make XML data available to all kind of browsers, we \ncan transform the XML document on the\nserver and send back to the browser as XHTML.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "That's another beauty of XSLT. One of the design goals for XSLT was to make it possible to transform data from one format to another on a server, returning readable data to all kinds of browsers.",
+      "html": "<p>That's another beauty of XSLT. One of the design goals for XSLT was to make it possible to\ntransform data from one format\nto another on a server, returning readable data to all kinds of browsers.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The XML File and the XSLT File",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the XML document that you have seen in the previous chapters:",
+      "html": "<p>Look at the XML document that you have seen in the previous chapters:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " version=\"1.0\" encoding=\"UTF-8\"?",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"1.0\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"UTF-8\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<catalog>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<cd>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<title>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</title>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<artist>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</artist>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<country>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</country>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<company>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</company>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<price>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</price>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<year>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</year>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</cd>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</catalog>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<catalog>\n\n\n<cd>\n\n\n<title>Empire Burlesque</title>\n\n\n<artist>Bob Dylan</artist>\n\n\n<country>USA</country>\n\n\n<company>Columbia</company>\n\n\n<price>10.90</price>\n\n\n<year>1985</year>\n\n\n</cd>\n\n.\n\n.\n\n</catalog>",
+      "syntax_highlighting": [
+        {
+          "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " version=\"1.0\" encoding=\"UTF-8\"?",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"1.0\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"UTF-8\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<catalog>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<cd>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<title>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</title>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<artist>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</artist>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<country>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</country>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<company>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</company>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<price>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</price>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<year>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</year>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</cd>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</catalog>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate htmlHigh\">\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>?xml<span class=\"attributecolor\" style=\"color:green\"> version<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"1.0\"</span> encoding<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"UTF-8\"</span>?</span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>catalog<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n  \u00a0\n  <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>cd<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n    \u00a0\u00a0\u00a0\n    <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>title<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Empire Burlesque<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/title<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n    \u00a0\u00a0\u00a0\n    <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>artist<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Bob Dylan<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/artist<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n    \u00a0\u00a0\u00a0\n    <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>country<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>USA<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/country<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n    \u00a0\u00a0\u00a0\n    <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>company<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Columbia<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/company<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n    \u00a0\u00a0\u00a0\n    <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>price<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>10.90<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/price<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n    \u00a0\u00a0\u00a0\n    <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>year<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>1985<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/year<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n  \u00a0\n  <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/cd<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n.<br/>\n.<br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/catalog<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " version=\"1.0\" encoding=\"UTF-8\"?",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"1.0\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"UTF-8\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<catalog>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<cd>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<title>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</title>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<artist>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</artist>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<country>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</country>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<company>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</company>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<price>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</price>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<year>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</year>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</cd>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</catalog>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "View the XML file",
+          "href": "https://www.w3schools.com/cdcatalog.xml",
+          "title": ""
+        }
+      ],
+      "text": "View the XML file .",
+      "html": "<p><a href=\"cdcatalog.xml\" target=\"_blank\">View the XML file</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And the accompanying XSL style sheet:",
+      "html": "<p>And the accompanying XSL style sheet:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " version=\"1.0\" encoding=\"UTF-8\"?",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"1.0\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"UTF-8\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<xsl:stylesheet version=\"1.0\"\nxmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " version=\"1.0\"\nxmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"1.0\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": "=\"http://www.w3.org/1999/XSL/Transform\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<xsl:template match=\"/\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " match=\"/\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"/\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<h2>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</h2>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<table border=\"1\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " border=\"1\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"1\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<tr bgcolor=\"#9acd32\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " bgcolor=\"#9acd32\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"#9acd32\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<th style=\"text-align:left\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " style=\"text-align:left\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"text-align:left\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</th>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<th style=\"text-align:left\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " style=\"text-align:left\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"text-align:left\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</th>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</tr>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<xsl:for-each select=\"catalog/cd\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " select=\"catalog/cd\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"catalog/cd\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<tr>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<td>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<xsl:value-of select=\"title\" />",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " select=\"title\" /",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"title\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</td>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<td>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<xsl:value-of select=\"artist\" />",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " select=\"artist\" /",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"artist\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</td>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</tr>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</xsl:for-each>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</table>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</xsl:template>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</xsl:stylesheet>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<xsl:stylesheet version=\"1.0\"\nxmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\n\n<xsl:template match=\"/\">\n\n\n<h2>My CD Collection</h2>\n\n\n<table border=\"1\">\n\n\n<tr bgcolor=\"#9acd32\">\n\n\n<th style=\"text-align:left\">Title</th>\n\n\n<th style=\"text-align:left\">Artist</th>\n\n\n</tr>\n\n\n<xsl:for-each select=\"catalog/cd\">\n\n\n<tr>\n\n\n<td><xsl:value-of select=\"title\" /></td>\n\n\n<td><xsl:value-of select=\"artist\" /></td>\n\n\n</tr>\n\n\n</xsl:for-each>\n\n\n</table>\n\n</xsl:template>\n\n\n</xsl:stylesheet>",
+      "syntax_highlighting": [
+        {
+          "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " version=\"1.0\" encoding=\"UTF-8\"?",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"1.0\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"UTF-8\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<xsl:stylesheet version=\"1.0\"\nxmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " version=\"1.0\"\nxmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"1.0\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": "=\"http://www.w3.org/1999/XSL/Transform\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<xsl:template match=\"/\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " match=\"/\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"/\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<h2>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</h2>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<table border=\"1\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " border=\"1\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"1\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<tr bgcolor=\"#9acd32\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " bgcolor=\"#9acd32\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"#9acd32\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<th style=\"text-align:left\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " style=\"text-align:left\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"text-align:left\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</th>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<th style=\"text-align:left\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " style=\"text-align:left\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"text-align:left\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</th>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</tr>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<xsl:for-each select=\"catalog/cd\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " select=\"catalog/cd\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"catalog/cd\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<tr>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<td>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<xsl:value-of select=\"title\" />",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " select=\"title\" /",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"title\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</td>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<td>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<xsl:value-of select=\"artist\" />",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " select=\"artist\" /",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"artist\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</td>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</tr>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</xsl:for-each>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</table>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</xsl:template>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</xsl:stylesheet>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate htmlHigh\">\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>?xml<span class=\"attributecolor\" style=\"color:green\"> version<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"1.0\"</span> encoding<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"UTF-8\"</span>?</span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>xsl:stylesheet<span class=\"attributecolor\" style=\"color:green\"> version<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"1.0\"</span><br/>\nxmlns:xsl<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"http://www.w3.org/1999/XSL/Transform\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>xsl:template<span class=\"attributecolor\" style=\"color:green\"> match<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"/\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n    \u00a0\n    <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>h2<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>My CD Collection<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/h2<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n    \u00a0\n    <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>table<span class=\"attributecolor\" style=\"color:green\"> border<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"1\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n      \u00a0\u00a0\u00a0\n      <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>tr<span class=\"attributecolor\" style=\"color:green\"> bgcolor<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"#9acd32\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n        \u00a0\u00a0\u00a0\u00a0\u00a0\n        <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>th<span class=\"attributecolor\" style=\"color:green\"> style<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"text-align:left\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Title<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/th<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n        \u00a0\u00a0\u00a0\u00a0\u00a0\n        <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>th<span class=\"attributecolor\" style=\"color:green\"> style<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"text-align:left\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Artist<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/th<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n      \u00a0\u00a0\u00a0\n      <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/tr<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n      \u00a0\u00a0\u00a0\n      <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>xsl:for-each<span class=\"attributecolor\" style=\"color:green\"> select<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"catalog/cd\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n      \u00a0\u00a0\u00a0\n      <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>tr<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n        \u00a0\u00a0\u00a0\u00a0\u00a0\n        <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>td<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>xsl:value-of<span class=\"attributecolor\" style=\"color:green\"> select<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"title\"</span> /</span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/td<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n        \u00a0\u00a0\u00a0\u00a0\u00a0\n        <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>td<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>xsl:value-of<span class=\"attributecolor\" style=\"color:green\"> select<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"artist\"</span> /</span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/td<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n      \u00a0\u00a0\u00a0\n      <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/tr<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n      \u00a0\u00a0\u00a0\n      <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/xsl:for-each<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n  \u00a0\n  <span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/table<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/xsl:template<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/xsl:stylesheet<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " version=\"1.0\" encoding=\"UTF-8\"?",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"1.0\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"UTF-8\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<xsl:stylesheet version=\"1.0\"\nxmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " version=\"1.0\"\nxmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"1.0\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": "=\"http://www.w3.org/1999/XSL/Transform\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<xsl:template match=\"/\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " match=\"/\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"/\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<h2>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</h2>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<table border=\"1\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " border=\"1\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"1\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<tr bgcolor=\"#9acd32\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " bgcolor=\"#9acd32\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"#9acd32\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<th style=\"text-align:left\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " style=\"text-align:left\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"text-align:left\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</th>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<th style=\"text-align:left\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " style=\"text-align:left\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"text-align:left\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</th>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</tr>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<xsl:for-each select=\"catalog/cd\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " select=\"catalog/cd\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"catalog/cd\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<tr>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<td>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<xsl:value-of select=\"title\" />",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " select=\"title\" /",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"title\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</td>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<td>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<xsl:value-of select=\"artist\" />",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " select=\"artist\" /",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"artist\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</td>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</tr>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</xsl:for-each>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</table>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</xsl:template>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</xsl:stylesheet>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "View the XSL file",
+          "href": "https://www.w3schools.com/cdcatalog.xsl",
+          "title": ""
+        }
+      ],
+      "text": "View the XSL file .",
+      "html": "<p><a href=\"cdcatalog.xsl\" target=\"_blank\">View the XSL file</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Notice that the XML file does not have a reference to the XSL file.",
+      "html": "<p><b>Notice that the XML file does not have a reference to the XSL file.</b></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "IMPORTANT: The above sentence indicates that an XML file could be transformed using many different XSL style sheets.",
+      "html": "<p><b>IMPORTANT:</b> The above sentence indicates that an XML file could be \ntransformed using many different XSL style sheets.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "PHP Code: Transform XML to XHTML on the Server",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here is the PHP source code needed to transform the XML file to XHTML on the server:",
+      "html": "<p>Here is the PHP source code needed to transform the XML file to XHTML on the server:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php\n// Load XML file\n$xml = new DOMDocument;\n$xml->load('cdcatalog.xml');\n\n\n// Load XSL file\n$xsl = new DOMDocument;\n$xsl->load('cdcatalog.xsl');\n\n// \nConfigure the transformer\n$proc = new XSLTProcessor;\n\n// Attach the xsl \nrules\n$proc->importStyleSheet($xsl);\n\n\necho $proc->transformToXML($xml);\n?>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n&lt;?php<br/>// Load XML file<br/>$xml = new DOMDocument;<br/>$xml-&gt;load('cdcatalog.xml');<br/>\n<br/>// Load XSL file<br/>$xsl = new DOMDocument;<br/>$xsl-&gt;load('cdcatalog.xsl');<br/><br/>// \nConfigure the transformer<br/>$proc = new XSLTProcessor;<br/><br/>// Attach the xsl \nrules<br/>$proc-&gt;importStyleSheet($xsl);<br/>\n<br/>echo $proc-&gt;transformToXML($xml);<br/>?&gt;\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "PHP tutorial",
+          "href": "https://www.w3schools.com/php/default.asp",
+          "title": ""
+        }
+      ],
+      "text": "Tip: If you don't know how to write PHP, please study our PHP tutorial .",
+      "html": "<p><b>Tip:</b> If you don't know how to write PHP, please study our\n<a href=\"/php/default.asp\">PHP tutorial</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "See how it works with PHP",
+          "href": "https://www.w3schools.com/cdcatalog.php",
+          "title": ""
+        }
+      ],
+      "text": "See how it works with PHP .",
+      "html": "<p><a href=\"cdcatalog.php\" target=\"_blank\">See how it works with PHP</a>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "ASP Code: Transform XML to XHTML on the Server",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here is the ASP source code needed to transform the XML file to XHTML on the server:",
+      "html": "<p>Here is the ASP source code needed to transform the XML file to XHTML on the server:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<%\n\n'Load XML file\n\nset xml = Server.CreateObject(\"Microsoft.XMLDOM\")\n\nxml.async = false\n\nxml.load(Server.MapPath(\"cdcatalog.xml\"))\n\n\n'Load XSL file\n\nset xsl = Server.CreateObject(\"Microsoft.XMLDOM\")\n\nxsl.async = false\n\nxsl.load(Server.MapPath(\"cdcatalog.xsl\"))\n\n\n'Transform file\n\nResponse.Write(xml.transformNode(xsl))\n\n%>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n&lt;%<br/>\n'Load XML file<br/>\nset xml = Server.CreateObject(\"Microsoft.XMLDOM\")<br/>\nxml.async = false<br/>\nxml.load(Server.MapPath(\"cdcatalog.xml\"))<br/><br/>\n'Load XSL file<br/>\nset xsl = Server.CreateObject(\"Microsoft.XMLDOM\")<br/>\nxsl.async = false<br/>\nxsl.load(Server.MapPath(\"cdcatalog.xsl\"))<br/><br/>\n'Transform file<br/>\nResponse.Write(xml.transformNode(xsl))<br/>\n%&gt;\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "See how it works with ASP",
+          "href": "https://www.w3schools.com/cdcatalog.asp",
+          "title": ""
+        }
+      ],
+      "text": "See how it works with ASP .",
+      "html": "<p><a href=\"cdcatalog.asp\" target=\"_blank\">See how it works with ASP</a>.</p>"
+    }
+  ]
+}

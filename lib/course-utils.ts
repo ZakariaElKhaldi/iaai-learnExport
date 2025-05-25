@@ -3,7 +3,34 @@ import { promises as fsPromises } from 'fs';
 
 const COURSE_DATA_DIR = path.join(process.cwd(), 'lib', 'course-data');
 
-// Types to match the JSON structure
+// Types to match the JSON structure from processed data
+export interface ContentItem {
+  type: string;
+  metadata?: any;
+  text?: string;
+  html?: string;
+  level?: string;
+  code?: string;
+  code_html?: string;
+  language?: string;
+  tryItLink?: string;
+  data?: any[][];
+  options?: { text: string; value: string }[];
+  question?: string;
+  colorValue?: string;
+  backgroundColor?: string;
+  link?: string;
+  buttonText?: string;
+}
+
+export interface ProcessedCourseData {
+  title: string;
+  url: string;
+  metadata: Record<string, string>;
+  content: ContentItem[];
+}
+
+// Original types for backward compatibility
 export interface CourseSectionContent {
   type: string;
   title: string;
@@ -53,6 +80,10 @@ export interface CourseData {
   related_topics: RelatedTopic[];
   quiz: QuizQuestion[];
   summary: string;
+  
+  // New fields for processed data
+  url?: string;
+  content?: ContentItem[];
 }
 
 // Interface for individual course metadata
@@ -67,6 +98,7 @@ export interface CourseMetadata {
   original_category?: string;
   main_category?: string;
   subcategory_id?: string;
+  url?: string;
 }
 
 // Interface for course in courses.json file
@@ -148,17 +180,23 @@ export async function getAllCourseFiles(): Promise<string[]> {
   return results;
 }
 
-// Function to get the unified courses data
-export async function getUnifiedCoursesData(): Promise<UnifiedCoursesData | null> {
+// Function to get all categories from the directory structure
+export async function getAllCategories(): Promise<string[]> {
   try {
-    const unifiedCoursesPath = path.join(COURSE_DATA_DIR, 'unified_courses.json');
-    const content = await fsPromises.readFile(unifiedCoursesPath, 'utf8');
-    const data = JSON.parse(content) as UnifiedCoursesData;
-    return data;
+    const entries = await fsPromises.readdir(COURSE_DATA_DIR, { withFileTypes: true });
+    return entries
+      .filter(entry => entry.isDirectory() && !['node_modules', '.git', 'metadata'].includes(entry.name))
+      .map(dir => dir.name);
   } catch (error) {
-    console.error('Error loading unified courses data:', error);
-    return null;
+    console.error('Error reading categories:', error);
+    return [];
   }
+}
+
+// Function to generate a slug from a filename
+function generateSlugFromFilename(filename: string): string {
+  // Remove extension and convert to lowercase
+  return filename.replace('.json', '').toLowerCase();
 }
 
 // Function to get course data by slug
@@ -166,67 +204,86 @@ export async function getCourseBySlug(slug: string): Promise<CourseData | null> 
   if (!slug) return null;
   
   try {
-    // First, get all the JSON files
-    const files = await getAllCourseFiles();
+    // Get all categories
+    const categories = await getAllCategories();
+    console.log(`Searching for course with slug "${slug}" in ${categories.length} categories`);
     
-    // Look for direct match in individual course files
-    for (const file of files) {
+    // Search in each category directory
+    for (const category of categories) {
       try {
-        const content = await fsPromises.readFile(file, 'utf8');
-        const data = JSON.parse(content);
+        const categoryDir = path.join(COURSE_DATA_DIR, category);
+        const files = await fsPromises.readdir(categoryDir);
         
-        // Check if this is an individual course file with matching slug
-        if (data.slug === slug && data.title && data.id) {
-          console.log(`Found course with slug "${slug}" in file: ${file}`);
-          return data as CourseData;
-        }
-        
-        // Check if this is a courses.json file containing the course with this slug
-        if (data.courses && Array.isArray(data.courses)) {
-          // Look through the courses array for a matching slug
-          const matchingCourse = data.courses.find((course: CourseEntry) => course.slug === slug);
-          
-          if (matchingCourse) {
-            console.log(`Found course with slug "${slug}" in courses.json: ${file}`);
+        // Find a file that matches the slug
+        for (const file of files) {
+          if (file.endsWith('.json')) {
+            const fileSlug = generateSlugFromFilename(file);
             
-            // If matching course has a path, try to load the full content
-            if (matchingCourse.path) {
-              // Resolve the path relative to the course-data directory
-              const coursePath = path.join(COURSE_DATA_DIR, matchingCourse.path);
-              console.log(`Loading full course data from: ${coursePath}`);
+            if (fileSlug === slug.toLowerCase()) {
+              const filePath = path.join(categoryDir, file);
+              console.log(`Found matching file at ${filePath}`);
+              
+              const content = await fsPromises.readFile(filePath, 'utf8');
+              let processedData;
               
               try {
-                const courseContent = await fsPromises.readFile(coursePath, 'utf8');
-                const fullCourseData = JSON.parse(courseContent) as CourseData;
-                return fullCourseData;
-              } catch (pathError) {
-                console.error(`Error loading course from path ${matchingCourse.path}:`, pathError);
-                // If we can't load from path, return the basic course entry as backup
-                return {
-                  id: matchingCourse.id,
-                  title: matchingCourse.title,
-                  slug: matchingCourse.slug,
-                  metadata: {
-                    description: matchingCourse.description || `Learn about ${matchingCourse.title}`,
-                    keywords: [],
-                    difficulty: matchingCourse.difficulty || 'beginner',
-                    prerequisites: [],
-                    estimated_time: matchingCourse.estimated_time || 5,
-                    category: matchingCourse.category || data.category || '',
-                    subcategory: matchingCourse.subcategory || '',
-                  },
-                  content_sections: [],
-                  practice_exercises: [],
-                  related_topics: [],
-                  quiz: [],
-                  summary: `This is a tutorial about ${matchingCourse.title}.`
-                };
+                processedData = JSON.parse(content) as ProcessedCourseData;
+                console.log(`Successfully parsed JSON for ${slug}`);
+                
+                // Log content structure for debugging
+                if (processedData.content) {
+                  console.log(`Content array length: ${processedData.content.length}`);
+                  // Log the types of content items
+                  const contentTypes = processedData.content.map(item => item.type);
+                  console.log(`Content types: ${contentTypes.join(', ')}`);
+                  
+                  // Check for any potential problematic items
+                  const problemItems = processedData.content.filter(item => 
+                    !item || !item.type || (item.type === 'header' && !item.html && !item.text) ||
+                    (item.type === 'text' && !item.html && !item.text)
+                  );
+                  
+                  if (problemItems.length > 0) {
+                    console.warn(`Found ${problemItems.length} potentially problematic content items`);
+                    console.warn('First problematic item:', JSON.stringify(problemItems[0]).substring(0, 200) + '...');
+                  }
+                } else {
+                  console.warn(`No content array found in ${slug}`);
+                }
+              } catch (parseError) {
+                console.error(`Error parsing JSON from ${filePath}:`, parseError);
+                continue;
               }
+              
+              // Convert from processed format to CourseData format
+              const courseData: CourseData = {
+                id: slug,
+                title: processedData.title,
+                slug: slug,
+                url: processedData.url,
+                content: processedData.content,
+                metadata: {
+                  description: processedData.metadata?.Description || `Learn about ${processedData.title}`,
+                  keywords: processedData.metadata?.Keywords?.split(',').map(k => k.trim()) || [],
+                  difficulty: 'beginner',
+                  prerequisites: [],
+                  estimated_time: 10,
+                  category: category,
+                  subcategory: ''
+                },
+                content_sections: [],
+                practice_exercises: [],
+                related_topics: [],
+                quiz: [],
+                summary: `This is a tutorial about ${processedData.title}.`
+              };
+              
+              return courseData;
             }
           }
         }
       } catch (error) {
-        console.error(`Error processing file ${file}:`, error);
+        console.error(`Error searching in category ${category}:`, error);
       }
     }
     
@@ -242,147 +299,105 @@ export async function getCourseBySlug(slug: string): Promise<CourseData | null> 
 // Function to get all courses with basic metadata
 export async function getAllCoursesMetadata(): Promise<CourseMetadata[]> {
   try {
-    // Try to use the unified courses data first for better performance
-    const unifiedData = await getUnifiedCoursesData();
-    if (unifiedData) {
-      const allCourses: CourseMetadata[] = [];
-      unifiedData.main_categories.forEach(mainCat => {
-        mainCat.subcategories.forEach(subCat => {
-          subCat.courses.forEach(course => {
-            allCourses.push({
-              id: course.id,
-              title: course.title,
-              slug: course.slug,
-              category: course.original_category || '',
-              subcategory: course.subcategory || '',
-              difficulty: course.difficulty || 'beginner',
-              description: course.description || `Learn about ${course.title}`,
-              main_category: course.main_category || mainCat.name,
-              subcategory_id: course.subcategory_id || subCat.id
-            });
-          });
-        });
-      });
-      return allCourses;
-    }
-
-    // Fall back to the old method if unified data is not available
-    const files = await getAllCourseFiles();
-    const coursesMetadata: CourseMetadata[] = [];
+    const categories = await getAllCategories();
+    const allCourses: CourseMetadata[] = [];
     
-    for (const file of files) {
+    for (const category of categories) {
       try {
-        const content = await fsPromises.readFile(file, 'utf8');
+        const categoryDir = path.join(COURSE_DATA_DIR, category);
+        const files = await fsPromises.readdir(categoryDir);
         
-        // More robust JSON parsing
-        let courseData;
-        try {
-          courseData = JSON.parse(content);
-        } catch (parseError) {
-          console.error(`Error parsing JSON in file ${file}:`, parseError);
-          continue; // Skip this file if JSON parsing fails
-        }
-        
-        // Extract folder name as fallback category from path
-        const pathParts = file.split('/');
-        const dirName = pathParts[pathParts.length - 2] || "";
-        const rootDirName = file.includes('/lib/course-data/') ? 
-          file.split('/lib/course-data/')[1]?.split('/')[0] || "" : "";
-        
-        // Handle both formats:
-        // 1. Individual course files with metadata property
-        // 2. Directory-level courses.json files that have direct properties
-        const metadata = courseData.metadata || {}; // Default to empty object if no metadata
-        
-        // Detect if this is a courses.json file listing multiple courses
-        if (courseData.courses && Array.isArray(courseData.courses)) {
-          // This is a directory-level courses.json file
-          // Process each course in the array
-          courseData.courses.forEach((course: CourseEntry) => {
-            if (course && course.id && course.title) {
-              coursesMetadata.push({
-                id: course.id,
-                title: course.title,
-                slug: course.slug || "",
-                category: course.category || courseData.category || rootDirName,
-                subcategory: course.subcategory || "",
-                difficulty: course.difficulty || "beginner",
-                description: course.description || `Learn about ${course.title}`,
+        for (const file of files) {
+          if (file.endsWith('.json')) {
+            try {
+              const filePath = path.join(categoryDir, file);
+              const content = await fsPromises.readFile(filePath, 'utf8');
+              const processedData = JSON.parse(content) as ProcessedCourseData;
+              
+              const slug = generateSlugFromFilename(file);
+              
+              allCourses.push({
+                id: slug,
+                title: processedData.title,
+                slug: slug,
+                category: category,
+                subcategory: '',
+                difficulty: 'beginner',
+                description: processedData.metadata?.Description || `Learn about ${processedData.title}`,
+                url: processedData.url
               });
+            } catch (error) {
+              console.error(`Error processing file ${file}:`, error);
             }
-          });
-        } else if (courseData.id && courseData.title) {
-          // This is an individual course file
-          coursesMetadata.push({
-            id: courseData.id,
-            title: courseData.title,
-            slug: courseData.slug || "",
-            category: metadata.category || courseData.category || rootDirName,
-            subcategory: metadata.subcategory || courseData.subcategory || "",
-            difficulty: metadata.difficulty || courseData.difficulty || "beginner",
-            description: metadata.description || courseData.description || `Learn about ${courseData.title}`,
-          });
+          }
         }
       } catch (error) {
-        console.error(`Error processing file ${file}:`, error);
+        console.error(`Error reading category ${category}:`, error);
       }
     }
     
-    return coursesMetadata;
+    return allCourses;
   } catch (error) {
     console.error('Error getting all courses metadata:', error);
     return [];
   }
 }
 
-// Get courses grouped by category
+// Function to get courses by category
 export async function getCoursesByCategory(): Promise<Record<string, CourseMetadata[]>> {
   try {
-    // Try to use unified data first
-    const unifiedData = await getUnifiedCoursesData();
-    if (unifiedData) {
-      const coursesByCategory: Record<string, CourseMetadata[]> = {};
-      
-      // Create entries for each main category
-      unifiedData.main_categories.forEach(mainCat => {
-        coursesByCategory[mainCat.name] = [];
-        
-        // Add all courses from all subcategories to their main category
-        mainCat.subcategories.forEach(subCat => {
-          subCat.courses.forEach(course => {
-            coursesByCategory[mainCat.name].push({
-              id: course.id,
-              title: course.title,
-              slug: course.slug,
-              category: course.original_category || '',
-              subcategory: subCat.name,
-              difficulty: course.difficulty || 'beginner',
-              description: course.description || `Learn about ${course.title}`,
-              main_category: mainCat.name,
-              subcategory_id: subCat.id
-            });
-          });
-        });
-      });
-      
-      return coursesByCategory;
-    }
-    
-    // Fall back to old method if unified data is not available
-    const allCourses = await getAllCoursesMetadata();
+    const courses = await getAllCoursesMetadata();
     const coursesByCategory: Record<string, CourseMetadata[]> = {};
     
-    allCourses.forEach((course) => {
-      const category = course.category;
-      if (!coursesByCategory[category]) {
-        coursesByCategory[category] = [];
+    for (const course of courses) {
+      if (!coursesByCategory[course.category]) {
+        coursesByCategory[course.category] = [];
       }
-      coursesByCategory[category].push(course);
-    });
+      coursesByCategory[course.category].push(course);
+    }
     
     return coursesByCategory;
   } catch (error) {
-    console.error('Error grouping courses by category:', error);
+    console.error('Error getting courses by category:', error);
     return {};
+  }
+}
+
+// Generate a unified courses data structure
+export async function generateUnifiedCoursesData(): Promise<UnifiedCoursesData> {
+  try {
+    const coursesByCategory = await getCoursesByCategory();
+    
+    const mainCategories: UnifiedMainCategory[] = Object.entries(coursesByCategory).map(([category, courses]) => {
+      return {
+        id: category.toLowerCase().replace(/\s+/g, '-'),
+        name: category.charAt(0).toUpperCase() + category.slice(1),
+        subcategories: [
+          {
+            id: category.toLowerCase().replace(/\s+/g, '-'),
+            name: category.charAt(0).toUpperCase() + category.slice(1),
+            courses: courses
+          }
+        ],
+        courses_count: courses.length
+      };
+    });
+    
+    const totalCourses = mainCategories.reduce((total, category) => total + category.courses_count, 0);
+    
+    return {
+      total_categories: mainCategories.length,
+      total_courses: totalCourses,
+      categories: mainCategories.map(cat => cat.name),
+      main_categories: mainCategories
+    };
+  } catch (error) {
+    console.error('Error generating unified courses data:', error);
+    return {
+      total_categories: 0,
+      total_courses: 0,
+      categories: [],
+      main_categories: []
+    };
   }
 } 

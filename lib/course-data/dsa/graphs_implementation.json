@@ -1,0 +1,396 @@
+{
+  "title": "DSA Graphs Implementation",
+  "url": "https://www.w3schools.com/dsa/dsa_data_graphs_implementation.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Graphs Implementation",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "A Basic Graph Implementation",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Before we can run algorithms on a Graph, we must first implement it somehow.",
+      "html": "<p>Before we can run algorithms on a Graph, we must first implement it somehow.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Adjacency Matrix",
+          "href": "https://www.w3schools.com/dsa_theory_graphs.php#adjMatrix",
+          "title": ""
+        }
+      ],
+      "text": "To implement a Graph we will use an Adjacency Matrix , like the one below.",
+      "html": "<p>To implement a Graph we will use an <a href=\"dsa_theory_graphs.php#adjMatrix\">Adjacency Matrix</a>, like the one below.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To store data for each vertex, in this case the letters A, B, C, and D, the data is put in a separate array that matches the indexes in the adjacency matrix, like this:",
+      "html": "<p>To store data for each vertex, in this case the letters A, B, C, and D, the data is put in a separate array that matches the indexes in the adjacency matrix, like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "vertexData\n=\n\n[\n\n'A'\n,\n\n'B'\n,\n\n'C'\n,\n\n'D'\n]",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\">vertexData <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">]</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For an undirected and not weighted Graph, like in the image above, an edge between vertices i and j is stored with value 1 . It is stored as 1 on both places (j,i) and (i,j) because the edge goes in both directions. As you can see, the matrix becomes diagonally symmetric for such undirected Graphs.",
+      "html": "<p>For an undirected and not weighted Graph, like in the image above, an edge between vertices <code>i</code> and <code>j</code> is stored with value <code>1</code>. It is stored as <code>1</code> on both places <code>(j,i)</code> and <code>(i,j)</code> because the edge goes in both directions. As you can see, the matrix becomes diagonally symmetric for such undirected Graphs.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's look at something more specific. In the adjacency matrix above, vertex A is on index 0 , and vertex D is on index 3 , so we get the edge between A and D stored as value 1 in position (0,3) and (3,0) , because the edge goes in both directions.",
+      "html": "<p>Let's look at something more specific. In the adjacency matrix above, vertex A is on index <code>0</code>, and vertex D is on index <code>3</code>, so we get the edge between A and D stored as value <code>1</code> in position <code>(0,3)</code> and <code>(3,0)</code>, because the edge goes in both directions.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Below is a basic implementation of the undirected Graph from the image above.",
+      "html": "<p>Below is a basic implementation of the undirected Graph from the image above.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "line-numbers",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "vertexData\n=\n\n[\n'A'\n,\n\n'B'\n,\n\n'C'\n,\n\n'D'\n]\n\n\nadjacency_matrix\n=\n\n[\n\n\n[\n0\n,\n\n1\n,\n\n1\n,\n\n1\n]\n,\n\n# Edges for A\n\n\n[\n1\n,\n\n0\n,\n\n1\n,\n\n0\n]\n,\n\n# Edges for B\n\n\n[\n1\n,\n\n1\n,\n\n0\n,\n\n0\n]\n,\n\n# Edges for C\n\n\n[\n1\n,\n\n0\n,\n\n0\n,\n\n0\n]\n\n# Edges for D\n\n\n]\n\n\n\ndef\n\nprint_adjacency_matrix\n(\nmatrix\n)\n:\n\n\nprint\n(\n\"\\nAdjacency Matrix:\"\n)\n\n\nfor\nrow\nin\nmatrix\n:\n\n\nprint\n(\nrow\n)\n\n\n\nprint\n(\n'vertexData:'\n,\nvertexData\n)\n\nprint_adjacency_matrix\n(\nadjacency_matrix\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate line-numbers w3-white language-python\" tabindex=\"0\"><code class=\"language-python\">vertexData <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'A'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">]</span>\n\nadjacency_matrix <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span>\n    <span class=\"token punctuation\">[</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>  <span class=\"token comment\"># Edges for A</span>\n    <span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>  <span class=\"token comment\"># Edges for B</span>\n    <span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>  <span class=\"token comment\"># Edges for C</span>\n    <span class=\"token punctuation\">[</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">]</span>   <span class=\"token comment\"># Edges for D</span>\n<span class=\"token punctuation\">]</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">print_adjacency_matrix</span><span class=\"token punctuation\">(</span>matrix<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\\nAdjacency Matrix:\"</span><span class=\"token punctuation\">)</span>\n    <span class=\"token keyword keyword-for\">for</span> row <span class=\"token keyword keyword-in\">in</span> matrix<span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span>row<span class=\"token punctuation\">)</span>\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">'vertexData:'</span><span class=\"token punctuation\">,</span>vertexData<span class=\"token punctuation\">)</span>\nprint_adjacency_matrix<span class=\"token punctuation\">(</span>adjacency_matrix<span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This implementation is basically just a two dimensional array, but to get a better sense of how the vertices are connected by edges in the Graph we have just implemented, we can run this function:",
+      "html": "<p>This implementation is basically just a two dimensional array, but to get a better sense of how the vertices are connected by edges in the Graph we have just implemented, we can run this function:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "line-numbers",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def\n\nprint_connections\n(\nmatrix\n,\nvertices\n)\n:\n\n\nprint\n(\n\"\\nConnections for each vertex:\"\n)\n\n\nfor\ni\nin\n\nrange\n(\nlen\n(\nvertices\n)\n)\n:\n\n\nprint\n(\nf\"\n{\nvertices\n[\ni\n]\n}\n: \"\n,\nend\n=\n\"\"\n)\n\n\nfor\nj\nin\n\nrange\n(\nlen\n(\nvertices\n)\n)\n:\n\n\nif\nmatrix\n[\ni\n]\n[\nj\n]\n:\n\n# if there is a connection\n\n\nprint\n(\nvertices\n[\nj\n]\n,\nend\n=\n\" \"\n)\n\n\nprint\n(\n)\n\n# new line",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate line-numbers w3-white language-python\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">print_connections</span><span class=\"token punctuation\">(</span>matrix<span class=\"token punctuation\">,</span> vertices<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\\nConnections for each vertex:\"</span><span class=\"token punctuation\">)</span>\n    <span class=\"token keyword keyword-for\">for</span> i <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span><span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>vertices<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>vertices<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">: \"</span></span><span class=\"token punctuation\">,</span> end<span class=\"token operator\">=</span><span class=\"token string\">\"\"</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-for\">for</span> j <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span><span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>vertices<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-if\">if</span> matrix<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>j<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>  <span class=\"token comment\"># if there is a connection</span>\n                <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span>vertices<span class=\"token punctuation\">[</span>j<span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> end<span class=\"token operator\">=</span><span class=\"token string\">\" \"</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># new line</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Graph Implementation Using Classes",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A more proper way to store a Graph is to add an abstraction layer using classes so that a Graph's vertices, edges, and relevant methods, like algorithms that we will implement later, are contained in one place.",
+      "html": "<p>A more proper way to store a Graph is to add an abstraction layer using classes so that a Graph's vertices, edges, and relevant methods, like algorithms that we will implement later, are contained in one place.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Programming languages with built-in object-oriented functionality like Python and Java, make implementation of Graphs using classes much easier than languages like C, without this built-in functionality.",
+      "html": "<p>Programming languages with built-in object-oriented functionality like Python and Java, make implementation of Graphs using classes much easier than languages like C, without this built-in functionality.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here is how the undirected Graph above can be implemented using classes.",
+      "html": "<p>Here is how the undirected Graph above can be implemented using classes.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "line-numbers",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class\n\nGraph\n:\n\n\ndef\n\n__init__\n(\nself\n,\nsize\n)\n:\n\nself\n.\nadj_matrix\n=\n\n[\n[\n0\n]\n\n*\nsize\nfor\n_\nin\n\nrange\n(\nsize\n)\n]\n\nself\n.\nsize\n=\nsize\nself\n.\nvertex_data\n=\n\n[\n''\n]\n\n*\nsize\n\n\ndef\n\nadd_edge\n(\nself\n,\nu\n,\nv\n)\n:\n\n\nif\n\n0\n\n<=\nu\n<\nself\n.\nsize\nand\n\n0\n\n<=\nv\n<\nself\n.\nsize\n:\n\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n=\n\n1\n\nself\n.\nadj_matrix\n[\nv\n]\n[\nu\n]\n\n=\n\n1\n\n\n\ndef\n\nadd_vertex_data\n(\nself\n,\nvertex\n,\ndata\n)\n:\n\n\nif\n\n0\n\n<=\nvertex\n<\nself\n.\nsize\n:\n\nself\n.\nvertex_data\n[\nvertex\n]\n\n=\ndata\n\n\ndef\n\nprint_graph\n(\nself\n)\n:\n\n\nprint\n(\n\"Adjacency Matrix:\"\n)\n\n\nfor\nrow\nin\nself\n.\nadj_matrix\n:\n\n\nprint\n(\n' '\n.\njoin\n(\nmap\n(\nstr\n,\nrow\n)\n)\n)\n\n\nprint\n(\n\"\\nVertex Data:\"\n)\n\n\nfor\nvertex\n,\ndata\nin\n\nenumerate\n(\nself\n.\nvertex_data\n)\n:\n\n\nprint\n(\nf\"Vertex\n{\nvertex\n}\n:\n{\ndata\n}\n\"\n)\n\n\ng\n=\nGraph\n(\n4\n)\n\ng\n.\nadd_vertex_data\n(\n0\n,\n\n'A'\n)\n\ng\n.\nadd_vertex_data\n(\n1\n,\n\n'B'\n)\n\ng\n.\nadd_vertex_data\n(\n2\n,\n\n'C'\n)\n\ng\n.\nadd_vertex_data\n(\n3\n,\n\n'D'\n)\n\ng\n.\nadd_edge\n(\n0\n,\n\n1\n)\n\n# A - B\n\ng\n.\nadd_edge\n(\n0\n,\n\n2\n)\n\n# A - C\n\ng\n.\nadd_edge\n(\n0\n,\n\n3\n)\n\n# A - D\n\ng\n.\nadd_edge\n(\n1\n,\n\n2\n)\n\n# B - C\n\n\ng\n.\nprint_graph\n(\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate line-numbers w3-white language-python\" data-line=\"9,10,29-32\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Graph</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">__init__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        self<span class=\"token punctuation\">.</span>adj_matrix <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token number\">0</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size <span class=\"token keyword keyword-for\">for</span> _ <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span>\n        self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">=</span> size\n        self<span class=\"token punctuation\">.</span>vertex_data <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">''</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size  \n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_edge</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> u <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size <span class=\"token keyword keyword-and\">and</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> v <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token number\">1</span>\n            self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token number\">1</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_vertex_data</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> vertex<span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> vertex <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> data\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">print_graph</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Adjacency Matrix:\"</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-for\">for</span> row <span class=\"token keyword keyword-in\">in</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">' '</span><span class=\"token punctuation\">.</span>join<span class=\"token punctuation\">(</span><span class=\"token builtin\">map</span><span class=\"token punctuation\">(</span><span class=\"token builtin\">str</span><span class=\"token punctuation\">,</span> row<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\\nVertex Data:\"</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-for\">for</span> vertex<span class=\"token punctuation\">,</span> data <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">enumerate</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"Vertex </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>vertex<span class=\"token punctuation\">}</span></span><span class=\"token string\">: </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>data<span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span>\n\ng <span class=\"token operator\">=</span> Graph<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A - B</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A - C</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A - D</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># B - C</span>\n\ng<span class=\"token punctuation\">.</span>print_graph<span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"9\" style=\"top: 177px; height: 22px; width: 789px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"10\" style=\"top: 199px; height: 22px; width: 789px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"29-32\" style=\"top: 617px; height: 88px; width: 789px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the code above, the matrix symmetry we get for undirected Graphs is provided for on line 9 and 10, and this saves us some code when initializing the edges in the Graph on lines 29-32.",
+      "html": "<p>In the code above, the matrix symmetry we get for undirected Graphs is provided for on line 9 and 10, and this saves us some code when initializing the edges in the Graph on lines 29-32.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Implementation of Directed and Weighted Graphs",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To implement a Graph that is directed and weighted, we just need to do a few changes to previous implementation of the undirected Graph.",
+      "html": "<p>To implement a Graph that is directed and weighted, we just need to do a few changes to previous implementation of the undirected Graph.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To create directed Graphs, we just need to remove line 10 in the previous example code, so that the matrix is not automatically symmetric anymore.",
+      "html": "<p>To create directed Graphs, we just need to remove line 10 in the previous example code, so that the matrix is not automatically symmetric anymore.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The second change we need to do is to add a weight argument to the add_edge() method, so that instead of just having value 1 to indicate that there is an edge between two vertices, we use the actual weight value to define the edge.",
+      "html": "<p>The second change we need to do is to add a <code>weight</code> argument to the <code>add_edge()</code> method, so that instead of just having value <code>1</code> to indicate that there is an edge between two vertices, we use the actual weight value to define the edge.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Below is the implementation of the directed and weighted Graph above.",
+      "html": "<p>Below is the implementation of the directed and weighted Graph above.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "line-numbers",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class\n\nGraph\n:\n\n\ndef\n\n__init__\n(\nself\n,\nsize\n)\n:\n\nself\n.\nadj_matrix\n=\n\n[\n[\nNone\n]\n\n*\nsize\nfor\n_\nin\n\nrange\n(\nsize\n)\n]\n\nself\n.\nsize\n=\nsize\nself\n.\nvertex_data\n=\n\n[\n''\n]\n\n*\nsize\n\n\ndef\n\nadd_edge\n(\nself\n,\nu\n,\nv\n,\nweight\n)\n:\n\n\nif\n\n0\n\n<=\nu\n<\nself\n.\nsize\nand\n\n0\n\n<=\nv\n<\nself\n.\nsize\n:\n\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n=\nweight\n\nself\n.\nadj_matrix\n[\nv\n]\n[\nu\n]\n\n=\nweight\n\n\n\ndef\n\nadd_vertex_data\n(\nself\n,\nvertex\n,\ndata\n)\n:\n\n\nif\n\n0\n\n<=\nvertex\n<\nself\n.\nsize\n:\n\nself\n.\nvertex_data\n[\nvertex\n]\n\n=\ndata\n\n\ndef\n\nprint_graph\n(\nself\n)\n:\n\n\nprint\n(\n\"Adjacency Matrix:\"\n)\n\n\nfor\nrow\nin\nself\n.\nadj_matrix\n:\n\n\nprint\n(\n' '\n.\njoin\n(\nmap\n(\nlambda\nx\n:\n\nstr\n(\nx\n)\n\nif\nx\nis\n\nnot\n\nNone\n\nelse\n\n'0'\n,\nrow\n)\n)\n)\n\n\nprint\n(\n\"\\nVertex Data:\"\n)\n\n\nfor\nvertex\n,\ndata\nin\n\nenumerate\n(\nself\n.\nvertex_data\n)\n:\n\n\nprint\n(\nf\"Vertex\n{\nvertex\n}\n:\n{\ndata\n}\n\"\n)\n\n\ng\n=\nGraph\n(\n4\n)\n\ng\n.\nadd_vertex_data\n(\n0\n,\n\n'A'\n)\n\ng\n.\nadd_vertex_data\n(\n1\n,\n\n'B'\n)\n\ng\n.\nadd_vertex_data\n(\n2\n,\n\n'C'\n)\n\ng\n.\nadd_vertex_data\n(\n3\n,\n\n'D'\n)\n\ng\n.\nadd_edge\n(\n0\n,\n\n1\n,\n\n3\n)\n\n# A -> B with weight 3\n\ng\n.\nadd_edge\n(\n0\n,\n\n2\n,\n\n2\n)\n\n# A -> C with weight 2\n\ng\n.\nadd_edge\n(\n3\n,\n\n0\n,\n\n4\n)\n\n# D -> A with weight 4\n\ng\n.\nadd_edge\n(\n2\n,\n\n1\n,\n\n1\n)\n\n# C -> B with weight 1\n\n\ng\n.\nprint_graph\n(\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate line-numbers w3-white language-python\" data-line=\"3,7,10\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Graph</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">__init__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        self<span class=\"token punctuation\">.</span>adj_matrix <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size <span class=\"token keyword keyword-for\">for</span> _ <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span>\n        self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">=</span> size\n        self<span class=\"token punctuation\">.</span>vertex_data <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">''</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size  \n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_edge</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> u <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size <span class=\"token keyword keyword-and\">and</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> v <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> weight\n            <del>self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> weight</del>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_vertex_data</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> vertex<span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> vertex <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> data\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">print_graph</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Adjacency Matrix:\"</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-for\">for</span> row <span class=\"token keyword keyword-in\">in</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">' '</span><span class=\"token punctuation\">.</span>join<span class=\"token punctuation\">(</span><span class=\"token builtin\">map</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-lambda\">lambda</span> x<span class=\"token punctuation\">:</span> <span class=\"token builtin\">str</span><span class=\"token punctuation\">(</span>x<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-if\">if</span> x <span class=\"token keyword keyword-is\">is</span> <span class=\"token keyword keyword-not\">not</span> <span class=\"token boolean\">None</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token string\">'0'</span><span class=\"token punctuation\">,</span> row<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\\nVertex Data:\"</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-for\">for</span> vertex<span class=\"token punctuation\">,</span> data <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">enumerate</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"Vertex </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>vertex<span class=\"token punctuation\">}</span></span><span class=\"token string\">: </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>data<span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span>\n\ng <span class=\"token operator\">=</span> Graph<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A -&gt; B with weight 3</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A -&gt; C with weight 2</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># D -&gt; A with weight 4</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># C -&gt; B with weight 1</span>\n\ng<span class=\"token punctuation\">.</span>print_graph<span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"3\" style=\"top: 45px; height: 22px; width: 801px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"7\" style=\"top: 133px; height: 22px; width: 801px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"10\" style=\"top: 199px; height: 22px; width: 801px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 3: All edges are set to None initially.",
+      "html": "<p><strong>Line 3: </strong>All edges are set to <code>None</code> initially.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 7: The weight can now be added to an edge with the additional weight argument.",
+      "html": "<p><strong>Line 7: </strong>The weight can now be added to an edge with the additional <code>weight</code> argument.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 10: By removing line 10, the Graph can now be set up as being directed.",
+      "html": "<p><strong>Line 10: </strong> By removing line 10, the Graph can now be set up as being directed.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On the next page we will see how Graphs can be traversed, and on the next pages after that we will look at different algorithms that can run on the Graph data structure.",
+      "html": "<p>On the next page we will see how Graphs can be traversed, and on the next pages after that we will look at different algorithms that can run on the Graph data structure.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "DSA Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Yourself With Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise:",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How are the edges in a graph implemented?",
+      "html": "<p>How are the edges in a graph implemented?</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "The edges, and edge weights,\nin a graph are normally\nimplemented in an\nmatrix.",
+      "language": "unknown",
+      "code_html": "<pre style=\"overflow: auto;\">The edges, and edge weights, \nin a graph are normally \nimplemented in an <input maxlength=\"9\" name=\"ex1\" style=\"width: 10ch;\"/> matrix.\n</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Start the Exercise",
+          "href": "https://www.w3schools.com/exercise.php?filename=exercise_theory_graphs2",
+          "title": ""
+        }
+      ],
+      "text": "Start the Exercise",
+      "html": "<p><a href=\"exercise.php?filename=exercise_theory_graphs2\" target=\"_blank\">Start the Exercise</a></p>"
+    }
+  ]
+}

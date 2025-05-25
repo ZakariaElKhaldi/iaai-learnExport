@@ -1,0 +1,1604 @@
+{
+  "title": "SQL Injection",
+  "url": "https://www.w3schools.com/sql/sql_injection.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "SQL Injection",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "SQL Injection",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "SQL injection is a code injection technique that might destroy your database.",
+      "html": "<p>SQL injection is a code injection technique that might destroy your database.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "SQL injection is one of the most common web hacking techniques.",
+      "html": "<p>SQL injection is one of the most common web hacking techniques.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "SQL injection is the placement of malicious code in SQL statements, via web page input.",
+      "html": "<p>SQL injection is the placement of malicious code in SQL statements, via web page input.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "SQL in Web Pages",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "SQL injection usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.",
+      "html": "<p>SQL injection usually occurs when you ask a user for input, like their \nusername/userid, and instead of a name/id, the user gives you an SQL statement \nthat you will <strong>unknowingly</strong> run on your database.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the following example which creates a SELECT statement by adding a variable (txtUserId) to a select string. The variable is fetched from user input (getRequestString):",
+      "html": "<p>Look at the following example which creates a <code>\nSELECT</code> statement by adding a variable \n(txtUserId) to a select string. The variable is fetched from user input \n(getRequestString):</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "txtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n txtUserId = getRequestString(\"UserId\");<br/>txtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The rest of this chapter describes the potential dangers of using user input in SQL statements.",
+      "html": "<p>The rest of this chapter describes the potential dangers of using user input in SQL statements.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "SQL Injection Based on 1=1 is Always True",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the example above again. The original purpose of the code was to create an SQL statement to select a user, with a given user id.",
+      "html": "<p>Look at the example above again. The original purpose of the code was to create an SQL statement to select a \nuser, with a given user id.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If there is nothing to prevent a user from entering \"wrong\" input, the user can enter some \"smart\" input like this:",
+      "html": "<p>If there is nothing to prevent a user from entering \"wrong\" input, the user \ncan enter some \"smart\" input like this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "UserId:",
+      "html": "<p>UserId: <input name=\"UserId\" type=\"text\" value=\"105 OR 1=1\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then, the SQL statement will look like this:",
+      "html": "<p>Then, the SQL statement will look like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM Users WHERE UserId = 105 OR 1=1; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "105",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          },
+          {
+            "text": "OR",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM Users WHERE UserId = 105 OR 1=1;",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM Users WHERE UserId = 105 OR 1=1; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "105",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        },
+        {
+          "text": "OR",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Users <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> UserId = <span class=\"sqlnumbercolor\" style=\"color:#905\">105</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">OR</span> <span class=\"sqlnumbercolor\" style=\"color:#905\">1</span>=<span class=\"sqlnumbercolor\" style=\"color:#905\">1</span>; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM Users WHERE UserId = 105 OR 1=1; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "105",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        },
+        {
+          "text": "OR",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The SQL above is valid and will return ALL rows from the \"Users\" table, since OR 1=1 is always TRUE.",
+      "html": "<p>The SQL above is valid and will return ALL rows from the \"Users\" table, since <strong>\nOR 1=1</strong> is always TRUE.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Does the example above look dangerous? What if the \"Users\" table contains names and passwords?",
+      "html": "<p>Does the example above look dangerous? What if the \"Users\" table contains names and passwords?</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The SQL statement above is much the same as this:",
+      "html": "<p>The SQL statement above is much the same as this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT UserId, Name, Password\nFROM Users WHERE UserId = 105 or 1=1; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "105",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          },
+          {
+            "text": "or",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT UserId, Name, Password\nFROM Users WHERE UserId = 105 or 1=1;",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT UserId, Name, Password\nFROM Users WHERE UserId = 105 or 1=1; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "105",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        },
+        {
+          "text": "or",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> UserId, Name, Password\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Users <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> UserId = <span class=\"sqlnumbercolor\" style=\"color:#905\">105</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">or</span> <span class=\"sqlnumbercolor\" style=\"color:#905\">1</span>=<span class=\"sqlnumbercolor\" style=\"color:#905\">1</span>; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT UserId, Name, Password\nFROM Users WHERE UserId = 105 or 1=1; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "105",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        },
+        {
+          "text": "or",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A hacker might get access to all the user names and passwords in a database, by simply inserting 105 OR 1=1 into the input field.",
+      "html": "<p>A hacker might get access to all the user names and passwords in a database, by \nsimply inserting \n105 OR 1=1 into the input field.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "SQL Injection Based on \"\"=\"\" is Always True",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here is an example of a user login on a web site:",
+      "html": "<p>Here is an example of a user login on a web site:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Username:",
+      "html": "<p>Username:<br/>\n<input name=\"uName\" style=\"padding:4px\" type=\"text\" value=\"John Doe\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Password:",
+      "html": "<p>Password:<br/>\n<input name=\"uPass\" style=\"padding:4px\" type=\"text\" value=\"myPass\"/></p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "uName = getRequestString(\"username\");\nuPass = getRequestString(\"userpassword\");\n\n\nsql = 'SELECT * FROM Users WHERE Name =\"' + uName + '\" AND Pass =\"' + uPass + \n'\"'",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\nuName = getRequestString(\"username\");<br/>uPass = getRequestString(\"userpassword\");<br/>\n<br/>sql = 'SELECT * FROM Users WHERE Name =\"' + uName + '\" AND Pass =\"' + uPass + \n '\"'</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM Users WHERE Name =\"John Doe\" AND Pass =\"myPass\" ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "\"John Doe\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          },
+          {
+            "text": "AND",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "\"myPass\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM Users WHERE Name =\"John Doe\" AND Pass =\"myPass\"",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM Users WHERE Name =\"John Doe\" AND Pass =\"myPass\" ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"John Doe\"",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        },
+        {
+          "text": "AND",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"myPass\"",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Users <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> Name =<span class=\"sqlstringcolor\" style=\"color:green\">\"John Doe\"</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">AND</span> Pass =<span class=\"sqlstringcolor\" style=\"color:green\">\"myPass\"</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM Users WHERE Name =\"John Doe\" AND Pass =\"myPass\" ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "\"John Doe\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        },
+        {
+          "text": "AND",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "\"myPass\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A hacker might get access to user names and passwords in a database by simply inserting \" OR \"\"=\" into the user name or password text box:",
+      "html": "<p>\nA hacker might get access to user names and passwords\u00a0in a database by \nsimply inserting \" OR \"\"=\" into the user name or password text box:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "User Name:",
+      "html": "<p>User Name:<br/>\n<input name=\"uName\" style=\"padding:4px\" type=\"text\" value='\" or \"\"=\"'/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Password:",
+      "html": "<p>Password:<br/>\n<input name=\"uPass\" style=\"padding:4px\" type=\"text\" value='\" or \"\"=\"'/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The code at the server will create a valid SQL statement like this:",
+      "html": "<p>The code at the server will create a valid SQL statement like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM Users WHERE Name =\"\" or \"\"=\"\" AND Pass =\"\" or \"\"=\"\" ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          },
+          {
+            "text": "or",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          },
+          {
+            "text": "AND",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          },
+          {
+            "text": "or",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          },
+          {
+            "text": "\"\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM Users WHERE Name =\"\" or \"\"=\"\" AND Pass =\"\" or \"\"=\"\"",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM Users WHERE Name =\"\" or \"\"=\"\" AND Pass =\"\" or \"\"=\"\" ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        },
+        {
+          "text": "or",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        },
+        {
+          "text": "AND",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        },
+        {
+          "text": "or",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        },
+        {
+          "text": "\"\"",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Users <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> Name =<span class=\"sqlstringcolor\" style=\"color:green\">\"\"</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">or</span> <span class=\"sqlstringcolor\" style=\"color:green\">\"\"</span>=<span class=\"sqlstringcolor\" style=\"color:green\">\"\"</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">AND</span> Pass =<span class=\"sqlstringcolor\" style=\"color:green\">\"\"</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">or</span> <span class=\"sqlstringcolor\" style=\"color:green\">\"\"</span>=<span class=\"sqlstringcolor\" style=\"color:green\">\"\"</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM Users WHERE Name =\"\" or \"\"=\"\" AND Pass =\"\" or \"\"=\"\" ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        },
+        {
+          "text": "or",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        },
+        {
+          "text": "AND",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        },
+        {
+          "text": "or",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        },
+        {
+          "text": "\"\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The SQL above is valid and will return all rows from the \"Users\" table, since OR \"\"=\"\" is always TRUE.",
+      "html": "<p>The SQL above is valid and will return all rows from the \"Users\" table, \nsince <strong>OR \"\"=\"\"</strong> is always TRUE.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "SQL Injection Based on Batched SQL Statements",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Most databases support batched SQL statement.",
+      "html": "<p>Most databases support batched SQL statement.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A batch of SQL statements is a group of two or more SQL statements, separated by semicolons.",
+      "html": "<p>A batch of SQL statements is a group of two or more SQL statements, separated by semicolons.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The SQL statement below will return all rows from the \"Users\" table, then delete the \"Suppliers\" table.",
+      "html": "<p>The SQL statement below will return all rows from the \"Users\" table, then delete the \n\"Suppliers\" table.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM Users; DROP TABLE Suppliers\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "DROP",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "TABLE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM Users; DROP TABLE Suppliers",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM Users; DROP TABLE Suppliers\n ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "DROP",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "TABLE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Users; <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">DROP</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">TABLE</span> Suppliers\n </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM Users; DROP TABLE Suppliers\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "DROP",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "TABLE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the following example:",
+      "html": "<p>Look at the following example: </p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "txtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\ntxtUserId = getRequestString(\"UserId\");<br/>txtSQL = \"SELECT *\nFROM Users WHERE UserId = \" + txtUserId;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And the following input:",
+      "html": "<p>And the following input:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "User id:",
+      "html": "<p>User id: <input name=\"UserId\" style=\"width:250px\" type=\"text\" value=\"105; DROP TABLE Suppliers\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The valid SQL statement would look like this:",
+      "html": "<p>The valid SQL statement would look like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM Users WHERE \nUserId = 105; DROP TABLE Suppliers; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "105",
+            "color": "rgb(153, 0, 85)",
+            "class": "sqlnumbercolor"
+          },
+          {
+            "text": "DROP",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "TABLE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM Users WHERE\nUserId = 105; DROP TABLE Suppliers;",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM Users WHERE \nUserId = 105; DROP TABLE Suppliers; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "105",
+          "color": "#905",
+          "class": [
+            "sqlnumbercolor"
+          ]
+        },
+        {
+          "text": "DROP",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "TABLE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Users <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> \nUserId = <span class=\"sqlnumbercolor\" style=\"color:#905\">105</span>; <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">DROP</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">TABLE</span> Suppliers; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM Users WHERE \nUserId = 105; DROP TABLE Suppliers; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "105",
+          "color": "rgb(153, 0, 85)",
+          "class": "sqlnumbercolor"
+        },
+        {
+          "text": "DROP",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "TABLE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Use SQL Parameters for Protection",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To protect a web site from SQL injection, you can use SQL parameters.",
+      "html": "<p>To protect a web site from SQL injection, you can use SQL parameters.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "SQL parameters are values that are added to an SQL query at execution time, in a controlled manner.",
+      "html": "<p>SQL parameters are values that are added to an SQL query at execution time, in a controlled manner.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "txtUserId = getRequestString(\"UserId\");\ntxtSQL = \"SELECT *\nFROM Users WHERE UserId = @0\";\ndb.Execute(txtSQL,txtUserId);",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\ntxtUserId = getRequestString(\"UserId\");<br/>txtSQL = \"SELECT *\nFROM Users WHERE UserId = @0\";<br/>db.Execute(txtSQL,txtUserId);</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note that parameters are represented in the SQL statement by a @ marker.",
+      "html": "<p>Note that parameters are represented in the SQL statement by a @ marker.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The SQL engine checks each parameter to ensure that it is correct for its column and are treated literally, and not as part of the SQL to be executed.",
+      "html": "<p>The SQL engine checks each parameter to ensure that it is correct for its column\nand are treated literally, and not as part of the SQL to be executed.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "txtNam = getRequestString(\"CustomerName\");\ntxtAdd = getRequestString(\"Address\");\ntxtCit = getRequestString(\"City\");\n\ntxtSQL = \"INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2)\";\ndb.Execute(txtSQL,txtNam,txtAdd,txtCit);",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n txtNam = getRequestString(\"CustomerName\");<br/>txtAdd = getRequestString(\"Address\");<br/>txtCit = getRequestString(\"City\");<br/>\n txtSQL = \"INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2)\";<br/>db.Execute(txtSQL,txtNam,txtAdd,txtCit);</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Examples",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following examples shows how to build parameterized queries in some common web languages.",
+      "html": "<p>The following examples shows how to build parameterized queries in some common web languages.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "SELECT STATEMENT IN ASP.NET:",
+      "html": "<p>SELECT STATEMENT IN ASP.NET:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "txtUserId = getRequestString(\"UserId\");\n\nsql = \"SELECT * FROM Customers WHERE CustomerId = @0\";\ncommand = new SqlCommand(sql);\ncommand.Parameters.AddWithValue(\"@0\",txtUserId);\n\ncommand.ExecuteReader();",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n txtUserId = getRequestString(\"UserId\");<br/>\n sql = \"SELECT * FROM Customers WHERE CustomerId = @0\";<br/>command = new SqlCommand(sql);<br/>command.Parameters.AddWithValue(\"@0\",txtUserId);<br/>\n command.ExecuteReader();</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "INSERT INTO STATEMENT IN ASP.NET:",
+      "html": "<p>INSERT INTO STATEMENT IN ASP.NET:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "txtNam = getRequestString(\"CustomerName\");\ntxtAdd = getRequestString(\"Address\");\ntxtCit = getRequestString(\"City\");\n\ntxtSQL = \"INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2)\";\ncommand = new SqlCommand(txtSQL);\n\ncommand.Parameters.AddWithValue(\"@0\",txtNam);\n\ncommand.Parameters.AddWithValue(\"@1\",txtAdd);\n\ncommand.Parameters.AddWithValue(\"@2\",txtCit);\ncommand.ExecuteNonQuery();",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n txtNam = getRequestString(\"CustomerName\");<br/>txtAdd = getRequestString(\"Address\");<br/>txtCit = getRequestString(\"City\");<br/>\n txtSQL = \"INSERT INTO Customers (CustomerName,Address,City) Values(@0,@1,@2)\";<br/>command = new SqlCommand(txtSQL);<br/>\n command.Parameters.AddWithValue(\"@0\",txtNam);<br/>\n command.Parameters.AddWithValue(\"@1\",txtAdd);<br/>\n command.Parameters.AddWithValue(\"@2\",txtCit);<br/>command.ExecuteNonQuery();</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "INSERT INTO STATEMENT IN PHP:",
+      "html": "<p>INSERT INTO STATEMENT IN PHP:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "$stmt = $dbh->prepare(\"INSERT INTO Customers (CustomerName,Address,City)\n\nVALUES (:nam, :add, :cit)\");\n$stmt->bindParam(':nam', $txtNam);\n\n$stmt->bindParam(':add', $txtAdd);\n$stmt->bindParam(':cit', $txtCit);\n\n$stmt->execute();",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n $stmt = $dbh-&gt;prepare(\"INSERT INTO Customers (CustomerName,Address,City) <br/>\n VALUES (:nam, :add, :cit)\");<br/>$stmt-&gt;bindParam(':nam', $txtNam);<br/>\n $stmt-&gt;bindParam(':add', $txtAdd);<br/>$stmt-&gt;bindParam(':cit', $txtCit);<br/>\n $stmt-&gt;execute();</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise ? What is this? Test your skills by answering a few questions about the topics of this page",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "What is SQL injection?",
+      "html": "<p>What is SQL injection?</p>"
+    },
+    {
+      "type": "page_quiz",
+      "metadata": {
+        "type": "quiz",
+        "question": "What is SQL injection?",
+        "options": [
+          {
+            "value": "0",
+            "text": "A technique to optimize SQL queries"
+          },
+          {
+            "value": "1",
+            "text": "A code injection technique to access or destroy a database"
+          },
+          {
+            "value": "2",
+            "text": "A method to protect SQL queries from being hacked"
+          },
+          {
+            "value": "3",
+            "text": "A debugging process for SQL queries"
+          }
+        ],
+        "formAction": "exercise.asp?x=xrcise_injection1"
+      },
+      "quiz_type": "quiz",
+      "question": "What is SQL injection?",
+      "options": [
+        {
+          "value": "0",
+          "text": "A technique to optimize SQL queries"
+        },
+        {
+          "value": "1",
+          "text": "A code injection technique to access or destroy a database"
+        },
+        {
+          "value": "2",
+          "text": "A method to protect SQL queries from being hacked"
+        },
+        {
+          "value": "3",
+          "text": "A debugging process for SQL queries"
+        }
+      ],
+      "form_action": "exercise.asp?x=xrcise_injection1",
+      "html": "<form action=\"exercise.asp?x=xrcise_injection1\" method=\"post\" rel=\"opener\" target=\"_blank\"><div class=\"quizoption\"><input id=\"quizoption0\" name=\"quizoption\" type=\"radio\" value=\"0\"/><label for=\"quizoption0\">A technique to optimize SQL queries</label></div><div class=\"quizoption\"><input id=\"quizoption1\" name=\"quizoption\" type=\"radio\" value=\"1\"/><label for=\"quizoption1\">A code injection technique to access or destroy a database</label></div><div class=\"quizoption\"><input id=\"quizoption2\" name=\"quizoption\" type=\"radio\" value=\"2\"/><label for=\"quizoption2\">A method to protect SQL queries from being hacked</label></div><div class=\"quizoption\"><input id=\"quizoption3\" name=\"quizoption\" type=\"radio\" value=\"3\"/><label for=\"quizoption3\">A debugging process for SQL queries</label></div><br/><button class=\"ws-btn\" type=\"submit\">Submit Answer \u00bb</button></form>"
+    }
+  ]
+}

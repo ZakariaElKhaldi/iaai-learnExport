@@ -1,0 +1,1247 @@
+{
+  "title": "Binary Search with Python",
+  "url": "https://www.w3schools.com/python/python_dsa_binarysearch.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Binary Search with Python",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Binary Search",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Binary Search algorithm searches through a sorted array and returns the index of the value it searches for.",
+      "html": "<p>The Binary Search algorithm searches through a <b>sorted</b> array and returns the index of the value it searches for.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p>\u00a0</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the simulation to see how the Binary Search algorithm works.",
+      "html": "<p>Run the simulation to see how the Binary Search algorithm works.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Binary Search is much faster than Linear Search, but requires a sorted array to work.",
+      "html": "<p>Binary Search is much faster than Linear Search, but requires a sorted array to work.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Binary Search algorithm works by checking the value in the center of the array. If the target value is lower, the next value to check is in the center of the left half of the array. This way of searching means that the search area is always half of the previous search area, and this is why the Binary Search algorithm is so fast.",
+      "html": "<p>The Binary Search algorithm works by checking the value in the center of the array. If the target value is lower, the next value to check is in the center of the left half of the array. This way of searching means that the search area is always half of the previous search area, and this is why the Binary Search algorithm is so fast.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This process of halving the search area happens until the target value is found, or until the search area of the array is empty.",
+      "html": "<p>This process of halving the search area happens until the target value is found, or until the search area of the array is empty.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How it works:",
+      "html": "<p><strong>How it works:</strong></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's try to do the searching manually, just to get an even better understanding of how Binary Search works before actually implementing it in a Python program. We will search for value 11.",
+      "html": "<p>Let's try to do the searching manually, just to get an even better understanding of how Binary Search works before actually implementing it in a Python program. We will search for value 11.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 1: We start with an array.",
+      "html": "<p><strong>Step 1:</strong> We start with an array.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 2, 3, 7, 7, 11, 15, 25]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 2: The value in the middle of the array at index 3, is it equal to 11?",
+      "html": "<p><strong>Step 2:</strong> The value in the middle of the array at index 3, is it equal to 11?</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 2, 3, 7,<mark class=\"dsa_mark\"> 7</mark>, 11, 15, 25]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 3: 7 is less than 11, so we must search for 11 to the right of index 3. The values to the right of index 3 are [ 11, 15, 25]. The next value to check is the middle value 15, at index 5.",
+      "html": "<p><strong>Step 3:</strong> 7 is less than 11, so we must search for 11 to the right of index 3. The values to the right of index 3 are [ 11, 15, 25]. The next value to check is the middle value 15, at index 5.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 2, 3, 7, 7, 11,<mark class=\"dsa_mark\"> 15</mark>, 25]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 4: 15 is higher than 11, so we must search to the left of index 5. We have already checked index 0-3, so index 4 is only value left to check.",
+      "html": "<p><strong>Step 4:</strong> 15 is higher than 11, so we must search to the left of index 5. We have already checked index 0-3, so index 4 is only value left to check.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 2, 3, 7, 7,<mark class=\"dsa_mark\"> 11</mark>, 15, 25]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We have found it!",
+      "html": "<p>We have found it!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Value 11 is found at index 4.",
+      "html": "<p>Value 11 is found at index 4.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Returning index position 4.",
+      "html": "<p>Returning index position 4.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Binary Search is finished.",
+      "html": "<p>Binary Search is finished.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the simulation below to see the steps above animated:",
+      "html": "<p>Run the simulation below to see the steps above animated:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Implementing Binary Search in Python",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To implement the Binary Search algorithm we need:",
+      "html": "<p>To implement the Binary Search algorithm we need:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The resulting code for Binary Search looks like this:",
+      "html": "<p>The resulting code for Binary Search looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\ndef binarySearch(arr, targetVal):\n\u00a0\u00a0left = 0\n\u00a0\u00a0right = len(arr) - 1\n\n\u00a0\u00a0while left <= right:\n\u00a0\u00a0\u00a0\u00a0mid = (left + right) // 2\n\n\u00a0\u00a0\u00a0\u00a0if arr[mid] == targetVal:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0return mid\n\n\u00a0\u00a0\u00a0\u00a0if arr[mid] < targetVal:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0left = mid + 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0right = mid - 1\n\n\u00a0\u00a0return -1\n\nmylist = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nx = 11\n\nresult = binarySearch(mylist, x)\n\nif result != -1:\n\u00a0\u00a0print(\"Found at index\", result)\nelse:\n\u00a0\u00a0print(\"Not found\") ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "3",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "5",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "7",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "9",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "11",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "13",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "15",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "17",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "19",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "11",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"Found at index\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"Not found\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def binarySearch(arr, targetVal):\nleft = 0\nright = len(arr) - 1\n\nwhile left <= right:\nmid = (left + right) // 2\n\nif arr[mid] == targetVal:\nreturn mid\n\nif arr[mid] < targetVal:\nleft = mid + 1\nelse:\nright = mid - 1\n\nreturn -1\n\nmylist = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nx = 11\n\nresult = binarySearch(mylist, x)\n\nif result != -1:\nprint(\"Found at index\", result)\nelse:\nprint(\"Not found\")",
+      "syntax_highlighting": [
+        {
+          "text": "\ndef binarySearch(arr, targetVal):\n\u00a0\u00a0left = 0\n\u00a0\u00a0right = len(arr) - 1\n\n\u00a0\u00a0while left <= right:\n\u00a0\u00a0\u00a0\u00a0mid = (left + right) // 2\n\n\u00a0\u00a0\u00a0\u00a0if arr[mid] == targetVal:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0return mid\n\n\u00a0\u00a0\u00a0\u00a0if arr[mid] < targetVal:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0left = mid + 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0right = mid - 1\n\n\u00a0\u00a0return -1\n\nmylist = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nx = 11\n\nresult = binarySearch(mylist, x)\n\nif result != -1:\n\u00a0\u00a0print(\"Found at index\", result)\nelse:\n\u00a0\u00a0print(\"Not found\") ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "3",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "5",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "7",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "9",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "11",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "13",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "15",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "17",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "19",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "11",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Found at index\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Not found\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> binarySearch(arr, targetVal):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0left = <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0right = <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(arr) - <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">while</span> left &lt;= right:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0mid = (left + right) // <span class=\"pythonnumbercolor\" style=\"color:#905\">2</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">if</span> arr[mid] == targetVal:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> mid<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">if</span> arr[mid] &lt; targetVal:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0left = mid + <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">else</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0right = mid - <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> -<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nmylist = [<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">3</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">5</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">7</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">9</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">11</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">13</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">15</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">17</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">19</span>]<br/>\nx = <span class=\"pythonnumbercolor\" style=\"color:#905\">11</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nresult = binarySearch(mylist, x)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">if</span> result != -<span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(<span class=\"pythonstringcolor\" style=\"color:green\">\"Found at index\"</span>, result)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">else</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(<span class=\"pythonstringcolor\" style=\"color:green\">\"Not found\"</span>) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\ndef binarySearch(arr, targetVal):\n\u00a0\u00a0left = 0\n\u00a0\u00a0right = len(arr) - 1\n\n\u00a0\u00a0while left <= right:\n\u00a0\u00a0\u00a0\u00a0mid = (left + right) // 2\n\n\u00a0\u00a0\u00a0\u00a0if arr[mid] == targetVal:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0return mid\n\n\u00a0\u00a0\u00a0\u00a0if arr[mid] < targetVal:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0left = mid + 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0right = mid - 1\n\n\u00a0\u00a0return -1\n\nmylist = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nx = 11\n\nresult = binarySearch(mylist, x)\n\nif result != -1:\n\u00a0\u00a0print(\"Found at index\", result)\nelse:\n\u00a0\u00a0print(\"Not found\") ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "3",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "5",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "7",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "9",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "11",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "13",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "15",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "17",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "19",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "11",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"Found at index\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"Not found\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Binary Search Time Complexity",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Each time Binary Search checks a new value to see if it is the target value, the search area is halved.",
+      "html": "<p>Each time Binary Search checks a new value to see if it is the target value, the search area is halved.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This means that even in the worst case scenario where Binary Search cannot find the target value, it still only needs log 2 n log 2 \u2061 n comparisons to look through a sorted array of n n values.",
+      "html": "<p>This means that even in the worst case scenario where Binary Search cannot find the target value, it still only needs <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;msub&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mrow class=\"MJX-TeXAtom-ORD\"&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-1-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-1\"><span class=\"mjx-mrow\" id=\"MJXc-Node-2\"><span class=\"mjx-msubsup\" id=\"MJXc-Node-3\"><span class=\"mjx-base\"><span class=\"mjx-mi\" id=\"MJXc-Node-4\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span></span><span class=\"mjx-sub\" style=\"font-size: 70.7%; vertical-align: -0.377em; padding-right: 0.071em;\"><span class=\"mjx-texatom\" id=\"MJXc-Node-5\" style=\"\"><span class=\"mjx-mrow\" id=\"MJXc-Node-6\"><span class=\"mjx-mn\" id=\"MJXc-Node-7\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-8\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-9\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><msub><mi>log</mi><mrow class=\"MJX-TeXAtom-ORD\"><mn>2</mn></mrow></msub><mo>\u2061</mo><mi>n</mi></math></span></span> comparisons to look through a sorted array of <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-2-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-10\"><span class=\"mjx-mrow\" id=\"MJXc-Node-11\"><span class=\"mjx-mi\" id=\"MJXc-Node-12\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>n</mi></math></span></span> values.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Time complexity for Binary Search is: O ( log 2 n ) O ( log 2 \u2061 n )",
+      "html": "<p>Time complexity for Binary Search is: <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mrow class=\"MJX-TeXAtom-ORD\"&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-3-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-13\"><span class=\"mjx-mrow\" id=\"MJXc-Node-14\"><span class=\"mjx-mi\" id=\"MJXc-Node-15\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-16\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-17\"><span class=\"mjx-base\"><span class=\"mjx-mi\" id=\"MJXc-Node-18\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span></span><span class=\"mjx-sub\" style=\"font-size: 70.7%; vertical-align: -0.377em; padding-right: 0.071em;\"><span class=\"mjx-texatom\" id=\"MJXc-Node-19\" style=\"\"><span class=\"mjx-mrow\" id=\"MJXc-Node-20\"><span class=\"mjx-mn\" id=\"MJXc-Node-21\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-22\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-23\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-24\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msub><mi>log</mi><mrow class=\"MJX-TeXAtom-ORD\"><mn>2</mn></mrow></msub><mo>\u2061</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: When writing time complexity using Big O notation we could also just have written O ( log n ) O ( log \u2061 n ) , but O ( log 2 n ) O ( log 2 \u2061 n ) reminds us that the array search area is halved for every new comparison, which is the basic concept of Binary Search, so we will just keep the base 2 indication in this case.",
+      "html": "<p><strong>Note:</strong> When writing time complexity using Big O notation we could also just have written <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-4-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-25\"><span class=\"mjx-mrow\" id=\"MJXc-Node-26\"><span class=\"mjx-mi\" id=\"MJXc-Node-27\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-28\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-29\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-30\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-31\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-32\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>log</mi><mo>\u2061</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span>, but <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mrow class=\"MJX-TeXAtom-ORD\"&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-5-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-33\"><span class=\"mjx-mrow\" id=\"MJXc-Node-34\"><span class=\"mjx-mi\" id=\"MJXc-Node-35\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-36\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-37\"><span class=\"mjx-base\"><span class=\"mjx-mi\" id=\"MJXc-Node-38\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span></span><span class=\"mjx-sub\" style=\"font-size: 70.7%; vertical-align: -0.377em; padding-right: 0.071em;\"><span class=\"mjx-texatom\" id=\"MJXc-Node-39\" style=\"\"><span class=\"mjx-mrow\" id=\"MJXc-Node-40\"><span class=\"mjx-mn\" id=\"MJXc-Node-41\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-42\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-43\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-44\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msub><mi>log</mi><mrow class=\"MJX-TeXAtom-ORD\"><mn>2</mn></mrow></msub><mo>\u2061</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span> reminds us that the array search area is halved for every new comparison, which is the basic concept of Binary Search, so we will just keep the base 2 indication in this case.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we draw how much time Binary Search needs to find a value in an array of n n values, compared to Linear Search, we get this graph:",
+      "html": "<p>If we draw how much time Binary Search needs to find a value in an array of <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-6-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-45\"><span class=\"mjx-mrow\" id=\"MJXc-Node-46\"><span class=\"mjx-mi\" id=\"MJXc-Node-47\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>n</mi></math></span></span> values, compared to Linear Search, we get this graph:</p>"
+    }
+  ]
+}

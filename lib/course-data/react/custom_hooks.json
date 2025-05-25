@@ -1,0 +1,223 @@
+{
+  "title": "React Custom Hooks",
+  "url": "https://www.w3schools.com/react/react_customhooks.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "React Custom Hooks",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hooks are reusable functions.",
+      "html": "<p class=\"intro\">Hooks are reusable functions.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When you have component logic that needs to be used by multiple components, we can extract that logic to a custom Hook.",
+      "html": "<p class=\"intro\">When you have component logic that needs to be used by multiple components, we can extract that logic to a custom Hook.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Custom Hooks start with \"use\". Example: useFetch .",
+      "html": "<p class=\"intro\">Custom Hooks start with \"use\". Example: <code>useFetch</code>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Build a Hook",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the following code, we are fetching data in our Home component and displaying it.",
+      "html": "<p>In the following code, we are fetching data in our <code>Home</code> component and displaying it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "JSONPlaceholder",
+          "href": "https://jsonplaceholder.typicode.com/",
+          "title": ""
+        }
+      ],
+      "text": "We will use the JSONPlaceholder service to fetch fake data. This service is great for testing applications when there is no existing data.",
+      "html": "<p>We will use the <a href=\"https://jsonplaceholder.typicode.com/\" target=\"_blank\">JSONPlaceholder</a> service to fetch fake data. This service is great for testing applications when there is no existing data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "JavaScript Fetch API",
+          "href": "https://www.w3schools.com/js/js_api_fetch.asp",
+          "title": ""
+        }
+      ],
+      "text": "To learn more, check out the JavaScript Fetch API section.",
+      "html": "<p>To learn more, check out the <a href=\"/js/js_api_fetch.asp\">JavaScript Fetch API</a> section.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Use the JSONPlaceholder service to fetch fake \"todo\" items and display the titles on the page:",
+      "html": "<p>Use the JSONPlaceholder service to fetch fake \"todo\" items and display the titles on the page:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n,\nuseEffect\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nconst\n\nHome\n\n=\n\n(\n)\n\n=>\n\n{\n\n\nconst\n\n[\ndata\n,\nsetData\n]\n\n=\n\nuseState\n(\nnull\n)\n;\n\n\n\nuseEffect\n(\n(\n)\n\n=>\n\n{\n\n\nfetch\n(\n\"https://jsonplaceholder.typicode.com/todos\"\n)\n\n\n.\nthen\n(\n(\nres\n)\n\n=>\nres\n.\njson\n(\n)\n)\n\n\n.\nthen\n(\n(\ndata\n)\n\n=>\n\nsetData\n(\ndata\n)\n)\n;\n\n\n}\n,\n\n[\n]\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n{\ndata\n&&\n\ndata\n.\nmap\n(\n(\nitem\n)\n\n=>\n\n{\n\n\nreturn\n\n<\np\n\nkey\n=\n{\nitem\n.\nid\n}\n>\n{\nitem\n.\ntitle\n}\n</\np\n>\n;\n\n\n}\n)\n}\n\n\n</\n>\n\n\n)\n;\n\n\n}\n;\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nHome\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState<span class=\"token punctuation\">,</span> useEffect <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">Home</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>data<span class=\"token punctuation\">,</span> setData<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-null\">null</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token function\">useEffect</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">fetch</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"https://jsonplaceholder.typicode.com/todos\"</span><span class=\"token punctuation\">)</span>\n      <span class=\"token punctuation\">.</span><span class=\"token function\">then</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">res</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> res<span class=\"token punctuation\">.</span><span class=\"token function\">json</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n      <span class=\"token punctuation\">.</span><span class=\"token function\">then</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">data</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token function\">setData</span><span class=\"token punctuation\">(</span>data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token punctuation\">{</span>data <span class=\"token operator\">&amp;&amp;</span>\n        data<span class=\"token punctuation\">.</span><span class=\"token function\">map</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">item</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n          <span class=\"token keyword keyword-return\">return</span> <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">key</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>item<span class=\"token punctuation\">.</span>id<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span>item<span class=\"token punctuation\">.</span>title<span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">;</span>\n        <span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">}</span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Home</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The fetch logic may be needed in other components as well, so we will extract that into a custom Hook.",
+      "html": "<p>The fetch logic may be needed in other components as well, so we will extract that into a custom Hook.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Move the fetch logic to a new file to be used as a custom Hook:",
+      "html": "<p>Move the fetch logic to a new file to be used as a custom Hook:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n,\nuseEffect\n}\n\nfrom\n\n\"react\"\n;\n\n\n\nconst\n\nuseFetch\n\n=\n\n(\nurl\n)\n\n=>\n\n{\n\n\nconst\n\n[\ndata\n,\nsetData\n]\n\n=\n\nuseState\n(\nnull\n)\n;\n\n\n\nuseEffect\n(\n(\n)\n\n=>\n\n{\n\n\nfetch\n(\nurl\n)\n\n\n.\nthen\n(\n(\nres\n)\n\n=>\nres\n.\njson\n(\n)\n)\n\n\n.\nthen\n(\n(\ndata\n)\n\n=>\n\nsetData\n(\ndata\n)\n)\n;\n\n\n}\n,\n\n[\nurl\n]\n)\n;\n\n\n\nreturn\n\n[\ndata\n]\n;\n\n\n}\n;\n\n\n\nexport\n\ndefault\nuseFetch\n;",
+      "language": "javascript",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState<span class=\"token punctuation\">,</span> useEffect <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">useFetch</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token parameter\">url</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>data<span class=\"token punctuation\">,</span> setData<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-null\">null</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token function\">useEffect</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">fetch</span><span class=\"token punctuation\">(</span>url<span class=\"token punctuation\">)</span>\n      <span class=\"token punctuation\">.</span><span class=\"token function\">then</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">res</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> res<span class=\"token punctuation\">.</span><span class=\"token function\">json</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n      <span class=\"token punctuation\">.</span><span class=\"token function\">then</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">data</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token function\">setData</span><span class=\"token punctuation\">(</span>data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span>url<span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">[</span>data<span class=\"token punctuation\">]</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> useFetch<span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\nimport\nuseFetch\nfrom\n\n\"./useFetch\"\n;\n\n\n\nconst\n\nHome\n\n=\n\n(\n)\n\n=>\n\n{\n\n\nconst\n\n[\ndata\n]\n\n=\n\nuseFetch\n(\n\"https://jsonplaceholder.typicode.com/todos\"\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n{\ndata\n&&\n\ndata\n.\nmap\n(\n(\nitem\n)\n\n=>\n\n{\n\n\nreturn\n\n<\np\n\nkey\n=\n{\nitem\n.\nid\n}\n>\n{\nitem\n.\ntitle\n}\n</\np\n>\n;\n\n\n}\n)\n}\n\n\n</\n>\n\n\n)\n;\n\n\n}\n;\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nHome\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> useFetch <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"./useFetch\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">Home</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>data<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useFetch</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"https://jsonplaceholder.typicode.com/todos\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token punctuation\">{</span>data <span class=\"token operator\">&amp;&amp;</span>\n        data<span class=\"token punctuation\">.</span><span class=\"token function\">map</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">item</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n          <span class=\"token keyword keyword-return\">return</span> <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">key</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>item<span class=\"token punctuation\">.</span>id<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span>item<span class=\"token punctuation\">.</span>title<span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">;</span>\n        <span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">}</span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Home</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Example Explained",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We have created a new file called useFetch.js containing a function called useFetch which contains all of the logic needed to fetch our data.",
+      "html": "<p>We have created a new file called <code>useFetch.js</code> containing a function called <code>useFetch</code> which contains all of the logic needed to fetch our data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We removed the hard-coded URL and replaced it with a url variable that can be passed to the custom Hook.",
+      "html": "<p>We removed the hard-coded URL and replaced it with a <code>url</code> variable that can be passed to the custom Hook.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Lastly, we are returning our data from our Hook.",
+      "html": "<p>Lastly, we are returning our data from our Hook.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In index.js , we are importing our useFetch Hook and utilizing it like any other Hook. This is where we pass in the URL to fetch data from.",
+      "html": "<p>In <code>index.js</code>, we are importing our <code>useFetch</code> Hook and utilizing it like any other Hook. This is where we pass in the URL to fetch data from.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now we can reuse this custom Hook in any component to fetch data from any URL.",
+      "html": "<p>Now we can reuse this custom Hook in any component to fetch data from any URL.</p>"
+    }
+  ]
+}

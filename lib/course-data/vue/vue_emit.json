@@ -1,0 +1,465 @@
+{
+  "title": "Vue $emit() Method",
+  "url": "https://www.w3schools.com/vue/vue_emit.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Vue $emit() Method",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With the built-in $emit() method in Vue we can create a custom event in the child component that can be captured in the parent element.",
+      "html": "<p>With the built-in <strong><code>$emit()</code></strong> method in Vue we can create a custom event in the child component that can be captured in the parent element.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Props are used to send data from the parent element to the child component, and $emit() is used to do the opposite: to pass information from the child component to the parent.",
+      "html": "<p>Props are used to send data from the parent element to the child component, and <strong><code>$emit()</code></strong> is used to do the \n  opposite: to pass information from the child component to the parent.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The purpose of the things we will do next is to end up with the 'favorite' status of a food item to be changed in the parent App.vue instead of in the the FoodItem.vue child component where the change is currently happening.",
+      "html": "<p><strong>The purpose</strong> of the things we will do next is to end up with the 'favorite' status of a food item to be changed in the parent <code>App.vue</code> instead of in the the <code>FoodItem.vue</code> child component where the change is currently happening.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The reason for changing the favorite status in App.vue instead of in FoodItem.vue is that App.vue is where the favorite status is stored in the first place, so that needs to be updated. In a larger project the data might come from a database we have connection to in App.vue , and we want a change happening from the component to make a change in the database, so we need to communicate back to the parent from the child component.",
+      "html": "<p><strong>The reason</strong> for changing the favorite status in <code>App.vue</code> instead of in <code>FoodItem.vue</code> is that <code>App.vue</code> is where the favorite status is stored in the first place, so that needs to be updated. In a larger project the data might come from a database we have connection to in <code>App.vue</code>, and we want a change happening from the component to make a change in the database, so we need to communicate back to the parent from the child component.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Emit a Custom Event",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "There is a need to send information from the component to the parent, and we use the built-in method $emit() to do that.",
+      "html": "<p>There is a need to send information from the component to the parent, and we use the built-in method <code>$emit()</code> to do that.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We already have the toggleFavorite method inside the FoodItem.vue component that runs when the toggle button is clicked. Now let's remove the existing line and add a line to emit our custom event 'toggle-favorite':",
+      "html": "<p>We already have the <code>toggleFavorite</code> method inside the <code>FoodItem.vue</code> component that runs when the toggle button is clicked. Now let's remove the existing line and add a line to emit our custom event 'toggle-favorite':</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-js"
+        ],
+        "isNotranslate": true
+      },
+      "code": "methods\n:\n\n{\n\n\ntoggleFavorite\n(\n)\n\n{\n\n\nthis\n.\nfoodIsFavorite\n=\n\n!\nthis\n.\nfoodIsFavorite\n;\n\n\nthis\n.\n$emit\n(\n'toggle-Favorite'\n)\n;\n\n\n}\n\n\n}",
+      "language": "javascript",
+      "code_html": "<pre class=\"notranslate w3-white language-js\" data-line=\"4\" tabindex=\"0\"><code class=\"language-js\"><span class=\"token literal-property property\">methods</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">toggleFavorite</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-this\"></span><del><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>foodIsFavorite <span class=\"token operator\">=</span> <span class=\"token operator\">!</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>foodIsFavorite<span class=\"token punctuation\">;</span></del><span class=\"token punctuation\"></span>\n    <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span><span class=\"token function\">$emit</span><span class=\"token punctuation\">(</span><span class=\"token string\">'toggle-Favorite'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"4\" data-start=\"4\" style=\"top: 66px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can choose the name of our custom event, but it is normal to use kebab-case for emit events.",
+      "html": "<p>We can choose the name of our custom event, but it is normal to use kebab-case for emit events.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Receive an Emit Event",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The custom emit event 'toggle-favorite' is now emitted from the FoodItem.vue component, but we need to listen to the event in the App.vue parent and call a method that does something so that we can see that the event happened.",
+      "html": "<p>The custom emit event 'toggle-favorite' is now emitted from the <code>FoodItem.vue</code> component, but we need to listen to the event in the <code>App.vue</code> parent and call a method that does something so that we can see that the event happened.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We listen to the event with the shorthand @ instead of v-on: in App.vue where the component is created:",
+      "html": "<p>We listen to the event with the shorthand <code>@</code> instead of <code>v-on:</code> in <code>App.vue</code> where the component is created:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\nfood-item\n\n\nv-for\n=\n\"\nx in foods\n\"\n\n\n:key\n=\n\"\nx.name\n\"\n\n\n:food-name\n=\n\"\nx.name\n\"\n\n\n:food-desc\n=\n\"\nx.desc\n\"\n\n\n:is-favorite\n=\n\"\nx.favorite\n\"\n\n\n@toggle-favorite\n=\n\"\nreceiveEmit\n\"\n\n\n/>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"7\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>food-item</span>\n  <span class=\"token attr-name\">v-for</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x in foods<span class=\"token punctuation\">\"</span></span>\n  <span class=\"token attr-name\">:key</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x.name<span class=\"token punctuation\">\"</span></span>\n  <span class=\"token attr-name\">:food-name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x.name<span class=\"token punctuation\">\"</span></span>\n  <span class=\"token attr-name\">:food-desc</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x.desc<span class=\"token punctuation\">\"</span></span>\n  <span class=\"token attr-name\">:is-favorite</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x.favorite<span class=\"token punctuation\">\"</span></span>\n  <span class=\"token attr-name\"></span><strong><span class=\"token attr-name\">@toggle-favorite</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>receiveEmit<span class=\"token punctuation\">\"</span></span></strong><span class=\"token attr-value\"><span class=\"token punctuation\"></span></span>\n<span class=\"token punctuation\">/&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"7\" data-start=\"7\" style=\"top: 132px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Change The Food Item 'favorite' Status in The Parent",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We now have an event that notifies App.vue when the 'Favorite' button is clicked from the child component.",
+      "html": "<p>We now have an event that notifies <code>App.vue</code> when the 'Favorite' button is clicked from the child component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We want to change the 'favorite' property in the 'foods' array in App.vue for the correct food item when a 'Favorite' button is clicked. To do that we send the food item name from FoodItem.vue to App.vue because that is unique for each food item:",
+      "html": "<p>We want to change the 'favorite' property in the 'foods' array in <code>App.vue</code> for the correct food item when a 'Favorite' button is clicked. To do that we send the food item name from <code>FoodItem.vue</code> to <code>App.vue</code> because that is unique for each food item:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-js"
+        ],
+        "isNotranslate": true
+      },
+      "code": "methods\n:\n\n{\n\n\ntoggleFavorite\n(\n)\n\n{\n\n\nthis\n.\n$emit\n(\n'toggle-favorite'\n,\n\nthis\n.\nfoodName\n)\n;\n\n\n}\n\n\n}",
+      "language": "javascript",
+      "code_html": "<pre class=\"notranslate w3-white language-js\" data-line=\"3\" tabindex=\"0\"><code class=\"language-js\"><span class=\"token literal-property property\">methods</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">toggleFavorite</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span><span class=\"token function\">$emit</span><span class=\"token punctuation\">(</span><span class=\"token string\">'toggle-favorite'</span><span class=\"token punctuation\"></span><strong><span class=\"token punctuation\">,</span> <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>foodName</strong><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"3\" data-start=\"3\" style=\"top: 44px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can now receive the food item name in App.vue as an argument to the method called when the 'toggle-favorite' event happens, like this:",
+      "html": "<p>We can now receive the food item name in <code>App.vue</code> as an argument to the method called when the 'toggle-favorite' event happens, like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-js"
+        ],
+        "isNotranslate": true
+      },
+      "code": "methods\n:\n\n{\n\n\nreceiveEmit\n(\nfoodId\n)\n\n{\n\n\nalert\n(\n\n'You clicked: '\n\n+\n\nfoodId\n\n)\n;\n\n\n}\n\n\n}",
+      "language": "javascript",
+      "code_html": "<pre class=\"notranslate w3-white language-js\" data-line=\"2,3\" tabindex=\"0\"><code class=\"language-js\"><span class=\"token literal-property property\">methods</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">receiveEmit</span><span class=\"token punctuation\">(</span><span class=\"token parameter\"><strong>foodId</strong></span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>  \n    <span class=\"token function\">alert</span><span class=\"token punctuation\">(</span> <span class=\"token string\">'You clicked: '</span> <span class=\"token operator\">+</span> <strong>foodId</strong> <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"2\" data-start=\"2\" style=\"top: 22px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"3\" data-start=\"3\" style=\"top: 44px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now that we know what food item that was clicked we can update the 'favorite' status for the correct food item inside the 'foods' array:",
+      "html": "<p>Now that we know what food item that was clicked we can update the 'favorite' status for the correct food item inside the 'foods' array:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-js"
+        ],
+        "isNotranslate": true
+      },
+      "code": "methods\n:\n\n{\n\n\nreceiveEmit\n(\nfoodId\n)\n\n{\n\n\nconst\nfoundFood\n=\n\nthis\n.\nfoods\n.\nfind\n(\n\n\nfood\n\n=>\nfood\n.\nname\n===\nfoodId\n\n)\n;\n\nfoundFood\n.\nfavorite\n=\n\n!\nfoundFood\n.\nfavorite\n;\n\n\n}\n\n\n}",
+      "language": "javascript",
+      "code_html": "<pre class=\"notranslate w3-white language-js\" data-line=\"\" tabindex=\"0\"><code class=\"language-js\"><span class=\"token literal-property property\">methods</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">receiveEmit</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">foodId</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-const\">const</span> foundFood <span class=\"token operator\">=</span> <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>foods<span class=\"token punctuation\">.</span><span class=\"token function\">find</span><span class=\"token punctuation\">(</span>\n      <span class=\"token parameter\">food</span> <span class=\"token operator\">=&gt;</span> food<span class=\"token punctuation\">.</span>name <span class=\"token operator\">===</span> foodId\n    <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    foundFood<span class=\"token punctuation\">.</span>favorite <span class=\"token operator\">=</span> <span class=\"token operator\">!</span>foundFood<span class=\"token punctuation\">.</span>favorite<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The correct food inside the 'foods' array now gets its 'favorite' status updated. The only thing remaining is to get the image indicating favorite food updated.",
+      "html": "<p>The correct food inside the 'foods' array now gets its 'favorite' status updated. The only thing remaining is to get the image indicating favorite food updated.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Because the food item components are already created with the 'favorite' status from the 'foods' array and sent as a prop 'is-favorite' from App.vue , we just need to refer to this 'isFavorite' prop in FoodItem.vue from v-show where the <img> element is to update the image:",
+      "html": "<p>Because the food item components are already created with the 'favorite' status from the 'foods' array and sent as a prop 'is-favorite' from <code>App.vue</code>, we just need to refer to this 'isFavorite' prop in <code>FoodItem.vue</code> from <code>v-show</code> where the <code>&lt;img&gt;</code> element is to update the image:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\nimg\n\nsrc\n=\n\"\n/img_quality.svg\n\"\n\nv-show\n=\n\"\nisFavorite\n\"\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_quality.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-show</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span><strong>isFavorite</strong><span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can also delete the 'foodIsFavorite' data property in FoodItem.vue because it is no longer in use.",
+      "html": "<p>We can also delete the 'foodIsFavorite' data property in <code>FoodItem.vue</code> because it is no longer in use.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-example"
+        ],
+        "isNotranslate": false
+      },
+      "code": "Example In this final example code the favorite status of the food items can be toggled in a similar way as before, but now the favorite status is modified in the correct place, inside App.vue . Run Example \u00bb",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-example"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The 'emits' Option",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the same way that we declare props inside the FoodItem.vue component, we can also document what the component emits by using the Vue 'emits' option.",
+      "html": "<p>In the same way that we declare props inside the <code>FoodItem.vue</code> component, we can also document what the component emits by using the Vue 'emits' option.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Props must be declared in the component, while emits are just recommended to be documented.",
+      "html": "<p>Props must be declared in the component, while emits are just recommended to be documented.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is how we can document our emit in the FoodItem.vue component:",
+      "html": "<p>This is how we can document our emit in the <code>FoodItem.vue</code> component:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\nprops\n:\n\n[\n'foodName'\n,\n'foodDesc'\n,\n'isFavorite'\n]\n,\n\n\nemits\n:\n\n[\n'toggle-favorite'\n]\n,\n\nmethods\n:\n\n{\n\n\ntoggleFavorite\n(\n)\n\n{\n\n\nthis\n.\n$emit\n(\n'toggle-favorite'\n,\n\nthis\n.\nfoodName\n)\n;\n\n\n}\n\n\n}\n\n\n}\n;\n\n\n</\nscript\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"4\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>  \n  props<span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'foodName'</span><span class=\"token punctuation\">,</span><span class=\"token string\">'foodDesc'</span><span class=\"token punctuation\">,</span><span class=\"token string\">'isFavorite'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n  <strong>emits<span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'toggle-favorite'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span></strong><span class=\"token punctuation\"></span>\n  methods<span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">toggleFavorite</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span><span class=\"token function\">$emit</span><span class=\"token punctuation\">(</span><span class=\"token string\">'toggle-favorite'</span><span class=\"token punctuation\">,</span> <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>foodName<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"4\" data-start=\"4\" style=\"top: 66px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The component becomes easier for others to use when the emits are documented.",
+      "html": "<p>The component becomes easier for others to use when the emits are documented.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Vue Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Yourself With Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise:",
+      "level": "h2"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "Props are used to send data\nfrom the parent element to the child component,\nand\nis used to to pass information\nfrom the child component to the parent.",
+      "language": "unknown",
+      "code_html": "<pre style=\"overflow: auto;\">Props are used to send data \nfrom the parent element to the child component, \nand <input maxlength=\"10\" name=\"ex1\" style=\"width: 11ch;\"/> is used to to pass information \nfrom the child component to the parent.\n</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Start the Exercise",
+          "href": "https://www.w3schools.com/exercise.php?filename=exercise_components5",
+          "title": ""
+        }
+      ],
+      "text": "Start the Exercise",
+      "html": "<p><a href=\"exercise.php?filename=exercise_components5\" target=\"_blank\">Start the Exercise</a></p>"
+    }
+  ]
+}

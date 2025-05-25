@@ -1,0 +1,679 @@
+{
+  "title": "DSA Bellman-Ford Algorithm",
+  "url": "https://www.w3schools.com/dsa/dsa_algo_graphs_bellmanford.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Bellman-Ford Algorithm",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The Bellman-Ford Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Bellman-Ford algorithm is best suited to find the shortest paths in a directed graph, with one or more negative edge weights, from the source vertex to all other vertices.",
+      "html": "<p>The Bellman-Ford algorithm is best suited to find the shortest paths in a directed graph, with one or more negative edge weights, from the source vertex to all other vertices.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It does so by repeatedly checking all the edges in the graph for shorter paths, as many times as there are vertices in the graph (minus 1).",
+      "html": "<p>It does so by repeatedly checking all the edges in the graph for shorter paths, as many times as there are vertices in the graph (minus 1).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Bellman-Ford algorithm can also be used for graphs with positive edges (both directed and undirected), like we can with Dijkstra's algorithm, but Dijkstra's algorithm is preferred in such cases because it is faster.",
+      "html": "<p>The Bellman-Ford algorithm can also be used for graphs with positive edges (both directed and undirected), like we can with Dijkstra's algorithm, but Dijkstra's algorithm is preferred in such cases because it is faster.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Using the Bellman-Ford algorithm on a graph with negative cycles will not produce a result of shortest paths because in a negative cycle we can always go one more round and get a shorter path.",
+      "html": "<p>Using the Bellman-Ford algorithm on a graph with negative cycles will not produce a result of shortest paths because in a negative cycle we can always go one more round and get a shorter path.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A negative cycle is a path we can follow in circles, where the sum of the edge weights is negative.",
+      "html": "<p>A negative cycle is a path we can follow in circles, where the sum of the edge weights is negative.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Luckily, the Bellman-Ford algorithm can be implemented to safely detect and report the presence of negative cycles.",
+      "html": "<p>Luckily, the Bellman-Ford algorithm can be implemented to safely detect and report the presence of negative cycles.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How it works:",
+      "html": "<p><strong>How it works:</strong>\n</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The animation of the Bellman-Ford algorithm above only shows us when checking of an edge leads to an updated distance, not all the other edge checks that do not lead to updated distances.",
+      "html": "<p>The animation of the Bellman-Ford algorithm above only shows us when checking of an edge leads to an updated distance, not all the other edge checks that do not lead to updated distances.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Bellman-Ford algorithm is actually quite straight forward, because it checks all edges, using the adjacency matrix. Each check is to see if a shorter distance can be made by going from the vertex on one side of the edge, via the edge, to the vertex on the other side of the edge.",
+      "html": "<p>The Bellman-Ford algorithm is actually quite straight forward, because it checks all edges, using the adjacency matrix. Each check is to see if a shorter distance can be made by going from the vertex on one side of the edge, via the edge, to the vertex on the other side of the edge.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And this check of all edges is done V \u2212 1 V \u2212 1 times, with V V being the number of vertices in the graph.",
+      "html": "<p>And this check of all edges is done <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-3-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-9\"><span class=\"mjx-mrow\" id=\"MJXc-Node-10\"><span class=\"mjx-mi\" id=\"MJXc-Node-11\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-12\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">\u2212</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-13\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi><mo>\u2212</mo><mn>1</mn></math></span></span> times, with <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-4-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-14\"><span class=\"mjx-mrow\" id=\"MJXc-Node-15\"><span class=\"mjx-mi\" id=\"MJXc-Node-16\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi></math></span></span> being the number of vertices in the graph.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is how the Bellman-Ford algorithm checks all the edges in the adjacency matrix in our graph 5-1=4 times:",
+      "html": "<p>This is how the Bellman-Ford algorithm checks all the edges in the adjacency matrix in our graph 5-1=4 times:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Checked all edges 0 times.",
+      "html": "<p>Checked all edges <span>0</span> times.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The first four edges that are checked in our graph are A-> C, A-> E, B-> C, and C-> A. These first four edge checks do not lead to any updates of the shortest distances because the starting vertex of all these edges has an infinite distance.",
+      "html": "<p>The first four edges that are checked in our graph are A-&gt;C, A-&gt;E, B-&gt;C, and C-&gt;A. These first four edge checks do not lead to any updates of the shortest distances because the starting vertex of all these edges has an infinite distance.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After the edges from vertices A, B, and C are checked, the edges from D are checked. Since the starting point (vertex D) has distance 0, the updated distances for A, B, and C are the edge weights going out from vertex D.",
+      "html": "<p>After the edges from vertices A, B, and C are checked, the edges from D are checked. Since the starting point (vertex D) has distance 0, the updated distances for A, B, and C are the edge weights going out from vertex D.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The next edges to be checked are the edges going out from vertex E, which leads to updated distances for vertices B and C.",
+      "html": "<p>The next edges to be checked are the edges going out from vertex E, which leads to updated distances for vertices B and C.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Bellman-Ford algorithm have now checked all edges 1 time. The algorithm will check all edges 3 more times before it is finished, because Bellman-Ford will check all edges as many times as there are vertices in the graph, minus 1.",
+      "html": "<p>The Bellman-Ford algorithm have now checked all edges 1 time. The algorithm will check all edges 3 more times before it is finished, because Bellman-Ford will check all edges as many times as there are vertices in the graph, minus 1.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The algorithm starts checking all edges a second time, starting with checking the edges going out from vertex A. Checking the edges A-> C and A-> E do not lead to updated distances.",
+      "html": "<p>The algorithm starts checking all edges a second time, starting with checking the edges going out from vertex A. Checking the edges A-&gt;C and A-&gt;E do not lead to updated distances.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The next edge to be checked is B-> C, going out from vertex B. This leads to an updated distance from vertex D to C of 5-4=1.",
+      "html": "<p>The next edge to be checked is B-&gt;C, going out from vertex B. This leads to an updated distance from vertex D to C of 5-4=1.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Checking the next edge C-> A, leads to an updated distance 1-3=-2 for vertex A.",
+      "html": "<p>Checking the next edge C-&gt;A, leads to an updated distance 1-3=-2 for vertex A.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The check of edge C-> A in round 2 of the Bellman-Ford algorithm is actually the last check that leads to an updated distance for this specific graph. The algorithm will continue to check all edges 2 more times without updating any distances.",
+      "html": "<p>The check of edge C-&gt;A in round 2 of the Bellman-Ford algorithm is actually the last check that leads to an updated distance for this specific graph. The algorithm will continue to check all edges 2 more times without updating any distances.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Checking all edges V \u2212 1 V \u2212 1 times in the Bellman-Ford algorithm may seem like a lot, but it is done this many times to make sure that the shortest distances will always be found.",
+      "html": "<p>Checking all edges <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-5-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-17\"><span class=\"mjx-mrow\" id=\"MJXc-Node-18\"><span class=\"mjx-mi\" id=\"MJXc-Node-19\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-20\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">\u2212</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-21\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi><mo>\u2212</mo><mn>1</mn></math></span></span> times in the Bellman-Ford algorithm may seem like a lot, but it is done this many times to make sure that the shortest distances will always be found.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Implementation of The Bellman-Ford Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "how we implemented Dijkstra's algorithm",
+          "href": "https://www.w3schools.com/dsa_algo_graphs_dijkstra.php#dijkstraImpl",
+          "title": ""
+        }
+      ],
+      "text": "Implementing the Bellman-Ford algorithm is very similar to how we implemented Dijkstra's algorithm .",
+      "html": "<p>Implementing the Bellman-Ford algorithm is very similar to <a href=\"dsa_algo_graphs_dijkstra.php#dijkstraImpl\">how we implemented Dijkstra's algorithm</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We start by creating the Graph class, where the methods __init__ , add_edge , and add_vertex will be used to create the specific graph we want to run the Bellman-Ford algorithm on to find the shortest paths.",
+      "html": "<p>We start by creating the <code>Graph</code> class, where the methods <code>__init__</code>, <code>add_edge</code>, and <code>add_vertex</code> will be used to create the specific graph we want to run the Bellman-Ford algorithm on to find the shortest paths.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class\n\nGraph\n:\n\n\ndef\n\n__init__\n(\nself\n,\nsize\n)\n:\n\nself\n.\nadj_matrix\n=\n\n[\n[\n0\n]\n\n*\nsize\nfor\n_\nin\n\nrange\n(\nsize\n)\n]\n\nself\n.\nsize\n=\nsize\nself\n.\nvertex_data\n=\n\n[\n''\n]\n\n*\nsize\n\n\ndef\n\nadd_edge\n(\nself\n,\nu\n,\nv\n,\nweight\n)\n:\n\n\nif\n\n0\n\n<=\nu\n<\nself\n.\nsize\nand\n\n0\n\n<=\nv\n<\nself\n.\nsize\n:\n\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n=\nweight\n\n#self.adj_matrix[v][u] = weight  # For undirected graph\n\n\n\ndef\n\nadd_vertex_data\n(\nself\n,\nvertex\n,\ndata\n)\n:\n\n\nif\n\n0\n\n<=\nvertex\n<\nself\n.\nsize\n:\n\nself\n.\nvertex_data\n[\nvertex\n]\n\n=\ndata",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Graph</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">__init__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        self<span class=\"token punctuation\">.</span>adj_matrix <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token number\">0</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size <span class=\"token keyword keyword-for\">for</span> _ <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span>\n        self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">=</span> size\n        self<span class=\"token punctuation\">.</span>vertex_data <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">''</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_edge</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> u <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size <span class=\"token keyword keyword-and\">and</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> v <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> weight\n            <span class=\"token comment\">#self.adj_matrix[v][u] = weight  # For undirected graph</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_vertex_data</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> vertex<span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> vertex <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> data<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The bellman_ford method is also placed inside the Graph class. It is this method that runs the Bellman-Ford algorithm.",
+      "html": "<p>The <code>bellman_ford</code> method is also placed inside the <code>Graph</code> class. It is this method that runs the Bellman-Ford algorithm.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def\n\nbellman_ford\n(\nself\n,\nstart_vertex_data\n)\n:\n\nstart_vertex\n=\nself\n.\nvertex_data\n.\nindex\n(\nstart_vertex_data\n)\n\ndistances\n=\n\n[\nfloat\n(\n'inf'\n)\n]\n\n*\nself\n.\nsize\ndistances\n[\nstart_vertex\n]\n\n=\n\n0\n\n\n\nfor\ni\nin\n\nrange\n(\nself\n.\nsize\n-\n\n1\n)\n:\n\n\nfor\nu\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nfor\nv\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nif\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n!=\n\n0\n:\n\n\nif\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n<\ndistances\n[\nv\n]\n:\n\ndistances\n[\nv\n]\n\n=\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n\nprint\n(\nf\"Relaxing edge\n{\nself\n.\nvertex_data\n[\nu\n]\n}\n-\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n, Updated distance to\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n:\n{\ndistances\n[\nv\n]\n}\n\"\n)\n\n\n\nreturn\ndistances",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"18-19, 21-26\" data-line-offset=\"16\" data-start=\"16\" style=\"counter-reset: linenumber 15;\" tabindex=\"0\"><code class=\"language-python\">    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">bellman_ford</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> start_vertex_data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        start_vertex <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">.</span>index<span class=\"token punctuation\">(</span>start_vertex_data<span class=\"token punctuation\">)</span>\n        distances <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token builtin\">float</span><span class=\"token punctuation\">(</span><span class=\"token string\">'inf'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> self<span class=\"token punctuation\">.</span>size\n        distances<span class=\"token punctuation\">[</span>start_vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token number\">0</span>\n\n        <span class=\"token keyword keyword-for\">for</span> i <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">-</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-for\">for</span> u <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                <span class=\"token keyword keyword-for\">for</span> v <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                    <span class=\"token keyword keyword-if\">if</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">!=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n                        <span class=\"token keyword keyword-if\">if</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">&lt;</span> distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n                            distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span>\n                            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"Relaxing edge </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">-</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">, Updated distance to </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">: </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span>\n\n        <span class=\"token keyword keyword-return\">return</span> distances<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"18-19\" style=\"top: 45px; height: 44px; width: 1458px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"21-26\" style=\"top: 111px; height: 132px; width: 1458px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 18-19: At the beginning, all vertices are set to have an infinite long distance from the starting vertex, except for the starting vertex itself, where the distance is set to 0.",
+      "html": "<p><strong>Line 18-19: </strong>At the beginning, all vertices are set to have an infinite long distance from the starting vertex, except for the starting vertex itself, where the distance is set to 0.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 21: All edges are checked V \u2212 1 V \u2212 1 times.",
+      "html": "<p><strong>Line 21: </strong>All edges are checked <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-6-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-22\"><span class=\"mjx-mrow\" id=\"MJXc-Node-23\"><span class=\"mjx-mi\" id=\"MJXc-Node-24\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-25\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">\u2212</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-26\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi><mo>\u2212</mo><mn>1</mn></math></span></span> times.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 22-23: A double for-loop checks all the edges in the adjacency matrix. For every vertex u , check edges going to vertices v .",
+      "html": "<p><strong>Line 22-23: </strong>A double for-loop checks all the edges in the adjacency matrix. For every vertex <code>u</code>, check edges going to vertices <code>v</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 24-26: If the edge exist, and if the calculated distance is shorter than the existing distance, update the distance to that vertex v .",
+      "html": "<p><strong>Line 24-26: </strong>If the edge exist, and if the calculated distance is shorter than the existing distance, update the distance to that vertex <code>v</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The complete code, including the initialization of our specific graph and code for running the Bellman-Ford algorithm, looks like this:",
+      "html": "<p>The complete code, including the initialization of our specific graph and code for running the Bellman-Ford algorithm, looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class\n\nGraph\n:\n\n\ndef\n\n__init__\n(\nself\n,\nsize\n)\n:\n\nself\n.\nadj_matrix\n=\n\n[\n[\n0\n]\n\n*\nsize\nfor\n_\nin\n\nrange\n(\nsize\n)\n]\n\nself\n.\nsize\n=\nsize\nself\n.\nvertex_data\n=\n\n[\n''\n]\n\n*\nsize\n\n\ndef\n\nadd_edge\n(\nself\n,\nu\n,\nv\n,\nweight\n)\n:\n\n\nif\n\n0\n\n<=\nu\n<\nself\n.\nsize\nand\n\n0\n\n<=\nv\n<\nself\n.\nsize\n:\n\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n=\nweight\n\n#self.adj_matrix[v][u] = weight  # For undirected graph\n\n\n\ndef\n\nadd_vertex_data\n(\nself\n,\nvertex\n,\ndata\n)\n:\n\n\nif\n\n0\n\n<=\nvertex\n<\nself\n.\nsize\n:\n\nself\n.\nvertex_data\n[\nvertex\n]\n\n=\ndata\n\n\ndef\n\nbellman_ford\n(\nself\n,\nstart_vertex_data\n)\n:\n\nstart_vertex\n=\nself\n.\nvertex_data\n.\nindex\n(\nstart_vertex_data\n)\n\ndistances\n=\n\n[\nfloat\n(\n'inf'\n)\n]\n\n*\nself\n.\nsize\ndistances\n[\nstart_vertex\n]\n\n=\n\n0\n\n\n\nfor\ni\nin\n\nrange\n(\nself\n.\nsize\n-\n\n1\n)\n:\n\n\nfor\nu\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nfor\nv\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nif\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n!=\n\n0\n:\n\n\nif\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n<\ndistances\n[\nv\n]\n:\n\ndistances\n[\nv\n]\n\n=\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n\nprint\n(\nf\"Relaxing edge\n{\nself\n.\nvertex_data\n[\nu\n]\n}\n-\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n, Updated distance to\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n:\n{\ndistances\n[\nv\n]\n}\n\"\n)\n\n\n\nreturn\ndistances\n\ng\n=\nGraph\n(\n5\n)\n\n\ng\n.\nadd_vertex_data\n(\n0\n,\n\n'A'\n)\n\ng\n.\nadd_vertex_data\n(\n1\n,\n\n'B'\n)\n\ng\n.\nadd_vertex_data\n(\n2\n,\n\n'C'\n)\n\ng\n.\nadd_vertex_data\n(\n3\n,\n\n'D'\n)\n\ng\n.\nadd_vertex_data\n(\n4\n,\n\n'E'\n)\n\n\ng\n.\nadd_edge\n(\n3\n,\n\n0\n,\n\n4\n)\n\n# D -> A, weight 4\n\ng\n.\nadd_edge\n(\n3\n,\n\n2\n,\n\n7\n)\n\n# D -> C, weight 7\n\ng\n.\nadd_edge\n(\n3\n,\n\n4\n,\n\n3\n)\n\n# D -> E, weight 3\n\ng\n.\nadd_edge\n(\n0\n,\n\n2\n,\n\n4\n)\n\n# A -> C, weight 4\n\ng\n.\nadd_edge\n(\n2\n,\n\n0\n,\n\n-\n3\n)\n\n# C -> A, weight -3\n\ng\n.\nadd_edge\n(\n0\n,\n\n4\n,\n\n5\n)\n\n# A -> E, weight 5\n\ng\n.\nadd_edge\n(\n4\n,\n\n2\n,\n\n3\n)\n\n# E -> C, weight 3\n\ng\n.\nadd_edge\n(\n1\n,\n\n2\n,\n\n-\n4\n)\n\n# B -> C, weight -4\n\ng\n.\nadd_edge\n(\n4\n,\n\n1\n,\n\n2\n)\n\n# E -> B, weight 2\n\n\n\n# Running the Bellman-Ford algorithm from D to all vertices\n\n\nprint\n(\n\"\\nThe Bellman-Ford Algorithm starting from vertex D:\"\n)\n\ndistances\n=\ng\n.\nbellman_ford\n(\n'D'\n)\n\n\nfor\ni\n,\nd\nin\n\nenumerate\n(\ndistances\n)\n:\n\n\nprint\n(\nf\"Distance from D to\n{\ng\n.\nvertex_data\n[\ni\n]\n}\n:\n{\nd\n}\n\"\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"\" style=\"height: 400px; overflow: auto;\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Graph</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">__init__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        self<span class=\"token punctuation\">.</span>adj_matrix <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token number\">0</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size <span class=\"token keyword keyword-for\">for</span> _ <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span>\n        self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">=</span> size\n        self<span class=\"token punctuation\">.</span>vertex_data <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">''</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_edge</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> u <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size <span class=\"token keyword keyword-and\">and</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> v <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> weight\n            <span class=\"token comment\">#self.adj_matrix[v][u] = weight  # For undirected graph</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_vertex_data</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> vertex<span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> vertex <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> data\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">bellman_ford</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> start_vertex_data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        start_vertex <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">.</span>index<span class=\"token punctuation\">(</span>start_vertex_data<span class=\"token punctuation\">)</span>\n        distances <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token builtin\">float</span><span class=\"token punctuation\">(</span><span class=\"token string\">'inf'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> self<span class=\"token punctuation\">.</span>size\n        distances<span class=\"token punctuation\">[</span>start_vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token number\">0</span>\n\n        <span class=\"token keyword keyword-for\">for</span> i <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">-</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-for\">for</span> u <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                <span class=\"token keyword keyword-for\">for</span> v <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                    <span class=\"token keyword keyword-if\">if</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">!=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n                        <span class=\"token keyword keyword-if\">if</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">&lt;</span> distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n                            distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span>\n                            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"Relaxing edge </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">-</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">, Updated distance to </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">: </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span>\n\n        <span class=\"token keyword keyword-return\">return</span> distances\n\ng <span class=\"token operator\">=</span> Graph<span class=\"token punctuation\">(</span><span class=\"token number\">5</span><span class=\"token punctuation\">)</span>\n\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'E'</span><span class=\"token punctuation\">)</span>\n\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># D -&gt; A, weight 4</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">7</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># D -&gt; C, weight 7</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># D -&gt; E, weight 3</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A -&gt; C, weight 4</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">3</span><span class=\"token punctuation\">)</span> <span class=\"token comment\"># C -&gt; A, weight -3</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">5</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A -&gt; E, weight 5</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># E -&gt; C, weight 3</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">4</span><span class=\"token punctuation\">)</span> <span class=\"token comment\"># B -&gt; C, weight -4</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># E -&gt; B, weight 2</span>\n\n<span class=\"token comment\"># Running the Bellman-Ford algorithm from D to all vertices</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\\nThe Bellman-Ford Algorithm starting from vertex D:\"</span><span class=\"token punctuation\">)</span>\ndistances <span class=\"token operator\">=</span> g<span class=\"token punctuation\">.</span>bellman_ford<span class=\"token punctuation\">(</span><span class=\"token string\">'D'</span><span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-for\">for</span> i<span class=\"token punctuation\">,</span> d <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">enumerate</span><span class=\"token punctuation\">(</span>distances<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"Distance from D to </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>g<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">: </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>d<span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Negative Edges in The Bellman-Ford Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To say that the Bellman-Ford algorithm finds the \"shortest paths\" is not intuitive, because how can we draw or imagine distances that are negative? So, to make it easier to understand we could instead say that it is the \" cheapest paths\" that are found with Bellman-Ford.",
+      "html": "<p>To say that the Bellman-Ford algorithm finds the \"shortest paths\" is not intuitive, because how can we draw or imagine distances that are negative? So, to make it easier to understand we could instead say that it is the \"<i>cheapest</i> paths\" that are found with Bellman-Ford.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In practice, the Bellman-Ford algorithm could for example help us to find delivering routes where the edge weights represent the cost of fuel and other things, minus the money to be made by driving that edge between those two vertices.",
+      "html": "<p>In practice, the Bellman-Ford algorithm could for example help us to find delivering routes where the edge weights represent the cost of fuel and other things, minus the money to be made by driving that edge between those two vertices.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With this interpretation in mind, the -3 weight on edge C-> A could mean that the fuel cost is $5 driving from C to A, and that we get paid $8 for picking up packages in C and delivering them in A. So we end up earning $3 more than we spend. Therefore, a total of $2 can be made by driving the delivery route D-> E-> B-> C-> A in our graph above.",
+      "html": "<p>With this interpretation in mind, the -3 weight on edge C-&gt;A could mean that the fuel cost is $5 driving from C to A, and that we get paid $8 for picking up packages in C and delivering them in A. So we end up earning $3 more than we spend. Therefore, a total of $2 can be made by driving the delivery route D-&gt;E-&gt;B-&gt;C-&gt;A in our graph above.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Negative Cycles in The Bellman-Ford Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we can go in circles in a graph, and the sum of edges in that circle is negative, we have a negative cycle.",
+      "html": "<p>If we can go in circles in a graph, and the sum of edges in that circle is negative, we have a negative cycle.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "By changing the weight on edge C-> A from -3 to -9, we get two negative cycles: A-> C-> A and A-> E-> C-> A. And every time we check these edges with the Bellman-Ford algorithm, the distances we calculate and update just become lower and lower.",
+      "html": "<p>By changing the weight on edge C-&gt;A from -3 to -9, we get two negative cycles: A-&gt;C-&gt;A and A-&gt;E-&gt;C-&gt;A. And every time we check these edges with the Bellman-Ford algorithm, the distances we calculate and update just become lower and lower.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The problem with negative cycles is that a shortest path does not exist, because we can always go one more round to get a path that is shorter.",
+      "html": "<p>The problem with negative cycles is that a shortest path does not exist, because we can always go one more round to get a path that is shorter.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "That is why it is useful to implement the Bellman-Ford algorithm with detection for negative cycles.",
+      "html": "<p>That is why it is useful to implement the Bellman-Ford algorithm with detection for negative cycles.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Detection of Negative Cycles in the Bellman-Ford Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After running the Bellman-Ford algorithm, checking all edges in a graph V \u2212 1 V \u2212 1 times, all the shortest distances are found.",
+      "html": "<p>After running the Bellman-Ford algorithm, checking all edges in a graph <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-7-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-27\"><span class=\"mjx-mrow\" id=\"MJXc-Node-28\"><span class=\"mjx-mi\" id=\"MJXc-Node-29\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-30\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">\u2212</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-31\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi><mo>\u2212</mo><mn>1</mn></math></span></span> times, all the shortest distances are found.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But, if the graph contains negative cycles, and we go one more round checking all edges, we will find at least one shorter distance in this last round, right?",
+      "html": "<p>But, if the graph contains negative cycles, and we go one more round checking all edges, we will find at least one shorter distance in this last round, right?</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "So to detect negative cycles in the Bellman-Ford algorithm, after checking all edges V \u2212 1 V \u2212 1 times, we just need to check all edges one more time, and if we find a shorter distance this last time, we can conclude that a negative cycle must exist.",
+      "html": "<p>So to detect negative cycles in the Bellman-Ford algorithm, after checking all edges <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-8-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-32\"><span class=\"mjx-mrow\" id=\"MJXc-Node-33\"><span class=\"mjx-mi\" id=\"MJXc-Node-34\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-35\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">\u2212</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-36\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi><mo>\u2212</mo><mn>1</mn></math></span></span> times, we just need to check all edges one more time, and if we find a shorter distance this last time, we can conclude that a negative cycle must exist.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Below is the bellman_ford method, with negative cycle detection included, running on the graph above with negative cycles due to the C-> A edge weight of -9:",
+      "html": "<p>Below is the <code>bellman_ford</code> method, with negative cycle detection included, running on the graph above with negative cycles due to the C-&gt;A edge weight of -9:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def\n\nbellman_ford\n(\nself\n,\nstart_vertex_data\n)\n:\n\nstart_vertex\n=\nself\n.\nvertex_data\n.\nindex\n(\nstart_vertex_data\n)\n\ndistances\n=\n\n[\nfloat\n(\n'inf'\n)\n]\n\n*\nself\n.\nsize\ndistances\n[\nstart_vertex\n]\n\n=\n\n0\n\n\n\nfor\ni\nin\n\nrange\n(\nself\n.\nsize\n-\n\n1\n)\n:\n\n\nfor\nu\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nfor\nv\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nif\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n!=\n\n0\n:\n\n\nif\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n<\ndistances\n[\nv\n]\n:\n\ndistances\n[\nv\n]\n\n=\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n\nprint\n(\nf\"Relaxing edge\n{\nself\n.\nvertex_data\n[\nu\n]\n}\n->\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n, Updated distance to\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n:\n{\ndistances\n[\nv\n]\n}\n\"\n)\n\n\n\n# Negative cycle detection\n\n\nfor\nu\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nfor\nv\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nif\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n!=\n\n0\n:\n\n\nif\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n<\ndistances\n[\nv\n]\n:\n\n\nreturn\n\n(\nTrue\n,\n\nNone\n)\n\n# Indicate a negative cycle was found\n\n\n\nreturn\n\n(\nFalse\n,\ndistances\n)\n\n# Indicate no negative cycle and return distances",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"29-34, 36\" data-line-offset=\"16\" data-start=\"16\" style=\"counter-reset: linenumber 15;\" tabindex=\"0\"><code class=\"language-python\">    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">bellman_ford</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> start_vertex_data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        start_vertex <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">.</span>index<span class=\"token punctuation\">(</span>start_vertex_data<span class=\"token punctuation\">)</span>\n        distances <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token builtin\">float</span><span class=\"token punctuation\">(</span><span class=\"token string\">'inf'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> self<span class=\"token punctuation\">.</span>size\n        distances<span class=\"token punctuation\">[</span>start_vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token number\">0</span>\n\n        <span class=\"token keyword keyword-for\">for</span> i <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">-</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-for\">for</span> u <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                <span class=\"token keyword keyword-for\">for</span> v <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                    <span class=\"token keyword keyword-if\">if</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">!=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n                        <span class=\"token keyword keyword-if\">if</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">&lt;</span> distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n                            distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span>\n                            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"Relaxing edge </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">-&gt;</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">, Updated distance to </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">: </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span>\n\n        <span class=\"token comment\"># Negative cycle detection</span>\n        <span class=\"token keyword keyword-for\">for</span> u <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-for\">for</span> v <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                <span class=\"token keyword keyword-if\">if</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">!=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n                    <span class=\"token keyword keyword-if\">if</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">&lt;</span> distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n                        <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span><span class=\"token boolean\">True</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># Indicate a negative cycle was found</span>\n\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span><span class=\"token boolean\">False</span><span class=\"token punctuation\">,</span> distances<span class=\"token punctuation\">)</span>  <span class=\"token comment\"># Indicate no negative cycle and return distances</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"29-34\" style=\"top: 287px; height: 132px; width: 1467px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"36\" style=\"top: 441px; height: 22px; width: 1467px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 30-33: All edges are checked one more time to see if there are negative cycles.",
+      "html": "<p><strong>Line 30-33: </strong>All edges are checked one more time to see if there are negative cycles.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 34: Returning True indicates that a negative cycle exists, and None is returned instead of the shortest distances, because finding the shortest distances in a graph with negative cycles does not make sense (because a shorter distance can always be found by checking all edges one more time).",
+      "html": "<p><strong>Line 34: </strong>Returning <code>True</code> indicates that a negative cycle exists, and <code>None</code> is returned instead of the shortest distances, because finding the shortest distances in a graph with negative cycles does not make sense (because a shorter distance can always be found by checking all edges one more time).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 36: Returning False means that there is no negative cycles, and the distances can be returned.",
+      "html": "<p><strong>Line 36: </strong>Returning <code>False</code> means that there is no negative cycles, and the <code>distances</code> can be returned.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Returning The Paths from The Bellman-Ford Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We are currently finding the total weight of the the shortest paths, so that for example \"Distance from D to A: -2\" is a result from running the Bellman-Ford algorithm.",
+      "html": "<p>We are currently finding the total weight of the the shortest paths, so that for example \"Distance from D to A: -2\" is a result from running the Bellman-Ford algorithm.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But by recording the predecessor of each vertex whenever an edge is relaxed, we can use that later in our code to print the result including the actual shortest paths. This means we can give more information in our result, with the actual path in addition to the path weight: \"D-> E-> B-> C-> A, Distance: -2\".",
+      "html": "<p>But by recording the predecessor of each vertex whenever an edge is relaxed, we can use that later in our code to print the result including the actual shortest paths. This means we can give more information in our result, with the actual path in addition to the path weight: \"D-&gt;E-&gt;B-&gt;C-&gt;A, Distance: -2\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This last code example is the complete code for the Bellman-Ford algorithm, with everything we have discussed up until now: finding the weights of shortest paths, detecting negative cycles, and finding the actual shortest paths:",
+      "html": "<p>This last code example is the complete code for the Bellman-Ford algorithm, with everything we have discussed up until now: finding the weights of shortest paths, detecting negative cycles, and finding the actual shortest paths:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class\n\nGraph\n:\n\n\ndef\n\n__init__\n(\nself\n,\nsize\n)\n:\n\nself\n.\nadj_matrix\n=\n\n[\n[\n0\n]\n\n*\nsize\nfor\n_\nin\n\nrange\n(\nsize\n)\n]\n\nself\n.\nsize\n=\nsize\nself\n.\nvertex_data\n=\n\n[\n''\n]\n\n*\nsize\n\n\ndef\n\nadd_edge\n(\nself\n,\nu\n,\nv\n,\nweight\n)\n:\n\n\nif\n\n0\n\n<=\nu\n<\nself\n.\nsize\nand\n\n0\n\n<=\nv\n<\nself\n.\nsize\n:\n\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n=\nweight\n\n#self.adj_matrix[v][u] = weight  # For undirected graph\n\n\n\ndef\n\nadd_vertex_data\n(\nself\n,\nvertex\n,\ndata\n)\n:\n\n\nif\n\n0\n\n<=\nvertex\n<\nself\n.\nsize\n:\n\nself\n.\nvertex_data\n[\nvertex\n]\n\n=\ndata\n\n\ndef\n\nbellman_ford\n(\nself\n,\nstart_vertex_data\n)\n:\n\nstart_vertex\n=\nself\n.\nvertex_data\n.\nindex\n(\nstart_vertex_data\n)\n\ndistances\n=\n\n[\nfloat\n(\n'inf'\n)\n]\n\n*\nself\n.\nsize\npredecessors\n=\n\n[\nNone\n]\n\n*\nself\n.\nsize\ndistances\n[\nstart_vertex\n]\n\n=\n\n0\n\n\n\nfor\ni\nin\n\nrange\n(\nself\n.\nsize\n-\n\n1\n)\n:\n\n\nfor\nu\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nfor\nv\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nif\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n!=\n\n0\n:\n\n\nif\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n<\ndistances\n[\nv\n]\n:\n\ndistances\n[\nv\n]\n\n=\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\npredecessors\n[\nv\n]\n\n=\nu\n\nprint\n(\nf\"Relaxing edge\n{\nself\n.\nvertex_data\n[\nu\n]\n}\n->\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n, Updated distance to\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n:\n{\ndistances\n[\nv\n]\n}\n\"\n)\n\n\n\n# Negative cycle detection\n\n\nfor\nu\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nfor\nv\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\n\nif\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n!=\n\n0\n:\n\n\nif\ndistances\n[\nu\n]\n\n+\nself\n.\nadj_matrix\n[\nu\n]\n[\nv\n]\n\n<\ndistances\n[\nv\n]\n:\n\n\nreturn\n\n(\nTrue\n,\n\nNone\n,\n\nNone\n)\n\n# Indicate a negative cycle was found\n\n\n\nreturn\n\n(\nFalse\n,\ndistances\n,\npredecessors\n)\n\n# Indicate no negative cycle and return distances\n\n\n\ndef\n\nget_path\n(\nself\n,\npredecessors\n,\nstart_vertex\n,\nend_vertex\n)\n:\n\npath\n=\n\n[\n]\n\ncurrent\n=\nself\n.\nvertex_data\n.\nindex\n(\nend_vertex\n)\n\n\nwhile\ncurrent\nis\n\nnot\n\nNone\n:\n\npath\n.\ninsert\n(\n0\n,\nself\n.\nvertex_data\n[\ncurrent\n]\n)\n\ncurrent\n=\npredecessors\n[\ncurrent\n]\n\n\nif\ncurrent\n==\nself\n.\nvertex_data\n.\nindex\n(\nstart_vertex\n)\n:\n\npath\n.\ninsert\n(\n0\n,\nstart_vertex\n)\n\n\nbreak\n\n\nreturn\n\n'->'\n.\njoin\n(\npath\n)\n\n\ng\n=\nGraph\n(\n5\n)\n\n\ng\n.\nadd_vertex_data\n(\n0\n,\n\n'A'\n)\n\ng\n.\nadd_vertex_data\n(\n1\n,\n\n'B'\n)\n\ng\n.\nadd_vertex_data\n(\n2\n,\n\n'C'\n)\n\ng\n.\nadd_vertex_data\n(\n3\n,\n\n'D'\n)\n\ng\n.\nadd_vertex_data\n(\n4\n,\n\n'E'\n)\n\n\ng\n.\nadd_edge\n(\n3\n,\n\n0\n,\n\n4\n)\n\n# D -> A, weight 4\n\ng\n.\nadd_edge\n(\n3\n,\n\n2\n,\n\n7\n)\n\n# D -> C, weight 7\n\ng\n.\nadd_edge\n(\n3\n,\n\n4\n,\n\n3\n)\n\n# D -> E, weight 3\n\ng\n.\nadd_edge\n(\n0\n,\n\n2\n,\n\n4\n)\n\n# A -> C, weight 4\n\ng\n.\nadd_edge\n(\n2\n,\n\n0\n,\n\n-\n3\n)\n\n# C -> A, weight -3\n\ng\n.\nadd_edge\n(\n0\n,\n\n4\n,\n\n5\n)\n\n# A -> E, weight 5\n\ng\n.\nadd_edge\n(\n4\n,\n\n2\n,\n\n3\n)\n\n# E -> C, weight 3\n\ng\n.\nadd_edge\n(\n1\n,\n\n2\n,\n\n-\n4\n)\n\n# B -> C, weight -4\n\ng\n.\nadd_edge\n(\n4\n,\n\n1\n,\n\n2\n)\n\n# E -> B, weight 2\n\n\n\n# Running the Bellman-Ford algorithm from D to all vertices\n\n\nprint\n(\n\"\\nThe Bellman-Ford Algorithm starting from vertex D:\"\n)\n\nnegative_cycle\n,\ndistances\n,\npredecessors\n=\ng\n.\nbellman_ford\n(\n'D'\n)\n\n\nif\n\nnot\nnegative_cycle\n:\n\n\nfor\ni\n,\nd\nin\n\nenumerate\n(\ndistances\n)\n:\n\n\nif\nd\n!=\n\nfloat\n(\n'inf'\n)\n:\n\npath\n=\ng\n.\nget_path\n(\npredecessors\n,\n\n'D'\n,\ng\n.\nvertex_data\n[\ni\n]\n)\n\n\nprint\n(\nf\"\n{\npath\n}\n, Distance:\n{\nd\n}\n\"\n)\n\n\nelse\n:\n\n\nprint\n(\nf\"No path from D to\n{\ng\n.\nvertex_data\n[\ni\n]\n}\n, Distance: Infinity\"\n)\n\n\nelse\n:\n\n\nprint\n(\n\"Negative weight cycle detected. Cannot compute shortest paths.\"\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"19, 28, 40-49\" style=\"height: 400px; overflow: auto;\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Graph</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">__init__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        self<span class=\"token punctuation\">.</span>adj_matrix <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token number\">0</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size <span class=\"token keyword keyword-for\">for</span> _ <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span>\n        self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">=</span> size\n        self<span class=\"token punctuation\">.</span>vertex_data <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">''</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_edge</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> u <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size <span class=\"token keyword keyword-and\">and</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> v <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> weight\n            <span class=\"token comment\">#self.adj_matrix[v][u] = weight  # For undirected graph</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_vertex_data</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> vertex<span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> vertex <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> data\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">bellman_ford</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> start_vertex_data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        start_vertex <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">.</span>index<span class=\"token punctuation\">(</span>start_vertex_data<span class=\"token punctuation\">)</span>\n        distances <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token builtin\">float</span><span class=\"token punctuation\">(</span><span class=\"token string\">'inf'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> self<span class=\"token punctuation\">.</span>size\n        predecessors <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> self<span class=\"token punctuation\">.</span>size\n        distances<span class=\"token punctuation\">[</span>start_vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token number\">0</span>\n\n        <span class=\"token keyword keyword-for\">for</span> i <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">-</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-for\">for</span> u <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                <span class=\"token keyword keyword-for\">for</span> v <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                    <span class=\"token keyword keyword-if\">if</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">!=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n                        <span class=\"token keyword keyword-if\">if</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">&lt;</span> distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n                            distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span>\n                            predecessors<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> u\n                            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"Relaxing edge </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">-&gt;</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">, Updated distance to </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">: </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span>\n\n        <span class=\"token comment\"># Negative cycle detection</span>\n        <span class=\"token keyword keyword-for\">for</span> u <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-for\">for</span> v <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                <span class=\"token keyword keyword-if\">if</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">!=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n                    <span class=\"token keyword keyword-if\">if</span> distances<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span> <span class=\"token operator\">+</span> self<span class=\"token punctuation\">.</span>adj_matrix<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span> <span class=\"token operator\">&lt;</span> distances<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n                        <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span><span class=\"token boolean\">True</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># Indicate a negative cycle was found</span>\n\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span><span class=\"token boolean\">False</span><span class=\"token punctuation\">,</span> distances<span class=\"token punctuation\">,</span> predecessors<span class=\"token punctuation\">)</span>  <span class=\"token comment\"># Indicate no negative cycle and return distances</span>\n    \n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">get_path</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> predecessors<span class=\"token punctuation\">,</span> start_vertex<span class=\"token punctuation\">,</span> end_vertex<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        path <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>\n        current <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">.</span>index<span class=\"token punctuation\">(</span>end_vertex<span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-while\">while</span> current <span class=\"token keyword keyword-is\">is</span> <span class=\"token keyword keyword-not\">not</span> <span class=\"token boolean\">None</span><span class=\"token punctuation\">:</span>\n            path<span class=\"token punctuation\">.</span>insert<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>current<span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span>\n            current <span class=\"token operator\">=</span> predecessors<span class=\"token punctuation\">[</span>current<span class=\"token punctuation\">]</span>\n            <span class=\"token keyword keyword-if\">if</span> current <span class=\"token operator\">==</span> self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">.</span>index<span class=\"token punctuation\">(</span>start_vertex<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n                path<span class=\"token punctuation\">.</span>insert<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> start_vertex<span class=\"token punctuation\">)</span>\n                <span class=\"token keyword keyword-break\">break</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'-&gt;'</span><span class=\"token punctuation\">.</span>join<span class=\"token punctuation\">(</span>path<span class=\"token punctuation\">)</span>\n\ng <span class=\"token operator\">=</span> Graph<span class=\"token punctuation\">(</span><span class=\"token number\">5</span><span class=\"token punctuation\">)</span>\n\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'E'</span><span class=\"token punctuation\">)</span>\n\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># D -&gt; A, weight 4</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">7</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># D -&gt; C, weight 7</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># D -&gt; E, weight 3</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A -&gt; C, weight 4</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">3</span><span class=\"token punctuation\">)</span> <span class=\"token comment\"># C -&gt; A, weight -3</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">5</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># A -&gt; E, weight 5</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># E -&gt; C, weight 3</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">4</span><span class=\"token punctuation\">)</span> <span class=\"token comment\"># B -&gt; C, weight -4</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># E -&gt; B, weight 2</span>\n\n<span class=\"token comment\"># Running the Bellman-Ford algorithm from D to all vertices</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\\nThe Bellman-Ford Algorithm starting from vertex D:\"</span><span class=\"token punctuation\">)</span>\nnegative_cycle<span class=\"token punctuation\">,</span> distances<span class=\"token punctuation\">,</span> predecessors <span class=\"token operator\">=</span> g<span class=\"token punctuation\">.</span>bellman_ford<span class=\"token punctuation\">(</span><span class=\"token string\">'D'</span><span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-if\">if</span> <span class=\"token keyword keyword-not\">not</span> negative_cycle<span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-for\">for</span> i<span class=\"token punctuation\">,</span> d <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">enumerate</span><span class=\"token punctuation\">(</span>distances<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> d <span class=\"token operator\">!=</span> <span class=\"token builtin\">float</span><span class=\"token punctuation\">(</span><span class=\"token string\">'inf'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            path <span class=\"token operator\">=</span> g<span class=\"token punctuation\">.</span>get_path<span class=\"token punctuation\">(</span>predecessors<span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">,</span> g<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span>\n            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>path<span class=\"token punctuation\">}</span></span><span class=\"token string\">, Distance: </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>d<span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-else\">else</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"No path from D to </span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>g<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">, Distance: Infinity\"</span></span><span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-else\">else</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Negative weight cycle detected. Cannot compute shortest paths.\"</span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"19\" style=\"top: 397px; height: 22px; width: 1467px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"28\" style=\"top: 595px; height: 22px; width: 1467px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"40-49\" style=\"top: 859px; height: 220px; width: 1467px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 19: The predecessors array holds each vertex' predecessor vertex in the shortest path.",
+      "html": "<p><strong>Line 19: </strong>The <code>predecessors</code> array holds each vertex' predecessor vertex in the shortest path.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 28: The predecessors array gets updated with the new predecessor vertex every time an edge is relaxed.",
+      "html": "<p><strong>Line 28: </strong>The <code>predecessors</code> array gets updated with the new predecessor vertex every time an edge is relaxed.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 40-49: The get_path method uses the predecessors array to generate the shortest path string for each vertex.",
+      "html": "<p><strong>Line 40-49: </strong>The <code>get_path</code> method uses the <code>predecessors</code> array to generate the shortest path string for each vertex.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Time Complexity for The Bellman-Ford Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The time complexity for the Bellman-Ford algorithm mostly depends on the nested loops.",
+      "html": "<p>The time complexity for the Bellman-Ford algorithm mostly depends on the nested loops.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The outer for-loop runs V \u2212 1 V \u2212 1 times, or V V times in case we also have negative cycle detection. For graphs with many vertices, checking all edges one less time than there are vertices makes little difference, so we can say that the outer loop contributes with O ( V ) O ( V ) to the time complexity.",
+      "html": "<p><strong>The outer for-loop </strong>runs <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-9-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-37\"><span class=\"mjx-mrow\" id=\"MJXc-Node-38\"><span class=\"mjx-mi\" id=\"MJXc-Node-39\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-40\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">\u2212</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-41\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi><mo>\u2212</mo><mn>1</mn></math></span></span> times, or <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-10-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-42\"><span class=\"mjx-mrow\" id=\"MJXc-Node-43\"><span class=\"mjx-mi\" id=\"MJXc-Node-44\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi></math></span></span> times in case we also have negative cycle detection. For graphs with many vertices, checking all edges one less time than there are vertices makes little difference, so we can say that the outer loop contributes with <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-11-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-45\"><span class=\"mjx-mrow\" id=\"MJXc-Node-46\"><span class=\"mjx-mi\" id=\"MJXc-Node-47\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-48\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-49\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-50\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>V</mi><mo stretchy=\"false\">)</mo></math></span></span> to the time complexity.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The two inner for-loops checks all edges in the graph. If we assume a worst case scenario in terms of time complexity, then we have a very dense graph where every vertex has an edge to every other vertex, so for all vertex V V the edge to all other vertices V V must be checked, which contributes with O ( V 2 ) O ( V 2 ) to the time complexity.",
+      "html": "<p><strong>The two inner for-loops </strong>checks all edges in the graph. If we assume a worst case scenario in terms of time complexity, then we have a very dense graph where every vertex has an edge to every other vertex, so for all vertex <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-12-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-51\"><span class=\"mjx-mrow\" id=\"MJXc-Node-52\"><span class=\"mjx-mi\" id=\"MJXc-Node-53\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi></math></span></span> the edge to all other vertices <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-13-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-54\"><span class=\"mjx-mrow\" id=\"MJXc-Node-55\"><span class=\"mjx-mi\" id=\"MJXc-Node-56\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi></math></span></span> must be checked, which contributes with <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-14-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-57\"><span class=\"mjx-mrow\" id=\"MJXc-Node-58\"><span class=\"mjx-mi\" id=\"MJXc-Node-59\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-60\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-61\"><span class=\"mjx-base\" style=\"margin-right: -0.186em;\"><span class=\"mjx-mi\" id=\"MJXc-Node-62\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span></span><span class=\"mjx-sup\" style=\"font-size: 70.7%; vertical-align: 0.513em; padding-left: 0.413em; padding-right: 0.071em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-63\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-64\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msup><mi>V</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></math></span></span> to the time complexity.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "So in total, we get the time complexity for the Bellman-Ford algorithm:",
+      "html": "<p>So in total, we get the time complexity for the Bellman-Ford algorithm:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "O ( V 3 ) O ( V 3 )",
+      "html": "<p><span class=\"math display\"><span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MJXc-display\" style=\"text-align: center;\"><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mn&gt;3&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-15-Frame\" role=\"presentation\" style=\"font-size: 119%; text-align: center; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-65\"><span class=\"mjx-mrow\" id=\"MJXc-Node-66\"><span class=\"mjx-mi\" id=\"MJXc-Node-67\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-68\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-69\"><span class=\"mjx-base\" style=\"margin-right: -0.186em;\"><span class=\"mjx-mi\" id=\"MJXc-Node-70\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span></span><span class=\"mjx-sup\" style=\"font-size: 70.7%; vertical-align: 0.584em; padding-left: 0.413em; padding-right: 0.071em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-71\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">3</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-72\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML MJX_Assistive_MathML_Block\" role=\"presentation\"><math display=\"block\" xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msup><mi>V</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo></math></span></span></span></span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "However, in practical situations and especially for sparse graphs, meaning each vertex only has edges to a small portion of the other vertices, time complexity of the two inner for-loops checking all edges can be approximated from O ( V 2 ) O ( V 2 ) to O ( E ) O ( E ) , and we get the total time complexity for Bellman-Ford:",
+      "html": "<p>However, in practical situations and especially for sparse graphs, meaning each vertex only has edges to a small portion of the other vertices, time complexity of the two inner for-loops checking all edges can be approximated from <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-16-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-73\"><span class=\"mjx-mrow\" id=\"MJXc-Node-74\"><span class=\"mjx-mi\" id=\"MJXc-Node-75\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-76\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-77\"><span class=\"mjx-base\" style=\"margin-right: -0.186em;\"><span class=\"mjx-mi\" id=\"MJXc-Node-78\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span></span><span class=\"mjx-sup\" style=\"font-size: 70.7%; vertical-align: 0.513em; padding-left: 0.413em; padding-right: 0.071em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-79\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-80\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msup><mi>V</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></math></span></span> to <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-17-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-81\"><span class=\"mjx-mrow\" id=\"MJXc-Node-82\"><span class=\"mjx-mi\" id=\"MJXc-Node-83\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-84\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-85\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-86\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>E</mi><mo stretchy=\"false\">)</mo></math></span></span>, and we get the total time complexity for Bellman-Ford:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "O ( V \u22c5 E ) O ( V \u22c5 E )",
+      "html": "<p><span class=\"math display\"><span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MJXc-display\" style=\"text-align: center;\"><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-18-Frame\" role=\"presentation\" style=\"font-size: 119%; text-align: center; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-87\"><span class=\"mjx-mrow\" id=\"MJXc-Node-88\"><span class=\"mjx-mi\" id=\"MJXc-Node-89\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-90\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-91\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-92\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-93\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-94\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML MJX_Assistive_MathML_Block\" role=\"presentation\"><math display=\"block\" xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>V</mi><mo>\u22c5</mo><mi>E</mi><mo stretchy=\"false\">)</mo></math></span></span></span></span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The time complexity for the Bellman-Ford algorithm is slower than for Dijkstra's algorithm, but Bellman-Ford can find the shortest paths in graphs with negative edges and it can detect negative cycles, which Dijkstra's algorithm cannot do.",
+      "html": "<p>The time complexity for the Bellman-Ford algorithm is slower than for Dijkstra's algorithm, but Bellman-Ford can find the shortest paths in graphs with negative edges and it can detect negative cycles, which Dijkstra's algorithm cannot do.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "DSA Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Yourself With Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise:",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the adjacency matrix below:",
+      "html": "<p>In the adjacency matrix below:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "What is the edge weight of the edge going from D to E?",
+      "html": "<p>What is the edge weight of the edge going from D to E?</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "The D->E edge weight is\n.",
+      "language": "unknown",
+      "code_html": "<pre style=\"overflow: auto;\">The D-&gt;E edge weight is <input maxlength=\"2\" name=\"ex1\" style=\"width: 3ch;\"/>.\n</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Start the Exercise",
+          "href": "https://www.w3schools.com/exercise.php?filename=exercise_algo_graphs_bellmanford1",
+          "title": ""
+        }
+      ],
+      "text": "Start the Exercise",
+      "html": "<p><a href=\"exercise.php?filename=exercise_algo_graphs_bellmanford1\" target=\"_blank\">Start the Exercise</a></p>"
+    }
+  ]
+}

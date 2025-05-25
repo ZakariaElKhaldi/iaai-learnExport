@@ -1,0 +1,485 @@
+{
+  "title": "MySQL Date Functions",
+  "url": "https://www.w3schools.com/mysql/mysql_dates.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "MySQL Working With Dates",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL Dates",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The most difficult part when working with dates is to be sure that the format of the date you are trying to insert, matches the format of the date column in the database.",
+      "html": "<p>The most difficult part when working with dates is to be sure that the format of the date you are trying to insert,\nmatches the format of the date column in the database.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As long as your data contains only the date portion, your queries will work as expected. However, if a time portion is involved, it gets more complicated.",
+      "html": "<p>As long as your data contains only the date portion, your queries will work as expected. However, if a time portion is involved, it gets \nmore complicated.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL Date Data Types",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "MySQL comes with the following data types for storing a date or a date/time value in the database:",
+      "html": "<p>MySQL comes with the following data types for storing a date or a date/time value in the database:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: The date data type are set for a column when you create a new table in your database!",
+      "html": "<p><b>Note:</b> The date data type are set for a column when you create a new table in your database!</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Working with Dates",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the following table:",
+      "html": "<p>Look at the following table:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Orders Table",
+      "level": "h3"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th style=\"width:20%\">OrderId</th>\n<th style=\"width:45%\">ProductName</th>\n<th>OrderDate</th>\n</tr>\n<tr>\n<td>1</td>\n<td>Geitost</td>\n<td>2008-11-11</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Camembert Pierrot</td>\n<td>2008-11-09</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Mozzarella di Giovanni</td>\n<td>2008-11-11</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Mascarpone Fabioli</td>\n<td>2008-10-29</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now we want to select the records with an OrderDate of \"2008-11-11\" from the table above.",
+      "html": "<p>Now we want to select the records with an OrderDate of \"2008-11-11\" from the table above.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We use the following SELECT statement:",
+      "html": "<p>We use the following <code>SELECT</code> statement:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM Orders WHERE OrderDate='2008-11-11' ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "'2008-11-11'",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM Orders WHERE OrderDate='2008-11-11'",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM Orders WHERE OrderDate='2008-11-11' ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "'2008-11-11'",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\"><div>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Orders <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> OrderDate=<span class=\"sqlstringcolor\" style=\"color:green\">'2008-11-11'</span></div> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM Orders WHERE OrderDate='2008-11-11' ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "'2008-11-11'",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The result-set will look like this:",
+      "html": "<p>The result-set will look like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th style=\"width:20%\">OrderId</th>\n<th style=\"width:45%\">ProductName</th>\n<th>OrderDate</th>\n</tr>\n<tr>\n<td>1</td>\n<td>Geitost</td>\n<td>2008-11-11</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Mozzarella di Giovanni</td>\n<td>2008-11-11</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: Two dates can easily be compared if there is no time component involved!",
+      "html": "<p><strong>Note:</strong> Two dates can easily be compared if there is no time component involved!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now, assume that the \"Orders\" table looks like this (notice the added time-component in the \"OrderDate\" column):",
+      "html": "<p>Now, assume that the \"Orders\" table looks like this (notice the \nadded time-component in the \"OrderDate\" column):</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th style=\"width:20%\">OrderId</th>\n<th style=\"width:45%\">ProductName</th>\n<th>OrderDate</th>\n</tr>\n<tr>\n<td>1</td>\n<td>Geitost</td>\n<td>2008-11-11 13:23:44</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Camembert Pierrot</td>\n<td>2008-11-09 15:45:21</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Mozzarella di Giovanni</td>\n<td>2008-11-11 11:12:01</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Mascarpone Fabioli</td>\n<td>2008-10-29 14:56:59</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we use the same SELECT statement as above:",
+      "html": "<p>If we use the same <code>SELECT</code> statement as above:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM Orders WHERE OrderDate='2008-11-11' ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "'2008-11-11'",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM Orders WHERE OrderDate='2008-11-11'",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM Orders WHERE OrderDate='2008-11-11' ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "'2008-11-11'",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\"><div>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Orders <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> OrderDate=<span class=\"sqlstringcolor\" style=\"color:green\">'2008-11-11'</span></div> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM Orders WHERE OrderDate='2008-11-11' ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "'2008-11-11'",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "we will get no result! This is because the query is looking only for dates with no time portion.",
+      "html": "<p>we will get no result! This is because the query is looking only for dates with no time portion.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Tip: To keep your queries simple and easy to maintain, do not use time-components in your dates, unless you have to!",
+      "html": "<p><b>Tip:</b> To keep your queries simple and easy to maintain, do not use time-components in your dates, unless you have to!</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise ? What is this? Test your skills by answering a few questions about the topics of this page",
+      "level": "h2"
+    },
+    {
+      "type": "page_quiz",
+      "metadata": {
+        "type": "quiz",
+        "question": "Exercise?What is this?Test your skills by answering a few questions about the topics of this page",
+        "options": [],
+        "formAction": "exercise.asp?x=xrcise_dates1"
+      },
+      "quiz_type": "quiz",
+      "question": "Exercise?What is this?Test your skills by answering a few questions about the topics of this page",
+      "options": [],
+      "form_action": "exercise.asp?x=xrcise_dates1",
+      "html": "<form action=\"exercise.asp?x=xrcise_dates1\" method=\"post\" rel=\"opener\" target=\"_blank\"><input id=\"formanswer\" name=\"formanswer\" type=\"hidden\"/><br/><br/><button class=\"ws-btn\" onclick=\"fill_dd_formanswer()\" type=\"submit\">Submit Answer \u00bb</button></form>"
+    }
+  ]
+}

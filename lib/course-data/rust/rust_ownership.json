@@ -1,0 +1,773 @@
+{
+  "title": "Rust Ownership",
+  "url": "https://www.w3schools.com/rust/rust_ownership.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Rust Ownership",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Ownership",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Rust uses \"ownership\" to manage memory in a safe way.",
+      "html": "<p>Rust uses \"ownership\" to manage memory in a safe way.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Every value in Rust has an owner . The owner is usually a variable.",
+      "html": "<p>Every value in Rust has an <strong>owner</strong>. The owner is usually a variable.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Ownership Rules",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Basic Ownership Example",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this example, a owns the string. Then we move it to b :",
+      "html": "<p>In this example, <code>a</code> owns the string. Then we move it to <code>\nb</code>:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_ownership",
+        "syntaxHighlighting": [
+          {
+            "text": "\nlet a = String::from(\"Hello\");\nlet b = a;\n  // println!(\"{}\", a); Error: a no longer owns the value\nprintln!(\"{}\", b); // Ok: b now owns the value\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "String",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\"Hello\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// println!(\"{}\", a); Error: a no longer owns the value",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\"{}\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "// Ok: b now owns the value\n ",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "let a = String::from(\"Hello\");\nlet b = a;\n// println!(\"{}\", a); Error: a no longer owns the value\nprintln!(\"{}\", b); // Ok: b now owns the value",
+      "syntax_highlighting": [
+        {
+          "text": "\nlet a = String::from(\"Hello\");\nlet b = a;\n // println!(\"{}\", a); Error: a no longer owns the value\nprintln!(\"{}\", b); // Ok: b now owns the value\n ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "String",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Hello\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// println!(\"{}\", a); Error: a no longer owns the value",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\"{}\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "// Ok: b now owns the value\n ",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\">\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> a = <span class=\"javakeywordcolor\" style=\"color:#005cc5\">String</span>::from(<span class=\"javastringcolor\" style=\"color:green\">\"Hello\"</span>);<br/>\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> b = a;<br/><br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// println!(\"{}\", a); Error: <strong>a</strong> no longer owns the value<br/></span>\nprintln!(<span class=\"javastringcolor\" style=\"color:green\">\"{}\"</span>, b); <span class=\"commentcolor\" style=\"color:slategray\">// Ok: b now owns the value\n </span></span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_ownership",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nlet a = String::from(\"Hello\");\nlet b = a;\n  // println!(\"{}\", a); Error: a no longer owns the value\nprintln!(\"{}\", b); // Ok: b now owns the value\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "String",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\"Hello\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// println!(\"{}\", a); Error: a no longer owns the value",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\"{}\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "// Ok: b now owns the value\n ",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When we assign a to b , the ownership moves . This means only b can use the value now, because a is no longer valid.",
+      "html": "<p>When we assign <code>a</code> to <code>\nb</code>, the ownership <strong>moves</strong>. This means only <code>b</code> can use the value now, because <code>a</code> is no longer valid.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But simple types like numbers, characters and booleans are copied , not moved.",
+      "html": "<p>But simple types like numbers, characters and booleans are <strong>copied</strong>, not \nmoved.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This means you can still use the original variable after assigning it to another:",
+      "html": "<p>This means you can still use the original variable after assigning it to \nanother:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_ownership2",
+        "syntaxHighlighting": [
+          {
+            "text": "\n  let a = 5;let b = a;println!(\"a = {}\", a);\u00a0 // Works\n  println!(\"b = {}\", b);\u00a0 // Works ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "5",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\"a = {}\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "// Works",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"b = {}\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "// Works ",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "let a = 5;let b = a;println!(\"a = {}\", a);\u00a0 // Works\nprintln!(\"b = {}\", b);\u00a0 // Works",
+      "syntax_highlighting": [
+        {
+          "text": "\n let a = 5;let b = a;println!(\"a = {}\", a);\u00a0 // Works\n  println!(\"b = {}\", b);\u00a0 // Works ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "5",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\"a = {}\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "// Works",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"b = {}\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "// Works ",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> a = <span class=\"javanumbercolor\" style=\"color:#905\">5</span>;<br/><span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> b = a;<br/>println!(<span class=\"javastringcolor\" style=\"color:green\">\"a = {}\"</span>, a);\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Works<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  println!(<span class=\"javastringcolor\" style=\"color:green\">\"b = {}\"</span>, b);\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Works </span></span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_ownership2",
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  let a = 5;let b = a;println!(\"a = {}\", a);\u00a0 // Works\n  println!(\"b = {}\", b);\u00a0 // Works ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "5",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\"a = {}\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "// Works",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"b = {}\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "// Works ",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here, a is copied into b , not moved, so you can still use b .",
+      "html": "<p>Here, <code>a</code> is <strong>copied</strong> into <code>b</code>, \nnot moved, so you can still use <code>b</code>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Clone",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For other types, like String , if you really want to keep the original value and also assign it to another variable, you can use the .clone() method, which makes a copy of the data:",
+      "html": "<p>For other types, like <code>String</code>, if you really want to keep the original value and \nalso assign it to another variable, you can use the <code>.clone()</code> method, which makes \na copy of the data:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_ownership_clone",
+        "syntaxHighlighting": [
+          {
+            "text": "\n  let a = String::from(\"Hello\");let b = a.clone(); // Now both have the same \n  valueprintln!(\"a = {}\", a);\u00a0 // Worksprintln!(\"b = {}\", b);\u00a0 \n  // Works ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "String",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\"Hello\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "clone",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "// Now both have the same \n  value",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\"a = {}\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "// Works",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\"b = {}\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Works ",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "let a = String::from(\"Hello\");let b = a.clone(); // Now both have the same\nvalueprintln!(\"a = {}\", a);\u00a0 // Worksprintln!(\"b = {}\", b);\n// Works",
+      "syntax_highlighting": [
+        {
+          "text": "\n let a = String::from(\"Hello\");let b = a.clone(); // Now both have the same \n  valueprintln!(\"a = {}\", a);\u00a0 // Worksprintln!(\"b = {}\", b);\u00a0 \n // Works ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "String",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Hello\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "clone",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "// Now both have the same \n  value",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\"a = {}\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "// Works",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\"b = {}\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Works ",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> a = <span class=\"javakeywordcolor\" style=\"color:#005cc5\">String</span>::from(<span class=\"javastringcolor\" style=\"color:green\">\"Hello\"</span>);<br/><span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> b = a.<span class=\"javapropertycolor\" style=\"color:black\">clone</span>(); <span class=\"commentcolor\" style=\"color:slategray\">// Now both have the same \n  value<br/></span><br/>println!(<span class=\"javastringcolor\" style=\"color:green\">\"a = {}\"</span>, a);\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Works<br/></span>println!(<span class=\"javastringcolor\" style=\"color:green\">\"b = {}\"</span>, b);\u00a0 <span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Works </span></span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_ownership_clone",
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  let a = String::from(\"Hello\");let b = a.clone(); // Now both have the same \n  valueprintln!(\"a = {}\", a);\u00a0 // Worksprintln!(\"b = {}\", b);\u00a0 \n  // Works ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "String",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\"Hello\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "clone",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "// Now both have the same \n  value",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\"a = {}\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "// Works",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\"b = {}\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Works ",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "However, if you don't need to own the value twice, using a reference ( & ) is usually better than cloning, which you will learn more about in the next chapter.",
+      "html": "<p>However, if you don't need to own the value twice, using a reference (<code>&amp;</code>) is usually better than cloning, which you will learn more about in the next chapter.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Why Ownership Matters",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Next: Learn about borrowing - how to let other parts of your program use a value without taking ownership.",
+      "html": "<p><strong>Next:</strong> Learn about <b>borrowing</b> - how to let other parts of your program use a value without taking ownership.</p>"
+    }
+  ]
+}

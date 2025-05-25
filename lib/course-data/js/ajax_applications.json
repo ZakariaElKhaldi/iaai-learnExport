@@ -1,0 +1,3439 @@
+{
+  "title": "XML Applications",
+  "url": "https://www.w3schools.com/js/js_ajax_applications.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "XML Applications",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This chapter demonstrates some HTML applications using XML, HTTP, DOM, and JavaScript.",
+      "html": "<p class=\"intro\">This chapter demonstrates some HTML applications using \nXML, HTTP, DOM, and JavaScript.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The XML Document Used",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "\"cd_catalog.xml\"",
+          "href": "https://www.w3schools.com/cd_catalog.xml",
+          "title": ""
+        }
+      ],
+      "text": "In this chapter we will use the XML file called \"cd_catalog.xml\" .",
+      "html": "<p>In this chapter we will use the XML file called <a href=\"cd_catalog.xml\" target=\"_blank\">\"cd_catalog.xml\"</a>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Display XML Data in an HTML Table",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This example loops through each <CD> element, and displays the values of the <ARTIST> and the <TITLE> elements in an HTML table:",
+      "html": "<p>This example loops through each &lt;CD&gt; element, and displays the values of the &lt;ARTIST&gt; and the \n&lt;TITLE&gt; elements in an HTML table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_display_table",
+        "syntaxHighlighting": [
+          {
+            "text": "<table id=\"demo\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " id=\"demo\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"demo\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</table>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<script>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "\nfunction loadXMLDoc() {\n\u00a0 const xhttp = new XMLHttpRequest();\n\u00a0 xhttp.onload = function() {\n\u00a0\u00a0\u00a0 const xmlDoc = xhttp.responseXML;\n\u00a0\u00a0\u00a0 const cd = xmlDoc.getElementsByTagName(\"CD\");\n\u00a0\u00a0\u00a0 myFunction(cd);\n\u00a0\u00a0}\n\u00a0 xhttp.open(\"GET\", \"cd_catalog.xml\");\u00a0 \nxhttp.send();\n}\n\nfunction myFunction(cd) {\n\u00a0 let table=\"<tr><th>Artist</th><th>Title</th></tr>\";\n\u00a0 for (let i = 0; i < cd.length; i++) {\n\u00a0\u00a0\u00a0 table += \"<tr><td>\" +\u00a0\u00a0\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n +\u00a0\u00a0\u00a0 \"</td><td>\" +\u00a0\u00a0\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n +\u00a0\u00a0\u00a0 \"</td></tr>\";\u00a0 }\u00a0 \n document.getElementById(\"demo\").innerHTML = table;}",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "onload",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "responseXML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"CD\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "open",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"GET\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\"cd_catalog.xml\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "send",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"<tr><th>Artist</th><th>Title</th></tr>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "length",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"<tr><td>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"ARTIST\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "childNodes",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "nodeValue",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"</td><td>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"TITLE\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "childNodes",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "nodeValue",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"</td></tr>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"demo\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "</script>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</body>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</html>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<table id=\"demo\"></table>\n\n\n\n<script>\nfunction loadXMLDoc() {\nconst xhttp = new XMLHttpRequest();\nxhttp.onload = function() {\nconst xmlDoc = xhttp.responseXML;\nconst cd = xmlDoc.getElementsByTagName(\"CD\");\nmyFunction(cd);\n}\nxhttp.open(\"GET\", \"cd_catalog.xml\");\nxhttp.send();\n}\n\nfunction myFunction(cd) {\nlet table=\"<tr><th>Artist</th><th>Title</th></tr>\";\nfor (let i = 0; i < cd.length; i++) {\ntable += \"<tr><td>\" +\u00a0\u00a0\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue\n+\u00a0\u00a0\u00a0 \"</td><td>\" +\u00a0\u00a0\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue\n+\u00a0\u00a0\u00a0 \"</td></tr>\";\u00a0 }\ndocument.getElementById(\"demo\").innerHTML = table;}</script>\n\n\n\n</body>\n\n</html>",
+      "syntax_highlighting": [
+        {
+          "text": "<table id=\"demo\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " id=\"demo\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"demo\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</table>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<script>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "\nfunction loadXMLDoc() {\n\u00a0 const xhttp = new XMLHttpRequest();\n\u00a0 xhttp.onload = function() {\n\u00a0\u00a0\u00a0 const xmlDoc = xhttp.responseXML;\n\u00a0\u00a0\u00a0 const cd = xmlDoc.getElementsByTagName(\"CD\");\n\u00a0\u00a0\u00a0 myFunction(cd);\n\u00a0\u00a0}\n\u00a0 xhttp.open(\"GET\", \"cd_catalog.xml\");\u00a0 \nxhttp.send();\n}\n\nfunction myFunction(cd) {\n\u00a0 let table=\"<tr><th>Artist</th><th>Title</th></tr>\";\n\u00a0 for (let i = 0; i < cd.length; i++) {\n\u00a0\u00a0\u00a0 table += \"<tr><td>\" +\u00a0\u00a0\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n +\u00a0\u00a0\u00a0 \"</td><td>\" +\u00a0\u00a0\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n +\u00a0\u00a0\u00a0 \"</td></tr>\";\u00a0 }\u00a0 \n document.getElementById(\"demo\").innerHTML = table;}",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "onload",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "responseXML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"CD\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "open",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"GET\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\"cd_catalog.xml\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "send",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<tr><th>Artist</th><th>Title</th></tr>\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "length",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"<tr><td>\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"ARTIST\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "childNodes",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "nodeValue",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"</td><td>\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"TITLE\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "childNodes",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "nodeValue",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"</td></tr>\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"demo\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "</script>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</body>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</html>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate htmlHigh\">\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>table<span class=\"attributecolor\" style=\"color:green\"> id<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"demo\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/table<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>script<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"jscolor\" style=\"color:black\"><br/>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> loadXMLDoc() {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> xhttp = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> XMLHttpRequest();<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 xhttp.<span class=\"jspropertycolor\" style=\"color:black\">onload</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>() {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> xmlDoc = xhttp.<span class=\"jspropertycolor\" style=\"color:black\">responseXML</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> cd = xmlDoc.<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"CD\"</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 myFunction(cd);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 xhttp.<span class=\"jspropertycolor\" style=\"color:black\">open</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"GET\"</span>, <span class=\"jsstringcolor\" style=\"color:green\">\"cd_catalog.xml\"</span>);<br/>\u00a0 \nxhttp.<span class=\"jspropertycolor\" style=\"color:black\">send</span>();<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> myFunction(cd) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">let</span> table=<span class=\"jsstringcolor\" style=\"color:green\">\"&lt;tr&gt;&lt;th&gt;Artist&lt;/th&gt;&lt;th&gt;Title&lt;/th&gt;&lt;/tr&gt;\"</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">for</span> (<span class=\"jskeywordcolor\" style=\"color:#005cc5\">let</span> i = <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>; i &lt; cd.<span class=\"jspropertycolor\" style=\"color:black\">length</span>; i++) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 table += <span class=\"jsstringcolor\" style=\"color:green\">\"&lt;tr&gt;&lt;td&gt;\"</span> +<br/>\u00a0\u00a0\u00a0 cd[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"ARTIST\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">childNodes</span>[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">nodeValue</span> <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> +<br/>\u00a0\u00a0\u00a0 <span class=\"jsstringcolor\" style=\"color:green\">\"&lt;/td&gt;&lt;td&gt;\"</span> +<br/>\u00a0\u00a0\u00a0 cd[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"TITLE\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">childNodes</span>[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">nodeValue</span> <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> +<br/>\u00a0\u00a0\u00a0 <span class=\"jsstringcolor\" style=\"color:green\">\"&lt;/td&gt;&lt;/tr&gt;\"</span>;<br/>\u00a0 }<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"demo\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> = table;<br/>}<br/></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/script<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/body<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/html<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span> </div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_display_table",
+      "syntax_highlighting_data": [
+        {
+          "text": "<table id=\"demo\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " id=\"demo\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"demo\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</table>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<script>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "\nfunction loadXMLDoc() {\n\u00a0 const xhttp = new XMLHttpRequest();\n\u00a0 xhttp.onload = function() {\n\u00a0\u00a0\u00a0 const xmlDoc = xhttp.responseXML;\n\u00a0\u00a0\u00a0 const cd = xmlDoc.getElementsByTagName(\"CD\");\n\u00a0\u00a0\u00a0 myFunction(cd);\n\u00a0\u00a0}\n\u00a0 xhttp.open(\"GET\", \"cd_catalog.xml\");\u00a0 \nxhttp.send();\n}\n\nfunction myFunction(cd) {\n\u00a0 let table=\"<tr><th>Artist</th><th>Title</th></tr>\";\n\u00a0 for (let i = 0; i < cd.length; i++) {\n\u00a0\u00a0\u00a0 table += \"<tr><td>\" +\u00a0\u00a0\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue \n +\u00a0\u00a0\u00a0 \"</td><td>\" +\u00a0\u00a0\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue \n +\u00a0\u00a0\u00a0 \"</td></tr>\";\u00a0 }\u00a0 \n document.getElementById(\"demo\").innerHTML = table;}",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "onload",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "responseXML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"CD\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "open",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"GET\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\"cd_catalog.xml\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "send",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"<tr><th>Artist</th><th>Title</th></tr>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "length",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"<tr><td>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"ARTIST\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "childNodes",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "nodeValue",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"</td><td>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"TITLE\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "childNodes",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "nodeValue",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"</td></tr>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"demo\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "</script>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</body>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</html>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "DOM Intro.",
+          "href": "https://www.w3schools.com/xml/dom_intro.asp",
+          "title": ""
+        }
+      ],
+      "text": "For more information about using JavaScript and the XML DOM, go to DOM Intro.",
+      "html": "<p>For more information about using JavaScript and the XML DOM, go to\n<a href=\"/xml/dom_intro.asp\">DOM Intro.</a></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Display the First CD in an HTML div Element",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This example uses a function to display the first CD element in an HTML element with id=\"showCD\":",
+      "html": "<p>This example uses a function to display the first CD element in an HTML element with id=\"showCD\":</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app_first",
+        "syntaxHighlighting": [
+          {
+            "text": "\nconst xhttp = new XMLHttpRequest();\nxhttp.onload = function() {\n\u00a0\u00a0const xmlDoc = xhttp.responseXML;\n\u00a0\u00a0const cd = xmlDoc.getElementsByTagName(\"CD\");\n\u00a0\u00a0myFunction(cd, 0);\n}\nxhttp.open(\"GET\", \"cd_catalog.xml\");\nxhttp.send();\n\nfunction myFunction(cd, i) {\n\n\u00a0 document.getElementById(\"showCD\").innerHTML =\n\u00a0 \"Artist: \" +\n\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Title: \" +\n\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue +\n\u00a0\u00a0\"<br>Year: \" + \n\u00a0 cd[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "onload",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "responseXML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "const",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"CD\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "open",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"GET\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\"cd_catalog.xml\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "send",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"showCD\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"Artist: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"ARTIST\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "childNodes",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "nodeValue",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"<br>Title: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"TITLE\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "childNodes",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "nodeValue",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"<br>Year: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"YEAR\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "childNodes",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "nodeValue",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "const xhttp = new XMLHttpRequest();\nxhttp.onload = function() {\nconst xmlDoc = xhttp.responseXML;\nconst cd = xmlDoc.getElementsByTagName(\"CD\");\nmyFunction(cd, 0);\n}\nxhttp.open(\"GET\", \"cd_catalog.xml\");\nxhttp.send();\n\nfunction myFunction(cd, i) {\ndocument.getElementById(\"showCD\").innerHTML =\n\"Artist: \" +\ncd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue +\n\"<br>Title: \" +\ncd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue +\n\"<br>Year: \" +\ncd[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nconst xhttp = new XMLHttpRequest();\nxhttp.onload = function() {\n\u00a0\u00a0const xmlDoc = xhttp.responseXML;\n\u00a0\u00a0const cd = xmlDoc.getElementsByTagName(\"CD\");\n\u00a0\u00a0myFunction(cd, 0);\n}\nxhttp.open(\"GET\", \"cd_catalog.xml\");\nxhttp.send();\n\nfunction myFunction(cd, i) {\n\u00a0 document.getElementById(\"showCD\").innerHTML =\n\u00a0 \"Artist: \" +\n\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Title: \" +\n\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue +\n\u00a0\u00a0\"<br>Year: \" + \n\u00a0 cd[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}\n ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "onload",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "responseXML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "const",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"CD\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "open",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"GET\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\"cd_catalog.xml\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "send",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"showCD\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"Artist: \"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"ARTIST\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "childNodes",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "nodeValue",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"<br>Title: \"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"TITLE\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "childNodes",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "nodeValue",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"<br>Year: \"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"YEAR\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "childNodes",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "nodeValue",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\">\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> xhttp = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> XMLHttpRequest();<br/>\nxhttp.<span class=\"jspropertycolor\" style=\"color:black\">onload</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>() {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> xmlDoc = xhttp.<span class=\"jspropertycolor\" style=\"color:black\">responseXML</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"jskeywordcolor\" style=\"color:#005cc5\">const</span> cd = xmlDoc.<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"CD\"</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0myFunction(cd, <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<br/>\nxhttp.<span class=\"jspropertycolor\" style=\"color:black\">open</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"GET\"</span>, <span class=\"jsstringcolor\" style=\"color:green\">\"cd_catalog.xml\"</span>);<br/>\nxhttp.<span class=\"jspropertycolor\" style=\"color:black\">send</span>();<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> myFunction(cd, i) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"showCD\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> =<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jsstringcolor\" style=\"color:green\">\"Artist: \"</span> +<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 cd[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"ARTIST\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">childNodes</span>[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">nodeValue</span> +<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jsstringcolor\" style=\"color:green\">\"&lt;br&gt;Title: \"</span> +<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 cd[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"TITLE\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">childNodes</span>[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">nodeValue</span> +<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"jsstringcolor\" style=\"color:green\">\"&lt;br&gt;Year: \"</span> + <br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 cd[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"YEAR\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">childNodes</span>[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">nodeValue</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app_first",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nconst xhttp = new XMLHttpRequest();\nxhttp.onload = function() {\n\u00a0\u00a0const xmlDoc = xhttp.responseXML;\n\u00a0\u00a0const cd = xmlDoc.getElementsByTagName(\"CD\");\n\u00a0\u00a0myFunction(cd, 0);\n}\nxhttp.open(\"GET\", \"cd_catalog.xml\");\nxhttp.send();\n\nfunction myFunction(cd, i) {\n\n\u00a0 document.getElementById(\"showCD\").innerHTML =\n\u00a0 \"Artist: \" +\n\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Title: \" +\n\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue +\n\u00a0\u00a0\"<br>Year: \" + \n\u00a0 cd[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "onload",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "responseXML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "const",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"CD\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "open",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"GET\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\"cd_catalog.xml\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "send",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"showCD\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"Artist: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"ARTIST\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "childNodes",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "nodeValue",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"<br>Title: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"TITLE\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "childNodes",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "nodeValue",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"<br>Year: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"YEAR\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "childNodes",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "nodeValue",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Navigate Between the CDs",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To navigate between the CDs in the example above, create a next() and previous() function:",
+      "html": "<p>To navigate between the CDs in the example above, create a \n<code>next()</code> and <code>previous()</code> function:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app_navigate",
+        "syntaxHighlighting": [
+          {
+            "text": "\nfunction next()\n{\u00a0 // display the next CD, unless you are on the last CD\n\u00a0\nif (i < len-1) {\n\u00a0\u00a0\u00a0 i++;\n\u00a0\u00a0\u00a0 displayCD(i);\n\u00a0 }\n}\n\nfunction previous()\n{\u00a0 // display the previous CD, unless you are on the first CD \n\u00a0\nif (i > 0) {\n\u00a0\u00a0\u00a0 i--;\n\u00a0\u00a0\u00a0 displayCD(i);\n\u00a0\u00a0}\n}\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// display the next CD, unless you are on the last CD",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// display the previous CD, unless you are on the first CD ",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "function next()\n{\u00a0 // display the next CD, unless you are on the last CD\n\nif (i < len-1) {\ni++;\ndisplayCD(i);\n}\n}\n\nfunction previous()\n{\u00a0 // display the previous CD, unless you are on the first CD\n\nif (i > 0) {\ni--;\ndisplayCD(i);\n}\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nfunction next()\n{\u00a0 // display the next CD, unless you are on the last CD\n\u00a0\nif (i < len-1) {\n\u00a0\u00a0\u00a0 i++;\n\u00a0\u00a0\u00a0 displayCD(i);\n\u00a0 }\n}\n\nfunction previous()\n{\u00a0 // display the previous CD, unless you are on the first CD \n\u00a0\nif (i > 0) {\n\u00a0\u00a0\u00a0 i--;\n\u00a0\u00a0\u00a0 displayCD(i);\n\u00a0\u00a0}\n}\n ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// display the next CD, unless you are on the last CD",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// display the previous CD, unless you are on the first CD ",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\">\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> next()<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>{<br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// display the next CD, unless you are on the last CD<br/></span><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (i &lt; len-<span class=\"jsnumbercolor\" style=\"color:#905\">1</span>) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 i++;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 displayCD(i);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 }<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> previous()<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>{<br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// display the previous CD, unless you are on the first CD <br/></span><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (i &gt; <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 i--;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0 displayCD(i);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app_navigate",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nfunction next()\n{\u00a0 // display the next CD, unless you are on the last CD\n\u00a0\nif (i < len-1) {\n\u00a0\u00a0\u00a0 i++;\n\u00a0\u00a0\u00a0 displayCD(i);\n\u00a0 }\n}\n\nfunction previous()\n{\u00a0 // display the previous CD, unless you are on the first CD \n\u00a0\nif (i > 0) {\n\u00a0\u00a0\u00a0 i--;\n\u00a0\u00a0\u00a0 displayCD(i);\n\u00a0\u00a0}\n}\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// display the next CD, unless you are on the last CD",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// display the previous CD, unless you are on the first CD ",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Show Album Information When Clicking On a CD",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The last example shows how you can show album information when the user clicks on a CD:",
+      "html": "<p>\nThe last example shows how you can show album information when the user clicks on a CD:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app",
+        "syntaxHighlighting": [
+          {
+            "text": "\nfunction displayCD(i) {\n\u00a0 document.getElementById(\"showCD\").innerHTML =\n\u00a0  \"Artist: \" +\n\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Title: \" +\n\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Year: \" + \n\u00a0 cd[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"showCD\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"Artist: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"ARTIST\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "childNodes",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "nodeValue",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"<br>Title: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"TITLE\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "childNodes",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "nodeValue",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"<br>Year: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"YEAR\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "childNodes",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "nodeValue",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "function displayCD(i) {\ndocument.getElementById(\"showCD\").innerHTML =\n\"Artist: \" +\ncd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue +\n\"<br>Title: \" +\ncd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue +\n\"<br>Year: \" +\ncd[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nfunction displayCD(i) {\n\u00a0 document.getElementById(\"showCD\").innerHTML =\n\u00a0  \"Artist: \" +\n\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Title: \" +\n\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Year: \" + \n\u00a0 cd[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}\n ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"showCD\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"Artist: \"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"ARTIST\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "childNodes",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "nodeValue",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"<br>Title: \"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"TITLE\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "childNodes",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "nodeValue",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"<br>Year: \"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"YEAR\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "childNodes",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "nodeValue",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\">\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> displayCD(i) {<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"showCD\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span> =<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0  <span class=\"jsstringcolor\" style=\"color:green\">\"Artist: \"</span> +<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 cd[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"ARTIST\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">childNodes</span>[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">nodeValue</span> +<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jsstringcolor\" style=\"color:green\">\"&lt;br&gt;Title: \"</span> +<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 cd[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"TITLE\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">childNodes</span>[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">nodeValue</span> +<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 <span class=\"jsstringcolor\" style=\"color:green\">\"&lt;br&gt;Year: \"</span> + <br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>\u00a0 cd[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"YEAR\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">childNodes</span>[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>].<span class=\"jspropertycolor\" style=\"color:black\">nodeValue</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nfunction displayCD(i) {\n\u00a0 document.getElementById(\"showCD\").innerHTML =\n\u00a0  \"Artist: \" +\n\u00a0 cd[i].getElementsByTagName(\"ARTIST\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Title: \" +\n\u00a0 cd[i].getElementsByTagName(\"TITLE\")[0].childNodes[0].nodeValue +\n\u00a0 \"<br>Year: \" + \n\u00a0 cd[i].getElementsByTagName(\"YEAR\")[0].childNodes[0].nodeValue;\n}\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"showCD\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"Artist: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"ARTIST\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "childNodes",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "nodeValue",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"<br>Title: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"TITLE\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "childNodes",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "nodeValue",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"<br>Year: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"YEAR\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "childNodes",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "nodeValue",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

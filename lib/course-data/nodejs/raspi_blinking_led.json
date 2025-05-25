@@ -1,0 +1,1136 @@
+{
+  "title": "Node.js Raspberry Pi Blinking LED",
+  "url": "https://www.w3schools.com/nodejs/nodejs_raspberrypi_blinking_led.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Node.js Raspberry Pi GPIO - Blinking LED",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Using the GPIO for Output",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this chapter we will use a Raspberry Pi and its GPIO to make a LED blink.",
+      "html": "<p>In this chapter we will use a Raspberry Pi and its GPIO to \nmake a LED blink.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We use Node.js with the onoff module to control the GPIO.",
+      "html": "<p>We use Node.js with the onoff module to control the GPIO.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To get a LED light to turn on, we use a GPIO pin as \"Output\", and create a script to turn it on and off (blinking).",
+      "html": "<p>To get a LED light to turn on, we use a GPIO pin as \"Output\", and create a \nscript to turn it on and off (blinking).</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "What do we need?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this chapter we will create a simple example where we control a LED light.",
+      "html": "<p>In this chapter we will create a simple example where \nwe control a LED light.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For this you need:",
+      "html": "<p>For this you need:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Click the links in the list above for descriptions of the different components.",
+      "html": "<p>Click the links in the list above for descriptions of the different \ncomponents.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: The resistor you need can be different from what we use depending on the type of LED you use. Most small LEDs only need a small resistor, around 200-500 ohms. It is generally not critical what exact value you use, but the smaller the value of the resistor, the brighter the LED will shine.",
+      "html": "<p><strong>Note:</strong> The resistor you need can be different from what we use depending on the type of LED you use. Most small LEDs only need a small resistor, around 200-500 ohms. It is generally not critical what exact value you use, but the smaller the value of the resistor, the brighter the LED will\nshine.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Building the Circuit",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now it is time to build the circuit on our Breadboard.",
+      "html": "<p>Now it is time to build the circuit on our Breadboard.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If you are new to electronics, we recommend you turn off the power for the Raspberry Pi. And use an anti-static mat or a grounding strap to avoid damaging it.",
+      "html": "<p>If you are new to electronics, we recommend you turn off the power for \nthe Raspberry Pi. And use an anti-static mat or a grounding strap to avoid \ndamaging it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Shut down the Raspberry Pi properly with the command:",
+      "html": "<p>Shut down the Raspberry Pi properly with the command:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "pi@w3demopi:~ $ sudo shutdown -h now",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  pi@w3demopi:~ $ sudo shutdown -h now\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After the LEDs stop blinking on the Raspberry Pi, then pull out the power plug from the Raspberry Pi (or turn off the power strip it is connected to).",
+      "html": "<p>After the LEDs stop blinking on the Raspberry Pi, then pull out the power \nplug from the Raspberry Pi (or turn off the power strip it is connected to).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Just pulling the plug without shutting down properly may cause corruption of the memory card.",
+      "html": "<p>Just pulling the plug without shutting down properly may cause corruption of the memory card.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the above illustration of the circuit.",
+      "html": "<p>Look at the above illustration of the circuit.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Your circuit should now be complete, and your connections should look pretty similar to the illustration above.",
+      "html": "<p>Your circuit should now be complete, and your connections should look \n  pretty similar to the illustration above.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now it is time to boot up the Raspberry Pi, and write the Node.js script to interact with it.",
+      "html": "<p>Now it is time to boot up the Raspberry Pi, and write the Node.js script to \n  interact with it.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Raspberry Pi and Node.js Blinking LED Script",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now that we have everything set up, we can write a script to turn the LED on and off.",
+      "html": "<p>Now that we have everything set up, we can write a script to turn the LED on and off.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Start by making a directory where we can keep our Node.js scripts:",
+      "html": "<p>Start by making a directory where we can keep our Node.js scripts:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "pi@w3demopi:~ $ mkdir nodetest",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  pi@w3demopi:~ $ mkdir nodetest\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Go to our new directory:",
+      "html": "<p>Go to our new directory:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "pi@w3demopi:~ $ cd nodetest",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  pi@w3demopi:~ $ cd nodetest\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now we will create a new file called \" blink.js \" using the Nano Editor:",
+      "html": "<p>Now we will create a new file called \"<code>blink.js</code>\" using the Nano Editor:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "pi@w3demopi:~ $ nano blink.js",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  pi@w3demopi:~ $ nano blink.js\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The file is now open and can be edited with the built in Nano Editor.",
+      "html": "<p>The file is now open and can be edited with the built in Nano Editor.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Write, or paste the following code:",
+      "html": "<p>Write, or paste the following code:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIOvar LED = new Gpio(4, 'out'); \n  //use GPIO pin 4, and specify that it is outputvar \n  blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every \n  250msfunction blinkLED() { //function to start blinking\u00a0 if (LED.readSync() === \n  0) { //check the pin state, if the state is 0 (or off)\u00a0\u00a0\u00a0 LED.writeSync(1); \n  //set pin state to 1 (turn LED on)\u00a0 } else {\u00a0\u00a0\u00a0 LED.writeSync(0); \n  //set pin state to 0 (turn LED off)\u00a0 }}function endBlink() \n  { //function to stop blinking\u00a0 clearInterval(blinkInterval); // Stop blink intervals\u00a0 \n  LED.writeSync(0); // Turn LED off\u00a0 LED.unexport(); // Unexport GPIO \n  to free resources}setTimeout(endBlink, 5000); //stop blinking \n  after 5 seconds ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "'onoff'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "Gpio",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "//include onoff to interact with the GPIO",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "4",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//use GPIO pin 4, and specify that it is output",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "250",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//run the blinkLED function every \n  250ms",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "//function to start blinking",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "readSync",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//check the pin state, if the state is 0 (or off)",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "writeSync",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//set pin state to 1 (turn LED on)",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "writeSync",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//set pin state to 0 (turn LED off)",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//function to stop blinking",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "// Stop blink intervals",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "writeSync",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Turn LED off",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "unexport",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "// Unexport GPIO \n  to free resources",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "5000",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//stop blinking \n  after 5 seconds ",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIOvar LED = new Gpio(4, 'out');\n//use GPIO pin 4, and specify that it is outputvar\nblinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every\n250msfunction blinkLED() { //function to start blinking\u00a0 if (LED.readSync() ===\n0) { //check the pin state, if the state is 0 (or off)\u00a0\u00a0\u00a0 LED.writeSync(1);\n//set pin state to 1 (turn LED on)\u00a0 } else {\u00a0\u00a0\u00a0 LED.writeSync(0);\n//set pin state to 0 (turn LED off)\u00a0 }}function endBlink()\n{ //function to stop blinking\u00a0 clearInterval(blinkInterval); // Stop blink intervals\nLED.writeSync(0); // Turn LED off\u00a0 LED.unexport(); // Unexport GPIO\nto free resources}setTimeout(endBlink, 5000); //stop blinking\nafter 5 seconds",
+      "syntax_highlighting": [
+        {
+          "text": "\n var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIOvar LED = new Gpio(4, 'out'); \n //use GPIO pin 4, and specify that it is outputvar \n  blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every \n  250msfunction blinkLED() { //function to start blinking\u00a0 if (LED.readSync() === \n 0) { //check the pin state, if the state is 0 (or off)\u00a0\u00a0\u00a0 LED.writeSync(1); \n //set pin state to 1 (turn LED on)\u00a0 } else {\u00a0\u00a0\u00a0 LED.writeSync(0); \n //set pin state to 0 (turn LED off)\u00a0 }}function endBlink() \n  { //function to stop blinking\u00a0 clearInterval(blinkInterval); // Stop blink intervals\u00a0 \n  LED.writeSync(0); // Turn LED off\u00a0 LED.unexport(); // Unexport GPIO \n  to free resources}setTimeout(endBlink, 5000); //stop blinking \n  after 5 seconds ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "'onoff'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "Gpio",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "//include onoff to interact with the GPIO",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "4",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//use GPIO pin 4, and specify that it is output",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "250",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//run the blinkLED function every \n  250ms",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "//function to start blinking",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "readSync",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//check the pin state, if the state is 0 (or off)",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "writeSync",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//set pin state to 1 (turn LED on)",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "writeSync",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//set pin state to 0 (turn LED off)",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//function to stop blinking",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "// Stop blink intervals",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "writeSync",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Turn LED off",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "unexport",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "// Unexport GPIO \n  to free resources",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "5000",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//stop blinking \n  after 5 seconds ",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> Gpio = require(<span class=\"jsstringcolor\" style=\"color:green\">'onoff'</span>).<span class=\"jspropertycolor\" style=\"color:black\">Gpio</span>; <span class=\"commentcolor\" style=\"color:slategray\">//include onoff to interact with the GPIO<br/></span><span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> LED = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">4</span>, <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>); <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">//use GPIO pin 4, and specify that it is output<br/></span><span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  blinkInterval = setInterval(blinkLED, <span class=\"jsnumbercolor\" style=\"color:#905\">250</span>); <span class=\"commentcolor\" style=\"color:slategray\">//run the blinkLED function every \n  250ms<br/></span><br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> blinkLED() { <span class=\"commentcolor\" style=\"color:slategray\">//function to start blinking<br/></span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (LED.<span class=\"jspropertycolor\" style=\"color:black\">readSync</span>() === <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>) { <span class=\"commentcolor\" style=\"color:slategray\">//check the pin state, if the state is 0 (or off)<br/></span>\u00a0\u00a0\u00a0 LED.<span class=\"jspropertycolor\" style=\"color:black\">writeSync</span>(<span class=\"jsnumbercolor\" style=\"color:#905\">1</span>); <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">//set pin state to 1 (turn LED on)<br/></span>\u00a0 } <span class=\"jskeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0\u00a0\u00a0 LED.<span class=\"jspropertycolor\" style=\"color:black\">writeSync</span>(<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>); <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">//set pin state to 0 (turn LED off)<br/></span>\u00a0 }<br/>}<br/><br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> endBlink() <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  { <span class=\"commentcolor\" style=\"color:slategray\">//function to stop blinking<br/></span>\u00a0 clearInterval(blinkInterval); <span class=\"commentcolor\" style=\"color:slategray\">// Stop blink intervals<br/></span>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  LED.<span class=\"jspropertycolor\" style=\"color:black\">writeSync</span>(<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>); <span class=\"commentcolor\" style=\"color:slategray\">// Turn LED off<br/></span>\u00a0 LED.<span class=\"jspropertycolor\" style=\"color:black\">unexport</span>(); <span class=\"commentcolor\" style=\"color:slategray\">// Unexport GPIO \n  to free resources<br/></span>}<br/><br/>setTimeout(endBlink, <span class=\"jsnumbercolor\" style=\"color:#905\">5000</span>); <span class=\"commentcolor\" style=\"color:slategray\">//stop blinking \n  after 5 seconds </span></span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIOvar LED = new Gpio(4, 'out'); \n  //use GPIO pin 4, and specify that it is outputvar \n  blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every \n  250msfunction blinkLED() { //function to start blinking\u00a0 if (LED.readSync() === \n  0) { //check the pin state, if the state is 0 (or off)\u00a0\u00a0\u00a0 LED.writeSync(1); \n  //set pin state to 1 (turn LED on)\u00a0 } else {\u00a0\u00a0\u00a0 LED.writeSync(0); \n  //set pin state to 0 (turn LED off)\u00a0 }}function endBlink() \n  { //function to stop blinking\u00a0 clearInterval(blinkInterval); // Stop blink intervals\u00a0 \n  LED.writeSync(0); // Turn LED off\u00a0 LED.unexport(); // Unexport GPIO \n  to free resources}setTimeout(endBlink, 5000); //stop blinking \n  after 5 seconds ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "'onoff'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "Gpio",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "//include onoff to interact with the GPIO",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "4",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//use GPIO pin 4, and specify that it is output",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "250",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//run the blinkLED function every \n  250ms",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "//function to start blinking",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "readSync",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//check the pin state, if the state is 0 (or off)",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "writeSync",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//set pin state to 1 (turn LED on)",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "writeSync",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//set pin state to 0 (turn LED off)",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//function to stop blinking",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "// Stop blink intervals",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "writeSync",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Turn LED off",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "unexport",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "// Unexport GPIO \n  to free resources",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "5000",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//stop blinking \n  after 5 seconds ",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Press \" Ctrl+x \" to save the code. Confirm with \" y \", and confirm the name with \" Enter \".",
+      "html": "<p>Press \"<code>Ctrl+x</code>\" to save the code. Confirm with \"<code>y</code>\", and confirm the name with \"<code>Enter</code>\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the code:",
+      "html": "<p>Run the code:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "pi@w3demopi:~ $ node blink.js",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  pi@w3demopi:~ $ node blink.js\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now the LED should blink for 5 seconds (10 times) before turning off again!",
+      "html": "<p>Now the LED should blink for 5 seconds (10 times) before turning off again!</p>"
+    }
+  ]
+}

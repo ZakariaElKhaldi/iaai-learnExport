@@ -1,0 +1,738 @@
+{
+  "title": "DSA Insertion Sort",
+  "url": "https://www.w3schools.com/dsa/dsa_algo_insertionsort.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Insertion Sort",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Insertion Sort",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Insertion Sort algorithm uses one part of the array to hold the sorted values, and the other part of the array to hold values that are not sorted yet.",
+      "html": "<p>The Insertion Sort algorithm uses one part of the array to hold the sorted values, and the other part of the array to hold values that are not sorted yet.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Speed:",
+      "html": "<p>Speed: <input max=\"900\" min=\"50\" type=\"range\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The algorithm takes one value at a time from the unsorted part of the array and puts it into the right place in the sorted part of the array, until the array is sorted.",
+      "html": "<p>The algorithm takes one value at a time from the unsorted part of the array and puts it into the right place in the sorted part of the array, until the array is sorted.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How it works:",
+      "html": "<p><strong>How it works:</strong></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Continue reading to fully understand the Insertion Sort algorithm and how to implement it yourself.",
+      "html": "<p>Continue reading to fully understand the Insertion Sort algorithm and how to implement it yourself.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Before we implement the Insertion Sort algorithm in a programming language, let's manually run through a short array, just to get the idea.",
+      "html": "<p>Before we implement the Insertion Sort algorithm in a programming language, let's manually run through a short array, just to get the idea.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 1: We start with an unsorted array.",
+      "html": "<p><strong>Step 1:</strong> We start with an unsorted array.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span> <span class=\"token number\">7</span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span> <span class=\"token number\">9</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 2: We can consider the first value as the initial sorted part of the array. If it is just one value, it must be sorted, right?",
+      "html": "<p><strong>Step 2:</strong> We can consider the first value as the initial sorted part of the array. If it is just one value, it must be sorted, right?</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span><mark class=\"dsa_mark\"> <span class=\"token number\">7</span></mark><span class=\"token number\"></span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span> <span class=\"token number\">9</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 3: The next value 12 should now be moved into the correct position in the sorted part of the array. But 12 is higher than 7, so it is already in the correct position.",
+      "html": "<p><strong>Step 3:</strong> The next value 12 should now be moved into the correct position in the sorted part of the array. But 12 is higher than 7, so it is already in the correct position.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span> <span class=\"token number\">7</span><span class=\"token punctuation\">,</span><mark class=\"dsa_mark\"> <span class=\"token number\">12</span></mark><span class=\"token number\"></span><span class=\"token punctuation\">,</span> <span class=\"token number\">9</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 4: Consider the next value 9.",
+      "html": "<p><strong>Step 4:</strong> Consider the next value 9.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span> <span class=\"token number\">7</span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span><mark class=\"dsa_mark\"> <span class=\"token number\">9</span></mark><span class=\"token number\"></span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 5: The value 9 must now be moved into the correct position inside the sorted part of the array, so we move 9 in between 7 and 12.",
+      "html": "<p><strong>Step 5:</strong> The value 9 must now be moved into the correct position inside the sorted part of the array, so we move 9 in between 7 and 12.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span> <span class=\"token number\">7</span><span class=\"token punctuation\">,</span><mark class=\"dsa_mark\"> <span class=\"token number\">9</span></mark><span class=\"token number\"></span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 6: The next value is 11.",
+      "html": "<p><strong>Step 6:</strong> The next value is 11.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span> <span class=\"token number\">7</span><span class=\"token punctuation\">,</span> <span class=\"token number\">9</span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">&gt;</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 7: We move it in between 9 and 12 in the sorted part of the array.",
+      "html": "<p><strong>Step 7:</strong> We move it in between 9 and 12 in the sorted part of the array.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span> <span class=\"token number\">7</span><span class=\"token punctuation\">,</span> <span class=\"token number\">9</span><span class=\"token punctuation\">,</span><mark class=\"dsa_mark\"> <span class=\"token number\">11</span></mark><span class=\"token number\"></span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 8: The last value to insert into the correct position is 3.",
+      "html": "<p><strong>Step 8:</strong> The last value to insert into the correct position is 3.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span> <span class=\"token number\">7</span><span class=\"token punctuation\">,</span> <span class=\"token number\">9</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span><mark class=\"dsa_mark\"> <span class=\"token number\">3</span></mark><span class=\"token number\"></span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 9: We insert 3 in front of all other values because it is the lowest value.",
+      "html": "<p><strong>Step 9:</strong> We insert 3 in front of all other values because it is the lowest value.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\"><span class=\"token punctuation\">[</span><mark class=\"dsa_mark\"> <span class=\"token number\">3</span></mark><span class=\"token number\"></span><span class=\"token punctuation\">,</span><span class=\"token number\">7</span><span class=\"token punctuation\">,</span> <span class=\"token number\">9</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Finally, the array is sorted.",
+      "html": "<p>Finally, the array is sorted.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the simulation below to see the steps above animated:",
+      "html": "<p>Run the simulation below to see the steps above animated:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through: What Happened?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We must understand what happened above to fully understand the algorithm, so that we can implement the algorithm in a programming language.",
+      "html": "<p>We must understand what happened above to fully understand the algorithm, so that we can implement the algorithm in a programming language.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The first value is considered to be the initial sorted part of the array.",
+      "html": "<p>The first value is considered to be the initial sorted part of the array.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Every value after the first value must be compared to the values in the sorted part of the algorithm so that it can be inserted into the correct position.",
+      "html": "<p>Every value after the first value must be compared to the values in the sorted part of the algorithm so that it can be inserted into the correct position.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Insertion Sort Algorithm must run through the array 4 times, to sort the array of 5 values because we do not have to sort the first value.",
+      "html": "<p>The Insertion Sort Algorithm must run through the array 4 times, to sort the array of 5 values because we do not have to sort the first value.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And each time the algorithm runs through the array, the remaining unsorted part of the array becomes shorter.",
+      "html": "<p>And each time the algorithm runs through the array, the remaining unsorted part of the array becomes shorter.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We will now use what we have learned to implement the Insertion Sort algorithm in a programming language.",
+      "html": "<p>We will now use what we have learned to implement the Insertion Sort algorithm in a programming language.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Insertion Sort Implementation",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To implement the Insertion Sort algorithm in a programming language, we need:",
+      "html": "<p>To implement the Insertion Sort algorithm in a programming language, we need:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The resulting code looks like this:",
+      "html": "<p>The resulting code looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_array\n=\n\n[\n64\n,\n\n34\n,\n\n25\n,\n\n12\n,\n\n22\n,\n\n11\n,\n\n90\n,\n\n5\n]\n\n\nn\n=\n\nlen\n(\nmy_array\n)\n\n\nfor\ni\nin\n\nrange\n(\n1\n,\nn\n)\n:\n\ninsert_index\n=\ni\ncurrent_value\n=\nmy_array\n.\npop\n(\ni\n)\n\n\nfor\nj\nin\n\nrange\n(\ni\n-\n1\n,\n\n-\n1\n,\n\n-\n1\n)\n:\n\n\nif\nmy_array\n[\nj\n]\n\n>\ncurrent_value\n:\n\ninsert_index\n=\nj\nmy_array\n.\ninsert\n(\ninsert_index\n,\ncurrent_value\n)\n\n\n\nprint\n(\n\"Sorted array:\"\n,\nmy_array\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" tabindex=\"0\"><code class=\"language-python\">my_array <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token number\">64</span><span class=\"token punctuation\">,</span> <span class=\"token number\">34</span><span class=\"token punctuation\">,</span> <span class=\"token number\">25</span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span> <span class=\"token number\">22</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">90</span><span class=\"token punctuation\">,</span> <span class=\"token number\">5</span><span class=\"token punctuation\">]</span>\n\nn <span class=\"token operator\">=</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>my_array<span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-for\">for</span> i <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span>n<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    insert_index <span class=\"token operator\">=</span> i\n    current_value <span class=\"token operator\">=</span> my_array<span class=\"token punctuation\">.</span>pop<span class=\"token punctuation\">(</span>i<span class=\"token punctuation\">)</span>\n    <span class=\"token keyword keyword-for\">for</span> j <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>i<span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> my_array<span class=\"token punctuation\">[</span>j<span class=\"token punctuation\">]</span> <span class=\"token operator\">&gt;</span> current_value<span class=\"token punctuation\">:</span>\n            insert_index <span class=\"token operator\">=</span> j\n    my_array<span class=\"token punctuation\">.</span>insert<span class=\"token punctuation\">(</span>insert_index<span class=\"token punctuation\">,</span> current_value<span class=\"token punctuation\">)</span>\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Sorted array:\"</span><span class=\"token punctuation\">,</span> my_array<span class=\"token punctuation\">)</span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Insertion Sort Improvement",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Insertion Sort can be improved a little bit more.",
+      "html": "<p>Insertion Sort can be improved a little bit more.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The way the code above first removes a value and then inserts it somewhere else is intuitive. It is how you would do Insertion Sort physically with a hand of cards for example. If low value cards are sorted to the left, you pick up a new unsorted card, and insert it in the correct place between the other already sorted cards.",
+      "html": "<p>The way the code above first removes a value and then inserts it somewhere else is intuitive. It is how you would do Insertion Sort physically with a hand of cards for example. If low value cards are sorted to the left, you pick up a new unsorted card, and insert it in the correct place between the other already sorted cards.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The problem with this way of programming it is that when removing a value from the array, all elements above must be shifted one index place down:",
+      "html": "<p>The problem with this way of programming it is that when removing a value from the array, all elements above must be shifted one index place down:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And when inserting the removed value into the array again, there are also many shift operations that must be done: all following elements must shift one position up to make place for the inserted value:",
+      "html": "<p>And when inserting the removed value into the array again, there are also many shift operations that must be done: all following elements must shift one position up to make place for the inserted value:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "These shifting operations can take a lot of time, especially for an array with many elements.",
+      "html": "<p>These shifting operations can take a lot of time, especially for an array with many elements.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hidden memory shifts: You will not see these shifting operations happening in the code if you are using a high-level programming language such as Python or JavaScript, but the shifting operations are still happening in the background. Such shifting operations require extra time for the computer to do, which can be a problem.",
+      "html": "<p><strong>Hidden memory shifts: </strong>You will not see these shifting operations happening in the code if you are using a high-level programming language such as Python or JavaScript, but the shifting operations are still happening in the background. Such shifting operations require extra time for the computer to do, which can be a problem.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "here",
+          "href": "https://www.w3schools.com/dsa_theory_linkedlists_memory.php#arraysInMemory",
+          "title": ""
+        }
+      ],
+      "text": "You can read more about how arrays are stored in memory here .",
+      "html": "<p>You can read more about how arrays are stored in memory <a href=\"dsa_theory_linkedlists_memory.php#arraysInMemory\">here</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "C and Java code examples above and below are the same: The issue of memory shifts happening behind the scenes is only relevant for high-level programming languages like Python or JavaScript, where arrays are dynamic, which means you can easily remove and insert elements. In lower-level programming languages like C and Java, where arrays have a fixed length, elements cannot be removed or inserted. As a result, there are no such memory shifts happening, and therefore the example codes above and below for C and Java remain the same.",
+      "html": "<p><strong>C and Java code examples above and below are the same: </strong>The issue of memory shifts happening behind the scenes is only relevant for high-level programming languages like Python or JavaScript, where arrays are dynamic, which means you can easily remove and insert elements. In lower-level programming languages like C and Java, where arrays have a fixed length, elements cannot be removed or inserted. As a result, there are no such memory shifts happening, and therefore the example codes above and below for C and Java remain the same.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Improved Solution",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can avoid most of these shift operations by only shifting the values necessary:",
+      "html": "<p>We can avoid most of these shift operations by only shifting the values necessary:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the image above, first value 7 is copied, then values 11 and 12 are shifted one place up in the array, and at last value 7 is put where value 11 was before.",
+      "html": "<p>In the image above, first value 7 is copied, then values 11 and 12 are shifted one place up in the array, and at last value 7 is put where value 11 was before.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The number of shifting operations is reduced from 12 to 2 in this case.",
+      "html": "<p>The number of shifting operations is reduced from 12 to 2 in this case.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This improvement is implemented in the example below:",
+      "html": "<p>This improvement is implemented in the example below:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_array\n=\n\n[\n64\n,\n\n34\n,\n\n25\n,\n\n12\n,\n\n22\n,\n\n11\n,\n\n90\n,\n\n5\n]\n\n\nn\n=\n\nlen\n(\nmy_array\n)\n\n\nfor\ni\nin\n\nrange\n(\n1\n,\nn\n)\n:\n\ninsert_index\n=\ni\ncurrent_value\n=\nmy_array\n[\ni\n]\n\n\nfor\nj\nin\n\nrange\n(\ni\n-\n1\n,\n\n-\n1\n,\n\n-\n1\n)\n:\n\n\nif\nmy_array\n[\nj\n]\n\n>\ncurrent_value\n:\n\nmy_array\n[\nj\n+\n1\n]\n\n=\nmy_array\n[\nj\n]\n\ninsert_index\n=\nj\n\nelse\n:\n\n\nbreak\n\nmy_array\n[\ninsert_index\n]\n\n=\ncurrent_value\n\n\nprint\n(\n\"Sorted array:\"\n,\nmy_array\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"6,9,11-13\" tabindex=\"0\"><code class=\"language-python\">my_array <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token number\">64</span><span class=\"token punctuation\">,</span> <span class=\"token number\">34</span><span class=\"token punctuation\">,</span> <span class=\"token number\">25</span><span class=\"token punctuation\">,</span> <span class=\"token number\">12</span><span class=\"token punctuation\">,</span> <span class=\"token number\">22</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">,</span> <span class=\"token number\">90</span><span class=\"token punctuation\">,</span> <span class=\"token number\">5</span><span class=\"token punctuation\">]</span>\n\nn <span class=\"token operator\">=</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>my_array<span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-for\">for</span> i <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span>n<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    insert_index <span class=\"token operator\">=</span> i\n    current_value <span class=\"token operator\">=</span> my_array<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span>\n    <span class=\"token keyword keyword-for\">for</span> j <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>i<span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> my_array<span class=\"token punctuation\">[</span>j<span class=\"token punctuation\">]</span> <span class=\"token operator\">&gt;</span> current_value<span class=\"token punctuation\">:</span>\n            my_array<span class=\"token punctuation\">[</span>j<span class=\"token operator\">+</span><span class=\"token number\">1</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> my_array<span class=\"token punctuation\">[</span>j<span class=\"token punctuation\">]</span>\n            insert_index <span class=\"token operator\">=</span> j\n        <span class=\"token keyword keyword-else\">else</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-break\">break</span>\n    my_array<span class=\"token punctuation\">[</span>insert_index<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> current_value\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Sorted array:\"</span><span class=\"token punctuation\">,</span> my_array<span class=\"token punctuation\">)</span><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"6\" data-start=\"6\" style=\"top: 110px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"9\" data-start=\"9\" style=\"top: 176px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"13\" data-range=\"11-13\" data-start=\"11\" style=\"top: 220px; width: 789px;\"> \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "What is also done in the code above is to break out of the inner loop. That is because there is no need to continue comparing values when we have already found the correct place for the current value.",
+      "html": "<p>What is also done in the code above is to break out of the inner loop. That is because there is no need to continue comparing values when we have already found the correct place for the current value.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Insertion Sort Time Complexity",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "this page",
+          "href": "https://www.w3schools.com/dsa_timecomplexity_theory.php",
+          "title": ""
+        }
+      ],
+      "text": "For a general explanation of what time complexity is, visit this page .",
+      "html": "<p class=\"fontComment\">For a general explanation of what time complexity is, visit <a href=\"dsa_timecomplexity_theory.php\">this page</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "this page",
+          "href": "https://www.w3schools.com/dsa_timecomplexity_insertionsort.php",
+          "title": ""
+        }
+      ],
+      "text": "For a more thorough and detailed explanation of Insertion Sort time complexity, visit this page .",
+      "html": "<p class=\"fontComment\">For a more thorough and detailed explanation of Insertion Sort time complexity, visit <a href=\"dsa_timecomplexity_insertionsort.php\">this page</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Insertion Sort sorts an array of n n values.",
+      "html": "<p>Insertion Sort sorts an array of <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-6-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-20\"><span class=\"mjx-mrow\" id=\"MJXc-Node-21\"><span class=\"mjx-mi\" id=\"MJXc-Node-22\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>n</mi></math></span></span> values.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On average, each value must be compared to about n 2 n 2 other values to find the correct place to insert it.",
+      "html": "<p>On average, each value must be compared to about <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mfrac&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mfrac&gt;&lt;/math&gt;' id=\"MathJax-Element-7-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-23\"><span class=\"mjx-mrow\" id=\"MJXc-Node-24\"><span class=\"mjx-mfrac\" id=\"MJXc-Node-25\"><span class=\"mjx-box MJXc-stacked\" style=\"width: 0.566em; padding: 0px 0.12em;\"><span class=\"mjx-numerator\" style=\"font-size: 70.7%; width: 0.8em; top: -1.097em;\"><span class=\"mjx-mi\" id=\"MJXc-Node-26\" style=\"\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span><span class=\"mjx-denominator\" style=\"font-size: 70.7%; width: 0.8em; bottom: -0.603em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-27\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span><span class=\"mjx-line\" style=\"border-bottom: 1.3px solid; top: -0.285em; width: 0.566em;\"></span></span><span class=\"mjx-vsize\" style=\"height: 1.202em; vertical-align: -0.426em;\"></span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mfrac><mi>n</mi><mn>2</mn></mfrac></math></span></span> other values to find the correct place to insert it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Insertion Sort must run the loop to insert a value in its correct place approximately n n times.",
+      "html": "<p>Insertion Sort must run the loop to insert a value in its correct place approximately <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-8-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-28\"><span class=\"mjx-mrow\" id=\"MJXc-Node-29\"><span class=\"mjx-mi\" id=\"MJXc-Node-30\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>n</mi></math></span></span> times.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We get time complexity for Insertion Sort:",
+      "html": "<p>We get time complexity for Insertion Sort:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "O ( n 2 \u22c5 n ) = O ( n 2 ) \u2013 \u2013\u2013\u2013\u2013\u2013 \u2013 \u2013 \u2013\u2013\u2013\u2013\u2013 \u2013 O ( n 2 \u22c5 n ) = O ( n 2 ) _ _",
+      "html": "<p><span class=\"math display\"><span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MJXc-display\" style=\"text-align: center;\"><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mfrac&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mfrac&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;munder&gt;&lt;munder&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;mo&gt;&amp;#x005F;&lt;/mo&gt;&lt;/munder&gt;&lt;mo&gt;&amp;#x005F;&lt;/mo&gt;&lt;/munder&gt;&lt;/math&gt;' id=\"MathJax-Element-9-Frame\" role=\"presentation\" style=\"font-size: 119%; text-align: center; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-31\"><span class=\"mjx-mrow\" id=\"MJXc-Node-32\"><span class=\"mjx-mi\" id=\"MJXc-Node-33\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-34\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mfrac\" id=\"MJXc-Node-35\"><span class=\"mjx-box MJXc-stacked\" style=\"width: 0.8em; padding: 0px 0.12em;\"><span class=\"mjx-numerator\" style=\"width: 0.8em; top: -1.144em;\"><span class=\"mjx-mi\" id=\"MJXc-Node-36\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span><span class=\"mjx-denominator\" style=\"width: 0.8em; bottom: -0.711em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-37\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span><span class=\"mjx-line\" style=\"border-bottom: 1.3px solid; top: -0.285em; width: 0.8em;\"></span></span><span class=\"mjx-vsize\" style=\"height: 1.854em; vertical-align: -0.711em;\"></span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-38\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-39\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-40\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span><span class=\"mjx-mo MJXc-space3\" id=\"MJXc-Node-41\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.059em; padding-bottom: 0.339em;\">=</span></span><span class=\"mjx-munderover MJXc-space3\" id=\"MJXc-Node-42\"><span class=\"mjx-itable\" style=\"margin-bottom: -0.223em;\"><span class=\"mjx-row\"><span class=\"mjx-cell\"><span class=\"mjx-op\"><span class=\"mjx-munderover\" id=\"MJXc-Node-43\"><span class=\"mjx-itable\" style=\"margin-bottom: -0.223em;\"><span class=\"mjx-row\"><span class=\"mjx-cell\"><span class=\"mjx-op\"><span class=\"mjx-mrow\" id=\"MJXc-Node-44\"><span class=\"mjx-mi\" id=\"MJXc-Node-45\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-46\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-47\"><span class=\"mjx-base\"><span class=\"mjx-mi\" id=\"MJXc-Node-48\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span><span class=\"mjx-sup\" style=\"font-size: 70.7%; vertical-align: 0.584em; padding-left: 0px; padding-right: 0.071em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-49\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-50\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span></span></span><span class=\"mjx-row\"><span class=\"mjx-under\" style=\"padding-top: 0.12em;\"><span class=\"mjx-mo\" id=\"MJXc-Node-51\" style=\"vertical-align: top;\"><span class=\"mjx-delim-h\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin: 0px -0.001em 0px 0px; padding-bottom: 0.537em;\">\u2013</span><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin: 0px 0.135em 0px -0.136em; padding-bottom: 0.537em; letter-spacing: -0.174em;\">\u2013\u2013\u2013\u2013\u2013</span><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin-top: 0px; padding-bottom: 0.537em; margin-right: -0.001em; margin-bottom: 0px;\">\u2013</span></span></span></span></span></span></span></span></span></span><span class=\"mjx-row\"><span class=\"mjx-under\" style=\"padding-top: 0.12em;\"><span class=\"mjx-mo\" id=\"MJXc-Node-52\" style=\"vertical-align: top;\"><span class=\"mjx-delim-h\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin: 0px -0.001em 0px 0px; padding-bottom: 0.537em;\">\u2013</span><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin: 0px 0.135em 0px -0.136em; padding-bottom: 0.537em; letter-spacing: -0.174em;\">\u2013\u2013\u2013\u2013\u2013</span><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin-top: 0px; padding-bottom: 0.537em; margin-right: -0.001em; margin-bottom: 0px;\">\u2013</span></span></span></span></span></span></span></span></span><span class=\"MJX_Assistive_MathML MJX_Assistive_MathML_Block\" role=\"presentation\"><math display=\"block\" xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mo>\u22c5</mo><mi>n</mi><mo stretchy=\"false\">)</mo><mo>=</mo><munder><munder><mrow><mi>O</mi><mo stretchy=\"false\">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><mo>_</mo></munder><mo>_</mo></munder></math></span></span></span></span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The time complexity for Insertion Sort can be displayed like this:",
+      "html": "<p>The time complexity for Insertion Sort can be displayed like this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Use the simulation below to see how the theoretical time complexity O ( n 2 ) O ( n 2 ) (red line) compares with the number of operations of actual Insertion Sorts.",
+      "html": "<p>Use the simulation below to see how the theoretical time complexity <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-10-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-53\"><span class=\"mjx-mrow\" id=\"MJXc-Node-54\"><span class=\"mjx-mi\" id=\"MJXc-Node-55\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-56\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-57\"><span class=\"mjx-base\"><span class=\"mjx-mi\" id=\"MJXc-Node-58\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span><span class=\"mjx-sup\" style=\"font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-59\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-60\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></math></span></span> (red line) compares with the number of operations of actual Insertion Sorts.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Set values: 300",
+      "html": "<p><label>Set values: <input max=\"480\" min=\"100\" type=\"range\"/></label> 300</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Random",
+      "html": "<p><label><input type=\"radio\" value=\"single\"/> Random</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Worst Case",
+      "html": "<p><label><input type=\"radio\" value=\"worstCase\"/> Worst Case</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Best Case",
+      "html": "<p><label><input type=\"radio\" value=\"bestCase\"/> Best Case</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "10 Random",
+      "html": "<p><label><input type=\"radio\" value=\"random30\"/> 10 Random</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Operations: 0",
+      "html": "<p>Operations: 0</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For Insertion Sort, there is a big difference between best, average and worst case scenarios. You can see that by running the different simulations above.",
+      "html": "<p>For Insertion Sort, there is a big difference between best, average and worst case scenarios. You can see that by running the different simulations above.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Next up is Quicksort. Finally we will see a faster sorting algorithm!",
+      "html": "<p>Next up is Quicksort. Finally we will see a faster sorting algorithm!</p>"
+    }
+  ]
+}

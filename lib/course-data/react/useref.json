@@ -1,0 +1,229 @@
+{
+  "title": "React useRef Hook",
+  "url": "https://www.w3schools.com/react/react_useref.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "React useRef Hook",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The useRef Hook allows you to persist values between renders.",
+      "html": "<p class=\"intro\">The <code>useRef</code> Hook allows you to persist values between renders.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It can be used to store a mutable value that does not cause a re-render when updated.",
+      "html": "<p class=\"intro\">It can be used to store a mutable value that does not cause a re-render when updated.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It can be used to access a DOM element directly.",
+      "html": "<p class=\"intro\">It can be used to access a DOM element directly.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Does Not Cause Re-renders",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we tried to count how many times our application renders using the useState Hook, we would be caught in an infinite loop since this Hook itself causes a re-render.",
+      "html": "<p>If we tried to count how many times our application renders using the <code>useState</code> Hook, we would be caught in an infinite loop since this Hook itself causes a re-render.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To avoid this, we can use the useRef Hook.",
+      "html": "<p>To avoid this, we can use the <code>useRef</code> Hook.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n,\nuseEffect\n,\nuseRef\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nfunction\n\nApp\n(\n)\n\n{\n\n\nconst\n\n[\ninputValue\n,\nsetInputValue\n]\n\n=\n\nuseState\n(\n\"\"\n)\n;\n\n\nconst\ncount\n=\n\nuseRef\n(\n0\n)\n;\n\n\n\nuseEffect\n(\n(\n)\n\n=>\n\n{\n\ncount\n.\ncurrent\n=\ncount\n.\ncurrent\n+\n\n1\n;\n\n\n}\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\ninput\n\n\ntype\n=\n\"\ntext\n\"\n\n\nvalue\n=\n{\ninputValue\n}\n\n\nonChange\n=\n{\n(\ne\n)\n\n=>\n\nsetInputValue\n(\ne\n.\ntarget\n.\nvalue\n)\n}\n\n\n/>\n\n\n<\nh1\n>\nRender Count:\n{\ncount\n.\ncurrent\n}\n</\nh1\n>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nApp\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState<span class=\"token punctuation\">,</span> useEffect<span class=\"token punctuation\">,</span> useRef <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">App</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>inputValue<span class=\"token punctuation\">,</span> setInputValue<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-const\">const</span> count <span class=\"token operator\">=</span> <span class=\"token function\">useRef</span><span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token function\">useEffect</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    count<span class=\"token punctuation\">.</span>current <span class=\"token operator\">=</span> count<span class=\"token punctuation\">.</span>current <span class=\"token operator\">+</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span>\n        <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>text<span class=\"token punctuation\">\"</span></span>\n        <span class=\"token attr-name\">value</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>inputValue<span class=\"token punctuation\">}</span></span>\n        <span class=\"token attr-name\">onChange</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">e</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token function\">setInputValue</span><span class=\"token punctuation\">(</span>e<span class=\"token punctuation\">.</span>target<span class=\"token punctuation\">.</span>value<span class=\"token punctuation\">)</span><span class=\"token punctuation\">}</span></span>\n      <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Render Count: </span><span class=\"token punctuation\">{</span>count<span class=\"token punctuation\">.</span>current<span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "useRef() only returns one item. It returns an Object called current .",
+      "html": "<p><code>useRef()</code> only returns one item. It returns an Object called <code>current</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When we initialize useRef we set the initial value: useRef(0) .",
+      "html": "<p>When we initialize <code>useRef</code> we set the initial value: <code>useRef(0)</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It's like doing this: const count = {current: 0} . We can access the count by using count.current .",
+      "html": "<p>It's like doing this: <code>const count = {current: 0}</code>. We can access the count by using <code>count.current</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run this on your computer and try typing in the input to see the application render count increase.",
+      "html": "<p>Run this on your computer and try typing in the input to see the application render count increase.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Accessing DOM Elements",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In general, we want to let React handle all DOM manipulation.",
+      "html": "<p>In general, we want to let React handle all DOM manipulation.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But there are some instances where useRef can be used without causing issues.",
+      "html": "<p>But there are some instances where <code>useRef</code> can be used without causing issues.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In React, we can add a ref attribute to an element to access it directly in the DOM.",
+      "html": "<p>In React, we can add a <code>ref</code> attribute to an element to access it directly in the DOM.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseRef\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nfunction\n\nApp\n(\n)\n\n{\n\n\nconst\ninputElement\n=\n\nuseRef\n(\n)\n;\n\n\n\nconst\n\nfocusInput\n\n=\n\n(\n)\n\n=>\n\n{\n\ninputElement\n.\ncurrent\n.\nfocus\n(\n)\n;\n\n\n}\n;\n\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\ninput\n\ntype\n=\n\"\ntext\n\"\n\nref\n=\n{\ninputElement\n}\n\n/>\n\n\n<\nbutton\n\nonClick\n=\n{\nfocusInput\n}\n>\nFocus Input\n</\nbutton\n>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nApp\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useRef <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">App</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> inputElement <span class=\"token operator\">=</span> <span class=\"token function\">useRef</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">focusInput</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    inputElement<span class=\"token punctuation\">.</span>current<span class=\"token punctuation\">.</span><span class=\"token function\">focus</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>text<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">ref</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>inputElement<span class=\"token punctuation\">}</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">onClick</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>focusInput<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Focus Input</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Tracking State Changes",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The useRef Hook can also be used to keep track of previous state values.",
+      "html": "<p>The <code>useRef</code> Hook can also be used to keep track of previous state values.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is because we are able to persist useRef values between renders.",
+      "html": "<p>This is because we are able to persist <code>useRef</code> values between renders.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n,\nuseEffect\n,\nuseRef\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nfunction\n\nApp\n(\n)\n\n{\n\n\nconst\n\n[\ninputValue\n,\nsetInputValue\n]\n\n=\n\nuseState\n(\n\"\"\n)\n;\n\n\nconst\npreviousInputValue\n=\n\nuseRef\n(\n\"\"\n)\n;\n\n\n\nuseEffect\n(\n(\n)\n\n=>\n\n{\n\npreviousInputValue\n.\ncurrent\n=\ninputValue\n;\n\n\n}\n,\n\n[\ninputValue\n]\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\ninput\n\n\ntype\n=\n\"\ntext\n\"\n\n\nvalue\n=\n{\ninputValue\n}\n\n\nonChange\n=\n{\n(\ne\n)\n\n=>\n\nsetInputValue\n(\ne\n.\ntarget\n.\nvalue\n)\n}\n\n\n/>\n\n\n<\nh2\n>\nCurrent Value:\n{\ninputValue\n}\n</\nh2\n>\n\n\n<\nh2\n>\nPrevious Value:\n{\npreviousInputValue\n.\ncurrent\n}\n</\nh2\n>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nApp\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState<span class=\"token punctuation\">,</span> useEffect<span class=\"token punctuation\">,</span> useRef <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">App</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>inputValue<span class=\"token punctuation\">,</span> setInputValue<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-const\">const</span> previousInputValue <span class=\"token operator\">=</span> <span class=\"token function\">useRef</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token function\">useEffect</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    previousInputValue<span class=\"token punctuation\">.</span>current <span class=\"token operator\">=</span> inputValue<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span>inputValue<span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span>\n        <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>text<span class=\"token punctuation\">\"</span></span>\n        <span class=\"token attr-name\">value</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>inputValue<span class=\"token punctuation\">}</span></span>\n        <span class=\"token attr-name\">onChange</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">e</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token function\">setInputValue</span><span class=\"token punctuation\">(</span>e<span class=\"token punctuation\">.</span>target<span class=\"token punctuation\">.</span>value<span class=\"token punctuation\">)</span><span class=\"token punctuation\">}</span></span>\n      <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Current Value: </span><span class=\"token punctuation\">{</span>inputValue<span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Previous Value: </span><span class=\"token punctuation\">{</span>previousInputValue<span class=\"token punctuation\">.</span>current<span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This time we use a combination of useState , useEffect , and useRef to keep track of the previous state.",
+      "html": "<p>This time we use a combination of <code>useState</code>, <code>useEffect</code>, and <code>useRef</code> to keep track of the previous state.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the useEffect , we are updating the useRef current value each time the inputValue is updated by entering text into the input field.",
+      "html": "<p>In the <code>useEffect</code>, we are updating the <code>useRef</code> current value each time the <code>inputValue</code> is updated by entering text into the input field.</p>"
+    }
+  ]
+}

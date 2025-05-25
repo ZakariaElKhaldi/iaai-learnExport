@@ -1,0 +1,294 @@
+{
+  "title": "Django Add Test View",
+  "url": "https://www.w3schools.com/django/django_test_view.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Django Add Test View",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test View",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When testing different aspects of Django, it can be a good idea to have somewhere to test code without destroying the main project.",
+      "html": "<p>When testing different aspects of Django, it can be a good idea to have somewhere to test\ncode without destroying the main project.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is optional off course, but if you like to follow all steps in this tutorial, you should add a test view that is exactly like the one we create below.",
+      "html": "<p>This is optional off course, but if you like to follow all steps in this tutorial,\nyou should add a test view that is exactly like the one we create below.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then you can follow the examples and try them out on your own computer.",
+      "html": "<p>Then you can follow the examples and try them out on your own computer.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Add View",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Start by adding a view called \"testing\" in the views.py file:",
+      "html": "<p>Start by adding a view called \"testing\" in the\n<code>views.py</code> file:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": true
+      },
+      "code": "from\ndjango\n.\nhttp\nimport\nHttpResponse\n\nfrom\ndjango\n.\ntemplate\nimport\nloader\n\nfrom\n\n.\nmodels\nimport\nMember\n\ndef\nmembers\n(\nrequest\n)\n:\n\nmymembers\n=\nMember\n.\nobjects\n.\nall\n(\n)\n.\nvalues\n(\n)\n\ntemplate\n=\nloader\n.\nget_template\n(\n'all_members.html'\n)\n\ncontext\n=\n\n{\n\n\n'mymembers'\n:\nmymembers\n,\n\n\n}\n\n\nreturn\n\nHttpResponse\n(\ntemplate\n.\nrender\n(\ncontext\n,\nrequest\n)\n)\n\n\ndef\ndetails\n(\nrequest\n,\nid\n)\n:\n\nmymember\n=\nMember\n.\nobjects\n.\nget\n(\nid\n=\nid\n)\n\ntemplate\n=\nloader\n.\nget_template\n(\n'details.html'\n)\n\ncontext\n=\n\n{\n\n\n'mymember'\n:\nmymember\n,\n\n\n}\n\n\nreturn\n\nHttpResponse\n(\ntemplate\n.\nrender\n(\ncontext\n,\nrequest\n)\n)\n\n\ndef\nmain\n(\nrequest\n)\n:\n\ntemplate\n=\nloader\n.\nget_template\n(\n'main.html'\n)\n\n\nreturn\n\nHttpResponse\n(\ntemplate\n.\nrender\n(\n)\n)\n\n\ndef\ntesting\n(\nrequest\n)\n:\n\ntemplate\n=\nloader\n.\nget_template\n(\n'template.html'\n)\n\ncontext\n=\n\n{\n\n\n'fruits'\n:\n\n[\n'Apple'\n,\n\n'Banana'\n,\n\n'Cherry'\n]\n,\n\n\n}\n\n\nreturn\n\nHttpResponse\n(\ntemplate\n.\nrender\n(\ncontext\n,\nrequest\n)\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-jsx\" data-line=\"25,26,27,28,29,30\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-from\">from</span> django<span class=\"token punctuation\">.</span>http <span class=\"token keyword keyword-import\">import</span> HttpResponse\n<span class=\"token keyword keyword-from\">from</span> django<span class=\"token punctuation\">.</span>template <span class=\"token keyword keyword-import\">import</span> loader\n<span class=\"token keyword keyword-from\">from</span> <span class=\"token punctuation\">.</span>models <span class=\"token keyword keyword-import\">import</span> Member\n\ndef <span class=\"token function\">members</span><span class=\"token punctuation\">(</span>request<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n  mymembers <span class=\"token operator\">=</span> Member<span class=\"token punctuation\">.</span>objects<span class=\"token punctuation\">.</span><span class=\"token function\">all</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">.</span><span class=\"token function\">values</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\n  template <span class=\"token operator\">=</span> loader<span class=\"token punctuation\">.</span><span class=\"token function\">get_template</span><span class=\"token punctuation\">(</span><span class=\"token string\">'all_members.html'</span><span class=\"token punctuation\">)</span>\n  context <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token string-property property\">'mymembers'</span><span class=\"token operator\">:</span> mymembers<span class=\"token punctuation\">,</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token function\">HttpResponse</span><span class=\"token punctuation\">(</span>template<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span>context<span class=\"token punctuation\">,</span> request<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n  \ndef <span class=\"token function\">details</span><span class=\"token punctuation\">(</span>request<span class=\"token punctuation\">,</span> id<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n  mymember <span class=\"token operator\">=</span> Member<span class=\"token punctuation\">.</span>objects<span class=\"token punctuation\">.</span><span class=\"token function\">get</span><span class=\"token punctuation\">(</span>id<span class=\"token operator\">=</span>id<span class=\"token punctuation\">)</span>\n  template <span class=\"token operator\">=</span> loader<span class=\"token punctuation\">.</span><span class=\"token function\">get_template</span><span class=\"token punctuation\">(</span><span class=\"token string\">'details.html'</span><span class=\"token punctuation\">)</span>\n  context <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token string-property property\">'mymember'</span><span class=\"token operator\">:</span> mymember<span class=\"token punctuation\">,</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token function\">HttpResponse</span><span class=\"token punctuation\">(</span>template<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span>context<span class=\"token punctuation\">,</span> request<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n  \ndef <span class=\"token function\">main</span><span class=\"token punctuation\">(</span>request<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n  template <span class=\"token operator\">=</span> loader<span class=\"token punctuation\">.</span><span class=\"token function\">get_template</span><span class=\"token punctuation\">(</span><span class=\"token string\">'main.html'</span><span class=\"token punctuation\">)</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token function\">HttpResponse</span><span class=\"token punctuation\">(</span>template<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n\ndef <span class=\"token function\">testing</span><span class=\"token punctuation\">(</span>request<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n  template <span class=\"token operator\">=</span> loader<span class=\"token punctuation\">.</span><span class=\"token function\">get_template</span><span class=\"token punctuation\">(</span><span class=\"token string\">'template.html'</span><span class=\"token punctuation\">)</span>\n  context <span class=\"token operator\">=</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token string-property property\">'fruits'</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'Apple'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'Banana'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'Cherry'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>   \n  <span class=\"token punctuation\">}</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token function\">HttpResponse</span><span class=\"token punctuation\">(</span>template<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span>context<span class=\"token punctuation\">,</span> request<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"25\" data-start=\"25\" style=\"top: 528px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"26\" data-start=\"26\" style=\"top: 550px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"27\" data-start=\"27\" style=\"top: 572px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"28\" data-start=\"28\" style=\"top: 594px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"29\" data-start=\"29\" style=\"top: 616px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"30\" data-start=\"30\" style=\"top: 638px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "URLs",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We have to make sure that incoming urls to /testing/ will be redirected to the testing view.",
+      "html": "<p>We have to make sure that incoming urls to /testing/ will be redirected to \nthe testing view.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is done in the urls.py file in the members folder:",
+      "html": "<p>This is done in the <code>urls.py</code> file in the\n<code>members</code> folder:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": true
+      },
+      "code": "from\ndjango\n.\nurls\nimport\npath\n\nfrom\n\n.\n\nimport\nviews\n\nurlpatterns\n=\n\n[\n\n\npath\n(\n''\n,\nviews\n.\nmain\n,\nname\n=\n'main'\n)\n,\n\n\npath\n(\n'members/'\n,\nviews\n.\nmembers\n,\nname\n=\n'members'\n)\n,\n\n\npath\n(\n'members/details/<int:id>'\n,\nviews\n.\ndetails\n,\nname\n=\n'details'\n)\n,\n\n\npath\n(\n'testing/'\n,\nviews\n.\ntesting\n,\nname\n=\n'testing'\n)\n,\n\n\n]",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-jsx\" data-line=\"8\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-from\">from</span> django<span class=\"token punctuation\">.</span>urls <span class=\"token keyword keyword-import\">import</span> path\n<span class=\"token keyword keyword-from\">from</span> <span class=\"token punctuation\">.</span> <span class=\"token keyword keyword-import\">import</span> views\n\nurlpatterns <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span>\n    <span class=\"token function\">path</span><span class=\"token punctuation\">(</span><span class=\"token string\">''</span><span class=\"token punctuation\">,</span> views<span class=\"token punctuation\">.</span>main<span class=\"token punctuation\">,</span> name<span class=\"token operator\">=</span><span class=\"token string\">'main'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n    <span class=\"token function\">path</span><span class=\"token punctuation\">(</span><span class=\"token string\">'members/'</span><span class=\"token punctuation\">,</span> views<span class=\"token punctuation\">.</span>members<span class=\"token punctuation\">,</span> name<span class=\"token operator\">=</span><span class=\"token string\">'members'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n    <span class=\"token function\">path</span><span class=\"token punctuation\">(</span><span class=\"token string\">'members/details/&lt;int:id&gt;'</span><span class=\"token punctuation\">,</span> views<span class=\"token punctuation\">.</span>details<span class=\"token punctuation\">,</span> name<span class=\"token operator\">=</span><span class=\"token string\">'details'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n    <span class=\"token function\">path</span><span class=\"token punctuation\">(</span><span class=\"token string\">'testing/'</span><span class=\"token punctuation\">,</span> views<span class=\"token punctuation\">.</span>testing<span class=\"token punctuation\">,</span> name<span class=\"token operator\">=</span><span class=\"token string\">'testing'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>    \n<span class=\"token punctuation\">]</span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"8\" data-start=\"8\" style=\"top: 154px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Template",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We also need a template where we can play around with HTML and Django code.",
+      "html": "<p>We also need a template where we can play around with HTML and Django code.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You might noticed that there was a reference to a template in the testing view?",
+      "html": "<p>You might noticed that there was a reference to a template in the testing view?</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Create a template called \"template.html\" in the templates folder:",
+      "html": "<p>Create a template called \"template.html\" in the templates folder:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_tennis_club\n\nmanage.py\n\nmy_tennis_club/\n\nmembers/\n\ntemplates/\n\n404.html\n\nall_members.html\n\ndetails.html\n\nmain.html\n\nmaster.html\n\nmyfirst.html\n\ntemplate.html",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\nmy_tennis_club<br/>\n\u00a0\u00a0\u00a0\u00a0manage.py<br/>\n\u00a0\u00a0\u00a0\u00a0my_tennis_club/<br/>\n\u00a0\u00a0\u00a0\u00a0members/<br/>\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0templates/<br/>\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0404.html<br/>\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0all_members.html<br/>\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0details.html<br/>\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0main.html<br/>\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0master.html<br/>\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0myfirst.html<br/>\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0template.html<br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Open the template.html file and insert the following:",
+      "html": "<p>Open the template.html file and insert the following:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "html",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-django"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<!\nDOCTYPE\n\nhtml\n>\n\n\n<\nhtml\n>\n\n\n<\nbody\n>\n\n\n\n{%\n\nfor\n\nx\n\nin\n\nfruits\n\n%}\n\n\n<\nh1\n>\n{{\n\nx\n\n}}\n</\nh1\n>\n\n\n{%\n\nendfor\n\n%}\n\n\n\n<\np\n>\nIn views.py you can see what the fruits variable looks like.\n</\np\n>\n\n\n\n</\nbody\n>\n\n\n</\nhtml\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-django\" tabindex=\"0\"><code class=\"language-django\"><span class=\"token doctype\"><span class=\"token punctuation\">&lt;!</span><span class=\"token doctype-tag\">DOCTYPE</span> <span class=\"token name\">html</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>html</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>body</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token django language-django\"><span class=\"token delimiter punctuation\">{%</span> <span class=\"token tag keyword\">for</span> <span class=\"token variable\">x</span> <span class=\"token keyword keyword-in\">in</span> <span class=\"token variable\">fruits</span> <span class=\"token delimiter punctuation\">%}</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token django language-django\"><span class=\"token delimiter punctuation\">{{</span> <span class=\"token variable\">x</span> <span class=\"token delimiter punctuation\">}}</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token django language-django\"><span class=\"token delimiter punctuation\">{%</span> <span class=\"token tag keyword\">endfor</span> <span class=\"token delimiter punctuation\">%}</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>In views.py you can see what the fruits variable looks like.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>body</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>html</span><span class=\"token punctuation\">&gt;</span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-django"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-django"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If the server is not running, navigate to the /my_tennis_club folder and execute this command in the command prompt:",
+      "html": "<p>If the server is not running, navigate to the <code>/my_tennis_club</code> folder and execute this command in the command prompt:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "python manage.py runserver",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\npython manage.py runserver\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "127.0.0.1:8000/testing/",
+          "href": "http://127.0.0.1:8000/testing/",
+          "title": ""
+        }
+      ],
+      "text": "In the browser window, type 127.0.0.1:8000/testing/ in the address bar.",
+      "html": "<p>In the browser window, type <code><a href=\"http://127.0.0.1:8000/testing/\" target=\"_blank\">127.0.0.1:8000/testing/</a></code> in the address bar.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The result should be like this:",
+      "html": "<p>The result should be like this:</p>"
+    }
+  ]
+}

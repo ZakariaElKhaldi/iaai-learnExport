@@ -1,0 +1,729 @@
+{
+  "title": "DSA Radix Sort",
+  "url": "https://www.w3schools.com/dsa/dsa_algo_radixsort.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Radix Sort",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Radix Sort",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Radix Sort algorithm sorts an array by individual digits, starting with the least significant digit (the rightmost one).",
+      "html": "<p>The Radix Sort algorithm sorts an array by individual digits, starting with the least significant digit (the rightmost one).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Click the button to do Radix Sort, one step (digit) at a time.",
+      "html": "<p>Click the button to do Radix Sort, one step (digit) at a time.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The radix (or base) is the number of unique digits in a number system. In the decimal system we normally use, there are 10 different digits from 0 till 9.",
+      "html": "<p>The radix (or base) is the number of unique digits in a number system. In the decimal system we normally use, there are 10 different digits from 0 till 9.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Radix Sort uses the radix so that decimal values are put into 10 different buckets (or containers) corresponding to the digit that is in focus, then put back into the array before moving on to the next digit.",
+      "html": "<p>Radix Sort uses the radix so that decimal values are put into 10 different buckets (or containers) corresponding to the digit that is in focus, then put back into the array before moving on to the next digit.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Radix Sort is a non comparative algorithm that only works with non negative integers.",
+      "html": "<p>Radix Sort is a non comparative algorithm that only works with non negative integers.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Radix Sort algorithm can be described like this:",
+      "html": "<p>The Radix Sort algorithm can be described like this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How it works:",
+      "html": "<p><strong>How it works:</strong></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Stable Sorting",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Radix Sort must sort the elements in a stable way for the result to be sorted correctly.",
+      "html": "<p>Radix Sort must sort the elements in a stable way for the result to be sorted correctly.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A stable sorting algorithm is an algorithm that keeps the order of elements with the same value before and after the sorting. Let's say we have two elements \"K\" and \"L\", where \"K\" comes before \"L\", and they both have value \"3\". A sorting algorithm is considered stable if element \"K\" still comes before \"L\" after the array is sorted.",
+      "html": "<p>A stable sorting algorithm is an algorithm that keeps the order of elements with the same value before and after the sorting. Let's say we have two elements \"K\" and \"L\", where \"K\" comes before \"L\", and they both have value \"3\". A sorting algorithm is considered stable if element \"K\" still comes before \"L\" after the array is sorted.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It makes little sense to talk about stable sorting algorithms for the previous algorithms we have looked at individually, because the result would be same if they are stable or not. But it is important for Radix Sort that the the sorting is done in a stable way because the elements are sorted by just one digit at a time.",
+      "html": "<p>It makes little sense to talk about stable sorting algorithms for the previous algorithms we have looked at individually, because the result would be same if they are stable or not. But it is important for Radix Sort that the the sorting is done in a stable way because the elements are sorted by just one digit at a time.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "So after sorting the elements on the least significant digit and moving to the next digit, it is important to not destroy the sorting work that has already been done on the previous digit position, and that is why we need to take care that Radix Sort does the sorting on each digit position in a stable way.",
+      "html": "<p>So after sorting the elements on the least significant digit and moving to the next digit, it is important to not destroy the sorting work that has already been done on the previous digit position, and that is why we need to take care that Radix Sort does the sorting on each digit position in a stable way.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the simulation below it is revealed how the underlying sorting into buckets is done. And to get a better understanding of how stable sorting works, you can also choose to sort in an unstable way, that will lead to an incorrect result. The sorting is made unstable by simply putting elements into buckets from the end of the array instead of from the start of the array.",
+      "html": "<p>In the simulation below it is revealed how the underlying sorting into buckets is done. And to get a better understanding of how stable sorting works, you can also choose to sort in an unstable way, that will lead to an incorrect result. The sorting is made unstable by simply putting elements into buckets from the end of the array instead of from the start of the array.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Speed:",
+      "html": "<p>Speed: <input max=\"300\" min=\"50\" type=\"range\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Stable sort? Yes",
+      "html": "<p>Stable sort? <label class=\"dsa_label\"><input type=\"checkbox\"/> Yes</label></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's try to do the sorting manually, just to get an even better understanding of how Radix Sort works before actually implementing it in a programming language.",
+      "html": "<p>Let's try to do the sorting manually, just to get an even better understanding of how Radix Sort works before actually implementing it in a programming language.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 1: We start with an unsorted array, and an empty array to fit values with corresponding radices 0 till 9.",
+      "html": "<p><strong>Step 1:</strong> We start with an unsorted array, and an empty array to fit values with corresponding radices 0 till 9.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\">myArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token number\">33</span><span class=\"token punctuation\">,</span> <span class=\"token number\">45</span><span class=\"token punctuation\">,</span> <span class=\"token number\">40</span><span class=\"token punctuation\">,</span> <span class=\"token number\">25</span><span class=\"token punctuation\">,</span> <span class=\"token number\">17</span><span class=\"token punctuation\">,</span> <span class=\"token number\">24</span><span class=\"token punctuation\">]</span></code><br/>\n<code class=\"w3-white language-python\">radixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> <span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 2: We start sorting by focusing on the least significant digit.",
+      "html": "<p><strong>Step 2:</strong> We start sorting by focusing on the least significant digit.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\">myArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token number\">3<mark class=\"dsa_mark\">3</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">4<mark class=\"dsa_mark\">5</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">4<mark class=\"dsa_mark\">0</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">2<mark class=\"dsa_mark\">5</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">1<mark class=\"dsa_mark\">7</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">2<mark class=\"dsa_mark\">4</mark></span><span class=\"token punctuation\">]</span></code><br/>\n<code class=\"w3-white language-python\">radixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> <span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 3: Now we move the elements into the correct positions in the radix array according to the digit in focus. Elements are taken from the start of myArray and pushed into the correct position in the radixArray.",
+      "html": "<p><strong>Step 3:</strong> Now we move the elements into the correct positions in the radix array according to the digit in focus. Elements are taken from the start of myArray and pushed into the correct position in the radixArray.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\">myArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">]</span></code><br/>\n<code class=\"w3-white language-python\">radixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">[</span><span class=\"token number\">4<mark class=\"dsa_mark\">0</mark></span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token number\">3<mark class=\"dsa_mark\">3</mark></span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token number\">2<mark class=\"dsa_mark\">4</mark></span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token number\">4<mark class=\"dsa_mark\">5</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">2<mark class=\"dsa_mark\">5</mark></span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token number\">1<mark class=\"dsa_mark\">7</mark></span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> <span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 4: We move the elements back into the initial array, and the sorting is now done for the least significant digit. Elements are taken from the end radixArray, and put into the start of myArray.",
+      "html": "<p><strong>Step 4:</strong> We move the elements back into the initial array, and the sorting is now done for the least significant digit. Elements are taken from the end radixArray, and put into the start of myArray.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\">myArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token number\">4<mark class=\"dsa_mark\">0</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">3<mark class=\"dsa_mark\">3</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">2<mark class=\"dsa_mark\">4</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">4<mark class=\"dsa_mark\">5</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">2<mark class=\"dsa_mark\">5</mark></span><span class=\"token punctuation\">,</span> <span class=\"token number\">1<mark class=\"dsa_mark\">7</mark></span> <span class=\"token punctuation\">]</span></code><br/>\n<code class=\"w3-white language-python\">radixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> <span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 5: We move focus to the next digit. Notice that values 45 and 25 are still in the same order relative to each other as they were to start with, because we sort in a stable way.",
+      "html": "<p><strong>Step 5:</strong> We move focus to the next digit. Notice that values 45 and 25 are still in the same order relative to each other as they were to start with, because we sort in a stable way.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\">myArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token number\"><mark class=\"dsa_mark\">4</mark>0</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">3</mark>3</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">2</mark>4</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">4</mark>5</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">2</mark>5</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">1</mark>7</span> <span class=\"token punctuation\">]</span></code><br/>\n<code class=\"w3-white language-python\">radixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> <span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 6: We move elements into the radix array according to the focused digit.",
+      "html": "<p><strong>Step 6:</strong> We move elements into the radix array according to the focused digit.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\">myArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">]</span></code><br/>\n<code class=\"w3-white language-python\">radixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token number\"><mark class=\"dsa_mark\">1</mark>7</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token number\"><mark class=\"dsa_mark\">2</mark>4</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">2</mark>5</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token number\"><mark class=\"dsa_mark\">3</mark>3</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token number\"><mark class=\"dsa_mark\">4</mark>0</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">4</mark>5</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> <span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 7: We move elements back into the start of myArray, from the back of radixArray.",
+      "html": "<p><strong>Step 7:</strong> We move elements back into the start of myArray, from the back of radixArray.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"w3-white language-python\">myArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token number\"><mark class=\"dsa_mark\">1</mark>7</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">2</mark>4</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">2</mark>5</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">3</mark>3</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">4</mark>0</span><span class=\"token punctuation\">,</span> <span class=\"token number\"><mark class=\"dsa_mark\">4</mark>5</span> <span class=\"token punctuation\">]</span></code><br/>\n<code class=\"w3-white language-python\">radixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> <span class=\"token punctuation\">]</span></code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The sorting is finished!",
+      "html": "<p>The sorting is finished!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the simulation below to see the steps above animated:",
+      "html": "<p>Run the simulation below to see the steps above animated:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through: What Happened?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We see that values are moved from the array and placed in the radix array according to the current radix in focus. And then the values are moved back into the array we want to sort.",
+      "html": "<p>We see that values are moved from the array and placed in the radix array according to the current radix in focus. And then the values are moved back into the array we want to sort.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This moving of values from the array we want to sort and back again must be done as many times as the maximum number of digits in a value. So for example if 437 is the highest number in the array that needs to be sorted, we know we must sort three times, once for each digit.",
+      "html": "<p>This moving of values from the array we want to sort and back again must be done as many times as the maximum number of digits in a value. So for example if 437 is the highest number in the array that needs to be sorted, we know we must sort three times, once for each digit.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We also see that the radix array needs to be two-dimensional so that more than one value on a specific radix, or index.",
+      "html": "<p>We also see that the radix array needs to be two-dimensional so that more than one value on a specific radix, or index.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And, as mentioned earlier, we must move values between the two arrays in a way that keeps the order of values with the same radix in focus, so the the sorting is stable.",
+      "html": "<p>And, as mentioned earlier, we must move values between the two arrays in a way that keeps the order of values with the same radix in focus, so the the sorting is stable.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Radix Sort Implementation",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To implement the Radix Sort algorithm we need:",
+      "html": "<p>To implement the Radix Sort algorithm we need:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The resulting code looks like this:",
+      "html": "<p>The resulting code looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "line-numbers",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "myArray\n=\n\n[\n170\n,\n\n45\n,\n\n75\n,\n\n90\n,\n\n802\n,\n\n24\n,\n\n2\n,\n\n66\n]\n\n\nprint\n(\n\"Original array:\"\n,\nmyArray\n)\n\nradixArray\n=\n\n[\n[\n]\n,\n\n[\n]\n,\n\n[\n]\n,\n\n[\n]\n,\n\n[\n]\n,\n\n[\n]\n,\n\n[\n]\n,\n\n[\n]\n,\n\n[\n]\n,\n\n[\n]\n]\n\nmaxVal\n=\n\nmax\n(\nmyArray\n)\n\nexp\n=\n\n1\n\n\n\nwhile\nmaxVal\n//\nexp\n>\n\n0\n:\n\n\n\nwhile\n\nlen\n(\nmyArray\n)\n\n>\n\n0\n:\n\nval\n=\nmyArray\n.\npop\n(\n)\n\nradixIndex\n=\n\n(\nval\n//\nexp\n)\n\n%\n\n10\n\nradixArray\n[\nradixIndex\n]\n.\nappend\n(\nval\n)\n\n\n\nfor\nbucket\nin\nradixArray\n:\n\n\nwhile\n\nlen\n(\nbucket\n)\n\n>\n\n0\n:\n\nval\n=\nbucket\n.\npop\n(\n)\n\nmyArray\n.\nappend\n(\nval\n)\n\n\nexp\n*=\n\n10\n\n\n\nprint\n(\n\"Sorted array:\"\n,\nmyArray\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate line-numbers w3-white language-python\" data-line=\"7,11\" tabindex=\"0\"><code class=\"language-python\">myArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token number\">170</span><span class=\"token punctuation\">,</span> <span class=\"token number\">45</span><span class=\"token punctuation\">,</span> <span class=\"token number\">75</span><span class=\"token punctuation\">,</span> <span class=\"token number\">90</span><span class=\"token punctuation\">,</span> <span class=\"token number\">802</span><span class=\"token punctuation\">,</span> <span class=\"token number\">24</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">66</span><span class=\"token punctuation\">]</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Original array:\"</span><span class=\"token punctuation\">,</span> myArray<span class=\"token punctuation\">)</span>\nradixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">]</span>\nmaxVal <span class=\"token operator\">=</span> <span class=\"token builtin\">max</span><span class=\"token punctuation\">(</span>myArray<span class=\"token punctuation\">)</span>\nexp <span class=\"token operator\">=</span> <span class=\"token number\">1</span>\n\n<span class=\"token keyword keyword-while\">while</span> maxVal <span class=\"token operator\">//</span> exp <span class=\"token operator\">&gt;</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n\n    <span class=\"token keyword keyword-while\">while</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>myArray<span class=\"token punctuation\">)</span> <span class=\"token operator\">&gt;</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n        val <span class=\"token operator\">=</span> myArray<span class=\"token punctuation\">.</span>pop<span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\n        radixIndex <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span>val <span class=\"token operator\">//</span> exp<span class=\"token punctuation\">)</span> <span class=\"token operator\">%</span> <span class=\"token number\">10</span>\n        radixArray<span class=\"token punctuation\">[</span>radixIndex<span class=\"token punctuation\">]</span><span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span>val<span class=\"token punctuation\">)</span>\n\n    <span class=\"token keyword keyword-for\">for</span> bucket <span class=\"token keyword keyword-in\">in</span> radixArray<span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-while\">while</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>bucket<span class=\"token punctuation\">)</span> <span class=\"token operator\">&gt;</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n            val <span class=\"token operator\">=</span> bucket<span class=\"token punctuation\">.</span>pop<span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\n            myArray<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span>val<span class=\"token punctuation\">)</span>\n\n    exp <span class=\"token operator\">*=</span> <span class=\"token number\">10</span>\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Sorted array:\"</span><span class=\"token punctuation\">,</span> myArray<span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"7\" style=\"top: 133px; height: 22px; width: 789px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"11\" style=\"top: 221px; height: 22px; width: 789px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "line-numbers",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On line 7 , we use floor division (\"//\") to divide the maximum value 802 by 1 the first time the while loop runs, the next time it is divided by 10, and the last time it is divided by 100. When using floor division \"//\", any number beyond the decimal point are disregarded, and an integer is returned.",
+      "html": "<p><strong>On line 7</strong>, we use floor division (\"//\") to divide the maximum value 802 by 1 the first time the while loop runs, the next time it is divided by 10, and the last time it is divided by 100. When using floor division \"//\", any number beyond the decimal point are disregarded, and an integer is returned.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On line 11 , it is decided where to put a value in the radixArray based on its radix, or digit in focus. For example, the second time the outer while loop runs exp will be 10. Value 170 divided by 10 will be 17. The \"%10\" operation divides by 10 and returns what is left. In this case 17 is divided by 10 one time, and 7 is left. So value 170 is placed in index 7 in the radixArray.",
+      "html": "<p><strong>On line 11</strong>, it is decided where to put a value in the radixArray based on its radix, or digit in focus. For example, the second time the outer while loop runs exp will be 10. Value 170 divided by 10 will be 17. The \"%10\" operation divides by 10 and returns what is left. In this case 17 is divided by 10 one time, and 7 is left. So value 170 is placed in index 7 in the radixArray.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Radix Sort Using Other Sorting Algorithms",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Radix Sort can actually be implemented together with any other sorting algorithm as long as it is stable. This means that when it comes down to sorting on a specific digit, any stable sorting algorithm will work, such as counting sort or bubble sort.",
+      "html": "<p>Radix Sort can actually be implemented together with any other sorting algorithm as long as it is stable. This means that when it comes down to sorting on a specific digit, any stable sorting algorithm will work, such as counting sort or bubble sort.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is an implementation of Radix Sort that uses Bubble Sort to sort on the individual digits:",
+      "html": "<p>This is an implementation of Radix Sort that uses Bubble Sort to sort on the individual digits:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def\n\nbubbleSort\n(\narr\n)\n:\n\nn\n=\n\nlen\n(\narr\n)\n\n\nfor\ni\nin\n\nrange\n(\nn\n)\n:\n\n\nfor\nj\nin\n\nrange\n(\n0\n,\nn\n-\ni\n-\n\n1\n)\n:\n\n\nif\narr\n[\nj\n]\n\n>\narr\n[\nj\n+\n\n1\n]\n:\n\narr\n[\nj\n]\n,\narr\n[\nj\n+\n\n1\n]\n\n=\narr\n[\nj\n+\n\n1\n]\n,\narr\n[\nj\n]\n\n\n\ndef\n\nradixSortWithBubbleSort\n(\narr\n)\n:\n\nmax_val\n=\n\nmax\n(\narr\n)\n\nexp\n=\n\n1\n\n\n\nwhile\nmax_val\n//\nexp\n>\n\n0\n:\n\nradixArray\n=\n\n[\n[\n]\n,\n[\n]\n,\n[\n]\n,\n[\n]\n,\n[\n]\n,\n[\n]\n,\n[\n]\n,\n[\n]\n,\n[\n]\n,\n[\n]\n]\n\n\n\nfor\nnum\nin\narr\n:\n\nradixIndex\n=\n\n(\nnum\n//\nexp\n)\n\n%\n\n10\n\nradixArray\n[\nradixIndex\n]\n.\nappend\n(\nnum\n)\n\n\n\nfor\nbucket\nin\nradixArray\n:\n\nbubbleSort\n(\nbucket\n)\n\n\ni\n=\n\n0\n\n\nfor\nbucket\nin\nradixArray\n:\n\n\nfor\nnum\nin\nbucket\n:\n\narr\n[\ni\n]\n\n=\nnum\ni\n+=\n\n1\n\n\nexp\n*=\n\n10\n\n\nmyArray\n=\n\n[\n170\n,\n\n45\n,\n\n75\n,\n\n90\n,\n\n802\n,\n\n24\n,\n\n2\n,\n\n66\n]\n\n\nprint\n(\n\"Original array:\"\n,\nmyArray\n)\n\nradixSortWithBubbleSort\n(\nmyArray\n)\n\n\nprint\n(\n\"Sorted array:\"\n,\nmyArray\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"1-6,20\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">bubbleSort</span><span class=\"token punctuation\">(</span>arr<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    n <span class=\"token operator\">=</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>arr<span class=\"token punctuation\">)</span>\n    <span class=\"token keyword keyword-for\">for</span> i <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>n<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-for\">for</span> j <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> n <span class=\"token operator\">-</span> i <span class=\"token operator\">-</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-if\">if</span> arr<span class=\"token punctuation\">[</span>j<span class=\"token punctuation\">]</span> <span class=\"token operator\">&gt;</span> arr<span class=\"token punctuation\">[</span>j <span class=\"token operator\">+</span> <span class=\"token number\">1</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n                arr<span class=\"token punctuation\">[</span>j<span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> arr<span class=\"token punctuation\">[</span>j <span class=\"token operator\">+</span> <span class=\"token number\">1</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> arr<span class=\"token punctuation\">[</span>j <span class=\"token operator\">+</span> <span class=\"token number\">1</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> arr<span class=\"token punctuation\">[</span>j<span class=\"token punctuation\">]</span>\n                \n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">radixSortWithBubbleSort</span><span class=\"token punctuation\">(</span>arr<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    max_val <span class=\"token operator\">=</span> <span class=\"token builtin\">max</span><span class=\"token punctuation\">(</span>arr<span class=\"token punctuation\">)</span>\n    exp <span class=\"token operator\">=</span> <span class=\"token number\">1</span>\n    \n    <span class=\"token keyword keyword-while\">while</span> max_val <span class=\"token operator\">//</span> exp <span class=\"token operator\">&gt;</span> <span class=\"token number\">0</span><span class=\"token punctuation\">:</span>\n        radixArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">]</span>\n        \n        <span class=\"token keyword keyword-for\">for</span> num <span class=\"token keyword keyword-in\">in</span> arr<span class=\"token punctuation\">:</span>\n            radixIndex <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span>num <span class=\"token operator\">//</span> exp<span class=\"token punctuation\">)</span> <span class=\"token operator\">%</span> <span class=\"token number\">10</span>\n            radixArray<span class=\"token punctuation\">[</span>radixIndex<span class=\"token punctuation\">]</span><span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span>num<span class=\"token punctuation\">)</span>\n        \n        <span class=\"token keyword keyword-for\">for</span> bucket <span class=\"token keyword keyword-in\">in</span> radixArray<span class=\"token punctuation\">:</span>\n            bubbleSort<span class=\"token punctuation\">(</span>bucket<span class=\"token punctuation\">)</span>\n        \n        i <span class=\"token operator\">=</span> <span class=\"token number\">0</span>\n        <span class=\"token keyword keyword-for\">for</span> bucket <span class=\"token keyword keyword-in\">in</span> radixArray<span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-for\">for</span> num <span class=\"token keyword keyword-in\">in</span> bucket<span class=\"token punctuation\">:</span>\n                arr<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> num\n                i <span class=\"token operator\">+=</span> <span class=\"token number\">1</span>\n        \n        exp <span class=\"token operator\">*=</span> <span class=\"token number\">10</span>\n\nmyArray <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token number\">170</span><span class=\"token punctuation\">,</span> <span class=\"token number\">45</span><span class=\"token punctuation\">,</span> <span class=\"token number\">75</span><span class=\"token punctuation\">,</span> <span class=\"token number\">90</span><span class=\"token punctuation\">,</span> <span class=\"token number\">802</span><span class=\"token punctuation\">,</span> <span class=\"token number\">24</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">66</span><span class=\"token punctuation\">]</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Original array:\"</span><span class=\"token punctuation\">,</span> myArray<span class=\"token punctuation\">)</span>\nradixSortWithBubbleSort<span class=\"token punctuation\">(</span>myArray<span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Sorted array:\"</span><span class=\"token punctuation\">,</span> myArray<span class=\"token punctuation\">)</span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"6\" data-range=\"1-6\" data-start=\"1\" style=\"top: 0px; width: 789px;\"> \n \n \n \n \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"20\" data-start=\"20\" style=\"top: 418px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Radix Sort Time Complexity",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "this page",
+          "href": "https://www.w3schools.com/dsa_timecomplexity_theory.php",
+          "title": ""
+        }
+      ],
+      "text": "For a general explanation of what time complexity is, visit this page .",
+      "html": "<p class=\"fontComment\">For a general explanation of what time complexity is, visit <a href=\"dsa_timecomplexity_theory.php\">this page</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "this page",
+          "href": "https://www.w3schools.com/dsa_timecomplexity_radixsort.php",
+          "title": ""
+        }
+      ],
+      "text": "For a more thorough and detailed explanation of Radix Sort time complexity, visit this page .",
+      "html": "<p class=\"fontComment\">For a more thorough and detailed explanation of Radix Sort time complexity, visit <a href=\"dsa_timecomplexity_radixsort.php\">this page</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The time complexity for Radix Sort is:",
+      "html": "<p>The time complexity for Radix Sort is:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "O ( n \u22c5 k ) \u2013 \u2013\u2013\u2013\u2013\u2013\u2013\u2013 \u2013 \u2013 \u2013\u2013\u2013\u2013\u2013\u2013\u2013 \u2013 O ( n \u22c5 k ) _ _",
+      "html": "<p><span class=\"math display\"><span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MJXc-display\" style=\"text-align: center;\"><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"&gt;&lt;munder&gt;&lt;munder&gt;&lt;mrow&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;mo&gt;&amp;#x005F;&lt;/mo&gt;&lt;/munder&gt;&lt;mo&gt;&amp;#x005F;&lt;/mo&gt;&lt;/munder&gt;&lt;/math&gt;' id=\"MathJax-Element-1-Frame\" role=\"presentation\" style=\"font-size: 119%; text-align: center; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-1\"><span class=\"mjx-mrow\" id=\"MJXc-Node-2\"><span class=\"mjx-munderover\" id=\"MJXc-Node-3\"><span class=\"mjx-itable\" style=\"margin-bottom: -0.223em;\"><span class=\"mjx-row\"><span class=\"mjx-cell\"><span class=\"mjx-op\"><span class=\"mjx-munderover\" id=\"MJXc-Node-4\"><span class=\"mjx-itable\" style=\"margin-bottom: -0.223em;\"><span class=\"mjx-row\"><span class=\"mjx-cell\"><span class=\"mjx-op\"><span class=\"mjx-mrow\" id=\"MJXc-Node-5\"><span class=\"mjx-mi\" id=\"MJXc-Node-6\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-7\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-8\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-9\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-10\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-11\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span></span></span><span class=\"mjx-row\"><span class=\"mjx-under\" style=\"padding-top: 0.12em;\"><span class=\"mjx-mo\" id=\"MJXc-Node-12\" style=\"vertical-align: top;\"><span class=\"mjx-delim-h\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin: 0px -0.001em 0px 0px; padding-bottom: 0.537em;\">\u2013</span><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin: 0px 0.121em 0px -0.122em; padding-bottom: 0.537em; letter-spacing: -0.145em;\">\u2013\u2013\u2013\u2013\u2013\u2013\u2013</span><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin-top: 0px; padding-bottom: 0.537em; margin-right: -0.001em; margin-bottom: 0px;\">\u2013</span></span></span></span></span></span></span></span></span></span><span class=\"mjx-row\"><span class=\"mjx-under\" style=\"padding-top: 0.12em;\"><span class=\"mjx-mo\" id=\"MJXc-Node-13\" style=\"vertical-align: top;\"><span class=\"mjx-delim-h\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin: 0px -0.001em 0px 0px; padding-bottom: 0.537em;\">\u2013</span><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin: 0px 0.121em 0px -0.122em; padding-bottom: 0.537em; letter-spacing: -0.145em;\">\u2013\u2013\u2013\u2013\u2013\u2013\u2013</span><span class=\"mjx-char MJXc-TeX-main-R\" style=\"margin-top: 0px; padding-bottom: 0.537em; margin-right: -0.001em; margin-bottom: 0px;\">\u2013</span></span></span></span></span></span></span></span></span><span class=\"MJX_Assistive_MathML MJX_Assistive_MathML_Block\" role=\"presentation\"><math display=\"block\" xmlns=\"http://www.w3.org/1998/Math/MathML\"><munder><munder><mrow><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo>\u22c5</mo><mi>k</mi><mo stretchy=\"false\">)</mo></mrow><mo>_</mo></munder><mo>_</mo></munder></math></span></span></span></span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This means that Radix Sort depends both on the values that need to be sorted n n , and the number of digits in the highest value k k .",
+      "html": "<p>This means that Radix Sort depends both on the values that need to be sorted <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-2-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-14\"><span class=\"mjx-mrow\" id=\"MJXc-Node-15\"><span class=\"mjx-mi\" id=\"MJXc-Node-16\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>n</mi></math></span></span>, and the number of digits in the highest value <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-3-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-17\"><span class=\"mjx-mrow\" id=\"MJXc-Node-18\"><span class=\"mjx-mi\" id=\"MJXc-Node-19\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>k</mi></math></span></span>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A best case scenario for Radix Sort is if there are lots of values to sort, but the values have few digits. For example if there are more than a million values to sort, and the highest value is 999, with just three digits. In such a case the time complexity O ( n \u22c5 k ) O ( n \u22c5 k ) can be simplified to just O ( n ) O ( n ) .",
+      "html": "<p>A best case scenario for Radix Sort is if there are lots of values to sort, but the values have few digits. For example if there are more than a million values to sort, and the highest value is 999, with just three digits. In such a case the time complexity <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-4-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-20\"><span class=\"mjx-mrow\" id=\"MJXc-Node-21\"><span class=\"mjx-mi\" id=\"MJXc-Node-22\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-23\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-24\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-25\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-26\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-27\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo>\u22c5</mo><mi>k</mi><mo stretchy=\"false\">)</mo></math></span></span> can be simplified to just <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-5-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-28\"><span class=\"mjx-mrow\" id=\"MJXc-Node-29\"><span class=\"mjx-mi\" id=\"MJXc-Node-30\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-31\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-32\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-33\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A worst case scenario for Radix Sort would be if there are as many digits in the highest value as there are values to sort. This is perhaps not a common scenario, but the time complexity would be O ( n 2 ) O ( n 2 ) in this case.",
+      "html": "<p>A worst case scenario for Radix Sort would be if there are as many digits in the highest value as there are values to sort. This is perhaps not a common scenario, but the time complexity would be <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-6-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-34\"><span class=\"mjx-mrow\" id=\"MJXc-Node-35\"><span class=\"mjx-mi\" id=\"MJXc-Node-36\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-37\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-38\"><span class=\"mjx-base\"><span class=\"mjx-mi\" id=\"MJXc-Node-39\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span><span class=\"mjx-sup\" style=\"font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-40\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-41\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></math></span></span>in this case.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The most average or common case is perhaps if the number of digits k k is something like k ( n ) = log n k ( n ) = log \u2061 n . If so, Radix Sort gets time complexity O ( n \u22c5 log n ) O ( n \u22c5 log \u2061 n ) . An example of such a case would be if there are 1000000 values to sort, and the values have 6 digits.",
+      "html": "<p>The most average or common case is perhaps if the number of digits <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-7-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-42\"><span class=\"mjx-mrow\" id=\"MJXc-Node-43\"><span class=\"mjx-mi\" id=\"MJXc-Node-44\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>k</mi></math></span></span> is something like <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-8-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-45\"><span class=\"mjx-mrow\" id=\"MJXc-Node-46\"><span class=\"mjx-mi\" id=\"MJXc-Node-47\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-48\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-49\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-50\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span><span class=\"mjx-mo MJXc-space3\" id=\"MJXc-Node-51\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.059em; padding-bottom: 0.339em;\">=</span></span><span class=\"mjx-mi MJXc-space3\" id=\"MJXc-Node-52\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-53\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-54\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>k</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo stretchy=\"false\">)</mo><mo>=</mo><mi>log</mi><mo>\u2061</mo><mi>n</mi></math></span></span>. If so, Radix Sort gets time complexity <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-9-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-55\"><span class=\"mjx-mrow\" id=\"MJXc-Node-56\"><span class=\"mjx-mi\" id=\"MJXc-Node-57\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-58\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-59\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-60\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-61\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-62\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-63\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-64\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo>\u22c5</mo><mi>log</mi><mo>\u2061</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span>. An example of such a case would be if there are 1000000 values to sort, and the values have 6 digits.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "See different possible time complexities for Radix Sort in the image below.",
+      "html": "<p>See different possible time complexities for Radix Sort in the image below.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run different simulations of Radix Sort to see how the number of operations falls between the worst case scenario O ( n 2 ) O ( n 2 ) (red line) and best case scenario O ( n ) O ( n ) (green line).",
+      "html": "<p>Run different simulations of Radix Sort to see how the number of operations falls between the worst case scenario <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-10-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-65\"><span class=\"mjx-mrow\" id=\"MJXc-Node-66\"><span class=\"mjx-mi\" id=\"MJXc-Node-67\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-68\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-msubsup\" id=\"MJXc-Node-69\"><span class=\"mjx-base\"><span class=\"mjx-mi\" id=\"MJXc-Node-70\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span><span class=\"mjx-sup\" style=\"font-size: 70.7%; vertical-align: 0.513em; padding-left: 0px; padding-right: 0.071em;\"><span class=\"mjx-mn\" id=\"MJXc-Node-71\" style=\"\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-72\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></math></span></span> (red line) and best case scenario <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-11-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-73\"><span class=\"mjx-mrow\" id=\"MJXc-Node-74\"><span class=\"mjx-mi\" id=\"MJXc-Node-75\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-76\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-77\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-78\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span> (green line).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Set values (n): 300",
+      "html": "<p><label class=\"dsa_label\">Set values (n): <input max=\"480\" min=\"100\" type=\"range\"/></label> 300</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Digits (k): 4",
+      "html": "<p><label class=\"dsa_label\">Digits (k): <input max=\"7\" min=\"2\" step=\"1\" type=\"range\"/></label> 4</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Random",
+      "html": "<p><label class=\"dsa_label\"><input type=\"radio\" value=\"single\"/> Random</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Descending",
+      "html": "<p><label class=\"dsa_label\"><input type=\"radio\" value=\"worstCase\"/> Descending</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Ascending",
+      "html": "<p><label class=\"dsa_label\"><input type=\"radio\" value=\"bestCase\"/> Ascending</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "10 Random",
+      "html": "<p><label class=\"dsa_label\"><input type=\"radio\" value=\"random30\"/> 10 Random</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Operations: 0",
+      "html": "<p>Operations: 0</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The bars representing the different values are scaled to fit the window, so that it looks ok. This means that values with 7 digits look like they are just 5 times bigger than values with 2 digits, but in reality, values with 7 digits are actually 5000 times bigger than values with 2 digits!",
+      "html": "<p>The bars representing the different values are scaled to fit the window, so that it looks ok. This means that values with 7 digits look like they are just 5 times bigger than values with 2 digits, but in reality, values with 7 digits are actually 5000 times bigger than values with 2 digits!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we hold n n and k k fixed, the \"Random\", \"Descending\" and \"Ascending\" alternatives in the simulation above results in the same number of operations. This is because the same thing happens in all three cases.",
+      "html": "<p>If we hold <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-12-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-79\"><span class=\"mjx-mrow\" id=\"MJXc-Node-80\"><span class=\"mjx-mi\" id=\"MJXc-Node-81\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>n</mi></math></span></span> and <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-13-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-82\"><span class=\"mjx-mrow\" id=\"MJXc-Node-83\"><span class=\"mjx-mi\" id=\"MJXc-Node-84\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">k</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>k</mi></math></span></span> fixed, the \"Random\", \"Descending\" and \"Ascending\" alternatives in the simulation above results in the same number of operations. This is because the same thing happens in all three cases.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "DSA Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Yourself With Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise:",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To sort an array with Radix Sort, what property must the sorting have for the sorting to be done properly?",
+      "html": "<p>To sort an array with Radix Sort, what property must the sorting have for the sorting to be done properly?</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "Radix Sort must use a\n\nsorting algorithm.",
+      "language": "unknown",
+      "code_html": "<pre style=\"overflow: auto;\">Radix Sort must use a <input maxlength=\"6\" name=\"ex1\" style=\"width: 7ch;\"/> \nsorting algorithm.\n</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Start the Exercise",
+          "href": "https://www.w3schools.com/exercise.php?filename=exercise_algo_radixsort1",
+          "title": ""
+        }
+      ],
+      "text": "Start the Exercise",
+      "html": "<p><a href=\"exercise.php?filename=exercise_algo_radixsort1\" target=\"_blank\">Start the Exercise</a></p>"
+    }
+  ]
+}

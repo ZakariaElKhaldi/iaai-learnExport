@@ -1,0 +1,511 @@
+{
+  "title": "Cyber Security Network Mapping & Port Scanning",
+  "url": "https://www.w3schools.com/cybersecurity/cybersecurity_mapping_port_scanning.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Cyber Security Network Mapping & Port Scanning",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we are to defend, we first need to know what to defend. Asset Management often relies on Network Mapping to identify which systems are live on a network.",
+      "html": "<p class=\"intro\">If we are to defend, we first need to know what to defend. Asset Management often relies on Network Mapping to identify which systems are live on a network.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Asset management and knowing what you expose on the network, including which services are hosted is very important for anyone looking to defend their network.",
+      "html": "<p class=\"intro\">Asset management and knowing what you expose on the network, including which services are hosted is very important for anyone looking to defend their network.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Nmap - The Network Mapper",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Nmap has for a long time been considered as the standard port scanner for both network engineers and security professionals. We can use it to discover assets to attack or defend.",
+      "html": "<p>Nmap has for a long time been considered as the standard port scanner for both network engineers and security professionals. We can use it to discover assets to attack or defend.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Network Mapping",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "One way to identify hosts which are active on the network is to send a ping, i.e. ICMP Echo Request, to all IP Addresses in the network. This is often referred to as a Ping Sweep.",
+      "html": "<p>One way to identify hosts which are active on the network is to send a ping, i.e. ICMP Echo Request, to all IP Addresses in the network. This is often referred to as a Ping Sweep.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img alt=\"Ping Sweep\" class=\"invert-on-dark\" src=\"img_pingsweep.svg\" style=\"width:100%;max-width:1280px\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This approach is not very good in discovering assets. It is likely that systems on the network will ignore incoming pings, perhaps due to a Firewall blocking them or because of a Host-Based Firewall. A host-based firewall is simply a firewall which is implemented on the system instead of on the network.",
+      "html": "<p>This approach is not very good in discovering assets. It is likely that systems on the network will ignore incoming pings, perhaps due to a Firewall blocking them or because of a Host-Based Firewall. A host-based firewall is simply a firewall which is implemented on the system instead of on the network.\u00a0</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A better approach involves sending a different kinds of packets to a system to try ask for any kind of answer to determine if system is alive or not. For example Nmap will send the following packets to the system to try cause a response:",
+      "html": "<p>A better approach involves sending a different kinds of packets to a system to try ask for any kind of answer to determine if system is alive or not. For example Nmap will send the following packets to the system to try cause a response:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Based on the TCP specifications, that is the rules of communications, a system should always engage in a three-way handshake before starting to communicate. Nmap seems to be intentionally breaking the rules with the packets above. Can you spot which packet is not behaving as systems would expect?",
+      "html": "<p>Based on the TCP specifications, that is the rules of communications, a system should always engage in a three-way handshake before starting to communicate. Nmap seems to be intentionally breaking the rules with the packets above. Can you spot which packet is not behaving as systems would expect?\u00a0</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Sending a TCP ACK packet to port 80 is not conforming to the rules of the TCP standard. Nmap does this specifically to try cause the target system to make a reply. In order to send packets which are not following the rules, Nmap must run with the highest level of privileges, e.g. root or local administrator. Most port scanners will be more accurate because of this.",
+      "html": "<p>Sending a TCP ACK packet to port 80 is not conforming to the rules of the TCP standard. Nmap does this specifically to try cause the target system to make a reply. In order to send packets which are not following the rules, Nmap must run with the highest level of privileges, e.g. root or local administrator. Most port scanners will be more accurate because of this.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Disabling the Network Mapping can be done with Nmap with the -Pn flag. Nmap will now consider all IP/systems to be up and go directly to port scanning.",
+      "html": "<p>Disabling the Network Mapping can be done with Nmap with the -Pn flag. Nmap will now consider all IP/systems to be up and go directly to port scanning.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Try this at home now if you would like to. Careful, if you are at a corporate environment, always get permission before you start running scanners as you do not want to violate any rules of your workspace. To try Nmap now, follow these simple steps:",
+      "html": "<p>Try this at home now if you would like to. Careful, if you are at a corporate environment, always get permission before you start running scanners as you do not want to violate any rules of your workspace. To try Nmap now, follow these simple steps:\u00a0</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We are adding two -v flag to tell Nmap we want verbose output, that makes the scan more fun to watch while it completes.",
+      "html": "<p>We are adding two -v flag to tell Nmap we want verbose output, that makes the scan more fun to watch while it completes.\u00a0</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img alt=\"Nmap Scan\" src=\"img_nmap-scan.png\" style=\"width:100%;max-width:1280px\"/></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "ARP Scan",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The ARP protocol is contained within a LAN, but if the hosts you need to discover is on the LAN we could use this protocol to try reveal systems on the network. By simply iterating over all available IP addresses on the LAN network with the ARP protocol, we are trying to force systems to reply.",
+      "html": "<p>The ARP protocol is contained within a LAN, but if the hosts you need to discover is on the LAN we could use this protocol to try reveal systems on the network. By simply iterating over all available IP addresses on the LAN network with the ARP protocol, we are trying to force systems to reply.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The scan looks like this:",
+      "html": "<p>The scan looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "Eve: Please Provide Mac Address of system 192.168.0.1\n\nEve: Please Provide Mac Address of system 192.168.0.2\n\nEve: Please Provide Mac Address of system 192.168.0.3\n\nEve: Please Provide Mac Address of system 192.168.0.4\n\nEve: Please Provide Mac Address of system 192.168.0.5-254\n\nDefault Gateway: 192.168.0.1 is me and my MAC Address is AA:BB:CC:12:34:56\n\nBob: 192.168.0.3 is me and my MAC Address is: BB:CC:DD:12:34:56\n\nAlice: 192.168.0.4 is me and my MAC Address is: CC:DD:EE:12:34:56",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">Eve: Please Provide Mac Address of system 192.168.0.1<br/>\nEve: Please Provide Mac Address of system 192.168.0.2<br/>\nEve: Please Provide Mac Address of system 192.168.0.3<br/>\nEve: Please Provide Mac Address of system 192.168.0.4<br/>\nEve: Please Provide Mac Address of system 192.168.0.5-254<br/>\nDefault Gateway: 192.168.0.1 is me and my MAC Address is AA:BB:CC:12:34:56<br/>\nBob: 192.168.0.3 is me and my MAC Address is: BB:CC:DD:12:34:56<br/>\nAlice: 192.168.0.4 is me and my MAC Address is: CC:DD:EE:12:34:56<br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Port Scanning",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Port Scanning is done to try determine which services we can connect to. Each listening service provides attack surface which could potentially be abused by attackers. As such it is important to learn which ports are open.",
+      "html": "<p>Port Scanning is done to try determine which services we can connect to. Each listening service provides attack surface which could potentially be abused by attackers. As such it is important to learn which ports are open.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Attackers are interested in knowing which applications are listening on the network. These applications represent opportunities for attackers. There might be vulnerabilities enabling them to attack successfully the organization.",
+      "html": "<p>Attackers are interested in knowing which applications are listening on the network. These applications represent opportunities for attackers. There might be vulnerabilities enabling them to attack successfully the organization.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Port Scanning works by sending packets to an application and looking for any replies. This is exceptionally easy for TCP, as if a TCP service is available it will always reply with a SYN/ACK packet. For UDP however it is more difficult. In order to detect if the service is available or not, in most cases the attacker must send specific input which forces the application to reply. Most applications hosted in UDP will not reply unless the Clients sends exactly the input required to engage in communications.",
+      "html": "<p>Port Scanning works by sending packets to an application and looking for any replies. This is exceptionally easy for TCP, as if a TCP service is available it will always reply with a SYN/ACK packet. For UDP however it is more difficult. In order to detect if the service is available or not, in most cases the attacker must send specific input which forces the application to reply. Most applications hosted in UDP will not reply unless the Clients sends exactly the input required to engage in communications.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "TCP Port Scanning",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "TCP is an easy protocol to scan because the TCP standard dictates that systems should reply with a SYN/ACK when receiving a SYN. We can send a SYN packet to all 65536 ports and record all SYN/ACK's coming back and conclude the ports which are opened based on the reply of a SYN/ACK. When no reply is received, we can assume the port is closed or filtered by for example a Firewall.",
+      "html": "<p>TCP is an easy protocol to scan because the TCP standard dictates that systems should reply with a SYN/ACK when receiving a SYN. We can send a SYN packet to all 65536 ports and record all SYN/ACK's coming back and conclude the ports which are opened based on the reply of a SYN/ACK. When no reply is received, we can assume the port is closed or filtered by for example a Firewall.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img alt=\"TPC Scan\" class=\"invert-on-dark\" src=\"img_tcpscan.svg\" style=\"width:100%;max-width:1280px\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With the SYN/ACK on port 445 we have identified the port is open.",
+      "html": "<p>With the SYN/ACK on port 445 we have identified the port is open.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "UDP Port Scanning",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With UDP it is harder to determine if a port is up or not. For UDP ports the scanner can not rely on a SYN/ACK. In fact, the scanner must almost always rely on making the service listening cause some sort of reply.",
+      "html": "<p>With UDP it is harder to determine if a port is up or not. For UDP ports the scanner can not rely on a SYN/ACK. In fact, the scanner must almost always rely on making the service listening cause some sort of reply.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With so many ports potentially open and different services only replying to the correct kind of data, it becomes time consuming and hard to scan all ports in a reasonable time.",
+      "html": "<p>With so many ports potentially open and different services only replying to the correct kind of data, it becomes time consuming and hard to scan all ports in a reasonable time.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Consider the following conversation where Eve tries to figure out if a UPD port is open:",
+      "html": "<p>Consider the following conversation where Eve tries to figure out if a UPD port is open:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img alt=\"UDP Scan\" class=\"invert-on-dark\" src=\"img_udpscan.svg\" style=\"width:100%;max-width:1280px\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Eve need to talk the correct protocol, and make sure the packets reach their destination, e.g. no packet loss. Otherwise Eve might not discover the port is open.",
+      "html": "<p>Eve need to talk the correct protocol, and make sure the packets reach their destination, e.g. no packet loss. Otherwise Eve might not discover the port is open.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Because of this UDP scanning can be very time consuming if we want to scan all ports.",
+      "html": "<p>Because of this UDP scanning can be very time consuming if we want to scan all ports.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Useful Nmap Scan Types and Options",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "There are many scanners out there, however in this section we focus on how to utilize Nmap to the full potential.",
+      "html": "<p>There are many scanners out there, however in this section we focus on how to utilize Nmap to the full potential.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Nmap can be told to scan the most common ports with the argument --top-ports.",
+      "html": "<p>Nmap can be told to scan the most common ports with the argument --top-ports.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "nmap --top-ports 100 <target>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">nmap --top-ports 100 &lt;target&gt;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The scanner can try determine versions of the application listening behind a port. This is called service scanning and can be enabled with the -sV flag.",
+      "html": "<p>The scanner can try determine versions of the application listening behind a port. This is called service scanning and can be enabled with the -sV flag.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "nmap -sV <target>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">nmap -sV &lt;target&gt;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Nmap has many built-in scripts designed to target a specific service and interact with it. Scripts can do all sorts of things like pull out information from the service or try to exploit it. We can enable the script scanner with the -sC flag. This enables only safe checks, as such no denial of service or exploitation attempts.",
+      "html": "<p>Nmap has many built-in scripts designed to target a specific service and interact with it. Scripts can do all sorts of things like pull out information from the service or try to exploit it. We can enable the script scanner with the -sC flag. This enables only safe checks, as such no denial of service or exploitation attempts.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "nmap -sC <target>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">nmap -sC &lt;target&gt;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Operating System detection can be done with the scanner, allowing it to try determine which operating system is running. It uses many different parameters to try measure and estimate the likelihood of what operating system it is. This can be enabled with the -O argument.",
+      "html": "<p>Operating System detection can be done with the scanner, allowing it to try determine which operating system is running. It uses many different parameters to try measure and estimate the likelihood of what operating system it is. This can be enabled with the -O argument.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "nmap -O <target>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">nmap -O &lt;target&gt;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The aggressive mode of Nmap enables many flags at once. The scanner will do version and OS detection, enable the script scanner and scan the top 1000 most common ports. It can be enabled wit the -A option.",
+      "html": "<p>The aggressive mode of Nmap enables many flags at once. The scanner will do version and OS detection, enable the script scanner and scan the top 1000 most common ports. It can be enabled wit the -A option.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "nmap -A <target>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">nmap -A &lt;target&gt;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Nmap can also scan IPv6 across all of the above flags. It is enabled by adding the -6 flag.",
+      "html": "<p>Nmap can also scan IPv6 across all of the above flags. It is enabled by adding the -6 flag.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "nmap -6 <target>",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">nmap -6 &lt;target&gt;</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Nmap Timing options",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Scanning can be done with different speeds. Slower speeds have a less likelihood to be detected by IDS systems, while a fast scan might overwhelm the system. Nmap supports the following options:",
+      "html": "<p>Scanning can be done with different speeds. Slower speeds have a less likelihood to be detected by IDS systems, while a fast scan might overwhelm the system. Nmap supports the following options:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Zenmap",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Nmap has a built-in GUI (\"Graphical User Interface\") a long side with other tools too. The GUI can be useful to visualize networks and browse open ports across different hosts. The GUI looks like this:",
+      "html": "<p>Nmap has a built-in GUI (\"Graphical User Interface\") a long side with other tools too. The GUI can be useful to visualize networks and browse open ports across different hosts. The GUI looks like this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img alt=\"Zen Map\" src=\"img_zenmap.png\" style=\"width:100%;max-width:1280px\"/></p>"
+    }
+  ]
+}

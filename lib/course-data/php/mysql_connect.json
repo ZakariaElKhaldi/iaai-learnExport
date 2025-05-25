@@ -1,0 +1,1302 @@
+{
+  "title": "PHP MySQL Connect to database",
+  "url": "https://www.w3schools.com/php/php_mysql_connect.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "PHP Connect to MySQL",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "PHP 5 and later can work with a MySQL database using:",
+      "html": "<p class=\"intro\">PHP 5 and later can work with a MySQL database using:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Earlier versions of PHP used the MySQL extension. However, this extension was deprecated in 2012.",
+      "html": "<p class=\"intro\">Earlier versions of PHP used the MySQL extension. However, this \nextension was deprecated in 2012.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Should I Use MySQLi or PDO?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If you need a short answer, it would be \"Whatever you like\".",
+      "html": "<p>If you need a short answer, it would be \"Whatever you like\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Both MySQLi and PDO have their advantages:",
+      "html": "<p>Both MySQLi and PDO have their advantages:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "PDO will work on 12 different database systems, whereas MySQLi will only work with MySQL databases.",
+      "html": "<p>PDO will work on 12 different database systems, whereas MySQLi will only \nwork with MySQL databases.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "So, if you have to switch your project to use another database, PDO makes the process easy. You only have to change the connection string and a few queries. With MySQLi, you will need to rewrite the entire code - queries included.",
+      "html": "<p>So, if you have to switch your project \nto use another database, PDO makes the process easy. You only have \nto change the connection string and a few queries. With MySQLi, you will need \nto rewrite the entire code - queries included.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Both are object-oriented, but MySQLi also offers a procedural API.",
+      "html": "<p>Both are object-oriented, but MySQLi also offers a procedural API.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Both support Prepared Statements. Prepared Statements protect from SQL injection, and are very important for web application security.",
+      "html": "<p>Both support Prepared Statements. Prepared Statements protect \nfrom SQL injection, and are very important for web application security.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL Examples in Both MySQLi and PDO Syntax",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this, and in the following chapters we demonstrate three ways of working with PHP and MySQL:",
+      "html": "<p>In this, and in the following chapters we demonstrate three ways of working \nwith PHP and MySQL:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQLi Installation",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For Linux and Windows: The MySQLi extension is automatically installed in most cases, when php5 mysql package is installed.",
+      "html": "<p>For Linux and Windows: The MySQLi extension is automatically installed in \nmost cases, when php5 mysql package is installed.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "\nhttp://php.net/manual/en/mysqli.installation.php",
+          "href": "http://php.net/manual/en/mysqli.installation.php",
+          "title": ""
+        }
+      ],
+      "text": "For installation details, go to: http://php.net/manual/en/mysqli.installation.php",
+      "html": "<p>For installation details, go to:\n<a href=\"http://php.net/manual/en/mysqli.installation.php\" target=\"_blank\">\nhttp://php.net/manual/en/mysqli.installation.php</a></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "PDO Installation",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "\nhttp://php.net/manual/en/pdo.installation.php",
+          "href": "http://php.net/manual/en/pdo.installation.php",
+          "title": ""
+        }
+      ],
+      "text": "For installation details, go to: http://php.net/manual/en/pdo.installation.php",
+      "html": "<p>For installation details, go to:\n<a href=\"http://php.net/manual/en/pdo.installation.php\" target=\"_blank\">\nhttp://php.net/manual/en/pdo.installation.php</a></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Open a Connection to MySQL",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Before we can access data in the MySQL database, we need to be able to connect to the server:",
+      "html": "<p>Before we can access data in the MySQL database, we need to be able to connect to \nthe server:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";// Create connection$conn = new mysqli($servername, $username, $password);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\necho \"Connected successfully\";\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connected successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";// Create connection$conn = new mysqli($servername, $username, $password);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);}\necho \"Connected successfully\";\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";// Create connection$conn = new mysqli($servername, $username, $password);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\necho \"Connected successfully\";\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connected successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>$conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> mysqli($servername, $username, $password);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($conn-&gt;connect_error)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . $conn-&gt;connect_error);<br/>}<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Connected successfully\"</span>;<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";// Create connection$conn = new mysqli($servername, $username, $password);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\necho \"Connected successfully\";\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connected successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note on the object-oriented example above:",
+      "html": "<p><strong>Note on the object-oriented example above:</strong> </p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "$connect_error was broken until PHP 5.2.9 and 5.3.0. If you need to ensure compatibility with PHP versions prior to 5.2.9 and 5.3.0, use the following code instead: // Check connection if (mysqli_connect_error()) { die(\"Database connection failed: \" . mysqli_connect_error()); }",
+      "html": "<p>$connect_error was \nbroken until PHP 5.2.9 and 5.3.0. If you need to ensure compatibility with PHP \nversions prior to 5.2.9 and 5.3.0, use the following code instead:<br/><br/>\n// Check connection<br/>if (mysqli_connect_error()) {<br/>\u00a0\u00a0die(\"Database connection failed: \" . mysqli_connect_error());<br/>}</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}echo \"Connected successfully\";\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connected successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";\n$password = \"password\";// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());}echo \"Connected successfully\";\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}echo \"Connected successfully\";\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connected successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> $password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>\n$conn = mysqli_connect($servername, $username, $password);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (!$conn)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . mysqli_connect_error());<br/>}<br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Connected successfully\"</span>;<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";// Create connection\n$conn = mysqli_connect($servername, $username, $password);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}echo \"Connected successfully\";\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connected successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";try {\u00a0\u00a0$conn = new PDO(\"mysql:host=$servername;dbname=myDB\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 echo \"Connected successfully\";\n } catch(PDOException $e)\u00a0{\u00a0\u00a0echo \"Connection failed: \" . $e->getMessage();}\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "try",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"mysql:host=$servername;dbname=myDB\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// set the PDO error mode to exception",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connected successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "catch",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";\n$password = \"password\";try {\u00a0\u00a0$conn = new PDO(\"mysql:host=$servername;dbname=myDB\", $username, $password);\n// set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\necho \"Connected successfully\";\n} catch(PDOException $e)\u00a0{\u00a0\u00a0echo \"Connection failed: \" . $e->getMessage();}\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";try {\u00a0\u00a0$conn = new PDO(\"mysql:host=$servername;dbname=myDB\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 echo \"Connected successfully\";\n } catch(PDOException $e)\u00a0{\u00a0\u00a0echo \"Connection failed: \" . $e->getMessage();}\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "try",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"mysql:host=$servername;dbname=myDB\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// set the PDO error mode to exception",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connected successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "catch",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> $password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">try</span> {<br/>\u00a0\u00a0$conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> PDO(<span class=\"phpstringcolor\" style=\"color:green\">\"mysql:host=$servername;dbname=myDB\"</span>, $username, $password);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// set the PDO error mode to exception<br/></span>\u00a0 $conn-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Connected successfully\"</span>;<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">catch</span>(PDOException $e)\u00a0{<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . $e-&gt;getMessage();<br/>}<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";try {\u00a0\u00a0$conn = new PDO(\"mysql:host=$servername;dbname=myDB\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 echo \"Connected successfully\";\n } catch(PDOException $e)\u00a0{\u00a0\u00a0echo \"Connection failed: \" . $e->getMessage();}\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "try",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"mysql:host=$servername;dbname=myDB\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// set the PDO error mode to exception",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connected successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "catch",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: In the PDO example above we have also specified a database (myDB) . PDO require a valid database to connect to. If no database is specified, an exception is thrown.",
+      "html": "<p><strong>Note:</strong> In the PDO example above we have also \n<strong>specified a database (myDB)</strong>. PDO require a valid database \nto connect to. If no database is specified, an exception is thrown.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Tip: A great benefit of PDO is that it has an exception class to handle any problems that may occur in our database queries. If an exception is thrown within the try{ } block, the script stops executing and flows directly to the first catch(){ } block.",
+      "html": "<p><strong>Tip:</strong> A great benefit of PDO is that it \nhas an exception class to handle any problems that may \noccur in our database queries. If an exception is thrown within the try{ } block, \nthe script stops executing and flows directly to the first catch(){ } block.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Close the Connection",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The connection will be closed automatically when the script ends. To close the connection before, use the following:",
+      "html": "<p>The connection will be closed automatically when the script ends. To close the \nconnection before, use the following:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "$conn->close();",
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n$conn-&gt;close(); </div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "mysqli_close($conn);",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\nmysqli_close($conn);\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "$conn = null;",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n$conn = null;\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

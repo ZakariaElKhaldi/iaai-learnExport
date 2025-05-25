@@ -1,0 +1,163 @@
+{
+  "title": "PHP Forms Required Fields",
+  "url": "https://www.w3schools.com/php/php_form_required.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "PHP Forms - Required Fields",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This chapter shows how to make input fields required and create error messages if needed.",
+      "html": "<p class=\"intro\">This chapter shows how to make input fields required and create error messages if needed.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "PHP - Required Fields",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "From the validation rules table on the previous page, we see that the \"Name\", \"E-mail\", and \"Gender\" fields are required. These fields cannot be empty and must be filled out in the HTML form.",
+      "html": "<p>From the validation rules table on the previous page, we see that the \"Name\", \"E-mail\", and \n\"Gender\" fields are required. These fields cannot be empty and must be filled out in the \nHTML form.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th style=\"width:25%\">Field</th>\n<th style=\"width:75%\">Validation Rules</th>\n</tr>\n<tr>\n<td>Name</td>\n<td>Required. + Must only contain letters and whitespace</td>\n</tr>\n<tr>\n<td>E-mail</td>\n<td>Required. + Must contain a valid email address (with @ and .)</td>\n</tr>\n<tr>\n<td>Website</td>\n<td>Optional. If present, it must contain a valid URL</td>\n</tr>\n<tr>\n<td>Comment</td>\n<td>Optional. Multi-line input field (textarea)</td>\n</tr>\n<tr>\n<td>Gender</td>\n<td>Required. Must select one</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the previous chapter, all input fields were optional.",
+      "html": "<p>In the previous chapter, all input fields were optional. </p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the following code we have added some new variables: $nameErr , $emailErr , $genderErr , and $websiteErr . These error variables will hold error messages for the required fields. We have also added an if else statement for each $_POST variable. This checks if the $_POST variable is empty (with the PHP empty() function). If it is empty, an error message is stored in the different error variables, and if it is not empty, it sends the user input data through the test_input() function:",
+      "html": "<p>In the following code we have added some new variables: <code>$nameErr</code>, <code>$emailErr</code>, \n<code>$genderErr</code>, and <code>$websiteErr</code>. These error variables will hold error messages for the \nrequired fields. We have also added an <code>if else</code> statement for each <code>$_POST</code> variable. This \nchecks if the <code>$_POST</code> variable is empty (with the PHP <code>empty()</code> \nfunction). If it is empty, an error message is stored in the different error variables, \nand if it is not empty, it sends the user input data through the <code>test_input()</code> \nfunction:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "language-php"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// define variables and set to empty values\n\n\n$nameErr\n\n=\n\n$emailErr\n\n=\n\n$genderErr\n\n=\n\n$websiteErr\n\n=\n\n\"\"\n;\n\n\n$name\n\n=\n\n$email\n\n=\n\n$gender\n\n=\n\n$comment\n\n=\n\n$website\n\n=\n\n\"\"\n;\n\n\n\nif\n\n(\n$_SERVER\n[\n\"REQUEST_METHOD\"\n]\n\n==\n\n\"POST\"\n)\n\n{\n\n\nif\n\n(\nempty\n(\n$_POST\n[\n\"name\"\n]\n)\n)\n\n{\n\n\n$nameErr\n\n=\n\n\"Name is required\"\n;\n\n\n}\n\nelse\n\n{\n\n\n$name\n\n=\n\ntest_input\n(\n$_POST\n[\n\"name\"\n]\n)\n;\n\n\n}\n\n\n\nif\n\n(\nempty\n(\n$_POST\n[\n\"email\"\n]\n)\n)\n\n{\n\n\n$emailErr\n\n=\n\n\"Email is required\"\n;\n\n\n}\n\nelse\n\n{\n\n\n$email\n\n=\n\ntest_input\n(\n$_POST\n[\n\"email\"\n]\n)\n;\n\n\n}\n\n\n\nif\n\n(\nempty\n(\n$_POST\n[\n\"website\"\n]\n)\n)\n\n{\n\n\n$website\n\n=\n\n\"\"\n;\n\n\n}\n\nelse\n\n{\n\n\n$website\n\n=\n\ntest_input\n(\n$_POST\n[\n\"website\"\n]\n)\n;\n\n\n}\n\n\n\nif\n\n(\nempty\n(\n$_POST\n[\n\"comment\"\n]\n)\n)\n\n{\n\n\n$comment\n\n=\n\n\"\"\n;\n\n\n}\n\nelse\n\n{\n\n\n$comment\n\n=\n\ntest_input\n(\n$_POST\n[\n\"comment\"\n]\n)\n;\n\n\n}\n\n\n\nif\n\n(\nempty\n(\n$_POST\n[\n\"gender\"\n]\n)\n)\n\n{\n\n\n$genderErr\n\n=\n\n\"Gender is required\"\n;\n\n\n}\n\nelse\n\n{\n\n\n$gender\n\n=\n\ntest_input\n(\n$_POST\n[\n\"gender\"\n]\n)\n;\n\n\n}\n\n\n}",
+      "language": "php",
+      "code_html": "<pre class=\"notranslate language-php\" style=\"border-radius:5px;\" tabindex=\"0\"><code class=\"language-php\"><span class=\"token comment\">// define variables and set to empty values</span>\n<span class=\"token variable\">$nameErr</span> <span class=\"token operator\">=</span> <span class=\"token variable\">$emailErr</span> <span class=\"token operator\">=</span> <span class=\"token variable\">$genderErr</span> <span class=\"token operator\">=</span> <span class=\"token variable\">$websiteErr</span> <span class=\"token operator\">=</span> <span class=\"token string double-quoted-string\">\"\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token variable\">$name</span> <span class=\"token operator\">=</span> <span class=\"token variable\">$email</span> <span class=\"token operator\">=</span> <span class=\"token variable\">$gender</span> <span class=\"token operator\">=</span> <span class=\"token variable\">$comment</span> <span class=\"token operator\">=</span> <span class=\"token variable\">$website</span> <span class=\"token operator\">=</span> <span class=\"token string double-quoted-string\">\"\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span><span class=\"token global\">$_SERVER</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"REQUEST_METHOD\"</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">==</span> <span class=\"token string double-quoted-string\">\"POST\"</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-empty\">empty</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"name\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$nameErr</span> <span class=\"token operator\">=</span> <span class=\"token string double-quoted-string\">\"Name is required\"</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$name</span> <span class=\"token operator\">=</span> <span class=\"token function\">test_input</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"name\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n\n  <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-empty\">empty</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"email\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$emailErr</span> <span class=\"token operator\">=</span> <span class=\"token string double-quoted-string\">\"Email is required\"</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$email</span> <span class=\"token operator\">=</span> <span class=\"token function\">test_input</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"email\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  \n  <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-empty\">empty</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"website\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$website</span> <span class=\"token operator\">=</span> <span class=\"token string double-quoted-string\">\"\"</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$website</span> <span class=\"token operator\">=</span> <span class=\"token function\">test_input</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"website\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  \n  <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-empty\">empty</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"comment\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$comment</span> <span class=\"token operator\">=</span> <span class=\"token string double-quoted-string\">\"\"</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$comment</span> <span class=\"token operator\">=</span> <span class=\"token function\">test_input</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"comment\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  \n  <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-empty\">empty</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"gender\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$genderErr</span> <span class=\"token operator\">=</span> <span class=\"token string double-quoted-string\">\"Gender is required\"</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token variable\">$gender</span> <span class=\"token operator\">=</span> <span class=\"token function\">test_input</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_POST</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"gender\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "language-php"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "language-php"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "PHP - Display The Error Messages",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then in the HTML form, we add a little script after each required field, which generates the correct error message if needed (that is if the user tries to submit the form without filling out the required fields):",
+      "html": "<p>Then in the HTML form, we add a little script after each required field, \nwhich generates the correct error message if needed (that is if the user tries to submit \nthe form without filling out the required fields):</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-php"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\nform\n\nmethod\n=\n\"\npost\n\"\n\naction\n=\n\"\n<?php\n\necho\n\nhtmlspecialchars\n(\n$_SERVER\n[\n\"PHP_SELF\"\n]\n)\n;\n?>\n\"\n>\n\n\nName:\n<\ninput\n\ntype\n=\n\"\ntext\n\"\n\nname\n=\n\"\nname\n\"\n>\n\n\n<\nspan\n\nclass\n=\n\"\nerror\n\"\n>\n*\n<?php\n\necho\n\n$nameErr\n;\n?>\n</\nspan\n>\n\n\n<\nbr\n>\n<\nbr\n>\n\nE-mail:\n\n<\ninput\n\ntype\n=\n\"\ntext\n\"\n\nname\n=\n\"\nemail\n\"\n>\n\n\n<\nspan\n\nclass\n=\n\"\nerror\n\"\n>\n*\n<?php\n\necho\n\n$emailErr\n;\n?>\n</\nspan\n>\n\n\n<\nbr\n>\n<\nbr\n>\n\nWebsite:\n\n<\ninput\n\ntype\n=\n\"\ntext\n\"\n\nname\n=\n\"\nwebsite\n\"\n>\n\n\n<\nspan\n\nclass\n=\n\"\nerror\n\"\n>\n<?php\n\necho\n\n$websiteErr\n;\n?>\n</\nspan\n>\n\n\n<\nbr\n>\n<\nbr\n>\n\nComment:\n<\ntextarea\n\nname\n=\n\"\ncomment\n\"\n\nrows\n=\n\"\n5\n\"\n\ncols\n=\n\"\n40\n\"\n>\n</\ntextarea\n>\n\n\n<\nbr\n>\n<\nbr\n>\n\nGender:\n\n<\ninput\n\ntype\n=\n\"\nradio\n\"\n\nname\n=\n\"\ngender\n\"\n\nvalue\n=\n\"\nfemale\n\"\n>\nFemale\n\n<\ninput\n\ntype\n=\n\"\nradio\n\"\n\nname\n=\n\"\ngender\n\"\n\nvalue\n=\n\"\nmale\n\"\n>\nMale\n\n<\ninput\n\ntype\n=\n\"\nradio\n\"\n\nname\n=\n\"\ngender\n\"\n\nvalue\n=\n\"\nother\n\"\n>\nOther\n\n<\nspan\n\nclass\n=\n\"\nerror\n\"\n>\n*\n<?php\n\necho\n\n$genderErr\n;\n?>\n</\nspan\n>\n\n\n<\nbr\n>\n<\nbr\n>\n\n\n<\ninput\n\ntype\n=\n\"\nsubmit\n\"\n\nname\n=\n\"\nsubmit\n\"\n\nvalue\n=\n\"\nSubmit\n\"\n>\n\n\n\n</\nform\n>",
+      "language": "php",
+      "code_html": "<pre class=\"notranslate w3-white language-php\" tabindex=\"0\"><code class=\"language-php\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>form</span> <span class=\"token attr-name\">method</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>post<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">action</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span><span class=\"token php language-php\"><span class=\"token delimiter important\">&lt;?php</span> <span class=\"token keyword keyword-echo\">echo</span> <span class=\"token function\">htmlspecialchars</span><span class=\"token punctuation\">(</span><span class=\"token global\">$_SERVER</span><span class=\"token punctuation\">[</span><span class=\"token string double-quoted-string\">\"PHP_SELF\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span><span class=\"token delimiter important\">?&gt;</span></span><span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n\nName: <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>text<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>name<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>span</span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>error<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>* <span class=\"token php language-php\"><span class=\"token delimiter important\">&lt;?php</span> <span class=\"token keyword keyword-echo\">echo</span> <span class=\"token variable\">$nameErr</span><span class=\"token punctuation\">;</span><span class=\"token delimiter important\">?&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>span</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\nE-mail:\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>text<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>email<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>span</span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>error<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>* <span class=\"token php language-php\"><span class=\"token delimiter important\">&lt;?php</span> <span class=\"token keyword keyword-echo\">echo</span> <span class=\"token variable\">$emailErr</span><span class=\"token punctuation\">;</span><span class=\"token delimiter important\">?&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>span</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\nWebsite:\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>text<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>website<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>span</span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>error<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token php language-php\"><span class=\"token delimiter important\">&lt;?php</span> <span class=\"token keyword keyword-echo\">echo</span> <span class=\"token variable\">$websiteErr</span><span class=\"token punctuation\">;</span><span class=\"token delimiter important\">?&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>span</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\nComment: <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>textarea</span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>comment<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">rows</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>5<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">cols</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>40<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>textarea</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\nGender:\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>radio<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>gender<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">value</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>female<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Female\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>radio<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>gender<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">value</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>male<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Male\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>radio<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>gender<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">value</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>other<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Other\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>span</span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>error<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>* <span class=\"token php language-php\"><span class=\"token delimiter important\">&lt;?php</span> <span class=\"token keyword keyword-echo\">echo</span> <span class=\"token variable\">$genderErr</span><span class=\"token punctuation\">;</span><span class=\"token delimiter important\">?&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>span</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">type</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>submit<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>submit<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">value</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>Submit<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>form</span><span class=\"token punctuation\">&gt;</span></span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-php"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-php"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The next step is to validate the input data, that is \"Does the Name field contain only letters and whitespace?\", and \"Does the E-mail field contain a valid e-mail address syntax?\", and if filled out, \"Does the Website field contain a valid URL?\".",
+      "html": "<p>The next step is to validate the input data, that is \"Does the Name field \ncontain only letters and whitespace?\", and \"Does the E-mail field contain a \nvalid e-mail address syntax?\", and if filled out, \"Does the Website field contain \na valid URL?\".</p>"
+    }
+  ]
+}

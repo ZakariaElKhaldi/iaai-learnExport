@@ -1,0 +1,177 @@
+{
+  "title": "React useMemo Hook",
+  "url": "https://www.w3schools.com/react/react_usememo.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "React useMemo Hook",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The React useMemo Hook returns a memoized value.",
+      "html": "<p class=\"intro\">The React <code>useMemo</code> Hook returns a memoized value.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Think of memoization as caching a value so that it does not need to be recalculated.",
+      "html": "<p class=\"intro\">Think of memoization as caching a value so that it does not need to be recalculated.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The useMemo Hook only runs when one of its dependencies update.",
+      "html": "<p class=\"intro\">The <code>useMemo</code> Hook only runs when one of its dependencies update.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This can improve performance.",
+      "html": "<p class=\"intro\">This can improve performance.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "useCallback chapter",
+          "href": "https://www.w3schools.com/react_usecallback.asp",
+          "title": ""
+        }
+      ],
+      "text": "The useMemo and useCallback Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function. You can learn more about useCallback in the useCallback chapter .",
+      "html": "<p class=\"intro\">The <code>useMemo</code> and <code>useCallback</code> Hooks are similar.\nThe main difference is that <code>useMemo</code> returns a memoized value and\n<code>useCallback</code> returns a memoized function.\nYou can learn more about <code>useCallback</code> in the <a href=\"react_usecallback.asp\">useCallback chapter</a>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Performance",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The useMemo Hook can be used to keep expensive, resource intensive functions from needlessly running.",
+      "html": "<p>The <code>useMemo</code> Hook can be used to keep expensive, resource intensive functions from needlessly running.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this example, we have an expensive function that runs on every render.",
+      "html": "<p>In this example, we have an expensive function that runs on every render.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When changing the count or adding a todo, you will notice a delay in execution.",
+      "html": "<p>When changing the count or adding a todo, you will notice a delay in execution.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nconst\n\nApp\n\n=\n\n(\n)\n\n=>\n\n{\n\n\nconst\n\n[\ncount\n,\nsetCount\n]\n\n=\n\nuseState\n(\n0\n)\n;\n\n\nconst\n\n[\ntodos\n,\nsetTodos\n]\n\n=\n\nuseState\n(\n[\n]\n)\n;\n\n\nconst\ncalculation\n=\n\nexpensiveCalculation\n(\ncount\n)\n;\n\n\n\nconst\n\nincrement\n\n=\n\n(\n)\n\n=>\n\n{\n\n\nsetCount\n(\n(\nc\n)\n\n=>\nc\n+\n\n1\n)\n;\n\n\n}\n;\n\n\nconst\n\naddTodo\n\n=\n\n(\n)\n\n=>\n\n{\n\n\nsetTodos\n(\n(\nt\n)\n\n=>\n\n[\n...\nt\n,\n\n\"New Todo\"\n]\n)\n;\n\n\n}\n;\n\n\n\nreturn\n\n(\n\n\n<\ndiv\n>\n\n\n<\ndiv\n>\n\n\n<\nh2\n>\nMy Todos\n</\nh2\n>\n\n\n{\ntodos\n.\nmap\n(\n(\ntodo\n,\nindex\n)\n\n=>\n\n{\n\n\nreturn\n\n<\np\n\nkey\n=\n{\nindex\n}\n>\n{\ntodo\n}\n</\np\n>\n;\n\n\n}\n)\n}\n\n\n<\nbutton\n\nonClick\n=\n{\naddTodo\n}\n>\nAdd Todo\n</\nbutton\n>\n\n\n</\ndiv\n>\n\n\n<\nhr\n\n/>\n\n\n<\ndiv\n>\n\nCount:\n{\ncount\n}\n\n\n<\nbutton\n\nonClick\n=\n{\nincrement\n}\n>\n+\n</\nbutton\n>\n\n\n<\nh2\n>\nExpensive Calculation\n</\nh2\n>\n\n\n{\ncalculation\n}\n\n\n</\ndiv\n>\n\n\n</\ndiv\n>\n\n\n)\n;\n\n\n}\n;\n\n\n\nconst\n\nexpensiveCalculation\n\n=\n\n(\nnum\n)\n\n=>\n\n{\n\nconsole\n.\nlog\n(\n\"Calculating...\"\n)\n;\n\n\nfor\n\n(\nlet\ni\n=\n\n0\n;\ni\n<\n\n1000000000\n;\ni\n++\n)\n\n{\n\nnum\n+=\n\n1\n;\n\n\n}\n\n\nreturn\nnum\n;\n\n\n}\n;\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nApp\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">App</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>count<span class=\"token punctuation\">,</span> setCount<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>todos<span class=\"token punctuation\">,</span> setTodos<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-const\">const</span> calculation <span class=\"token operator\">=</span> <span class=\"token function\">expensiveCalculation</span><span class=\"token punctuation\">(</span>count<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">increment</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">setCount</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">c</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> c <span class=\"token operator\">+</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">addTodo</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">setTodos</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">t</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">[</span><span class=\"token operator\">...</span>t<span class=\"token punctuation\">,</span> <span class=\"token string\">\"New Todo\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">My Todos</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        </span><span class=\"token punctuation\">{</span>todos<span class=\"token punctuation\">.</span><span class=\"token function\">map</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">todo<span class=\"token punctuation\">,</span> index</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n          <span class=\"token keyword keyword-return\">return</span> <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">key</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>index<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span>todo<span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">;</span>\n        <span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">}</span><span class=\"token plain-text\">\n        </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">onClick</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>addTodo<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Add Todo</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>hr</span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        Count: </span><span class=\"token punctuation\">{</span>count<span class=\"token punctuation\">}</span><span class=\"token plain-text\">\n        </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">onClick</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>increment<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">+</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Expensive Calculation</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        </span><span class=\"token punctuation\">{</span>calculation<span class=\"token punctuation\">}</span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">expensiveCalculation</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token parameter\">num</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n  console<span class=\"token punctuation\">.</span><span class=\"token function\">log</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Calculating...\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-for\">for</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-let\">let</span> i <span class=\"token operator\">=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span> i <span class=\"token operator\">&lt;</span> <span class=\"token number\">1000000000</span><span class=\"token punctuation\">;</span> i<span class=\"token operator\">++</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    num <span class=\"token operator\">+=</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token keyword keyword-return\">return</span> num<span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Use useMemo",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To fix this performance issue, we can use the useMemo Hook to memoize the expensiveCalculation function. This will cause the function to only run when needed.",
+      "html": "<p>To fix this performance issue, we can use the <code>useMemo</code> Hook to memoize the <code>expensiveCalculation</code> function. This will cause the function to only run when needed.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can wrap the expensive function call with useMemo .",
+      "html": "<p>We can wrap the expensive function call with <code>useMemo</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The useMemo Hook accepts a second parameter to declare dependencies. The expensive function will only run when its dependencies have changed.",
+      "html": "<p>The <code>useMemo</code>Hook accepts a second parameter to declare \ndependencies. The expensive function will only run when its dependencies have changed.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the following example, the expensive function will only run when count is changed and not when todo's are added.",
+      "html": "<p>In the following example, the expensive function will only run when <code>count</code> \nis changed and not when todo's are added.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n,\nuseMemo\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nconst\n\nApp\n\n=\n\n(\n)\n\n=>\n\n{\n\n\nconst\n\n[\ncount\n,\nsetCount\n]\n\n=\n\nuseState\n(\n0\n)\n;\n\n\nconst\n\n[\ntodos\n,\nsetTodos\n]\n\n=\n\nuseState\n(\n[\n]\n)\n;\n\n\nconst\ncalculation\n=\n\nuseMemo\n(\n(\n)\n\n=>\n\nexpensiveCalculation\n(\ncount\n)\n,\n\n[\ncount\n]\n)\n;\n\n\n\nconst\n\nincrement\n\n=\n\n(\n)\n\n=>\n\n{\n\n\nsetCount\n(\n(\nc\n)\n\n=>\nc\n+\n\n1\n)\n;\n\n\n}\n;\n\n\nconst\n\naddTodo\n\n=\n\n(\n)\n\n=>\n\n{\n\n\nsetTodos\n(\n(\nt\n)\n\n=>\n\n[\n...\nt\n,\n\n\"New Todo\"\n]\n)\n;\n\n\n}\n;\n\n\n\nreturn\n\n(\n\n\n<\ndiv\n>\n\n\n<\ndiv\n>\n\n\n<\nh2\n>\nMy Todos\n</\nh2\n>\n\n\n{\ntodos\n.\nmap\n(\n(\ntodo\n,\nindex\n)\n\n=>\n\n{\n\n\nreturn\n\n<\np\n\nkey\n=\n{\nindex\n}\n>\n{\ntodo\n}\n</\np\n>\n;\n\n\n}\n)\n}\n\n\n<\nbutton\n\nonClick\n=\n{\naddTodo\n}\n>\nAdd Todo\n</\nbutton\n>\n\n\n</\ndiv\n>\n\n\n<\nhr\n\n/>\n\n\n<\ndiv\n>\n\nCount:\n{\ncount\n}\n\n\n<\nbutton\n\nonClick\n=\n{\nincrement\n}\n>\n+\n</\nbutton\n>\n\n\n<\nh2\n>\nExpensive Calculation\n</\nh2\n>\n\n\n{\ncalculation\n}\n\n\n</\ndiv\n>\n\n\n</\ndiv\n>\n\n\n)\n;\n\n\n}\n;\n\n\n\nconst\n\nexpensiveCalculation\n\n=\n\n(\nnum\n)\n\n=>\n\n{\n\nconsole\n.\nlog\n(\n\"Calculating...\"\n)\n;\n\n\nfor\n\n(\nlet\ni\n=\n\n0\n;\ni\n<\n\n1000000000\n;\ni\n++\n)\n\n{\n\nnum\n+=\n\n1\n;\n\n\n}\n\n\nreturn\nnum\n;\n\n\n}\n;\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nApp\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState<span class=\"token punctuation\">,</span> useMemo <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">App</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>count<span class=\"token punctuation\">,</span> setCount<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>todos<span class=\"token punctuation\">,</span> setTodos<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-const\">const</span> calculation <span class=\"token operator\">=</span> <span class=\"token function\">useMemo</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token function\">expensiveCalculation</span><span class=\"token punctuation\">(</span>count<span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span>count<span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">increment</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">setCount</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">c</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> c <span class=\"token operator\">+</span> <span class=\"token number\">1</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">addTodo</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">setTodos</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">t</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">[</span><span class=\"token operator\">...</span>t<span class=\"token punctuation\">,</span> <span class=\"token string\">\"New Todo\"</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">My Todos</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        </span><span class=\"token punctuation\">{</span>todos<span class=\"token punctuation\">.</span><span class=\"token function\">map</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">todo<span class=\"token punctuation\">,</span> index</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n          <span class=\"token keyword keyword-return\">return</span> <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">key</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>index<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span>todo<span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">;</span>\n        <span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">}</span><span class=\"token plain-text\">\n        </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">onClick</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>addTodo<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Add Todo</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>hr</span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        Count: </span><span class=\"token punctuation\">{</span>count<span class=\"token punctuation\">}</span><span class=\"token plain-text\">\n        </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">onClick</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>increment<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">+</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Expensive Calculation</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n        </span><span class=\"token punctuation\">{</span>calculation<span class=\"token punctuation\">}</span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> <span class=\"token function-variable function\">expensiveCalculation</span> <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token parameter\">num</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">=&gt;</span> <span class=\"token punctuation\">{</span>\n  console<span class=\"token punctuation\">.</span><span class=\"token function\">log</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Calculating...\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-for\">for</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-let\">let</span> i <span class=\"token operator\">=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span> i <span class=\"token operator\">&lt;</span> <span class=\"token number\">1000000000</span><span class=\"token punctuation\">;</span> i<span class=\"token operator\">++</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    num <span class=\"token operator\">+=</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token keyword keyword-return\">return</span> num<span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">App</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    }
+  ]
+}

@@ -1,0 +1,687 @@
+{
+  "title": "Python MySQL Join",
+  "url": "https://www.w3schools.com/python/python_mysql_join.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Python MySQL Join",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Join Two or More Tables",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You can combine rows from two or more tables, based on a related column between them, by using a JOIN statement.",
+      "html": "<p>You can combine rows from two or more tables, based on a related column \nbetween them, by using a JOIN statement.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Consider you have a \"users\" table and a \"products\" table:",
+      "html": "<p>Consider you have a \"users\" table and a \"products\" table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "{ id: 1, name: 'John', fav: 154},\n{ id: \n2, name: 'Peter', fav: 154},\n{ id: 3, name: 'Amy', fav: 155},\n{ id: 4, name: 'Hannah', fav:},\n{ id: 5, name: 'Michael', fav:}",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">{ id: 1, name: 'John', fav: 154},<br/>{ id: \n  2, name: 'Peter', fav: 154},<br/>{ id: 3, name: 'Amy', fav: 155},<br/>{ id: 4, name: 'Hannah', fav:},<br/>{ id: 5, name: 'Michael', fav:}<br/></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "{ id: 154, name: \n'Chocolate Heaven' },\n{ id: 155, name: 'Tasty Lemons' },\n{ \nid: 156, name: 'Vanilla Dreams' }",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">{ id: 154, name: \n  'Chocolate Heaven' },<br/>{ id: 155, name: 'Tasty Lemons' },<br/>{ \n  id: 156, name: 'Vanilla Dreams' }</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "These two tables can be combined by using users' fav field and products' id field.",
+      "html": "<p>These two tables can be combined by using users' <code>fav</code> field and products' \n<code>id</code> field.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  import mysql.connectormydb = mysql.connector.connect(\u00a0 host=\"localhost\",\u00a0\n  user=\"yourusername\",\u00a0 password=\"yourpassword\",\u00a0 database=\"mydatabase\")\n  mycursor = mydb.cursor()sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 INNER JOIN \n  products ON users.fav = products.id\"mycursor.execute(sql)\n  myresult = mycursor.fetchall()for x in myresult:\u00a0 print(x) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "connector",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "connector",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "connect",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"yourusername\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\"yourpassword\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\"mydatabase\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "cursor",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 INNER JOIN \n  products ON users.fav = products.id\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "execute",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "fetchall",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "import mysql.connectormydb = mysql.connector.connect(\u00a0 host=\"localhost\",\nuser=\"yourusername\",\u00a0 password=\"yourpassword\",\u00a0 database=\"mydatabase\")\nmycursor = mydb.cursor()sql = \"SELECT \\\u00a0 users.name AS user,\n\\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 INNER JOIN\nproducts ON users.fav = products.id\"mycursor.execute(sql)\nmyresult = mycursor.fetchall()for x in myresult:\u00a0 print(x)",
+      "syntax_highlighting": [
+        {
+          "text": "\n import mysql.connectormydb = mysql.connector.connect(\u00a0 host=\"localhost\",\u00a0\n  user=\"yourusername\",\u00a0 password=\"yourpassword\",\u00a0 database=\"mydatabase\")\n  mycursor = mydb.cursor()sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 INNER JOIN \n  products ON users.fav = products.id\"mycursor.execute(sql)\n  myresult = mycursor.fetchall()for x in myresult:\u00a0 print(x) ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "connector",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "connector",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "connect",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"yourusername\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\"yourpassword\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\"mydatabase\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "cursor",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 INNER JOIN \n  products ON users.fav = products.id\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "execute",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "fetchall",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">import</span> mysql.<span class=\"jspropertycolor\" style=\"color:black\">connector</span><br/><br/>mydb = mysql.<span class=\"jspropertycolor\" style=\"color:black\">connector</span>.<span class=\"jspropertycolor\" style=\"color:black\">connect</span>(<br/>\u00a0 host=<span class=\"jsstringcolor\" style=\"color:green\">\"localhost\"</span>,<br/>\u00a0<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  user=<span class=\"jsstringcolor\" style=\"color:green\">\"<em>yourusername</em>\"</span>,<br/>\u00a0 password=<span class=\"jsstringcolor\" style=\"color:green\">\"<em>yourpassword</em>\"</span>,<br/>\u00a0 database=<span class=\"jsstringcolor\" style=\"color:green\">\"mydatabase\"</span><br/>)<br/><br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  mycursor = mydb.<span class=\"jspropertycolor\" style=\"color:black\">cursor</span>()<br/><br/>sql = <span class=\"jsstringcolor\" style=\"color:green\">\"SELECT \\<br/>\u00a0 users.name AS user, \n  \\<br/>\u00a0 products.name AS favorite \\<br/>\u00a0 FROM users \\<br/>\u00a0 INNER JOIN \n  products ON users.fav = products.id\"</span><br/><br/>mycursor.<span class=\"jspropertycolor\" style=\"color:black\">execute</span>(sql)<br/><br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  myresult = mycursor.<span class=\"jspropertycolor\" style=\"color:black\">fetchall</span>()<br/><br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">for</span> x <span class=\"jskeywordcolor\" style=\"color:#005cc5\">in</span> myresult:<br/>\u00a0 print(x) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  import mysql.connectormydb = mysql.connector.connect(\u00a0 host=\"localhost\",\u00a0\n  user=\"yourusername\",\u00a0 password=\"yourpassword\",\u00a0 database=\"mydatabase\")\n  mycursor = mydb.cursor()sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 INNER JOIN \n  products ON users.fav = products.id\"mycursor.execute(sql)\n  myresult = mycursor.fetchall()for x in myresult:\u00a0 print(x) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "connector",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "connector",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "connect",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"yourusername\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\"yourpassword\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\"mydatabase\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "cursor",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 INNER JOIN \n  products ON users.fav = products.id\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "execute",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "fetchall",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: You can use JOIN instead of INNER JOIN. They will both give you the same result.",
+      "html": "<p><strong>Note:</strong> You can use JOIN instead of INNER JOIN. They will \n  both give you the same result.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "LEFT JOIN",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the example above, Hannah, and Michael were excluded from the result, that is because INNER JOIN only shows the records where there is a match.",
+      "html": "<p>In the example above, Hannah, and Michael were excluded from the result, that \nis because INNER JOIN only shows the records where there is a match.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If you want to show all users, even if they do not have a favorite product, use the LEFT JOIN statement:",
+      "html": "<p>If you want to show all users, even if they do not have a favorite product, \nuse the LEFT JOIN statement:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 LEFT JOIN \n  products ON users.fav = products.id\" ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 LEFT JOIN \n  products ON users.fav = products.id\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "sql = \"SELECT \\\u00a0 users.name AS user,\n\\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 LEFT JOIN\nproducts ON users.fav = products.id\"",
+      "syntax_highlighting": [
+        {
+          "text": "\n  sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 LEFT JOIN \n  products ON users.fav = products.id\" ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 LEFT JOIN \n  products ON users.fav = products.id\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  sql = <span class=\"jsstringcolor\" style=\"color:green\">\"SELECT \\<br/>\u00a0 users.name AS user, \n  \\<br/>\u00a0 products.name AS favorite \\<br/>\u00a0 FROM users \\<br/>\u00a0 LEFT JOIN \n  products ON users.fav = products.id\"</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 LEFT JOIN \n  products ON users.fav = products.id\" ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 LEFT JOIN \n  products ON users.fav = products.id\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "RIGHT JOIN",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If you want to return all products, and the users who have them as their favorite, even if no user have them as their favorite, use the RIGHT JOIN statement:",
+      "html": "<p>If you want to return all products, and the users who have them as their \nfavorite, even if no user have them as their favorite, use the RIGHT JOIN \nstatement:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 RIGHT JOIN \n  products ON users.fav = products.id\" ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 RIGHT JOIN \n  products ON users.fav = products.id\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "sql = \"SELECT \\\u00a0 users.name AS user,\n\\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 RIGHT JOIN\nproducts ON users.fav = products.id\"",
+      "syntax_highlighting": [
+        {
+          "text": "\n  sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 RIGHT JOIN \n  products ON users.fav = products.id\" ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 RIGHT JOIN \n  products ON users.fav = products.id\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  sql = <span class=\"jsstringcolor\" style=\"color:green\">\"SELECT \\<br/>\u00a0 users.name AS user, \n  \\<br/>\u00a0 products.name AS favorite \\<br/>\u00a0 FROM users \\<br/>\u00a0 RIGHT JOIN \n  products ON users.fav = products.id\"</span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  sql = \"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 RIGHT JOIN \n  products ON users.fav = products.id\" ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"SELECT \\\u00a0 users.name AS user, \n  \\\u00a0 products.name AS favorite \\\u00a0 FROM users \\\u00a0 RIGHT JOIN \n  products ON users.fav = products.id\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: Hannah and Michael, who have no favorite product, are not included in the result.",
+      "html": "<p><strong>Note:</strong> Hannah and Michael, who have no favorite product, are not included in the result.</p>"
+    }
+  ]
+}

@@ -1,0 +1,1413 @@
+{
+  "title": "Python Machine Learning Multiple Regression",
+  "url": "https://www.w3schools.com/python/python_ml_multiple_regression.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Machine Learning - Multiple Regression",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Multiple Regression",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "linear regression",
+          "href": "https://www.w3schools.com/python_ml_linear_regression.asp",
+          "title": ""
+        }
+      ],
+      "text": "Multiple regression is like linear regression , but with more than one independent value, meaning that we try to predict a value based on two or more variables.",
+      "html": "<p>Multiple regression is like <a href=\"python_ml_linear_regression.asp\">linear regression</a>, but with more than one \nindependent value, meaning that we try to predict a value based on <strong>two \nor more</strong> variables.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Take a look at the data set below, it contains some information about cars.",
+      "html": "<p>Take a look at the data set below, it contains some information about cars.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can predict the CO2 emission of a car based on the size of the engine, but with multiple regression we can throw in more variables, like the weight of the car, to make the prediction more accurate.",
+      "html": "<p>We can predict the CO2 emission of a car based on \nthe size of the engine, but with multiple regression we can throw in more \nvariables, like the weight of the car, to make the prediction more accurate.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "How Does it Work?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In Python we have modules that will do the work for us. Start by importing the Pandas module.",
+      "html": "<p>In Python we have modules that will do the work for us. Start by importing \nthe Pandas module.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "import pandas ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import pandas",
+      "language": "python",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "import pandas ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Pandas Tutorial",
+          "href": "https://www.w3schools.com/pandas_tutorial.asp",
+          "title": ""
+        }
+      ],
+      "text": "Learn about the Pandas module in our Pandas Tutorial .",
+      "html": "<p>Learn about the Pandas module in our <a href=\"pandas_tutorial.asp\">Pandas Tutorial</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Pandas module allows us to read csv files and return a DataFrame object.",
+      "html": "<p>The Pandas module allows us to read csv files and return a DataFrame object.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "data.csv",
+          "href": "https://www.w3schools.com/data.csv",
+          "title": ""
+        }
+      ],
+      "text": "The file is meant for testing purposes only, you can download it here: data.csv",
+      "html": "<p>The file is meant for testing purposes only, you can download it here: <a href=\"data.csv\">data.csv</a></p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "df = pandas.read_csv(\"data.csv\") ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\"data.csv\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "df = pandas.read_csv( \"data.csv\" )",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "df = pandas.read_csv(\"data.csv\") ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\"data.csv\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then make a list of the independent values and call this variable X .",
+      "html": "<p>Then make a list of the independent values and call this \nvariable <code>X</code>. </p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Put the dependent values in a variable called y .",
+      "html": "<p>Put the dependent values in a variable called <code>y</code>.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "X = df[['Weight', 'Volume']]\ny = df['CO2'] ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "'Weight'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Volume'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'CO2'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "X = df[[ 'Weight' , 'Volume' ]] y = df[ 'CO2' ]",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "X = df[['Weight', 'Volume']]\ny = df['CO2'] ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "'Weight'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Volume'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'CO2'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Tip: It is common to name the list of independent values with a upper case X, and the list of dependent values with a lower case y.",
+      "html": "<p><strong>Tip:</strong>  It is common to name the list of independent values with a upper \ncase X, and the list of dependent values with a lower case y.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We will use some methods from the sklearn module, so we will have to import that module as well:",
+      "html": "<p>We will use some methods from the sklearn module, so we will have to import that module as well:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "from sklearn import linear_model ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "from",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "from sklearn import linear_model",
+      "language": "python",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "from sklearn import linear_model ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "from",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "From the sklearn module we will use the LinearRegression() method to create a linear regression object.",
+      "html": "<p>From the sklearn module we will use the <code>LinearRegression()</code> method \nto create a linear regression object.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This object has a method called fit() that takes the independent and dependent values as parameters and fills the regression object with data that describes the relationship:",
+      "html": "<p>This object has a method called <code>fit()</code> that takes \nthe independent and dependent values as parameters and fills the regression object with data that describes the relationship:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "regr = linear_model.LinearRegression()\nregr.fit(X, y) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "regr = linear_model.LinearRegression() regr.fit(X, y)",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "regr = linear_model.LinearRegression()\nregr.fit(X, y) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now we have a regression object that are ready to predict CO2 values based on a car's weight and volume:",
+      "html": "<p>Now we have a regression object that are ready to predict CO2 values based on \na car's weight and volume:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "#predict the CO2 emission of a car where the weight \n  is 2300kg, and the volume is 1300cm3:\n  predictedCO2 = regr.predict([[2300, 1300]]) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "#predict the CO2 emission of a car where the weight \n  is 2300kg, and the volume is 1300cm3:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2300",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1300",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-example",
+          "ws-light-grey"
+        ],
+        "isNotranslate": false
+      },
+      "code": "#predict the CO2 emission of a car where the weight is 2300kg, and the volume is 1300cm 3 : predictedCO2 = regr.predict([[ 2300 , 1300 ]])",
+      "language": "unknown",
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "#predict the CO2 emission of a car where the weight \n  is 2300kg, and the volume is 1300cm3:\n  predictedCO2 = regr.predict([[2300, 1300]]) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "#predict the CO2 emission of a car where the weight \n  is 2300kg, and the volume is 1300cm3:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2300",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1300",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-example",
+        "ws-light-grey"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n  X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm3:\n  predictedCO2 = regr.predict([[2300, 1300]])\n  print(predictedCO2) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "from",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"data.csv\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Weight'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Volume'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'CO2'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm3:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2300",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1300",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]y = df['CO2']regr =\nlinear_model.LinearRegression()regr.fit(X, y)#predict the CO2\nemission of a car where the weight is 2300kg, and the volume is 1300cm3:\npredictedCO2 = regr.predict([[2300, 1300]])\nprint(predictedCO2)",
+      "syntax_highlighting": [
+        {
+          "text": "\n import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm3:\n  predictedCO2 = regr.predict([[2300, 1300]])\n print(predictedCO2) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "from",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"data.csv\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Weight'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Volume'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'CO2'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm3:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2300",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1300",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\"><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> pandas<br/><span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">from</span> sklearn <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> linear_model<br/><br/>df = pandas.read_csv(<span class=\"pythonstringcolor\" style=\"color:green\">\"data.csv\"</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <br/>X = df[[<span class=\"pythonstringcolor\" style=\"color:green\">'Weight'</span>, <span class=\"pythonstringcolor\" style=\"color:green\">'Volume'</span>]]<br/>y = df[<span class=\"pythonstringcolor\" style=\"color:green\">'CO2'</span>]<br/><br/>regr = <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  linear_model.LinearRegression()<br/>regr.fit(X, y)<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm<sup>3</sup>:<br/></span><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  predictedCO2 = regr.predict([[<span class=\"pythonnumbercolor\" style=\"color:#905\">2300</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">1300</span>]])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(predictedCO2) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n  X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm3:\n  predictedCO2 = regr.predict([[2300, 1300]])\n  print(predictedCO2) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "from",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"data.csv\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Weight'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Volume'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'CO2'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "#predict the CO2 \n  emission of a car where the weight is 2300kg, and the volume is 1300cm3:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2300",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1300",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We have predicted that a car with 1.3 liter engine, and a weight of 2300 kg, will release approximately 107 grams of CO2 for every kilometer it drives.",
+      "html": "<p>We have predicted that a car with 1.3 liter engine, and a weight of 2300 kg, will release approximately 107 grams of CO2 for every \nkilometer it drives.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Coefficient",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The coefficient is a factor that describes the relationship with an unknown variable.",
+      "html": "<p>The coefficient is a factor that describes the relationship \nwith an unknown variable.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Example: if x is a variable, then 2x is x two times. x is the unknown variable, and the number 2 is the coefficient.",
+      "html": "<p>Example: if <code>x</code> is a variable, then\n<code>2x</code> is <code>x</code> two \ntimes. <code>x</code> is the unknown variable, and the \nnumber <code>2</code> is the coefficient.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this case, we can ask for the coefficient value of weight against CO2, and for volume against CO2. The answer(s) we get tells us what would happen if we increase, or decrease, one of the independent values.",
+      "html": "<p>In this case, we can ask for the coefficient value of weight against CO2, and \nfor volume against CO2. The answer(s) we get tells us what would happen if we \nincrease, or decrease, one of the independent values.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n  X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)print(regr.coef_) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "from",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"data.csv\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Weight'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Volume'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'CO2'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]y = df['CO2']regr =\nlinear_model.LinearRegression()regr.fit(X, y)print(regr.coef_)",
+      "syntax_highlighting": [
+        {
+          "text": "\n import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)print(regr.coef_) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "from",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"data.csv\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Weight'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Volume'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'CO2'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\"><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> pandas<br/><span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">from</span> sklearn <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> linear_model<br/><br/>df = pandas.read_csv(<span class=\"pythonstringcolor\" style=\"color:green\">\"data.csv\"</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <br/>X = df[[<span class=\"pythonstringcolor\" style=\"color:green\">'Weight'</span>, <span class=\"pythonstringcolor\" style=\"color:green\">'Volume'</span>]]<br/>y = df[<span class=\"pythonstringcolor\" style=\"color:green\">'CO2'</span>]<br/><br/>regr = <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  linear_model.LinearRegression()<br/>regr.fit(X, y)<br/><br/><span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(regr.coef_) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n  X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)print(regr.coef_) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "from",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"data.csv\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Weight'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Volume'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'CO2'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Result Explained",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The result array represents the coefficient values of weight and volume.",
+      "html": "<p>The result array represents the coefficient values of weight and volume.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Weight: 0.00755095 Volume: 0.00780526",
+      "html": "<p>Weight: 0.00755095<br/>\nVolume: 0.00780526</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "These values tell us that if the weight increase by 1kg, the CO2 emission increases by 0.00755095g.",
+      "html": "<p>These values tell us that if the weight increase by 1kg, the CO2 \nemission increases by 0.00755095g.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And if the engine size (Volume) increases by 1cm 3 , the CO2 emission increases by 0.00780526g.",
+      "html": "<p>And if the engine size (Volume) increases by 1cm<sup>3</sup>, the CO2 emission \nincreases by 0.00780526g.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "I think that is a fair guess, but let test it!",
+      "html": "<p>I think that is a fair guess, but let test it!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We have already predicted that if a car with a 1300cm 3 engine weighs 2300kg, the CO2 emission will be approximately 107g.",
+      "html": "<p>We have already predicted that if a car with a 1300cm<sup>3</sup> engine weighs 2300kg, the CO2 emission will be approximately 107g.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "What if we increase the weight with 1000kg?",
+      "html": "<p>What if we increase the weight with 1000kg?</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n  X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)predictedCO2 = regr.predict([[3300, 1300]])\n  print(predictedCO2) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "from",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "import",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"data.csv\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "'Weight'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'Volume'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "'CO2'",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "3300",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1300",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\nX = df[['Weight', 'Volume']]y = df['CO2']regr =\nlinear_model.LinearRegression()regr.fit(X, y)predictedCO2 = regr.predict([[3300, 1300]])\nprint(predictedCO2)",
+      "syntax_highlighting": [
+        {
+          "text": "\n import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)predictedCO2 = regr.predict([[3300, 1300]])\n print(predictedCO2) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "from",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "import",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"data.csv\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "'Weight'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'Volume'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "'CO2'",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "3300",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1300",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\"><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> pandas<br/><span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">from</span> sklearn <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">import</span> linear_model<br/><br/>df = pandas.read_csv(<span class=\"pythonstringcolor\" style=\"color:green\">\"data.csv\"</span>)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <br/>X = df[[<span class=\"pythonstringcolor\" style=\"color:green\">'Weight'</span>, <span class=\"pythonstringcolor\" style=\"color:green\">'Volume'</span>]]<br/>y = df[<span class=\"pythonstringcolor\" style=\"color:green\">'CO2'</span>]<br/><br/>regr = <span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>  linear_model.LinearRegression()<br/>regr.fit(X, y)<br/><br/>predictedCO2 = regr.predict([[<span class=\"pythonnumbercolor\" style=\"color:#905\">3300</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">1300</span>]])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(predictedCO2) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  import pandasfrom sklearn import linear_modeldf = pandas.read_csv(\"data.csv\")\n  X = df[['Weight', 'Volume']]y = df['CO2']regr = \n  linear_model.LinearRegression()regr.fit(X, y)predictedCO2 = regr.predict([[3300, 1300]])\n  print(predictedCO2) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "from",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "import",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"data.csv\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "'Weight'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'Volume'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "'CO2'",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "3300",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1300",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We have predicted that a car with 1.3 liter engine, and a weight of 3300 kg, will release approximately 115 grams of CO2 for every kilometer it drives.",
+      "html": "<p>\nWe have predicted that a car with 1.3 liter engine, and a weight of \n3300 kg, will release approximately 115 grams of CO2 for every kilometer it drives.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which shows that the coefficient of 0.00755095 is correct:",
+      "html": "<p>\nWhich shows that the coefficient of 0.00755095 is correct:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "107.2087328 + (1000 * 0.00755095) = 114.75968",
+      "html": "<p>\n107.2087328 + (1000 * 0.00755095) = 114.75968</p>"
+    }
+  ]
+}

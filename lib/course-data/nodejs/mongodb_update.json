@@ -1,0 +1,2009 @@
+{
+  "title": "Node.js MongoDB Update",
+  "url": "https://www.w3schools.com/nodejs/nodejs_mongodb_update.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Node.js MongoDB Update",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Update Document",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You can update a record, or document as it is called in MongoDB, by using the updateOne() method.",
+      "html": "<p>You can update a record, or document as it is called in MongoDB, by using \nthe <code>updateOne()</code> method.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The first parameter of the updateOne() method is a query object defining which document to update.",
+      "html": "<p>The first parameter of the <code>updateOne()</code> method \nis a query object defining which document to update.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: If the query finds more than one record, only the first occurrence is updated.",
+      "html": "<p><strong>Note:</strong> If the query finds more than one record, only the first \noccurrence is updated.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The second parameter is an object defining the new values of the document.",
+      "html": "<p>The second parameter  \nis an object defining the new values of the document.<!-- By default, all fields in \nthe \ndocument gets updated, (except the <code class=\"w3-codespan\">_id</code> field) \nso remember to set the value of every field, otherwise the value will be left \nempty.--></p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n  MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n  var dbo = db.db(\"mydb\");\u00a0 \n  var myquery = { address: \"Valley 345\" };\u00a0 var newvalues = { \n  $set: {name: \n  \"Mickey\", address: \"Canyon 123\" } };\u00a0 dbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(\"1 document updated\");\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "'mongodb'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "MongoClient",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"mongodb://127.0.0.1:27017/\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "connect",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "throw",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "db",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"mydb\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"Valley 345\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"Mickey\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\"Canyon 123\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "collection",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"customers\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "updateOne",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "throw",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "log",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"1 document updated\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "close",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: \"Valley 345\" };\u00a0 var newvalues = {\n$set: {name:\n\"Mickey\", address: \"Canyon 123\" } };\u00a0 dbo.collection(\"customers\").updateOne(myquery,\nnewvalues, function(err, res) {\u00a0\u00a0\u00a0 if (err) throw err;\nconsole.log(\"1 document updated\");\ndb.close();\u00a0 });});",
+      "syntax_highlighting": [
+        {
+          "text": "\n var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n var dbo = db.db(\"mydb\");\u00a0 \n var myquery = { address: \"Valley 345\" };\u00a0 var newvalues = { \n  $set: {name: \n \"Mickey\", address: \"Canyon 123\" } };\u00a0 dbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(\"1 document updated\");\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "'mongodb'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "MongoClient",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"mongodb://127.0.0.1:27017/\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "connect",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "throw",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "db",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"mydb\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Valley 345\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"Mickey\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\"Canyon 123\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "collection",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"customers\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "updateOne",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "throw",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "log",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"1 document updated\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "close",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> MongoClient = require(<span class=\"jsstringcolor\" style=\"color:green\">'mongodb'</span>).<span class=\"jspropertycolor\" style=\"color:black\">MongoClient</span>;<br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> url = <span class=\"jsstringcolor\" style=\"color:green\">\"mongodb://127.0.0.1:27017/\"</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>MongoClient.<span class=\"jspropertycolor\" style=\"color:black\">connect</span>(url, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(err, db) {<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (err) <span class=\"jskeywordcolor\" style=\"color:#005cc5\">throw</span> err;<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> dbo = db.<span class=\"jspropertycolor\" style=\"color:black\">db</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"mydb\"</span>);<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> myquery = { address: <span class=\"jsstringcolor\" style=\"color:green\">\"Valley 345\"</span> };<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> newvalues = { <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  $set: {name: <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jsstringcolor\" style=\"color:green\">\"Mickey\"</span>, address: <span class=\"jsstringcolor\" style=\"color:green\">\"Canyon 123\"</span> } };<br/>\u00a0 dbo.<span class=\"jspropertycolor\" style=\"color:black\">collection</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"customers\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">updateOne</span>(myquery, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  newvalues, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(err, res) {<br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (err) <span class=\"jskeywordcolor\" style=\"color:#005cc5\">throw</span> err;<br/>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  console.<span class=\"jspropertycolor\" style=\"color:black\">log</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"1 document updated\"</span>);<br/>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  db.<span class=\"jspropertycolor\" style=\"color:black\">close</span>();<br/>\u00a0 });<br/>}); </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n  MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n  var dbo = db.db(\"mydb\");\u00a0 \n  var myquery = { address: \"Valley 345\" };\u00a0 var newvalues = { \n  $set: {name: \n  \"Mickey\", address: \"Canyon 123\" } };\u00a0 dbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(\"1 document updated\");\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "'mongodb'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "MongoClient",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"mongodb://127.0.0.1:27017/\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "connect",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "throw",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "db",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"mydb\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"Valley 345\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"Mickey\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\"Canyon 123\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "collection",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"customers\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "updateOne",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "throw",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "log",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"1 document updated\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "close",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Save the code above in a file called \"demo_update_one.js\" and run the file:",
+      "html": "<p>Save the code above in a file called \"demo_update_one.js\" and run the file:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "C:\\Users\\>node demo_update_one.js",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\nC:\\Users\\<em>Your Name</em>&gt;node demo_update_one.js\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which will give you this result:",
+      "html": "<p>Which will give you this result:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "1 document updated",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">1 document updated</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Update Only Specific Fields",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When using the $set operator, only the specified fields are updated:",
+      "html": "<p>When using the <code>$set</code> operator, only the \nspecified fields are updated:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  ...\u00a0 var myquery = { address: \"Valley 345\" };\u00a0 var newvalues \n  = { $set: { address: \"Canyon 123\" } };\u00a0 dbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {... ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"Valley 345\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"Canyon 123\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "collection",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"customers\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "updateOne",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "...\u00a0 var myquery = { address: \"Valley 345\" };\u00a0 var newvalues\n= { $set: { address: \"Canyon 123\" } };\u00a0 dbo.collection(\"customers\").updateOne(myquery,\nnewvalues, function(err, res) {...",
+      "syntax_highlighting": [
+        {
+          "text": "\n  ...\u00a0 var myquery = { address: \"Valley 345\" };\u00a0 var newvalues \n  = { $set: { address: \"Canyon 123\" } };\u00a0 dbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {... ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Valley 345\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"Canyon 123\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "collection",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"customers\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "updateOne",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  .<span class=\"jspropertycolor\" style=\"color:black\"></span>.<span class=\"jspropertycolor\" style=\"color:black\"></span>.<span class=\"jspropertycolor\" style=\"color:black\"></span><br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> myquery = { address: <span class=\"jsstringcolor\" style=\"color:green\">\"Valley 345\"</span> };<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> newvalues <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  = { <strong>$set: { address: <span class=\"jsstringcolor\" style=\"color:green\">\"Canyon 123\"</span> }</strong> };<br/>\u00a0 dbo.<span class=\"jspropertycolor\" style=\"color:black\">collection</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"customers\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">updateOne</span>(myquery, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  newvalues, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(err, res) {<br/>.<span class=\"jspropertycolor\" style=\"color:black\"></span>.<span class=\"jspropertycolor\" style=\"color:black\"></span>.<span class=\"jspropertycolor\" style=\"color:black\"></span> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  ...\u00a0 var myquery = { address: \"Valley 345\" };\u00a0 var newvalues \n  = { $set: { address: \"Canyon 123\" } };\u00a0 dbo.collection(\"customers\").updateOne(myquery, \n  newvalues, function(err, res) {... ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"Valley 345\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"Canyon 123\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "collection",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"customers\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "updateOne",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Update Many Documents",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To update all documents that meets the criteria of the query, use the updateMany() method.",
+      "html": "<p>To update <em>all</em> documents that meets the criteria of the query, use \nthe <code>updateMany()</code> method.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n  MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n  var dbo = db.db(\"mydb\");\u00a0 \n  var myquery = { address: /^S/ };\u00a0 var newvalues = {$set: {name: \n  \"Minnie\"} };\u00a0 \n  dbo.collection(\"customers\").updateMany(myquery, newvalues, function(err, \n  res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(res.result.nModified + \" document(s) updated\");\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "'mongodb'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "MongoClient",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"mongodb://127.0.0.1:27017/\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "connect",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "throw",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "db",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"mydb\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "/^S/",
+            "color": "rgb(238, 153, 0)",
+            "class": "jsregexpcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"Minnie\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "collection",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"customers\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "updateMany",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "throw",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "log",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "result",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "nModified",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\" document(s) updated\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "close",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\nvar dbo = db.db(\"mydb\");\nvar myquery = { address: /^S/ };\u00a0 var newvalues = {$set: {name:\n\"Minnie\"} };\ndbo.collection(\"customers\").updateMany(myquery, newvalues, function(err,\nres) {\u00a0\u00a0\u00a0 if (err) throw err;\nconsole.log(res.result.nModified + \" document(s) updated\");\ndb.close();\u00a0 });});",
+      "syntax_highlighting": [
+        {
+          "text": "\n var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n var dbo = db.db(\"mydb\");\u00a0 \n var myquery = { address: /^S/ };\u00a0 var newvalues = {$set: {name: \n \"Minnie\"} };\u00a0 \n  dbo.collection(\"customers\").updateMany(myquery, newvalues, function(err, \n  res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(res.result.nModified + \" document(s) updated\");\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "'mongodb'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "MongoClient",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"mongodb://127.0.0.1:27017/\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "connect",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "throw",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "db",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"mydb\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "/^S/",
+          "color": "#e90",
+          "class": [
+            "jsregexpcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"Minnie\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "collection",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"customers\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "updateMany",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "throw",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "log",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "result",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "nModified",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\" document(s) updated\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "close",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> MongoClient = require(<span class=\"jsstringcolor\" style=\"color:green\">'mongodb'</span>).<span class=\"jspropertycolor\" style=\"color:black\">MongoClient</span>;<br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> url = <span class=\"jsstringcolor\" style=\"color:green\">\"mongodb://127.0.0.1:27017/\"</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>MongoClient.<span class=\"jspropertycolor\" style=\"color:black\">connect</span>(url, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(err, db) {<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (err) <span class=\"jskeywordcolor\" style=\"color:#005cc5\">throw</span> err;<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> dbo = db.<span class=\"jspropertycolor\" style=\"color:black\">db</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"mydb\"</span>);<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> myquery = { address: <span class=\"jsregexpcolor\" style=\"color:#e90\">/^S/</span> };<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> newvalues = {$set: {name: <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jsstringcolor\" style=\"color:green\">\"Minnie\"</span>} };<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  dbo.<span class=\"jspropertycolor\" style=\"color:black\">collection</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"customers\"</span>).<span class=\"jspropertycolor\" style=\"color:black\">updateMany</span>(myquery, newvalues, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(err, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  res) {<br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (err) <span class=\"jskeywordcolor\" style=\"color:#005cc5\">throw</span> err;<br/>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  console.<span class=\"jspropertycolor\" style=\"color:black\">log</span>(res.<span class=\"jspropertycolor\" style=\"color:black\">result</span>.<span class=\"jspropertycolor\" style=\"color:black\">nModified</span> + <span class=\"jsstringcolor\" style=\"color:green\">\" document(s) updated\"</span>);<br/>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  db.<span class=\"jspropertycolor\" style=\"color:black\">close</span>();<br/>\u00a0 });<br/>}); </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n  MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n  var dbo = db.db(\"mydb\");\u00a0 \n  var myquery = { address: /^S/ };\u00a0 var newvalues = {$set: {name: \n  \"Minnie\"} };\u00a0 \n  dbo.collection(\"customers\").updateMany(myquery, newvalues, function(err, \n  res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(res.result.nModified + \" document(s) updated\");\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "'mongodb'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "MongoClient",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"mongodb://127.0.0.1:27017/\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "connect",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "throw",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "db",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"mydb\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "/^S/",
+          "color": "rgb(238, 153, 0)",
+          "class": "jsregexpcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"Minnie\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "collection",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"customers\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "updateMany",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "throw",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "log",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "result",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "nModified",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\" document(s) updated\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "close",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Save the code above in a file called \"demo_update_many.js\" and run the file:",
+      "html": "<p>Save the code above in a file called \"demo_update_many.js\" and run the file:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "C:\\Users\\>node demo_update_many.js",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\nC:\\Users\\<em>Your Name</em>&gt;node demo_update_many.js\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which will give you this result:",
+      "html": "<p>Which will give you this result:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "2 document(s) updated",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">2 document(s) updated</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The Result Object",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The updateOne() and the updateMany() methods return an object which contains information about how the execution affected the database.",
+      "html": "<p>The <code>updateOne()</code> and the\n<code>updateMany()</code> methods return an object which contains information about how \nthe execution affected the database.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Most of the information is not important to understand, but one object inside the object is called \"result\" which tells us if the execution went OK, and how many documents were affected.",
+      "html": "<p>Most of the information is not important to understand, but one object inside \nthe object is called \"result\" which tells us if the execution went OK, and how \nmany documents were affected.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The result object looks like this:",
+      "html": "<p>The result object looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "{ n: 1, nModified: 2, ok: 1 }",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  { n: 1, nModified: 2, ok: 1 }</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You can use this object to return the number of updated documents:",
+      "html": "<p>You can use this object to return the number of updated documents:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "console.log(res.result.nModified);",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  console.log(res.result.nModified);</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which will produce this result:",
+      "html": "<p>Which will produce this result:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "2",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  2</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

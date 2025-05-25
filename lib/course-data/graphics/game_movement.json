@@ -1,0 +1,2566 @@
+{
+  "title": "Game Tutorial",
+  "url": "https://www.w3schools.com/graphics/game_movement.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Game Movement",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With the new way of drawing components, explained in the Game Rotation chapter, the movements are more flexible.",
+      "html": "<p>With the new way of drawing components, explained in the Game Rotation chapter, the movements are more flexible.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "How to Move Objects?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Add a speed property to the component constructor, which represents the current speed of the component.",
+      "html": "<p>Add a <code>speed</code> property to the <code>component</code> constructor, which represents the current speed of the component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Also make some changes in the newPos() method, to calculate the position of the component, based on speed and angle .",
+      "html": "<p>Also make some changes in the <code>newPos()</code> method, to calculate the \nposition of the component, based on <code>speed</code> and <code>angle</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "By default, the components are facing up, and by setting the speed property to 1, the component will start moving forward.",
+      "html": "<p>By default, the components are facing up, and by setting the speed \nproperty to 1, the component will start moving forward.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/graphics/tryit.asp?filename=trygame_movement_forward",
+        "syntaxHighlighting": [
+          {
+            "text": "\nfunction component(width, height, color, x, y) {\u00a0 this.gamearea = gamearea;\n  \u00a0 this.width = width;\u00a0 this.height = height;\u00a0 this.angle = 0;\n  \u00a0 this.speed = 1;\n \u00a0 this.x = x;\u00a0 this.y = y;\n \u00a0 this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0 ctx.save();\n  \u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\n  \u00a0\u00a0\u00a0 ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0\u00a0}\u00a0 this.newPos = function() {\u00a0\u00a0\u00a0 this.x += this.speed * Math.sin(this.angle);\n  \u00a0\u00a0\u00a0 this.y -= this.speed * Math.cos(this.angle);\u00a0\u00a0}\n } ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "gamearea",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "height",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "speed",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "x",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "y",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "update",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "context",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "save",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "translate",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "x",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "y",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "rotate",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "fillStyle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "fillRect",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "/ -2, this.height /",
+            "color": "rgb(238, 153, 0)",
+            "class": "jsregexpcolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "height",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "restore",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "newPos",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "x",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "speed",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "sin",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "y",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "speed",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "cos",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "function component(width, height, color, x, y) {\u00a0 this.gamearea = gamearea;\nthis.width = width;\u00a0 this.height = height;\u00a0 this.angle = 0;\nthis.speed = 1;\nthis.x = x;\u00a0 this.y = y;\nthis.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0 ctx.save();\nctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\nctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore(); \u00a0\u00a0}\u00a0 this.newPos = function() {\u00a0\u00a0\u00a0 this.x += this.speed * Math.sin(this.angle);\nthis.y -= this.speed * Math.cos(this.angle);\u00a0\u00a0}\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nfunction component(width, height, color, x, y) {\u00a0 this.gamearea = gamearea;\n  \u00a0 this.width = width;\u00a0 this.height = height;\u00a0 this.angle = 0;\n  \u00a0 this.speed = 1;\n \u00a0 this.x = x;\u00a0 this.y = y;\n \u00a0 this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0 ctx.save();\n  \u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\n  \u00a0\u00a0\u00a0 ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0\u00a0}\u00a0 this.newPos = function() {\u00a0\u00a0\u00a0 this.x += this.speed * Math.sin(this.angle);\n  \u00a0\u00a0\u00a0 this.y -= this.speed * Math.cos(this.angle);\u00a0\u00a0}\n } ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "gamearea",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "height",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "speed",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "x",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "y",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "update",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "context",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "save",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "translate",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "x",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "y",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "rotate",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "fillStyle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "fillRect",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "/ -2, this.height /",
+          "color": "#e90",
+          "class": [
+            "jsregexpcolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "height",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "restore",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "newPos",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "x",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "speed",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "sin",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "y",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "speed",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "cos",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\">\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> component(width, height, color, x, y) {<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">gamearea</span> = gamearea;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span> = width;<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">height</span> = height;<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span> = <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>;<br/><strong>\n  \u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">speed</span> = <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> </strong>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">x</span> = x;<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">y</span> = y;<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">update</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>() {<br/>\u00a0\u00a0\u00a0 ctx = myGameArea.<span class=\"jspropertycolor\" style=\"color:black\">context</span>;<br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">save</span>();<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">translate</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">x</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">y</span>); <br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">rotate</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">fillStyle</span> = color;<br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">fillRect</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span> <span class=\"jsregexpcolor\" style=\"color:#e90\">/ -2, this.height /</span> -<span class=\"jsnumbercolor\" style=\"color:#905\">2</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">height</span>);<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">restore</span>(); <br/>\u00a0\u00a0}<br/><strong>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">newPos</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>() {<br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">x</span> += <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">speed</span> * Math.<span class=\"jspropertycolor\" style=\"color:black\">sin</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">y</span> -= <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">speed</span> * Math.<span class=\"jspropertycolor\" style=\"color:black\">cos</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span>);<br/>\u00a0\u00a0}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> </strong>}<br/> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/graphics/tryit.asp?filename=trygame_movement_forward",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nfunction component(width, height, color, x, y) {\u00a0 this.gamearea = gamearea;\n  \u00a0 this.width = width;\u00a0 this.height = height;\u00a0 this.angle = 0;\n  \u00a0 this.speed = 1;\n \u00a0 this.x = x;\u00a0 this.y = y;\n \u00a0 this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0 ctx.save();\n  \u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\n  \u00a0\u00a0\u00a0 ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0\u00a0}\u00a0 this.newPos = function() {\u00a0\u00a0\u00a0 this.x += this.speed * Math.sin(this.angle);\n  \u00a0\u00a0\u00a0 this.y -= this.speed * Math.cos(this.angle);\u00a0\u00a0}\n } ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "gamearea",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "height",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "speed",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "x",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "y",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "update",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "context",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "save",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "translate",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "x",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "y",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "rotate",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "fillStyle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "fillRect",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "/ -2, this.height /",
+          "color": "rgb(238, 153, 0)",
+          "class": "jsregexpcolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "height",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "restore",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "newPos",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "x",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "speed",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "sin",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "y",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "speed",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "cos",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Making Turns",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We also want to be able to make left and right turns. Make a new property called moveAngle , which indicates the current moving value, or rotation angle. In the newPos() method calculate the angle based on the moveAngle property:",
+      "html": "<p>We also want to be able to make left and right turns. Make a new \nproperty called <code>moveAngle</code>, which indicates the current moving \nvalue, or rotation angle. In the <code>newPos()</code> method calculate the\n<code>angle</code> based on the <code>moveAngle</code> property:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/graphics/tryit.asp?filename=trygame_movement_turn",
+        "syntaxHighlighting": [
+          {
+            "text": "\nfunction component(width, height, color, x, y) {\u00a0\u00a0this.width = width;\n  \u00a0 this.height = height;\u00a0 this.angle = 0;\u00a0 this.moveAngle = 1;\n \u00a0\u00a0this.speed = 1;\n \u00a0\u00a0this.x = x;\u00a0 this.y = y;\n \u00a0 this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0\u00a0ctx.save();\u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\u00a0\u00a0\u00a0\u00a0ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0 }\u00a0 this.newPos = function() {\u00a0\u00a0\u00a0 this.angle += this.moveAngle * Math.PI / 180;\n  \u00a0\u00a0\u00a0 this.x += this.speed * Math.sin(this.angle);\u00a0\u00a0\u00a0 this.y -= this.speed * Math.cos(this.angle);\n  \u00a0\u00a0}\n } ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "height",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "moveAngle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "speed",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "x",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "y",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "update",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "context",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "save",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "translate",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "x",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "y",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "rotate",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "fillStyle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "fillRect",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "/ -2, this.height /",
+            "color": "rgb(238, 153, 0)",
+            "class": "jsregexpcolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "height",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "restore",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "newPos",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "moveAngle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "PI",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "180",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "x",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "speed",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "sin",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "y",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "speed",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "cos",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "function component(width, height, color, x, y) {\u00a0\u00a0this.width = width;\nthis.height = height;\u00a0 this.angle = 0;\u00a0 this.moveAngle = 1;\nthis.speed = 1;\nthis.x = x;\u00a0 this.y = y;\nthis.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0\u00a0ctx.save();\u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\u00a0\u00a0\u00a0\u00a0ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore(); \u00a0 }\u00a0 this.newPos = function() {\u00a0\u00a0\u00a0 this.angle += this.moveAngle * Math.PI / 180;\nthis.x += this.speed * Math.sin(this.angle);\u00a0\u00a0\u00a0 this.y -= this.speed * Math.cos(this.angle);\n}\n}",
+      "syntax_highlighting": [
+        {
+          "text": "\nfunction component(width, height, color, x, y) {\u00a0\u00a0this.width = width;\n  \u00a0 this.height = height;\u00a0 this.angle = 0;\u00a0 this.moveAngle = 1;\n \u00a0\u00a0this.speed = 1;\n \u00a0\u00a0this.x = x;\u00a0 this.y = y;\n \u00a0 this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0\u00a0ctx.save();\u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\u00a0\u00a0\u00a0\u00a0ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0 }\u00a0 this.newPos = function() {\u00a0\u00a0\u00a0 this.angle += this.moveAngle * Math.PI / 180;\n  \u00a0\u00a0\u00a0 this.x += this.speed * Math.sin(this.angle);\u00a0\u00a0\u00a0 this.y -= this.speed * Math.cos(this.angle);\n  \u00a0\u00a0}\n } ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "height",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "moveAngle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "speed",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "x",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "y",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "update",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "context",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "save",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "translate",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "x",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "y",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "rotate",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "fillStyle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "fillRect",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "/ -2, this.height /",
+          "color": "#e90",
+          "class": [
+            "jsregexpcolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "height",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "restore",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "newPos",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "moveAngle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "PI",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "180",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "x",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "speed",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "sin",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "y",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "speed",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "cos",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\">\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> component(width, height, color, x, y) {<br/>\u00a0\u00a0<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span> = width;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">height</span> = height;<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span> = <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>;<br/><strong>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">moveAngle</span> = <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> </strong>\u00a0\u00a0<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">speed</span> = <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> \u00a0\u00a0<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">x</span> = x;<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">y</span> = y;<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">update</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>() {<br/>\u00a0\u00a0\u00a0 ctx = myGameArea.<span class=\"jspropertycolor\" style=\"color:black\">context</span>;<br/>\u00a0\u00a0\u00a0\u00a0ctx.<span class=\"jspropertycolor\" style=\"color:black\">save</span>();<br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">translate</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">x</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">y</span>); <br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">rotate</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span>);<br/>\u00a0\u00a0\u00a0\u00a0ctx.<span class=\"jspropertycolor\" style=\"color:black\">fillStyle</span> = color;<br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">fillRect</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span> <span class=\"jsregexpcolor\" style=\"color:#e90\">/ -2, this.height /</span> -<span class=\"jsnumbercolor\" style=\"color:#905\">2</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">height</span>);<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">restore</span>(); <br/>\u00a0 }<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">newPos</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>() {<br/><strong>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span> += <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">moveAngle</span> * Math.<span class=\"jspropertycolor\" style=\"color:black\">PI</span> / <span class=\"jsnumbercolor\" style=\"color:#905\">180</span>;<br/></strong>\n  \u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">x</span> += <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">speed</span> * Math.<span class=\"jspropertycolor\" style=\"color:black\">sin</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span>);<br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">y</span> -= <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">speed</span> * Math.<span class=\"jspropertycolor\" style=\"color:black\">cos</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span>);<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0}<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> }<br/> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/graphics/tryit.asp?filename=trygame_movement_turn",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nfunction component(width, height, color, x, y) {\u00a0\u00a0this.width = width;\n  \u00a0 this.height = height;\u00a0 this.angle = 0;\u00a0 this.moveAngle = 1;\n \u00a0\u00a0this.speed = 1;\n \u00a0\u00a0this.x = x;\u00a0 this.y = y;\n \u00a0 this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0\u00a0ctx.save();\u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\u00a0\u00a0\u00a0\u00a0ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0 }\u00a0 this.newPos = function() {\u00a0\u00a0\u00a0 this.angle += this.moveAngle * Math.PI / 180;\n  \u00a0\u00a0\u00a0 this.x += this.speed * Math.sin(this.angle);\u00a0\u00a0\u00a0 this.y -= this.speed * Math.cos(this.angle);\n  \u00a0\u00a0}\n } ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "height",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "moveAngle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "speed",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "x",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "y",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "update",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "context",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "save",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "translate",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "x",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "y",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "rotate",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "fillStyle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "fillRect",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "/ -2, this.height /",
+          "color": "rgb(238, 153, 0)",
+          "class": "jsregexpcolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "height",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "restore",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "newPos",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "moveAngle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "PI",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "180",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "x",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "speed",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "sin",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "y",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "speed",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "cos",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Use the Keyboard",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How does the red square move when using the keyboard? Instead of moving up and down, and from side to side, the red square moves forward when you use the \"up\" arrow, and turns left and right when pressing the left and right arrows.",
+      "html": "<p>How does the red square move when using the keyboard?\nInstead of moving up and down, and from side to side, the red square moves forward when you use the \"up\" arrow,\nand turns left and right when pressing the left and right arrows.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": "https://www.w3schools.com/graphics/tryit.asp?filename=trygame_movement_keyboard",
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "w3-padding",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<div class=\"w3-white w3-padding notranslate\">\n<iframe src=\"trygame_movement_keyboard.htm\" style=\"width:100%;height:440px;border:none;\"></iframe>\n</div>",
+      "code_classes": [
+        "w3-white",
+        "w3-padding",
+        "notranslate"
+      ],
+      "tryItLink": "https://www.w3schools.com/graphics/tryit.asp?filename=trygame_movement_keyboard",
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "w3-padding",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

@@ -1,0 +1,763 @@
+{
+  "title": "DSA Graphs",
+  "url": "https://www.w3schools.com/dsa/dsa_theory_hashtables.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Hash Tables",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Hash Table",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A Hash Table is a data structure designed to be fast to work with.",
+      "html": "<p>A Hash Table is a data structure designed to be fast to work with.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The reason Hash Tables are sometimes preferred instead of arrays or linked lists is because searching for, adding, and deleting data can be done really quickly, even for large amounts of data.",
+      "html": "<p>The reason Hash Tables are sometimes preferred instead of arrays or linked lists is because searching for, adding, and deleting data can be done really quickly, even for large amounts of data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Linked List",
+          "href": "https://www.w3schools.com/dsa_theory_linkedlists.php",
+          "title": ""
+        }
+      ],
+      "text": "In a Linked List , finding a person \"Bob\" takes time because we would have to go from one node to the next, checking each node, until the node with \"Bob\" is found.",
+      "html": "<p>In a <a href=\"dsa_theory_linkedlists.php\">Linked List</a>, finding a person \"Bob\" takes time because we would have to go from one node to the next, checking each node, until the node with \"Bob\" is found.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Array",
+          "href": "https://www.w3schools.com/dsa_data_arrays.php",
+          "title": ""
+        }
+      ],
+      "text": "And finding \"Bob\" in an Array could be fast if we knew the index, but when we only know the name \"Bob\", we need to compare each element (like with Linked Lists), and that takes time.",
+      "html": "<p>And finding \"Bob\" in an <a href=\"dsa_data_arrays.php\">Array</a> could be fast if we knew the index, but when we only know the name \"Bob\", we need to compare each element (like with Linked Lists), and that takes time.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With a Hash Table however, finding \"Bob\" is done really fast because there is a way to go directly to where \"Bob\" is stored, using something called a hash function.",
+      "html": "<p>With a Hash Table however, finding \"Bob\" is done really fast because there is a way to go directly to where \"Bob\" is stored, using something called a hash function.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Building A Hash Table from Scratch",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To get the idea of what a Hash Table is, let's try to build one from scratch, to store unique first names inside it.",
+      "html": "<p>To get the idea of what a Hash Table is, let's try to build one from scratch, to store unique first names inside it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We will build the Hash Set in 5 steps:",
+      "html": "<p>We will build the Hash Set in 5 steps:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 1: Starting with an array",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Using an array, we could store names like this:",
+      "html": "<p>Using an array, we could store names like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_array\n=\n\n[\n'Pete'\n,\n\n'Jones'\n,\n\n'Lisa'\n,\n\n'Bob'\n,\n\n'Siri'\n]",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\">my_array <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'Pete'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'Jones'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'Lisa'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'Bob'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'Siri'</span><span class=\"token punctuation\">]</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To find \"Bob\" in this array, we need to compare each name, element by element, until we find \"Bob\".",
+      "html": "<p>To find \"Bob\" in this array, we need to compare each name, element by element, until we find \"Bob\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If the array was sorted alphabetically, we could use Binary Search to find a name quickly, but inserting or deleting names in the array would mean a big operation of shifting elements in memory.",
+      "html": "<p>If the array was sorted alphabetically, we could use Binary Search to find a name quickly, but inserting or deleting names in the array would mean a big operation of shifting elements in memory.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To make interacting with the list of names really fast, let's use a Hash Table for this instead, or a Hash Set, which is a simplified version of a Hash Table.",
+      "html": "<p>To make interacting with the list of names really fast, let's use a Hash Table for this instead, or a Hash Set, which is a simplified version of a Hash Table.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To keep it simple, let's assume there is at most 10 names in the list, so the array must be a fixed size of 10 elements. When talking about Hash Tables, each of these elements is called a bucket .",
+      "html": "<p>To keep it simple, let's assume there is at most 10 names in the list, so the array must be a fixed size of 10 elements. When talking about Hash Tables, each of these elements is called a <strong>bucket</strong>.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_hash_set\n=\n\n[\nNone\n,\nNone\n,\nNone\n,\nNone\n,\nNone\n,\nNone\n,\nNone\n,\nNone\n,\nNone\n,\nNone\n]",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\">my_hash_set <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 2: Storing names using a hash function",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now comes the special way we interact with the Hash Set we are making.",
+      "html": "<p>Now comes the special way we interact with the Hash Set we are making.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We want to store a name directly into its right place in the array, and this is where the hash function comes in.",
+      "html": "<p>We want to store a name directly into its right place in the array, and this is where the <strong>hash function</strong> comes in.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A hash function can be made in many ways, it is up to the creator of the Hash Table. A common way is to find a way to convert the value into a number that equals one of the Hash Set's index numbers, in this case a number from 0 to 9. In our example we will use the Unicode number of each character, summarize them and do a modulo 10 operation to get index numbers 0-9.",
+      "html": "<p>A hash function can be made in many ways, it is up to the creator of the Hash Table. A common way is to find a way to convert the value into a number that equals one of the Hash Set's index numbers, in this case a number from 0 to 9. In our example we will use the Unicode number of each character, summarize them and do a modulo 10 operation to get index numbers 0-9.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def\n\nhash_function\n(\nvalue\n)\n:\n\nsum_of_chars\n=\n\n0\n\n\nfor\nchar\nin\nvalue\n:\n\nsum_of_chars\n+=\n\nord\n(\nchar\n)\n\n\n\nreturn\nsum_of_chars\n%\n\n10\n\n\n\nprint\n(\n\"'Bob' has hash code:\"\n,\nhash_function\n(\n'Bob'\n)\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">hash_function</span><span class=\"token punctuation\">(</span>value<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    sum_of_chars <span class=\"token operator\">=</span> <span class=\"token number\">0</span>\n    <span class=\"token keyword keyword-for\">for</span> char <span class=\"token keyword keyword-in\">in</span> value<span class=\"token punctuation\">:</span>\n        sum_of_chars <span class=\"token operator\">+=</span> <span class=\"token builtin\">ord</span><span class=\"token punctuation\">(</span>char<span class=\"token punctuation\">)</span>\n\n    <span class=\"token keyword keyword-return\">return</span> sum_of_chars <span class=\"token operator\">%</span> <span class=\"token number\">10</span>\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"'Bob' has hash code:\"</span><span class=\"token punctuation\">,</span>hash_function<span class=\"token punctuation\">(</span><span class=\"token string\">'Bob'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The character \"B\" has Unicode code point 66, \"o\" has 111, and \"b\" has 98. Adding those together we get 275. Modulo 10 of 275 is 5, so \"Bob\" should be stored as an array element at index 5.",
+      "html": "<p>The character \"B\" has Unicode code point 66, \"o\" has 111, and \"b\" has 98. Adding those together we get 275. Modulo 10 of 275 is 5, so \"Bob\" should be stored as an array element at index 5.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The number returned by the hash function is called the hash code .",
+      "html": "<p>The number returned by the hash function is called the <strong>hash code</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "this page",
+          "href": "https://www.w3schools.com/charsets/ref_utf_basic_latin.asp",
+          "title": ""
+        }
+      ],
+      "text": "Unicode number: Everything in our computers are stored as numbers, and the Unicode code point is a unique number that exist for every character. For example, the character A has Unicode number (also called Unicode code point) 65 . Just try it in the simulation below. See this page for more information about how characters are represented as numbers.",
+      "html": "<p><strong>Unicode number: </strong>Everything in our computers are stored as numbers, and the Unicode code point is a unique number that exist for every character. For example, the character <code>A</code> has Unicode number (also called Unicode code point) <code>65</code>. Just try it in the simulation below. See <a href=\"/charsets/ref_utf_basic_latin.asp\">this page</a> for more information about how characters are represented as numbers.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Modulo: A mathematical operation, written as % in most programming languages (or m o d m o d in mathematics). A modulo operation divides a number with another number, and gives us the resulting remainder. So for example, 7 % 3 will give us the remainder 1 . (Dividing 7 apples between 3 people, means that each person gets 2 apples, with 1 apple to spare.)",
+      "html": "<p><strong>Modulo: </strong>A mathematical operation, written as <code>%</code> in most programming languages (or <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-1-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-1\"><span class=\"mjx-mrow\" id=\"MJXc-Node-2\"><span class=\"mjx-mi\" id=\"MJXc-Node-3\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">m</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-4\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">o</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-5\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.003em;\">d</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>m</mi><mi>o</mi><mi>d</mi></math></span></span> in mathematics). A modulo operation divides a number with another number, and gives us the resulting remainder. So for example, <code>7 % 3</code> will give us the remainder <code>1</code>. (Dividing 7 apples between 3 people, means that each person gets 2 apples, with 1 apple to spare.)</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After storing \"Bob\" where the hash code tells us (index 5), our array now looks like this:",
+      "html": "<p>After storing \"Bob\" where the hash code tells us (index 5), our array now looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_hash_set\n=\n\n[\nNone\n,\nNone\n,\nNone\n,\nNone\n,\nNone\n,\n'Bob'\n,\nNone\n,\nNone\n,\nNone\n,\nNone\n]",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\">my_hash_set <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Bob'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can use the hash function to find out where to store the other names \"Pete\", \"Jones\", \"Lisa\", and \"Siri\" as well.",
+      "html": "<p>We can use the hash function to find out where to store the other names \"Pete\", \"Jones\", \"Lisa\", and \"Siri\" as well.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After using the hash function to store those names in the correct position, our array looks like this:",
+      "html": "<p>After using the hash function to store those names in the correct position, our array looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_hash_set\n=\n\n[\nNone\n,\n'Jones'\n,\nNone\n,\n'Lisa'\n,\nNone\n,\n'Bob'\n,\nNone\n,\n'Siri'\n,\n'Pete'\n,\nNone\n]",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\">my_hash_set <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Jones'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Lisa'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Bob'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Siri'</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Pete'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 3: Looking up a name using a hash function",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We have now established a super basic Hash Set, because we do not have to check the array element by element anymore to find out if \"Pete\" is in there, we can just use the hash function to go straight to the right element!",
+      "html": "<p>We have now established a super basic Hash Set, because we do not have to check the array element by element anymore to find out if \"Pete\" is in there, we can just use the hash function to go straight to the right element!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To find out if \"Pete\" is stored in the array, we give the name \"Pete\" to our hash function, we get back hash code 8, we go directly to the element at index 8, and there he is. We found \"Pete\" without checking any other elements.",
+      "html": "<p>To find out if \"Pete\" is stored in the array, we give the name \"Pete\" to our hash function, we get back hash code 8, we go directly to the element at index 8, and there he is. We found \"Pete\" without checking any other elements.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_hash_set\n=\n\n[\nNone\n,\n'Jones'\n,\nNone\n,\n'Lisa'\n,\nNone\n,\n'Bob'\n,\nNone\n,\n'Siri'\n,\n'Pete'\n,\nNone\n]\n\n\n\ndef\n\nhash_function\n(\nvalue\n)\n:\n\nsum_of_chars\n=\n\n0\n\n\nfor\nchar\nin\nvalue\n:\n\nsum_of_chars\n+=\n\nord\n(\nchar\n)\n\n\n\nreturn\nsum_of_chars\n%\n\n10\n\n\n\ndef\n\ncontains\n(\nname\n)\n:\n\nindex\n=\nhash_function\n(\nname\n)\n\n\nreturn\nmy_hash_set\n[\nindex\n]\n\n==\nname\n\n\nprint\n(\n\"'Pete' is in the Hash Set:\"\n,\ncontains\n(\n'Pete'\n)\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\">my_hash_set <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Jones'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Lisa'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Bob'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Siri'</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Pete'</span><span class=\"token punctuation\">,</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">hash_function</span><span class=\"token punctuation\">(</span>value<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    sum_of_chars <span class=\"token operator\">=</span> <span class=\"token number\">0</span>\n    <span class=\"token keyword keyword-for\">for</span> char <span class=\"token keyword keyword-in\">in</span> value<span class=\"token punctuation\">:</span>\n        sum_of_chars <span class=\"token operator\">+=</span> <span class=\"token builtin\">ord</span><span class=\"token punctuation\">(</span>char<span class=\"token punctuation\">)</span>\n\n    <span class=\"token keyword keyword-return\">return</span> sum_of_chars <span class=\"token operator\">%</span> <span class=\"token number\">10</span>\n    \n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">contains</span><span class=\"token punctuation\">(</span>name<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    index <span class=\"token operator\">=</span> hash_function<span class=\"token punctuation\">(</span>name<span class=\"token punctuation\">)</span>\n    <span class=\"token keyword keyword-return\">return</span> my_hash_set<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span> <span class=\"token operator\">==</span> name\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"'Pete' is in the Hash Set:\"</span><span class=\"token punctuation\">,</span>contains<span class=\"token punctuation\">(</span><span class=\"token string\">'Pete'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When deleting a name from our Hash Set, we can also use the hash function to go straight to where the name is, and set that element value to None .",
+      "html": "<p>When deleting a name from our Hash Set, we can also use the hash function to go straight to where the name is, and set that element value to <code>None</code>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 4: Handling collisions",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's also add \"Stuart\" to our Hash Set.",
+      "html": "<p>Let's also add \"Stuart\" to our Hash Set.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We give \"Stuart\" to our hash function, and we get the hash code 3, meaning \"Stuart\" should be stored at index 3.",
+      "html": "<p>We give \"Stuart\" to our hash function, and we get the hash code 3, meaning \"Stuart\" should be stored at index 3.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Trying to store \"Stuart\" creates what is called a collision , because \"Lisa\" is already stored at index 3.",
+      "html": "<p>Trying to store \"Stuart\" creates what is called a <strong>collision</strong>, because \"Lisa\" is already stored at index 3.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To fix the collision, we can make room for more elements in the same bucket, and solving the collision problem in this way is called chaining. We can give room for more elements in the same bucket by implementing each bucket as a linked list, or as an array.",
+      "html": "<p>To fix the collision, we can make room for more elements in the same bucket, and solving the collision problem in this way is called chaining. We can give room for more elements in the same bucket by implementing each bucket as a linked list, or as an array.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After implementing each bucket as an array, to give room for potentially more than one name in each bucket, \"Stuart\" can also be stored at index 3, and our Hash Set now looks like this:",
+      "html": "<p>After implementing each bucket as an array, to give room for potentially more than one name in each bucket, \"Stuart\" can also be stored at index 3, and our Hash Set now looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_hash_set\n=\n\n[\n\n\n[\nNone\n]\n,\n\n\n[\n'Jones'\n]\n,\n\n\n[\nNone\n]\n,\n\n\n[\n'Lisa'\n,\n\n'Stuart'\n]\n,\n\n\n[\nNone\n]\n,\n\n\n[\n'Bob'\n]\n,\n\n\n[\nNone\n]\n,\n\n\n[\n'Siri'\n]\n,\n\n\n[\n'Pete'\n]\n,\n\n\n[\nNone\n]\n\n\n]",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-python\" data-line=\"\" tabindex=\"0\"><code class=\"language-python\">my_hash_set <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Jones'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Lisa'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'Stuart'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Bob'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Siri'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Pete'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span>\n<span class=\"token punctuation\">]</span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Searching for \"Stuart\" in our Hash Set now means that using the hash function we end up directly in bucket 3, but then be must first check \"Lisa\" in that bucket, before we find \"Stuart\" as the second element in bucket 3.",
+      "html": "<p>Searching for \"Stuart\" in our Hash Set now means that using the hash function we end up directly in bucket 3, but then be must first check \"Lisa\" in that bucket, before we find \"Stuart\" as the second element in bucket 3.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Step 5: Hash Set code example and simulation",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To complete our very basic Hash Set code, let's have functions for adding and searching for names in the Hash Set, which is now a two dimensional array.",
+      "html": "<p>To complete our very basic Hash Set code, let's have functions for adding and searching for names in the Hash Set, which is now a two dimensional array.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the code example below, and try it with different values to get a better understanding of how a Hash Set works.",
+      "html": "<p>Run the code example below, and try it with different values to get a better understanding of how a Hash Set works.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "my_hash_set\n=\n\n[\n\n\n[\nNone\n]\n,\n\n\n[\n'Jones'\n]\n,\n\n\n[\nNone\n]\n,\n\n\n[\n'Lisa'\n]\n,\n\n\n[\nNone\n]\n,\n\n\n[\n'Bob'\n]\n,\n\n\n[\nNone\n]\n,\n\n\n[\n'Siri'\n]\n,\n\n\n[\n'Pete'\n]\n,\n\n\n[\nNone\n]\n\n\n]\n\n\n\ndef\n\nhash_function\n(\nvalue\n)\n:\n\n\nreturn\n\nsum\n(\nord\n(\nchar\n)\n\nfor\nchar\nin\nvalue\n)\n\n%\n\n10\n\n\n\ndef\n\nadd\n(\nvalue\n)\n:\n\nindex\n=\nhash_function\n(\nvalue\n)\n\nbucket\n=\nmy_hash_set\n[\nindex\n]\n\n\nif\nvalue\nnot\n\nin\nbucket\n:\n\nbucket\n.\nappend\n(\nvalue\n)\n\n\n\ndef\n\ncontains\n(\nvalue\n)\n:\n\nindex\n=\nhash_function\n(\nvalue\n)\n\nbucket\n=\nmy_hash_set\n[\nindex\n]\n\n\nreturn\nvalue\nin\nbucket\n\nadd\n(\n'Stuart'\n)\n\n\n\nprint\n(\nmy_hash_set\n)\n\n\nprint\n(\n'Contains Stuart:'\n,\ncontains\n(\n'Stuart'\n)\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" tabindex=\"0\"><code class=\"language-python\">my_hash_set <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Jones'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Lisa'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Bob'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Siri'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token string\">'Pete'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n    <span class=\"token punctuation\">[</span><span class=\"token boolean\">None</span><span class=\"token punctuation\">]</span>\n<span class=\"token punctuation\">]</span>\n\n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">hash_function</span><span class=\"token punctuation\">(</span>value<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token builtin\">sum</span><span class=\"token punctuation\">(</span><span class=\"token builtin\">ord</span><span class=\"token punctuation\">(</span>char<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-for\">for</span> char <span class=\"token keyword keyword-in\">in</span> value<span class=\"token punctuation\">)</span> <span class=\"token operator\">%</span> <span class=\"token number\">10</span>\n    \n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add</span><span class=\"token punctuation\">(</span>value<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    index <span class=\"token operator\">=</span> hash_function<span class=\"token punctuation\">(</span>value<span class=\"token punctuation\">)</span>\n    bucket <span class=\"token operator\">=</span> my_hash_set<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span>\n    <span class=\"token keyword keyword-if\">if</span> value <span class=\"token keyword keyword-not\">not</span> <span class=\"token keyword keyword-in\">in</span> bucket<span class=\"token punctuation\">:</span>\n        bucket<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span>value<span class=\"token punctuation\">)</span>\n        \n<span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">contains</span><span class=\"token punctuation\">(</span>value<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n    index <span class=\"token operator\">=</span> hash_function<span class=\"token punctuation\">(</span>value<span class=\"token punctuation\">)</span>\n    bucket <span class=\"token operator\">=</span> my_hash_set<span class=\"token punctuation\">[</span>index<span class=\"token punctuation\">]</span>\n    <span class=\"token keyword keyword-return\">return</span> value <span class=\"token keyword keyword-in\">in</span> bucket\n\nadd<span class=\"token punctuation\">(</span><span class=\"token string\">'Stuart'</span><span class=\"token punctuation\">)</span>\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span>my_hash_set<span class=\"token punctuation\">)</span>\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">'Contains Stuart:'</span><span class=\"token punctuation\">,</span>contains<span class=\"token punctuation\">(</span><span class=\"token string\">'Stuart'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The next two pages show better and more detailed implementations of Hast Sets and Hash Tables.",
+      "html": "<p>The next two pages show better and more detailed implementations of Hast Sets and Hash Tables.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Try the Hash Set simulation below to get a better ide of how a Hash Set works in principle.",
+      "html": "<p>Try the Hash Set simulation below to get a better ide of how a Hash Set works in principle.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hash Set",
+      "html": "<p style=\"font-weight: bold;\">Hash Set</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hash Code",
+      "html": "<p style=\"font-weight: bold;\">Hash Code</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "275 % 10 = 5",
+      "html": "<p>275 % 10 = <span class=\"hashcode\">5</span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Try interacting with the Hash Set 0",
+      "html": "<p>Try interacting with the Hash Set<span style=\"opacity: 0;\">0</span></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Uses of Hash Tables",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hash Tables are great for:",
+      "html": "<p>Hash Tables are great for:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "here",
+          "href": "https://www.w3schools.com/dsa_timecomplexity_theory.php",
+          "title": ""
+        }
+      ],
+      "text": "The most important reason why Hash Tables are great for these things is that Hash Tables are very fast compared Arrays and Linked Lists, especially for large sets. Arrays and Linked Lists have time complexity O ( n ) O ( n ) for search and delete, while Hash Tables have just O ( 1 ) O ( 1 ) on average! Read more about time complexity here .",
+      "html": "<p>The most important reason why Hash Tables are great for these things is that Hash Tables are very fast compared Arrays and Linked Lists, especially for large sets. Arrays and Linked Lists have time complexity <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-2-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-6\"><span class=\"mjx-mrow\" id=\"MJXc-Node-7\"><span class=\"mjx-mi\" id=\"MJXc-Node-8\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-9\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-10\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-11\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span> for search and delete, while Hash Tables have just <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-3-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-12\"><span class=\"mjx-mrow\" id=\"MJXc-Node-13\"><span class=\"mjx-mi\" id=\"MJXc-Node-14\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-15\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mn\" id=\"MJXc-Node-16\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-17\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mn>1</mn><mo stretchy=\"false\">)</mo></math></span></span> on average! Read more about time complexity <a href=\"dsa_timecomplexity_theory.php\">here</a>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Hash Set vs. Hash Map",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A Hash Table can be a Hash Set or a Hash Map. The next two pages describe these data structures in more detail.",
+      "html": "<p>A Hash Table can be a Hash Set or a Hash Map. The next two pages describe these data structures in more detail.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here's how Hash Sets and Hash Maps are different and similar:",
+      "html": "<p>Here's how Hash Sets and Hash Maps are different and similar:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "class": "MathJax_Preview"
+          },
+          {
+            "text": "",
+            "color": "rgb(0, 0, 0)",
+            "class": "MathJax_Preview"
+          }
+        ],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "syntax_highlighting": [
+        {
+          "text": "",
+          "color": "inherit",
+          "class": [
+            "MathJax_Preview"
+          ]
+        },
+        {
+          "text": "",
+          "color": "inherit",
+          "class": [
+            "MathJax_Preview"
+          ]
+        }
+      ],
+      "language": "javascript",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th></th>\n<th>Hash Set</th>\n<th>Hash Map</th>\n</tr>\n<tr>\n<td><i>Uniqueness and storage</i></td>\n<td>Every element is a unique key.</td>\n<td>Every entry is a key-value-pair, with a key that is unique, and a value connected it.</td>\n</tr>\n<tr>\n<td><i>Use case</i></td>\n<td>Checking if an element is in the set, like checking if a name is on a guest list.</td>\n<td>Finding information based on a key, like looking up who owns a certain telephone number.</td>\n</tr>\n<tr>\n<td><i>Is it fast to search, add and delete elements?</i></td>\n<td>Yes, average <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-4-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-18\"><span class=\"mjx-mrow\" id=\"MJXc-Node-19\"><span class=\"mjx-mi\" id=\"MJXc-Node-20\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-21\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mn\" id=\"MJXc-Node-22\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-23\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mn>1</mn><mo stretchy=\"false\">)</mo></math></span></span><script id=\"MathJax-Element-4\" type=\"math/tex\">O(1)</script>.</td>\n<td>Yes, average <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-5-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-24\"><span class=\"mjx-mrow\" id=\"MJXc-Node-25\"><span class=\"mjx-mi\" id=\"MJXc-Node-26\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-27\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mn\" id=\"MJXc-Node-28\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-29\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mn>1</mn><mo stretchy=\"false\">)</mo></math></span></span><script id=\"MathJax-Element-5\" type=\"math/tex\">O(1)</script>.</td>\n</tr>\n<tr>\n<td><i>Is there a hash function that takes the key, generates a hash code, and that is the bucket where the element is stored?</i></td>\n<td>Yes</td>\n<td>Yes</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "class": "MathJax_Preview"
+        },
+        {
+          "text": "",
+          "color": "rgb(0, 0, 0)",
+          "class": "MathJax_Preview"
+        }
+      ],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Hash Tables Summarized",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hash Table elements are stored in storage containers called buckets .",
+      "html": "<p>Hash Table elements are stored in storage containers called <strong>buckets</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Every Hash Table element has a part that is unique that is called the key .",
+      "html": "<p>Every Hash Table element has a part that is unique that is called the <strong>key</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A hash function takes the key of an element to generate a hash code .",
+      "html": "<p>A <strong>hash function</strong> takes the key of an element to generate a <strong>hash code</strong>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The hash code says what bucket the element belongs to, so now we can go directly to that Hash Table element: to modify it, or to delete it, or just to check if it exists. Specific hash functions are explained in detail on the next two pages.",
+      "html": "<p>The hash code says what bucket the element belongs to, so now we can go directly to that Hash Table element: to modify it, or to delete it, or just to check if it exists. Specific hash functions are explained in detail on the next two pages.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A collision happens when two Hash Table elements have the same hash code, because that means they belong to the same bucket . A collision can be solved in two ways.",
+      "html": "<p>A <strong>collision</strong> happens when two Hash Table elements have the same hash code, because that means they belong to the same <strong>bucket</strong>. A collision can be solved in two ways.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Chaining is the way collisions are solved in this tutorial, by using arrays or linked lists to allow more than one element in the same bucket.",
+      "html": "<p><strong>Chaining</strong> is the way collisions are solved in this tutorial, by using arrays or linked lists to allow more than one element in the same bucket.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Open Addressing is another way to solve collisions. With open addressing, if we want to store an element but there is already an element in that bucket, the element is stored in the next available bucket. This can be done in many different ways, but we will not explain open addressing any further here.",
+      "html": "<p><strong>Open Addressing</strong> is another way to solve collisions. With open addressing, if we want to store an element but there is already an element in that bucket, the element is stored in the next available bucket. This can be done in many different ways, but we will not explain open addressing any further here.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Conclusion",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Hash Tables are powerful tools in programming, helping you to manage and access data efficiently.",
+      "html": "<p>Hash Tables are powerful tools in programming, helping you to manage and access data efficiently.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Whether you use a Hash Set or a Hash Map depends on what you need: just to know if something is there, or to find detailed information about it.",
+      "html": "<p>Whether you use a Hash Set or a Hash Map depends on what you need: just to know if something is there, or to find detailed information about it.</p>"
+    }
+  ]
+}

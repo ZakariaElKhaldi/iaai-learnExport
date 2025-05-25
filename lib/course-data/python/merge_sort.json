@@ -1,0 +1,3134 @@
+{
+  "title": "DSA Merge Sort with Python",
+  "url": "https://www.w3schools.com/python/python_dsa_mergesort.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Merge Sort with Python",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Merge Sort",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Merge Sort algorithm is a divide-and-conquer algorithm that sorts an array by first breaking it down into smaller arrays, and then building the array back together the correct way so that it is sorted.",
+      "html": "<p>The Merge Sort algorithm is a divide-and-conquer algorithm that sorts an array by first breaking it down into smaller arrays, and then building the array back together the correct way so that it is sorted.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Divide: The algorithm starts with breaking up the array into smaller and smaller pieces until one such sub-array only consists of one element.",
+      "html": "<p><strong>Divide: </strong>The algorithm starts with breaking up the array into smaller and smaller pieces until one such sub-array only consists of one element.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Conquer: The algorithm merges the small pieces of the array back together by putting the lowest values first, resulting in a sorted array.",
+      "html": "<p><strong>Conquer: </strong>The algorithm merges the small pieces of the array back together by putting the lowest values first, resulting in a sorted array.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The breaking down and building up of the array to sort the array is done recursively.",
+      "html": "<p>The breaking down and building up of the array to sort the array is done recursively.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the animation above, each time the bars are pushed down represents a recursive call, splitting the array into smaller pieces. When the bars are lifted up, it means that two sub-arrays have been merged together.",
+      "html": "<p>In the animation above, each time the bars are pushed down represents a recursive call, splitting the array into smaller pieces. When the bars are lifted up, it means that two sub-arrays have been merged together.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Merge Sort algorithm can be described like this:",
+      "html": "<p>The Merge Sort algorithm can be described like this:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How it works:",
+      "html": "<p><strong>How it works:</strong></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Take a look at the drawing below to see how Merge Sort works from a different perspective. As you can see, the array is split into smaller and smaller pieces until it is merged back together. And as the merging happens, values from each sub-array are compared so that the lowest value comes first.",
+      "html": "<p>Take a look at the drawing below to see how Merge Sort works from a different perspective. As you can see, the array is split into smaller and smaller pieces until it is merged back together. And as the merging happens, values from each sub-array are compared so that the lowest value comes first.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's try to do the sorting manually, just to get an even better understanding of how Merge Sort works before actually implementing it in a Python program.",
+      "html": "<p>Let's try to do the sorting manually, just to get an even better understanding of how Merge Sort works before actually implementing it in a Python program.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 1: We start with an unsorted array, and we know that it splits in half until the sub-arrays only consist of one element. The Merge Sort function calls itself two times, once for each half of the array. That means that the first sub-array will split into the smallest pieces first.",
+      "html": "<p><strong>Step 1:</strong> We start with an unsorted array, and we know that it splits in half until the sub-arrays only consist of one element. The Merge Sort function calls itself two times, once for each half of the array. That means that the first sub-array will split into the smallest pieces first.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 12, 8, 9, 3, 11, 5, 4]</code><br/>\n<code class=\"language-python w3-white\">[ 12, 8, 9] [ 3, 11, 5, 4]</code><br/>\n<code class=\"language-python w3-white\">[ 12] [ 8, 9] [ 3, 11, 5, 4]</code><br/>\n<code class=\"language-python w3-white\">[ 12] [ 8] [ 9] [ 3, 11, 5, 4]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 2: The splitting of the first sub-array is finished, and now it is time to merge. 8 and 9 are the first two elements to be merged. 8 is the lowest value, so that comes before 9 in the first merged sub-array.",
+      "html": "<p><strong>Step 2:</strong> The splitting of the first sub-array is finished, and now it is time to merge. 8 and 9 are the first two elements to be merged. 8 is the lowest value, so that comes before 9 in the first merged sub-array.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 12] [<mark class=\"dsa_mark\"> 8</mark>,<mark class=\"dsa_mark\"> 9</mark>] [ 3, 11, 5, 4]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 3: The next sub-arrays to be merged is [ 12] and [ 8, 9]. Values in both arrays are compared from the start. 8 is lower than 12, so 8 comes first, and 9 is also lower than 12.",
+      "html": "<p><strong>Step 3:</strong> The next sub-arrays to be merged is [ 12] and [ 8, 9]. Values in both arrays are compared from the start. 8 is lower than 12, so 8 comes first, and 9 is also lower than 12.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[<mark class=\"dsa_mark\"> 8</mark>,<mark class=\"dsa_mark\"> 9</mark>,<mark class=\"dsa_mark\"> 12</mark>] [ 3, 11, 5, 4]</code>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 4: Now the second big sub-array is split recursively.",
+      "html": "<p><strong>Step 4:</strong> Now the second big sub-array is split recursively.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 8, 9, 12] [ 3, 11, 5, 4]</code><br/>\n<code class=\"language-python w3-white\">[ 8, 9, 12] [ 3, 11] [ 5, 4]</code><br/>\n<code class=\"language-python w3-white\">[ 8, 9, 12] [ 3] [ 11] [ 5, 4]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 5: 3 and 11 are merged back together in the same order as they are shown because 3 is lower than 11.",
+      "html": "<p><strong>Step 5:</strong> 3 and 11 are merged back together in the same order as they are shown because 3 is lower than 11.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 8, 9, 12] [<mark class=\"dsa_mark\"> 3</mark>,<mark class=\"dsa_mark\"> 11</mark>] [ 5, 4]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 6: Sub-array with values 5 and 4 is split, then merged so that 4 comes before 5.",
+      "html": "<p><strong>Step 6:</strong> Sub-array with values 5 and 4 is split, then merged so that 4 comes before 5.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 8, 9, 12] [ 3, 11] [<mark class=\"dsa_mark\"> 5</mark>] [<mark class=\"dsa_mark\"> 4</mark>]</code><br/>\n<code class=\"language-python w3-white\">[ 8, 9, 12] [ 3, 11] [<mark class=\"dsa_mark\"> 4</mark>,<mark class=\"dsa_mark\"> 5</mark>]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 7: The two sub-arrays on the right are merged. Comparisons are done to create elements in the new merged array:",
+      "html": "<p><strong>Step 7:</strong> The two sub-arrays on the right are merged. Comparisons are done to create elements in the new merged array:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">[ 8, 9, 12] [<mark class=\"dsa_mark\"> 3</mark>,<mark class=\"dsa_mark\"> 4</mark>,<mark class=\"dsa_mark\"> 5</mark>,<mark class=\"dsa_mark\"> 11</mark>]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 8: The two last remaining sub-arrays are merged. Let's look at how the comparisons are done in more detail to create the new merged and finished sorted array:",
+      "html": "<p><strong>Step 8:</strong> The two last remaining sub-arrays are merged. Let's look at how the comparisons are done in more detail to create the new merged and finished sorted array:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "3 is lower than 8:",
+      "html": "<p>3 is lower than 8:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">Before [<mark class=\"dsa_mark\"> 8</mark>, 9, 12] [<mark class=\"dsa_mark\"> 3</mark>, 4, 5, 11]</code><br/>\n<code class=\"language-python w3-white\">After: [<mark class=\"dsa_mark\"> 3</mark>,<mark class=\"dsa_mark\"> 8</mark>, 9, 12] [ 4, 5, 11]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 9: 4 is lower than 8:",
+      "html": "<p><strong>Step 9:</strong> 4 is lower than 8:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">Before [ 3,<mark class=\"dsa_mark\"> 8</mark>, 9, 12] [<mark class=\"dsa_mark\"> 4</mark>, 5, 11]</code><br/>\n<code class=\"language-python w3-white\">After: [ 3,<mark class=\"dsa_mark\"> 4</mark>,<mark class=\"dsa_mark\"> 8</mark>, 9, 12] [ 5, 11]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 10: 5 is lower than 8:",
+      "html": "<p><strong>Step 10:</strong> 5 is lower than 8:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">Before [ 3, 4,<mark class=\"dsa_mark\"> 8</mark>, 9, 12] [<mark class=\"dsa_mark\"> 5</mark>, 11]</code><br/>\n<code class=\"language-python w3-white\">After: [ 3, 4,<mark class=\"dsa_mark\"> 5</mark>,<mark class=\"dsa_mark\"> 8</mark>, 9, 12] [ 11]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 11: 8 and 9 are lower than 11:",
+      "html": "<p><strong>Step 11:</strong> 8 and 9 are lower than 11:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">Before [ 3, 4, 5,<mark class=\"dsa_mark\"> 8</mark>,<mark class=\"dsa_mark\"> 9</mark>, 12] [<mark class=\"dsa_mark\"> 11</mark>]</code><br/>\n<code class=\"language-python w3-white\">After: [ 3, 4, 5,<mark class=\"dsa_mark\"> 8</mark>,<mark class=\"dsa_mark\"> 9</mark>, 12] [<mark class=\"dsa_mark\"> 11</mark>]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Step 12: 11 is lower than 12:",
+      "html": "<p><strong>Step 12:</strong> 11 is lower than 12:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n<code class=\"language-python w3-white\">Before [ 3, 4, 5, 8, 9,<mark class=\"dsa_mark\"> 12</mark>] [<mark class=\"dsa_mark\"> 11</mark>]</code><br/>\n<code class=\"language-python w3-white\">After: [ 3, 4, 5, 8, 9,<mark class=\"dsa_mark\"> 11</mark>,<mark class=\"dsa_mark\"> 12</mark>]</code><br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The sorting is finished!",
+      "html": "<p>The sorting is finished!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the simulation below to see the steps above animated:",
+      "html": "<p>Run the simulation below to see the steps above animated:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "[",
+      "language": "unknown",
+      "code_html": "<pre>[</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "12",
+      "language": "unknown",
+      "code_html": "<pre> 12</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": ",",
+      "language": "unknown",
+      "code_html": "<pre>, </pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "8",
+      "language": "unknown",
+      "code_html": "<pre>8</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": ",",
+      "language": "unknown",
+      "code_html": "<pre>, </pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "9",
+      "language": "unknown",
+      "code_html": "<pre>9</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": ",",
+      "language": "unknown",
+      "code_html": "<pre>, </pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "3",
+      "language": "unknown",
+      "code_html": "<pre>3</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": ",",
+      "language": "unknown",
+      "code_html": "<pre>, </pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "11",
+      "language": "unknown",
+      "code_html": "<pre>11</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": ",",
+      "language": "unknown",
+      "code_html": "<pre>, </pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "5",
+      "language": "unknown",
+      "code_html": "<pre>5</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": ",",
+      "language": "unknown",
+      "code_html": "<pre>, </pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "4",
+      "language": "unknown",
+      "code_html": "<pre>4</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "]",
+      "language": "unknown",
+      "code_html": "<pre>]</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Implement Merge Sort in Python",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To implement the Merge Sort algorithm we need:",
+      "html": "<p>To implement the Merge Sort algorithm we need:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The resulting code looks like this:",
+      "html": "<p>The resulting code looks like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\ndef mergeSort(arr):\n\u00a0\u00a0if len(arr) <= 1:\n\u00a0\u00a0\u00a0\u00a0return arr\n\n\u00a0\u00a0mid = len(arr) // 2\n\u00a0\u00a0leftHalf = arr[:mid]\n\u00a0\u00a0rightHalf = arr[mid:]\n\n\u00a0\u00a0sortedLeft = mergeSort(leftHalf)\n\u00a0\u00a0sortedRight = mergeSort(rightHalf)\n\n\u00a0\u00a0return merge(sortedLeft, sortedRight)\n\ndef merge(left, right):\n\u00a0\u00a0result = []\n\u00a0\u00a0i = j = 0\n\n\u00a0\u00a0while i < len(left) and j < len(right):\n\u00a0\u00a0\u00a0\u00a0if left[i] < right[j]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(left[i])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(right[j])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0j += 1\n\n\u00a0\u00a0result.extend(left[i:])\n\u00a0\u00a0result.extend(right[j:])\n\n\u00a0\u00a0return result\n\nmylist = [3, 7, 6, -10, 15, 23.5, 55, -13]\nmysortedlist = mergeSort(mylist)\nprint(\"Sorted array:\", mysortedlist) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "3",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "7",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "6",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "15",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "23.5",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "55",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "13",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\"Sorted array:\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "pythonstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def mergeSort(arr):\nif len(arr) <= 1:\nreturn arr\n\nmid = len(arr) // 2\nleftHalf = arr[:mid]\nrightHalf = arr[mid:]\n\nsortedLeft = mergeSort(leftHalf)\nsortedRight = mergeSort(rightHalf)\n\nreturn merge(sortedLeft, sortedRight)\n\ndef merge(left, right):\nresult = []\ni = j = 0\n\nwhile i < len(left) and j < len(right):\nif left[i] < right[j]:\nresult.append(left[i])\ni += 1\nelse:\nresult.append(right[j])\nj += 1\n\nresult.extend(left[i:])\nresult.extend(right[j:])\n\nreturn result\n\nmylist = [3, 7, 6, -10, 15, 23.5, 55, -13]\nmysortedlist = mergeSort(mylist)\nprint(\"Sorted array:\", mysortedlist)",
+      "syntax_highlighting": [
+        {
+          "text": "\ndef mergeSort(arr):\n\u00a0\u00a0if len(arr) <= 1:\n\u00a0\u00a0\u00a0\u00a0return arr\n\n\u00a0\u00a0mid = len(arr) // 2\n\u00a0\u00a0leftHalf = arr[:mid]\n\u00a0\u00a0rightHalf = arr[mid:]\n\n\u00a0\u00a0sortedLeft = mergeSort(leftHalf)\n\u00a0\u00a0sortedRight = mergeSort(rightHalf)\n\n\u00a0\u00a0return merge(sortedLeft, sortedRight)\n\ndef merge(left, right):\n\u00a0\u00a0result = []\n\u00a0\u00a0i = j = 0\n\n\u00a0\u00a0while i < len(left) and j < len(right):\n\u00a0\u00a0\u00a0\u00a0if left[i] < right[j]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(left[i])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(right[j])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0j += 1\n\n\u00a0\u00a0result.extend(left[i:])\n\u00a0\u00a0result.extend(right[j:])\n\n\u00a0\u00a0return result\n\nmylist = [3, 7, 6, -10, 15, 23.5, 55, -13]\nmysortedlist = mergeSort(mylist)\nprint(\"Sorted array:\", mysortedlist) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "3",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "7",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "6",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "15",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "23.5",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "55",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "13",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Sorted array:\"",
+          "color": "green",
+          "class": [
+            "pythonstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> mergeSort(arr):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">if</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(arr) &lt;= <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> arr<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0mid = <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(arr) // <span class=\"pythonnumbercolor\" style=\"color:#905\">2</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0leftHalf = arr[:mid]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0rightHalf = arr[mid:]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0sortedLeft = mergeSort(leftHalf)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0sortedRight = mergeSort(rightHalf)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> merge(sortedLeft, sortedRight)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> merge(left, right):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0result = []<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0i = j = <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">while</span> i &lt; <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(left) and j &lt; <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(right):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">if</span> left[i] &lt; right[j]:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(left[i])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">else</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(right[j])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0j += <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0result.extend(left[i:])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0result.extend(right[j:])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> result<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nmylist = [<span class=\"pythonnumbercolor\" style=\"color:#905\">3</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">7</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">6</span>, -<span class=\"pythonnumbercolor\" style=\"color:#905\">10</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">15</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">23.5</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">55</span>, -<span class=\"pythonnumbercolor\" style=\"color:#905\">13</span>]<br/>\nmysortedlist = mergeSort(mylist)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(<span class=\"pythonstringcolor\" style=\"color:green\">\"Sorted array:\"</span>, mysortedlist) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\ndef mergeSort(arr):\n\u00a0\u00a0if len(arr) <= 1:\n\u00a0\u00a0\u00a0\u00a0return arr\n\n\u00a0\u00a0mid = len(arr) // 2\n\u00a0\u00a0leftHalf = arr[:mid]\n\u00a0\u00a0rightHalf = arr[mid:]\n\n\u00a0\u00a0sortedLeft = mergeSort(leftHalf)\n\u00a0\u00a0sortedRight = mergeSort(rightHalf)\n\n\u00a0\u00a0return merge(sortedLeft, sortedRight)\n\ndef merge(left, right):\n\u00a0\u00a0result = []\n\u00a0\u00a0i = j = 0\n\n\u00a0\u00a0while i < len(left) and j < len(right):\n\u00a0\u00a0\u00a0\u00a0if left[i] < right[j]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(left[i])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(right[j])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0j += 1\n\n\u00a0\u00a0result.extend(left[i:])\n\u00a0\u00a0result.extend(right[j:])\n\n\u00a0\u00a0return result\n\nmylist = [3, 7, 6, -10, 15, 23.5, 55, -13]\nmysortedlist = mergeSort(mylist)\nprint(\"Sorted array:\", mysortedlist) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "3",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "7",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "6",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "15",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "23.5",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "55",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "13",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\"Sorted array:\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "pythonstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On line 6 , arr[:mid] takes all values from the array up until, but not including, the value on index \"mid\".",
+      "html": "<p><strong>On line 6</strong>, arr[:mid] takes all values from the array up until, but not including, the value on index \"mid\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On line 7 , arr[mid:] takes all values from the array, starting at the value on index \"mid\" and all the next values.",
+      "html": "<p><strong>On line 7</strong>, arr[mid:] takes all values from the array, starting at the value on index \"mid\" and all the next values.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "On lines 26-27 , the first part of the merging is done. At this this point the values of the two sub-arrays are compared, and either the left sub-array or the right sub-array is empty, so the result array can just be filled with the remaining values from either the left or the right sub-array. These lines can be swapped, and the result will be the same.",
+      "html": "<p><strong>On lines 26-27</strong>, the first part of the merging is done. At this this point the values of the two sub-arrays are compared, and either the left sub-array or the right sub-array is empty, so the result array can just be filled with the remaining values from either the left or the right sub-array. These lines can be swapped, and the result will be the same.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Merge Sort without Recursion",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Since Merge Sort is a divide and conquer algorithm, recursion is the most intuitive code to use for implementation. The recursive implementation of Merge Sort is also perhaps easier to understand, and uses less code lines in general.",
+      "html": "<p>Since Merge Sort is a divide and conquer algorithm, recursion is the most intuitive code to use for implementation. The recursive implementation of Merge Sort is also perhaps easier to understand, and uses less code lines in general.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But Merge Sort can also be implemented without the use of recursion, so that there is no function calling itself.",
+      "html": "<p>But Merge Sort can also be implemented without the use of recursion, so that there is no function calling itself.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Take a look at the Merge Sort implementation below, that does not use recursion:",
+      "html": "<p>Take a look at the Merge Sort implementation below, that does not use recursion:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\ndef merge(left, right):\n\u00a0\u00a0result = []\n\u00a0\u00a0i = j = 0\n\n\u00a0\u00a0while i < len(left) and j < len(right):\n\u00a0\u00a0\u00a0\u00a0if left[i] < right[j]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(left[i])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(right[j])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0j += 1\n\n\u00a0\u00a0result.extend(left[i:])\n\u00a0\u00a0result.extend(right[j:])\n\n\u00a0\u00a0return result\n\ndef mergeSort(arr):\n\u00a0\u00a0step = 1  # Starting with sub-arrays of length 1\n\u00a0\u00a0length = len(arr)\n\n\u00a0\u00a0while step < length:\n\u00a0\u00a0\u00a0\u00a0for i in range(0, length, 2 * step):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0left = arr[i:i + step]\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0right = arr[i + step:i + 2 * step]\n\n\u00a0\u00a0\u00a0\u00a0merged = merge(left, right)\n\n\u00a0\u00a0\u00a0\u00a0# Place the merged array back into the original array\n\u00a0\u00a0\u00a0\u00a0for j, val in enumerate(merged):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[i + j] = val\n\n\u00a0\u00a0\u00a0\u00a0step *= 2  # Double the sub-array length for the next iteration\n\n\u00a0\u00a0return arr\n\nmylist = [3, 7, 6, -10, 15, 23.5, 55, -13]\nmysortedlist = mergeSort(mylist)\nprint(mysortedlist) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "pythoncolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "len",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "def",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "# Starting with sub-arrays of length 1",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "range",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "# Place the merged array back into the original array",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "in",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "enumerate",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "# Double the sub-array length for the next iteration",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "3",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "7",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "6",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "15",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "23.5",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "55",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "13",
+            "color": "rgb(153, 0, 85)",
+            "class": "pythonnumbercolor"
+          },
+          {
+            "text": "print",
+            "color": "rgb(0, 92, 197)",
+            "class": "pythonkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "pythonHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def merge(left, right):\nresult = []\ni = j = 0\n\nwhile i < len(left) and j < len(right):\nif left[i] < right[j]:\nresult.append(left[i])\ni += 1\nelse:\nresult.append(right[j])\nj += 1\n\nresult.extend(left[i:])\nresult.extend(right[j:])\n\nreturn result\n\ndef mergeSort(arr):\nstep = 1 # Starting with sub-arrays of length 1\nlength = len(arr)\n\nwhile step < length:\nfor i in range(0, length, 2 * step):\nleft = arr[i:i + step]\nright = arr[i + step:i + 2 * step]\n\nmerged = merge(left, right)\n\n# Place the merged array back into the original array\nfor j, val in enumerate(merged):\narr[i + j] = val\n\nstep *= 2 # Double the sub-array length for the next iteration\n\nreturn arr\n\nmylist = [3, 7, 6, -10, 15, 23.5, 55, -13]\nmysortedlist = mergeSort(mylist)\nprint(mysortedlist)",
+      "syntax_highlighting": [
+        {
+          "text": "\ndef merge(left, right):\n\u00a0\u00a0result = []\n\u00a0\u00a0i = j = 0\n\n\u00a0\u00a0while i < len(left) and j < len(right):\n\u00a0\u00a0\u00a0\u00a0if left[i] < right[j]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(left[i])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(right[j])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0j += 1\n\n\u00a0\u00a0result.extend(left[i:])\n\u00a0\u00a0result.extend(right[j:])\n\n\u00a0\u00a0return result\n\ndef mergeSort(arr):\n\u00a0\u00a0step = 1 # Starting with sub-arrays of length 1\n\u00a0\u00a0length = len(arr)\n\n\u00a0\u00a0while step < length:\n\u00a0\u00a0\u00a0\u00a0for i in range(0, length, 2 * step):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0left = arr[i:i + step]\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0right = arr[i + step:i + 2 * step]\n\n\u00a0\u00a0\u00a0\u00a0merged = merge(left, right)\n\n\u00a0\u00a0\u00a0\u00a0# Place the merged array back into the original array\n\u00a0\u00a0\u00a0\u00a0for j, val in enumerate(merged):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[i + j] = val\n\n\u00a0\u00a0\u00a0\u00a0step *= 2 # Double the sub-array length for the next iteration\n\n\u00a0\u00a0return arr\n\nmylist = [3, 7, 6, -10, 15, 23.5, 55, -13]\nmysortedlist = mergeSort(mylist)\nprint(mysortedlist) ",
+          "color": "black",
+          "class": [
+            "pythoncolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "len",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "def",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "# Starting with sub-arrays of length 1",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "range",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "# Place the merged array back into the original array",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "in",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "enumerate",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "# Double the sub-array length for the next iteration",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "3",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "7",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "6",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "15",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "23.5",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "55",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "13",
+          "color": "#905",
+          "class": [
+            "pythonnumbercolor"
+          ]
+        },
+        {
+          "text": "print",
+          "color": "#005cc5",
+          "class": [
+            "pythonkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate pythonHigh\"><span class=\"pythoncolor\" style=\"color:black\">\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> merge(left, right):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0result = []<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0i = j = <span class=\"pythonnumbercolor\" style=\"color:#905\">0</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">while</span> i &lt; <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(left) and j &lt; <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">len</span>(right):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">if</span> left[i] &lt; right[j]:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(left[i])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">else</span>:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(right[j])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0j += <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0result.extend(left[i:])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0result.extend(right[j:])<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> result<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">def</span> mergeSort(arr):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0step = <span class=\"pythonnumbercolor\" style=\"color:#905\">1</span> <span class=\"commentcolor\" style=\"color:slategray\"># Starting with sub-arrays of length 1<br/></span><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0length = len(arr)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">while</span> step &lt; length:<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> i <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">range</span>(<span class=\"pythonnumbercolor\" style=\"color:#905\">0</span>, length, <span class=\"pythonnumbercolor\" style=\"color:#905\">2</span> * step):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0left = arr[i:i + step]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0right = arr[i + step:i + <span class=\"pythonnumbercolor\" style=\"color:#905\">2</span> * step]<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0merged = merge(left, right)<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"commentcolor\" style=\"color:slategray\"># Place the merged array back into the original array<br/></span><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">for</span> j, val <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">in</span> <span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">enumerate</span>(merged):<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[i + j] = val<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0\u00a0\u00a0step *= <span class=\"pythonnumbercolor\" style=\"color:#905\">2</span> <span class=\"commentcolor\" style=\"color:slategray\"># Double the sub-array length for the next iteration<br/></span><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">return</span> arr<br/><span class=\"pythonnumbercolor\" style=\"color:#905\">\n</span><br/>\nmylist = [<span class=\"pythonnumbercolor\" style=\"color:#905\">3</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">7</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">6</span>, -<span class=\"pythonnumbercolor\" style=\"color:#905\">10</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">15</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">23.5</span>, <span class=\"pythonnumbercolor\" style=\"color:#905\">55</span>, -<span class=\"pythonnumbercolor\" style=\"color:#905\">13</span>]<br/>\nmysortedlist = mergeSort(mylist)<br/>\n<span class=\"pythonkeywordcolor\" style=\"color:#005cc5\">print</span>(mysortedlist) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\ndef merge(left, right):\n\u00a0\u00a0result = []\n\u00a0\u00a0i = j = 0\n\n\u00a0\u00a0while i < len(left) and j < len(right):\n\u00a0\u00a0\u00a0\u00a0if left[i] < right[j]:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(left[i])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0i += 1\n\u00a0\u00a0\u00a0\u00a0else:\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0result.append(right[j])\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0j += 1\n\n\u00a0\u00a0result.extend(left[i:])\n\u00a0\u00a0result.extend(right[j:])\n\n\u00a0\u00a0return result\n\ndef mergeSort(arr):\n\u00a0\u00a0step = 1  # Starting with sub-arrays of length 1\n\u00a0\u00a0length = len(arr)\n\n\u00a0\u00a0while step < length:\n\u00a0\u00a0\u00a0\u00a0for i in range(0, length, 2 * step):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0left = arr[i:i + step]\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0right = arr[i + step:i + 2 * step]\n\n\u00a0\u00a0\u00a0\u00a0merged = merge(left, right)\n\n\u00a0\u00a0\u00a0\u00a0# Place the merged array back into the original array\n\u00a0\u00a0\u00a0\u00a0for j, val in enumerate(merged):\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0arr[i + j] = val\n\n\u00a0\u00a0\u00a0\u00a0step *= 2  # Double the sub-array length for the next iteration\n\n\u00a0\u00a0return arr\n\nmylist = [3, 7, 6, -10, 15, 23.5, 55, -13]\nmysortedlist = mergeSort(mylist)\nprint(mysortedlist) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "pythoncolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "len",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "def",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "# Starting with sub-arrays of length 1",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "range",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "# Place the merged array back into the original array",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "in",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "enumerate",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "# Double the sub-array length for the next iteration",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "3",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "7",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "6",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "15",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "23.5",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "55",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "13",
+          "color": "rgb(153, 0, 85)",
+          "class": "pythonnumbercolor"
+        },
+        {
+          "text": "print",
+          "color": "rgb(0, 92, 197)",
+          "class": "pythonkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "pythonHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You might notice that the merge functions are exactly the same in the two Merge Sort implementations above, but in the implementation right above here the while loop inside the mergeSort function is used to replace the recursion. The while loop does the splitting and merging of the array in place, and that makes the code a bit harder to understand.",
+      "html": "<p>You might notice that the merge functions are exactly the same in the two Merge Sort implementations above, but in the implementation right above here the while loop inside the mergeSort function is used to replace the recursion. The while loop does the splitting and merging of the array in place, and that makes the code a bit harder to understand.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To put it simply, the while loop inside the mergeSort function uses short step lengths to sort tiny pieces (sub-arrays) of the initial array using the merge function. Then the step length is increased to merge and sort larger pieces of the array until the whole array is sorted.",
+      "html": "<p>To put it simply, the while loop inside the mergeSort function uses short step lengths to sort tiny pieces (sub-arrays) of the initial array using the merge function. Then the step length is increased to merge and sort larger pieces of the array until the whole array is sorted.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Merge Sort Time Complexity",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The time complexity for Merge Sort is: O ( n \u22c5 log n ) O ( n \u22c5 log \u2061 n )",
+      "html": "<p>The time complexity for Merge Sort is: <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;&amp;#x2061;&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-1-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-1\"><span class=\"mjx-mrow\" id=\"MJXc-Node-2\"><span class=\"mjx-mi\" id=\"MJXc-Node-3\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-4\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-5\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-6\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-7\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.563em;\">log</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-8\"><span class=\"mjx-char\"></span></span><span class=\"mjx-mi MJXc-space1\" id=\"MJXc-Node-9\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">n</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-10\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>n</mi><mo>\u22c5</mo><mi>log</mi><mo>\u2061</mo><mi>n</mi><mo stretchy=\"false\">)</mo></math></span></span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And the time complexity is pretty much the same for different kinds of arrays. The algorithm needs to split the array and merge it back together whether it is already sorted or completely shuffled.",
+      "html": "<p>And the time complexity is pretty much the same for different kinds of arrays.\n  The algorithm needs to split the array and merge it back together whether it is already sorted or completely shuffled.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The image below shows the time complexity for Merge Sort.",
+      "html": "<p>The image below shows the time complexity for Merge Sort.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Merge Sort performs almost the same every time because the array is split, and merged using comparison, both if the array is already sorted or not.",
+      "html": "<p>Merge Sort performs almost the same every time because the array is split, and merged using comparison, both if the array is already sorted or not.</p>"
+    }
+  ]
+}

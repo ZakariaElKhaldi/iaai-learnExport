@@ -1,0 +1,458 @@
+{
+  "title": "DSA Kruskal's Algorithm",
+  "url": "https://www.w3schools.com/dsa/dsa_algo_mst_kruskal.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "DSA Kruskal's Algorithm",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Kruskal's Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Kruskal's algorithm finds the Minimum Spanning Tree (MST), or Minimum Spanning Forest, in an undirected graph.",
+      "html": "<p>Kruskal's algorithm finds the Minimum Spanning Tree (MST), or Minimum Spanning Forest, in an undirected graph.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Connected",
+      "html": "<p><label><input type=\"checkbox\"/> Connected</label></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The MST (or MSTs) found by Kruskal's algorithm is the collection of edges that connect all vertices (or as many as possible) with the minimum total edge weight.",
+      "html": "<p>The MST (or MSTs) found by Kruskal's algorithm is the collection of edges that connect all vertices (or as many as possible) with the minimum total edge weight.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Kruskal's algorithm adds edges to the MST (or Minimum Spanning Forest), starting with the edges with the lowest edge weights.",
+      "html": "<p>Kruskal's algorithm adds edges to the MST (or Minimum Spanning Forest), starting with the edges with the lowest edge weights.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Edges that would create a cycle are not added to the MST. These are the red blinking lines in the animation above.",
+      "html": "<p>Edges that would create a cycle are not added to the MST. These are the red blinking lines in the animation above.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Kruskal's algorithm checks all edges in the graph, but the animation above is made to stop when the MST or Minimum Spanning forest is completed, so that you don't have to wait for the longest edges to be checked.",
+      "html": "<p>Kruskal's algorithm checks all edges in the graph, but the animation above is made to stop when the MST or Minimum Spanning forest is completed, so that you don't have to wait for the longest edges to be checked.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Minimum Spanning Forest is what it is called when a graph has more than one Minimum Spanning Tree. This happens when a graph is not connected. Try it yourself by using the checkbox in the animation above.",
+      "html": "<p><strong>Minimum Spanning Forest</strong> is what it is called when a graph has more than one Minimum Spanning Tree. This happens when a graph is not connected. Try it yourself by using the checkbox in the animation above.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Unlike Prim's algorithm, Kruskal's algorithm can be used for such graphs that are not connected, which means that it can find more than one MST, and that is what we call a Minimum Spanning Forest.",
+      "html": "<p>Unlike Prim's algorithm, Kruskal's algorithm can be used for such graphs that are not connected, which means that it can find more than one MST, and that is what we call a Minimum Spanning Forest.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Union-Find cycle detection",
+          "href": "https://www.w3schools.com/dsa_algo_graphs_cycledetection.php#unionfind",
+          "title": ""
+        }
+      ],
+      "text": "To find out if an edge will create a cycle, we will use Union-Find cycle detection inside Kruskal's algorithm.",
+      "html": "<p>To find out if an edge will create a cycle, we will use <a href=\"dsa_algo_graphs_cycledetection.php#unionfind\">Union-Find cycle detection</a> inside Kruskal's algorithm.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "How it works:",
+      "html": "<p><strong>How it works:</strong></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Manual Run Through",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's run through Kruskal's algorithm manually on the graph below, so that we understand the detailed step-by-step operations before we try to program it.",
+      "html": "<p>Let's run through Kruskal's algorithm manually on the graph below, so that we understand the detailed step-by-step operations before we try to program it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The first three edges are added to the MST. These three edges have the lowest edge weights and do not create any cycles:",
+      "html": "<p>The first three edges are added to the MST. These three edges have the lowest edge weights and do not create any cycles:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After that, edge C-D (indicated in red) cannot be added as it would lead to a cycle.",
+      "html": "<p>After that, edge C-D (indicated in red) cannot be added as it would lead to a cycle.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The next four edges Kruskal's algorithm tries to add to the MST are:",
+      "html": "<p>The next four edges Kruskal's algorithm tries to add to the MST are:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Edge C-G (indicated in red) cannot be added to the MST because it would create a cycle.",
+      "html": "<p>Edge C-G (indicated in red) cannot be added to the MST because it would create a cycle.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see, the MST is already created at this point, but Kruskal's algorithm will continue to run until all edges are tested to see if they can be added to the MST.",
+      "html": "<p>As you can see, the MST is already created at this point, but Kruskal's algorithm will continue to run until all edges are tested to see if they can be added to the MST.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The last three edges Kruskal's algorithm tries to add to the MST are the ones with the highest edge weights:",
+      "html": "<p>The last three edges Kruskal's algorithm tries to add to the MST are the ones with the highest edge weights:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Each of these edges would create a cycle in the MST, so they cannot be added.",
+      "html": "<p>Each of these edges would create a cycle in the MST, so they cannot be added.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Kruskal's algorithm is now finished.",
+      "html": "<p>Kruskal's algorithm is now finished.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the simulation below to see Kruskal's algorithm doing the manual steps that we have just done.",
+      "html": "<p>Run the simulation below to see Kruskal's algorithm doing the manual steps that we have just done.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: Although Kruskal's algorithm checks all edges in the graph, the animation at the top of this page stops right after the last edge is added to the MST or Minimum Spanning Forest so that we don't have to look at all the red edges that can't be added.",
+      "html": "<p><strong>Note: </strong>Although Kruskal's algorithm checks all edges in the graph, the animation at the top of this page stops right after the last edge is added to the MST or Minimum Spanning Forest so that we don't have to look at all the red edges that can't be added. </p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is possible because for a connected graph, there is just one MST, and the search can stop when the number of edges in the MST is one less than there are vertices in the graph ( V \u2212 1 V \u2212 1 ). For the unconnected graph, there are two MSTs in our animation, and the algorithm stops when the MSTs have reached a size of V \u2212 2 V \u2212 2 edges in total.",
+      "html": "<p>This is possible because for a connected graph, there is just one MST, and the search can stop when the number of edges in the MST is one less than there are vertices in the graph (<span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-1-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-1\"><span class=\"mjx-mrow\" id=\"MJXc-Node-2\"><span class=\"mjx-mi\" id=\"MJXc-Node-3\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-4\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">\u2212</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-5\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">1</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi><mo>\u2212</mo><mn>1</mn></math></span></span>). For the unconnected graph, there are two MSTs in our animation, and the algorithm stops when the MSTs have reached a size of <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/math&gt;' id=\"MathJax-Element-2-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-6\"><span class=\"mjx-mrow\" id=\"MJXc-Node-7\"><span class=\"mjx-mi\" id=\"MJXc-Node-8\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-9\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.283em; padding-bottom: 0.451em;\">\u2212</span></span><span class=\"mjx-mn MJXc-space2\" id=\"MJXc-Node-10\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.395em; padding-bottom: 0.339em;\">2</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi><mo>\u2212</mo><mn>2</mn></math></span></span> edges in total.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Implementation of Kruskal's Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For Kruskal's algorithm to find a Minimum Spanning Tree (MST), or a Minimum Spanning Forest, we create a Graph class. We will use the methods inside this Graph class later to create the graph from the example above, and to run Kruskal's algorithm on it.",
+      "html": "<p>For Kruskal's algorithm to find a Minimum Spanning Tree (MST), or a Minimum Spanning Forest, we create a <code>Graph</code> class. We will use the methods inside this <code>Graph</code> class later to create the graph from the example above, and to run Kruskal's algorithm on it.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class\n\nGraph\n:\n\n\ndef\n\n__init__\n(\nself\n,\nsize\n)\n:\n\nself\n.\nsize\n=\nsize\nself\n.\nedges\n=\n\n[\n]\n\n# For storing edges as (weight, u, v)\n\nself\n.\nvertex_data\n=\n\n[\n''\n]\n\n*\nsize\n# Store vertex names\n\n\n\ndef\n\nadd_edge\n(\nself\n,\nu\n,\nv\n,\nweight\n)\n:\n\n\nif\n\n0\n\n<=\nu\n<\nself\n.\nsize\nand\n\n0\n\n<=\nv\n<\nself\n.\nsize\n:\n\nself\n.\nedges\n.\nappend\n(\n(\nweight\n,\nu\n,\nv\n)\n)\n\n# Add edge with weight\n\n\n\ndef\n\nadd_vertex_data\n(\nself\n,\nvertex\n,\ndata\n)\n:\n\n\nif\n\n0\n\n<=\nvertex\n<\nself\n.\nsize\n:\n\nself\n.\nvertex_data\n[\nvertex\n]\n\n=\ndata",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"8,12\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Graph</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">__init__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">=</span> size\n        self<span class=\"token punctuation\">.</span>edges <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>  <span class=\"token comment\"># For storing edges as (weight, u, v)</span>\n        self<span class=\"token punctuation\">.</span>vertex_data <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">''</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size  <span class=\"token comment\"># Store vertex names</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_edge</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> u <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size <span class=\"token keyword keyword-and\">and</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> v <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>edges<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span>weight<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># Add edge with weight</span>\n            \n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_vertex_data</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> vertex<span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> vertex <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> data<span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"8\" style=\"top: 155px; height: 22px; width: 789px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"12\" style=\"top: 243px; height: 22px; width: 789px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 8 and 12: Checks if the input arguments u , v , and vertex , are within the possible range of index values.",
+      "html": "<p><strong>Line 8 and 12: </strong>Checks if the input arguments <code>u</code>, <code>v</code>, and <code>vertex</code>, are within the possible range of index values.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To do Union-Find cycle detection in Kruskal's algorithm, these two methods find and union are also defined inside the Graph class:",
+      "html": "<p>To do Union-Find cycle detection in Kruskal's algorithm, these two methods <code>find</code> and <code>union</code> are also defined inside the <code>Graph</code> class:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def\n\nfind\n(\nself\n,\nparent\n,\ni\n)\n:\n\n\nif\nparent\n[\ni\n]\n\n==\ni\n:\n\n\nreturn\ni\n\nreturn\nself\n.\nfind\n(\nparent\n,\nparent\n[\ni\n]\n)\n\n\n\ndef\n\nunion\n(\nself\n,\nparent\n,\nrank\n,\nx\n,\ny\n)\n:\n\nxroot\n=\nself\n.\nfind\n(\nparent\n,\nx\n)\n\nyroot\n=\nself\n.\nfind\n(\nparent\n,\ny\n)\n\n\nif\nrank\n[\nxroot\n]\n\n<\nrank\n[\nyroot\n]\n:\n\nparent\n[\nxroot\n]\n\n=\nyroot\n\nelif\nrank\n[\nxroot\n]\n\n>\nrank\n[\nyroot\n]\n:\n\nparent\n[\nyroot\n]\n\n=\nxroot\n\nelse\n:\n\nparent\n[\nyroot\n]\n\n=\nxroot\nrank\n[\nxroot\n]\n\n+=\n\n1",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"15-18, 20-29\" data-line-offset=\"15\" data-start=\"15\" style=\"counter-reset: linenumber 14;\" tabindex=\"0\"><code class=\"language-python\">    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">find</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> parent<span class=\"token punctuation\">,</span> i<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> parent<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span> <span class=\"token operator\">==</span> i<span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-return\">return</span> i\n        <span class=\"token keyword keyword-return\">return</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> parent<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">union</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> parent<span class=\"token punctuation\">,</span> rank<span class=\"token punctuation\">,</span> x<span class=\"token punctuation\">,</span> y<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        xroot <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> x<span class=\"token punctuation\">)</span>\n        yroot <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> y<span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-if\">if</span> rank<span class=\"token punctuation\">[</span>xroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">&lt;</span> rank<span class=\"token punctuation\">[</span>yroot<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n            parent<span class=\"token punctuation\">[</span>xroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> yroot\n        <span class=\"token keyword keyword-elif\">elif</span> rank<span class=\"token punctuation\">[</span>xroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">&gt;</span> rank<span class=\"token punctuation\">[</span>yroot<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n            parent<span class=\"token punctuation\">[</span>yroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> xroot\n        <span class=\"token keyword keyword-else\">else</span><span class=\"token punctuation\">:</span>\n            parent<span class=\"token punctuation\">[</span>yroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> xroot\n            rank<span class=\"token punctuation\">[</span>xroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">+=</span> <span class=\"token number\">1</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"15-18\" style=\"top: 1px; height: 88px; width: 789px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"20-29\" style=\"top: 111px; height: 220px; width: 789px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 15-18: The find method uses the parent array to recursively find the root of a vertex. For each vertex, the parent array holds a pointer (index) to the parent of that vertex. The root vertex is found when the find method comes to a vertex in the parent array that points to itself. Keep reading to see how the find method and the parent array are used inside the kruskals_algorithm method.",
+      "html": "<p><strong>Line 15-18: </strong>The <code>find</code> method uses the <code>parent</code> array to recursively find the root of a vertex. For each vertex, the <code>parent</code> array holds a pointer (index) to the parent of that vertex. The root vertex is found when the <code>find</code> method comes to a vertex in the <code>parent</code> array that points to itself. Keep reading to see how the <code>find</code> method and the <code>parent</code> array are used inside the <code>kruskals_algorithm</code> method.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 20-29: When an edge is added to the MST, the union method uses the parent array to merge (union) two trees. The rank array holds a rough estimate of the tree height for every root vertex. When merging two trees, the root with a lesser rank becomes a child of the other tree's root vertex.",
+      "html": "<p><strong>Line 20-29: </strong>When an edge is added to the MST, the <code>union</code> method uses the <code>parent</code> array to merge (union) two trees. The <code>rank</code> array holds a rough estimate of the tree height for every root vertex. When merging two trees, the root with a lesser rank becomes a child of the other tree's root vertex.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here is how Kruskal's algorithm is implemented as a method inside the Graph class:",
+      "html": "<p>Here is how Kruskal's algorithm is implemented as a method inside the <code>Graph</code> class:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "def\n\nkruskals_algorithm\n(\nself\n)\n:\n\nresult\n=\n\n[\n]\n\n# MST\n\ni\n=\n\n0\n\n# edge counter\n\n\nself\n.\nedges\n=\n\nsorted\n(\nself\n.\nedges\n,\nkey\n=\nlambda\nitem\n:\nitem\n[\n2\n]\n)\n\n\nparent\n,\nrank\n=\n\n[\n]\n,\n\n[\n]\n\n\n\nfor\nnode\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\nparent\n.\nappend\n(\nnode\n)\n\nrank\n.\nappend\n(\n0\n)\n\n\n\nwhile\ni\n<\n\nlen\n(\nself\n.\nedges\n)\n:\n\nu\n,\nv\n,\nweight\n=\nself\n.\nedges\n[\ni\n]\n\ni\n+=\n\n1\n\n\nx\n=\nself\n.\nfind\n(\nparent\n,\nu\n)\n\ny\n=\nself\n.\nfind\n(\nparent\n,\nv\n)\n\n\nif\nx\n!=\ny\n:\n\nresult\n.\nappend\n(\n(\nu\n,\nv\n,\nweight\n)\n)\n\nself\n.\nunion\n(\nparent\n,\nrank\n,\nx\n,\ny\n)\n\n\n\nprint\n(\n\"Edge \\tWeight\"\n)\n\n\nfor\nu\n,\nv\n,\nweight\nin\nresult\n:\n\n\nprint\n(\nf\"\n{\nself\n.\nvertex_data\n[\nu\n]\n}\n-\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n\\t\n{\nweight\n}\n\"\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"35, 40-41,44-45, 47-51\" data-line-offset=\"31\" data-start=\"31\" style=\"counter-reset: linenumber 30;\" tabindex=\"0\"><code class=\"language-python\">    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">kruskals_algorithm</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        result <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>  <span class=\"token comment\"># MST</span>\n        i <span class=\"token operator\">=</span> <span class=\"token number\">0</span> <span class=\"token comment\"># edge counter</span>\n\n        self<span class=\"token punctuation\">.</span>edges <span class=\"token operator\">=</span> <span class=\"token builtin\">sorted</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>edges<span class=\"token punctuation\">,</span> key<span class=\"token operator\">=</span><span class=\"token keyword keyword-lambda\">lambda</span> item<span class=\"token punctuation\">:</span> item<span class=\"token punctuation\">[</span><span class=\"token number\">2</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span>\n\n        parent<span class=\"token punctuation\">,</span> rank <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>\n\n        <span class=\"token keyword keyword-for\">for</span> node <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            parent<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span>node<span class=\"token punctuation\">)</span>\n            rank<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span>\n\n        <span class=\"token keyword keyword-while\">while</span> i <span class=\"token operator\">&lt;</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>edges<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>edges<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span>\n            i <span class=\"token operator\">+=</span> <span class=\"token number\">1</span>\n\n            x <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">)</span>\n            y <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">)</span>\n            <span class=\"token keyword keyword-if\">if</span> x <span class=\"token operator\">!=</span> y<span class=\"token punctuation\">:</span>\n                result<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span>u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n                self<span class=\"token punctuation\">.</span>union<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> rank<span class=\"token punctuation\">,</span> x<span class=\"token punctuation\">,</span> y<span class=\"token punctuation\">)</span>\n\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Edge \\tWeight\"</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-for\">for</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight <span class=\"token keyword keyword-in\">in</span> result<span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">-</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\"> \\t</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>weight<span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"35\" style=\"top: 89px; height: 22px; width: 789px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"40-41\" style=\"top: 199px; height: 44px; width: 789px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"44-45\" style=\"top: 287px; height: 44px; width: 789px;\"></div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"47-51\" style=\"top: 353px; height: 110px; width: 789px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 35: The edges must be sorted before Kruskal's algorithm starts trying to add the edges to the MST.",
+      "html": "<p><strong>Line 35: </strong>The edges must be sorted before Kruskal's algorithm starts trying to add the edges to the MST.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 40-41: The parent and rank arrays are initialized. To start with, every vertex is its own root (every element in the parent array points to itself), and every vertex has no height ( 0 values in the rank array).",
+      "html": "<p><strong>Line 40-41: </strong>The <code>parent</code> and <code>rank</code> arrays are initialized. To start with, every vertex is its own root (every element in the <code>parent</code> array points to itself), and every vertex has no height (<code>0</code> values in the <code>rank</code> array).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 44-45: Pick the smallest edge, and increment i so that the correct edge is picked in the next iteration.",
+      "html": "<p><strong>Line 44-45: </strong>Pick the smallest edge, and increment <code>i</code> so that the correct edge is picked in the next iteration.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Line 47-51: If the vertices u and v at each end of the current edge have different roots x and y , it means there will be no cycle for the new edge and the trees are merged. To merge the trees, the current edge is added to the result array, and we run the union method to make sure the trees are merged correctly, so that there is only one root vertex in the resulting merged tree.",
+      "html": "<p><strong>Line 47-51: </strong>If the vertices <code>u</code> and <code>v</code> at each end of the current edge have different roots <code>x</code> and <code>y</code>, it means there will be no cycle for the new edge and the trees are merged. To merge the trees, the current edge is added to the <code>result</code> array, and we run the <code>union</code> method to make sure the trees are merged correctly, so that there is only one root vertex in the resulting merged tree.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now let's create the graph from the \"Manual Run Through\" above and run Kruskal's algorithm on it:",
+      "html": "<p>Now let's create the graph from the \"Manual Run Through\" above and run Kruskal's algorithm on it:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "line-numbers",
+          "language-python"
+        ],
+        "isNotranslate": true
+      },
+      "code": "class\n\nGraph\n:\n\n\ndef\n\n__init__\n(\nself\n,\nsize\n)\n:\n\nself\n.\nsize\n=\nsize\nself\n.\nedges\n=\n\n[\n]\n\n# For storing edges as (weight, u, v)\n\nself\n.\nvertex_data\n=\n\n[\n''\n]\n\n*\nsize\n# Store vertex names\n\n\n\ndef\n\nadd_edge\n(\nself\n,\nu\n,\nv\n,\nweight\n)\n:\n\n\nif\n\n0\n\n<=\nu\n<\nself\n.\nsize\nand\n\n0\n\n<=\nv\n<\nself\n.\nsize\n:\n\nself\n.\nedges\n.\nappend\n(\n(\nu\n,\nv\n,\nweight\n)\n)\n\n# Add edge with weight\n\n\n\ndef\n\nadd_vertex_data\n(\nself\n,\nvertex\n,\ndata\n)\n:\n\n\nif\n\n0\n\n<=\nvertex\n<\nself\n.\nsize\n:\n\nself\n.\nvertex_data\n[\nvertex\n]\n\n=\ndata\n\n\ndef\n\nfind\n(\nself\n,\nparent\n,\ni\n)\n:\n\n\nif\nparent\n[\ni\n]\n\n==\ni\n:\n\n\nreturn\ni\n\nreturn\nself\n.\nfind\n(\nparent\n,\nparent\n[\ni\n]\n)\n\n\n\ndef\n\nunion\n(\nself\n,\nparent\n,\nrank\n,\nx\n,\ny\n)\n:\n\nxroot\n=\nself\n.\nfind\n(\nparent\n,\nx\n)\n\nyroot\n=\nself\n.\nfind\n(\nparent\n,\ny\n)\n\n\nif\nrank\n[\nxroot\n]\n\n<\nrank\n[\nyroot\n]\n:\n\nparent\n[\nxroot\n]\n\n=\nyroot\n\nelif\nrank\n[\nxroot\n]\n\n>\nrank\n[\nyroot\n]\n:\n\nparent\n[\nyroot\n]\n\n=\nxroot\n\nelse\n:\n\nparent\n[\nyroot\n]\n\n=\nxroot\nrank\n[\nxroot\n]\n\n+=\n\n1\n\n\n\ndef\n\nkruskals_algorithm\n(\nself\n)\n:\n\nresult\n=\n\n[\n]\n\n# MST\n\ni\n=\n\n0\n\n# edge counter\n\n\nself\n.\nedges\n=\n\nsorted\n(\nself\n.\nedges\n,\nkey\n=\nlambda\nitem\n:\nitem\n[\n2\n]\n)\n\n\nparent\n,\nrank\n=\n\n[\n]\n,\n\n[\n]\n\n\n\nfor\nnode\nin\n\nrange\n(\nself\n.\nsize\n)\n:\n\nparent\n.\nappend\n(\nnode\n)\n\nrank\n.\nappend\n(\n0\n)\n\n\n\nwhile\ni\n<\n\nlen\n(\nself\n.\nedges\n)\n:\n\nu\n,\nv\n,\nweight\n=\nself\n.\nedges\n[\ni\n]\n\ni\n+=\n\n1\n\n\nx\n=\nself\n.\nfind\n(\nparent\n,\nu\n)\n\ny\n=\nself\n.\nfind\n(\nparent\n,\nv\n)\n\n\nif\nx\n!=\ny\n:\n\nresult\n.\nappend\n(\n(\nu\n,\nv\n,\nweight\n)\n)\n\nself\n.\nunion\n(\nparent\n,\nrank\n,\nx\n,\ny\n)\n\n\n\nprint\n(\n\"Edge \\tWeight\"\n)\n\n\nfor\nu\n,\nv\n,\nweight\nin\nresult\n:\n\n\nprint\n(\nf\"\n{\nself\n.\nvertex_data\n[\nu\n]\n}\n-\n{\nself\n.\nvertex_data\n[\nv\n]\n}\n\\t\n{\nweight\n}\n\"\n)\n\n\ng\n=\nGraph\n(\n7\n)\n\ng\n.\nadd_vertex_data\n(\n0\n,\n\n'A'\n)\n\ng\n.\nadd_vertex_data\n(\n1\n,\n\n'B'\n)\n\ng\n.\nadd_vertex_data\n(\n2\n,\n\n'C'\n)\n\ng\n.\nadd_vertex_data\n(\n3\n,\n\n'D'\n)\n\ng\n.\nadd_vertex_data\n(\n4\n,\n\n'E'\n)\n\ng\n.\nadd_vertex_data\n(\n5\n,\n\n'F'\n)\n\ng\n.\nadd_vertex_data\n(\n6\n,\n\n'G'\n)\n\n\ng\n.\nadd_edge\n(\n0\n,\n\n1\n,\n\n4\n)\n\n#A-B,  4\n\ng\n.\nadd_edge\n(\n0\n,\n\n6\n,\n\n10\n)\n\n#A-G, 10\n\ng\n.\nadd_edge\n(\n0\n,\n\n2\n,\n\n9\n)\n\n#A-C,  9\n\ng\n.\nadd_edge\n(\n1\n,\n\n2\n,\n\n8\n)\n\n#B-C,  8\n\ng\n.\nadd_edge\n(\n2\n,\n\n3\n,\n\n5\n)\n\n#C-D,  5\n\ng\n.\nadd_edge\n(\n2\n,\n\n4\n,\n\n2\n)\n\n#C-E,  2\n\ng\n.\nadd_edge\n(\n2\n,\n\n6\n,\n\n7\n)\n\n#C-G,  7\n\ng\n.\nadd_edge\n(\n3\n,\n\n4\n,\n\n3\n)\n\n#D-E,  3\n\ng\n.\nadd_edge\n(\n3\n,\n\n5\n,\n\n7\n)\n\n#D-F,  7\n\ng\n.\nadd_edge\n(\n4\n,\n\n6\n,\n\n6\n)\n\n#E-G,  6\n\ng\n.\nadd_edge\n(\n5\n,\n\n6\n,\n\n11\n)\n\n#F-G, 11\n\n\n\nprint\n(\n\"Kruskal's Algorithm MST:\"\n)\n\ng\n.\nkruskals_algorithm\n(\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white line-numbers language-python\" data-line=\"32\" style=\"height: 400px; overflow: auto;\" tabindex=\"0\"><code class=\"language-python\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Graph</span><span class=\"token punctuation\">:</span>\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">__init__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        self<span class=\"token punctuation\">.</span>size <span class=\"token operator\">=</span> size\n        self<span class=\"token punctuation\">.</span>edges <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>  <span class=\"token comment\"># For storing edges as (weight, u, v)</span>\n        self<span class=\"token punctuation\">.</span>vertex_data <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token string\">''</span><span class=\"token punctuation\">]</span> <span class=\"token operator\">*</span> size  <span class=\"token comment\"># Store vertex names</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_edge</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> u <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size <span class=\"token keyword keyword-and\">and</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> v <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>edges<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span>u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\"># Add edge with weight</span>\n            \n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">add_vertex_data</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> vertex<span class=\"token punctuation\">,</span> data<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> <span class=\"token number\">0</span> <span class=\"token operator\">&lt;=</span> vertex <span class=\"token operator\">&lt;</span> self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">:</span>\n            self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>vertex<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> data\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">find</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> parent<span class=\"token punctuation\">,</span> i<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        <span class=\"token keyword keyword-if\">if</span> parent<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span> <span class=\"token operator\">==</span> i<span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-return\">return</span> i\n        <span class=\"token keyword keyword-return\">return</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> parent<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">union</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">,</span> parent<span class=\"token punctuation\">,</span> rank<span class=\"token punctuation\">,</span> x<span class=\"token punctuation\">,</span> y<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        xroot <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> x<span class=\"token punctuation\">)</span>\n        yroot <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> y<span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-if\">if</span> rank<span class=\"token punctuation\">[</span>xroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">&lt;</span> rank<span class=\"token punctuation\">[</span>yroot<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n            parent<span class=\"token punctuation\">[</span>xroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> yroot\n        <span class=\"token keyword keyword-elif\">elif</span> rank<span class=\"token punctuation\">[</span>xroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">&gt;</span> rank<span class=\"token punctuation\">[</span>yroot<span class=\"token punctuation\">]</span><span class=\"token punctuation\">:</span>\n            parent<span class=\"token punctuation\">[</span>yroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> xroot\n        <span class=\"token keyword keyword-else\">else</span><span class=\"token punctuation\">:</span>\n            parent<span class=\"token punctuation\">[</span>yroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> xroot\n            rank<span class=\"token punctuation\">[</span>xroot<span class=\"token punctuation\">]</span> <span class=\"token operator\">+=</span> <span class=\"token number\">1</span>\n\n    <span class=\"token keyword keyword-def\">def</span> <span class=\"token function\">kruskals_algorithm</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n        result <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>  <span class=\"token comment\"># MST</span>\n        i <span class=\"token operator\">=</span> <span class=\"token number\">0</span>  <span class=\"token comment\"># edge counter</span>\n\n        self<span class=\"token punctuation\">.</span>edges <span class=\"token operator\">=</span> <span class=\"token builtin\">sorted</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>edges<span class=\"token punctuation\">,</span> key<span class=\"token operator\">=</span><span class=\"token keyword keyword-lambda\">lambda</span> item<span class=\"token punctuation\">:</span> item<span class=\"token punctuation\">[</span><span class=\"token number\">2</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">)</span>\n\n        parent<span class=\"token punctuation\">,</span> rank <span class=\"token operator\">=</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span> <span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span>\n\n        <span class=\"token keyword keyword-for\">for</span> node <span class=\"token keyword keyword-in\">in</span> <span class=\"token builtin\">range</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>size<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            parent<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span>node<span class=\"token punctuation\">)</span>\n            rank<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">)</span>\n\n        <span class=\"token keyword keyword-while\">while</span> i <span class=\"token operator\">&lt;</span> <span class=\"token builtin\">len</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">.</span>edges<span class=\"token punctuation\">)</span><span class=\"token punctuation\">:</span>\n            u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>edges<span class=\"token punctuation\">[</span>i<span class=\"token punctuation\">]</span>\n            i <span class=\"token operator\">+=</span> <span class=\"token number\">1</span>\n            \n            x <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> u<span class=\"token punctuation\">)</span>\n            y <span class=\"token operator\">=</span> self<span class=\"token punctuation\">.</span>find<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">)</span>\n            <span class=\"token keyword keyword-if\">if</span> x <span class=\"token operator\">!=</span> y<span class=\"token punctuation\">:</span>\n                result<span class=\"token punctuation\">.</span>append<span class=\"token punctuation\">(</span><span class=\"token punctuation\">(</span>u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span>\n                self<span class=\"token punctuation\">.</span>union<span class=\"token punctuation\">(</span>parent<span class=\"token punctuation\">,</span> rank<span class=\"token punctuation\">,</span> x<span class=\"token punctuation\">,</span> y<span class=\"token punctuation\">)</span>\n\n        <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Edge \\tWeight\"</span><span class=\"token punctuation\">)</span>\n        <span class=\"token keyword keyword-for\">for</span> u<span class=\"token punctuation\">,</span> v<span class=\"token punctuation\">,</span> weight <span class=\"token keyword keyword-in\">in</span> result<span class=\"token punctuation\">:</span>\n            <span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string-interpolation\"><span class=\"token string\">f\"</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>u<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\">-</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>self<span class=\"token punctuation\">.</span>vertex_data<span class=\"token punctuation\">[</span>v<span class=\"token punctuation\">]</span><span class=\"token punctuation\">}</span></span><span class=\"token string\"> \\t</span><span class=\"token interpolation\"><span class=\"token punctuation\">{</span>weight<span class=\"token punctuation\">}</span></span><span class=\"token string\">\"</span></span><span class=\"token punctuation\">)</span>\n\ng <span class=\"token operator\">=</span> Graph<span class=\"token punctuation\">(</span><span class=\"token number\">7</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'A'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'B'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'C'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'D'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'E'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">5</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'F'</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>add_vertex_data<span class=\"token punctuation\">(</span><span class=\"token number\">6</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'G'</span><span class=\"token punctuation\">)</span>\n\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#A-B,  4</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">6</span><span class=\"token punctuation\">,</span> <span class=\"token number\">10</span><span class=\"token punctuation\">)</span> <span class=\"token comment\">#A-G, 10</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">0</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">9</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#A-C,  9</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">1</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">8</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#B-C,  8</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">5</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#C-D,  5</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#C-E,  2</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">6</span><span class=\"token punctuation\">,</span> <span class=\"token number\">7</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#C-G,  7</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#D-E,  3</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">3</span><span class=\"token punctuation\">,</span> <span class=\"token number\">5</span><span class=\"token punctuation\">,</span> <span class=\"token number\">7</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#D-F,  7</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">4</span><span class=\"token punctuation\">,</span> <span class=\"token number\">6</span><span class=\"token punctuation\">,</span> <span class=\"token number\">6</span><span class=\"token punctuation\">)</span>  <span class=\"token comment\">#E-G,  6</span>\ng<span class=\"token punctuation\">.</span>add_edge<span class=\"token punctuation\">(</span><span class=\"token number\">5</span><span class=\"token punctuation\">,</span> <span class=\"token number\">6</span><span class=\"token punctuation\">,</span> <span class=\"token number\">11</span><span class=\"token punctuation\">)</span> <span class=\"token comment\">#F-G, 11</span>\n\n<span class=\"token keyword keyword-print\">print</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Kruskal's Algorithm MST:\"</span><span class=\"token punctuation\">)</span>\ng<span class=\"token punctuation\">.</span>kruskals_algorithm<span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span aria-hidden=\"true\" class=\"line-numbers-rows\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"32\" style=\"top: 683px; height: 22px; width: 789px;\"></div></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "line-numbers",
+        "language-python"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Time Complexity for Kruskal's Algorithm",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "this page",
+          "href": "https://www.w3schools.com/dsa_timecomplexity_theory.php",
+          "title": ""
+        }
+      ],
+      "text": "For a general explanation of what time complexity is, visit this page .",
+      "html": "<p style=\"font-style: oblique;\">For a general explanation of what time complexity is, visit <a href=\"dsa_timecomplexity_theory.php\">this page</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With E E as the number of edges in our graph, the time complexity for Kruskal's algorithm is",
+      "html": "<p>With <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-3-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-11\"><span class=\"mjx-mrow\" id=\"MJXc-Node-12\"><span class=\"mjx-mi\" id=\"MJXc-Node-13\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>E</mi></math></span></span> as the number of edges in our graph, the time complexity for Kruskal's algorithm is</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "O ( E \u22c5 l o g E ) O ( E \u22c5 l o g E )",
+      "html": "<p><span class=\"math display\"><span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MJXc-display\" style=\"text-align: center;\"><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mrow class=\"MJX-TeXAtom-ORD\"&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;/mrow&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-4-Frame\" role=\"presentation\" style=\"font-size: 119%; text-align: center; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-14\"><span class=\"mjx-mrow\" id=\"MJXc-Node-15\"><span class=\"mjx-mi\" id=\"MJXc-Node-16\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-17\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-18\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-19\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-20\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">l</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-21\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">o</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-22\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.507em; padding-right: 0.003em;\">g</span></span><span class=\"mjx-texatom\" id=\"MJXc-Node-23\"><span class=\"mjx-mrow\" id=\"MJXc-Node-24\"><span class=\"mjx-mi\" id=\"MJXc-Node-25\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-26\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML MJX_Assistive_MathML_Block\" role=\"presentation\"><math display=\"block\" xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>E</mi><mo>\u22c5</mo><mi>l</mi><mi>o</mi><mi>g</mi><mrow class=\"MJX-TeXAtom-ORD\"><mi>E</mi></mrow><mo stretchy=\"false\">)</mo></math></span></span></span></span></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Quick Sort",
+          "href": "https://www.w3schools.com/dsa_algo_quicksort.php",
+          "title": ""
+        },
+        {
+          "text": "Merge Sort",
+          "href": "https://www.w3schools.com/dsa_algo_mergesort.php",
+          "title": ""
+        }
+      ],
+      "text": "We get this time complexity because the edges must be sorted before Kruskal's can start adding edges to the MST. Using a fast algorithm like Quick Sort or Merge Sort gives us a time complexity of O ( E \u22c5 l o g E ) O ( E \u22c5 l o g E ) for this sorting alone.",
+      "html": "<p>We get this time complexity because the edges must be sorted before Kruskal's can start adding edges to the MST. Using a fast algorithm like <a href=\"dsa_algo_quicksort.php\">Quick Sort</a> or <a href=\"dsa_algo_mergesort.php\">Merge Sort</a> gives us a time complexity of <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mo stretchy=\"false\"&gt;(&lt;/mo&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mrow class=\"MJX-TeXAtom-ORD\"&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;/mrow&gt;&lt;mo stretchy=\"false\"&gt;)&lt;/mo&gt;&lt;/math&gt;' id=\"MathJax-Element-5-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-27\"><span class=\"mjx-mrow\" id=\"MJXc-Node-28\"><span class=\"mjx-mi\" id=\"MJXc-Node-29\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.507em; padding-bottom: 0.283em;\">O</span></span><span class=\"mjx-mo\" id=\"MJXc-Node-30\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">(</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-31\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span><span class=\"mjx-mo MJXc-space2\" id=\"MJXc-Node-32\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.003em; padding-bottom: 0.339em;\">\u22c5</span></span><span class=\"mjx-mi MJXc-space2\" id=\"MJXc-Node-33\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em;\">l</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-34\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.283em;\">o</span></span><span class=\"mjx-mi\" id=\"MJXc-Node-35\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.227em; padding-bottom: 0.507em; padding-right: 0.003em;\">g</span></span><span class=\"mjx-texatom\" id=\"MJXc-Node-36\"><span class=\"mjx-mrow\" id=\"MJXc-Node-37\"><span class=\"mjx-mi\" id=\"MJXc-Node-38\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span></span></span><span class=\"mjx-mo\" id=\"MJXc-Node-39\"><span class=\"mjx-char MJXc-TeX-main-R\" style=\"padding-top: 0.451em; padding-bottom: 0.619em;\">)</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>O</mi><mo stretchy=\"false\">(</mo><mi>E</mi><mo>\u22c5</mo><mi>l</mi><mi>o</mi><mi>g</mi><mrow class=\"MJX-TeXAtom-ORD\"><mi>E</mi></mrow><mo stretchy=\"false\">)</mo></math></span></span> for this sorting alone.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After the edges are sorted, they are all checked one by one, to see if they will create a cycle, and if not, they are added to the MST.",
+      "html": "<p>After the edges are sorted, they are all checked one by one, to see if they will create a cycle, and if not, they are added to the MST.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Although it looks like a lot of work to check if a cycle will be created using the find method, and then to include an edge to the MST using the union method, this can still be viewed as one operation. The reason we can see this as just one operation is that it takes approximately constant time. That means that the time this operation takes grows very little as the graph grows, and so it does actually not contribute to the overall time complexity.",
+      "html": "<p>Although it looks like a lot of work to check if a cycle will be created using the <code>find</code> method, and then to include an edge to the MST using the <code>union</code> method, this can still be viewed as one operation. The reason we can see this as just one operation is that it takes approximately constant time. That means that the time this operation takes grows very little as the graph grows, and so it does actually not contribute to the overall time complexity.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Since the time complexity for Kruskal's algorithm only varies with the number of edges E E , it is especially fast for sparse graphs where the ratio between the number of edges E E and the number of vertices V V is relatively low.",
+      "html": "<p>Since the time complexity for Kruskal's algorithm only varies with the number of edges <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-6-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-40\"><span class=\"mjx-mrow\" id=\"MJXc-Node-41\"><span class=\"mjx-mi\" id=\"MJXc-Node-42\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>E</mi></math></span></span>, it is especially fast for sparse graphs where the ratio between the number of edges <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-7-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-43\"><span class=\"mjx-mrow\" id=\"MJXc-Node-44\"><span class=\"mjx-mi\" id=\"MJXc-Node-45\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.026em;\">E</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>E</mi></math></span></span> and the number of vertices <span class=\"MathJax_Preview\" style=\"color: inherit;\"></span><span class=\"mjx-chtml MathJax_CHTML\" data-mathml='&lt;math xmlns=\"http://www.w3.org/1998/Math/MathML\"&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/math&gt;' id=\"MathJax-Element-8-Frame\" role=\"presentation\" style=\"font-size: 119%; position: relative;\" tabindex=\"0\"><span aria-hidden=\"true\" class=\"mjx-math\" id=\"MJXc-Node-46\"><span class=\"mjx-mrow\" id=\"MJXc-Node-47\"><span class=\"mjx-mi\" id=\"MJXc-Node-48\"><span class=\"mjx-char MJXc-TeX-math-I\" style=\"padding-top: 0.451em; padding-bottom: 0.283em; padding-right: 0.186em;\">V</span></span></span></span><span class=\"MJX_Assistive_MathML\" role=\"presentation\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>V</mi></math></span></span> is relatively low.</p>"
+    }
+  ]
+}

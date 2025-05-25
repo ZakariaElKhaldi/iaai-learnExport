@@ -1,0 +1,459 @@
+{
+  "title": "Rust Borrowing and References",
+  "url": "https://www.w3schools.com/rust/rust_borrowing_references.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Rust Borrowing and References",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Borrowing and References",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Sometimes you want to use a value without taking ownership of it.",
+      "html": "<p>Sometimes you want to use a value without taking ownership of it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Rust lets you do this using a reference - this is called borrowing :",
+      "html": "<p>Rust lets you do this using a <strong>reference</strong> - this is called <strong>borrowing</strong>:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "What is a Reference?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A reference lets you look at a value without owning it. You create a reference using the & symbol:",
+      "html": "<p>A reference lets you look at a value without owning it.  \nYou create a reference using the <code>&amp;</code> symbol:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_borrowing_references",
+        "syntaxHighlighting": [
+          {
+            "text": "\nlet a = String::from(\"Hello\");\nlet b = &a;\n  println!(\"a = {}\", a);println!(\"b = {}\", b); ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "String",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\"Hello\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"a = {}\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "\"b = {}\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "let a = String::from(\"Hello\");\nlet b = &a;\nprintln!(\"a = {}\", a);println!(\"b = {}\", b);",
+      "syntax_highlighting": [
+        {
+          "text": "\nlet a = String::from(\"Hello\");\nlet b = &a;\n  println!(\"a = {}\", a);println!(\"b = {}\", b); ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "String",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Hello\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"a = {}\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "\"b = {}\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\">\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> a = <span class=\"javakeywordcolor\" style=\"color:#005cc5\">String</span>::from(<span class=\"javastringcolor\" style=\"color:green\">\"Hello\"</span>);<br/>\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> b = &amp;a;<br/><br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  println!(<span class=\"javastringcolor\" style=\"color:green\">\"a = {}\"</span>, a);<br/>println!(<span class=\"javastringcolor\" style=\"color:green\">\"b = {}\"</span>, b); </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_borrowing_references",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nlet a = String::from(\"Hello\");\nlet b = &a;\n  println!(\"a = {}\", a);println!(\"b = {}\", b); ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "String",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\"Hello\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"a = {}\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "\"b = {}\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Since b is only borrowing the value, a still owns it.",
+      "html": "<p>Since <code>b</code> is only borrowing the value, <code>\na</code> still owns it.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Mutable References",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If you want to change a value through a reference, you need to make the reference mut :",
+      "html": "<p>If you want to <strong>change</strong> a value through a reference, you need to make the reference <code>mut</code>:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_borrowing_references",
+        "syntaxHighlighting": [
+          {
+            "text": "\nlet mut name = String::from(\"John\");\nlet name_ref = &mut name;\nname_ref.push_str(\" Doe\");\nprintln!(\"{}\", name_ref); // John Doe\n ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "String",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\"John\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "let",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "push_str",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "\" Doe\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "\"{}\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "// John Doe\n ",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "let mut name = String::from(\"John\");\nlet name_ref = &mut name;\nname_ref.push_str(\" Doe\");\nprintln!(\"{}\", name_ref); // John Doe",
+      "syntax_highlighting": [
+        {
+          "text": "\nlet mut name = String::from(\"John\");\nlet name_ref = &mut name;\nname_ref.push_str(\" Doe\");\nprintln!(\"{}\", name_ref); // John Doe\n ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "String",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\"John\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "let",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "push_str",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "\" Doe\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "\"{}\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "// John Doe\n ",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\">\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> mut name = <span class=\"javakeywordcolor\" style=\"color:#005cc5\">String</span>::from(<span class=\"javastringcolor\" style=\"color:green\">\"John\"</span>);<br/>\n<span class=\"javakeywordcolor\" style=\"color:#005cc5\">let</span> name_ref = &amp;mut name;<br/>\nname_ref.<span class=\"javapropertycolor\" style=\"color:black\">push_str</span>(<span class=\"javastringcolor\" style=\"color:green\">\" Doe\"</span>);<br/><br/>\nprintln!(<span class=\"javastringcolor\" style=\"color:green\">\"{}\"</span>, name_ref); <span class=\"commentcolor\" style=\"color:slategray\">// John Doe\n </span></span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/rust/tryrust.php?filename=demo_borrowing_references",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nlet mut name = String::from(\"John\");\nlet name_ref = &mut name;\nname_ref.push_str(\" Doe\");\nprintln!(\"{}\", name_ref); // John Doe\n ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "String",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\"John\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "let",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "push_str",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "\" Doe\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "\"{}\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "// John Doe\n ",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: You can only have one mutable reference to a value at a time!",
+      "html": "<p><strong>Note:</strong> You can only have one mutable reference to a value at a time!</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Why Borrowing is Important",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Borrowing helps you reuse values safely, without giving them away.",
+      "html": "<p>Borrowing helps you reuse values safely, without giving them away.</p>"
+    }
+  ]
+}

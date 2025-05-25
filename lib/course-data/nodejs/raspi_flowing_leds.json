@@ -1,0 +1,1930 @@
+{
+  "title": "Node.js Raspberry Pi Flowing LEDs",
+  "url": "https://www.w3schools.com/nodejs/nodejs_raspberrypi_flowing_leds.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Node.js Raspberry Pi GPIO - Flowing LEDs",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Using Array With Output to Create Flowing LEDs",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this chapter we will use several GPIO pins to create a \"flowing\" effect by turning them on and off in sequence.",
+      "html": "<p>In this chapter we will use several GPIO pins to create a \"flowing\" effect by \nturning them on and off in sequence.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "What do we need?",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For this you need:",
+      "html": "<p>For this you need:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: The resistor you need can be different from what we use depending on the type of LEDs you use. Most small LEDs only need a small resistor, around 200-500 ohms. It is generally not critical what exact value you use, but the smaller the value of the resistor, the brighter the LED will shine.",
+      "html": "<p><strong>Note:</strong> The resistor you need can be different from what we use depending on the type of LEDs you use. Most small LEDs only need a small resistor, around 200-500 ohms. It is generally not critical what exact value you use, but the smaller the value of the resistor, the brighter the LED will\nshine.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Click the links in the list above for descriptions of the different components.",
+      "html": "<p>Click the links in the list above for descriptions of the different \ncomponents.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Building the Circuit",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now it is time to build the circuit on our Breadboard.",
+      "html": "<p>Now it is time to build the circuit on our Breadboard.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If you are new to electronics, we recommend you turn off the power for the Raspberry Pi. And use an anti-static mat or a grounding strap to avoid damaging it.",
+      "html": "<p>If you are new to electronics, we recommend you turn off the power for \nthe Raspberry Pi. And use an anti-static mat or a grounding strap to avoid \ndamaging it.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Shut down the Raspberry Pi properly with the command:",
+      "html": "<p>Shut down the Raspberry Pi properly with the command:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "pi@w3demopi:~ $ sudo shutdown -h now",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  pi@w3demopi:~ $ sudo shutdown -h now\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After the LEDs stop blinking on the Raspberry Pi, then pull out the power plug from the Raspberry Pi (or turn of the power strip it is connected to).",
+      "html": "<p>After the LEDs stop blinking on the Raspberry Pi, then pull out the power \nplug from the Raspberry Pi (or turn of the power strip it is connected to).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Just pulling the plug without shutting down properly may cause corruption of the memory card.",
+      "html": "<p>Just pulling the plug without shutting down properly may cause corruption of the memory card.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Look at the above illustration of the circuit.",
+      "html": "<p>Look at the above illustration of the circuit.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Your circuit should now be complete, and your connections should look pretty similar to the illustration above.",
+      "html": "<p>Your circuit should now be complete, and your connections should look \n  pretty similar to the illustration above.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now it is time to boot up the Raspberry Pi, and write the Node.js script to interact with it.",
+      "html": "<p>Now it is time to boot up the Raspberry Pi, and write the Node.js script to \n  interact with it.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Raspberry Pi and Node.js Flowing LEDs Script",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Go to the \"nodetest\" directory, and create a new file called \" flowingleds.js \":",
+      "html": "<p>Go to the \"nodetest\" directory, and create a new file called \"<code>flowingleds.js</code>\":</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "pi@w3demopi:~ $ nano\nflowingleds.js",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  pi@w3demopi:~ $ nano \n  flowingleds.js\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The file is now open and can be edited with the built in Nano Editor.",
+      "html": "<p>The file is now open and can be edited with the built in Nano Editor.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Write, or paste the following:",
+      "html": "<p>Write, or paste the following:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\n  var LED04 = new Gpio(4, 'out'), //use declare variables for all the GPIO \n  output pins\u00a0 LED17 = new Gpio(17, 'out'),\u00a0 LED27 = new Gpio(27, \n  'out'),\u00a0 LED22 = new Gpio(22, 'out'),\u00a0 LED18 = new Gpio(18, \n  'out'),\u00a0 LED23 = new Gpio(23, 'out'),\u00a0 LED24 = new Gpio(24, \n  'out'),\u00a0 LED25 = new Gpio(25, 'out');//Put all the LED \n  variables in an arrayvar leds = [LED04, \n  LED17, LED27, LED22, LED18, LED23, LED24, LED25];var indexCount = 0; //a \n  counterdir = \"up\"; //variable for flowing directionvar \n  flowInterval = setInterval(flowingLeds, 100); //run the flowingLeds function \n  every 100msfunction flowingLeds() { //function for flowing Leds\u00a0 \n  leds.forEach(function(currentValue) { //for each item in array\u00a0\u00a0\u00a0 \n  currentValue.writeSync(0); //turn off LED\u00a0 });\u00a0 if (indexCount \n  == 0) dir = \"up\"; //set flow direction to \"up\" if the count reaches zero\u00a0 \n  if (indexCount >= leds.length) dir = \"down\"; //set flow direction to \"down\" if \n  the count reaches 7\u00a0 if (dir == \"down\") indexCount--; //count \n  downwards if direction is down\u00a0 leds[indexCount].writeSync(1); \n  //turn on LED that where array index matches count\u00a0 if (dir == \n  \"up\") indexCount++ //count upwards if direction is up};function unexportOnClose() { \n  //function to run when exiting program\u00a0 clearInterval(flowInterval); \n  //stop flow interwal\u00a0 leds.forEach(function(currentValue) { //for \n  each LED\u00a0\u00a0\u00a0 currentValue.writeSync(0); //turn off LED\u00a0\u00a0\u00a0 \n  currentValue.unexport(); //unexport GPIO\u00a0 });};process.on('SIGINT', unexportOnClose); //function to \n  run when user closes using ctrl+cc ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "'onoff'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "Gpio",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "//include onoff to interact with the GPIO",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "4",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "//use declare variables for all the GPIO \n  output pins",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "17",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "27",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "22",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "18",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "23",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "24",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "25",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'out'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "//Put all the LED \n  variables in an array",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//a \n  counter",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\"up\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "//variable for flowing direction",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "100",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//run the flowingLeds function \n  every 100ms",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "//function for flowing Leds",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "forEach",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "//for each item in array",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "writeSync",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//turn off LED",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"up\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "//set flow direction to \"up\" if the count reaches zero",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "length",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"down\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "//set flow direction to \"down\" if \n  the count reaches 7",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"down\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "//count \n  downwards if direction is down",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "writeSync",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//turn on LED that where array index matches count",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"up\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "//count upwards if direction is up",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//function to run when exiting program",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//stop flow interwal",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "forEach",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "//for \n  each LED",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "writeSync",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "//turn off LED",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "unexport",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "//unexport GPIO",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "on",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "'SIGINT'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "//function to \n  run when user closes using ctrl+cc ",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\nvar LED04 = new Gpio(4, 'out'), //use declare variables for all the GPIO\noutput pins\u00a0 LED17 = new Gpio(17, 'out'),\u00a0 LED27 = new Gpio(27,\n'out'),\u00a0 LED22 = new Gpio(22, 'out'),\u00a0 LED18 = new Gpio(18,\n'out'),\u00a0 LED23 = new Gpio(23, 'out'),\u00a0 LED24 = new Gpio(24,\n'out'),\u00a0 LED25 = new Gpio(25, 'out');//Put all the LED\nvariables in an arrayvar leds = [LED04,\nLED17, LED27, LED22, LED18, LED23, LED24, LED25];var indexCount = 0; //a\ncounterdir = \"up\"; //variable for flowing directionvar\nflowInterval = setInterval(flowingLeds, 100); //run the flowingLeds function\nevery 100msfunction flowingLeds() { //function for flowing Leds\nleds.forEach(function(currentValue) { //for each item in array\ncurrentValue.writeSync(0); //turn off LED\u00a0 });\u00a0 if (indexCount\n== 0) dir = \"up\"; //set flow direction to \"up\" if the count reaches zero\nif (indexCount >= leds.length) dir = \"down\"; //set flow direction to \"down\" if\nthe count reaches 7\u00a0 if (dir == \"down\") indexCount--; //count\ndownwards if direction is down\u00a0 leds[indexCount].writeSync(1);\n//turn on LED that where array index matches count\u00a0 if (dir ==\n\"up\") indexCount++ //count upwards if direction is up};function unexportOnClose() {\n//function to run when exiting program\u00a0 clearInterval(flowInterval);\n//stop flow interwal\u00a0 leds.forEach(function(currentValue) { //for\neach LED\u00a0\u00a0\u00a0 currentValue.writeSync(0); //turn off LED\ncurrentValue.unexport(); //unexport GPIO\u00a0 });};process.on('SIGINT', unexportOnClose); //function to\nrun when user closes using ctrl+cc",
+      "syntax_highlighting": [
+        {
+          "text": "\n var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\n var LED04 = new Gpio(4, 'out'), //use declare variables for all the GPIO \n  output pins\u00a0 LED17 = new Gpio(17, 'out'),\u00a0 LED27 = new Gpio(27, \n 'out'),\u00a0 LED22 = new Gpio(22, 'out'),\u00a0 LED18 = new Gpio(18, \n 'out'),\u00a0 LED23 = new Gpio(23, 'out'),\u00a0 LED24 = new Gpio(24, \n 'out'),\u00a0 LED25 = new Gpio(25, 'out');//Put all the LED \n  variables in an arrayvar leds = [LED04, \n  LED17, LED27, LED22, LED18, LED23, LED24, LED25];var indexCount = 0; //a \n  counterdir = \"up\"; //variable for flowing directionvar \n  flowInterval = setInterval(flowingLeds, 100); //run the flowingLeds function \n  every 100msfunction flowingLeds() { //function for flowing Leds\u00a0 \n  leds.forEach(function(currentValue) { //for each item in array\u00a0\u00a0\u00a0 \n  currentValue.writeSync(0); //turn off LED\u00a0 });\u00a0 if (indexCount \n  == 0) dir = \"up\"; //set flow direction to \"up\" if the count reaches zero\u00a0 \n if (indexCount >= leds.length) dir = \"down\"; //set flow direction to \"down\" if \n  the count reaches 7\u00a0 if (dir == \"down\") indexCount--; //count \n  downwards if direction is down\u00a0 leds[indexCount].writeSync(1); \n //turn on LED that where array index matches count\u00a0 if (dir == \n \"up\") indexCount++ //count upwards if direction is up};function unexportOnClose() { \n //function to run when exiting program\u00a0 clearInterval(flowInterval); \n //stop flow interwal\u00a0 leds.forEach(function(currentValue) { //for \n  each LED\u00a0\u00a0\u00a0 currentValue.writeSync(0); //turn off LED\u00a0\u00a0\u00a0 \n  currentValue.unexport(); //unexport GPIO\u00a0 });};process.on('SIGINT', unexportOnClose); //function to \n  run when user closes using ctrl+cc ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "'onoff'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "Gpio",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "//include onoff to interact with the GPIO",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "4",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "//use declare variables for all the GPIO \n  output pins",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "17",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "27",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "22",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "18",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "23",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "24",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "25",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'out'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "//Put all the LED \n  variables in an array",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//a \n  counter",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\"up\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "//variable for flowing direction",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "100",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//run the flowingLeds function \n  every 100ms",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "//function for flowing Leds",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "forEach",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "//for each item in array",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "writeSync",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//turn off LED",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"up\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "//set flow direction to \"up\" if the count reaches zero",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "length",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"down\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "//set flow direction to \"down\" if \n  the count reaches 7",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"down\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "//count \n  downwards if direction is down",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "writeSync",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//turn on LED that where array index matches count",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"up\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "//count upwards if direction is up",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//function to run when exiting program",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//stop flow interwal",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "forEach",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "//for \n  each LED",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "writeSync",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "//turn off LED",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "unexport",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "//unexport GPIO",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "on",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "'SIGINT'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "//function to \n  run when user closes using ctrl+cc ",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> Gpio = require(<span class=\"jsstringcolor\" style=\"color:green\">'onoff'</span>).<span class=\"jspropertycolor\" style=\"color:black\">Gpio</span>; <span class=\"commentcolor\" style=\"color:slategray\">//include onoff to interact with the GPIO<br/></span><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> LED04 = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">4</span>, <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>), <span class=\"commentcolor\" style=\"color:slategray\">//use declare variables for all the GPIO \n  output pins<br/></span>\u00a0 LED17 = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">17</span>, <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>),<br/>\u00a0 LED27 = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">27</span>, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>),<br/>\u00a0 LED22 = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">22</span>, <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>),<br/>\u00a0 LED18 = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">18</span>, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>),<br/>\u00a0 LED23 = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">23</span>, <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>),<br/>\u00a0 LED24 = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">24</span>, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>),<br/>\u00a0 LED25 = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">new</span> Gpio(<span class=\"jsnumbercolor\" style=\"color:#905\">25</span>, <span class=\"jsstringcolor\" style=\"color:green\">'out'</span>);<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">//Put all the LED \n  variables in an array<br/></span><span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> leds = [LED04, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  LED17, LED27, LED22, LED18, LED23, LED24, LED25];<br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> indexCount = <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>; <span class=\"commentcolor\" style=\"color:slategray\">//a \n  counter<br/></span>dir = <span class=\"jsstringcolor\" style=\"color:green\">\"up\"</span>; <span class=\"commentcolor\" style=\"color:slategray\">//variable for flowing direction<br/></span><br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  flowInterval = setInterval(flowingLeds, <span class=\"jsnumbercolor\" style=\"color:#905\">100</span>); <span class=\"commentcolor\" style=\"color:slategray\">//run the flowingLeds function \n  every 100ms<br/></span><br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> flowingLeds() { <span class=\"commentcolor\" style=\"color:slategray\">//function for flowing Leds<br/></span>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  leds.<span class=\"jspropertycolor\" style=\"color:black\">forEach</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(currentValue) { <span class=\"commentcolor\" style=\"color:slategray\">//for each item in array<br/></span>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  currentValue.<span class=\"jspropertycolor\" style=\"color:black\">writeSync</span>(<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>); <span class=\"commentcolor\" style=\"color:slategray\">//turn off LED<br/></span>\u00a0 });<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (indexCount <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  == <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>) dir = <span class=\"jsstringcolor\" style=\"color:green\">\"up\"</span>; <span class=\"commentcolor\" style=\"color:slategray\">//set flow direction to \"up\" if the count reaches zero<br/></span>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (indexCount &gt;= leds.<span class=\"jspropertycolor\" style=\"color:black\">length</span>) dir = <span class=\"jsstringcolor\" style=\"color:green\">\"down\"</span>; <span class=\"commentcolor\" style=\"color:slategray\">//set flow direction to \"down\" if \n  the count reaches 7<br/></span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (dir == <span class=\"jsstringcolor\" style=\"color:green\">\"down\"</span>) indexCount--; <span class=\"commentcolor\" style=\"color:slategray\">//count \n  downwards if direction is down<br/></span>\u00a0 leds[indexCount].<span class=\"jspropertycolor\" style=\"color:black\">writeSync</span>(<span class=\"jsnumbercolor\" style=\"color:#905\">1</span>); <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">//turn on LED that where array index matches count<br/></span>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (dir == <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jsstringcolor\" style=\"color:green\">\"up\"</span>) indexCount++ <span class=\"commentcolor\" style=\"color:slategray\">//count upwards if direction is up<br/></span>};<br/><br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> unexportOnClose() { <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">//function to run when exiting program<br/></span>\u00a0 clearInterval(flowInterval); <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">//stop flow interwal<br/></span>\u00a0 leds.<span class=\"jspropertycolor\" style=\"color:black\">forEach</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(currentValue) { <span class=\"commentcolor\" style=\"color:slategray\">//for \n  each LED<br/></span>\u00a0\u00a0\u00a0 currentValue.<span class=\"jspropertycolor\" style=\"color:black\">writeSync</span>(<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>); <span class=\"commentcolor\" style=\"color:slategray\">//turn off LED<br/></span>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  currentValue.<span class=\"jspropertycolor\" style=\"color:black\">unexport</span>(); <span class=\"commentcolor\" style=\"color:slategray\">//unexport GPIO<br/></span>\u00a0 });<br/>};<br/><br/>process.<span class=\"jspropertycolor\" style=\"color:black\">on</span>(<span class=\"jsstringcolor\" style=\"color:green\">'SIGINT'</span>, unexportOnClose); <span class=\"commentcolor\" style=\"color:slategray\">//function to \n  run when user closes using ctrl+cc </span></span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO\n  var LED04 = new Gpio(4, 'out'), //use declare variables for all the GPIO \n  output pins\u00a0 LED17 = new Gpio(17, 'out'),\u00a0 LED27 = new Gpio(27, \n  'out'),\u00a0 LED22 = new Gpio(22, 'out'),\u00a0 LED18 = new Gpio(18, \n  'out'),\u00a0 LED23 = new Gpio(23, 'out'),\u00a0 LED24 = new Gpio(24, \n  'out'),\u00a0 LED25 = new Gpio(25, 'out');//Put all the LED \n  variables in an arrayvar leds = [LED04, \n  LED17, LED27, LED22, LED18, LED23, LED24, LED25];var indexCount = 0; //a \n  counterdir = \"up\"; //variable for flowing directionvar \n  flowInterval = setInterval(flowingLeds, 100); //run the flowingLeds function \n  every 100msfunction flowingLeds() { //function for flowing Leds\u00a0 \n  leds.forEach(function(currentValue) { //for each item in array\u00a0\u00a0\u00a0 \n  currentValue.writeSync(0); //turn off LED\u00a0 });\u00a0 if (indexCount \n  == 0) dir = \"up\"; //set flow direction to \"up\" if the count reaches zero\u00a0 \n  if (indexCount >= leds.length) dir = \"down\"; //set flow direction to \"down\" if \n  the count reaches 7\u00a0 if (dir == \"down\") indexCount--; //count \n  downwards if direction is down\u00a0 leds[indexCount].writeSync(1); \n  //turn on LED that where array index matches count\u00a0 if (dir == \n  \"up\") indexCount++ //count upwards if direction is up};function unexportOnClose() { \n  //function to run when exiting program\u00a0 clearInterval(flowInterval); \n  //stop flow interwal\u00a0 leds.forEach(function(currentValue) { //for \n  each LED\u00a0\u00a0\u00a0 currentValue.writeSync(0); //turn off LED\u00a0\u00a0\u00a0 \n  currentValue.unexport(); //unexport GPIO\u00a0 });};process.on('SIGINT', unexportOnClose); //function to \n  run when user closes using ctrl+cc ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "'onoff'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "Gpio",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "//include onoff to interact with the GPIO",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "4",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "//use declare variables for all the GPIO \n  output pins",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "17",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "27",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "22",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "18",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "23",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "24",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "25",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'out'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "//Put all the LED \n  variables in an array",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//a \n  counter",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\"up\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "//variable for flowing direction",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "100",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//run the flowingLeds function \n  every 100ms",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "//function for flowing Leds",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "forEach",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "//for each item in array",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "writeSync",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//turn off LED",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"up\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "//set flow direction to \"up\" if the count reaches zero",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "length",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"down\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "//set flow direction to \"down\" if \n  the count reaches 7",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"down\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "//count \n  downwards if direction is down",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "writeSync",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//turn on LED that where array index matches count",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"up\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "//count upwards if direction is up",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//function to run when exiting program",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//stop flow interwal",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "forEach",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "//for \n  each LED",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "writeSync",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "//turn off LED",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "unexport",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "//unexport GPIO",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "on",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "'SIGINT'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "//function to \n  run when user closes using ctrl+cc ",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Press \" Ctrl+x \" to save the code. Confirm with \" y \", and confirm the name with \" Enter \".",
+      "html": "<p>Press \"<code>Ctrl+x</code>\" to save the code. Confirm with \"<code>y</code>\", and confirm the name with \"<code>Enter</code>\".</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Run the code:",
+      "html": "<p>Run the code:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "pi@w3demopi:~ $ node flowingleds.js",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\n  pi@w3demopi:~ $ node flowingleds.js\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now the LEDs should turn on and off in sequence, creating a flowing effect.",
+      "html": "<p>Now the LEDs should turn on and off in sequence, creating a flowing effect.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "End the program with Ctrl+c .",
+      "html": "<p>End the program with <code>Ctrl+c</code>.</p>"
+    }
+  ]
+}

@@ -1,0 +1,546 @@
+{
+  "title": "Cyber Security Web Application Attacks",
+  "url": "https://www.w3schools.com/cybersecurity/cybersecurity_web_applications_attacks.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Cyber Security Web Application Attacks",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Web applications are everywhere today, and they are used to control just about everything you can imagine. In this section we will look into web application attacks and security.",
+      "html": "<p class=\"intro\">Web applications are everywhere today, and they are used to control just about everything you can imagine. In this section we will look into web application attacks and security.\u00a0</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "IDOR (\"Insecure Direct Object Reference\")",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "IDOR vulnerabilities happen when developers have not implemented authorization requirements to access resources.",
+      "html": "<p>IDOR vulnerabilities happen when developers have not implemented authorization requirements to access resources.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img alt=\"IDOR\" class=\"invert-on-dark\" src=\"img_idor.svg\" style=\"width:100%;max-width:1280px\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Eve, by simply changing an identifier, e.g. the document Rest parameter, she can access Alice's documents.",
+      "html": "<p>Eve, by simply changing an identifier, e.g. the document Rest parameter, she can access Alice's documents.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This happens when the web application does not enforce authorization between objects, allowing attackers to enumerate values and test access to other points of data.",
+      "html": "<p>This happens when the web application does not enforce authorization between objects, allowing attackers to enumerate values and test access to other points of data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For example we might have the following pseudo-code showing no signs of authorization:",
+      "html": "<p>For example we might have the following pseudo-code showing no signs of authorization:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "$id = getInputFromUser();\n\n$doc = getDocument($id);\n\nreturn $doc;",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">$id = getInputFromUser();<br/>\n$doc = getDocument($id);<br/>\nreturn $doc;\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The code above asks for input from user, performs no validation or sanitization, then performs a lookup with the getDocument function directly and returns the document in question.",
+      "html": "<p>The code above asks for input from user, performs no validation or sanitization, then performs a lookup with the getDocument function directly and returns the document in question.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A better implementation would be to check the privileges:",
+      "html": "<p>A better implementation would be to check the privileges:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "$id = getInputFromUser();\n\n$user = findUsername();\n\n$doc = \"\";\n\nif (hasAccessToDocument($user, $id)) {\n\n$doc = getDocument($id);\n\n} else {\n\n$doc = \"Not authorized for this document\";\n\n}\n\nreturn $doc;",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">$id = getInputFromUser();<br/>\n$user = findUsername();<br/>\n$doc = \"\";<br/>\nif (hasAccessToDocument($user, $id)) {<br/>\n\u00a0\u00a0$doc = getDocument($id);<br/>\n} else {<br/>\n\u00a0\u00a0$doc = \"Not authorized for this document\";<br/>\n}<br/>\nreturn $doc;<br/>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Vulnerabilities like these are easy to find as you can simply change a simple number and see if you get access to someone else's data. Checking if the user is authorized first prevents this vulnerability.",
+      "html": "<p>Vulnerabilities like these are easy to find as you can simply change a simple number and see if you get access to someone \nelse's data. Checking if the user is authorized first prevents this vulnerability.\u00a0</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Avoiding \"Magic Numbers\"",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "An application want to avoid using sequences of numbers when referencing data. In the IDOR example, the documents had identifiers from 1000 to 1002. Sometimes these numbers are called \"Magic Numbers\" as they directly point to a resource on the server, e.g. via database, and all values can easily be enumerated. For example an attacker can check all document identifiers from 0 all the way to 10000 and record any results which provides access to data.",
+      "html": "<p>An application want to avoid using sequences of numbers when referencing data. In the IDOR example, the documents had identifiers from 1000 to 1002. Sometimes these numbers are called \"Magic Numbers\" as they directly point to a resource on the server, e.g. via database, and all values can easily be enumerated. For example an attacker can check all document identifiers from 0 all the way to 10000 and record any results which provides access to data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "While authorization should be properly implemented, it is also helpful to use GUID (\"Globally Unique Identifier\") or UUID (\"Universally Unique Identifier\") when referencing data. These identifiers are designed to be globally unique and impossible to enumerate because of the built-in entropy of the generation of the numbers.",
+      "html": "<p>While authorization should be properly implemented, it is also helpful to use GUID (\"Globally Unique Identifier\") or UUID (\"Universally Unique Identifier\") when referencing data. These identifiers are designed to be globally unique and impossible to enumerate because of the built-in entropy of the generation of the numbers.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is what a GUID can look like:",
+      "html": "<p>This is what a GUID can look like:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "SQL Injection",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Many web applications are connected to a database. The database holds all the information the web application wish to store and use.",
+      "html": "<p>Many web applications are connected to a database. The database holds all the information the web application wish to store and use.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "SQL Injection is a technique which allows attackers to manipulate the SQL (\"Structured Query Language\") the developer of the web application is using. This typically happens because of lack of data sanitization. SQL is used regularly by developers to access database resources.",
+      "html": "<p>SQL Injection is a technique which allows attackers to manipulate the SQL (\"Structured Query Language\") the developer of the web application is using. This typically happens because of lack of data sanitization. SQL is used regularly by developers to access database resources.\u00a0</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img class=\"invert-on-dark\" src=\"img_sqlinjection.svg\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the request Eve makes in the graphic above, we see she inputs the value: 1000' OR '1'='1",
+      "html": "<p>In the request Eve makes in the graphic above, we see she inputs the value: 1000' OR '1'='1</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This causes the resulting SQL Query to return all rows of the table because the database evaluates the statement as always true. Think about it: the database receives a request where the value can be either 1000 OR 1 is equal to 1; it will return a value every time! There are many different SQL functions and operations we can use to manipulate the syntax, and this example is just one of very many.",
+      "html": "<p>This causes the resulting SQL Query to return all rows of the table because the database evaluates the statement as always true.\u00a0 Think about it: the database receives a request where the value can be either 1000 OR 1 is equal to 1; it will return a value every time! There are many different SQL functions and operations we can use to manipulate the syntax, and this example is just one of very many.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Below is a pseudo-code example which contains a SQL Injection vulnerability.",
+      "html": "<p>Below is a pseudo-code example which contains a SQL Injection vulnerability.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "$username =  getUserName();\n\n$pw = getPassword();\n\n$user = mysql_query(\"SELECT * FROM userTable WHERE username = $username AND password =  $pw\");\n\nif ($user) {\n\n$loggedIn = True;\n\n} else {\n\n$loggedIn = False;\n\n}",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n$username =  getUserName();<br/>\n$pw = getPassword();<br/>\n$user = mysql_query(\"SELECT * FROM userTable WHERE username = $username AND password =  $pw\");<br/>\nif ($user) {<br/>\n\u00a0\u00a0$loggedIn = True;<br/>\n} else {<br/>\n\u00a0\u00a0$loggedIn = False;<br/>\n}\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "For an attacker to exploit this, they could simply craft a URL against the target domain with the attack in it like this:",
+      "html": "<p>For an attacker to exploit this, they could simply craft a URL against the target domain with the attack in it like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "/login?username=admin&password=password' OR '1'='1",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">/login?username=admin&amp;password=password' OR '1'='1\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The password variable is set to contain the SQL characters, causing the resulting SQL string to return a row, even if the password is unknown to us. The resulting SQL query would be:",
+      "html": "<p>The password variable is set to contain the SQL characters, causing the resulting SQL string to return a row, even if the password is unknown to us. The resulting SQL query would be:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM userTable WHERE username = 'admin' AND password = 'password' OR '1'='1'",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">SELECT * FROM userTable WHERE username = 'admin' AND password = 'password' OR '1'='1'\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Parameterized queries is the recommended solution to defeat SQL Injections. Within a parameterized query, the developers carefully ensure each input to the query is defined as a specific value and type. Here is an example from the above code which is considered a secure implementation:",
+      "html": "<p>Parameterized queries is the recommended solution to defeat SQL Injections. Within a parameterized query, the developers carefully ensure each input to the query is defined as a specific value and type. Here is an example from the above code which is considered a secure implementation:\u00a0</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "$username = getUserName();\n\n$pw = getPassword();\n\n$parameterizedQuery = prepare_query(\"SELECT * FROM userTable where username = ? and password = ?\");\n\n$parameterizedQuery.setString(1, $username)\n\n$parameterizedQuery.setString(2, $password)\n\n$user = parameterizedQuery.execute();\n\nif ($user) {\n\n$loggedIn = True;\n\n} else {\n\n$loggedIn = False;\n\n}",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n$username = getUserName();<br/>\n$pw = getPassword();<br/>\n$parameterizedQuery = prepare_query(\"SELECT * FROM userTable where username = ? and password = ?\");<br/>\n$parameterizedQuery.setString(1, $username)<br/>\n$parameterizedQuery.setString(2, $password)<br/>\n$user = parameterizedQuery.execute();<br/>\nif ($user) {<br/>\n\u00a0 \u00a0 $loggedIn = True;<br/>\n} else {<br/>\n\u00a0 \u00a0 $loggedIn = False;<br/>\n}</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the above example, the developer has carefully said that parameter 1 should be a string and contain the username, and the password in the second parameter.",
+      "html": "<p>In the above example, the developer has carefully said that parameter 1 should be a string and contain the username, and the password in the second parameter.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "XSS (\"Cross-Site Scripting\")",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "XSS uses the server to attack visitors of the server. The attack does not target the server itself, but instead the users.",
+      "html": "<p>XSS uses the server to attack visitors of the server. The attack does not target the server itself, but instead the users.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The server is simply used to reflect attackers values, typically JavaScript, against visitors who then run the attackers data in their own browser. The attacker has to craft an input which the server does not clean and sanitize, that way when a visitor clicks a link containing the attackers values, or visits a resource on the webpage which the attacker has used in their attack, the user runs code which the attacker supplied.",
+      "html": "<p>The server is simply used to reflect attackers values, typically JavaScript, against visitors who then run the attackers data in their own browser. The attacker has to craft an input which the server does not clean and sanitize, that way when a visitor clicks a link containing the attackers values, or visits a resource on the webpage which the attacker has used in their attack, the user runs code which the attacker supplied.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here is a graphical example of Eve sending a link to Alice which contains the XSS attack:",
+      "html": "<p>Here is a graphical example of Eve sending a link to Alice which contains the XSS attack:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img alt=\"XSS\" class=\"invert-on-dark\" src=\"img_xss.svg\" style=\"width:100%;max-width:1280px\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This attack is called a Reflected XSS and involves Eve finding the vulnerability, then sending a link containing the attack to an unsuspecting user and having them click the link. The link contains the attack and makes the webserver return the attack to the victim clicking the link.",
+      "html": "<p>This attack is called a Reflected XSS and involves Eve finding the vulnerability, then sending a link containing the attack to an unsuspecting user and having them click the link. The link contains the attack and makes the webserver return the attack to the victim clicking the link.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The code behind this could be something simple as this pseudo-code example:",
+      "html": "<p>The code behind this could be something simple as this pseudo-code example:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "$nickname = etNickName();\n\necho \"Greeting $nickname, nice to meet you!\";",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate\">\n$nickname = etNickName();<br/>\necho \"Greeting $nickname, nice to meet you!\";\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Another kind of XSS is called a Stored XSS attack. In Stored XSS attacks the attacker is capable of saving content on the webpage which is reflected every time someone visits the website. It does not require someone to click a link necessarily.",
+      "html": "<p>Another kind of XSS is called a Stored XSS attack. In Stored XSS attacks the attacker is capable of saving content on the webpage which is reflected every time someone visits the website. It does not require someone to click a link necessarily.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This graphic describes how Eve is able to store malicious JavaScript to be executed in anyone's browser when the visit the resource:",
+      "html": "<p>This graphic describes how Eve is able to store malicious JavaScript to be executed in anyone's browser when the visit the resource:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p><img alt=\"Stored XSS\" class=\"invert-on-dark\" src=\"img_stored-xss.svg\" style=\"width:100%;max-width:1280px\"/></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "XSS attacks can accomplish many things, for example:",
+      "html": "<p>XSS attacks can accomplish many things, for example:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To defend against XSS there are several best-practices to follow:",
+      "html": "<p>To defend against XSS there are several best-practices to follow:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "HTML Encoding",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "HTML encoding allows the web application to return typically unsafe characters in a safe manner. For example the following special characters can be encoded into their respective counterpart:",
+      "html": "<p>HTML encoding allows the web application to return typically unsafe characters in a safe manner. For example the following special characters can be encoded into their respective counterpart:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th>Special Character</th>\n<th>HTML Entity</th>\n</tr>\n<tr>\n<td>&lt;</td>\n<td>&amp;lt;</td>\n</tr>\n<tr>\n<td>&gt;</td>\n<td>&amp;gt;</td>\n</tr>\n<tr>\n<td>\"</td>\n<td>&amp;quot;</td>\n</tr>\n<tr>\n<td>&amp;</td>\n<td>&amp;amp;</td>\n</tr>\n<tr>\n<td>'</td>\n<td>&amp;apos;</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This produces output which can be displayed safely. We can then use the JavaScript on the client-side to safely turn the HTML entities into values.",
+      "html": "<p>This produces output which can be displayed safely. We can then use the JavaScript on the client-side to safely turn the HTML entities into values.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "CSP (\"Content Security Policy\")",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The webserver can control what kind of JavaScript is allowed to run on the website. This does not remove vulnerabilities but adds defense in depth for when there is an unknown vulnerability.",
+      "html": "<p>The webserver can control what kind of JavaScript is allowed to run on the website. This does not remove vulnerabilities but adds \ndefense in depth for when there is an unknown vulnerability.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A common and strict CSP is to provide the users of the web-application with a list of all accepted JavaScript source files.",
+      "html": "<p>A common and strict CSP is to provide the users of the web-application with a list of all accepted JavaScript source files.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In addition, it is typical for CSP to prevent execution of in-line JavaScript.",
+      "html": "<p>In addition, it is typical for CSP to prevent execution of in-line JavaScript.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To allow for easier implementation and detection of on-going attacks, CSP allows for clients to report CSP violations to a URL provided by the server",
+      "html": "<p>To allow for easier implementation and detection of on-going attacks, CSP allows for clients to report CSP violations to a URL provided by the server</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Web-Application Scanning",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "There are many web application scanners out there. These allow for applications to be scanned for vulnerabilities such as SQL Injection and XSS. Contrary to a network vulnerability scanner, a web-application scanner is typically built on heuristics instead of signatures and lists of known vulnerabilities.",
+      "html": "<p>There are many web application scanners out there. These allow for applications to be scanned for vulnerabilities such as SQL Injection and XSS. Contrary to a network vulnerability scanner, a web-application scanner is typically built on heuristics instead of signatures and lists of known vulnerabilities.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Web application scanners are useful, especially when built into development processes such as CI (\"Continuous Integration\") and CD (\"Continuous Delivery\")",
+      "html": "<p>Web application scanners are useful, especially when built into development processes such as CI (\"Continuous Integration\") and CD (\"Continuous Delivery\")</p>"
+    }
+  ]
+}

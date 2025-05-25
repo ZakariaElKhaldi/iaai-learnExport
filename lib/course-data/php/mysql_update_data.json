@@ -1,0 +1,1625 @@
+{
+  "title": "PHP MySQL Update Data",
+  "url": "https://www.w3schools.com/php/php_mysql_update.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "PHP MySQL Update Data",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Update Data In a MySQL Table Using MySQLi and PDO",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The UPDATE statement is used to update existing records in a table:",
+      "html": "<p>The UPDATE statement is used to update existing records in a table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate\"><div>\nUPDATE table_name<br/>\nSET column1=value, column2=value2,...<br/>\nWHERE some_column=some_value\u00a0\n</div></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Notice the WHERE clause in the UPDATE syntax: The WHERE clause specifies which record or records that should be updated. If you omit the WHERE clause, all records will be updated!",
+      "html": "<p><strong>Notice the WHERE clause in the UPDATE syntax:</strong> The WHERE clause \nspecifies which record or records that should be updated. If you omit the WHERE \nclause, all records will be updated!</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "SQL tutorial",
+          "href": "https://www.w3schools.com/sql/default.asp",
+          "title": ""
+        }
+      ],
+      "text": "To learn more about SQL, please visit our SQL tutorial .",
+      "html": "<p>To learn more about SQL, please visit our <a href=\"/sql/default.asp\">SQL tutorial</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's look at the \"MyGuests\" table:",
+      "html": "<p>Let's look at the \"MyGuests\" table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th>id</th>\n<th>firstname</th>\n<th>lastname</th>\n<th>email</th>\n<th>reg_date</th>\n</tr>\n<tr>\n<td>1</td>\n<td>John</td>\n<td>Doe</td>\n<td>john@example.com</td>\n<td>2014-10-22 14:26:15</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Mary</td>\n<td>Moe</td>\n<td>mary@example.com</td>\n<td>2014-10-23 10:22:30</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following examples update the record with id=2 in the \"MyGuests\" table:",
+      "html": "<p>The following examples update the record with id=2 in the \"MyGuests\" table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\n\n $sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n if ($conn->query($sql) === TRUE) {\u00a0\u00a0echo \"Record updated successfully\";} else {\u00a0\u00a0echo \"Error updating record: \" . $conn->error;}$conn->close();\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDB\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Record updated successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Error updating record: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);}\n\n$sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\nif ($conn->query($sql) === TRUE) {\u00a0\u00a0echo \"Record updated successfully\";} else {\u00a0\u00a0echo \"Error updating record: \" . $conn->error;}$conn->close();\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\n\n $sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n if ($conn->query($sql) === TRUE) {\u00a0\u00a0echo \"Record updated successfully\";} else {\u00a0\u00a0echo \"Error updating record: \" . $conn->error;}$conn->close();\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Record updated successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Error updating record: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate htmlHigh\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDB\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>$conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> mysqli($servername, $username, $password, $dbname);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($conn-&gt;connect_error)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . $conn-&gt;connect_error);<br/>}<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>$sql = <span class=\"phpstringcolor\" style=\"color:green\">\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($conn-&gt;query($sql) === TRUE) {<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Record updated successfully\"</span>;<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Error updating record: \"</span> . $conn-&gt;error;<br/>}<br/><br/>$conn-&gt;close();<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\n\n $sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n if ($conn->query($sql) === TRUE) {\u00a0\u00a0echo \"Record updated successfully\";} else {\u00a0\u00a0echo \"Error updating record: \" . $conn->error;}$conn->close();\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Record updated successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Error updating record: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n if (mysqli_query($conn, $sql)) {\u00a0 echo \"Record updated successfully\";} else {\n  \u00a0 echo \"Error updating record: \" . mysqli_error($conn);}mysqli_close($conn);\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDB\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Record updated successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Error updating record: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());}$sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\nif (mysqli_query($conn, $sql)) {\u00a0 echo \"Record updated successfully\";} else {\necho \"Error updating record: \" . mysqli_error($conn);}mysqli_close($conn);\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n if (mysqli_query($conn, $sql)) {\u00a0 echo \"Record updated successfully\";} else {\n  \u00a0 echo \"Error updating record: \" . mysqli_error($conn);}mysqli_close($conn);\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Record updated successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Error updating record: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate htmlHigh\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDB\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>\n$conn = mysqli_connect($servername, $username, $password, $dbname);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (!$conn)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . mysqli_connect_error());<br/>}<br/><br/>$sql = <span class=\"phpstringcolor\" style=\"color:green\">\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (mysqli_query($conn, $sql)) {<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Record updated successfully\"</span>;<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Error updating record: \"</span> . mysqli_error($conn);<br/>}<br/><br/>mysqli_close($conn);<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n if (mysqli_query($conn, $sql)) {\u00a0 echo \"Record updated successfully\";} else {\n  \u00a0 echo \"Error updating record: \" . mysqli_error($conn);}mysqli_close($conn);\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Record updated successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Error updating record: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";$dbname = \"myDBPDO\";try {\n  \u00a0 $conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0\n $sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n \u00a0 // Prepare statement\u00a0\u00a0$stmt = $conn->prepare($sql);\u00a0\u00a0// execute the query\n  \u00a0 $stmt->execute();\u00a0\u00a0// echo a message to say the UPDATE succeeded\n  \u00a0 echo $stmt->rowCount() . \" records UPDATED successfully\";} catch(PDOException $e) \n  {\u00a0 echo $sql . \"<br>\" . $e->getMessage();}\n $conn = null;\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDBPDO\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "try",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"mysql:host=$servername;dbname=$dbname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// set the PDO error mode to exception",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Prepare statement",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "// execute the query",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// echo a message to say the UPDATE succeeded",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\" records UPDATED successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "catch",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"<br>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";\n$password = \"password\";$dbname = \"myDBPDO\";try {\n$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n\n$sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n// Prepare statement\u00a0\u00a0$stmt = $conn->prepare($sql);\u00a0\u00a0// execute the query\n$stmt->execute();\u00a0\u00a0// echo a message to say the UPDATE succeeded\necho $stmt->rowCount() . \" records UPDATED successfully\";} catch(PDOException $e)\n{\u00a0 echo $sql . \"<br>\" . $e->getMessage();}\n$conn = null;\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";$dbname = \"myDBPDO\";try {\n  \u00a0 $conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0\n $sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n \u00a0 // Prepare statement\u00a0\u00a0$stmt = $conn->prepare($sql);\u00a0\u00a0// execute the query\n  \u00a0 $stmt->execute();\u00a0\u00a0// echo a message to say the UPDATE succeeded\n  \u00a0 echo $stmt->rowCount() . \" records UPDATED successfully\";} catch(PDOException $e) \n  {\u00a0 echo $sql . \"<br>\" . $e->getMessage();}\n $conn = null;\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDBPDO\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "try",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"mysql:host=$servername;dbname=$dbname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// set the PDO error mode to exception",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Prepare statement",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "// execute the query",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// echo a message to say the UPDATE succeeded",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\" records UPDATED successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "catch",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate htmlHigh\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> $password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDBPDO\"</span>;<br/><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">try</span> {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 $conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> PDO(<span class=\"phpstringcolor\" style=\"color:green\">\"mysql:host=$servername;dbname=$dbname\"</span>, $username, $password);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// set the PDO error mode to exception<br/></span>\u00a0 $conn-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);<br/><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> $sql = <span class=\"phpstringcolor\" style=\"color:green\">\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Prepare statement<br/></span>\u00a0\u00a0$stmt = $conn-&gt;prepare($sql);<br/><br/>\u00a0\u00a0<span class=\"commentcolor\" style=\"color:slategray\">// execute the query<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 $stmt-&gt;execute();<br/><br/>\u00a0\u00a0<span class=\"commentcolor\" style=\"color:slategray\">// echo a message to say the UPDATE succeeded<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> $stmt-&gt;rowCount() . <span class=\"phpstringcolor\" style=\"color:green\">\" records UPDATED successfully\"</span>;<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">catch</span>(PDOException $e) <span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  {<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> $sql . <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;br&gt;\"</span> . $e-&gt;getMessage();<br/>}<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>$conn = null;<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";$dbname = \"myDBPDO\";try {\n  \u00a0 $conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0\n $sql = \"UPDATE MyGuests SET lastname='Doe' WHERE id=2\";\n \u00a0 // Prepare statement\u00a0\u00a0$stmt = $conn->prepare($sql);\u00a0\u00a0// execute the query\n  \u00a0 $stmt->execute();\u00a0\u00a0// echo a message to say the UPDATE succeeded\n  \u00a0 echo $stmt->rowCount() . \" records UPDATED successfully\";} catch(PDOException $e) \n  {\u00a0 echo $sql . \"<br>\" . $e->getMessage();}\n $conn = null;\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDBPDO\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "try",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"mysql:host=$servername;dbname=$dbname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// set the PDO error mode to exception",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"UPDATE MyGuests SET lastname='Doe' WHERE id=2\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Prepare statement",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "// execute the query",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// echo a message to say the UPDATE succeeded",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\" records UPDATED successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "catch",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After the record is updated, the table will look like this:",
+      "html": "<p>After the record is updated, the table will look like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th>id</th>\n<th>firstname</th>\n<th>lastname</th>\n<th>email</th>\n<th>reg_date</th>\n</tr>\n<tr>\n<td>1</td>\n<td>John</td>\n<td>Doe</td>\n<td>john@example.com</td>\n<td>2014-10-22 14:26:15</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Mary</td>\n<td>Doe</td>\n<td>mary@example.com</td>\n<td>2014-10-23 10:22:30</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

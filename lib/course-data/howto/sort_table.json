@@ -1,0 +1,3450 @@
+{
+  "title": "How To Sort a Table",
+  "url": "https://www.w3schools.com/howto/howto_js_sort_table.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "How TO - Sort a Table",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Learn how to sort an HTML table, using JavaScript.",
+      "html": "<p class=\"intro\">Learn how to sort an HTML table, using JavaScript.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Click the button to sort the table alphabetically, based on customer name:",
+      "html": "<p>Click the button to sort the table alphabetically, based on customer name:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Try it Yourself \u00bb",
+          "href": "https://www.w3schools.com/tryit.asp?filename=tryhow_js_sort_table",
+          "title": ""
+        }
+      ],
+      "text": "Try it Yourself \u00bb",
+      "html": "<p><a class=\"ws-btn\" href=\"tryit.asp?filename=tryhow_js_sort_table\" target=\"_blank\">Try it Yourself \u00bb</a></p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Creating a Sort Function",
+      "level": "h2"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  function sortTable() {\u00a0 var table, rows, switching, i, x, y, \n  shouldSwitch;\u00a0 table = document.getElementById(\"myTable\");\u00a0 \n  switching = true;\u00a0 /* Make a loop that will continue until\u00a0 \n  no switching has been done: */\u00a0 while (switching) {\u00a0\u00a0\u00a0 \n  // Start by saying: no switching is done:\u00a0\u00a0\u00a0 switching = \n  false;\u00a0\u00a0\u00a0 rows = table.rows;\u00a0\u00a0\u00a0 \n  /* Loop through all table rows (except the\u00a0\u00a0\u00a0 first, which \n  contains table headers): */\u00a0\u00a0\u00a0 for (i = 1; i < (rows.length \n  - 1); i++) {\u00a0\u00a0\u00a0\u00a0\u00a0 // Start by saying there should \n  be no switching:\u00a0\u00a0\u00a0\u00a0\u00a0 shouldSwitch = false;\u00a0\u00a0\u00a0\u00a0\u00a0 \n  /* Get the two elements you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  one from current row and one from the next: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  x = rows[i].getElementsByTagName(\"TD\")[0];\u00a0\u00a0\u00a0\u00a0\u00a0 y \n  = rows[i + 1].getElementsByTagName(\"TD\")[0];\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // Check if the two rows should switch place:\u00a0\u00a0\u00a0\u00a0\u00a0 \n  if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 break;\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0 if (shouldSwitch) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n  /* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\u00a0\u00a0\u00a0\u00a0\u00a0 \n  switching = true;\u00a0\u00a0\u00a0 }\u00a0 }} ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"myTable\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "/* Make a loop that will continue until\u00a0 \n  no switching has been done: */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Start by saying: no switching is done:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "false",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "rows",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "/* Loop through all table rows (except the\u00a0\u00a0\u00a0 first, which \n  contains table headers): */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "length",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Start by saying there should \n  be no switching:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "false",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "/* Get the two elements you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  one from current row and one from the next: */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"TD\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"TD\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Check if the two rows should switch place:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "toLowerCase",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "toLowerCase",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// If so, mark as a switch and break the loop:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "break",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "/* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "parentNode",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "insertBefore",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "function sortTable() {\u00a0 var table, rows, switching, i, x, y,\nshouldSwitch;\u00a0 table = document.getElementById(\"myTable\");\nswitching = true;\u00a0 /* Make a loop that will continue until\nno switching has been done: */\u00a0 while (switching) {\n// Start by saying: no switching is done:\u00a0\u00a0\u00a0 switching =\nfalse;\u00a0\u00a0\u00a0 rows = table.rows;\n/* Loop through all table rows (except the\u00a0\u00a0\u00a0 first, which\ncontains table headers): */\u00a0\u00a0\u00a0 for (i = 1; i < (rows.length\n- 1); i++) {\u00a0\u00a0\u00a0\u00a0\u00a0 // Start by saying there should\nbe no switching:\u00a0\u00a0\u00a0\u00a0\u00a0 shouldSwitch = false;\n/* Get the two elements you want to compare,\none from current row and one from the next: */\nx = rows[i].getElementsByTagName(\"TD\")[0];\u00a0\u00a0\u00a0\u00a0\u00a0 y\n= rows[i + 1].getElementsByTagName(\"TD\")[0];\n// Check if the two rows should switch place:\nif (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 break;\n}\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0 if (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\u00a0\u00a0\u00a0 }\u00a0 }}",
+      "syntax_highlighting": [
+        {
+          "text": "\n function sortTable() {\u00a0 var table, rows, switching, i, x, y, \n  shouldSwitch;\u00a0 table = document.getElementById(\"myTable\");\u00a0 \n  switching = true;\u00a0 /* Make a loop that will continue until\u00a0 \n  no switching has been done: */\u00a0 while (switching) {\u00a0\u00a0\u00a0 \n // Start by saying: no switching is done:\u00a0\u00a0\u00a0 switching = \n false;\u00a0\u00a0\u00a0 rows = table.rows;\u00a0\u00a0\u00a0 \n /* Loop through all table rows (except the\u00a0\u00a0\u00a0 first, which \n  contains table headers): */\u00a0\u00a0\u00a0 for (i = 1; i < (rows.length \n  - 1); i++) {\u00a0\u00a0\u00a0\u00a0\u00a0 // Start by saying there should \n  be no switching:\u00a0\u00a0\u00a0\u00a0\u00a0 shouldSwitch = false;\u00a0\u00a0\u00a0\u00a0\u00a0 \n /* Get the two elements you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  one from current row and one from the next: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  x = rows[i].getElementsByTagName(\"TD\")[0];\u00a0\u00a0\u00a0\u00a0\u00a0 y \n  = rows[i + 1].getElementsByTagName(\"TD\")[0];\u00a0\u00a0\u00a0\u00a0\u00a0 \n // Check if the two rows should switch place:\u00a0\u00a0\u00a0\u00a0\u00a0 \n if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 break;\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0 if (shouldSwitch) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n /* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\u00a0\u00a0\u00a0\u00a0\u00a0 \n  switching = true;\u00a0\u00a0\u00a0 }\u00a0 }} ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"myTable\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "/* Make a loop that will continue until\u00a0 \n  no switching has been done: */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Start by saying: no switching is done:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "false",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "rows",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "/* Loop through all table rows (except the\u00a0\u00a0\u00a0 first, which \n  contains table headers): */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "length",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Start by saying there should \n  be no switching:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "false",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "/* Get the two elements you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  one from current row and one from the next: */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"TD\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"TD\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check if the two rows should switch place:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "toLowerCase",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "toLowerCase",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// If so, mark as a switch and break the loop:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "break",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "/* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "parentNode",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "insertBefore",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> sortTable() {<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> table, rows, switching, i, x, y, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  shouldSwitch;<br/>\u00a0 table = document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"myTable\"</span>);<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  switching = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">/* Make a loop that will continue until<br/>\u00a0 \n  no switching has been done: */</span><br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">while</span> (switching) {<br/>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Start by saying: no switching is done:<br/></span>\u00a0\u00a0\u00a0 switching = <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">false</span>;<br/>\u00a0\u00a0\u00a0 rows = table.<span class=\"jspropertycolor\" style=\"color:black\">rows</span>;<br/>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">/* Loop through all table rows (except the<br/>\u00a0\u00a0\u00a0 first, which \n  contains table headers): */</span><br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">for</span> (i = <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>; i &lt; (rows.<span class=\"jspropertycolor\" style=\"color:black\">length</span> <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  - <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>); i++) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Start by saying there should \n  be no switching:<br/></span>\u00a0\u00a0\u00a0\u00a0\u00a0 shouldSwitch = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">false</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">/* Get the two elements you want to compare,<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 \n  one from current row and one from the next: */</span><br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  x = rows[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"TD\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>];<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 y <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  = rows[i + <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"TD\"</span>)[<span class=\"jsnumbercolor\" style=\"color:#905\">0</span>];<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Check if the two rows should switch place:<br/></span>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span>.<span class=\"jspropertycolor\" style=\"color:black\">toLowerCase</span>() &gt; y.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span>.<span class=\"jspropertycolor\" style=\"color:black\">toLowerCase</span>()) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// If so, mark as a switch and break the loop:<br/></span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  shouldSwitch = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">break</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  }<br/>\u00a0\u00a0\u00a0 }<br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (shouldSwitch) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">/* If a switch has been marked, make the switch<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */</span><br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  rows[i].<span class=\"jspropertycolor\" style=\"color:black\">parentNode</span>.<span class=\"jspropertycolor\" style=\"color:black\">insertBefore</span>(rows[i + <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>], rows[i]);<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  switching = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0\u00a0\u00a0 }<br/>\u00a0 }<br/>}<br/> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  function sortTable() {\u00a0 var table, rows, switching, i, x, y, \n  shouldSwitch;\u00a0 table = document.getElementById(\"myTable\");\u00a0 \n  switching = true;\u00a0 /* Make a loop that will continue until\u00a0 \n  no switching has been done: */\u00a0 while (switching) {\u00a0\u00a0\u00a0 \n  // Start by saying: no switching is done:\u00a0\u00a0\u00a0 switching = \n  false;\u00a0\u00a0\u00a0 rows = table.rows;\u00a0\u00a0\u00a0 \n  /* Loop through all table rows (except the\u00a0\u00a0\u00a0 first, which \n  contains table headers): */\u00a0\u00a0\u00a0 for (i = 1; i < (rows.length \n  - 1); i++) {\u00a0\u00a0\u00a0\u00a0\u00a0 // Start by saying there should \n  be no switching:\u00a0\u00a0\u00a0\u00a0\u00a0 shouldSwitch = false;\u00a0\u00a0\u00a0\u00a0\u00a0 \n  /* Get the two elements you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  one from current row and one from the next: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  x = rows[i].getElementsByTagName(\"TD\")[0];\u00a0\u00a0\u00a0\u00a0\u00a0 y \n  = rows[i + 1].getElementsByTagName(\"TD\")[0];\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // Check if the two rows should switch place:\u00a0\u00a0\u00a0\u00a0\u00a0 \n  if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 break;\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0 if (shouldSwitch) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n  /* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\u00a0\u00a0\u00a0\u00a0\u00a0 \n  switching = true;\u00a0\u00a0\u00a0 }\u00a0 }} ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"myTable\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "/* Make a loop that will continue until\u00a0 \n  no switching has been done: */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Start by saying: no switching is done:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "false",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "rows",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "/* Loop through all table rows (except the\u00a0\u00a0\u00a0 first, which \n  contains table headers): */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "length",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Start by saying there should \n  be no switching:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "false",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "/* Get the two elements you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  one from current row and one from the next: */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"TD\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"TD\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Check if the two rows should switch place:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "toLowerCase",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "toLowerCase",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// If so, mark as a switch and break the loop:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "break",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "/* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "parentNode",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "insertBefore",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Sort Table by Clicking the Headers",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Click the headers to sort the table.",
+      "html": "<p>Click the headers to sort the table.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Click \"Name\" to sort by names, and \"Country\" to sort by country.",
+      "html": "<p>Click \"Name\" to sort by names, and \"Country\" to sort by country.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The first time you click, the sorting direction is ascending (A to Z).",
+      "html": "<p>The first time you click, the sorting direction is ascending (A to Z).</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Click again, and the sorting direction will be descending (Z to A):",
+      "html": "<p>Click again, and the sorting direction will be descending (Z to A):</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<table id=\"myTable2\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " id=\"myTable2\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"myTable2\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<tr>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<!--When a header is clicked, run the \n  sortTable function, with a parameter,0 for sorting by names, 1 for sorting \n  by country: -->",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "<th onclick=\"sortTable(0)\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " onclick=\"sortTable(0)\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"sortTable(0)\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</th>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<th onclick=\"sortTable(1)\">",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": " onclick=\"sortTable(1)\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "attributecolor"
+          },
+          {
+            "text": "=\"sortTable(1)\"",
+            "color": "rgb(0, 92, 197)",
+            "class": "attributevaluecolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</th>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "</tr>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "<script>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": "function sortTable(n) {\u00a0 var table, \n  rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;\u00a0 table \n  = document.getElementById(\"myTable2\");\u00a0 switching = true;\u00a0 \n  // Set the sorting direction to ascending:\u00a0 dir = \"asc\"; \u00a0 \n  /* Make a loop that will continue until\u00a0 no switching has been done: */\u00a0 \n  while (switching) {\u00a0\u00a0\u00a0 // Start by saying: no switching is \n  done:\u00a0\u00a0\u00a0 switching = false;\u00a0\u00a0\u00a0 rows = \n  table.rows;\u00a0\u00a0\u00a0 /* Loop through all \n  table rows (except the\u00a0\u00a0\u00a0 first, which contains table \n  headers): */\u00a0\u00a0\u00a0 for (i = 1; i < (rows.length - 1); i++) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // Start by saying there should be no switching:\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = false;\u00a0\u00a0\u00a0\u00a0\u00a0 /* Get the two elements \n  you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 one from current row \n  and one from the next: */\u00a0\u00a0\u00a0\u00a0\u00a0 x = rows[i].getElementsByTagName(\"TD\")[n];\u00a0\u00a0\u00a0\u00a0\u00a0 \n  y = rows[i + 1].getElementsByTagName(\"TD\")[n];\u00a0\u00a0\u00a0\u00a0\u00a0 \n  /* Check if the two rows should switch place,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  based on the direction, asc or desc: */\u00a0\u00a0\u00a0\u00a0\u00a0 if (dir \n  == \"asc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 if (x.innerHTML.toLowerCase() \n  > y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  break;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0\u00a0 \n  } else if (dir == \"desc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 if (x.innerHTML.toLowerCase() \n  < y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  break;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0 if (shouldSwitch) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n  /* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\u00a0\u00a0\u00a0\u00a0\u00a0 \n  switching = true;\u00a0\u00a0\u00a0\u00a0\u00a0 // Each time a switch is \n  done, increase this count by 1:\u00a0\u00a0\u00a0\u00a0\u00a0 switchcount \n  ++; \u00a0\u00a0\u00a0 } else {\u00a0\u00a0\u00a0\u00a0\u00a0 /* If no \n  switching has been done AND the direction is \"asc\",\u00a0\u00a0\u00a0\u00a0\u00a0 \n  set the direction to \"desc\" and run the while loop again. */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  if (switchcount == 0 && dir == \"asc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  dir = \"desc\";\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 switching = true;\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0 }}",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementById",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"myTable2\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Set the sorting direction to ascending:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\"asc\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "/* Make a loop that will continue until\u00a0 no switching has been done: */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "while",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "// Start by saying: no switching is \n  done:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "false",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "rows",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "/* Loop through all \n  table rows (except the\u00a0\u00a0\u00a0 first, which contains table \n  headers): */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "length",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// Start by saying there should be no switching:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "false",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "/* Get the two elements \n  you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 one from current row \n  and one from the next: */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"TD\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "getElementsByTagName",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"TD\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "/* Check if the two rows should switch place,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  based on the direction, asc or desc: */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"asc\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "toLowerCase",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "toLowerCase",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// If so, mark as a switch and break the loop:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "break",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"desc\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "toLowerCase",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "toLowerCase",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "// If so, mark as a switch and break the loop:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "break",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "/* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "parentNode",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "insertBefore",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "// Each time a switch is \n  done, increase this count by 1:",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "/* If no \n  switching has been done AND the direction is \"asc\",\u00a0\u00a0\u00a0\u00a0\u00a0 \n  set the direction to \"desc\" and run the while loop again. */",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"asc\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\"desc\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "</script>",
+            "color": "rgb(153, 0, 85)",
+            "class": "tagnamecolor"
+          },
+          {
+            "text": "<",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          },
+          {
+            "text": ">",
+            "color": "rgb(153, 153, 153)",
+            "class": "tagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "htmlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<table id=\"myTable2\">\n<tr>\n<!--When a header is clicked, run the \nsortTable function, with a parameter,0 for sorting by names, 1 for sorting\nby country: -->\n<th onclick=\"sortTable(0)\">Name</th>\n<th onclick=\"sortTable(1)\">Country</th>\n\n</tr>\n...\n\n<script>function sortTable(n) {\u00a0 var table, \nrows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;\u00a0 table\n= document.getElementById(\"myTable2\");\u00a0 switching = true;\n// Set the sorting direction to ascending:\u00a0 dir = \"asc\";\n/* Make a loop that will continue until\u00a0 no switching has been done: */\nwhile (switching) {\u00a0\u00a0\u00a0 // Start by saying: no switching is\ndone:\u00a0\u00a0\u00a0 switching = false;\u00a0\u00a0\u00a0 rows =\ntable.rows;\u00a0\u00a0\u00a0 /* Loop through all\ntable rows (except the\u00a0\u00a0\u00a0 first, which contains table\nheaders): */\u00a0\u00a0\u00a0 for (i = 1; i < (rows.length - 1); i++) {\n// Start by saying there should be no switching:\nshouldSwitch = false;\u00a0\u00a0\u00a0\u00a0\u00a0 /* Get the two elements\nyou want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 one from current row\nand one from the next: */\u00a0\u00a0\u00a0\u00a0\u00a0 x = rows[i].getElementsByTagName(\"TD\")[n];\ny = rows[i + 1].getElementsByTagName(\"TD\")[n];\n/* Check if the two rows should switch place,\nbased on the direction, asc or desc: */\u00a0\u00a0\u00a0\u00a0\u00a0 if (dir\n== \"asc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 if (x.innerHTML.toLowerCase()\n> y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\n} else if (dir == \"desc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 if (x.innerHTML.toLowerCase()\n< y.innerHTML.toLowerCase()) {\n// If so, mark as a switch and break the loop:\nshouldSwitch = true;\nbreak;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\n}\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0 if (shouldSwitch) {\n/* If a switch has been marked, make the switch\nand mark that a switch has been done: */\nrows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\nswitching = true;\u00a0\u00a0\u00a0\u00a0\u00a0 // Each time a switch is\ndone, increase this count by 1:\u00a0\u00a0\u00a0\u00a0\u00a0 switchcount\n++; \u00a0\u00a0\u00a0 } else {\u00a0\u00a0\u00a0\u00a0\u00a0 /* If no\nswitching has been done AND the direction is \"asc\",\nset the direction to \"desc\" and run the while loop again. */\nif (switchcount == 0 && dir == \"asc\") {\ndir = \"desc\";\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 switching = true;\n}\u00a0\u00a0\u00a0 }\u00a0 }}</script>",
+      "syntax_highlighting": [
+        {
+          "text": "<table id=\"myTable2\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " id=\"myTable2\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"myTable2\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<tr>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<!--When a header is clicked, run the \n  sortTable function, with a parameter,0 for sorting by names, 1 for sorting \n  by country: -->",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "<th onclick=\"sortTable(0)\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " onclick=\"sortTable(0)\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"sortTable(0)\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</th>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<th onclick=\"sortTable(1)\">",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": " onclick=\"sortTable(1)\"",
+          "color": "green",
+          "class": [
+            "attributecolor"
+          ]
+        },
+        {
+          "text": "=\"sortTable(1)\"",
+          "color": "#005cc5",
+          "class": [
+            "attributevaluecolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</th>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "</tr>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "<script>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": "function sortTable(n) {\u00a0 var table, \n  rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;\u00a0 table \n  = document.getElementById(\"myTable2\");\u00a0 switching = true;\u00a0 \n // Set the sorting direction to ascending:\u00a0 dir = \"asc\"; \u00a0 \n /* Make a loop that will continue until\u00a0 no switching has been done: */\u00a0 \n while (switching) {\u00a0\u00a0\u00a0 // Start by saying: no switching is \n  done:\u00a0\u00a0\u00a0 switching = false;\u00a0\u00a0\u00a0 rows = \n  table.rows;\u00a0\u00a0\u00a0 /* Loop through all \n  table rows (except the\u00a0\u00a0\u00a0 first, which contains table \n  headers): */\u00a0\u00a0\u00a0 for (i = 1; i < (rows.length - 1); i++) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n // Start by saying there should be no switching:\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = false;\u00a0\u00a0\u00a0\u00a0\u00a0 /* Get the two elements \n  you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 one from current row \n  and one from the next: */\u00a0\u00a0\u00a0\u00a0\u00a0 x = rows[i].getElementsByTagName(\"TD\")[n];\u00a0\u00a0\u00a0\u00a0\u00a0 \n  y = rows[i + 1].getElementsByTagName(\"TD\")[n];\u00a0\u00a0\u00a0\u00a0\u00a0 \n /* Check if the two rows should switch place,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  based on the direction, asc or desc: */\u00a0\u00a0\u00a0\u00a0\u00a0 if (dir \n  == \"asc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 if (x.innerHTML.toLowerCase() \n  > y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n break;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0\u00a0 \n  } else if (dir == \"desc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 if (x.innerHTML.toLowerCase() \n  < y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n break;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0 if (shouldSwitch) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n /* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\u00a0\u00a0\u00a0\u00a0\u00a0 \n  switching = true;\u00a0\u00a0\u00a0\u00a0\u00a0 // Each time a switch is \n  done, increase this count by 1:\u00a0\u00a0\u00a0\u00a0\u00a0 switchcount \n  ++; \u00a0\u00a0\u00a0 } else {\u00a0\u00a0\u00a0\u00a0\u00a0 /* If no \n  switching has been done AND the direction is \"asc\",\u00a0\u00a0\u00a0\u00a0\u00a0 \n  set the direction to \"desc\" and run the while loop again. */\u00a0\u00a0\u00a0\u00a0\u00a0 \n if (switchcount == 0 && dir == \"asc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  dir = \"desc\";\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 switching = true;\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0 }}",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementById",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"myTable2\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Set the sorting direction to ascending:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\"asc\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "/* Make a loop that will continue until\u00a0 no switching has been done: */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "while",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "// Start by saying: no switching is \n  done:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "false",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "rows",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "/* Loop through all \n  table rows (except the\u00a0\u00a0\u00a0 first, which contains table \n  headers): */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "length",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// Start by saying there should be no switching:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "false",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "/* Get the two elements \n  you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 one from current row \n  and one from the next: */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"TD\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"TD\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "/* Check if the two rows should switch place,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  based on the direction, asc or desc: */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"asc\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "toLowerCase",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "toLowerCase",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// If so, mark as a switch and break the loop:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "break",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"desc\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "toLowerCase",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "toLowerCase",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "// If so, mark as a switch and break the loop:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "break",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "/* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "parentNode",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "insertBefore",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "// Each time a switch is \n  done, increase this count by 1:",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "/* If no \n  switching has been done AND the direction is \"asc\",\u00a0\u00a0\u00a0\u00a0\u00a0 \n  set the direction to \"desc\" and run the while loop again. */",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"asc\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\"desc\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "</script>",
+          "color": "#905",
+          "class": [
+            "tagnamecolor"
+          ]
+        },
+        {
+          "text": "<",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        },
+        {
+          "text": ">",
+          "color": "#999",
+          "class": [
+            "tagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate htmlHigh\">\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>table<span class=\"attributecolor\" style=\"color:green\"> id<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"myTable2\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>tr<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><span class=\"commentcolor\" style=\"color:slategray\">&lt;!--When a header is clicked, run the \n  sortTable function, with a parameter,<br/>0 for sorting by names, 1 for sorting \n  by country: --&gt;</span><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>th<span class=\"attributecolor\" style=\"color:green\"> onclick<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"sortTable(0)\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Name<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/th<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>th<span class=\"attributecolor\" style=\"color:green\"> onclick<span class=\"attributevaluecolor\" style=\"color:#005cc5\">=\"sortTable(1)\"</span></span><span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span>Country<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/th<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>\n<span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/tr<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/>...<br/><br/><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>script<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><span class=\"jscolor\" style=\"color:black\"><br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> sortTable(n) {<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> table, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  rows, switching, i, x, y, shouldSwitch, dir, switchcount = <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>;<br/>\u00a0 table <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  = document.<span class=\"jspropertycolor\" style=\"color:black\">getElementById</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"myTable2\"</span>);<br/>\u00a0 switching = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Set the sorting direction to ascending:<br/></span>\u00a0 dir = <span class=\"jsstringcolor\" style=\"color:green\">\"asc\"</span>; <br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">/* Make a loop that will continue until<br/>\u00a0 no switching has been done: */</span><br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">while</span> (switching) {<br/>\u00a0\u00a0\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Start by saying: no switching is \n  done:<br/></span>\u00a0\u00a0\u00a0 switching = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">false</span>;<br/>\u00a0\u00a0\u00a0 rows = <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  table.<span class=\"jspropertycolor\" style=\"color:black\">rows</span>;<br/>\u00a0\u00a0\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">/* Loop through all \n  table rows (except the<br/>\u00a0\u00a0\u00a0 first, which contains table \n  headers): */</span><br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">for</span> (i = <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>; i &lt; (rows.<span class=\"jspropertycolor\" style=\"color:black\">length</span> - <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>); i++) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Start by saying there should be no switching:<br/></span>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  shouldSwitch = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">false</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">/* Get the two elements \n  you want to compare,<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 one from current row \n  and one from the next: */</span><br/>\u00a0\u00a0\u00a0\u00a0\u00a0 x = rows[i].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"TD\"</span>)[n];<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  y = rows[i + <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>].<span class=\"jspropertycolor\" style=\"color:black\">getElementsByTagName</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"TD\"</span>)[n];<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">/* Check if the two rows should switch place,<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 \n  based on the direction, asc or desc: */</span><br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (dir <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  == <span class=\"jsstringcolor\" style=\"color:green\">\"asc\"</span>) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span>.<span class=\"jspropertycolor\" style=\"color:black\">toLowerCase</span>() <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  &gt; y.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span>.<span class=\"jspropertycolor\" style=\"color:black\">toLowerCase</span>()) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// If so, mark as a switch and break the loop:<br/></span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  shouldSwitch = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">break</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  } <span class=\"jskeywordcolor\" style=\"color:#005cc5\">else</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (dir == <span class=\"jsstringcolor\" style=\"color:green\">\"desc\"</span>) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span>.<span class=\"jspropertycolor\" style=\"color:black\">toLowerCase</span>() <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  &lt; y.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span>.<span class=\"jspropertycolor\" style=\"color:black\">toLowerCase</span>()) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// If so, mark as a switch and break the loop:<br/></span>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  shouldSwitch = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">break</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  }<br/>\u00a0\u00a0\u00a0 }<br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (shouldSwitch) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">/* If a switch has been marked, make the switch<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */</span><br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  rows[i].<span class=\"jspropertycolor\" style=\"color:black\">parentNode</span>.<span class=\"jspropertycolor\" style=\"color:black\">insertBefore</span>(rows[i + <span class=\"jsnumbercolor\" style=\"color:#905\">1</span>], rows[i]);<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  switching = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Each time a switch is \n  done, increase this count by 1:<br/></span>\u00a0\u00a0\u00a0\u00a0\u00a0 switchcount <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  ++; <br/>\u00a0\u00a0\u00a0 } <span class=\"jskeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">/* If no \n  switching has been done AND the direction is \"asc\",<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 \n  set the direction to \"desc\" and run the while loop again. */</span><br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (switchcount == <span class=\"jsnumbercolor\" style=\"color:#905\">0</span> &amp;&amp; dir == <span class=\"jsstringcolor\" style=\"color:green\">\"asc\"</span>) {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  dir = <span class=\"jsstringcolor\" style=\"color:green\">\"desc\"</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 switching = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  }<br/>\u00a0\u00a0\u00a0 }<br/>\u00a0 }<br/>}<br/></span><span class=\"tagnamecolor\" style=\"color:#905\"><span class=\"tagcolor\" style=\"color:#999\">&lt;</span>/script<span class=\"tagcolor\" style=\"color:#999\">&gt;</span></span><br/> </div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<table id=\"myTable2\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " id=\"myTable2\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"myTable2\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<tr>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<!--When a header is clicked, run the \n  sortTable function, with a parameter,0 for sorting by names, 1 for sorting \n  by country: -->",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "<th onclick=\"sortTable(0)\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " onclick=\"sortTable(0)\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"sortTable(0)\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</th>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<th onclick=\"sortTable(1)\">",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": " onclick=\"sortTable(1)\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "attributecolor"
+        },
+        {
+          "text": "=\"sortTable(1)\"",
+          "color": "rgb(0, 92, 197)",
+          "class": "attributevaluecolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</th>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "</tr>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "<script>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": "function sortTable(n) {\u00a0 var table, \n  rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;\u00a0 table \n  = document.getElementById(\"myTable2\");\u00a0 switching = true;\u00a0 \n  // Set the sorting direction to ascending:\u00a0 dir = \"asc\"; \u00a0 \n  /* Make a loop that will continue until\u00a0 no switching has been done: */\u00a0 \n  while (switching) {\u00a0\u00a0\u00a0 // Start by saying: no switching is \n  done:\u00a0\u00a0\u00a0 switching = false;\u00a0\u00a0\u00a0 rows = \n  table.rows;\u00a0\u00a0\u00a0 /* Loop through all \n  table rows (except the\u00a0\u00a0\u00a0 first, which contains table \n  headers): */\u00a0\u00a0\u00a0 for (i = 1; i < (rows.length - 1); i++) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // Start by saying there should be no switching:\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = false;\u00a0\u00a0\u00a0\u00a0\u00a0 /* Get the two elements \n  you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 one from current row \n  and one from the next: */\u00a0\u00a0\u00a0\u00a0\u00a0 x = rows[i].getElementsByTagName(\"TD\")[n];\u00a0\u00a0\u00a0\u00a0\u00a0 \n  y = rows[i + 1].getElementsByTagName(\"TD\")[n];\u00a0\u00a0\u00a0\u00a0\u00a0 \n  /* Check if the two rows should switch place,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  based on the direction, asc or desc: */\u00a0\u00a0\u00a0\u00a0\u00a0 if (dir \n  == \"asc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 if (x.innerHTML.toLowerCase() \n  > y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  break;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0\u00a0 \n  } else if (dir == \"desc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 if (x.innerHTML.toLowerCase() \n  < y.innerHTML.toLowerCase()) {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  // If so, mark as a switch and break the loop:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  shouldSwitch = true;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  break;\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0 if (shouldSwitch) {\u00a0\u00a0\u00a0\u00a0\u00a0 \n  /* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);\u00a0\u00a0\u00a0\u00a0\u00a0 \n  switching = true;\u00a0\u00a0\u00a0\u00a0\u00a0 // Each time a switch is \n  done, increase this count by 1:\u00a0\u00a0\u00a0\u00a0\u00a0 switchcount \n  ++; \u00a0\u00a0\u00a0 } else {\u00a0\u00a0\u00a0\u00a0\u00a0 /* If no \n  switching has been done AND the direction is \"asc\",\u00a0\u00a0\u00a0\u00a0\u00a0 \n  set the direction to \"desc\" and run the while loop again. */\u00a0\u00a0\u00a0\u00a0\u00a0 \n  if (switchcount == 0 && dir == \"asc\") {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  dir = \"desc\";\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 switching = true;\u00a0\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 }\u00a0 }}",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementById",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"myTable2\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Set the sorting direction to ascending:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\"asc\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "/* Make a loop that will continue until\u00a0 no switching has been done: */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "while",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "// Start by saying: no switching is \n  done:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "false",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "rows",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "/* Loop through all \n  table rows (except the\u00a0\u00a0\u00a0 first, which contains table \n  headers): */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "length",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// Start by saying there should be no switching:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "false",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "/* Get the two elements \n  you want to compare,\u00a0\u00a0\u00a0\u00a0\u00a0 one from current row \n  and one from the next: */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"TD\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "getElementsByTagName",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"TD\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "/* Check if the two rows should switch place,\u00a0\u00a0\u00a0\u00a0\u00a0 \n  based on the direction, asc or desc: */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"asc\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "toLowerCase",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "toLowerCase",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// If so, mark as a switch and break the loop:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "break",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"desc\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "toLowerCase",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "toLowerCase",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "// If so, mark as a switch and break the loop:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "break",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "/* If a switch has been marked, make the switch\u00a0\u00a0\u00a0\u00a0\u00a0 \n  and mark that a switch has been done: */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "parentNode",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "insertBefore",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "// Each time a switch is \n  done, increase this count by 1:",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "/* If no \n  switching has been done AND the direction is \"asc\",\u00a0\u00a0\u00a0\u00a0\u00a0 \n  set the direction to \"desc\" and run the while loop again. */",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"asc\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\"desc\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "</script>",
+          "color": "rgb(153, 0, 85)",
+          "class": "tagnamecolor"
+        },
+        {
+          "text": "<",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        },
+        {
+          "text": ">",
+          "color": "rgb(153, 153, 153)",
+          "class": "tagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "htmlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Sort Table Numerically",
+      "level": "h2"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  if (Number(x.innerHTML) > Number(y.innerHTML)) {\u00a0 shouldSwitch = true;\u00a0\u00a0break;} ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "innerHTML",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "true",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "break",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "if (Number(x.innerHTML) > Number(y.innerHTML)) {\u00a0 shouldSwitch = true;\u00a0\u00a0break;}",
+      "syntax_highlighting": [
+        {
+          "text": "\n if (Number(x.innerHTML) > Number(y.innerHTML)) {\u00a0 shouldSwitch = true;\u00a0\u00a0break;} ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "innerHTML",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "true",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "break",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (Number(x.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span>) &gt; Number(y.<span class=\"jspropertycolor\" style=\"color:black\">innerHTML</span>)) {<br/>\u00a0 shouldSwitch = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">true</span>;<br/>\u00a0\u00a0<span class=\"jskeywordcolor\" style=\"color:#005cc5\">break</span>;<br/>}<br/> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  if (Number(x.innerHTML) > Number(y.innerHTML)) {\u00a0 shouldSwitch = true;\u00a0\u00a0break;} ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "innerHTML",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "true",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "break",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

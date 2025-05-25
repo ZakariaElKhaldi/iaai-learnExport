@@ -1,0 +1,1008 @@
+{
+  "title": "Game Tutorial",
+  "url": "https://www.w3schools.com/graphics/game_rotation.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Game Rotation",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The red square can rotate:",
+      "html": "<p>The red square can rotate:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Rotating Components",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Earlier in this tutorial, the red square was able to move around on the gamearea, but it could not turn or rotate.",
+      "html": "<p>Earlier in this tutorial, the red square was able to move around on the gamearea, but it could not turn or rotate.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To rotate components, we have to change the way we draw components.",
+      "html": "<p>To rotate components, we have to change the way we draw components.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The only rotation method available for the canvas element will rotate the entire canvas:",
+      "html": "<p>The only rotation method available for the canvas element will rotate the entire canvas:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Everything else you draw on the canvas will also be rotated, not only the specific component.",
+      "html": "<p>Everything else you draw on the canvas will also be rotated, not only the specific component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "That is why we have to make some changes in the update() method:",
+      "html": "<p>That is why we have to make some changes in the <code>update()</code> method:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "First, we save the current canvas context object:",
+      "html": "<p>First, we save the current canvas context object:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "ctx.save();",
+      "html": "<p><code>ctx.save();</code></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then we move the entire canvas to the center of the specific component, using the translate method:",
+      "html": "<p>Then we move the entire canvas to the center of the specific component, using the translate method:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "ctx.translate(x, y);",
+      "html": "<p><code>ctx.translate(x, y);</code></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then we perform the wanted rotation using the rotate() method:",
+      "html": "<p>Then we perform the wanted rotation using the rotate() method:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "ctx.rotate( angle );",
+      "html": "<p><code>ctx.rotate(<em>angle</em>);</code></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now we are ready to draw the component onto the canvas, but now we will draw it with its center position at position 0,0 on the translated (and rotated) canvas:",
+      "html": "<p>Now we are ready to draw the component onto the canvas, but now we will draw it with its center position at position 0,0 on the translated (and rotated) canvas:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "ctx.fillRect(width / -2, height / -2, width, height);",
+      "html": "<p><code>ctx.fillRect(width / -2, height / -2, width, height);</code></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When we are finished, we must restore the context object back to its saved position, using the restore method:",
+      "html": "<p>When we are finished, we must restore the context object back to its saved position, using the restore method:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "ctx.restore();",
+      "html": "<p><code>ctx.restore();</code></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The component is the only thing that is rotated:",
+      "html": "<p>The component is the only thing that is rotated:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The Component Constructor",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The component constructor has a new property called angle , which is radian number that represents the angle of the component.",
+      "html": "<p>The <code>component</code> constructor has a new property called <code>angle</code>, \nwhich is radian number that represents the angle of the component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The update method of the component constructor is were we draw the component, and here you can see the changes that will allow the component to rotate:",
+      "html": "<p>The <code>update</code> method of the <code>component</code> constructor is \nwere we draw the component, and here you can see the changes that will allow the \ncomponent to rotate:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/graphics/tryit.asp?filename=trygame_rotate_game",
+        "syntaxHighlighting": [
+          {
+            "text": "\nfunction component(width, height, color, x, y) {\u00a0 this.width = width;\u00a0 this.height = height;\n  \u00a0 this.angle = 0;\n \u00a0 this.x = x;\u00a0 this.y = y;\n \u00a0\u00a0this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0 ctx.save();\u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\n  \u00a0\u00a0\u00a0 ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0\u00a0}}function updateGameArea() {\u00a0 myGameArea.clear();\n  \u00a0 myGamePiece.angle += 1 * Math.PI / 180; \u00a0 myGamePiece.update();} ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "height",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "x",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "y",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "update",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "context",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "save",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "translate",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "x",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "y",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "rotate",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "fillStyle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "fillRect",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "/ -2, this.height /",
+            "color": "rgb(238, 153, 0)",
+            "class": "jsregexpcolor"
+          },
+          {
+            "text": "2",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "width",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "this",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "height",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "restore",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "clear",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "angle",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "PI",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "180",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "update",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "function component(width, height, color, x, y) {\u00a0 this.width = width;\u00a0 this.height = height;\nthis.angle = 0;\nthis.x = x;\u00a0 this.y = y;\nthis.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0 ctx.save();\u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\nctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\nctx.restore(); \u00a0\u00a0}}function updateGameArea() {\u00a0 myGameArea.clear();\nmyGamePiece.angle += 1 * Math.PI / 180; \u00a0 myGamePiece.update();}",
+      "syntax_highlighting": [
+        {
+          "text": "\nfunction component(width, height, color, x, y) {\u00a0 this.width = width;\u00a0 this.height = height;\n  \u00a0 this.angle = 0;\n \u00a0 this.x = x;\u00a0 this.y = y;\n \u00a0\u00a0this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0 ctx.save();\u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\n  \u00a0\u00a0\u00a0 ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0\u00a0}}function updateGameArea() {\u00a0 myGameArea.clear();\n \u00a0 myGamePiece.angle += 1 * Math.PI / 180; \u00a0 myGamePiece.update();} ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "height",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "x",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "y",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "update",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "context",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "save",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "translate",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "x",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "y",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "rotate",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "fillStyle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "fillRect",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "/ -2, this.height /",
+          "color": "#e90",
+          "class": [
+            "jsregexpcolor"
+          ]
+        },
+        {
+          "text": "2",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "width",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "this",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "height",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "restore",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "clear",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "angle",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "PI",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "180",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "update",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\">\n<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> component(width, height, color, x, y) {<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span> = width;<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">height</span> = height;<br/><strong>\n  \u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span> = <span class=\"jsnumbercolor\" style=\"color:#905\">0</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> </strong>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">x</span> = x;<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">y</span> = y;<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0\u00a0<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">update</span> = <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>() {<br/>\u00a0\u00a0\u00a0 ctx = myGameArea.<span class=\"jspropertycolor\" style=\"color:black\">context</span>;<br/><strong>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">save</span>();<br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">translate</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">x</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">y</span>); <br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">rotate</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">angle</span>);<br/></strong>\n  \u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">fillStyle</span> = color;<br/><strong>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">fillRect</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span> <span class=\"jsregexpcolor\" style=\"color:#e90\">/ -2, this.height /</span> -<span class=\"jsnumbercolor\" style=\"color:#905\">2</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">width</span>, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">this</span>.<span class=\"jspropertycolor\" style=\"color:black\">height</span>);<span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>\u00a0\u00a0\u00a0 ctx.<span class=\"jspropertycolor\" style=\"color:black\">restore</span>(); <br/></strong>\u00a0\u00a0}<br/>}<br/><br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span> updateGameArea() {<br/>\u00a0 myGameArea.<span class=\"jspropertycolor\" style=\"color:black\">clear</span>();<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <strong>\u00a0 myGamePiece.<span class=\"jspropertycolor\" style=\"color:black\">angle</span> += <span class=\"jsnumbercolor\" style=\"color:#905\">1</span> * Math.<span class=\"jspropertycolor\" style=\"color:black\">PI</span> / <span class=\"jsnumbercolor\" style=\"color:#905\">180</span>; <br/></strong>\u00a0 myGamePiece.<span class=\"jspropertycolor\" style=\"color:black\">update</span>();<br/>}<br/> </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/graphics/tryit.asp?filename=trygame_rotate_game",
+      "syntax_highlighting_data": [
+        {
+          "text": "\nfunction component(width, height, color, x, y) {\u00a0 this.width = width;\u00a0 this.height = height;\n  \u00a0 this.angle = 0;\n \u00a0 this.x = x;\u00a0 this.y = y;\n \u00a0\u00a0this.update = function() {\u00a0\u00a0\u00a0 ctx = myGameArea.context;\u00a0\u00a0\u00a0 ctx.save();\u00a0\u00a0\u00a0 ctx.translate(this.x, this.y); \u00a0\u00a0\u00a0 ctx.rotate(this.angle);\n  \u00a0\u00a0\u00a0 ctx.fillStyle = color;\u00a0\u00a0\u00a0 ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height);\n \u00a0\u00a0\u00a0 ctx.restore(); \u00a0\u00a0}}function updateGameArea() {\u00a0 myGameArea.clear();\n  \u00a0 myGamePiece.angle += 1 * Math.PI / 180; \u00a0 myGamePiece.update();} ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "height",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "x",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "y",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "update",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "context",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "save",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "translate",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "x",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "y",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "rotate",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "fillStyle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "fillRect",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "/ -2, this.height /",
+          "color": "rgb(238, 153, 0)",
+          "class": "jsregexpcolor"
+        },
+        {
+          "text": "2",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "width",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "this",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "height",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "restore",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "clear",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "angle",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "PI",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "180",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "update",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

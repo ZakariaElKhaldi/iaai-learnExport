@@ -45,6 +45,8 @@ import {
   Star,
   History,
   ChevronRight,
+  ListFilter,
+  X,
   type LucideIcon
 } from "lucide-react"
 
@@ -134,7 +136,7 @@ type Tutorial = {
   level: string;
   popular: boolean;
   category: string;
-  subcategoryId: string;
+  subcategoryId?: string; // Make this optional since our new structure doesn't have it
 };
 
 type SubCategory = {
@@ -153,7 +155,7 @@ type MainTopic = {
   description: string;
   tutorialCount: number;
   tutorials: Tutorial[];
-  subCategories: SubCategory[];
+  subCategories?: SubCategory[]; // Make this optional since our new structure doesn't have it
   difficulty: string;
 };
 
@@ -187,6 +189,35 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [recentlyViewed, setRecentlyViewed] = React.useState<Tutorial[]>([]);
   const [favorites, setFavorites] = React.useState<MainTopic[]>([]);
   const [expandedTopics, setExpandedTopics] = React.useState<string[]>([]);
+  const [showAllTopics, setShowAllTopics] = React.useState(true);
+  const [currentCategory, setCurrentCategory] = React.useState<string | null>(null);
+  
+  // Determine current category from URL
+  React.useEffect(() => {
+    if (pathname?.startsWith('/learn/')) {
+      const slug = pathname.replace('/learn/', '');
+      
+      // Fetch the course to get its category
+      const fetchCourseCategory = async () => {
+        try {
+          const response = await fetch(`/api/learn/course?slug=${slug}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data && data.category) {
+              setCurrentCategory(data.category);
+              setShowAllTopics(false);
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching course category:', error);
+        }
+      };
+      
+      fetchCourseCategory();
+    } else {
+      setShowAllTopics(true);
+    }
+  }, [pathname]);
   
   // Fetch topics data
   React.useEffect(() => {
@@ -197,12 +228,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           throw new Error('Failed to fetch main topics');
         }
         const data = await response.json();
+        console.log('Fetched data:', data); // Debug log
         setMainTopics(data);
         
         // Auto-expand the active topic if any
         const topicParam = searchParams.get('topic');
         if (topicParam) {
           setExpandedTopics([topicParam]);
+        } else if (currentCategory && !showAllTopics) {
+          // Auto-expand the current category
+          const categoryTopic = data.find((topic: MainTopic) => 
+            topic.id.toLowerCase() === currentCategory.toLowerCase()
+          );
+          if (categoryTopic) {
+            setExpandedTopics([categoryTopic.id]);
+          }
         }
       } catch (err) {
         console.error('Error fetching main topics:', err);
@@ -210,7 +250,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     };
 
     fetchMainTopics();
-  }, [searchParams]);
+  }, [searchParams, currentCategory, showAllTopics]);
 
   // Get recently viewed tutorials
   React.useEffect(() => {
@@ -244,6 +284,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ? prev.filter(id => id !== topicId)
         : [...prev, topicId]
     );
+  };
+  
+  // Toggle between showing all topics or only the current category
+  const toggleShowAllTopics = () => {
+    setShowAllTopics(prev => !prev);
   };
   
   // Simple function to check if a URL is part of the current path
@@ -287,6 +332,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
     ]
     
+    // Add category filter toggle button
+    if (currentCategory) {
+      navItems.push({
+        title: showAllTopics ? "Show Current Category" : "Show All Categories",
+        url: "#filter",
+        icon: showAllTopics ? ListFilter : X,
+        isActive: false,
+      });
+    }
+    
     // Add recently viewed items if available
     if (recentlyViewed.length > 0) {
       navItems.push({
@@ -317,8 +372,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       });
     }
     
-    // Add main topics with their subcategories - more organized approach
-    mainTopics.forEach(topic => {
+    // Filter topics if we're showing only the current category
+    const topicsToShow = showAllTopics 
+      ? mainTopics 
+      : mainTopics.filter(topic => 
+          currentCategory && topic.id.toLowerCase() === currentCategory.toLowerCase()
+        );
+    
+    // Add main topics with their tutorials
+    topicsToShow.forEach(topic => {
       // Check if this topic is expanded or active
       const isTopicActive = isActive(`/learn?topic=${topic.id}`);
       const isExpanded = expandedTopics.includes(topic.id) || isTopicActive;
@@ -327,32 +389,25 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       const IconName = topic.icon || "BookOpen";
       const TopicIcon = IconMap[IconName] || BookOpen;
       
-      // Create subcategory navigation items - only if topic is expanded
-      const subCategoryItems = isExpanded ? topic.subCategories
-        .filter(subCat => subCat.tutorialCount > 0) // Only show non-empty subcategories
-        .map(subCat => {
-          // Get the Icon component if one has been assigned
-          const subIconName = subCat.icon || "FileText";
-          const SubIcon = IconMap[subIconName] || FileText;
-          
-          // Only show "View All" link instead of individual courses to reduce clutter
+      // Create tutorial navigation items - only if topic is expanded
+      const tutorialItems = isExpanded ? topic.tutorials
+        .map(tutorial => {
           return {
-            title: subCat.name,
-            url: `/learn?topic=${topic.id}&subcategory=${subCat.id}`,
-            isActive: isActive(`/learn?topic=${topic.id}&subcategory=${subCat.id}`),
-            badge: subCat.tutorialCount > 0 ? `${subCat.tutorialCount}` : undefined,
-            icon: SubIcon
+            title: tutorial.name,
+            url: `/learn/${tutorial.slug}`,
+            isActive: isActive(`/learn/${tutorial.slug}`),
+            badge: getCourseCompletionStatus(tutorial.id, progress)
           };
         }) : [];
       
-      // Add the main topic with its subcategories
+      // Add the main topic with its tutorials
       navItems.push({
         title: topic.name,
         url: `#${topic.id}`, // Use anchor to handle expansion logic
         icon: TopicIcon,
-        isActive: isTopicActive && !searchParams.has('subcategory'),
+        isActive: isTopicActive,
         badge: `${topic.tutorialCount}`,
-        items: subCategoryItems
+        items: tutorialItems
       });
     });
     
@@ -374,8 +429,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   : 'hover:bg-muted/50'
               }`}
               onClick={() => {
+                // Handle filter button separately
+                if (item.url === "#filter") {
+                  toggleShowAllTopics();
+                }
                 // Handle main topics expansion differently
-                if (item.url.startsWith('#')) {
+                else if (item.url.startsWith('#')) {
                   const topicId = item.url.substring(1);
                   toggleTopicExpansion(topicId);
                 } else {

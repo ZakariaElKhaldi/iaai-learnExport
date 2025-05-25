@@ -1,0 +1,233 @@
+{
+  "title": "Vue Provide/Inject",
+  "url": "https://www.w3schools.com/vue/vue_provide-inject.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Vue Provide/Inject",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Provide/Inject in Vue is used to provide data from one component to other components, particularly in large projects.",
+      "html": "<p><strong>Provide/Inject</strong> in Vue is used to provide data from one component to other components, particularly in large projects.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Provide makes data available to other components.",
+      "html": "<p><strong>Provide</strong> makes data available to other components.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Inject is used to get the provided data.",
+      "html": "<p><strong>Inject</strong> is used to get the provided data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Provide/Inject is a way to share data as an alternative to passing data using props.",
+      "html": "<p><strong>Provide/Inject</strong> is a way to share data as an alternative to passing data using props.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Provide/Inject",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In a large project, with components inside components, it can be hard to use props to provide data from \"App.vue\" to a sub-component, because it requires props to be defined in every component the data passes through.",
+      "html": "<p>In a large project, with components inside components, it can be hard to use props to provide data from \"App.vue\" to a sub-component, because it requires props to be defined in every component the data passes through.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we use provide/inject instead of props, we only need to define the provided data where it is provided, and we only need to define the injected data where it is injected.",
+      "html": "<p>If we use provide/inject instead of props, we only need to define the provided data where it is provided, and we only need to define the injected data where it is injected.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Provide Data",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We use the 'provide' configuration option to make data available to other components:",
+      "html": "<p>We use the 'provide' configuration option to make data available to other components:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nFood\n</\nh1\n>\n\n\n<\ndiv\n\n@click\n=\n\"\nthis.activeComp = 'food-about'\n\"\n\nclass\n=\n\"\ndivBtn\n\"\n>\nAbout\n</\ndiv\n>\n\n\n<\ndiv\n\n@click\n=\n\"\nthis.activeComp = 'food-kinds'\n\"\n\nclass\n=\n\"\ndivBtn\n\"\n>\nKinds\n</\ndiv\n>\n\n\n<\ndiv\n\nid\n=\n\"\ndivComp\n\"\n>\n\n\n<\ncomponent\n\n:is\n=\n\"\nactiveComp\n\"\n>\n</\ncomponent\n>\n\n\n</\ndiv\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\nactiveComp\n:\n\n'food-about'\n,\n\n\nfoods\n:\n\n[\n\n\n{\n\nname\n:\n\n'Pizza'\n,\n\nimgUrl\n:\n\n'/img_pizza.svg'\n\n}\n,\n\n\n{\n\nname\n:\n\n'Apple'\n,\n\nimgUrl\n:\n\n'/img_apple.svg'\n\n}\n,\n\n\n{\n\nname\n:\n\n'Cake'\n,\n\nimgUrl\n:\n\n'/img_cake.svg'\n\n}\n,\n\n\n{\n\nname\n:\n\n'Fish'\n,\n\nimgUrl\n:\n\n'/img_fish.svg'\n\n}\n,\n\n\n{\n\nname\n:\n\n'Rice'\n,\n\nimgUrl\n:\n\n'/img_rice.svg'\n\n}\n\n\n]\n\n\n}\n\n\n}\n,\n\n\nprovide\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\nfoods\n:\n\nthis\n.\nfoods\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"24-28\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Food<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.activeComp = 'food-about'<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>divBtn<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>About<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.activeComp = 'food-kinds'<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>divBtn<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Kinds<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">id</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>divComp<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>component</span> <span class=\"token attr-name\">:is</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>activeComp<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>component</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">activeComp</span><span class=\"token operator\">:</span> <span class=\"token string\">'food-about'</span><span class=\"token punctuation\">,</span>\n      <span class=\"token literal-property property\">foods</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span>\n        <span class=\"token punctuation\">{</span> <span class=\"token literal-property property\">name</span><span class=\"token operator\">:</span> <span class=\"token string\">'Pizza'</span><span class=\"token punctuation\">,</span> <span class=\"token literal-property property\">imgUrl</span><span class=\"token operator\">:</span> <span class=\"token string\">'/img_pizza.svg'</span> <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n        <span class=\"token punctuation\">{</span> <span class=\"token literal-property property\">name</span><span class=\"token operator\">:</span> <span class=\"token string\">'Apple'</span><span class=\"token punctuation\">,</span> <span class=\"token literal-property property\">imgUrl</span><span class=\"token operator\">:</span> <span class=\"token string\">'/img_apple.svg'</span> <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n        <span class=\"token punctuation\">{</span> <span class=\"token literal-property property\">name</span><span class=\"token operator\">:</span> <span class=\"token string\">'Cake'</span><span class=\"token punctuation\">,</span> <span class=\"token literal-property property\">imgUrl</span><span class=\"token operator\">:</span> <span class=\"token string\">'/img_cake.svg'</span> <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n        <span class=\"token punctuation\">{</span> <span class=\"token literal-property property\">name</span><span class=\"token operator\">:</span> <span class=\"token string\">'Fish'</span><span class=\"token punctuation\">,</span> <span class=\"token literal-property property\">imgUrl</span><span class=\"token operator\">:</span> <span class=\"token string\">'/img_fish.svg'</span> <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n        <span class=\"token punctuation\">{</span> <span class=\"token literal-property property\">name</span><span class=\"token operator\">:</span> <span class=\"token string\">'Rice'</span><span class=\"token punctuation\">,</span> <span class=\"token literal-property property\">imgUrl</span><span class=\"token operator\">:</span> <span class=\"token string\">'/img_rice.svg'</span> <span class=\"token punctuation\">}</span>\n      <span class=\"token punctuation\">]</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token function\">provide</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">foods</span><span class=\"token operator\">:</span> <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>foods\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"28\" data-range=\"24-28\" data-start=\"24\" style=\"top: 506px; width: 789px;\"> \n \n \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the code above, the 'foods' array is now provided so that it is available to be injected in other components in your project.",
+      "html": "<p>In the code above, the 'foods' array is now provided so that it is available to be injected in other components in your project.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Inject Data",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now that the 'foods' array is made available by 'provide' in 'App.vue', we can include it in the 'FoodKinds' component.",
+      "html": "<p>Now that the 'foods' array is made available by 'provide' in 'App.vue', we can include it in the 'FoodKinds' component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With the 'foods' data injected in the 'FoodKinds' component, we can use the data from App.vue to display different foods in the 'FoodKinds' component:",
+      "html": "<p>With the 'foods' data injected in the 'FoodKinds' component, we can use the data from App.vue to display different foods in the 'FoodKinds' component:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh2\n>\nDifferent Kinds of Food\n</\nh2\n>\n\n\n<\np\n>\n<\nmark\n>\nIn this application, food data is provided in \"App.vue\", and injected in the \"FoodKinds.vue\" component so that it can be shown here:\n</\nmark\n>\n</\np\n>\n\n\n<\ndiv\n\nv-for\n=\n\"\nx in foods\n\"\n>\n\n\n<\nimg\n\n:src\n=\n\"\nx.imgUrl\n\"\n>\n\n\n<\np\n\nclass\n=\n\"\npName\n\"\n>\n{{ x.name }}\n</\np\n>\n\n\n</\ndiv\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ninject\n:\n\n[\n'foods'\n]\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n\nscoped\n>\n\n\ndiv\n\n{\n\n\nmargin\n:\n10px\n;\n\n\npadding\n:\n10px\n;\n\n\ndisplay\n:\ninline-block\n;\n\n\nwidth\n:\n80px\n;\n\n\nbackground-color\n:\n#28e49f47\n;\n\n\nborder-radius\n:\n10px\n;\n\n\n}\n\n\n.pName\n\n{\n\n\ntext-align\n:\ncenter\n;\n\n\n}\n\n\nimg\n\n{\n\n\nwidth\n:\n100%\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"4-7,12\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span>Different Kinds of Food<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>mark</span><span class=\"token punctuation\">&gt;</span></span>In this application, food data is provided in \"App.vue\", and injected in the \"FoodKinds.vue\" component so that it can be shown here:<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>mark</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">v-for</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x in foods<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n        <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">:src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x.imgUrl<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n        <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>pName<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>{{ x.name }}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token literal-property property\">inject</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'foods'</span><span class=\"token punctuation\">]</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span> <span class=\"token attr-name\">scoped</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n    <span class=\"token selector\">div</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token property\">margin</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n        <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n        <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n        <span class=\"token property\">width</span><span class=\"token punctuation\">:</span> 80px<span class=\"token punctuation\">;</span>\n        <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> #28e49f47<span class=\"token punctuation\">;</span>\n        <span class=\"token property\">border-radius</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">.pName</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token property\">text-align</span><span class=\"token punctuation\">:</span> center<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">img</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token property\">width</span><span class=\"token punctuation\">:</span> 100%<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"7\" data-range=\"4-7\" data-start=\"4\" style=\"top: 66px; width: 1434px;\"> \n \n \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"12\" data-start=\"12\" style=\"top: 242px; width: 1434px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Vue Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Yourself With Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise:",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which configuration option is needed in the code below so that the fish name 'Turbot' becomes available to other components?",
+      "html": "<p>Which configuration option is needed in the code below so that the fish name 'Turbot' becomes available to other components?</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "data() {\nreturn {\nfishName: 'Turbot',\ncount: 4\n}\n},\n\n() {\nreturn {\nfishName: this.fishName\n}\n}",
+      "language": "unknown",
+      "code_html": "<pre style=\"overflow: auto;\">data() {\n  return {\n    fishName: 'Turbot',\n    count: 4\n  }\n},\n<input maxlength=\"13\" name=\"ex1\" style=\"width: 14ch;\"/>() {\n  return {\n    fishName: this.fishName\n  }\n}\n</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Start the Exercise",
+          "href": "https://www.w3schools.com/exercise.php?filename=exercise_provide-inject1",
+          "title": ""
+        }
+      ],
+      "text": "Start the Exercise",
+      "html": "<p><a href=\"exercise.php?filename=exercise_provide-inject1\" target=\"_blank\">Start the Exercise</a></p>"
+    }
+  ]
+}

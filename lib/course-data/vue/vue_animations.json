@@ -1,0 +1,842 @@
+{
+  "title": "Vue Animations",
+  "url": "https://www.w3schools.com/vue/vue_animations.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Vue Animations",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The built-in <Transition> component in Vue helps us to do animations when elements are added or removed with v-if , v-show or with dynamic components.",
+      "html": "<p>The built-in <strong><code>&lt;Transition&gt;</code></strong> component in Vue helps us to do animations when elements are added or removed with <code>v-if</code>, <code>v-show</code> or with dynamic components.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "There is nothing wrong with using plain CSS transitions and animations in other cases.",
+      "html": "<p>There is nothing wrong with using plain CSS transitions and animations in other cases.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "A Short Introduction to CSS Transition and Animation",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "animations",
+          "href": "https://www.w3schools.com/css/css3_animations.asp",
+          "title": ""
+        },
+        {
+          "text": "transitions",
+          "href": "https://www.w3schools.com/css/css3_transitions.asp",
+          "title": ""
+        }
+      ],
+      "text": "This part of the tutorial requires knowledge about basic CSS animations and transitions .",
+      "html": "<p>This part of the tutorial requires knowledge about basic CSS <a href=\"/css/css3_animations.asp\" target=\"_blank\">animations</a> and <a href=\"/css/css3_transitions.asp\" target=\"_blank\">transitions</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But before we use the Vue specific built-in <Transition> component to create animations, let's look at two examples of how plain CSS animations and transitions can be used with Vue.",
+      "html": "<p>But before we use the Vue specific built-in <code>&lt;Transition&gt;</code> component to create animations, let's look at two examples of how plain CSS animations and transitions can be used with Vue.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nBasic CSS Transition\n</\nh1\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nthis.doesRotate = true\n\"\n>\nRotate\n</\nbutton\n>\n\n\n<\ndiv\n\n:class\n=\n\"\n{ rotate: doesRotate }\n\"\n>\n</\ndiv\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\ndoesRotate\n:\n\nfalse\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n\nscoped\n>\n\n\n.rotate\n\n{\n\n\nrotate\n:\n160deg\n;\n\n\ntransition\n:\nrotate 1s\n;\n\n\n}\n\n\ndiv\n\n{\n\n\nborder\n:\nsolid black 2px\n;\n\n\nbackground-color\n:\nlightcoral\n;\n\n\nwidth\n:\n60px\n;\n\n\nheight\n:\n60px\n;\n\n\n}\n\n\nh1, button, div\n\n{\n\n\nmargin\n:\n10px\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"3-4,18-21\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Basic CSS Transition<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.doesRotate = true<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Rotate<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">:class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>{ rotate: doesRotate }<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">doesRotate</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span> <span class=\"token attr-name\">scoped</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.rotate</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 160deg<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">transition</span><span class=\"token punctuation\">:</span> rotate 1s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">border</span><span class=\"token punctuation\">:</span> solid black 2px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightcoral<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">width</span><span class=\"token punctuation\">:</span> 60px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">height</span><span class=\"token punctuation\">:</span> 60px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">h1, button, div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">margin</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"4\" data-range=\"3-4\" data-start=\"3\" style=\"top: 44px; width: 789px;\"> \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"21\" data-range=\"18-21\" data-start=\"18\" style=\"top: 374px; width: 789px;\"> \n \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the example above, we use v-bind to give the <div> tag a class so that it rotates. The reason that the rotation takes 1 second, is that it is defined with the CSS transition property.",
+      "html": "<p>In the example above, we use <code>v-bind</code> to give the <code>&lt;div&gt;</code> tag a class so that it rotates. The reason that the rotation takes 1 second, is that it is defined with the CSS <code>transition</code> property.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the example below, we see how we can move an object with the CSS animation property.",
+      "html": "<p>In the example below, we see how we can move an object with the CSS <code>animation</code> property.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nBasic CSS Animation\n</\nh1\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nthis.doesMove = true\n\"\n>\nStart\n</\nbutton\n>\n\n\n<\ndiv\n\n:class\n=\n\"\n{ move: doesMove }\n\"\n>\n</\ndiv\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\ndoesMove\n:\n\nfalse\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n\nscoped\n>\n\n\n.move\n\n{\n\n\nanimation\n:\nmove .5s alternate 4 ease-in-out\n;\n\n\n}\n\n\n@keyframes\nmove\n\n{\n\n\nfrom\n\n{\n\n\ntranslate\n:\n0 0\n;\n\n\n}\n\n\nto\n\n{\n\n\ntranslate\n:\n70px 0\n;\n\n\n}\n\n\n}\n\n\ndiv\n\n{\n\n\nborder\n:\nsolid black 2px\n;\n\n\nbackground-color\n:\nlightcoral\n;\n\n\nborder-radius\n:\n50%\n;\n\n\nwidth\n:\n60px\n;\n\n\nheight\n:\n60px\n;\n\n\n}\n\n\nh1, button, div\n\n{\n\n\nmargin\n:\n10px\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"3-4,18-28\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Basic CSS Animation<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.doesMove = true<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Start<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">:class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>{ move: doesMove }<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">doesMove</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span> <span class=\"token attr-name\">scoped</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.move</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> move .5s alternate 4 ease-in-out<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> move</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 0 0<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 70px 0<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">border</span><span class=\"token punctuation\">:</span> solid black 2px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightcoral<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">border-radius</span><span class=\"token punctuation\">:</span> 50%<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">width</span><span class=\"token punctuation\">:</span> 60px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">height</span><span class=\"token punctuation\">:</span> 60px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">h1, button, div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">margin</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"4\" data-range=\"3-4\" data-start=\"3\" style=\"top: 44px; width: 789px;\"> \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"28\" data-range=\"18-28\" data-start=\"18\" style=\"top: 374px; width: 789px;\"> \n \n \n \n \n \n \n \n \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The <Transition> Component",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "There is nothing wrong with using plain CSS transitions and animations like we did in the two examples above.",
+      "html": "<p>There is nothing wrong with using plain CSS transitions and animations like we did in the two examples above.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But luckily Vue provides us with the built-in <Transition> component in cases where we want to animate an element as it is removed from, or added to, our application with v-if or v-show , because that would be hard to do with plain CSS animation.",
+      "html": "<p>But luckily Vue provides us with the built-in <code>&lt;Transition&gt;</code> component in cases where we want to animate an element as it is removed from, or added to, our application with <code>v-if</code> or <code>v-show</code>, because that would be hard to do with plain CSS animation.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's first make an application where a button adds or removes a <p> tag:",
+      "html": "<p>Let's first make an application where a button adds or removes a <code>&lt;p&gt;</code> tag:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nAdd/Remove\n<\np\n>\nTag\n</\nh1\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nthis.exists = !this.exists\n\"\n>\n{{btnText}}\n</\nbutton\n>\n<\nbr\n>\n\n\n<\np\n\nv-if\n=\n\"\nexists\n\"\n>\nHello World!\n</\np\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\nexists\n:\n\nfalse\n\n\n}\n\n\n}\n,\n\n\ncomputed\n:\n\n{\n\n\nbtnText\n(\n)\n\n{\n\n\nif\n(\nthis\n.\nexists\n)\n\n{\n\n\nreturn\n\n'Remove'\n;\n\n\n}\n\n\nelse\n\n{\n\n\nreturn\n\n'Add'\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n>\n\n\np\n\n{\n\n\nbackground-color\n:\nlightgreen\n;\n\n\ndisplay\n:\ninline-block\n;\n\n\npadding\n:\n10px\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Add/Remove <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span> Tag<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.exists = !this.exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>{{btnText}}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">exists</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">computed</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">btnText</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>exists<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Remove'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n      <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Add'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">p</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now let's wrap the <Transition> component around the <p> tag, and see how we can animate the removal of the <p> tag.",
+      "html": "<p>Now let's wrap the <code>&lt;Transition&gt;</code> component around the <code>&lt;p&gt;</code> tag, and see how we can animate the removal of the <code>&lt;p&gt;</code> tag.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When we use the <Transition> component, we automatically get six different CSS classes we can use to animate when elements are added or removed.",
+      "html": "<p>When we use the <code>&lt;Transition&gt;</code> component, we automatically get six different CSS classes we can use to animate when elements are added or removed.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the example below we will use the automatically available classes v-leave-from and v-leave-to to make a fade out animation when the <p> tag is removed:",
+      "html": "<p>In the example below we will use the automatically available classes <code>v-leave-from</code> and <code>v-leave-to</code> to make a fade out animation when the <code>&lt;p&gt;</code> tag is removed:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nAdd/Remove\n<\np\n>\nTag\n</\nh1\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nthis.exists = !this.exists\n\"\n>\n{{btnText}}\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n>\n\n\n<\np\n\nv-if\n=\n\"\nexists\n\"\n>\nHello World!\n</\np\n>\n\n\n</\nTransition\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\nexists\n:\n\nfalse\n\n\n}\n\n\n}\n,\n\n\ncomputed\n:\n\n{\n\n\nbtnText\n(\n)\n\n{\n\n\nif\n(\nthis\n.\nexists\n)\n\n{\n\n\nreturn\n\n'Remove'\n;\n\n\n}\n\n\nelse\n\n{\n\n\nreturn\n\n'Add'\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n>\n\n\n.v-leave-from\n\n{\n\n\nopacity\n:\n1\n;\n\n\n}\n\n\n.v-leave-to\n\n{\n\n\nopacity\n:\n0\n;\n\n\n}\n\n\np\n\n{\n\n\nbackground-color\n:\nlightgreen\n;\n\n\ndisplay\n:\ninline-block\n;\n\n\npadding\n:\n10px\n;\n\n\ntransition\n:\nopacity 0.5s\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"4-6,30-35,40\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Add/Remove <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span> Tag<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.exists = !this.exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>{{btnText}}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">exists</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">computed</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">btnText</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>exists<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Remove'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n      <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Add'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-leave-from</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-leave-to</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">p</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">transition</span><span class=\"token punctuation\">:</span> opacity 0.5s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"6\" data-range=\"4-6\" data-start=\"4\" style=\"top: 66px; width: 789px;\"> \n \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"35\" data-range=\"30-35\" data-start=\"30\" style=\"top: 638px; width: 789px;\"> \n \n \n \n \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"40\" data-start=\"40\" style=\"top: 858px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The Six <Transition> Classes",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "There are six classes automatically available to us when we use the <Transition> component.",
+      "html": "<p>There are six classes automatically available to us when we use the <code>&lt;Transition&gt;</code> component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As an element inside the <Transition> component is added , we can use these first three classes to animate that transition:",
+      "html": "<p>As an element inside the <code>&lt;Transition&gt;</code> component is <strong style=\"background-color: lightgreen;\">added</strong>, we can use these first three classes to animate that transition:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And as an element is removed inside the <Transition> component, we can use the next three classes :",
+      "html": "<p>And as an element is <strong style=\"background-color: lightpink;\">removed</strong> inside the <code>&lt;Transition&gt;</code> component, we can use the next three classes :</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: There can only be one element on root level of the <Transition> component.",
+      "html": "<p><strong>Note: </strong>There can only be one element on root level of the <code>&lt;Transition&gt;</code> component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now, let's use four of these classes so that we can animate both when the <p> tag is added, and when it is removed.",
+      "html": "<p>Now, let's use four of these classes so that we can animate both when the <code>&lt;p&gt;</code> tag is added, and when it is removed.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nAdd/Remove\n<\np\n>\nTag\n</\nh1\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nthis.exists = !this.exists\n\"\n>\n{{btnText}}\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n>\n\n\n<\np\n\nv-if\n=\n\"\nexists\n\"\n>\nHello World!\n</\np\n>\n\n\n</\nTransition\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\nexists\n:\n\nfalse\n\n\n}\n\n\n}\n,\n\n\ncomputed\n:\n\n{\n\n\nbtnText\n(\n)\n\n{\n\n\nif\n(\nthis\n.\nexists\n)\n\n{\n\n\nreturn\n\n'Remove'\n;\n\n\n}\n\n\nelse\n\n{\n\n\nreturn\n\n'Add'\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n>\n\n\n.v-enter-from\n\n{\n\n\nopacity\n:\n0\n;\n\n\ntranslate\n:\n-100px 0\n;\n\n\n}\n\n\n.v-enter-to\n\n{\n\n\nopacity\n:\n1\n;\n\n\ntranslate\n:\n0 0\n;\n\n\n}\n\n\n.v-leave-from\n\n{\n\n\nopacity\n:\n1\n;\n\n\ntranslate\n:\n0 0\n;\n\n\n}\n\n\n.v-leave-to\n\n{\n\n\nopacity\n:\n0\n;\n\n\ntranslate\n:\n100px 0\n;\n\n\n}\n\n\np\n\n{\n\n\nbackground-color\n:\nlightgreen\n;\n\n\ndisplay\n:\ninline-block\n;\n\n\npadding\n:\n10px\n;\n\n\ntransition\n:\nall 0.5s\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"4-6,30-45\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Add/Remove <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span> Tag<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.exists = !this.exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>{{btnText}}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">exists</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">computed</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">btnText</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>exists<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Remove'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n      <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Add'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-from</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> -100px 0<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-enter-to</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 0 0<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-leave-from</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 0 0<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-leave-to</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 100px 0<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">p</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">transition</span><span class=\"token punctuation\">:</span> all 0.5s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"6\" data-range=\"4-6\" data-start=\"4\" style=\"top: 66px; width: 789px;\"> \n \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"45\" data-range=\"30-45\" data-start=\"30\" style=\"top: 638px; width: 789px;\"> \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can also use the v-enter-active and v-leave-active to set styling or animation during adding or during removal of an element:",
+      "html": "<p>We can also use the <code>v-enter-active</code> and <code>v-leave-active</code> to set styling or animation <strong>during adding</strong> or <strong>during removal</strong> of an element:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nAdd/Remove\n<\np\n>\nTag\n</\nh1\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nthis.exists = !this.exists\n\"\n>\n{{btnText}}\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n>\n\n\n<\np\n\nv-if\n=\n\"\nexists\n\"\n>\nHello World!\n</\np\n>\n\n\n</\nTransition\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\nexists\n:\n\nfalse\n\n\n}\n\n\n}\n,\n\n\ncomputed\n:\n\n{\n\n\nbtnText\n(\n)\n\n{\n\n\nif\n(\nthis\n.\nexists\n)\n\n{\n\n\nreturn\n\n'Remove'\n;\n\n\n}\n\n\nelse\n\n{\n\n\nreturn\n\n'Add'\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n>\n\n\n.v-enter-active\n\n{\n\n\nbackground-color\n:\nlightgreen\n;\n\n\nanimation\n:\nadded 1s\n;\n\n\n}\n\n\n.v-leave-active\n\n{\n\n\nbackground-color\n:\nlightcoral\n;\n\n\nanimation\n:\nadded 1s reverse\n;\n\n\n}\n\n\n@keyframes\nadded\n\n{\n\n\nfrom\n\n{\n\n\nopacity\n:\n0\n;\n\n\ntranslate\n:\n-100px 0\n;\n\n\n}\n\n\nto\n\n{\n\n\nopacity\n:\n1\n;\n\n\ntranslate\n:\n0 0\n;\n\n\n}\n\n\n}\n\n\np\n\n{\n\n\ndisplay\n:\ninline-block\n;\n\n\npadding\n:\n10px\n;\n\n\nborder\n:\ndashed black 1px\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"4-6,30-47\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Add/Remove <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span> Tag<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.exists = !this.exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>{{btnText}}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">exists</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">computed</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">btnText</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>exists<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Remove'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n      <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Add'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> added 1s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-leave-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightcoral<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> added 1s reverse<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> added</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> -100px 0<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 0 0<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">p</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">border</span><span class=\"token punctuation\">:</span> dashed black 1px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"6\" data-range=\"4-6\" data-start=\"4\" style=\"top: 66px; width: 789px;\"> \n \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"47\" data-range=\"30-47\" data-start=\"30\" style=\"top: 638px; width: 789px;\"> \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The Transition 'name' Prop",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In case you have several <Transition> components, but you want at least one of the <Transition> components to have a different animation, you need different names for the <Transition> components to tell them apart.",
+      "html": "<p>In case you have several <code>&lt;Transition&gt;</code> components, but you want at least one of the <code>&lt;Transition&gt;</code> components to have a different animation, you need different names for the <code>&lt;Transition&gt;</code> components to tell them apart.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can choose the name of a <Transition> component with the name prop, and that changes the name of the transition classes as well, so that we can set different CSS animation rules for that component.",
+      "html": "<p>We can choose the name of a <code>&lt;Transition&gt;</code> component with the <code>name</code> prop, and that changes the name of the transition classes as well, so that we can set different CSS animation rules for that component.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\nTransition\n\nname\n=\n\"\nswirl\n\"\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>swirl<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If the transition name prop value is set to 'swirl' , the automatically available classes will now start with 'swirl-' instead of 'v-' :",
+      "html": "<p>If the transition <code>name</code> prop value is set to <strong>'swirl'</strong>, the automatically available classes will now start with <strong>'swirl-'</strong> instead of <strong>'v-'</strong>:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the example below we use the name prop to give the <Transition> components different animations. One <Transition> component is not given a name, and is therefore given animations using the automatically generated CSS classes starting with 'v-'. The other <Transition> component is given a name 'swirl' so that it can be given rules for animation with the automatically generated CSS classes starting with 'swirl-'.",
+      "html": "<p>In the example below we use the <code>name</code> prop to give the <code>&lt;Transition&gt;</code> components different animations. One <code>&lt;Transition&gt;</code> component is not given a name, and is therefore given animations using the automatically generated CSS classes starting with 'v-'. The other <code>&lt;Transition&gt;</code> component is given a name 'swirl' so that it can be given rules for animation with the automatically generated CSS classes starting with 'swirl-'.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nAdd/Remove\n<\np\n>\nTag\n</\nh1\n>\n\n\n<\np\n>\nThe second transition in this example has the name prop \"swirl\", so that we can keep the transitions apart with different class names.\n</\np\n>\n\n\n<\nhr\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nthis.p1Exists = !this.p1Exists\n\"\n>\n{{btn1Text}}\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n>\n\n\n<\np\n\nv-if\n=\n\"\np1Exists\n\"\n\nid\n=\n\"\np1\n\"\n>\nHello World!\n</\np\n>\n\n\n</\nTransition\n>\n\n\n<\nhr\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nthis.p2Exists = !this.p2Exists\n\"\n>\n{{btn2Text}}\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n\nname\n=\n\"\nswirl\n\"\n>\n\n\n<\np\n\nv-if\n=\n\"\np2Exists\n\"\n\nid\n=\n\"\np2\n\"\n>\nHello World!\n</\np\n>\n\n\n</\nTransition\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\np1Exists\n:\n\nfalse\n,\n\n\np2Exists\n:\n\nfalse\n\n\n}\n\n\n}\n,\n\n\ncomputed\n:\n\n{\n\n\nbtn1Text\n(\n)\n\n{\n\n\nif\n(\nthis\n.\np1Exists\n)\n\n{\n\n\nreturn\n\n'Remove'\n;\n\n\n}\n\n\nelse\n\n{\n\n\nreturn\n\n'Add'\n;\n\n\n}\n\n\n}\n,\n\n\nbtn2Text\n(\n)\n\n{\n\n\nif\n(\nthis\n.\np2Exists\n)\n\n{\n\n\nreturn\n\n'Remove'\n;\n\n\n}\n\n\nelse\n\n{\n\n\nreturn\n\n'Add'\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n>\n\n\n.v-enter-active\n\n{\n\n\nbackground-color\n:\nlightgreen\n;\n\n\nanimation\n:\nadded 1s\n;\n\n\n}\n\n\n.v-leave-active\n\n{\n\n\nbackground-color\n:\nlightcoral\n;\n\n\nanimation\n:\nadded 1s reverse\n;\n\n\n}\n\n\n@keyframes\nadded\n\n{\n\n\nfrom\n\n{\n\n\nopacity\n:\n0\n;\n\n\ntranslate\n:\n-100px 0\n;\n\n\n}\n\n\nto\n\n{\n\n\nopacity\n:\n1\n;\n\n\ntranslate\n:\n0 0\n;\n\n\n}\n\n\n}\n\n\n.swirl-enter-active\n\n{\n\n\nanimation\n:\nswirlAdded 1s\n;\n\n\n}\n\n\n.swirl-leave-active\n\n{\n\n\nanimation\n:\nswirlAdded 1s reverse\n;\n\n\n}\n\n\n@keyframes\nswirlAdded\n\n{\n\n\nfrom\n\n{\n\n\nopacity\n:\n0\n;\n\n\nrotate\n:\n0\n;\n\n\nscale\n:\n0.1\n;\n\n\n}\n\n\nto\n\n{\n\n\nopacity\n:\n1\n;\n\n\nrotate\n:\n360deg\n;\n\n\nscale\n:\n1\n;\n\n\n}\n\n\n}\n\n\n#p1, #p2\n\n{\n\n\ndisplay\n:\ninline-block\n;\n\n\npadding\n:\n10px\n;\n\n\nborder\n:\ndashed black 1px\n;\n\n\n}\n\n\n#p2\n\n{\n\n\nbackground-color\n:\nlightcoral\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"11-13,64-81\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Add/Remove <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span> Tag<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>The second transition in this example has the name prop \"swirl\", so that we can keep the transitions apart with different class names.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>hr</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.p1Exists = !this.p1Exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>{{btn1Text}}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>p1Exists<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">id</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>p1<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>hr</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>this.p2Exists = !this.p2Exists<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>{{btn2Text}}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span> <span class=\"token attr-name\">name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>swirl<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>p2Exists<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">id</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>p2<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">p1Exists</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span><span class=\"token punctuation\">,</span>\n      <span class=\"token literal-property property\">p2Exists</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">computed</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">btn1Text</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>p1Exists<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Remove'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n      <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Add'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    <span class=\"token function\">btn2Text</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>p2Exists<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Remove'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n      <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'Add'</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> added 1s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-leave-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightcoral<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> added 1s reverse<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> added</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> -100px 0<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 0 0<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.swirl-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 1s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.swirl-leave-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 1s reverse<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> swirlAdded</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 0.1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 360deg<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#p1, #p2</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">border</span><span class=\"token punctuation\">:</span> dashed black 1px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#p2</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightcoral<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"13\" data-range=\"11-13\" data-start=\"11\" style=\"top: 220px; width: 1317px;\"> \n \n \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"81\" data-range=\"64-81\" data-start=\"64\" style=\"top: 1386px; width: 1317px;\"> \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "JavaScript Transition Hooks",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Every Transition class as just mentioned corresponds to an event that we can hook into to run some JavaScript code.",
+      "html": "<p>Every Transition class as just mentioned corresponds to an event that we can hook into to run some JavaScript code.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "ws-table-all",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "unknown",
+      "code_html": "<table class=\"ws-table-all notranslate\">\n<tbody><tr>\n<th style=\"width:20%\">Transition Class</th>\n<th>JavaScript Event</th>\n</tr>\n<tr>\n<td>v-enter-from</td>\n<td><code class=\"w3-codespan\">before-enter</code></td>\n</tr>\n<tr>\n<td>v-enter-active</td>\n<td><code class=\"w3-codespan\">enter</code></td>\n</tr>\n<tr>\n<td>v-enter-to</td>\n<td><code class=\"w3-codespan\">after-enter</code><br/>\n<code class=\"w3-codespan\">enter-cancelled</code></td>\n</tr>\n<tr>\n<td>v-leave-from</td>\n<td><code class=\"w3-codespan\">before-leave</code></td>\n</tr>\n<tr>\n<td>v-leave-active</td>\n<td><code class=\"w3-codespan\">leave</code></td>\n</tr>\n<tr>\n<td>v-leave-to</td>\n<td><code class=\"w3-codespan\">after-leave</code><br/>\n<code class=\"w3-codespan\">leave-cancelled</code> (v-show only)</td>\n</tr>\n</tbody></table>",
+      "code_classes": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "ws-table-all",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When the after-enter event happens in the example below, a method runs that displays a red <div> element.",
+      "html": "<p>When the <code>after-enter</code> event happens in the example below, a method runs that displays a red <code>&lt;div&gt;</code> element.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nJavaScript Transition Hooks\n</\nh1\n>\n\n\n<\np\n>\nThis code hooks into \"after-enter\" so that after the initial animation is done, a method runs that displays a red div.\n</\np\n>\n\n\n<\nbutton\n\n@click\n=\n\"\npVisible=true\n\"\n>\nCreate p-tag!\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n\n@after-enter\n=\n\"\nonAfterEnter\n\"\n>\n\n\n<\np\n\nv-show\n=\n\"\npVisible\n\"\n\nid\n=\n\"\np1\n\"\n>\nHello World!\n</\np\n>\n\n\n</\nTransition\n>\n\n\n<\nbr\n>\n\n\n<\ndiv\n\nv-show\n=\n\"\ndivVisible\n\"\n>\nThis appears after the \"enter-active\" phase of the transition.\n</\ndiv\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\npVisible\n:\n\nfalse\n,\n\n\ndivVisible\n:\n\nfalse\n\n\n}\n\n\n}\n,\n\n\nmethods\n:\n\n{\n\n\nonAfterEnter\n(\n)\n\n{\n\n\nthis\n.\ndivVisible\n=\n\ntrue\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n\nscoped\n>\n\n\n.v-enter-active\n\n{\n\n\nanimation\n:\nswirlAdded 1s\n;\n\n\n}\n\n\n@keyframes\nswirlAdded\n\n{\n\n\nfrom\n\n{\n\n\nopacity\n:\n0\n;\n\n\nrotate\n:\n0\n;\n\n\nscale\n:\n0.1\n;\n\n\n}\n\n\nto\n\n{\n\n\nopacity\n:\n1\n;\n\n\nrotate\n:\n360deg\n;\n\n\nscale\n:\n1\n;\n\n\n}\n\n\n}\n\n\n#p1, div\n\n{\n\n\ndisplay\n:\ninline-block\n;\n\n\npadding\n:\n10px\n;\n\n\nborder\n:\ndashed black 1px\n;\n\n\n}\n\n\n#p1\n\n{\n\n\nbackground-color\n:\nlightgreen\n;\n\n\n}\n\n\ndiv\n\n{\n\n\nbackground-color\n:\nlightcoral\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"5\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>JavaScript Transition Hooks<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>This code hooks into \"after-enter\" so that after the initial animation is done, a method runs that displays a red div.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>pVisible=true<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Create p-tag!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span> <span class=\"token attr-name\">@after-enter</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>onAfterEnter<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">v-show</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>pVisible<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">id</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>p1<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">v-show</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>divVisible<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>This appears after the \"enter-active\" phase of the transition.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">pVisible</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span><span class=\"token punctuation\">,</span>\n      <span class=\"token literal-property property\">divVisible</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">methods</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">onAfterEnter</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>divVisible <span class=\"token operator\">=</span> <span class=\"token boolean\">true</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span> <span class=\"token attr-name\">scoped</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 1s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> swirlAdded</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 0.1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 360deg<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#p1, div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">border</span><span class=\"token punctuation\">:</span> dashed black 1px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#p1</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightcoral<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"5\" data-start=\"5\" style=\"top: 88px; width: 1173px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You can use the \"Toggle\" button in the example below to interrupt the enter transition phase of the <p> element so that the enter-cancelled event is triggered:",
+      "html": "<p>You can use the \"Toggle\" button in the example below to interrupt the enter transition phase of the <code>&lt;p&gt;</code> element so that the <code>enter-cancelled</code> event is triggered:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nThe 'enter-cancelled' Event\n</\nh1\n>\n\n\n<\np\n>\nClick the toggle button again before the enter animation is finished to trigger the 'enter-cancelled' event.\n</\np\n>\n\n\n<\nbutton\n\n@click\n=\n\"\npVisible=!pVisible\n\"\n>\nToggle\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n\n@enter-cancelled\n=\n\"\nonEnterCancelled\n\"\n>\n\n\n<\np\n\nv-if\n=\n\"\npVisible\n\"\n\nid\n=\n\"\np1\n\"\n>\nHello World!\n</\np\n>\n\n\n</\nTransition\n>\n\n\n<\nbr\n>\n\n\n<\ndiv\n\nv-if\n=\n\"\ndivVisible\n\"\n>\nYou interrupted the \"enter-active\" transition.\n</\ndiv\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\npVisible\n:\n\nfalse\n,\n\n\ndivVisible\n:\n\nfalse\n\n\n}\n\n\n}\n,\n\n\nmethods\n:\n\n{\n\n\nonEnterCancelled\n(\n)\n\n{\n\n\nthis\n.\ndivVisible\n=\n\ntrue\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n\nscoped\n>\n\n\n.v-enter-active\n\n{\n\n\nanimation\n:\nswirlAdded 2s\n;\n\n\n}\n\n\n@keyframes\nswirlAdded\n\n{\n\n\nfrom\n\n{\n\n\nopacity\n:\n0\n;\n\n\nrotate\n:\n0\n;\n\n\nscale\n:\n0.1\n;\n\n\n}\n\n\nto\n\n{\n\n\nopacity\n:\n1\n;\n\n\nrotate\n:\n720deg\n;\n\n\nscale\n:\n1\n;\n\n\n}\n\n\n}\n\n\n#p1, div\n\n{\n\n\ndisplay\n:\ninline-block\n;\n\n\npadding\n:\n10px\n;\n\n\nborder\n:\ndashed black 1px\n;\n\n\n}\n\n\n#p1\n\n{\n\n\nbackground-color\n:\nlightgreen\n;\n\n\n}\n\n\ndiv\n\n{\n\n\nbackground-color\n:\nlightcoral\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"5\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>The 'enter-cancelled' Event<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>Click the toggle button again before the enter animation is finished to trigger the 'enter-cancelled' event.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>pVisible=!pVisible<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Toggle<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span> <span class=\"token attr-name\">@enter-cancelled</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>onEnterCancelled<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>pVisible<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">id</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>p1<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>divVisible<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>You interrupted the \"enter-active\" transition.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">pVisible</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span><span class=\"token punctuation\">,</span>\n      <span class=\"token literal-property property\">divVisible</span><span class=\"token operator\">:</span> <span class=\"token boolean\">false</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">methods</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">onEnterCancelled</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>divVisible <span class=\"token operator\">=</span> <span class=\"token boolean\">true</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span> <span class=\"token attr-name\">scoped</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 2s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> swirlAdded</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 0.1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 720deg<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#p1, div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">border</span><span class=\"token punctuation\">:</span> dashed black 1px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#p1</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightcoral<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"5\" data-start=\"5\" style=\"top: 88px; width: 1083px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The 'appear' Prop",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we have an element that we want to animate when the page loads, we need to use the appear prop on the <Transition> component.",
+      "html": "<p>If we have an element that we want to animate when the page loads, we need to use the <code>appear</code> prop on the <code>&lt;Transition&gt;</code> component.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\nTransition\n\nappear\n>\n\n...\n\n</\nTransition\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span> <span class=\"token attr-name\">appear</span><span class=\"token punctuation\">&gt;</span></span>\n  ...\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In this example, the appear prop starts an animation when the page load for the first time:",
+      "html": "<p>In this example, the <code>appear</code> prop starts an animation when the page load for the first time:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nThe 'appear' Prop\n</\nh1\n>\n\n\n<\np\n>\nThe 'appear' prop starts the animation when the p tag below is rendered for the first time as the page opens. Without the 'appear' prop, this example would have had no animation.\n</\np\n>\n\n\n<\nTransition\n\nappear\n>\n\n\n<\np\n\nid\n=\n\"\np1\n\"\n>\nHello World!\n</\np\n>\n\n\n</\nTransition\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nstyle\n>\n\n\n.v-enter-active\n\n{\n\n\nanimation\n:\nswirlAdded 1s\n;\n\n\n}\n\n\n@keyframes\nswirlAdded\n\n{\n\n\nfrom\n\n{\n\n\nopacity\n:\n0\n;\n\n\nrotate\n:\n0\n;\n\n\nscale\n:\n0.1\n;\n\n\n}\n\n\nto\n\n{\n\n\nopacity\n:\n1\n;\n\n\nrotate\n:\n360deg\n;\n\n\nscale\n:\n1\n;\n\n\n}\n\n\n}\n\n\n#p1\n\n{\n\n\ndisplay\n:\ninline-block\n;\n\n\npadding\n:\n10px\n;\n\n\nborder\n:\ndashed black 1px\n;\n\n\nbackground-color\n:\nlightgreen\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"4\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>The 'appear' Prop<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>The 'appear' prop starts the animation when the p tag below is rendered for the first time as the page opens. Without the 'appear' prop, this example would have had no animation.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span> <span class=\"token attr-name\">appear</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span> <span class=\"token attr-name\">id</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>p1<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Hello World!<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 1s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> swirlAdded</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 0.1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 360deg<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#p1</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">display</span><span class=\"token punctuation\">:</span> inline-block<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">border</span><span class=\"token punctuation\">:</span> dashed black 1px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"4\" data-start=\"4\" style=\"top: 66px; width: 1713px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Transition Between Elements",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The <Transition> component can also be used to switch between several elements, as long as we make sure that only one element is shown at a time with the use of <v-if> and <v-else-if> :",
+      "html": "<p>The <code>&lt;Transition&gt;</code> component can also be used to switch between several elements, as long as we make sure that only one element is shown at a time with the use of <code>&lt;v-if&gt;</code> and <code>&lt;v-else-if&gt;</code>:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nTransition Between Elements\n</\nh1\n>\n\n\n<\np\n>\nClick the button to get a new image.\n</\np\n>\n\n\n<\np\n>\nThe new image is added before the previous is removed. We will fix this in the next example with mode=\"out-in\".\n</\np\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nnewImg\n\"\n>\nNext image\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_pizza.svg\n\"\n\nv-if\n=\n\"\nimgActive === 'pizza'\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_apple.svg\n\"\n\nv-else-if\n=\n\"\nimgActive === 'apple'\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_cake.svg\n\"\n\nv-else-if\n=\n\"\nimgActive === 'cake'\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_fish.svg\n\"\n\nv-else-if\n=\n\"\nimgActive === 'fish'\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_rice.svg\n\"\n\nv-else-if\n=\n\"\nimgActive === 'rice'\n\"\n>\n\n\n</\nTransition\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\nimgActive\n:\n\n'pizza'\n,\n\n\nimgs\n:\n\n[\n'pizza'\n,\n\n'apple'\n,\n\n'cake'\n,\n\n'fish'\n,\n\n'rice'\n]\n,\n\n\nindexNbr\n:\n\n0\n\n\n}\n\n\n}\n,\n\n\nmethods\n:\n\n{\n\n\nnewImg\n(\n)\n\n{\n\n\nthis\n.\nindexNbr\n++\n;\n\n\nif\n(\nthis\n.\nindexNbr\n>=\n\nthis\n.\nimgs\n.\nlength\n)\n\n{\n\n\nthis\n.\nindexNbr\n=\n\n0\n;\n\n\n}\n\n\nthis\n.\nimgActive\n=\n\nthis\n.\nimgs\n[\nthis\n.\nindexNbr\n]\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n>\n\n\n.v-enter-active\n\n{\n\n\nanimation\n:\nswirlAdded 1s\n;\n\n\n}\n\n\n.v-leave-active\n\n{\n\n\nanimation\n:\nswirlAdded 1s reverse\n;\n\n\n}\n\n\n@keyframes\nswirlAdded\n\n{\n\n\nfrom\n\n{\n\n\nopacity\n:\n0\n;\n\n\nrotate\n:\n0\n;\n\n\nscale\n:\n0.1\n;\n\n\n}\n\n\nto\n\n{\n\n\nopacity\n:\n1\n;\n\n\nrotate\n:\n360deg\n;\n\n\nscale\n:\n1\n;\n\n\n}\n\n\n}\n\n\nimg\n\n{\n\n\nwidth\n:\n100px\n;\n\n\nmargin\n:\n20px\n;\n\n\n}\n\n\nimg:hover\n\n{\n\n\ncursor\n:\npointer\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"7-11\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Transition Between Elements<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>Click the button to get a new image.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>The new image is added before the previous is removed. We will fix this in the next example with mode=\"out-in\".<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>newImg<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Next image<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_pizza.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'pizza'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_apple.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-else-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'apple'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_cake.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-else-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'cake'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_fish.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-else-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'fish'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_rice.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-else-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'rice'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">imgActive</span><span class=\"token operator\">:</span> <span class=\"token string\">'pizza'</span><span class=\"token punctuation\">,</span>\n      <span class=\"token literal-property property\">imgs</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'pizza'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'apple'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'cake'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'fish'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'rice'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n      <span class=\"token literal-property property\">indexNbr</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">methods</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">newImg</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>indexNbr<span class=\"token operator\">++</span><span class=\"token punctuation\">;</span>\n      <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>indexNbr <span class=\"token operator\">&gt;=</span> <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>imgs<span class=\"token punctuation\">.</span>length<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>indexNbr <span class=\"token operator\">=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n      <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>imgActive <span class=\"token operator\">=</span> <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>imgs<span class=\"token punctuation\">[</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>indexNbr<span class=\"token punctuation\">]</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 1s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-leave-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 1s reverse<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> swirlAdded</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 0.1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 360deg<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">img</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">width</span><span class=\"token punctuation\">:</span> 100px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">margin</span><span class=\"token punctuation\">:</span> 20px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">img:hover</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">cursor</span><span class=\"token punctuation\">:</span> pointer<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"11\" data-range=\"7-11\" data-start=\"7\" style=\"top: 132px; width: 1110px;\"> \n \n \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "mode=\"out-in\"",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the example above, the next image is added before the previous image is removed.",
+      "html": "<p>In the example above, the next image is added before the previous image is removed.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We use the mode=\"out-in\" prop and prop value on the <Transition> component so that the removal of an element is finished before the next element is added.",
+      "html": "<p>We use the <code>mode=\"out-in\"</code> prop and prop value on the <code>&lt;Transition&gt;</code> component so that the removal of an element is finished before the next element is added.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nmode=\"out-in\"\n</\nh1\n>\n\n\n<\np\n>\nClick the button to get a new image.\n</\np\n>\n\n\n<\np\n>\nWith mode=\"out-in\", the next image is not added until the current image is removed. Another difference from the previous example, is that here we use computed prop instead of a method.\n</\np\n>\n\n\n<\nbutton\n\n@click\n=\n\"\nindexNbr++\n\"\n>\nNext image\n</\nbutton\n>\n<\nbr\n>\n\n\n<\nTransition\n\nmode\n=\n\"\nout-in\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_pizza.svg\n\"\n\nv-if\n=\n\"\nimgActive === 'pizza'\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_apple.svg\n\"\n\nv-else-if\n=\n\"\nimgActive === 'apple'\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_cake.svg\n\"\n\nv-else-if\n=\n\"\nimgActive === 'cake'\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_fish.svg\n\"\n\nv-else-if\n=\n\"\nimgActive === 'fish'\n\"\n>\n\n\n<\nimg\n\nsrc\n=\n\"\n/img_rice.svg\n\"\n\nv-else-if\n=\n\"\nimgActive === 'rice'\n\"\n>\n\n\n</\nTransition\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\nimgs\n:\n\n[\n'pizza'\n,\n\n'apple'\n,\n\n'cake'\n,\n\n'fish'\n,\n\n'rice'\n]\n,\n\n\nindexNbr\n:\n\n0\n\n\n}\n\n\n}\n,\n\n\ncomputed\n:\n\n{\n\n\nimgActive\n(\n)\n\n{\n\n\nif\n(\nthis\n.\nindexNbr\n>=\n\nthis\n.\nimgs\n.\nlength\n)\n\n{\n\n\nthis\n.\nindexNbr\n=\n\n0\n;\n\n\n}\n\n\nreturn\n\nthis\n.\nimgs\n[\nthis\n.\nindexNbr\n]\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n>\n\n\n.v-enter-active\n\n{\n\n\nanimation\n:\nswirlAdded 0.7s\n;\n\n\n}\n\n\n.v-leave-active\n\n{\n\n\nanimation\n:\nswirlAdded 0.7s reverse\n;\n\n\n}\n\n\n@keyframes\nswirlAdded\n\n{\n\n\nfrom\n\n{\n\n\nopacity\n:\n0\n;\n\n\nrotate\n:\n0\n;\n\n\nscale\n:\n0.1\n;\n\n\n}\n\n\nto\n\n{\n\n\nopacity\n:\n1\n;\n\n\nrotate\n:\n360deg\n;\n\n\nscale\n:\n1\n;\n\n\n}\n\n\n}\n\n\nimg\n\n{\n\n\nwidth\n:\n100px\n;\n\n\nmargin\n:\n20px\n;\n\n\n}\n\n\nimg:hover\n\n{\n\n\ncursor\n:\npointer\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"7-11\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>mode=\"out-in\"<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>Click the button to get a new image.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>With mode=\"out-in\", the next image is not added until the current image is removed. Another difference from the previous example, is that here we use computed prop instead of a method.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>indexNbr++<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Next image<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>br</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span> <span class=\"token attr-name\">mode</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>out-in<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_pizza.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'pizza'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_apple.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-else-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'apple'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_cake.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-else-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'cake'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_fish.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-else-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'fish'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>img</span> <span class=\"token attr-name\">src</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>/img_rice.svg<span class=\"token punctuation\">\"</span></span> <span class=\"token attr-name\">v-else-if</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>imgActive === 'rice'<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n<span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token literal-property property\">imgs</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'pizza'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'apple'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'cake'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'fish'</span><span class=\"token punctuation\">,</span> <span class=\"token string\">'rice'</span><span class=\"token punctuation\">]</span><span class=\"token punctuation\">,</span>\n      <span class=\"token literal-property property\">indexNbr</span><span class=\"token operator\">:</span> <span class=\"token number\">0</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n  <span class=\"token literal-property property\">computed</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">imgActive</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>indexNbr <span class=\"token operator\">&gt;=</span> <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>imgs<span class=\"token punctuation\">.</span>length<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>indexNbr <span class=\"token operator\">=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n      <span class=\"token keyword keyword-return\">return</span> <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>imgs<span class=\"token punctuation\">[</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>indexNbr<span class=\"token punctuation\">]</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 0.7s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-leave-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> swirlAdded 0.7s reverse<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> swirlAdded</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 0.1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">rotate</span><span class=\"token punctuation\">:</span> 360deg<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">scale</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">img</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">width</span><span class=\"token punctuation\">:</span> 100px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">margin</span><span class=\"token punctuation\">:</span> 20px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">img:hover</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">cursor</span><span class=\"token punctuation\">:</span> pointer<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"11\" data-range=\"7-11\" data-start=\"7\" style=\"top: 132px; width: 1767px;\"> \n \n \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Transition with Dynamic Components",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can also use the <Transition> component to animate switching between dynamic components:",
+      "html": "<p>We can also use the <code>&lt;Transition&gt;</code> component to animate switching between dynamic components:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh1\n>\nTransition with Dynamic Components\n</\nh1\n>\n\n\n<\np\n>\nThe Transition component wraps around the dynamic component so that the switching can be animated.\n</\np\n>\n\n\n<\nbutton\n\n@click\n=\n\"\ntoggleValue = !toggleValue\n\"\n>\nSwitch component\n</\nbutton\n>\n\n\n<\nTransition\n\nmode\n=\n\"\nout-in\n\"\n>\n\n\n<\ncomponent\n\n:is\n=\n\"\nactiveComp\n\"\n>\n</\ncomponent\n>\n\n\n</\nTransition\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n\n(\n)\n\n{\n\n\nreturn\n\n{\n\n\ntoggleValue\n:\n\ntrue\n\n\n}\n\n\n}\n,\n\n\ncomputed\n:\n\n{\n\n\nactiveComp\n(\n)\n\n{\n\n\nif\n(\nthis\n.\ntoggleValue\n)\n\n{\n\n\nreturn\n\n'comp-one'\n\n\n}\n\n\nelse\n\n{\n\n\nreturn\n\n'comp-two'\n\n\n}\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>\n\n\n\n<\nstyle\n>\n\n\n.v-enter-active\n\n{\n\n\nanimation\n:\nslideIn 0.5s\n;\n\n\n}\n\n\n@keyframes\nslideIn\n\n{\n\n\nfrom\n\n{\n\n\ntranslate\n:\n-200px 0\n;\n\n\nopacity\n:\n0\n;\n\n\n}\n\n\nto\n\n{\n\n\ntranslate\n:\n0 0\n;\n\n\nopacity\n:\n1\n;\n\n\n}\n\n\n}\n\n\n.v-leave-active\n\n{\n\n\nanimation\n:\nslideOut 0.5s\n;\n\n\n}\n\n\n@keyframes\nslideOut\n\n{\n\n\nfrom\n\n{\n\n\ntranslate\n:\n0 0\n;\n\n\nopacity\n:\n1\n;\n\n\n}\n\n\nto\n\n{\n\n\ntranslate\n:\n200px 0\n;\n\n\nopacity\n:\n0\n;\n\n\n}\n\n\n}\n\n\n#app\n\n{\n\n\nwidth\n:\n350px\n;\n\n\nmargin\n:\n10px\n;\n\n\n}\n\n\n#app > div\n\n{\n\n\nborder\n:\nsolid black 2px\n;\n\n\npadding\n:\n10px\n;\n\n\nmargin-top\n:\n10px\n;\n\n\n}\n\n\n</\nstyle\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"5-7\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span>Transition with Dynamic Components<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>p</span><span class=\"token punctuation\">&gt;</span></span>The Transition component wraps around the dynamic component so that the switching can be animated.<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>p</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>toggleValue = !toggleValue<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Switch component<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>Transition</span> <span class=\"token attr-name\">mode</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>out-in<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>component</span> <span class=\"token attr-name\">:is</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>activeComp<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>component</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>Transition</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n  <span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">data</span> <span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token literal-property property\">toggleValue</span><span class=\"token operator\">:</span> <span class=\"token boolean\">true</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    <span class=\"token literal-property property\">computed</span><span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token function\">activeComp</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>toggleValue<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n          <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'comp-one'</span>\n        <span class=\"token punctuation\">}</span>\n        <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n          <span class=\"token keyword keyword-return\">return</span> <span class=\"token string\">'comp-two'</span>\n        <span class=\"token punctuation\">}</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>style</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token style\"><span class=\"token language-css\">\n  <span class=\"token selector\">.v-enter-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> slideIn 0.5s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> slideIn</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> -200px 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 0 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">.v-leave-active</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">animation</span><span class=\"token punctuation\">:</span> slideOut 0.5s<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token atrule\"><span class=\"token rule\">@keyframes</span> slideOut</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token selector\">from</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 0 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 1<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n    <span class=\"token selector\">to</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token property\">translate</span><span class=\"token punctuation\">:</span> 200px 0<span class=\"token punctuation\">;</span>\n      <span class=\"token property\">opacity</span><span class=\"token punctuation\">:</span> 0<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#app</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">width</span><span class=\"token punctuation\">:</span> 350px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">margin</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  <span class=\"token selector\">#app &gt; div</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token property\">border</span><span class=\"token punctuation\">:</span> solid black 2px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">padding</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n    <span class=\"token property\">margin-top</span><span class=\"token punctuation\">:</span> 10px<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>style</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-end=\"7\" data-range=\"5-7\" data-start=\"5\" style=\"top: 88px; width: 993px;\"> \n \n \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Vue Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Yourself With Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise:",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The <Transition> component automatically gives us 6 different CSS classes we can use to animate an element.",
+      "html": "<p>The &lt;Transition&gt; component automatically gives us 6 different CSS classes we can use to animate an element.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Fill the blanks so that the 3 first class names are completed, in the correct order, for when an element becomes visible:",
+      "html": "<p>Fill the blanks so that the 3 first class names are completed, in the correct order, for when an element becomes visible:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "1. v-enter-\n\n2. v-enter-\n\n3. v-enter-",
+      "language": "unknown",
+      "code_html": "<pre style=\"overflow: auto;\">  1. v-enter-<input maxlength=\"6\" name=\"ex1\" style=\"width: 7ch;\"/>\n  2. v-enter-<input maxlength=\"6\" name=\"ex2\" style=\"width: 7ch;\"/>\n  3. v-enter-<input maxlength=\"6\" name=\"ex3\" style=\"width: 7ch;\"/>\n</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Start the Exercise",
+          "href": "https://www.w3schools.com/exercise.php?filename=exercise_animations2",
+          "title": ""
+        }
+      ],
+      "text": "Start the Exercise",
+      "html": "<p><a href=\"exercise.php?filename=exercise_animations2\" target=\"_blank\">Start the Exercise</a></p>"
+    }
+  ]
+}

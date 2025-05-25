@@ -1,0 +1,330 @@
+{
+  "title": "React useContext Hook",
+  "url": "https://www.w3schools.com/react/react_usecontext.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "React useContext Hook",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "React Context",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "React Context is a way to manage state globally.",
+      "html": "<p>React Context is a way to manage state globally.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It can be used together with the useState Hook to share state between deeply nested components more easily than with useState alone.",
+      "html": "<p>It can be used together with the <code>useState</code> Hook to share state between\ndeeply nested components more easily than with <code>useState</code> alone.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The Problem",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "State should be held by the highest parent component in the stack that requires access to the state.",
+      "html": "<p>State should be held by the highest parent component in the stack that requires access to the state.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To illustrate, we have many nested components. The component at the top and bottom of the stack need access to the state.",
+      "html": "<p>To illustrate, we have many nested components. The component at the top and bottom of the stack need access to the state.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To do this without Context, we will need to pass the state as \"props\" through each nested component. This is called \"prop drilling\".",
+      "html": "<p>To do this without Context, we will need to pass the state as \"props\" through each nested component. This is called \"prop drilling\".</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nfunction\n\nComponent1\n(\n)\n\n{\n\n\nconst\n\n[\nuser\n,\nsetUser\n]\n\n=\n\nuseState\n(\n\"Jesse Hall\"\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\n{\n`\nHello\n${\nuser\n}\n!\n`\n}\n</\nh1\n>\n\n\n<\nComponent2\n\nuser\n=\n{\nuser\n}\n\n/>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nfunction\n\nComponent2\n(\n{\nuser\n}\n)\n\n{\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 2\n</\nh1\n>\n\n\n<\nComponent3\n\nuser\n=\n{\nuser\n}\n\n/>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nfunction\n\nComponent3\n(\n{\nuser\n}\n)\n\n{\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 3\n</\nh1\n>\n\n\n<\nComponent4\n\nuser\n=\n{\nuser\n}\n\n/>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nfunction\n\nComponent4\n(\n{\nuser\n}\n)\n\n{\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 4\n</\nh1\n>\n\n\n<\nComponent5\n\nuser\n=\n{\nuser\n}\n\n/>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nfunction\n\nComponent5\n(\n{\nuser\n}\n)\n\n{\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 5\n</\nh1\n>\n\n\n<\nh2\n>\n{\n`\nHello\n${\nuser\n}\nagain!\n`\n}\n</\nh2\n>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nComponent1\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component1</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>user<span class=\"token punctuation\">,</span> setUser<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Jesse Hall\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span><span class=\"token template-string\"><span class=\"token template-punctuation string\">`</span><span class=\"token string\">Hello </span><span class=\"token interpolation\"><span class=\"token interpolation-punctuation punctuation\">${</span>user<span class=\"token interpolation-punctuation punctuation\">}</span></span><span class=\"token string\">!</span><span class=\"token template-punctuation string\">`</span></span><span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component2</span></span> <span class=\"token attr-name\">user</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>user<span class=\"token punctuation\">}</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component2</span><span class=\"token punctuation\">(</span><span class=\"token parameter\"><span class=\"token punctuation\">{</span> user <span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 2</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component3</span></span> <span class=\"token attr-name\">user</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>user<span class=\"token punctuation\">}</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component3</span><span class=\"token punctuation\">(</span><span class=\"token parameter\"><span class=\"token punctuation\">{</span> user <span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 3</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component4</span></span> <span class=\"token attr-name\">user</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>user<span class=\"token punctuation\">}</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component4</span><span class=\"token punctuation\">(</span><span class=\"token parameter\"><span class=\"token punctuation\">{</span> user <span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 4</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component5</span></span> <span class=\"token attr-name\">user</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>user<span class=\"token punctuation\">}</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component5</span><span class=\"token punctuation\">(</span><span class=\"token parameter\"><span class=\"token punctuation\">{</span> user <span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 5</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span><span class=\"token template-string\"><span class=\"token template-punctuation string\">`</span><span class=\"token string\">Hello </span><span class=\"token interpolation\"><span class=\"token interpolation-punctuation punctuation\">${</span>user<span class=\"token interpolation-punctuation punctuation\">}</span></span><span class=\"token string\"> again!</span><span class=\"token template-punctuation string\">`</span></span><span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component1</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Even though components 2-4 did not need the state, they had to pass the state along so that it could reach component 5.",
+      "html": "<p>Even though components 2-4 did not need the state, they had to pass the state along so that it could reach component 5.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The Solution",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The solution is to create context.",
+      "html": "<p>The solution is to create context.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Create Context",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To create context, you must Import createContext and initialize it:",
+      "html": "<p>To create context, you must Import <code>createContext</code> and initialize \nit:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n,\ncreateContext\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nconst\nUserContext\n=\n\ncreateContext\n(\n)",
+      "language": "javascript",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState<span class=\"token punctuation\">,</span> createContext <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> UserContext <span class=\"token operator\">=</span> <span class=\"token function\">createContext</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Next we'll use the Context Provider to wrap the tree of components that need the state Context.",
+      "html": "<p>Next we'll use the Context Provider to wrap the tree of components that need the state Context.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Context Provider",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Wrap child components in the Context Provider and supply the state value.",
+      "html": "<p>Wrap child components in the Context Provider and supply the state value.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "function\n\nComponent1\n(\n)\n\n{\n\n\nconst\n\n[\nuser\n,\nsetUser\n]\n\n=\n\nuseState\n(\n\"Jesse Hall\"\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\nUserContext.Provider\n\nvalue\n=\n{\nuser\n}\n>\n\n\n<\nh1\n>\n{\n`\nHello\n${\nuser\n}\n!\n`\n}\n</\nh1\n>\n\n\n<\nComponent2\n\nuser\n=\n{\nuser\n}\n\n/>\n\n\n</\nUserContext.Provider\n>\n\n\n)\n;\n\n\n}",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component1</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>user<span class=\"token punctuation\">,</span> setUser<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Jesse Hall\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">UserContext.Provider</span></span> <span class=\"token attr-name\">value</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>user<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span><span class=\"token template-string\"><span class=\"token template-punctuation string\">`</span><span class=\"token string\">Hello </span><span class=\"token interpolation\"><span class=\"token interpolation-punctuation punctuation\">${</span>user<span class=\"token interpolation-punctuation punctuation\">}</span></span><span class=\"token string\">!</span><span class=\"token template-punctuation string\">`</span></span><span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component2</span></span> <span class=\"token attr-name\">user</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>user<span class=\"token punctuation\">}</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span><span class=\"token class-name\">UserContext.Provider</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span></code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now, all components in this tree will have access to the user Context.",
+      "html": "<p>Now, all components in this tree will have access to the user Context.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Use the useContext Hook",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In order to use the Context in a child component, we need to access it using the useContext Hook.",
+      "html": "<p>In order to use the Context in a child component, we need to access it using the <code>useContext</code> Hook.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "First, include the useContext in the import statement:",
+      "html": "<p>First, include the <code>useContext</code> in the import \nstatement:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n,\ncreateContext\n,\nuseContext\n}\n\nfrom\n\n\"react\"\n;",
+      "language": "python",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState<span class=\"token punctuation\">,</span> createContext<span class=\"token punctuation\">,</span> useContext <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then you can access the user Context in all components:",
+      "html": "<p>Then you can access the user Context in all components:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "function\n\nComponent5\n(\n)\n\n{\n\n\nconst\nuser\n=\n\nuseContext\n(\nUserContext\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 5\n</\nh1\n>\n\n\n<\nh2\n>\n{\n`\nHello\n${\nuser\n}\nagain!\n`\n}\n</\nh2\n>\n\n\n</\n>\n\n\n)\n;\n\n\n}",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component5</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> user <span class=\"token operator\">=</span> <span class=\"token function\">useContext</span><span class=\"token punctuation\">(</span>UserContext<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 5</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span><span class=\"token template-string\"><span class=\"token template-punctuation string\">`</span><span class=\"token string\">Hello </span><span class=\"token interpolation\"><span class=\"token interpolation-punctuation punctuation\">${</span>user<span class=\"token interpolation-punctuation punctuation\">}</span></span><span class=\"token string\"> again!</span><span class=\"token template-punctuation string\">`</span></span><span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Full Example",
+      "level": "h2"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\n{\nuseState\n,\ncreateContext\n,\nuseContext\n}\n\nfrom\n\n\"react\"\n;\n\n\nimport\nReactDOM\nfrom\n\n\"react-dom/client\"\n;\n\n\n\nconst\nUserContext\n=\n\ncreateContext\n(\n)\n;\n\n\n\nfunction\n\nComponent1\n(\n)\n\n{\n\n\nconst\n\n[\nuser\n,\nsetUser\n]\n\n=\n\nuseState\n(\n\"Jesse Hall\"\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\nUserContext.Provider\n\nvalue\n=\n{\nuser\n}\n>\n\n\n<\nh1\n>\n{\n`\nHello\n${\nuser\n}\n!\n`\n}\n</\nh1\n>\n\n\n<\nComponent2\n\n/>\n\n\n</\nUserContext.Provider\n>\n\n\n)\n;\n\n\n}\n\n\n\nfunction\n\nComponent2\n(\n)\n\n{\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 2\n</\nh1\n>\n\n\n<\nComponent3\n\n/>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nfunction\n\nComponent3\n(\n)\n\n{\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 3\n</\nh1\n>\n\n\n<\nComponent4\n\n/>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nfunction\n\nComponent4\n(\n)\n\n{\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 4\n</\nh1\n>\n\n\n<\nComponent5\n\n/>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nfunction\n\nComponent5\n(\n)\n\n{\n\n\nconst\nuser\n=\n\nuseContext\n(\nUserContext\n)\n;\n\n\n\nreturn\n\n(\n\n\n<\n>\n\n\n<\nh1\n>\nComponent 5\n</\nh1\n>\n\n\n<\nh2\n>\n{\n`\nHello\n${\nuser\n}\nagain!\n`\n}\n</\nh2\n>\n\n\n</\n>\n\n\n)\n;\n\n\n}\n\n\n\nconst\nroot\n=\nReactDOM\n.\ncreateRoot\n(\ndocument\n.\ngetElementById\n(\n'root'\n)\n)\n;\n\nroot\n.\nrender\n(\n<\nComponent1\n\n/>\n)\n;",
+      "language": "html",
+      "code_html": "<pre class=\"w3-white language-jsx\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> useState<span class=\"token punctuation\">,</span> createContext<span class=\"token punctuation\">,</span> useContext <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react\"</span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> ReactDOM <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">\"react-dom/client\"</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-const\">const</span> UserContext <span class=\"token operator\">=</span> <span class=\"token function\">createContext</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component1</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> <span class=\"token punctuation\">[</span>user<span class=\"token punctuation\">,</span> setUser<span class=\"token punctuation\">]</span> <span class=\"token operator\">=</span> <span class=\"token function\">useState</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Jesse Hall\"</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">UserContext.Provider</span></span> <span class=\"token attr-name\">value</span><span class=\"token script language-javascript\"><span class=\"token script-punctuation punctuation\">=</span><span class=\"token punctuation\">{</span>user<span class=\"token punctuation\">}</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span><span class=\"token template-string\"><span class=\"token template-punctuation string\">`</span><span class=\"token string\">Hello </span><span class=\"token interpolation\"><span class=\"token interpolation-punctuation punctuation\">${</span>user<span class=\"token interpolation-punctuation punctuation\">}</span></span><span class=\"token string\">!</span><span class=\"token template-punctuation string\">`</span></span><span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component2</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span><span class=\"token class-name\">UserContext.Provider</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component2</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 2</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component3</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component3</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 3</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component4</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component4</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 4</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component5</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-function\">function</span> <span class=\"token function\">Component5</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-const\">const</span> user <span class=\"token operator\">=</span> <span class=\"token function\">useContext</span><span class=\"token punctuation\">(</span>UserContext<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">(</span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">Component 5</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h1</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n      </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">{</span><span class=\"token template-string\"><span class=\"token template-punctuation string\">`</span><span class=\"token string\">Hello </span><span class=\"token interpolation\"><span class=\"token interpolation-punctuation punctuation\">${</span>user<span class=\"token interpolation-punctuation punctuation\">}</span></span><span class=\"token string\"> again!</span><span class=\"token template-punctuation string\">`</span></span><span class=\"token punctuation\">}</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h2</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token plain-text\">\n    </span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-const\">const</span> root <span class=\"token operator\">=</span> ReactDOM<span class=\"token punctuation\">.</span><span class=\"token function\">createRoot</span><span class=\"token punctuation\">(</span>document<span class=\"token punctuation\">.</span><span class=\"token function\">getElementById</span><span class=\"token punctuation\">(</span><span class=\"token string\">'root'</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\nroot<span class=\"token punctuation\">.</span><span class=\"token function\">render</span><span class=\"token punctuation\">(</span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Component1</span></span> <span class=\"token punctuation\">/&gt;</span></span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span></code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": false
+    }
+  ]
+}

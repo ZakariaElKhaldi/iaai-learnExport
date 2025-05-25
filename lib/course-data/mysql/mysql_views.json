@@ -1,0 +1,1425 @@
+{
+  "title": "MySQL CREATE VIEW, REPLACE VIEW, DROP VIEW Statements",
+  "url": "https://www.w3schools.com/mysql/mysql_view.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "MySQL Views",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL CREATE VIEW Statement",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In SQL, a view is a virtual table based on the result-set of an SQL statement.",
+      "html": "<p>In SQL, a view is a virtual table based on the result-set of an SQL statement.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.",
+      "html": "<p>A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "You can add SQL statements and functions to a view and present the data as if the data were coming from one single table.",
+      "html": "<p>You can add SQL statements and functions to a view and present the data as if the data were coming from one single table.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A view is created with the CREATE VIEW statement.",
+      "html": "<p>A view is created with the <code>CREATE VIEW</code> statement.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "CREATE VIEW Syntax",
+      "level": "h3"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nCREATE VIEW view_name AS\nSELECT column1, column2, ...\nFROM table_name\nWHERE condition; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "CREATE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "VIEW",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "AS",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "CREATE VIEW view_name AS\nSELECT column1, column2, ...\nFROM table_name\nWHERE condition;",
+      "syntax_highlighting": [
+        {
+          "text": "\nCREATE VIEW view_name AS\nSELECT column1, column2, ...\nFROM table_name\nWHERE condition; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "CREATE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "VIEW",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "AS",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">CREATE</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">VIEW</span> <em>view_name</em> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">AS</span><br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> <em>column1</em>, <em>column2</em>, ...<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> <em>table_name</em><br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> <em>condition</em>; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nCREATE VIEW view_name AS\nSELECT column1, column2, ...\nFROM table_name\nWHERE condition; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "CREATE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "VIEW",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "AS",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: A view always shows up-to-date data! The database engine recreates the view, every time a user queries it.",
+      "html": "<p><b>Note:</b> A view always shows up-to-date data! The database engine recreates the \nview, every time a user queries it.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL CREATE VIEW Examples",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following SQL creates a view that shows all customers from Brazil:",
+      "html": "<p>The following SQL creates a view that shows all customers from Brazil:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nCREATE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName\nFROM Customers\nWHERE Country = 'Brazil'; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "CREATE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "VIEW",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "AS",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "'Brazil'",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "CREATE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName\nFROM Customers\nWHERE Country = 'Brazil';",
+      "syntax_highlighting": [
+        {
+          "text": "\nCREATE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName\nFROM Customers\nWHERE Country = 'Brazil'; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "CREATE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "VIEW",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "AS",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "'Brazil'",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">CREATE</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">VIEW</span> [Brazil Customers] <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">AS</span><br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> CustomerName, ContactName<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Customers<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> Country = <span class=\"sqlstringcolor\" style=\"color:green\">'Brazil'</span>; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nCREATE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName\nFROM Customers\nWHERE Country = 'Brazil'; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "CREATE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "VIEW",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "AS",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "'Brazil'",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can query the view above as follows:",
+      "html": "<p>We can query the view above as follows:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM [Brazil Customers]; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM [Brazil Customers];",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM [Brazil Customers]; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> [Brazil Customers]; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM [Brazil Customers]; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following SQL creates a view that selects every product in the \"Products\" table with a price higher than the average price:",
+      "html": "<p>The following SQL creates a view that selects every product in the \"Products\" table with a price higher than the average price:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nCREATE VIEW [Products Above Average Price] AS\nSELECT ProductName, Price\nFROM Products\nWHERE Price > (SELECT AVG(Price) FROM Products); ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "CREATE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "VIEW",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "AS",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "CREATE VIEW [Products Above Average Price] AS\nSELECT ProductName, Price\nFROM Products\nWHERE Price > (SELECT AVG(Price) FROM Products);",
+      "syntax_highlighting": [
+        {
+          "text": "\nCREATE VIEW [Products Above Average Price] AS\nSELECT ProductName, Price\nFROM Products\nWHERE Price > (SELECT AVG(Price) FROM Products); ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "CREATE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "VIEW",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "AS",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">CREATE</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">VIEW</span> [Products Above Average Price] <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">AS</span><br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> ProductName, Price<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Products<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> Price &gt; (<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> AVG(Price) <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Products); </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nCREATE VIEW [Products Above Average Price] AS\nSELECT ProductName, Price\nFROM Products\nWHERE Price > (SELECT AVG(Price) FROM Products); ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "CREATE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "VIEW",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "AS",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can query the view above as follows:",
+      "html": "<p>We can query the view above as follows:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nSELECT * FROM [Products Above Average Price]; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "SELECT * FROM [Products Above Average Price];",
+      "syntax_highlighting": [
+        {
+          "text": "\nSELECT * FROM [Products Above Average Price]; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> * <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> [Products Above Average Price]; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nSELECT * FROM [Products Above Average Price]; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL Updating a View",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A view can be updated with the CREATE OR REPLACE VIEW statement.",
+      "html": "<p>A view can be updated with the <code>CREATE OR REPLACE VIEW</code> statement.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "CREATE OR REPLACE VIEW Syntax",
+      "level": "h3"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nCREATE OR REPLACE VIEW view_name AS\nSELECT column1, column2, ...\nFROM table_name\nWHERE condition; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "CREATE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "OR",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "REPLACE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "VIEW",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "AS",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "CREATE OR REPLACE VIEW view_name AS\nSELECT column1, column2, ...\nFROM table_name\nWHERE condition;",
+      "syntax_highlighting": [
+        {
+          "text": "\nCREATE OR REPLACE VIEW view_name AS\nSELECT column1, column2, ...\nFROM table_name\nWHERE condition; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "CREATE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "OR",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "REPLACE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "VIEW",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "AS",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">CREATE</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">OR</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">REPLACE</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">VIEW</span> <em>view_name</em> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">AS</span><br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> <em>column1</em>, <em>column2</em>, ...<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> <em>table_name</em><br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> <em>condition</em>; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nCREATE OR REPLACE VIEW view_name AS\nSELECT column1, column2, ...\nFROM table_name\nWHERE condition; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "CREATE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "OR",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "REPLACE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "VIEW",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "AS",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following SQL adds the \"City\" column to the \"Brazil Customers\" view:",
+      "html": "<p>The following SQL adds the \"City\" column to the \"Brazil Customers\" view:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "sql",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nCREATE OR REPLACE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName, City\nFROM Customers\nWHERE Country = 'Brazil'; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "CREATE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "OR",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "REPLACE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "VIEW",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "AS",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "SELECT",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "FROM",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "WHERE",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "'Brazil'",
+            "color": "rgb(0, 128, 0)",
+            "class": "sqlstringcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "CREATE OR REPLACE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName, City\nFROM Customers\nWHERE Country = 'Brazil';",
+      "syntax_highlighting": [
+        {
+          "text": "\nCREATE OR REPLACE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName, City\nFROM Customers\nWHERE Country = 'Brazil'; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "CREATE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "OR",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "REPLACE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "VIEW",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "AS",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "SELECT",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "FROM",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "WHERE",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "'Brazil'",
+          "color": "green",
+          "class": [
+            "sqlstringcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">CREATE</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">OR</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">REPLACE</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">VIEW</span> [Brazil Customers] <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">AS</span><br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">SELECT</span> CustomerName, ContactName, City<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">FROM</span> Customers<br/>\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">WHERE</span> Country = <span class=\"sqlstringcolor\" style=\"color:green\">'Brazil'</span>; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nCREATE OR REPLACE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName, City\nFROM Customers\nWHERE Country = 'Brazil'; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "CREATE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "OR",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "REPLACE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "VIEW",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "AS",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "SELECT",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "FROM",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "WHERE",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "'Brazil'",
+          "color": "rgb(0, 128, 0)",
+          "class": "sqlstringcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "MySQL Dropping a View",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A view is deleted with the DROP VIEW statement.",
+      "html": "<p>A view is deleted with the <code>DROP VIEW</code> statement.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "DROP VIEW Syntax",
+      "level": "h3"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nDROP VIEW view_name; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "DROP",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "VIEW",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "DROP VIEW view_name;",
+      "syntax_highlighting": [
+        {
+          "text": "\nDROP VIEW view_name; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "DROP",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "VIEW",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">DROP</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">VIEW</span> <em>view_name</em>; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nDROP VIEW view_name; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "DROP",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "VIEW",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following SQL drops the \"Brazil Customers\" view:",
+      "html": "<p>The following SQL drops the \"Brazil Customers\" view:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\nDROP VIEW [Brazil Customers]; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "sqlcolor"
+          },
+          {
+            "text": "DROP",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          },
+          {
+            "text": "VIEW",
+            "color": "rgb(0, 92, 197)",
+            "class": "sqlkeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "sqlHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "DROP VIEW [Brazil Customers];",
+      "syntax_highlighting": [
+        {
+          "text": "\nDROP VIEW [Brazil Customers]; ",
+          "color": "black",
+          "class": [
+            "sqlcolor"
+          ]
+        },
+        {
+          "text": "DROP",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        },
+        {
+          "text": "VIEW",
+          "color": "#005cc5",
+          "class": [
+            "sqlkeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate sqlHigh\"><span class=\"sqlcolor\" style=\"color:black\">\n<span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">DROP</span> <span class=\"sqlkeywordcolor\" style=\"color:#005cc5\">VIEW</span> [Brazil Customers]; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\nDROP VIEW [Brazil Customers]; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "sqlcolor"
+        },
+        {
+          "text": "DROP",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        },
+        {
+          "text": "VIEW",
+          "color": "rgb(0, 92, 197)",
+          "class": "sqlkeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "sqlHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise ? What is this? Test your skills by answering a few questions about the topics of this page",
+      "level": "h2"
+    },
+    {
+      "type": "page_quiz",
+      "metadata": {
+        "type": "quiz",
+        "question": "Exercise?What is this?Test your skills by answering a few questions about the topics of this page",
+        "options": [],
+        "formAction": "exercise.asp?x=xrcise_view1"
+      },
+      "quiz_type": "quiz",
+      "question": "Exercise?What is this?Test your skills by answering a few questions about the topics of this page",
+      "options": [],
+      "form_action": "exercise.asp?x=xrcise_view1",
+      "html": "<form action=\"exercise.asp?x=xrcise_view1\" method=\"post\" rel=\"opener\" target=\"_blank\"><input id=\"formanswer\" name=\"formanswer\" type=\"hidden\"/><br/><br/><button class=\"ws-btn\" onclick=\"fill_dd_formanswer()\" type=\"submit\">Submit Answer \u00bb</button></form>"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "title": "Django Admin - Set Fields to Display",
+  "url": "https://www.w3schools.com/django/django_admin_set_list_display.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Django Admin - Set Fields to Display",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Make the List Display More Reader-Friendly",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When you display a Model as a list, Django displays each record as the string representation of the record object, which in our case is \"Member object (1)\", \"Member object(2)\" etc.:",
+      "html": "<p>When you display a Model as a list, Django displays each record as the string representation of the record object,\nwhich in our case is \"Member object (1)\", \"Member object(2)\" etc.:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To change this to a more reader-friendly format, we have two choices:",
+      "html": "<p>To change this to a more reader-friendly format, we have two choices:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Change the String Representation Function",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To change the string representation, we have to define the __str__() function of the Member Model in models.py , like this:",
+      "html": "<p>To change the string representation, we have to define the\n<code>__str__()</code> function of the Member Model\nin <code>models.py</code>, like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": true
+      },
+      "code": "from\ndjango\n.\ndb\nimport\nmodels\n\n\nclass\n\nMember\n(\nmodels\n.\nModel\n)\n:\n\nfirstname\n=\nmodels\n.\nCharField\n(\nmax_length\n=\n255\n)\n\nlastname\n=\nmodels\n.\nCharField\n(\nmax_length\n=\n255\n)\n\nphone\n=\nmodels\n.\nIntegerField\n(\nnull\n=\nTrue\n)\n\njoined_date\n=\nmodels\n.\nDateField\n(\nnull\n=\nTrue\n)\n\n\ndef\n__str__\n(\nself\n)\n:\n\n\nreturn\nf\n\"{self.firstname} {self.lastname}\"",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-jsx\" data-line=\"9,10\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-from\">from</span> django<span class=\"token punctuation\">.</span>db <span class=\"token keyword keyword-import\">import</span> models\n\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Member</span><span class=\"token punctuation\">(</span>models<span class=\"token punctuation\">.</span>Model<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n  firstname <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">CharField</span><span class=\"token punctuation\">(</span>max_length<span class=\"token operator\">=</span><span class=\"token number\">255</span><span class=\"token punctuation\">)</span>\n  lastname <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">CharField</span><span class=\"token punctuation\">(</span>max_length<span class=\"token operator\">=</span><span class=\"token number\">255</span><span class=\"token punctuation\">)</span>\n  phone <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">IntegerField</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-null\">null</span><span class=\"token operator\">=</span>True<span class=\"token punctuation\">)</span>\n  joined_date <span class=\"token operator\">=</span> models<span class=\"token punctuation\">.</span><span class=\"token function\">DateField</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-null\">null</span><span class=\"token operator\">=</span>True<span class=\"token punctuation\">)</span>\n\n  def <span class=\"token function\">__str__</span><span class=\"token punctuation\">(</span>self<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n    <span class=\"token keyword keyword-return\">return</span> f<span class=\"token string\">\"{self.firstname} {self.lastname}\"</span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"9\" data-start=\"9\" style=\"top: 176px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"10\" data-start=\"10\" style=\"top: 198px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which gives us this result:",
+      "html": "<p>Which gives us this result:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Python object tutorial",
+          "href": "https://www.w3schools.com/python_classes.asp",
+          "title": ""
+        }
+      ],
+      "text": "Defining our own __str__() function is not a Django feature, it is how to change the string representation of objects in Python. Read more about Python objects in our Python object tutorial .",
+      "html": "<p>Defining our own <code>__str__()</code> function is not a Django feature,\nit is how to change the string representation of objects in Python.\nRead more about Python objects in our <a href=\"/python_classes.asp\">Python object tutorial</a>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Set list_display",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We can control the fields to display by specifying them in a list_display property in the admin.py file.",
+      "html": "<p>We can control the fields to display by specifying them in a \n<code>list_display</code> property in the <code>admin.py</code> file.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "First create a MemberAdmin() class and specify the list_display tuple, like this:",
+      "html": "<p>First create a <code>MemberAdmin()</code> class and specify the\n<code>list_display</code> tuple, like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "python",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-jsx"
+        ],
+        "isNotranslate": true
+      },
+      "code": "from\ndjango\n.\ncontrib\nimport\nadmin\n\nfrom\n\n.\nmodels\nimport\nMember\n\n# Register your models here\n.\n\n\n\nclass\n\nMemberAdmin\n(\nadmin\n.\nModelAdmin\n)\n:\n\nlist_display\n=\n\n(\n\"firstname\"\n,\n\n\"lastname\"\n,\n\n\"joined_date\"\n,\n)\n\n\nadmin\n.\nsite\n.\nregister\n(\nMember\n,\nMemberAdmin\n)",
+      "language": "python",
+      "code_html": "<pre class=\"notranslate w3-white language-jsx\" data-line=\"6,7,8,9\" tabindex=\"0\"><code class=\"language-jsx\"><span class=\"token keyword keyword-from\">from</span> django<span class=\"token punctuation\">.</span>contrib <span class=\"token keyword keyword-import\">import</span> admin\n<span class=\"token keyword keyword-from\">from</span> <span class=\"token punctuation\">.</span>models <span class=\"token keyword keyword-import\">import</span> Member\n\n# Register your models here<span class=\"token punctuation\">.</span>\n\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">MemberAdmin</span><span class=\"token punctuation\">(</span>admin<span class=\"token punctuation\">.</span>ModelAdmin<span class=\"token punctuation\">)</span><span class=\"token operator\">:</span>\n  list_display <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token string\">\"firstname\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"lastname\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"joined_date\"</span><span class=\"token punctuation\">,</span><span class=\"token punctuation\">)</span>\n  \nadmin<span class=\"token punctuation\">.</span>site<span class=\"token punctuation\">.</span><span class=\"token function\">register</span><span class=\"token punctuation\">(</span>Member<span class=\"token punctuation\">,</span> MemberAdmin<span class=\"token punctuation\">)</span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"6\" data-start=\"6\" style=\"top: 110px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"7\" data-start=\"7\" style=\"top: 132px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"8\" data-start=\"8\" style=\"top: 154px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"9\" data-start=\"9\" style=\"top: 176px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-jsx"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Remember to add the MemberAdmin as an argumet in the admin.site.register(Member, MemberAdmin) .",
+      "html": "<p>Remember to add the MemberAdmin as an argumet in the <code>admin.site.register(Member, MemberAdmin)</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Now go back to the browser and you should get this result:",
+      "html": "<p>Now go back to the browser and you should get this result:</p>"
+    }
+  ]
+}

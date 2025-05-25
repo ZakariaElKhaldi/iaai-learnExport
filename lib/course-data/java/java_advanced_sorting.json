@@ -1,0 +1,572 @@
+{
+  "title": "Java Advanced Sorting (Comparator and Comparable)",
+  "url": "https://www.w3schools.com/java/java_advanced_sorting.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Java Advanced Sorting (Comparator and Comparable)",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Java Advanced Sorting",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "List Sorting Chapter",
+          "href": "https://www.w3schools.com/java_sort_list.asp",
+          "title": ""
+        }
+      ],
+      "text": "In the List Sorting Chapter , you learned how to sort lists alphabetically and numerically, but what if the list has objects in it?",
+      "html": "<p>In the <a href=\"java_sort_list.asp\">List Sorting Chapter</a>, you learned how to sort lists alphabetically and numerically, but what if the list has objects in it?</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To sort objects you need to specify a rule that decides how objects should be sorted. For example, if you have a list of cars you might want to sort them by year, the rule could be that cars with an earlier year go first.",
+      "html": "<p>To sort objects you need to specify a rule that decides how objects should be sorted. For example, if you have a list of cars you might want to sort them by year, the rule could be that cars with an earlier year go first.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Comparator and Comparable interfaces allow you to specify what rule is used to sort objects.",
+      "html": "<p>The <code>Comparator</code> and <code>Comparable</code> interfaces allow you to specify what rule is used to sort objects.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Being able to specify a sorting rule also allows you to change how strings and numbers are sorted.",
+      "html": "<p>Being able to specify a sorting rule also allows you to change how strings and numbers are sorted.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Comparators",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "An object that implements the Comparator interface is called a comparator.",
+      "html": "<p>An object that implements the <code>Comparator</code> interface is called a comparator.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Comparator interface allows you to create a class with a compare() method that compares two objects to decide which one should go first in a list.",
+      "html": "<p>The <code>Comparator</code> interface allows you to create a class with a <code>compare()</code> method that compares two objects to decide which one should go first in a list.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The compare() method should return a number which is:",
+      "html": "<p>The <code>compare()</code> method should return a number which is:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A class that implements the Comparator interface might look something like this:",
+      "html": "<p>A class that implements the <code>Comparator</code> interface might look something like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "// Sort Car objects by year\n\n\nclass\n\nSortByYear\n\nimplements\n\nComparator\n\n{\n\n\npublic\n\nint\n\ncompare\n(\nObject\nobj1\n,\n\nObject\nobj2\n)\n\n{\n\n\n// Make sure that the objects are Car objects\n\n\nCar\na\n=\n\n(\nCar\n)\nobj1\n;\n\n\nCar\nb\n=\n\n(\nCar\n)\nobj2\n;\n\n\n\n// Compare the objects\n\n\nif\n\n(\na\n.\nyear\n<\nb\n.\nyear\n)\n\nreturn\n\n-\n1\n;\n\n// The first car has a smaller year\n\n\nif\n\n(\na\n.\nyear\n>\nb\n.\nyear\n)\n\nreturn\n\n1\n;\n\n// The first car has a larger year\n\n\nreturn\n\n0\n;\n\n// Both cars have the same year\n\n\n}\n\n\n}",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token comment\">// Sort Car objects by year</span>\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">SortByYear</span> <span class=\"token keyword keyword-implements\">implements</span> <span class=\"token class-name\">Comparator</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-int\">int</span> <span class=\"token function\">compare</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">Object</span> obj1<span class=\"token punctuation\">,</span> <span class=\"token class-name\">Object</span> obj2<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token comment\">// Make sure that the objects are Car objects</span>\n    <span class=\"token class-name\">Car</span> a <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">)</span> obj1<span class=\"token punctuation\">;</span>\n    <span class=\"token class-name\">Car</span> b <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">)</span> obj2<span class=\"token punctuation\">;</span>\n    \n    <span class=\"token comment\">// Compare the objects</span>\n    <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">&lt;</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// The first car has a smaller year</span>\n    <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">&gt;</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>  <span class=\"token comment\">// The first car has a larger year</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// Both cars have the same year</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To use the comparator, pass it as an argument into a sorting method:",
+      "html": "<p>To use the comparator, pass it as an argument into a sorting method:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "// Use a comparator to sort the cars\n\n\nComparator\nmyComparator\n=\n\nnew\n\nSortByYear\n(\n)\n;\n\n\nCollections\n.\nsort\n(\nmyCars\n,\nmyComparator\n)\n;",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token comment\">// Use a comparator to sort the cars</span>\n<span class=\"token class-name\">Comparator</span> myComparator <span class=\"token operator\">=</span> <span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">SortByYear</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n<span class=\"token class-name\">Collections</span><span class=\"token punctuation\">.</span><span class=\"token function\">sort</span><span class=\"token punctuation\">(</span>myCars<span class=\"token punctuation\">,</span> myComparator<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here is a complete example using a comparator to sort a list of cars by year:",
+      "html": "<p>Here is a complete example using a comparator to sort a list of cars by year:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_comparator",
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\njava\n.\nutil\n.\nArrayList\n;\n\n\nimport\n\njava\n.\nutil\n.\nCollections\n;\n\n\nimport\n\njava\n.\nutil\n.\nComparator\n;\n\n\n\n// Define a Car class\n\n\nclass\n\nCar\n\n{\n\n\npublic\n\nString\nbrand\n;\n\n\npublic\n\nString\nmodel\n;\n\n\npublic\n\nint\nyear\n;\n\n\n\npublic\n\nCar\n(\nString\nb\n,\n\nString\nm\n,\n\nint\ny\n)\n\n{\n\nbrand\n=\nb\n;\n\nmodel\n=\nm\n;\n\nyear\n=\ny\n;\n\n\n}\n\n\n}\n\n\n\n// Create a comparator\n\n\nclass\n\nSortByYear\n\nimplements\n\nComparator\n\n{\n\n\npublic\n\nint\n\ncompare\n(\nObject\nobj1\n,\n\nObject\nobj2\n)\n\n{\n\n\n// Make sure that the objects are Car objects\n\n\nCar\na\n=\n\n(\nCar\n)\nobj1\n;\n\n\nCar\nb\n=\n\n(\nCar\n)\nobj2\n;\n\n\n\n// Compare the year of both objects\n\n\nif\n\n(\na\n.\nyear\n<\nb\n.\nyear\n)\n\nreturn\n\n-\n1\n;\n\n// The first car has a smaller year\n\n\nif\n\n(\na\n.\nyear\n>\nb\n.\nyear\n)\n\nreturn\n\n1\n;\n\n// The first car has a larger year\n\n\nreturn\n\n0\n;\n\n// Both cars have the same year\n\n\n}\n\n\n}\n\n\n\npublic\n\nclass\n\nMain\n\n{\n\n\npublic\n\nstatic\n\nvoid\n\nmain\n(\nString\n[\n]\nargs\n)\n\n{\n\n\n// Create a list of cars\n\n\nArrayList\n<\nCar\n>\nmyCars\n=\n\nnew\n\nArrayList\n<\nCar\n>\n(\n)\n;\n\nmyCars\n.\nadd\n(\nnew\n\nCar\n(\n\"BMW\"\n,\n\n\"X5\"\n,\n\n1999\n)\n)\n;\n\nmyCars\n.\nadd\n(\nnew\n\nCar\n(\n\"Honda\"\n,\n\n\"Accord\"\n,\n\n2006\n)\n)\n;\n\nmyCars\n.\nadd\n(\nnew\n\nCar\n(\n\"Ford\"\n,\n\n\"Mustang\"\n,\n\n1970\n)\n)\n;\n\n\n\n// Use a comparator to sort the cars\n\n\nComparator\nmyComparator\n=\n\nnew\n\nSortByYear\n(\n)\n;\n\n\nCollections\n.\nsort\n(\nmyCars\n,\nmyComparator\n)\n;\n\n\n\n// Display the cars\n\n\nfor\n\n(\nCar\nc\n:\nmyCars\n)\n\n{\n\n\nSystem\n.\nout\n.\nprintln\n(\nc\n.\nbrand\n+\n\n\" \"\n\n+\nc\n.\nmodel\n+\n\n\" \"\n\n+\nc\n.\nyear\n)\n;\n\n\n}\n\n\n}\n\n\n}",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">ArrayList</span></span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">Collections</span></span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">Comparator</span></span><span class=\"token punctuation\">;</span>\n\n<span class=\"token comment\">// Define a Car class</span>\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Car</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token class-name\">String</span> brand<span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token class-name\">String</span> model<span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-int\">int</span> year<span class=\"token punctuation\">;</span>\n  \n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token class-name\">Car</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">String</span> b<span class=\"token punctuation\">,</span> <span class=\"token class-name\">String</span> m<span class=\"token punctuation\">,</span> <span class=\"token keyword keyword-int\">int</span> y<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    brand <span class=\"token operator\">=</span> b<span class=\"token punctuation\">;</span>\n    model <span class=\"token operator\">=</span> m<span class=\"token punctuation\">;</span>\n    year <span class=\"token operator\">=</span> y<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token comment\">// Create a comparator</span>\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">SortByYear</span> <span class=\"token keyword keyword-implements\">implements</span> <span class=\"token class-name\">Comparator</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-int\">int</span> <span class=\"token function\">compare</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">Object</span> obj1<span class=\"token punctuation\">,</span> <span class=\"token class-name\">Object</span> obj2<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token comment\">// Make sure that the objects are Car objects</span>\n    <span class=\"token class-name\">Car</span> a <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">)</span> obj1<span class=\"token punctuation\">;</span>\n    <span class=\"token class-name\">Car</span> b <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">)</span> obj2<span class=\"token punctuation\">;</span>\n    \n    <span class=\"token comment\">// Compare the year of both objects</span>\n    <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">&lt;</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// The first car has a smaller year</span>\n    <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">&gt;</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>  <span class=\"token comment\">// The first car has a larger year</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// Both cars have the same year</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Main</span> <span class=\"token punctuation\">{</span> \n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-static\">static</span> <span class=\"token keyword keyword-void\">void</span> <span class=\"token function\">main</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">String</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> args<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span> \n    <span class=\"token comment\">// Create a list of cars</span>\n    <span class=\"token class-name\">ArrayList</span><span class=\"token generics\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">&gt;</span></span> myCars <span class=\"token operator\">=</span> <span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">ArrayList</span><span class=\"token generics\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>    \n    myCars<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Car</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"BMW\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"X5\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1999</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myCars<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Car</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Honda\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"Accord\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2006</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myCars<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Car</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Ford\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"Mustang\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1970</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Use a comparator to sort the cars</span>\n    <span class=\"token class-name\">Comparator</span> myComparator <span class=\"token operator\">=</span> <span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">SortByYear</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token class-name\">Collections</span><span class=\"token punctuation\">.</span><span class=\"token function\">sort</span><span class=\"token punctuation\">(</span>myCars<span class=\"token punctuation\">,</span> myComparator<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Display the cars</span>\n    <span class=\"token keyword keyword-for\">for</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span> c <span class=\"token operator\">:</span> myCars<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token class-name\">System</span><span class=\"token punctuation\">.</span>out<span class=\"token punctuation\">.</span><span class=\"token function\">println</span><span class=\"token punctuation\">(</span>c<span class=\"token punctuation\">.</span>brand <span class=\"token operator\">+</span> <span class=\"token string\">\" \"</span> <span class=\"token operator\">+</span> c<span class=\"token punctuation\">.</span>model <span class=\"token operator\">+</span> <span class=\"token string\">\" \"</span> <span class=\"token operator\">+</span> c<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span> \n<span class=\"token punctuation\">}</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_comparator",
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Using a Lambda Expression",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To make the code shorter, the comparator can be replaced with a lambda expression which has the same arguments and return value as the compare() method:",
+      "html": "<p>To make the code shorter, the comparator can be replaced with a lambda expression which has the same arguments and return value as the <code>compare()</code> method:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_comparator_lambda",
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "Collections\n.\nsort\n(\nmyCars\n,\n\n(\nobj1\n,\nobj2\n)\n\n->\n\n{\n\n\nCar\na\n=\n\n(\nCar\n)\nobj1\n;\n\n\nCar\nb\n=\n\n(\nCar\n)\nobj2\n;\n\n\nif\n\n(\na\n.\nyear\n<\nb\n.\nyear\n)\n\nreturn\n\n-\n1\n;\n\n\nif\n\n(\na\n.\nyear\n>\nb\n.\nyear\n)\n\nreturn\n\n1\n;\n\n\nreturn\n\n0\n;\n\n\n}\n)\n;",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token class-name\">Collections</span><span class=\"token punctuation\">.</span><span class=\"token function\">sort</span><span class=\"token punctuation\">(</span>myCars<span class=\"token punctuation\">,</span> <span class=\"token punctuation\">(</span>obj1<span class=\"token punctuation\">,</span> obj2<span class=\"token punctuation\">)</span> <span class=\"token operator\">-&gt;</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token class-name\">Car</span> a <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">)</span> obj1<span class=\"token punctuation\">;</span>\n  <span class=\"token class-name\">Car</span> b <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">)</span> obj2<span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">&lt;</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">&gt;</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n<span class=\"token punctuation\">}</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_comparator_lambda",
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Special Sorting Rules",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Comparators can also be used to make special sorting rules for strings and numbers. In this example we use a comparator to list all of the even numbers before the odd ones:",
+      "html": "<p>Comparators can also be used to make special sorting rules for strings and numbers. In this example we use a comparator to list all of the even numbers before the odd ones:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_comparator_numbers",
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\njava\n.\nutil\n.\nArrayList\n;\n\n\nimport\n\njava\n.\nutil\n.\nCollections\n;\n\n\nimport\n\njava\n.\nutil\n.\nComparator\n;\n\n\n\nclass\n\nSortEvenFirst\n\nimplements\n\nComparator\n\n{\n\n\npublic\n\nint\n\ncompare\n(\nObject\nobj1\n,\n\nObject\nobj2\n)\n\n{\n\n\n// Make sure the objects are integers\n\n\nInteger\na\n=\n\n(\nInteger\n)\nobj1\n;\n\n\nInteger\nb\n=\n\n(\nInteger\n)\nobj2\n;\n\n\n\n// Check each number to see if it is even\n\n\n// A number is even if the remainder when dividing by 2 is 0\n\n\nboolean\naIsEven\n=\n\n(\na\n%\n\n2\n)\n\n==\n\n0\n;\n\n\nboolean\nbIsEven\n=\n\n(\nb\n%\n\n2\n)\n\n==\n\n0\n;\n\n\n\nif\n\n(\naIsEven\n==\nbIsEven\n)\n\n{\n\n\n\n// If both numbers are even or both are odd then use normal sorting rules\n\n\nif\n\n(\na\n<\nb\n)\n\nreturn\n\n-\n1\n;\n\n\nif\n\n(\na\n>\nb\n)\n\nreturn\n\n1\n;\n\n\nreturn\n\n0\n;\n\n\n\n}\n\nelse\n\n{\n\n\n\n// If a is even then it goes first, otherwise b goes first\n\n\nif\n\n(\naIsEven\n)\n\n{\n\n\nreturn\n\n-\n1\n;\n\n\n}\n\nelse\n\n{\n\n\nreturn\n\n1\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n}\n\n\n\npublic\n\nclass\n\nMain\n\n{\n\n\npublic\n\nstatic\n\nvoid\n\nmain\n(\nString\n[\n]\nargs\n)\n\n{\n\n\nArrayList\n<\nInteger\n>\nmyNumbers\n=\n\nnew\n\nArrayList\n<\nInteger\n>\n(\n)\n;\n\nmyNumbers\n.\nadd\n(\n33\n)\n;\n\nmyNumbers\n.\nadd\n(\n15\n)\n;\n\nmyNumbers\n.\nadd\n(\n20\n)\n;\n\nmyNumbers\n.\nadd\n(\n34\n)\n;\n\nmyNumbers\n.\nadd\n(\n8\n)\n;\n\nmyNumbers\n.\nadd\n(\n12\n)\n;\n\n\n\nComparator\nmyComparator\n=\n\nnew\n\nSortEvenFirst\n(\n)\n;\n\n\nCollections\n.\nsort\n(\nmyNumbers\n,\nmyComparator\n)\n;\n\n\n\nfor\n\n(\nint\ni\n:\nmyNumbers\n)\n\n{\n\n\nSystem\n.\nout\n.\nprintln\n(\ni\n)\n;\n\n\n}\n\n\n}\n\n\n}",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">ArrayList</span></span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">Collections</span></span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">Comparator</span></span><span class=\"token punctuation\">;</span>\n\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">SortEvenFirst</span> <span class=\"token keyword keyword-implements\">implements</span> <span class=\"token class-name\">Comparator</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-int\">int</span> <span class=\"token function\">compare</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">Object</span> obj1<span class=\"token punctuation\">,</span> <span class=\"token class-name\">Object</span> obj2<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token comment\">// Make sure the objects are integers</span>\n    <span class=\"token class-name\">Integer</span> a <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Integer</span><span class=\"token punctuation\">)</span>obj1<span class=\"token punctuation\">;</span>\n    <span class=\"token class-name\">Integer</span> b <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Integer</span><span class=\"token punctuation\">)</span>obj2<span class=\"token punctuation\">;</span>\n    \n    <span class=\"token comment\">// Check each number to see if it is even</span>\n    <span class=\"token comment\">// A number is even if the remainder when dividing by 2 is 0</span>\n    <span class=\"token keyword keyword-boolean\">boolean</span> aIsEven <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span>a <span class=\"token operator\">%</span> <span class=\"token number\">2</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">==</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n    <span class=\"token keyword keyword-boolean\">boolean</span> bIsEven <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span>b <span class=\"token operator\">%</span> <span class=\"token number\">2</span><span class=\"token punctuation\">)</span> <span class=\"token operator\">==</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n    \n    <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>aIsEven <span class=\"token operator\">==</span> bIsEven<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    \n      <span class=\"token comment\">// If both numbers are even or both are odd then use normal sorting rules</span>\n      <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a <span class=\"token operator\">&lt;</span> b<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n      <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a <span class=\"token operator\">&gt;</span> b<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n      <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span>\n      \n    <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n    \n      <span class=\"token comment\">// If a is even then it goes first, otherwise b goes first</span>\n      <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>aIsEven<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      \t<span class=\"token keyword keyword-return\">return</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Main</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-static\">static</span> <span class=\"token keyword keyword-void\">void</span> <span class=\"token function\">main</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">String</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> args<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token class-name\">ArrayList</span><span class=\"token generics\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Integer</span><span class=\"token punctuation\">&gt;</span></span> myNumbers <span class=\"token operator\">=</span> <span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">ArrayList</span><span class=\"token generics\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Integer</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myNumbers<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token number\">33</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myNumbers<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token number\">15</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myNumbers<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token number\">20</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myNumbers<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token number\">34</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myNumbers<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token number\">8</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myNumbers<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token number\">12</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token class-name\">Comparator</span> myComparator <span class=\"token operator\">=</span> <span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">SortEvenFirst</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token class-name\">Collections</span><span class=\"token punctuation\">.</span><span class=\"token function\">sort</span><span class=\"token punctuation\">(</span>myNumbers<span class=\"token punctuation\">,</span> myComparator<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token keyword keyword-for\">for</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-int\">int</span> i <span class=\"token operator\">:</span> myNumbers<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token class-name\">System</span><span class=\"token punctuation\">.</span>out<span class=\"token punctuation\">.</span><span class=\"token function\">println</span><span class=\"token punctuation\">(</span>i<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_comparator_numbers",
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "The Comparable Interface",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Comparable interface allows an object to specify its own sorting rule with a compareTo() method.",
+      "html": "<p>The <code>Comparable</code> interface allows an object to specify its own sorting rule with a <code>compareTo()</code> method.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The compareTo() method takes an object as an argument and compares the comparable with the argument to decide which one should go first in a list.",
+      "html": "<p>The <code>compareTo()</code> method takes an object as an argument and compares the comparable with the argument to decide which one should go first in a list.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Like the comparator, the compareTo() method returns a number which is:",
+      "html": "<p>Like the comparator, the <code>compareTo()</code> method returns a number which is:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Many native Java classes implement the Comparable interface, such as String and Integer .",
+      "html": "<p>Many native Java classes implement the <code>Comparable</code> interface, such as <code>String</code> and <code>Integer</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This is why strings and numbers do not need a comparator to be sorted.",
+      "html": "<p>This is why strings and numbers do not need a comparator to be sorted.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "An object that implements the Comparable interface might look something like this:",
+      "html": "<p>An object that implements the <code>Comparable</code> interface might look something like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "class\n\nCar\n\nimplements\n\nComparable\n\n{\n\n\npublic\n\nString\nbrand\n;\n\n\npublic\n\nString\nmodel\n;\n\n\npublic\n\nint\nyear\n;\n\n\n\n// Decide how this object compares to other objects\n\n\npublic\n\nint\n\ncompareTo\n(\nObject\nobj\n)\n\n{\n\n\nCar\nother\n=\n\n(\nCar\n)\nobj\n;\n\n\nif\n(\nyear\n<\nother\n.\nyear\n)\n\nreturn\n\n-\n1\n;\n\n// This object is smaller than the other one\n\n\nif\n(\nyear\n>\nother\n.\nyear\n)\n\nreturn\n\n1\n;\n\n// This object is larger than the other one\n\n\nreturn\n\n0\n;\n\n// Both objects are the same\n\n\n}\n\n\n}",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Car</span> <span class=\"token keyword keyword-implements\">implements</span> <span class=\"token class-name\">Comparable</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token class-name\">String</span> brand<span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token class-name\">String</span> model<span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-int\">int</span> year<span class=\"token punctuation\">;</span>\n  \n  <span class=\"token comment\">// Decide how this object compares to other objects</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-int\">int</span> <span class=\"token function\">compareTo</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">Object</span> obj<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  \t<span class=\"token class-name\">Car</span> other <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">)</span>obj<span class=\"token punctuation\">;</span>\n    <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span>year <span class=\"token operator\">&lt;</span> other<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// This object is smaller than the other one</span>\n    <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span>year <span class=\"token operator\">&gt;</span> other<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>  <span class=\"token comment\">// This object is larger than the other one</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// Both objects are the same</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here is the same example as before but using the Comparable interface instead of a comparator:",
+      "html": "<p>Here is the same example as before but using the <code>Comparable</code> interface instead of a comparator:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_comparable",
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "import\n\njava\n.\nutil\n.\nArrayList\n;\n\n\nimport\n\njava\n.\nutil\n.\nCollections\n;\n\n\nimport\n\njava\n.\nutil\n.\nComparator\n;\n\n\n\n// Define a Car class which is comparable\n\n\nclass\n\nCar\n\nimplements\n\nComparable\n\n{\n\n\npublic\n\nString\nbrand\n;\n\n\npublic\n\nString\nmodel\n;\n\n\npublic\n\nint\nyear\n;\n\n\n\npublic\n\nCar\n(\nString\nb\n,\n\nString\nm\n,\n\nint\ny\n)\n\n{\n\nbrand\n=\nb\n;\n\nmodel\n=\nm\n;\n\nyear\n=\ny\n;\n\n\n}\n\n\n\n// Decide how this object compares to other objects\n\n\npublic\n\nint\n\ncompareTo\n(\nObject\nobj\n)\n\n{\n\n\nCar\nother\n=\n\n(\nCar\n)\nobj\n;\n\n\nif\n(\nyear\n<\nother\n.\nyear\n)\n\nreturn\n\n-\n1\n;\n\n// This object is smaller than the other one\n\n\nif\n(\nyear\n>\nother\n.\nyear\n)\n\nreturn\n\n1\n;\n\n// This object is larger than the other one\n\n\nreturn\n\n0\n;\n\n// Both objects are the same\n\n\n}\n\n\n}\n\n\n\npublic\n\nclass\n\nMain\n\n{\n\n\npublic\n\nstatic\n\nvoid\n\nmain\n(\nString\n[\n]\nargs\n)\n\n{\n\n\n// Create a list of cars\n\n\nArrayList\n<\nCar\n>\nmyCars\n=\n\nnew\n\nArrayList\n<\nCar\n>\n(\n)\n;\n\nmyCars\n.\nadd\n(\nnew\n\nCar\n(\n\"BMW\"\n,\n\n\"X5\"\n,\n\n1999\n)\n)\n;\n\nmyCars\n.\nadd\n(\nnew\n\nCar\n(\n\"Honda\"\n,\n\n\"Accord\"\n,\n\n2006\n)\n)\n;\n\nmyCars\n.\nadd\n(\nnew\n\nCar\n(\n\"Ford\"\n,\n\n\"Mustang\"\n,\n\n1970\n)\n)\n;\n\n\n\n// Sort the cars\n\n\nCollections\n.\nsort\n(\nmyCars\n)\n;\n\n\n\n// Display the cars\n\n\nfor\n\n(\nCar\nc\n:\nmyCars\n)\n\n{\n\n\nSystem\n.\nout\n.\nprintln\n(\nc\n.\nbrand\n+\n\n\" \"\n\n+\nc\n.\nmodel\n+\n\n\" \"\n\n+\nc\n.\nyear\n)\n;\n\n\n}\n\n\n}\n\n\n}",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">ArrayList</span></span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">Collections</span></span><span class=\"token punctuation\">;</span>\n<span class=\"token keyword keyword-import\">import</span> <span class=\"token import\"><span class=\"token namespace\">java<span class=\"token punctuation\">.</span>util<span class=\"token punctuation\">.</span></span><span class=\"token class-name\">Comparator</span></span><span class=\"token punctuation\">;</span>\n\n<span class=\"token comment\">// Define a Car class which is comparable</span>\n<span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Car</span> <span class=\"token keyword keyword-implements\">implements</span> <span class=\"token class-name\">Comparable</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token class-name\">String</span> brand<span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token class-name\">String</span> model<span class=\"token punctuation\">;</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-int\">int</span> year<span class=\"token punctuation\">;</span>\n  \n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token class-name\">Car</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">String</span> b<span class=\"token punctuation\">,</span> <span class=\"token class-name\">String</span> m<span class=\"token punctuation\">,</span> <span class=\"token keyword keyword-int\">int</span> y<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    brand <span class=\"token operator\">=</span> b<span class=\"token punctuation\">;</span>\n    model <span class=\"token operator\">=</span> m<span class=\"token punctuation\">;</span>\n    year <span class=\"token operator\">=</span> y<span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n  \n  <span class=\"token comment\">// Decide how this object compares to other objects</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-int\">int</span> <span class=\"token function\">compareTo</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">Object</span> obj<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n  \t<span class=\"token class-name\">Car</span> other <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">)</span>obj<span class=\"token punctuation\">;</span>\n    <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span>year <span class=\"token operator\">&lt;</span> other<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// This object is smaller than the other one</span>\n    <span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span>year <span class=\"token operator\">&gt;</span> other<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span>  <span class=\"token comment\">// This object is larger than the other one</span>\n    <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// Both objects are the same</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span>\n\n<span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Main</span> <span class=\"token punctuation\">{</span> \n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-static\">static</span> <span class=\"token keyword keyword-void\">void</span> <span class=\"token function\">main</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">String</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> args<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span> \n    <span class=\"token comment\">// Create a list of cars</span>\n    <span class=\"token class-name\">ArrayList</span><span class=\"token generics\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">&gt;</span></span> myCars <span class=\"token operator\">=</span> <span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">ArrayList</span><span class=\"token generics\"><span class=\"token punctuation\">&lt;</span><span class=\"token class-name\">Car</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>    \n    myCars<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Car</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"BMW\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"X5\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1999</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myCars<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Car</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Honda\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"Accord\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">2006</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    myCars<span class=\"token punctuation\">.</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Car</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Ford\"</span><span class=\"token punctuation\">,</span> <span class=\"token string\">\"Mustang\"</span><span class=\"token punctuation\">,</span> <span class=\"token number\">1970</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Sort the cars</span>\n    <span class=\"token class-name\">Collections</span><span class=\"token punctuation\">.</span><span class=\"token function\">sort</span><span class=\"token punctuation\">(</span>myCars<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Display the cars</span>\n    <span class=\"token keyword keyword-for\">for</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">Car</span> c <span class=\"token operator\">:</span> myCars<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token class-name\">System</span><span class=\"token punctuation\">.</span>out<span class=\"token punctuation\">.</span><span class=\"token function\">println</span><span class=\"token punctuation\">(</span>c<span class=\"token punctuation\">.</span>brand <span class=\"token operator\">+</span> <span class=\"token string\">\" \"</span> <span class=\"token operator\">+</span> c<span class=\"token punctuation\">.</span>model <span class=\"token operator\">+</span> <span class=\"token string\">\" \"</span> <span class=\"token operator\">+</span> c<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span> \n<span class=\"token punctuation\">}</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_comparable",
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "A Common Sorting Trick",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The most obvious way to sort two numbers naturally is to write something like this:",
+      "html": "<p>The most obvious way to sort two numbers naturally is to write something like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "if\n(\na\n.\nyear\n<\nb\n.\nyear\n)\n\nreturn\n\n-\n1\n;\n\n// a is less than b\n\n\nif\n(\na\n.\nyear\n>\nb\n.\nyear\n)\n\nreturn\n\n1\n;\n\n// a is greater than b\n\n\nreturn\n\n0\n;\n\n// a is equal to b",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">&lt;</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token operator\">-</span><span class=\"token number\">1</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// a is less than b</span>\n<span class=\"token keyword keyword-if\">if</span><span class=\"token punctuation\">(</span>a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">&gt;</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">)</span> <span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">1</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// a is greater than b</span>\n<span class=\"token keyword keyword-return\">return</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span> <span class=\"token comment\">// a is equal to b</span>\n</code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "But it can actually be done with just a single line:",
+      "html": "<p>But it can actually be done with just a single line:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "return\na\n.\nyear\n-\nb\n.\nyear\n;",
+      "language": "java",
+      "code_html": "<pre class=\"language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token keyword keyword-return\">return</span> a<span class=\"token punctuation\">.</span>year <span class=\"token operator\">-</span> b<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">;</span></code></pre>",
+      "code_classes": [
+        "language-java"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This trick can also be used to easily sort things in reverse:",
+      "html": "<p>This trick can also be used to easily sort things in reverse:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "return\nb\n.\nyear\n-\na\n.\nyear\n;",
+      "language": "java",
+      "code_html": "<pre class=\"language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token keyword keyword-return\">return</span> b<span class=\"token punctuation\">.</span>year <span class=\"token operator\">-</span> a<span class=\"token punctuation\">.</span>year<span class=\"token punctuation\">;</span></code></pre>",
+      "code_classes": [
+        "language-java"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Comparator vs. Comparable",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A comparator is an object with one method that is used to compare two different objects.",
+      "html": "<p>A comparator is an object with one method that is used to compare two different objects.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A comparable is an object which can compare itself with other objects.",
+      "html": "<p>A comparable is an object which can compare itself with other objects.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It is easier to use the Comparable interface when possible, but the Comparator interface is more powerful because it allows you to sort any kind of object even if you cannot change its code.",
+      "html": "<p>It is easier to use the <code>Comparable</code> interface when possible, but the <code>Comparator</code> interface is more powerful because it allows you to sort any kind of object even if you cannot change its code.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "",
+      "html": "<p>\n</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise ? What is this? Test your skills by answering a few questions about the topics of this page",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The Comparable interface allows..",
+      "html": "<p>The Comparable interface allows..</p>"
+    },
+    {
+      "type": "page_quiz",
+      "metadata": {
+        "type": "quiz",
+        "question": "The Comparable interface allows..",
+        "options": [
+          {
+            "value": "0",
+            "text": "An object to specify its own sorting rule with a compareTo() method"
+          },
+          {
+            "value": "1",
+            "text": "A short block of code to use parameters and return values"
+          },
+          {
+            "value": "2",
+            "text": "An interface to behave as a standard class"
+          },
+          {
+            "value": "3",
+            "text": "A sequence of characters to form a search pattern"
+          }
+        ],
+        "formAction": "exercise.asp?x=xrcise_advanced_sorting1"
+      },
+      "quiz_type": "quiz",
+      "question": "The Comparable interface allows..",
+      "options": [
+        {
+          "value": "0",
+          "text": "An object to specify its own sorting rule with a compareTo() method"
+        },
+        {
+          "value": "1",
+          "text": "A short block of code to use parameters and return values"
+        },
+        {
+          "value": "2",
+          "text": "An interface to behave as a standard class"
+        },
+        {
+          "value": "3",
+          "text": "A sequence of characters to form a search pattern"
+        }
+      ],
+      "form_action": "exercise.asp?x=xrcise_advanced_sorting1",
+      "html": "<form action=\"exercise.asp?x=xrcise_advanced_sorting1\" method=\"post\" rel=\"opener\" target=\"_blank\"><div class=\"quizoption\"><input id=\"quizoption0\" name=\"quizoption\" type=\"radio\" value=\"0\"/><label for=\"quizoption0\">An object to specify its own sorting rule with a compareTo() method</label></div><div class=\"quizoption\"><input id=\"quizoption1\" name=\"quizoption\" type=\"radio\" value=\"1\"/><label for=\"quizoption1\">A short block of code to use parameters and return values</label></div><div class=\"quizoption\"><input id=\"quizoption2\" name=\"quizoption\" type=\"radio\" value=\"2\"/><label for=\"quizoption2\">An interface to behave as a standard class</label></div><div class=\"quizoption\"><input id=\"quizoption3\" name=\"quizoption\" type=\"radio\" value=\"3\"/><label for=\"quizoption3\">A sequence of characters to form a search pattern</label></div><br/><button class=\"ws-btn\" type=\"submit\">Submit Answer \u00bb</button></form>"
+    }
+  ]
+}

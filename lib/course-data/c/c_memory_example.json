@@ -1,0 +1,2809 @@
+{
+  "title": "C Real-Life Memory Management Example",
+  "url": "https://www.w3schools.com/c/c_memory_reallife.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "C Memory Management Example",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Real-Life Memory Management Example",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To demonstrate a practical example of dynamic memory , we created a program that can make a list of any length.",
+      "html": "<p>To demonstrate a practical example of <strong>dynamic memory</strong>, we created a program that can make a list of any length.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Regular arrays in C have a fixed length and cannot be changed, but with dynamic memory we can create a list as long as we like:",
+      "html": "<p>Regular arrays in C have a fixed length and cannot be changed, but with \ndynamic memory we can create a list as long as we like:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": "https://www.w3schools.com/c/tryc.php?filename=demo_memory_reallife",
+        "syntaxHighlighting": [
+          {
+            "text": "\n  struct list {\u00a0 int *data; // Points to the memory where the list items are \n  stored\u00a0 int numItems; // Indicates how many items are currently in the list\n  \u00a0\n  int size; // Indicates how many items fit in the allocated memory};\n  void addToList(struct list *myList, int item);int main() {\n  \u00a0\n  struct list myList;\u00a0 int amount;\u00a0 // Create a list and start with \n  enough space for 10 items\u00a0 myList.numItems = 0;\u00a0 myList.size = 10;\n  \u00a0\n  myList.data = malloc(myList.size * sizeof(int));\u00a0 // Find out if \n  memory allocation was successful\u00a0 if (myList.data == NULL) {\u00a0\u00a0\u00a0 \n  printf(\"Memory allocation failed\");\u00a0\u00a0\u00a0 return 1; // Exit \n  the program with an error code\u00a0 }\u00a0 // Add any number of \n  items to the list specified by the amount variable\u00a0 amount = 44;\n  \u00a0\n  for (int i = 0; i < amount; i++) {\u00a0\u00a0\u00a0 addToList(&myList, i + 1);\u00a0 }\u00a0 // \n  Display the contents of the list\u00a0 for (int j = 0; j < myList.numItems; j++) {\n  \u00a0\u00a0\u00a0\n  printf(\"%d \", myList.data[j]);\u00a0 }\u00a0 // Free the memory when it is no \n  longer needed\u00a0 free(myList.data);\u00a0 myList.data = NULL;\u00a0 return 0;\n  }// This function adds an item to a listvoid addToList(struct list \n  *myList, int item) {\u00a0 // If the list is full then resize the memory to \n  fit 10 more items\u00a0 if (myList->numItems == myList->size) {\u00a0\u00a0\u00a0 myList->size += \n  10;\u00a0\u00a0\u00a0 myList->data = realloc( myList->data, myList->size * sizeof(int) );\n  \u00a0\n  }\u00a0 // Add the item to the end of the list\n  \u00a0\n  myList->data[myList->numItems] = item;\u00a0 myList->numItems++;} ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "// Points to the memory where the list items are \n  stored",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "// Indicates how many items are currently in the list",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "// Indicates how many items fit in the allocated memory",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "void",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "// Create a list and start with \n  enough space for 10 items",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "numItems",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "size",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "size",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "// Find out if \n  memory allocation was successful",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"Memory allocation failed\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Exit \n  the program with an error code",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "// Add any number of \n  items to the list specified by the amount variable",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "44",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// \n  Display the contents of the list",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "numItems",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"%d \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "// Free the memory when it is no \n  longer needed",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// This function adds an item to a list",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "void",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "// If the list is full then resize the memory to \n  fit 10 more items",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Add the item to the end of the list",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "struct list {\u00a0 int *data; // Points to the memory where the list items are\nstored\u00a0 int numItems; // Indicates how many items are currently in the list\n\nint size; // Indicates how many items fit in the allocated memory};\nvoid addToList(struct list *myList, int item);int main() {\n\nstruct list myList;\u00a0 int amount;\u00a0 // Create a list and start with\nenough space for 10 items\u00a0 myList.numItems = 0;\u00a0 myList.size = 10;\n\nmyList.data = malloc(myList.size * sizeof(int));\u00a0 // Find out if\nmemory allocation was successful\u00a0 if (myList.data == NULL) {\nprintf(\"Memory allocation failed\");\u00a0\u00a0\u00a0 return 1; // Exit\nthe program with an error code\u00a0 }\u00a0 // Add any number of\nitems to the list specified by the amount variable\u00a0 amount = 44;\n\nfor (int i = 0; i < amount; i++) {\u00a0\u00a0\u00a0 addToList(&myList, i + 1);\u00a0 }\u00a0 //\nDisplay the contents of the list\u00a0 for (int j = 0; j < myList.numItems; j++) {\n\nprintf(\"%d \", myList.data[j]);\u00a0 }\u00a0 // Free the memory when it is no\nlonger needed\u00a0 free(myList.data);\u00a0 myList.data = NULL;\u00a0 return 0;\n}// This function adds an item to a listvoid addToList(struct list\n*myList, int item) {\u00a0 // If the list is full then resize the memory to\nfit 10 more items\u00a0 if (myList->numItems == myList->size) {\u00a0\u00a0\u00a0 myList->size +=\n10;\u00a0\u00a0\u00a0 myList->data = realloc( myList->data, myList->size * sizeof(int) );\n\n}\u00a0 // Add the item to the end of the list\n\nmyList->data[myList->numItems] = item;\u00a0 myList->numItems++;}",
+      "syntax_highlighting": [
+        {
+          "text": "\n  struct list {\u00a0 int *data; // Points to the memory where the list items are \n  stored\u00a0 int numItems; // Indicates how many items are currently in the list\n  \u00a0\n int size; // Indicates how many items fit in the allocated memory};\n void addToList(struct list *myList, int item);int main() {\n  \u00a0\n  struct list myList;\u00a0 int amount;\u00a0 // Create a list and start with \n  enough space for 10 items\u00a0 myList.numItems = 0;\u00a0 myList.size = 10;\n  \u00a0\n  myList.data = malloc(myList.size * sizeof(int));\u00a0 // Find out if \n  memory allocation was successful\u00a0 if (myList.data == NULL) {\u00a0\u00a0\u00a0 \n  printf(\"Memory allocation failed\");\u00a0\u00a0\u00a0 return 1; // Exit \n  the program with an error code\u00a0 }\u00a0 // Add any number of \n  items to the list specified by the amount variable\u00a0 amount = 44;\n  \u00a0\n for (int i = 0; i < amount; i++) {\u00a0\u00a0\u00a0 addToList(&myList, i + 1);\u00a0 }\u00a0 // \n  Display the contents of the list\u00a0 for (int j = 0; j < myList.numItems; j++) {\n  \u00a0\u00a0\u00a0\n  printf(\"%d \", myList.data[j]);\u00a0 }\u00a0 // Free the memory when it is no \n  longer needed\u00a0 free(myList.data);\u00a0 myList.data = NULL;\u00a0 return 0;\n  }// This function adds an item to a listvoid addToList(struct list \n  *myList, int item) {\u00a0 // If the list is full then resize the memory to \n  fit 10 more items\u00a0 if (myList->numItems == myList->size) {\u00a0\u00a0\u00a0 myList->size += \n 10;\u00a0\u00a0\u00a0 myList->data = realloc( myList->data, myList->size * sizeof(int) );\n  \u00a0\n  }\u00a0 // Add the item to the end of the list\n  \u00a0\n  myList->data[myList->numItems] = item;\u00a0 myList->numItems++;} ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "// Points to the memory where the list items are \n  stored",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "// Indicates how many items are currently in the list",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "// Indicates how many items fit in the allocated memory",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "void",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "// Create a list and start with \n  enough space for 10 items",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "numItems",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "size",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "size",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "// Find out if \n  memory allocation was successful",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"Memory allocation failed\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Exit \n  the program with an error code",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "// Add any number of \n  items to the list specified by the amount variable",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "44",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// \n  Display the contents of the list",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "numItems",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"%d \"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "// Free the memory when it is no \n  longer needed",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// This function adds an item to a list",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "void",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "// If the list is full then resize the memory to \n  fit 10 more items",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Add the item to the end of the list",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  struct list {<br/>\u00a0 <span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> *data; <span class=\"commentcolor\" style=\"color:slategray\">// Points to the memory where the list items are \n  stored<br/></span>\u00a0 <span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> numItems; <span class=\"commentcolor\" style=\"color:slategray\">// Indicates how many items are currently in the list<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  \u00a0<span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> size; <span class=\"commentcolor\" style=\"color:slategray\">// Indicates how many items fit in the allocated memory<br/></span>};<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"javakeywordcolor\" style=\"color:#005cc5\">void</span> addToList(struct list *myList, <span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> item);<br/><br/><span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> main() {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  \u00a0<span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  struct list myList;<br/>\u00a0 <span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> amount;<br/><br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Create a list and start with \n  enough space for 10 items<br/></span>\u00a0 myList.<span class=\"javapropertycolor\" style=\"color:black\">numItems</span> = <span class=\"javanumbercolor\" style=\"color:#905\">0</span>;<br/>\u00a0 myList.<span class=\"javapropertycolor\" style=\"color:black\">size</span> = <span class=\"javanumbercolor\" style=\"color:#905\">10</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  \u00a0<span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span> = malloc(myList.<span class=\"javapropertycolor\" style=\"color:black\">size</span> * sizeof(<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span>));<br/><br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Find out if \n  memory allocation was successful<br/></span>\u00a0 <span class=\"javakeywordcolor\" style=\"color:#005cc5\">if</span> (myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span> == NULL) {<br/>\u00a0\u00a0\u00a0 <span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  printf(<span class=\"javastringcolor\" style=\"color:green\">\"Memory allocation failed\"</span>);<br/>\u00a0\u00a0\u00a0 <span class=\"javakeywordcolor\" style=\"color:#005cc5\">return</span> <span class=\"javanumbercolor\" style=\"color:#905\">1</span>; <span class=\"commentcolor\" style=\"color:slategray\">// Exit \n  the program with an error code<br/></span>\u00a0 }<br/><br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Add any number of \n  items to the list specified by the amount variable<br/></span>\u00a0 amount = <span class=\"javanumbercolor\" style=\"color:#905\">44</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  \u00a0<span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javakeywordcolor\" style=\"color:#005cc5\">for</span> (<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> i = <span class=\"javanumbercolor\" style=\"color:#905\">0</span>; i &lt; amount; i++) {<br/>\u00a0\u00a0\u00a0 addToList(&amp;myList, i + <span class=\"javanumbercolor\" style=\"color:#905\">1</span>);<br/>\u00a0 }<br/><br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// \n  Display the contents of the list<br/></span>\u00a0 <span class=\"javakeywordcolor\" style=\"color:#005cc5\">for</span> (<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> j = <span class=\"javanumbercolor\" style=\"color:#905\">0</span>; j &lt; myList.<span class=\"javapropertycolor\" style=\"color:black\">numItems</span>; j++) {<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  \u00a0\u00a0\u00a0<span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  printf(<span class=\"javastringcolor\" style=\"color:green\">\"%d \"</span>, myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span>[j]);<br/>\u00a0 }<br/><br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Free the memory when it is no \n  longer needed<br/></span>\u00a0 free(myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span>);<br/>\u00a0 myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span> = NULL;<br/><br/>\u00a0 <span class=\"javakeywordcolor\" style=\"color:#005cc5\">return</span> <span class=\"javanumbercolor\" style=\"color:#905\">0</span>;<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  }<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// This function adds an item to a list<br/></span><span class=\"javakeywordcolor\" style=\"color:#005cc5\">void</span> addToList(struct list <span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  *myList, <span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> item) {<br/><br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// If the list is full then resize the memory to \n  fit 10 more items<br/></span>\u00a0 <span class=\"javakeywordcolor\" style=\"color:#005cc5\">if</span> (myList-&gt;numItems == myList-&gt;size) {<br/>\u00a0\u00a0\u00a0 myList-&gt;size += <span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javanumbercolor\" style=\"color:#905\">10</span>;<br/>\u00a0\u00a0\u00a0 myList-&gt;data = realloc( myList-&gt;data, myList-&gt;size * sizeof(<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span>) );<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  \u00a0<span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  }<br/><br/>\u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// Add the item to the end of the list<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  \u00a0<span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  myList-&gt;data[myList-&gt;numItems] = item;<br/>\u00a0 myList-&gt;numItems++;<br/>} </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": "https://www.w3schools.com/c/tryc.php?filename=demo_memory_reallife",
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  struct list {\u00a0 int *data; // Points to the memory where the list items are \n  stored\u00a0 int numItems; // Indicates how many items are currently in the list\n  \u00a0\n  int size; // Indicates how many items fit in the allocated memory};\n  void addToList(struct list *myList, int item);int main() {\n  \u00a0\n  struct list myList;\u00a0 int amount;\u00a0 // Create a list and start with \n  enough space for 10 items\u00a0 myList.numItems = 0;\u00a0 myList.size = 10;\n  \u00a0\n  myList.data = malloc(myList.size * sizeof(int));\u00a0 // Find out if \n  memory allocation was successful\u00a0 if (myList.data == NULL) {\u00a0\u00a0\u00a0 \n  printf(\"Memory allocation failed\");\u00a0\u00a0\u00a0 return 1; // Exit \n  the program with an error code\u00a0 }\u00a0 // Add any number of \n  items to the list specified by the amount variable\u00a0 amount = 44;\n  \u00a0\n  for (int i = 0; i < amount; i++) {\u00a0\u00a0\u00a0 addToList(&myList, i + 1);\u00a0 }\u00a0 // \n  Display the contents of the list\u00a0 for (int j = 0; j < myList.numItems; j++) {\n  \u00a0\u00a0\u00a0\n  printf(\"%d \", myList.data[j]);\u00a0 }\u00a0 // Free the memory when it is no \n  longer needed\u00a0 free(myList.data);\u00a0 myList.data = NULL;\u00a0 return 0;\n  }// This function adds an item to a listvoid addToList(struct list \n  *myList, int item) {\u00a0 // If the list is full then resize the memory to \n  fit 10 more items\u00a0 if (myList->numItems == myList->size) {\u00a0\u00a0\u00a0 myList->size += \n  10;\u00a0\u00a0\u00a0 myList->data = realloc( myList->data, myList->size * sizeof(int) );\n  \u00a0\n  }\u00a0 // Add the item to the end of the list\n  \u00a0\n  myList->data[myList->numItems] = item;\u00a0 myList->numItems++;} ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "// Points to the memory where the list items are \n  stored",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "// Indicates how many items are currently in the list",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "// Indicates how many items fit in the allocated memory",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "void",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "// Create a list and start with \n  enough space for 10 items",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "numItems",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "size",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "size",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "// Find out if \n  memory allocation was successful",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"Memory allocation failed\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Exit \n  the program with an error code",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "// Add any number of \n  items to the list specified by the amount variable",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "44",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// \n  Display the contents of the list",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "numItems",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"%d \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "// Free the memory when it is no \n  longer needed",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// This function adds an item to a list",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "void",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "// If the list is full then resize the memory to \n  fit 10 more items",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Add the item to the end of the list",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Pointers to structures: This example has a pointer to the structure myList . Because we are using a pointer to the structure instead of the structure itself, we use the arrow syntax ( -> ) to access the structure's members.",
+      "html": "<p><strong>Pointers to structures:</strong> This example has a pointer to the structure <code>myList</code>. Because we are using a <strong>pointer</strong> to the structure instead of the structure itself, we use the arrow syntax (<code>-&gt;</code>) to access the structure's members.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h3"
+      },
+      "text": "Example explained",
+      "level": "h3"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "This example has three parts:",
+      "html": "<p>This example has three parts:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The myList structure",
+      "html": "<p><strong>The <code>myList</code> structure</strong></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The myList structure contains all of the information about the list, including its contents. It has three members:",
+      "html": "<p>The <code>myList</code> structure contains all of the information about the list, including its contents. It has three members:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We use a structure so that we can easily pass all of this information into a function.",
+      "html": "<p>We use a structure so that we can easily pass all of this information into a function.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The main() function",
+      "html": "<p><strong>The <code>main()</code> function</strong></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The main() function starts by initializing the list with space for 10 items:",
+      "html": "<p>The <code>main()</code> function starts by initializing the list with space for 10 items:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  // Create a list and start with enough space for 10 itemsmyList.numItems = \n  0;myList.size = 10;myList.data = malloc(myList.size * sizeof(int)); ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Create a list and start with enough space for 10 items",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "numItems",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "size",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "size",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Create a list and start with enough space for 10 itemsmyList.numItems =\n0;myList.size = 10;myList.data = malloc(myList.size * sizeof(int));",
+      "syntax_highlighting": [
+        {
+          "text": "\n // Create a list and start with enough space for 10 itemsmyList.numItems = \n 0;myList.size = 10;myList.data = malloc(myList.size * sizeof(int)); ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Create a list and start with enough space for 10 items",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "numItems",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "size",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "size",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Create a list and start with enough space for 10 items<br/></span>myList.<span class=\"javapropertycolor\" style=\"color:black\">numItems</span> = <span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javanumbercolor\" style=\"color:#905\">0</span>;<br/>myList.<span class=\"javapropertycolor\" style=\"color:black\">size</span> = <span class=\"javanumbercolor\" style=\"color:#905\">10</span>;<br/>myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span> = malloc(myList.<span class=\"javapropertycolor\" style=\"color:black\">size</span> * sizeof(<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span>)); </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  // Create a list and start with enough space for 10 itemsmyList.numItems = \n  0;myList.size = 10;myList.data = malloc(myList.size * sizeof(int)); ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Create a list and start with enough space for 10 items",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "numItems",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "size",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "size",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "myList.numItems is set to 0 because the list starts off empty.",
+      "html": "<p><code>myList.numItems</code> is set to 0 because the list starts off empty.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "myList.size keeps track of how much memory is reserved. We set it to 10 because we will reserve enough memory for 10 items.",
+      "html": "<p><code>myList.size</code> keeps track of how much memory is reserved. We set it to 10 because we will reserve enough memory for 10 items.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We then allocate the memory and store a pointer to it in myList.data .",
+      "html": "<p>We then allocate the memory and store a pointer to it in <code>myList.data</code>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Then we include error checking to find out if memory allocation was successful:",
+      "html": "<p>Then we include error checking to find out if memory allocation was successful:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  // Find out if memory allocation was successfulif (myList.data == NULL) {\u00a0 printf(\"Memory allocation failed\");\u00a0 \n  return 1; // Exit the program with an error code} ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Find out if memory allocation was successful",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "\"Memory allocation failed\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "return",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Exit the program with an error code",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Find out if memory allocation was successfulif (myList.data == NULL) {\u00a0 printf(\"Memory allocation failed\");\nreturn 1; // Exit the program with an error code}",
+      "syntax_highlighting": [
+        {
+          "text": "\n // Find out if memory allocation was successfulif (myList.data == NULL) {\u00a0 printf(\"Memory allocation failed\");\u00a0 \n return 1; // Exit the program with an error code} ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Find out if memory allocation was successful",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "\"Memory allocation failed\"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "return",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Exit the program with an error code",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Find out if memory allocation was successful<br/></span><span class=\"javakeywordcolor\" style=\"color:#005cc5\">if</span> (myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span> == NULL) {<br/>\u00a0 printf(<span class=\"javastringcolor\" style=\"color:green\">\"Memory allocation failed\"</span>);<br/>\u00a0 <span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javakeywordcolor\" style=\"color:#005cc5\">return</span> <span class=\"javanumbercolor\" style=\"color:#905\">1</span>; <span class=\"commentcolor\" style=\"color:slategray\">// Exit the program with an error code<br/></span>} </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  // Find out if memory allocation was successfulif (myList.data == NULL) {\u00a0 printf(\"Memory allocation failed\");\u00a0 \n  return 1; // Exit the program with an error code} ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Find out if memory allocation was successful",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "\"Memory allocation failed\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "return",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Exit the program with an error code",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If everything is fine, a loop adds 44 items to the list using the addToList() function:",
+      "html": "<p>If everything is fine, a loop adds 44 items to the list using the <code>addToList()</code> function:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  // Add any number of items to the list specified by the amount variable\n  amount = 44;for (int i = 0; i < amount; i++) {\u00a0 \n  addToList(&myList, i + 1);} ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Add any number of items to the list specified by the amount variable",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "44",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "1",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Add any number of items to the list specified by the amount variable\namount = 44;for (int i = 0; i < amount; i++) {\naddToList(&myList, i + 1);}",
+      "syntax_highlighting": [
+        {
+          "text": "\n // Add any number of items to the list specified by the amount variable\n  amount = 44;for (int i = 0; i < amount; i++) {\u00a0 \n  addToList(&myList, i + 1);} ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Add any number of items to the list specified by the amount variable",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "44",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "1",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Add any number of items to the list specified by the amount variable<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  amount = <span class=\"javanumbercolor\" style=\"color:#905\">44</span>;<br/><span class=\"javakeywordcolor\" style=\"color:#005cc5\">for</span> (<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> i = <span class=\"javanumbercolor\" style=\"color:#905\">0</span>; i &lt; amount; i++) {<br/>\u00a0 <span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  addToList(&amp;myList, i + <span class=\"javanumbercolor\" style=\"color:#905\">1</span>);<br/>} </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  // Add any number of items to the list specified by the amount variable\n  amount = 44;for (int i = 0; i < amount; i++) {\u00a0 \n  addToList(&myList, i + 1);} ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Add any number of items to the list specified by the amount variable",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "44",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "1",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the code above, &myList is a pointer to the list and i + 1 is a number that we want to add to the list. We chose i + 1 so that the list would start at 1 instead of 0. You can choose any number to add to the list.",
+      "html": "<p>In the code above, <code>&amp;myList</code> is a pointer to the list and <code>i + 1</code> is a number that we want to add to the list. We chose <code>i + 1</code> so that the list would start at 1 instead of 0. You can choose any number to add to the list.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After all of the items have been added to the list, the next loop prints the contents of the list.",
+      "html": "<p>After all of the items have been added to the list, the next loop prints the contents of the list.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  // Display the contents of the listfor (int j = 0; j < myList.numItems; \n  j++) {\u00a0 printf(\"%d \", myList.data[j]);} ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Display the contents of the list",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "for",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "0",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "numItems",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\"%d \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "javastringcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Display the contents of the listfor (int j = 0; j < myList.numItems;\nj++) {\u00a0 printf(\"%d \", myList.data[j]);}",
+      "syntax_highlighting": [
+        {
+          "text": "\n // Display the contents of the listfor (int j = 0; j < myList.numItems; \n  j++) {\u00a0 printf(\"%d \", myList.data[j]);} ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Display the contents of the list",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "for",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "0",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "numItems",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\"%d \"",
+          "color": "green",
+          "class": [
+            "javastringcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Display the contents of the list<br/></span><span class=\"javakeywordcolor\" style=\"color:#005cc5\">for</span> (<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> j = <span class=\"javanumbercolor\" style=\"color:#905\">0</span>; j &lt; myList.<span class=\"javapropertycolor\" style=\"color:black\">numItems</span>; <span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  j++) {<br/>\u00a0 printf(<span class=\"javastringcolor\" style=\"color:green\">\"%d \"</span>, myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span>[j]);<br/>} </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  // Display the contents of the listfor (int j = 0; j < myList.numItems; \n  j++) {\u00a0 printf(\"%d \", myList.data[j]);} ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Display the contents of the list",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "for",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "0",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "numItems",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\"%d \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "javastringcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "When we finish printing the list we free the memory to prevent memory leaks.",
+      "html": "<p>When we finish printing the list we free the memory to prevent memory leaks.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  // Free the memory when it is no longer neededfree(myList.data);\n  myList.data = NULL; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Free the memory when it is no longer needed",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "data",
+            "color": "rgb(0, 0, 0)",
+            "class": "javapropertycolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Free the memory when it is no longer neededfree(myList.data);\nmyList.data = NULL;",
+      "syntax_highlighting": [
+        {
+          "text": "\n // Free the memory when it is no longer neededfree(myList.data);\n  myList.data = NULL; ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Free the memory when it is no longer needed",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "data",
+          "color": "black",
+          "class": [
+            "javapropertycolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Free the memory when it is no longer needed<br/></span>free(myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span>);<br/><span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  myList.<span class=\"javapropertycolor\" style=\"color:black\">data</span> = NULL; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  // Free the memory when it is no longer neededfree(myList.data);\n  myList.data = NULL; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Free the memory when it is no longer needed",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "data",
+          "color": "rgb(0, 0, 0)",
+          "class": "javapropertycolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The addToList() function",
+      "html": "<p><strong>The <code>addToList()</code> function</strong></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Our addToList() function adds an item to the list. It takes two parameters:",
+      "html": "<p>Our <code>addToList()</code> function adds an item to the list. It takes two parameters:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  void addToList(struct list *myList, int item) ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "void",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "void addToList(struct list *myList, int item)",
+      "syntax_highlighting": [
+        {
+          "text": "\n void addToList(struct list *myList, int item) ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "void",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javakeywordcolor\" style=\"color:#005cc5\">void</span> addToList(struct list *myList, <span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span> item) </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  void addToList(struct list *myList, int item) ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "void",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The function first checks if the list is full by comparing the number of items in the list to the size of the list. If the list is full then it reallocates the memory to fit 10 more items:",
+      "html": "<p>The function first checks if the list is full by comparing the number of \nitems in the list to the size of the list. If the list is full then it \nreallocates the memory to fit 10 more items:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  // If the list is full then resize the memory to fit 10 more items\n  if (myList->numItems == myList->size) {\u00a0 myList->size += 10;\u00a0 \n  myList->data = realloc( myList->data, myList->size * sizeof(int) );} ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// If the list is full then resize the memory to fit 10 more items",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          },
+          {
+            "text": "10",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "int",
+            "color": "rgb(0, 92, 197)",
+            "class": "javakeywordcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// If the list is full then resize the memory to fit 10 more items\nif (myList->numItems == myList->size) {\u00a0 myList->size += 10;\nmyList->data = realloc( myList->data, myList->size * sizeof(int) );}",
+      "syntax_highlighting": [
+        {
+          "text": "\n // If the list is full then resize the memory to fit 10 more items\n if (myList->numItems == myList->size) {\u00a0 myList->size += 10;\u00a0 \n  myList->data = realloc( myList->data, myList->size * sizeof(int) );} ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// If the list is full then resize the memory to fit 10 more items",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        },
+        {
+          "text": "10",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "int",
+          "color": "#005cc5",
+          "class": [
+            "javakeywordcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// If the list is full then resize the memory to fit 10 more items<br/></span><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"javakeywordcolor\" style=\"color:#005cc5\">if</span> (myList-&gt;numItems == myList-&gt;size) {<br/>\u00a0 myList-&gt;size += <span class=\"javanumbercolor\" style=\"color:#905\">10</span>;<br/>\u00a0 <span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  myList-&gt;data = realloc( myList-&gt;data, myList-&gt;size * sizeof(<span class=\"javakeywordcolor\" style=\"color:#005cc5\">int</span>) );<br/>} </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  // If the list is full then resize the memory to fit 10 more items\n  if (myList->numItems == myList->size) {\u00a0 myList->size += 10;\u00a0 \n  myList->data = realloc( myList->data, myList->size * sizeof(int) );} ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// If the list is full then resize the memory to fit 10 more items",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        },
+        {
+          "text": "10",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "int",
+          "color": "rgb(0, 92, 197)",
+          "class": "javakeywordcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Finally, the function adds the item to the end of list. The index at myList-> numItems is always at the end of the list because it increases by 1 each time a new item is added.",
+      "html": "<p>Finally, the function adds the item to the end of list. The index at <code>myList-&gt;numItems</code> is always at the end of the list because it increases by 1 each time a new item is added.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  // Add the item to the end of the listmyList->data[myList->numItems] = \n  item;myList->numItems++; ",
+            "color": "rgb(0, 0, 0)",
+            "class": "javacolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          },
+          {
+            "text": "// Add the item to the end of the list",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "javanumbercolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "javaHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "// Add the item to the end of the listmyList->data[myList->numItems] =\nitem;myList->numItems++;",
+      "syntax_highlighting": [
+        {
+          "text": "\n // Add the item to the end of the listmyList->data[myList->numItems] = \n  item;myList->numItems++; ",
+          "color": "black",
+          "class": [
+            "javacolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        },
+        {
+          "text": "// Add the item to the end of the list",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "javanumbercolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate javaHigh\"><span class=\"javacolor\" style=\"color:black\"><span class=\"javanumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Add the item to the end of the list<br/></span>myList-&gt;data[myList-&gt;numItems] = <span class=\"javanumbercolor\" style=\"color:#905\">\n</span>  item;<br/>myList-&gt;numItems++; </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  // Add the item to the end of the listmyList->data[myList->numItems] = \n  item;myList->numItems++; ",
+          "color": "rgb(0, 0, 0)",
+          "class": "javacolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        },
+        {
+          "text": "// Add the item to the end of the list",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "javanumbercolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "javaHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Why do we reserve 10 items at a time?",
+      "html": "<p><strong>Why do we reserve 10 items at a time?</strong></p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Optimizing is a balancing act between memory and performance. Even though we may be allocating some memory that we are not using, reallocating memory too frequently can be inefficient. There is a balance between allocating too much memory and allocating memory too frequently.",
+      "html": "<p>Optimizing is a balancing act between memory and performance. Even though we may be allocating some memory that we are not using, reallocating memory too frequently can be inefficient. There is a balance between allocating too much memory and allocating memory too frequently.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "We chose the number 10 for this example, but it depends on how much data you expect and how often it changes. For example, if we know beforehand that we are going to have exactly 44 items then we can allocate memory for exactly 44 items and only allocate it once.",
+      "html": "<p>We chose the number 10 for this example, but it depends on how much data you expect and how often it changes. For example, if we know beforehand that we are going to have exactly 44 items then we can allocate memory for exactly 44 items and only allocate it once.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Complete stdlib Reference",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "C \n<stdlib.h> Library Reference",
+          "href": "https://www.w3schools.com/c_ref_stdlib.php",
+          "title": ""
+        }
+      ],
+      "text": "For a complete reference of memory management functions and other functions found in the standard library, go to our C <stdlib.h> Library Reference .",
+      "html": "<p>For a complete reference of memory management functions and other functions found in the standard library, go to our <a href=\"c_ref_stdlib.php\">C \n&lt;stdlib.h&gt; Library Reference</a>.</p>"
+    }
+  ]
+}

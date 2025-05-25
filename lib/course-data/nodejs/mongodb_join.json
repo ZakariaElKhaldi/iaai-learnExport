@@ -1,0 +1,889 @@
+{
+  "title": "Node.js MongoDB Join",
+  "url": "https://www.w3schools.com/nodejs/nodejs_mongodb_join.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Node.js MongoDB Join",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Join Collections",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "MongoDB is not a relational database, but you can perform a left outer join by using the $lookup stage.",
+      "html": "<p>MongoDB is not a relational database, but you can perform a left outer join \nby using the <code>$lookup</code> stage.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The $lookup stage lets you specify which collection you want to join with the current collection, and which fields that should match.",
+      "html": "<p>The <code>$lookup</code> stage lets you specify which \ncollection you want to join with the current collection, and which \nfields that should match.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Consider you have a \"orders\" collection and a \"products\" collection:",
+      "html": "<p>Consider you have a \"orders\" collection and a \"products\" collection:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "[\n\u00a0 { _id: 1, product_id: \n154, status: 1 }\n]",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">[<br/>\u00a0 { _id: 1, product_id: \n  154, status: 1 }<br/>]</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "[\n\u00a0 { _id: 154, name: \n'Chocolate Heaven' },\n\u00a0 { _id: 155, name: 'Tasty Lemons' },\n\u00a0 { \n_id: 156, name: 'Vanilla Dreams' }\n]",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">[<br/>\u00a0 { _id: 154, name: \n  'Chocolate Heaven' },<br/>\u00a0 { _id: 155, name: 'Tasty Lemons' },<br/>\u00a0 { \n  _id: 156, name: 'Vanilla Dreams' }<br/>]</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "\n  var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n  MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n  var dbo = db.db(\"mydb\");\u00a0 \n  dbo.collection('orders').aggregate([\u00a0\u00a0\u00a0 { $lookup:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 from: 'products',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  localField: 'product_id',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  foreignField: '_id',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  as: 'orderdetails'\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 ]).toArray(function(err, \n  res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(JSON.stringify(res));\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+            "color": "rgb(0, 0, 0)",
+            "class": "jscolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "'mongodb'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "MongoClient",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\"mongodb://127.0.0.1:27017/\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "connect",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "throw",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "var",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "db",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\"mydb\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "collection",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "'orders'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "aggregate",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'products'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'product_id'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'_id'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "'orderdetails'",
+            "color": "rgb(0, 128, 0)",
+            "class": "jsstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "toArray",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "function",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "throw",
+            "color": "rgb(0, 92, 197)",
+            "class": "jskeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "log",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "stringify",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "jsnumbercolor"
+          },
+          {
+            "text": "close",
+            "color": "rgb(0, 0, 0)",
+            "class": "jspropertycolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "jsHigh"
+        ],
+        "isNotranslate": true
+      },
+      "code": "var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\nMongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\nvar dbo = db.db(\"mydb\");\ndbo.collection('orders').aggregate([\u00a0\u00a0\u00a0 { $lookup:\n{\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 from: 'products',\nlocalField: 'product_id',\nforeignField: '_id',\nas: 'orderdetails'\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\n}\u00a0\u00a0\u00a0 ]).toArray(function(err,\nres) {\u00a0\u00a0\u00a0 if (err) throw err;\nconsole.log(JSON.stringify(res));\ndb.close();\u00a0 });});",
+      "syntax_highlighting": [
+        {
+          "text": "\n var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n var dbo = db.db(\"mydb\");\u00a0 \n  dbo.collection('orders').aggregate([\u00a0\u00a0\u00a0 { $lookup:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 from: 'products',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  localField: 'product_id',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  foreignField: '_id',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  as: 'orderdetails'\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 ]).toArray(function(err, \n  res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(JSON.stringify(res));\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+          "color": "black",
+          "class": [
+            "jscolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "'mongodb'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "MongoClient",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\"mongodb://127.0.0.1:27017/\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "connect",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "throw",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "var",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "db",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\"mydb\"",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "collection",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "'orders'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "aggregate",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'products'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'product_id'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'_id'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "'orderdetails'",
+          "color": "green",
+          "class": [
+            "jsstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "toArray",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "function",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "throw",
+          "color": "#005cc5",
+          "class": [
+            "jskeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "log",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "stringify",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "jsnumbercolor"
+          ]
+        },
+        {
+          "text": "close",
+          "color": "black",
+          "class": [
+            "jspropertycolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate jsHigh\"><span class=\"jscolor\" style=\"color:black\"><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> MongoClient = require(<span class=\"jsstringcolor\" style=\"color:green\">'mongodb'</span>).<span class=\"jspropertycolor\" style=\"color:black\">MongoClient</span>;<br/><span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> url = <span class=\"jsstringcolor\" style=\"color:green\">\"mongodb://127.0.0.1:27017/\"</span>;<br/><span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <br/>MongoClient.<span class=\"jspropertycolor\" style=\"color:black\">connect</span>(url, <span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(err, db) {<br/>\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (err) <span class=\"jskeywordcolor\" style=\"color:#005cc5\">throw</span> err;<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span> <span class=\"jskeywordcolor\" style=\"color:#005cc5\">var</span> dbo = db.<span class=\"jspropertycolor\" style=\"color:black\">db</span>(<span class=\"jsstringcolor\" style=\"color:green\">\"mydb\"</span>);<br/>\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  dbo.<span class=\"jspropertycolor\" style=\"color:black\">collection</span>(<span class=\"jsstringcolor\" style=\"color:green\">'orders'</span>).<span class=\"jspropertycolor\" style=\"color:black\">aggregate</span>([<br/><strong>\u00a0\u00a0\u00a0 { $lookup:<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  {<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 from: <span class=\"jsstringcolor\" style=\"color:green\">'products'</span>,<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  localField: <span class=\"jsstringcolor\" style=\"color:green\">'product_id'</span>,<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  foreignField: <span class=\"jsstringcolor\" style=\"color:green\">'_id'</span>,<br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  as: <span class=\"jsstringcolor\" style=\"color:green\">'orderdetails'</span><br/>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }<br/>\u00a0\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  }<br/></strong>\u00a0\u00a0\u00a0 ]).<span class=\"jspropertycolor\" style=\"color:black\">toArray</span>(<span class=\"jskeywordcolor\" style=\"color:#005cc5\">function</span>(err, <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  res) {<br/>\u00a0\u00a0\u00a0 <span class=\"jskeywordcolor\" style=\"color:#005cc5\">if</span> (err) <span class=\"jskeywordcolor\" style=\"color:#005cc5\">throw</span> err;<br/>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  console.<span class=\"jspropertycolor\" style=\"color:black\">log</span>(JSON.<span class=\"jspropertycolor\" style=\"color:black\">stringify</span>(res));<br/>\u00a0\u00a0\u00a0 <span class=\"jsnumbercolor\" style=\"color:#905\">\n</span>  db.<span class=\"jspropertycolor\" style=\"color:black\">close</span>();<br/>\u00a0 });<br/>}); </span></div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "\n  var MongoClient = require('mongodb').MongoClient;var url = \"mongodb://127.0.0.1:27017/\";\n  MongoClient.connect(url, function(err, db) {\u00a0 if (err) throw err;\u00a0 \n  var dbo = db.db(\"mydb\");\u00a0 \n  dbo.collection('orders').aggregate([\u00a0\u00a0\u00a0 { $lookup:\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  {\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 from: 'products',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  localField: 'product_id',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  foreignField: '_id',\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \n  as: 'orderdetails'\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 }\u00a0\u00a0\u00a0\u00a0 \n  }\u00a0\u00a0\u00a0 ]).toArray(function(err, \n  res) {\u00a0\u00a0\u00a0 if (err) throw err;\u00a0\u00a0\u00a0 \n  console.log(JSON.stringify(res));\u00a0\u00a0\u00a0 \n  db.close();\u00a0 });}); ",
+          "color": "rgb(0, 0, 0)",
+          "class": "jscolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "'mongodb'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "MongoClient",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\"mongodb://127.0.0.1:27017/\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "connect",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "throw",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "var",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "db",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\"mydb\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "collection",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "'orders'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "aggregate",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'products'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'product_id'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'_id'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "'orderdetails'",
+          "color": "rgb(0, 128, 0)",
+          "class": "jsstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "toArray",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "function",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "throw",
+          "color": "rgb(0, 92, 197)",
+          "class": "jskeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "log",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "stringify",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "jsnumbercolor"
+        },
+        {
+          "text": "close",
+          "color": "rgb(0, 0, 0)",
+          "class": "jspropertycolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "jsHigh"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Save the code above in a file called \"demo_mongodb_join.js\" and run the file:",
+      "html": "<p>Save the code above in a file called \"demo_mongodb_join.js\" and run the file:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "C:\\Users\\>node demo_mongodb_join.js",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">\nC:\\Users\\<em>Your Name</em>&gt;node demo_mongodb_join.js\n</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Which will give you this result:",
+      "html": "<p>Which will give you this result:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "notranslate",
+          "w3-black"
+        ],
+        "isNotranslate": true
+      },
+      "code": "[\n\u00a0 { \"_id\": 1, \"product_id\": \n154, \"status\": 1, \"orderdetails\": [\n\u00a0\u00a0\u00a0 { \"_id\": 154, \"name\": \n\"Chocolate Heaven\" } ]\n\u00a0 }\n]",
+      "language": "html",
+      "code_html": "<div class=\"w3-code notranslate w3-black\">[<br/>\u00a0 { \"_id\": 1, \"product_id\": \n  154, \"status\": 1, \"orderdetails\": [<br/>\u00a0\u00a0\u00a0 { \"_id\": 154, \"name\": \n  \"Chocolate Heaven\" } ]<br/>\u00a0 }<br/>]</div>",
+      "code_classes": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "notranslate",
+        "w3-black"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "As you can see from the result above, the matching document from the products collection is included in the orders collection as an array.",
+      "html": "<p>As you can see from the result above, the matching document from the products \ncollection is included in the orders collection as an array.</p>"
+    }
+  ]
+}

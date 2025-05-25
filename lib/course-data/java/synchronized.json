@@ -1,0 +1,135 @@
+{
+  "title": "Java synchronized Keyword",
+  "url": "https://www.w3schools.com/java/ref_keyword_synchronized.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Java synchronized Keyword",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "\u276e Java Keywords",
+          "href": "https://www.w3schools.com/java_ref_keywords.asp",
+          "title": ""
+        }
+      ],
+      "text": "\u276e Java Keywords",
+      "html": "<p>\n<a href=\"java_ref_keywords.asp\">\u276e Java Keywords</a>\n</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_ref_keyword_synchronized",
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-white",
+          "language-java"
+        ],
+        "isNotranslate": false
+      },
+      "code": "public\n\nclass\n\nMain\n\nimplements\n\nRunnable\n\n{\n\n\npublic\n\nstatic\n\nint\na\n,\nb\n;\n\n\n\npublic\n\nstatic\n\nvoid\n\nmain\n(\nString\n[\n]\nargs\n)\n\n{\n\na\n=\n\n100\n;\n\nb\n=\n\n100\n;\n\n\n\n// Check the total amount shared between a and b before the transfers\n\n\nSystem\n.\nout\n.\nprintln\n(\n\"Total before: \"\n\n+\n\n(\na\n+\nb\n)\n)\n;\n\n\n\n// Run threads which will transfer amounts between a and b\n\n\nThread\nthread1\n=\n\nnew\n\nThread\n(\nnew\n\nMain\n(\n)\n)\n;\n\n\nThread\nthread2\n=\n\nnew\n\nThread\n(\nnew\n\nMain\n(\n)\n)\n;\n\nthread1\n.\nstart\n(\n)\n;\n\nthread2\n.\nstart\n(\n)\n;\n\n\n\n// Wait for the threads to finish running\n\n\ntry\n\n{\n\nthread1\n.\njoin\n(\n)\n;\n\nthread2\n.\njoin\n(\n)\n;\n\n\n}\n\ncatch\n\n(\nInterruptedException\ne\n)\n\n{\n\ne\n.\nprintStackTrace\n(\n)\n;\n\n\n}\n\n\n\n// Check the total amount shared between a and b after the transfers\n\n\n// It should be the same amount as before\n\n\nSystem\n.\nout\n.\nprintln\n(\n\"Total after: \"\n\n+\n\n(\na\n+\nb\n)\n)\n;\n\n\n}\n\n\n\npublic\n\nvoid\n\nrun\n(\n)\n\n{\n\n\nfor\n\n(\nint\ni\n=\n\n0\n;\ni\n<\n\n10000000\n;\ni\n++\n)\n\n{\n\n\ntransfer\n(\n)\n;\n\n\n}\n\n\n}\n\n\n\npublic\n\nstatic\n\nsynchronized\n\nvoid\n\ntransfer\n(\n)\n\n{\n\n\n// Choose a random amount to transfer\n\n\nint\namount\n=\n\n(\nint\n)\n\n(\n5.0\n\n*\n\nMath\n.\nrandom\n(\n)\n)\n;\n\n\n\n// Transfer between a and b\n\n\nif\n\n(\na\n>\nb\n)\n\n{\n\na\n-=\namount\n;\n\nb\n+=\namount\n;\n\n\n}\n\nelse\n\n{\n\na\n+=\namount\n;\n\nb\n-=\namount\n;\n\n\n}\n\n\n}\n\n\n}",
+      "language": "java",
+      "code_html": "<pre class=\"w3-white language-java\" tabindex=\"0\"><code class=\"language-java\"><span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-class\">class</span> <span class=\"token class-name\">Main</span> <span class=\"token keyword keyword-implements\">implements</span> <span class=\"token class-name\">Runnable</span> <span class=\"token punctuation\">{</span>\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-static\">static</span> <span class=\"token keyword keyword-int\">int</span> a<span class=\"token punctuation\">,</span> b<span class=\"token punctuation\">;</span>\n\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-static\">static</span> <span class=\"token keyword keyword-void\">void</span> <span class=\"token function\">main</span><span class=\"token punctuation\">(</span><span class=\"token class-name\">String</span><span class=\"token punctuation\">[</span><span class=\"token punctuation\">]</span> args<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    a <span class=\"token operator\">=</span> <span class=\"token number\">100</span><span class=\"token punctuation\">;</span>\n    b <span class=\"token operator\">=</span> <span class=\"token number\">100</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Check the total amount shared between a and b before the transfers</span>\n    <span class=\"token class-name\">System</span><span class=\"token punctuation\">.</span>out<span class=\"token punctuation\">.</span><span class=\"token function\">println</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Total before: \"</span> <span class=\"token operator\">+</span> <span class=\"token punctuation\">(</span>a <span class=\"token operator\">+</span> b<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Run threads which will transfer amounts between a and b</span>\n    <span class=\"token class-name\">Thread</span> thread1 <span class=\"token operator\">=</span> <span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Thread</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token class-name\">Thread</span> thread2 <span class=\"token operator\">=</span> <span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Thread</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-new\">new</span> <span class=\"token class-name\">Main</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    thread1<span class=\"token punctuation\">.</span><span class=\"token function\">start</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    thread2<span class=\"token punctuation\">.</span><span class=\"token function\">start</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Wait for the threads to finish running</span>\n    <span class=\"token keyword keyword-try\">try</span> <span class=\"token punctuation\">{</span>\n      thread1<span class=\"token punctuation\">.</span><span class=\"token function\">join</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n      thread2<span class=\"token punctuation\">.</span><span class=\"token function\">join</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-catch\">catch</span> <span class=\"token punctuation\">(</span><span class=\"token class-name\">InterruptedException</span> e<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      e<span class=\"token punctuation\">.</span><span class=\"token function\">printStackTrace</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n\n    <span class=\"token comment\">// Check the total amount shared between a and b after the transfers</span>\n    <span class=\"token comment\">// It should be the same amount as before</span>\n    <span class=\"token class-name\">System</span><span class=\"token punctuation\">.</span>out<span class=\"token punctuation\">.</span><span class=\"token function\">println</span><span class=\"token punctuation\">(</span><span class=\"token string\">\"Total after: \"</span> <span class=\"token operator\">+</span> <span class=\"token punctuation\">(</span>a <span class=\"token operator\">+</span> b<span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n  <span class=\"token punctuation\">}</span>\n\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-void\">void</span> <span class=\"token function\">run</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token keyword keyword-for\">for</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-int\">int</span> i <span class=\"token operator\">=</span> <span class=\"token number\">0</span><span class=\"token punctuation\">;</span> i <span class=\"token operator\">&lt;</span> <span class=\"token number\">10000000</span><span class=\"token punctuation\">;</span> i<span class=\"token operator\">++</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token function\">transfer</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n\n  <span class=\"token keyword keyword-public\">public</span> <span class=\"token keyword keyword-static\">static</span> <span class=\"token keyword keyword-synchronized\">synchronized</span> <span class=\"token keyword keyword-void\">void</span> <span class=\"token function\">transfer</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token comment\">// Choose a random amount to transfer</span>\n    <span class=\"token keyword keyword-int\">int</span> amount <span class=\"token operator\">=</span> <span class=\"token punctuation\">(</span><span class=\"token keyword keyword-int\">int</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">(</span><span class=\"token number\">5.0</span> <span class=\"token operator\">*</span> <span class=\"token class-name\">Math</span><span class=\"token punctuation\">.</span><span class=\"token function\">random</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span>\n\n    <span class=\"token comment\">// Transfer between a and b</span>\n    <span class=\"token keyword keyword-if\">if</span> <span class=\"token punctuation\">(</span>a <span class=\"token operator\">&gt;</span> b<span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      a <span class=\"token operator\">-=</span> amount<span class=\"token punctuation\">;</span>\n      b <span class=\"token operator\">+=</span> amount<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-else\">else</span> <span class=\"token punctuation\">{</span>\n      a <span class=\"token operator\">+=</span> amount<span class=\"token punctuation\">;</span>\n      b <span class=\"token operator\">-=</span> amount<span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n<span class=\"token punctuation\">}</span></code></pre>",
+      "code_classes": [
+        "w3-white",
+        "language-java"
+      ],
+      "tryItLink": "https://www.w3schools.com/java/tryjava.asp?filename=demo_ref_keyword_synchronized",
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-white",
+        "language-java"
+      ],
+      "is_notranslate": false
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Definition and Usage",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The synchronized keyword is a modifier that locks a method so that only one thread can use it at a time. This prevents problems that arise from race conditions between threads.",
+      "html": "<p>The <code>synchronized</code> keyword is a modifier that locks a method so that only one thread can use it at a time. This prevents problems that arise from race conditions between threads.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the example above, removing the synchronized keyword from the transfer() method may cause the values of a and b to be modified by another thread in between operations. This would result in the total amount between the two variables to change.",
+      "html": "<p>In the example above, removing the <code>synchronized</code> keyword from the <code>transfer()</code> method may cause the values of <code>a</code> and <code>b</code> to be modified by another thread in between operations. This would result in the total amount between the two variables to change.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Related Pages",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Java Modifiers Tutorial",
+          "href": "https://www.w3schools.com/java_modifiers.asp",
+          "title": ""
+        }
+      ],
+      "text": "Read more about modifiers in our Java Modifiers Tutorial .",
+      "html": "<p>Read more about modifiers in our <a href=\"java_modifiers.asp\">Java Modifiers Tutorial</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Java Threads Tutorial",
+          "href": "https://www.w3schools.com/java_threads.asp",
+          "title": ""
+        }
+      ],
+      "text": "Read more about threads in our Java Threads Tutorial .",
+      "html": "<p>Read more about threads in our <a href=\"java_threads.asp\">Java Threads Tutorial</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "\u276e Java Keywords",
+          "href": "https://www.w3schools.com/java_ref_keywords.asp",
+          "title": ""
+        }
+      ],
+      "text": "\u276e Java Keywords",
+      "html": "<p>\n<a href=\"java_ref_keywords.asp\">\u276e Java Keywords</a>\n</p>"
+    }
+  ]
+}

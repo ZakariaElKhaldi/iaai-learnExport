@@ -1,0 +1,1543 @@
+{
+  "title": "PHP MySQL Insert Data",
+  "url": "https://www.w3schools.com/php/php_mysql_insert.asp",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "PHP MySQL Insert Data",
+      "level": "h1"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Insert Data Into MySQL Using MySQLi and PDO",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "After a database and a table have been created, we can start adding data in them.",
+      "html": "<p>After a database and a table have been created, we can start adding data in \nthem.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Here are some syntax rules to follow:",
+      "html": "<p>Here are some syntax rules to follow:</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The INSERT INTO statement is used to add new records to a MySQL table:",
+      "html": "<p>The INSERT INTO statement is used to add new records to a MySQL table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "w3-code",
+          "w3-border",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "",
+      "language": "html",
+      "code_html": "<div class=\"w3-code w3-border notranslate\">\n<div>\nINSERT INTO table_name (column1, column2, column3,...)<br/>\nVALUES (value1, value2, value3,...)\n</div></div>",
+      "code_classes": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "w3-code",
+        "w3-border",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "SQL tutorial",
+          "href": "https://www.w3schools.com/sql/default.asp",
+          "title": ""
+        }
+      ],
+      "text": "To learn more about SQL, please visit our SQL tutorial .",
+      "html": "<p>To learn more about SQL, please visit our <a href=\"/sql/default.asp\">SQL tutorial</a>.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "In the previous chapter we created an empty table named \"MyGuests\" with five columns: \"id\", \"firstname\", \"lastname\", \"email\" and \"reg_date\". Now, let us fill the table with data.",
+      "html": "<p>In the previous chapter we created an empty table named \"MyGuests\" with \nfive columns: \"id\", \"firstname\", \"lastname\", \"email\" and \"reg_date\". \nNow, let us fill the table with data.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Note: If a column is AUTO_INCREMENT (like the \"id\" column) or TIMESTAMP with default update of current_timesamp (like the \"reg_date\" column), it is no need to be specified in the SQL query; MySQL will automatically add the value.",
+      "html": "<p><strong>Note:</strong> If a column is AUTO_INCREMENT (like the \"id\" column) or TIMESTAMP \nwith default update of current_timesamp \n(like the \"reg_date\" column), it is no need to be specified in \nthe SQL query; MySQL will automatically add the value.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "The following examples add a new record to the \"MyGuests\" table:",
+      "html": "<p>The following examples add a new record to the \"MyGuests\" table:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\n\n $sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\";\n if ($conn->query($sql) === TRUE) {\u00a0 echo \"New record created successfully\";} else {\n  \u00a0 echo \"Error: \" . $sql . \"<br>\" . $conn->error;}$conn->close();\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDB\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"New record created successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Error: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"<br>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);\n// Check connection\nif ($conn->connect_error)\u00a0{\ndie(\"Connection failed: \" . $conn->connect_error);}\n\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif ($conn->query($sql) === TRUE) {\u00a0 echo \"New record created successfully\";} else {\necho \"Error: \" . $sql . \"<br>\" . $conn->error;}$conn->close();\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\n\n $sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\";\n if ($conn->query($sql) === TRUE) {\u00a0 echo \"New record created successfully\";} else {\n  \u00a0 echo \"Error: \" . $sql . \"<br>\" . $conn->error;}$conn->close();\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"New record created successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Error: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDB\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>$conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> mysqli($servername, $username, $password, $dbname);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($conn-&gt;connect_error)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . $conn-&gt;connect_error);<br/>}<span class=\"phpnumbercolor\" style=\"color:#905\">\n</span><br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>$sql = <span class=\"phpstringcolor\" style=\"color:green\">\"INSERT INTO MyGuests (firstname, lastname, email)<br/>\n VALUES ('John', 'Doe', 'john@example.com')\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> ($conn-&gt;query($sql) === TRUE) {<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"New record created successfully\"</span>;<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Error: \"</span> . $sql . <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;br&gt;\"</span> . $conn-&gt;error;<br/>}<br/><br/>$conn-&gt;close();<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection$conn = new mysqli($servername, $username, $password, $dbname);\n // Check connection\n if ($conn->connect_error)\u00a0{\n\u00a0\u00a0die(\"Connection failed: \" . $conn->connect_error);}\n\n $sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\";\n if ($conn->query($sql) === TRUE) {\u00a0 echo \"New record created successfully\";} else {\n  \u00a0 echo \"Error: \" . $sql . \"<br>\" . $conn->error;}$conn->close();\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"New record created successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Error: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\";\n if (mysqli_query($conn, $sql)) {\u00a0 echo \"New record created successfully\";} else {\u00a0 echo \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);}mysqli_close($conn);\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDB\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "// Create connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// Check connection",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "die",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Connection failed: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "if",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"New record created successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "else",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"Error: \"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"<br>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n// Check connection\nif (!$conn)\u00a0{\ndie(\"Connection failed: \" . mysqli_connect_error());}$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\nVALUES ('John', 'Doe', 'john@example.com')\";\nif (mysqli_query($conn, $sql)) {\u00a0 echo \"New record created successfully\";} else {\u00a0 echo \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);}mysqli_close($conn);\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\";\n if (mysqli_query($conn, $sql)) {\u00a0 echo \"New record created successfully\";} else {\u00a0 echo \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);}mysqli_close($conn);\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "// Create connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// Check connection",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "die",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "if",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"New record created successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "else",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"Error: \"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/>$password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDB\"</span>;<br/><br/><span class=\"commentcolor\" style=\"color:slategray\">// Create connection<br/></span>\n$conn = mysqli_connect($servername, $username, $password, $dbname);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"commentcolor\" style=\"color:slategray\">// Check connection<br/></span><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (!$conn)\u00a0{<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">die</span>(<span class=\"phpstringcolor\" style=\"color:green\">\"Connection failed: \"</span> . mysqli_connect_error());<br/>}<br/><br/>$sql = <span class=\"phpstringcolor\" style=\"color:green\">\"INSERT INTO MyGuests (firstname, lastname, email)<br/>\n VALUES ('John', 'Doe', 'john@example.com')\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">if</span> (mysqli_query($conn, $sql)) {<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"New record created successfully\"</span>;<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">else</span> {<br/>\u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"Error: \"</span> . $sql . <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;br&gt;\"</span> . mysqli_error($conn);<br/>}<br/><br/>mysqli_close($conn);<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";$password = \"password\";$dbname = \"myDB\";// Create connection\n$conn = mysqli_connect($servername, $username, $password, $dbname);\n // Check connection\n if (!$conn)\u00a0{\n  \u00a0 die(\"Connection failed: \" . mysqli_connect_error());}$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\";\n if (mysqli_query($conn, $sql)) {\u00a0 echo \"New record created successfully\";} else {\u00a0 echo \"Error: \" . $sql . \"<br>\" . mysqli_error($conn);}mysqli_close($conn);\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDB\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "// Create connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// Check connection",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "die",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Connection failed: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n VALUES ('John', 'Doe', 'john@example.com')\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "if",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"New record created successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "else",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"Error: \"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [
+          {
+            "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";$dbname = \"myDBPDO\";try {\u00a0\u00a0$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 $sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n  \u00a0\n VALUES ('John', 'Doe', 'john@example.com')\";\n  \u00a0 // use exec() because no results are returned\u00a0 $conn->exec($sql);\n  \u00a0 echo \"New record created successfully\";} catch(PDOException $e) \n  {\u00a0\u00a0echo $sql . \"<br>\" . $e->getMessage();\n  }\n $conn = null;\n?>",
+            "color": "rgb(0, 0, 0)",
+            "class": "phpcolor"
+          },
+          {
+            "text": "<?php",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          },
+          {
+            "text": "\"localhost\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"username\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"password\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\"myDBPDO\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "try",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "new",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"mysql:host=$servername;dbname=$dbname\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// set the PDO error mode to exception",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n  \u00a0\n VALUES ('John', 'Doe', 'john@example.com')\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "// use exec() because no results are returned",
+            "color": "rgb(112, 128, 144)",
+            "class": "commentcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"New record created successfully\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "catch",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "echo",
+            "color": "rgb(0, 92, 197)",
+            "class": "phpkeywordcolor"
+          },
+          {
+            "text": "\"<br>\"",
+            "color": "rgb(0, 128, 0)",
+            "class": "phpstringcolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "\n",
+            "color": "rgb(153, 0, 85)",
+            "class": "phpnumbercolor"
+          },
+          {
+            "text": "?>",
+            "color": "rgb(215, 58, 73)",
+            "class": "phptagcolor"
+          }
+        ],
+        "classList": [
+          "w3-code",
+          "htmlHigh",
+          "notranslate"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<?php$servername = \"localhost\";$username = \"username\";\n$password = \"password\";$dbname = \"myDBPDO\";try {\u00a0\u00a0$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n// set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n$sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n\nVALUES ('John', 'Doe', 'john@example.com')\";\n// use exec() because no results are returned\u00a0 $conn->exec($sql);\necho \"New record created successfully\";} catch(PDOException $e)\n{\u00a0\u00a0echo $sql . \"<br>\" . $e->getMessage();\n}\n$conn = null;\n?>",
+      "syntax_highlighting": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";$dbname = \"myDBPDO\";try {\u00a0\u00a0$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 $sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n  \u00a0\n VALUES ('John', 'Doe', 'john@example.com')\";\n  \u00a0 // use exec() because no results are returned\u00a0 $conn->exec($sql);\n  \u00a0 echo \"New record created successfully\";} catch(PDOException $e) \n  {\u00a0\u00a0echo $sql . \"<br>\" . $e->getMessage();\n  }\n $conn = null;\n?>",
+          "color": "black",
+          "class": [
+            "phpcolor"
+          ]
+        },
+        {
+          "text": "<?php",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"username\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"password\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\"myDBPDO\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "try",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "new",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"mysql:host=$servername;dbname=$dbname\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// set the PDO error mode to exception",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n  \u00a0\n VALUES ('John', 'Doe', 'john@example.com')\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "// use exec() because no results are returned",
+          "color": "slategray",
+          "class": [
+            "commentcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"New record created successfully\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "catch",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "echo",
+          "color": "#005cc5",
+          "class": [
+            "phpkeywordcolor"
+          ]
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "green",
+          "class": [
+            "phpstringcolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "\n",
+          "color": "#905",
+          "class": [
+            "phpnumbercolor"
+          ]
+        },
+        {
+          "text": "?>",
+          "color": "#d73a49",
+          "class": [
+            "phptagcolor"
+          ]
+        }
+      ],
+      "language": "html",
+      "code_html": "<div class=\"w3-code htmlHigh notranslate\">\n<span class=\"phpcolor\" style=\"color:black\"><span class=\"phptagcolor\" style=\"color:#d73a49\">&lt;?php</span><br/>$servername = <span class=\"phpstringcolor\" style=\"color:green\">\"localhost\"</span>;<br/>$username = <span class=\"phpstringcolor\" style=\"color:green\">\"username\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> $password = <span class=\"phpstringcolor\" style=\"color:green\">\"password\"</span>;<br/>$dbname = <span class=\"phpstringcolor\" style=\"color:green\">\"myDBPDO\"</span>;<br/><br/><span class=\"phpkeywordcolor\" style=\"color:#005cc5\">try</span> {<br/>\u00a0\u00a0$conn = <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">new</span> PDO(<span class=\"phpstringcolor\" style=\"color:green\">\"mysql:host=$servername;dbname=$dbname\"</span>, $username, $password);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// set the PDO error mode to exception<br/></span>\u00a0 $conn-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 $sql = <span class=\"phpstringcolor\" style=\"color:green\">\"INSERT INTO MyGuests (firstname, lastname, email)<br/>\n  \u00a0\n VALUES ('John', 'Doe', 'john@example.com')\"</span>;<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"commentcolor\" style=\"color:slategray\">// use exec() because no results are returned<br/></span>\u00a0 $conn-&gt;exec($sql);<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  \u00a0 <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> <span class=\"phpstringcolor\" style=\"color:green\">\"New record created successfully\"</span>;<br/>} <span class=\"phpkeywordcolor\" style=\"color:#005cc5\">catch</span>(PDOException $e) <span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  {<br/>\u00a0\u00a0<span class=\"phpkeywordcolor\" style=\"color:#005cc5\">echo</span> $sql . <span class=\"phpstringcolor\" style=\"color:green\">\"&lt;br&gt;\"</span> . $e-&gt;getMessage();<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span>  }<br/><span class=\"phpnumbercolor\" style=\"color:#905\">\n</span> <br/>$conn = null;<br/>\n<span class=\"phptagcolor\" style=\"color:#d73a49\">?&gt;</span></span>\n</div>",
+      "code_classes": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [
+        {
+          "text": "<?php$servername = \"localhost\";$username = \"username\";\n $password = \"password\";$dbname = \"myDBPDO\";try {\u00a0\u00a0$conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $username, $password);\n  \u00a0 // set the PDO error mode to exception\u00a0 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n  \u00a0 $sql = \"INSERT INTO MyGuests (firstname, lastname, email)\n  \u00a0\n VALUES ('John', 'Doe', 'john@example.com')\";\n  \u00a0 // use exec() because no results are returned\u00a0 $conn->exec($sql);\n  \u00a0 echo \"New record created successfully\";} catch(PDOException $e) \n  {\u00a0\u00a0echo $sql . \"<br>\" . $e->getMessage();\n  }\n $conn = null;\n?>",
+          "color": "rgb(0, 0, 0)",
+          "class": "phpcolor"
+        },
+        {
+          "text": "<?php",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        },
+        {
+          "text": "\"localhost\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"username\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"password\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\"myDBPDO\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "try",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "new",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"mysql:host=$servername;dbname=$dbname\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// set the PDO error mode to exception",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\"INSERT INTO MyGuests (firstname, lastname, email)\n  \u00a0\n VALUES ('John', 'Doe', 'john@example.com')\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "// use exec() because no results are returned",
+          "color": "rgb(112, 128, 144)",
+          "class": "commentcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"New record created successfully\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "catch",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "echo",
+          "color": "rgb(0, 92, 197)",
+          "class": "phpkeywordcolor"
+        },
+        {
+          "text": "\"<br>\"",
+          "color": "rgb(0, 128, 0)",
+          "class": "phpstringcolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "\n",
+          "color": "rgb(153, 0, 85)",
+          "class": "phpnumbercolor"
+        },
+        {
+          "text": "?>",
+          "color": "rgb(215, 58, 73)",
+          "class": "phptagcolor"
+        }
+      ],
+      "class_list": [
+        "w3-code",
+        "htmlHigh",
+        "notranslate"
+      ],
+      "is_notranslate": true
+    }
+  ]
+}

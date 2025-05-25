@@ -1,0 +1,377 @@
+{
+  "title": "Vue Fallthrough Attributes",
+  "url": "https://www.w3schools.com/vue/vue_fallthru-attr.php",
+  "metadata": {
+    "viewport": "width=device-width, initial-scale=1",
+    "title": "W3Schools.com",
+    "Keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website",
+    "Description": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, Python, Bootstrap, Java and XML.",
+    "og:image": "https://www.w3schools.com/images/w3schools_logo_436_2.png",
+    "og:image:type": "image/png",
+    "og:image:width": "436",
+    "og:image:height": "228",
+    "og:description": "W3Schools offers free online tutorials, references and exercises in all the major languages of the web. Covering popular subjects like HTML, CSS, JavaScript, Python, SQL, Java, and many, many more.",
+    "msapplication-TileColor": "#00a300",
+    "theme-color": "#ffffff",
+    "keywords": "HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website"
+  },
+  "content": [
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h1"
+      },
+      "text": "Vue Fallthrough Attributes",
+      "level": "h1"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "A component can be called with attributes that are not declared as props, and they will simply fall through to the root element in the component.",
+      "html": "<p>A component can be called with attributes that are not declared as props, and they will simply <strong>fall through</strong> to the root element in the component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "With fallthrough attributes you get a better overview from the parent where the component is created, and it simplifies our code because we don't need to declare the attribute as a prop.",
+      "html": "<p>With <strong>fallthrough attributes</strong> you get a better overview from the parent where the component is created, and it simplifies our code because we don't need to declare the attribute as a prop.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Typical attributes used to fall through are class , style and v-on .",
+      "html": "<p>Typical attributes used to fall through are <code>class</code>, <code>style</code> and <code>v-on</code>.</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Fallthrough Attributes",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "It can be nice to for example control the component styling from the parent rather than having the styling hidden away inside the component.",
+      "html": "<p>It can be nice to for example control the component styling from the parent rather than having the styling hidden away inside the component.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Let's create a new example, a basic to-do list in Vue, and see how the style attribute falls through to the components representing things to do.",
+      "html": "<p>Let's create a new example, a basic to-do list in Vue, and see how the style attribute falls through to the components representing things to do.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "So, our App.vue should contain the list of things to do, and an <input> element and a <button> to add new things to do. Each list item is a <todo-item /> component.",
+      "html": "<p>So, our <code>App.vue</code> should contain the list of things to do, and an <code>&lt;input&gt;</code> element and a <code>&lt;button&gt;</code> to add new things to do. Each list item is a <code>&lt;todo-item /&gt;</code> component.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh3\n>\nTodo List\n</\nh3\n>\n\n\n<\nul\n>\n\n\n<\ntodo-item\n\n\nv-for\n=\n\"\nx in items\n\"\n\n\n:key\n=\n\"\nx\n\"\n\n\n:item-name\n=\n\"\nx\n\"\n\n\n/>\n\n\n</\nul\n>\n\n\n<\ninput\n\nv-model\n=\n\"\nnewItem\n\"\n>\n\n\n<\nbutton\n\n@click\n=\n\"\naddItem\n\"\n>\nAdd\n</\nbutton\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\n\ndata\n(\n)\n\n{\n\n\nreturn\n\n{\n\nnewItem\n:\n\n''\n,\n\nitems\n:\n\n[\n'Buy apples'\n,\n'Make pizza'\n,\n'Mow the lawn'\n]\n\n\n}\n;\n\n\n}\n,\n\nmethods\n:\n\n{\n\n\naddItem\n(\n)\n\n{\n\n\nthis\n.\nitems\n.\npush\n(\nthis\n.\nnewItem\n)\n,\n\n\nthis\n.\nnewItem\n=\n\n''\n;\n\n\n}\n\n\n}\n\n\n}\n\n\n</\nscript\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h3</span><span class=\"token punctuation\">&gt;</span></span>Todo List<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h3</span><span class=\"token punctuation\">&gt;</span></span>  \n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>ul</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>todo-item</span>\n      <span class=\"token attr-name\">v-for</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x in items<span class=\"token punctuation\">\"</span></span>\n      <span class=\"token attr-name\">:key</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x<span class=\"token punctuation\">\"</span></span>\n      <span class=\"token attr-name\">:item-name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x<span class=\"token punctuation\">\"</span></span>\n    <span class=\"token punctuation\">/&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>ul</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">v-model</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>newItem<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>addItem<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Add<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n  <span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n    <span class=\"token function\">data</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token keyword keyword-return\">return</span> <span class=\"token punctuation\">{</span>\n        newItem<span class=\"token operator\">:</span> <span class=\"token string\">''</span><span class=\"token punctuation\">,</span>\n        items<span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'Buy apples'</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Make pizza'</span><span class=\"token punctuation\">,</span><span class=\"token string\">'Mow the lawn'</span><span class=\"token punctuation\">]</span>\n      <span class=\"token punctuation\">}</span><span class=\"token punctuation\">;</span>\n    <span class=\"token punctuation\">}</span><span class=\"token punctuation\">,</span>\n    methods<span class=\"token operator\">:</span> <span class=\"token punctuation\">{</span>\n      <span class=\"token function\">addItem</span><span class=\"token punctuation\">(</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">{</span>\n        <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>items<span class=\"token punctuation\">.</span><span class=\"token function\">push</span><span class=\"token punctuation\">(</span><span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>newItem<span class=\"token punctuation\">)</span><span class=\"token punctuation\">,</span>\n        <span class=\"token keyword keyword-this\">this</span><span class=\"token punctuation\">.</span>newItem <span class=\"token operator\">=</span> <span class=\"token string\">''</span><span class=\"token punctuation\">;</span>\n      <span class=\"token punctuation\">}</span>\n    <span class=\"token punctuation\">}</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "And TodoItem.vue just receives the description of what to do as a prop:",
+      "html": "<p>And <code>TodoItem.vue</code> just receives the description of what to do as a prop:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nli\n>\n{{ itemName }}\n</\nli\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\nprops\n:\n\n[\n'itemName'\n]\n\n\n}\n\n\n</\nscript\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>li</span><span class=\"token punctuation\">&gt;</span></span>{{ itemName }}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>li</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n  <span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n    props<span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'itemName'</span><span class=\"token punctuation\">]</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n</code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To build our application correctly we also need the right setup in main.js :",
+      "html": "<p>To build our application correctly we also need the right setup in <code>main.js</code>:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "javascript",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-js"
+        ],
+        "isNotranslate": true
+      },
+      "code": "import\n\n{\ncreateApp\n}\n\nfrom\n\n'vue'\n\n\n\nimport\nApp\nfrom\n\n'./App.vue'\n\n\nimport\nTodoItem\nfrom\n\n'./components/TodoItem.vue'\n\n\n\nconst\napp\n=\n\ncreateApp\n(\nApp\n)\n\napp\n.\ncomponent\n(\n'todo-item'\n,\nTodoItem\n)\n\napp\n.\nmount\n(\n'#app'\n)",
+      "language": "javascript",
+      "code_html": "<pre class=\"notranslate w3-white language-js\" data-line=\"4,7\" tabindex=\"0\"><code class=\"language-js\"><span class=\"token keyword keyword-import\">import</span> <span class=\"token punctuation\">{</span> createApp <span class=\"token punctuation\">}</span> <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">'vue'</span>\n  \n<span class=\"token keyword keyword-import\">import</span> App <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">'./App.vue'</span>\n<span class=\"token keyword keyword-import\">import</span> TodoItem <span class=\"token keyword keyword-from\">from</span> <span class=\"token string\">'./components/TodoItem.vue'</span>\n\n<span class=\"token keyword keyword-const\">const</span> app <span class=\"token operator\">=</span> <span class=\"token function\">createApp</span><span class=\"token punctuation\">(</span>App<span class=\"token punctuation\">)</span>\napp<span class=\"token punctuation\">.</span><span class=\"token function\">component</span><span class=\"token punctuation\">(</span><span class=\"token string\">'todo-item'</span><span class=\"token punctuation\">,</span> TodoItem<span class=\"token punctuation\">)</span>\napp<span class=\"token punctuation\">.</span><span class=\"token function\">mount</span><span class=\"token punctuation\">(</span><span class=\"token string\">'#app'</span><span class=\"token punctuation\">)</span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"4\" data-start=\"4\" style=\"top: 66px; width: 789px;\"> \n</div><div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"7\" data-start=\"7\" style=\"top: 132px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-js"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To see the point of this section, that properties can fall through to the root element inside the <template> of our component, we can give the list items some styling from App.vue :",
+      "html": "<p>To see the point of this section, that properties can fall through to the root element inside the <code>&lt;template&gt;</code> of our component, we can give the list items some styling from <code>App.vue</code>:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nh3\n>\nTodo List\n</\nh3\n>\n\n\n<\nul\n>\n\n\n<\ntodo-item\n\n\nv-for\n=\n\"\nx in items\n\"\n\n\n:key\n=\n\"\nx\n\"\n\n\n:item-name\n=\n\"\nx\n\"\n\n\nstyle\n=\n\"\nbackground-color\n:\nlightgreen\n;\n\"\n\n\n/>\n\n\n</\nul\n>\n\n\n<\ninput\n\nv-model\n=\n\"\nnewItem\n\"\n>\n\n\n<\nbutton\n\n@click\n=\n\"\naddItem\n\"\n>\nAdd\n</\nbutton\n>\n\n\n</\ntemplate\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"8\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>h3</span><span class=\"token punctuation\">&gt;</span></span>Todo List<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>h3</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>ul</span><span class=\"token punctuation\">&gt;</span></span>\n    <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>todo-item</span>\n      <span class=\"token attr-name\">v-for</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x in items<span class=\"token punctuation\">\"</span></span>\n      <span class=\"token attr-name\">:key</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x<span class=\"token punctuation\">\"</span></span>\n      <span class=\"token attr-name\">:item-name</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>x<span class=\"token punctuation\">\"</span></span>\n      <span class=\"token special-attr\"><span class=\"token attr-name\"></span><strong><span class=\"token attr-name\">style</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span><span class=\"token value css language-css\"><span class=\"token property\">background-color</span><span class=\"token punctuation\">:</span> lightgreen<span class=\"token punctuation\">;</span></span><span class=\"token punctuation\">\"</span></span></strong><span class=\"token attr-value\"><span class=\"token punctuation\"></span></span></span>\n    <span class=\"token punctuation\">/&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>ul</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>input</span> <span class=\"token attr-name\">v-model</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>newItem<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>button</span> <span class=\"token attr-name\">@click</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>addItem<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span>Add<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>button</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"8\" data-start=\"8\" style=\"top: 154px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To confirm that the style attribute has actually fallen through we can right click an <li> element in our to-do list in the browser, choose 'Inspect', and we can see the style attribute is now on the <li> element:",
+      "html": "<p><strong>To confirm that the style attribute has actually fallen through</strong> we can right click an <code>&lt;li&gt;</code> element in our \nto-do list in the browser, choose 'Inspect', and we can see the style attribute is now on the <code>&lt;li&gt;</code> element:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Merging 'class' and 'style' Attributes",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If 'class' or 'style' attributes are already set, and 'class' or 'style' attributes also comes from the parent as fallthrough attributes, the attributes will be merged.",
+      "html": "<p>If 'class' or 'style' attributes are already set, and 'class' or 'style' attributes also comes from the parent as fallthrough attributes, the attributes will be merged.</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "css",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\nli\n\nstyle\n=\n\"\nmargin\n:\n5px 0\n;\n\"\n>\n{{ itemName }}\n</\nli\n>\n\n\n</\ntemplate\n>\n\n\n\n<\nscript\n>\n\n\nexport\n\ndefault\n\n{\n\nprops\n:\n\n[\n'itemName'\n]\n\n\n}\n\n\n</\nscript\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"2\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>li</span> <span class=\"token special-attr\"><span class=\"token attr-name\"></span><strong><span class=\"token attr-name\">style</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span><span class=\"token value css language-css\"><span class=\"token property\">margin</span><span class=\"token punctuation\">:</span> 5px 0<span class=\"token punctuation\">;</span></span><span class=\"token punctuation\">\"</span></span></strong><span class=\"token attr-value\"><span class=\"token punctuation\"></span></span></span><span class=\"token punctuation\">&gt;</span></span>{{ itemName }}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>li</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>script</span><span class=\"token punctuation\">&gt;</span></span><span class=\"token script\"><span class=\"token language-javascript\">\n  <span class=\"token keyword keyword-export\">export</span> <span class=\"token keyword keyword-default\">default</span> <span class=\"token punctuation\">{</span>\n    props<span class=\"token operator\">:</span> <span class=\"token punctuation\">[</span><span class=\"token string\">'itemName'</span><span class=\"token punctuation\">]</span>\n  <span class=\"token punctuation\">}</span>\n</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>script</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"2\" data-start=\"2\" style=\"top: 22px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we right click an <li> element in the browser we can see that the attributes have been merged. Margin is set directly on the <li> element inside the component, and is merged with the background-color that falls through from the parent:",
+      "html": "<p>If we right click an <code>&lt;li&gt;</code> element in the browser we can see that the attributes have been merged. Margin is set directly on the <code>&lt;li&gt;</code> element inside the component, and is merged with the background-color that falls through from the parent:</p>"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "$attrs",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "If we have more than one element on the root level of the component, it is no longer clear which element the attributes should fall through to.",
+      "html": "<p>If we have more than one element on the root level of the component, it is no longer clear which element the attributes should fall through to.</p>"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "To define which root element gets the fallthrough attributes we can mark the element with the built-in $attrs object, like this:",
+      "html": "<p>To define which root element gets the fallthrough attributes we can mark the element with the built-in <code>$attrs</code> object, like this:</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [
+          "notranslate",
+          "w3-white",
+          "language-html"
+        ],
+        "isNotranslate": true
+      },
+      "code": "<\ntemplate\n>\n\n\n<\ndiv\n\nclass\n=\n\"\npinkBall\n\"\n>\n</\ndiv\n>\n\n\n<\nli\n\nv-bind\n=\n\"\n$attrs\n\"\n>\n{{ itemName }}\n</\nli\n>\n\n\n<\ndiv\n\nclass\n=\n\"\npinkBall\n\"\n>\n</\ndiv\n>\n\n\n</\ntemplate\n>",
+      "language": "html",
+      "code_html": "<pre class=\"notranslate w3-white language-html\" data-line=\"3\" tabindex=\"0\"><code class=\"language-html\"><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>pinkBall<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>li</span> <span class=\"token attr-name\"></span><strong><span class=\"token attr-name\">v-bind</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>$attrs<span class=\"token punctuation\">\"</span></span></strong><span class=\"token attr-value\"><span class=\"token punctuation\"></span></span><span class=\"token punctuation\">&gt;</span></span>{{ itemName }}<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>li</span><span class=\"token punctuation\">&gt;</span></span>\n  <span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;</span>div</span> <span class=\"token attr-name\">class</span><span class=\"token attr-value\"><span class=\"token punctuation attr-equals\">=</span><span class=\"token punctuation\">\"</span>pinkBall<span class=\"token punctuation\">\"</span></span><span class=\"token punctuation\">&gt;</span></span><span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>div</span><span class=\"token punctuation\">&gt;</span></span>\n<span class=\"token tag\"><span class=\"token tag\"><span class=\"token punctuation\">&lt;/</span>template</span><span class=\"token punctuation\">&gt;</span></span>\n<div aria-hidden=\"true\" class=\"line-highlight\" data-range=\"3\" data-start=\"3\" style=\"top: 44px; width: 789px;\"> \n</div></code></pre>",
+      "code_classes": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [
+        "notranslate",
+        "w3-white",
+        "language-html"
+      ],
+      "is_notranslate": true
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Vue Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Test Yourself With Exercises",
+      "level": "h2"
+    },
+    {
+      "type": "header",
+      "metadata": {
+        "level": "h2"
+      },
+      "text": "Exercise:",
+      "level": "h2"
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "text": "Set the root element of the 'fish-type' component to belong to the 'blue' CSS class (create a fallthrough attribute).",
+      "html": "<p>Set the root element of the 'fish-type' component to belong to the 'blue' CSS class (create a fallthrough attribute).</p>"
+    },
+    {
+      "type": "code",
+      "metadata": {
+        "language": "unknown",
+        "tryItLink": null,
+        "syntaxHighlighting": [],
+        "classList": [],
+        "isNotranslate": false
+      },
+      "code": "<fish-type\n/>",
+      "language": "html",
+      "code_html": "<pre style=\"overflow: auto;\">&lt;fish-type <input maxlength=\"20\" name=\"ex1\" style=\"width: 21ch;\"/> /&gt;\n</pre>",
+      "code_classes": [],
+      "tryItLink": null,
+      "syntax_highlighting_data": [],
+      "class_list": [],
+      "is_notranslate": false
+    },
+    {
+      "type": "text",
+      "metadata": {},
+      "links": [
+        {
+          "text": "Start the Exercise",
+          "href": "https://www.w3schools.com/exercise.php?filename=exercise_components6",
+          "title": ""
+        }
+      ],
+      "text": "Start the Exercise",
+      "html": "<p><a href=\"exercise.php?filename=exercise_components6\" target=\"_blank\">Start the Exercise</a></p>"
+    }
+  ]
+}
