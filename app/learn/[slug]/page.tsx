@@ -360,7 +360,7 @@ export default async function CoursePage({
             <CourseProgress 
               courseId={String(course.id)} 
               courseName={course.title}
-              estimatedTime={course.metadata?.estimated_time ? parseInt(course.metadata.estimated_time, 10) : undefined}
+              estimatedTime={course.metadata?.estimated_time ? parseInt(String(course.metadata.estimated_time), 10) : undefined}
             />
             
             {/* Content */}
