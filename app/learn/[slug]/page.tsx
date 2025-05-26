@@ -129,6 +129,8 @@ export default async function CoursePage({
                 code={item.code || ''}
                 codeHtml={item.code_html}
                 language={item.language || 'unknown'}
+                syntax_highlighting={item.syntax_highlighting || []}
+                code_classes={item.code_classes || []}
               />
             );
             
@@ -192,6 +194,8 @@ export default async function CoursePage({
                   <CodeSection 
                     code={item.code || '// Add your code here'}
                     language={item.language || 'javascript'}
+                    syntax_highlighting={item.syntax_highlighting || []}
+                    code_classes={item.code_classes || []}
                   />
                 </div>
               </div>

@@ -97,9 +97,11 @@ export function CourseOutline({ sections, courseId, className = '' }: CourseOutl
         {sections.map((section) => (
           <div 
             key={section.id}
-            className={`
-              pl-${section.level === 'h3' ? '4' : section.level === 'h4' ? '6' : section.level === 'h2' ? '2' : '0'}
-            `}
+            className={
+              section.level === 'h3' ? 'pl-4' : 
+              section.level === 'h4' ? 'pl-6' : 
+              section.level === 'h2' ? 'pl-2' : 'pl-0'
+            }
           >
             <a
               href={`#${section.id}`}
@@ -107,13 +109,11 @@ export function CourseOutline({ sections, courseId, className = '' }: CourseOutl
                 e.preventDefault();
                 handleSectionClick(section.id);
               }}
-              className={`
-                block py-1.5 px-2 rounded-md text-sm transition-colors
-                ${activeSection === section.id 
+              className={`block py-1.5 px-2 rounded-md text-sm transition-colors ${
+                activeSection === section.id 
                   ? 'bg-primary/10 text-primary font-medium' 
                   : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
-                }
-              `}
+              }`}
             >
               <div className="flex items-start">
                 <div className="flex-shrink-0 mr-2 mt-0.5">

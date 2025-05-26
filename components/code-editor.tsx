@@ -273,18 +273,6 @@ export function CodeEditor({
               overflowWrap: "normal"
             }}
           />
-          <pre 
-            className="absolute top-0 left-0 w-full h-full pt-10 pb-4 px-4 pointer-events-none overflow-auto"
-            style={{ 
-              fontFamily: 'inherit',
-              margin: 0,
-              lineHeight: 1.5,
-              tabSize: 2,
-              whiteSpace: "pre",
-              overflowWrap: "normal"
-            }}
-            dangerouslySetInnerHTML={{ __html: getSyntaxHighlightedCode() }}
-          />
         </div>
         
         {showPreview && (
