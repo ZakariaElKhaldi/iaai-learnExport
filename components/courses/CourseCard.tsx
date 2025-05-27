@@ -67,13 +67,19 @@ export default function CourseCard({
     <Card className={cn("overflow-hidden transition-all hover:shadow-md", className)}>
       <div className="aspect-video relative overflow-hidden">
         <Link href={`/courses/${id}`}>
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform hover:scale-105"
-          />
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-slate-100">
+              <BookOpen className="h-12 w-12 text-slate-400" />
+            </div>
+          )}
         </Link>
         <Badge 
           variant="secondary" 

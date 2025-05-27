@@ -367,7 +367,7 @@ export default function UserDashboardPage() {
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
                     <div>
-                      <h3 className="font-semibold">{courseInProgress.title}</h3>
+                    <h3 className="font-semibold">{courseInProgress.title}</h3>
                       <p className="text-sm text-muted-foreground">{courseInProgress.module}</p>
                     </div>
                     <Badge className={`self-start sm:self-auto mt-1 sm:mt-0 ${getLevelBadgeColor(courseInProgress.level)}`}>
@@ -392,11 +392,11 @@ export default function UserDashboardPage() {
                       <span className="font-medium">{courseInProgress.progress}%</span>
                     </div>
                   </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
       </div>
 
       {/* Main content area */}
@@ -437,7 +437,7 @@ export default function UserDashboardPage() {
                   <div key={stat.id} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all">
                     <div className="flex justify-between items-start">
                       <div className={statColor.icon}>
-                        {stat.icon}
+                    {stat.icon}
                       </div>
                       {stat.trend !== 'neutral' && (
                         <div className={`text-xs font-medium ${stat.trend === 'up' ? 'text-emerald-600' : 'text-red-600'}`}>
@@ -478,7 +478,7 @@ export default function UserDashboardPage() {
                             <BookOpenCheck className={`h-4 w-4 ${activityColor.icon}`} /> : 
                             <Award className={`h-4 w-4 ${activityColor.icon}`} />
                           }
-                        </div>
+                      </div>
                         <div>
                           <p className="text-sm font-medium">{activity.action}: {activity.title}</p>
                           <p className="text-xs text-muted-foreground mt-1">{activity.course}</p>
@@ -557,14 +557,14 @@ export default function UserDashboardPage() {
                                 </div>
                               </div>
                             </div>
-                          </div>
+              </div>
                         </Link>
                       </CardContent>
                     </Card>
                   );
                 })}
-              </TabsContent>
-              <TabsContent value="completed">
+            </TabsContent>
+            <TabsContent value="completed">
                 <Card>
                   <CardContent className="py-8 text-center">
                     <BookOpenCheck className="mx-auto h-10 w-10 mb-3 text-emerald-500" />
@@ -573,11 +573,11 @@ export default function UserDashboardPage() {
                     <div className="flex justify-center gap-2">
                       <Button variant="outline" size="sm">View Certificate</Button>
                       <Button size="sm">Review Course</Button>
-                    </div>
+              </div>
                   </CardContent>
                 </Card>
-              </TabsContent>
-              <TabsContent value="recommended">
+            </TabsContent>
+            <TabsContent value="recommended">
                 <Card>
                   <CardContent className="py-8 text-center">
                     <Zap className="mx-auto h-10 w-10 mb-3 text-amber-500" />
@@ -591,8 +591,8 @@ export default function UserDashboardPage() {
                     </Button>
                   </CardContent>
                 </Card>
-              </TabsContent>
-            </Tabs>
+            </TabsContent>
+          </Tabs>
           </div>
         </div>
 
@@ -684,7 +684,7 @@ export default function UserDashboardPage() {
                   </div>
                 );
               })}
-            </div>
+              </div>
             
             <Link 
               href="/user-notifications"
@@ -692,13 +692,13 @@ export default function UserDashboardPage() {
             >
               View All Notifications
             </Link>
-          </div>
+                    </div>
 
           {/* Quick Links - Redesigned to match the example */}
           <div className="bg-white rounded-xl shadow-sm overflow-hidden">
             <div className="px-6 py-4 border-b">
               <h2 className="text-lg font-semibold">Quick Links</h2>
-            </div>
+                  </div>
             
             <div className="grid grid-cols-2 divide-x divide-y">
               <Link 
@@ -717,7 +717,7 @@ export default function UserDashboardPage() {
               >
                 <div className="text-amber-600 mb-2">
                   <Award className="h-6 w-6" />
-                </div>
+                    </div>
                 <span className="font-medium text-sm">Certificates</span>
               </Link>
               
@@ -740,8 +740,8 @@ export default function UserDashboardPage() {
                 </div>
                 <span className="font-medium text-sm">Settings</span>
               </Link>
-            </div>
-          </div>
+                </div>
+              </div>
         </div>
       </div>
     </div>

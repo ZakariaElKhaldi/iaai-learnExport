@@ -16,7 +16,11 @@ import {
   Building2,
   FileText,
   Award,
-  CreditCard
+  CreditCard,
+  Layers,
+  MoreHorizontal,
+  Code,
+  Globe
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -75,56 +79,53 @@ const data = {
           title: "Learning Path",
           url: "/user-learning-path",
         },
+        {
+          title: "Practice Playground",
+          url: "/user-practice",
+        },
       ],
+    },
+    {
+      title: "Community",
+      url: "/user-community",
+      icon: Globe,
+      items: [],
     },
     {
       title: "Consultations",
       url: "/user-consultations",
       icon: MessageSquare,
-      items: [
-        {
-          title: "My Sessions",
-          url: "/user-consultations",
-        },
-        {
-          title: "Request Session",
-          url: "/user-consultations/request",
-        },
-        {
-          title: "Find Consultant",
-          url: "/consultants",
-        },
-      ],
-    },
-    {
-      title: "Calendar",
-      url: "/calendar",
-      icon: Calendar,
       items: [],
     },
     {
-      title: "Account",
-      url: "/user-profile",
-      icon: User,
-      items: [
-        {
-          title: "Profile",
-          url: "/user-profile",
-        },
-        {
-          title: "Settings",
-          url: "/user-settings",
-        },
-        {
-          title: "Billing",
-          url: "/user-billing-history",
-        },
-        {
-          title: "Subscriptions",
-          url: "/user-subscriptions",
-        },
-      ],
+      title: "Calendar",
+      url: "/user-calendar",
+      icon: Calendar,
+      items: [],
     },
+    // {
+    //   title: "Account",
+    //   url: "/user-profile",
+    //   icon: User,
+    //   items: [
+    //     {
+    //       title: "Profile",
+    //       url: "/user-profile",
+    //     },
+    //     {
+    //       title: "Settings",
+    //       url: "/user-settings",
+    //     },
+    //     {
+    //       title: "Billing",
+    //       url: "/user-billing",
+    //     },
+    //     {
+    //       title: "Subscriptions",
+    //       url: "/user-subscriptions",
+    //     },
+    //   ],
+    // },
   ],
   adminNav: [
     {
@@ -196,7 +197,7 @@ const data = {
         },
         {
           title: "Media Library",
-          url: "/creato-rmedia-library",
+          url: "/creator-media-library",
         },
       ],
     },
