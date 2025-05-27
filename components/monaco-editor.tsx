@@ -22,6 +22,7 @@ export interface MonacoEditorProps {
   readOnly?: boolean;
   defaultHeight?: string;
   onRun?: (code: string) => void;
+  showLanguageLabel?: boolean;
 }
 
 // Map language names to Monaco Editor language IDs
@@ -31,8 +32,10 @@ const languageMapping: Record<string, string> = {
   'ts': 'typescript',
   'tsx': 'typescript',
   'py': 'python',
-  'c': 'cpp',
+  'c': 'c',
   'cpp': 'cpp',
+  'c++': 'cpp',
+  'cxx': 'cpp',
   'java': 'java',
   'html': 'html',
   'css': 'css',
@@ -41,6 +44,24 @@ const languageMapping: Record<string, string> = {
   'python': 'python',
   'javascript': 'javascript',
   'typescript': 'typescript',
+  'rust': 'rust',
+  'rs': 'rust',
+  'go': 'go',
+  'sh': 'shell',
+  'bash': 'shell',
+  'shell': 'shell',
+  'php': 'php',
+  'rb': 'ruby',
+  'ruby': 'ruby',
+  'cs': 'csharp',
+  'csharp': 'csharp',
+  'scala': 'scala',
+  'swift': 'swift',
+  'kotlin': 'kotlin',
+  'sql': 'sql',
+  'yaml': 'yaml',
+  'yml': 'yaml',
+  'xml': 'xml',
   'unknown': 'plaintext',
 };
 
@@ -58,6 +79,7 @@ export function MonacoEditor({
   readOnly = false,
   defaultHeight = "350px",
   onRun,
+  showLanguageLabel = false,
 }: MonacoEditorProps) {
   const [editorMounted, setEditorMounted] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
@@ -72,7 +94,7 @@ export function MonacoEditor({
 
   // Normalize language ID
   const getLanguageId = () => {
-    const lang = language.toLowerCase();
+    const lang = language?.toLowerCase() || '';
     return languageMapping[lang] || languageExtensionMap[lang] || 'plaintext';
   };
 
@@ -248,111 +270,104 @@ export function MonacoEditor({
   return (
     <div className={`monaco-editor-container ${isFullscreen ? 'fixed inset-0 z-50 bg-white dark:bg-gray-900' : 'relative'}`}>
       {/* Editor toolbar */}
-      <div className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 p-2 border-b border-gray-200 dark:border-gray-700">
+      <div className="flex justify-between items-center bg-gray-100 dark:bg-gray-800 p-2 border border-b-0 border-gray-200 dark:border-gray-700 rounded-t-md">
         <div className="flex items-center space-x-2">
           <FileCode className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-          <span className="font-medium text-gray-700 dark:text-gray-300 text-sm">
-            {getLanguageId().charAt(0).toUpperCase() + getLanguageId().slice(1)} Editor
-          </span>
+          {showLanguageLabel && getLanguageId() !== 'plaintext' && (
+            <span className="text-sm text-gray-600 dark:text-gray-300">{getLanguageId()}</span>
+          )}
         </div>
-        
-        <div className="flex items-center space-x-1">
-          <button
-            onClick={formatCode}
-            className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            title="Format code (Ctrl+S)"
+        <div className="flex items-center space-x-2">
+          {/* Theme selector button */}
+          <div className="relative">
+            <button 
+              ref={themeButtonRef}
+              className="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded-md text-gray-600 dark:text-gray-300"
+              onClick={() => setThemeMenuOpen(!themeMenuOpen)}
+              title="Change theme"
+            >
+              {getCurrentThemeIcon()}
+            </button>
+            
+            {/* Theme dropdown menu */}
+            {themeMenuOpen && (
+              <div 
+                ref={themeMenuRef}
+                className="absolute right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-10 min-w-[150px]"
+              >
+                {themes.map((theme) => {
+                  const ThemeIcon = theme.icon;
+                  return (
+                    <button 
+                      key={theme.id} 
+                      className={`flex items-center px-4 py-2 w-full text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 ${currentTheme === theme.id ? 'bg-gray-100 dark:bg-gray-700 text-primary' : 'text-gray-700 dark:text-gray-300'}`}
+                      onClick={() => changeTheme(theme.id)}
+                    >
+                      <ThemeIcon className="h-4 w-4 mr-2" />
+                      {theme.name}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+          
+          {/* Format code button */}
+          <button 
+            onClick={formatCode} 
+            className="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded-md text-gray-600 dark:text-gray-300"
+            title="Format code"
           >
             <RefreshCw className="h-4 w-4" />
           </button>
           
+          {/* Copy button */}
+          <button 
+            onClick={handleCopy} 
+            className="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded-md text-gray-600 dark:text-gray-300"
+            title="Copy code"
+          >
+            {isCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+          </button>
+          
+          {/* Run button (if onRun is provided) */}
           {onRun && (
-            <button
-              onClick={runCode}
-              className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            <button 
+              onClick={runCode} 
+              className="bg-primary text-white hover:bg-primary/90 p-1 rounded-md"
               title="Run code"
             >
               <Play className="h-4 w-4" />
             </button>
           )}
           
-          <button
-            onClick={handleCopy}
-            className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            title="Copy code"
-          >
-            {isCopied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
-          </button>
-          
-          <div className="relative">
-            <button
-              ref={themeButtonRef}
-              onClick={() => setThemeMenuOpen(!themeMenuOpen)}
-              className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              title="Change theme"
-            >
-              {getCurrentThemeIcon()}
-            </button>
-            
-            {themeMenuOpen && (
-              <div 
-                ref={themeMenuRef}
-                className="absolute right-0 mt-1 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 border border-gray-200 dark:border-gray-700"
-              >
-                <ul className="py-1">
-                  {themes.map((theme) => {
-                    const ThemeIcon = theme.icon;
-                    return (
-                      <li key={theme.id}>
-                        <button
-                          onClick={() => changeTheme(theme.id)}
-                          className={`flex items-center w-full px-3 py-2 text-sm text-left ${
-                            currentTheme === theme.id
-                              ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white'
-                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                          }`}
-                        >
-                          <ThemeIcon className="h-4 w-4 mr-2" />
-                          {theme.name}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
-          </div>
-          
-          <button
-            onClick={toggleFullscreen}
-            className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+          {/* Fullscreen toggle button */}
+          <button 
+            onClick={toggleFullscreen} 
+            className="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded-md text-gray-600 dark:text-gray-300"
+            title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
           >
             {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
           </button>
         </div>
       </div>
       
-      {/* Monaco Editor instance */}
+      {/* Monaco Editor */}
       <Editor
-        height={isFullscreen ? "calc(100vh - 48px)" : defaultHeight}
-        language={getLanguageId()}
-        value={code}
+        height={isFullscreen ? "calc(100vh - 45px)" : defaultHeight}
+        defaultLanguage={getLanguageId()}
+        defaultValue={code}
         options={{
-          readOnly,
-          minimap: { enabled: true },
-          scrollBeyondLastLine: false,
           fontSize: 14,
-          ...getFormattingOptions(),
+          fontFamily: "'Fira Code', Menlo, Monaco, 'Courier New', monospace",
+          fontLigatures: true,
+          wordWrap: "on",
+          lineNumbers: "on",
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
           automaticLayout: true,
-          lineNumbers: 'on',
-          roundedSelection: true,
-          scrollbar: {
-            vertical: 'auto',
-            horizontal: 'auto',
-          },
-          autoIndent: 'advanced',
-          formatOnPaste: true,
-          formatOnType: true,
+          readOnly: readOnly,
+          ...getFormattingOptions(),
         }}
         theme={currentTheme}
         beforeMount={handleEditorWillMount}

@@ -152,6 +152,9 @@ export function CodeSection({
         // No pre-rendered HTML, highlight the code ourselves
         setHighlightedCode(applySyntaxHighlighting(code, langToUse));
       }
+      
+      // Also set the editor code
+      setEditorCode(code);
     }
   }, [code, codeHtml, language, code_classes]);
   
@@ -488,199 +491,86 @@ export function CodeSection({
     : 'relative mb-6 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 group shadow-sm hover:shadow-md transition-shadow';
   
   return (
-    <div className={containerClasses}>
-      <div className={isFullscreen ? 'w-full max-w-4xl' : 'w-full'}>
-        {/* Header */}
-        <div className="bg-gray-50 dark:bg-gray-800 px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Code className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-            <span className="font-medium text-gray-700 dark:text-gray-300">Example</span>
-          </div>
-          <div className="flex items-center gap-2">
-            {detectedLanguage && detectedLanguage !== 'unknown' && (
-              <Badge variant="outline" className="text-xs capitalize bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">{getLanguageLabel()}</Badge>
-            )}
-            <button 
-              className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              aria-label="Copy code"
-              onClick={handleCopy}
-              title="Copy code"
+    <div className={`relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 ${isFullscreen ? 'fixed inset-0 z-50 bg-white dark:bg-gray-900' : ''}`}>
+      {/* Code header */}
+      <div className="flex items-center justify-between bg-slate-100 dark:bg-slate-800 px-4 py-2">
+        <div className="flex items-center space-x-2">
+          <Code className="h-4 w-4" />
+          {expectedOutput && (
+            <Badge variant="outline" className="text-xs">Expected Output</Badge>
+          )}
+        </div>
+        <div className="flex items-center space-x-2">
+          {isEditing ? (
+            <button
+              onClick={() => setIsEditing(false)}
+              className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700"
+              title="View code"
             >
-              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              <Eye className="h-4 w-4" />
             </button>
-            <button 
-              className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              aria-label={isEditing ? "View code" : "Edit code"}
-              onClick={() => setIsEditing(!isEditing)}
-              title={isEditing ? "View code" : "Edit code"}
+          ) : (
+            <button
+              onClick={() => setIsEditing(true)}
+              className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700"
+              title="Edit code"
             >
               <Edit className="h-4 w-4" />
             </button>
-            <button 
-              className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
-              onClick={toggleFullscreen}
-              title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+          )}
+          
+          {!isEditing && (
+            <button
+              onClick={handleCopy}
+              className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700"
+              title="Copy code"
             >
-              <Maximize2 className="h-4 w-4" />
+              {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
             </button>
-            {canPreview && (
-              <button 
-                className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                aria-label={showPreview ? "Hide preview" : "Show preview"}
-                onClick={togglePreview}
-                title={showPreview ? "Hide preview" : "Show preview"}
-              >
-                <Eye className="h-4 w-4" />
-              </button>
-            )}
-          </div>
+          )}
+
+          {showPreview && !isEditing && expectedOutput && (
+            <button
+              onClick={togglePreview}
+              className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700"
+              title="Show output"
+            >
+              <Terminal className="h-4 w-4" />
+            </button>
+          )}
+          
+          <button
+            onClick={toggleFullscreen}
+            className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700"
+            title="Fullscreen"
+          >
+            <Maximize2 className="h-4 w-4" />
+          </button>
         </div>
-        
-        {/* Content */}
+      </div>
+
+      {/* Code content */}
+      <div className={`bg-slate-50 dark:bg-slate-900 ${isFullscreen ? 'h-[calc(100%-40px)]' : ''}`}>
         {isEditing ? (
-          <MonacoEditor
-            code={code}
-            language={detectedLanguage || language}
-            defaultHeight={isFullscreen ? "70vh" : "350px"}
-            readOnly={false}
+          <MonacoEditor 
+            code={editorCode} 
+            language={detectedLanguage}
             onChange={handleEditorChange}
-            onRun={handleRun}
+            defaultHeight={isFullscreen ? "calc(100vh - 100px)" : "350px"}
+            showLanguageLabel={false}
+            onRun={expectedOutput ? handleRun : undefined}
           />
-        ) : showPreview && canPreview ? (
-          <div className="relative">
-            <div className="h-8 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-3">
-              <div className="flex gap-1.5">
-                <div key="dot-red" className="w-3 h-3 rounded-full bg-red-400/80"></div>
-                <div key="dot-yellow" className="w-3 h-3 rounded-full bg-yellow-400/80"></div>
-                <div key="dot-green" className="w-3 h-3 rounded-full bg-green-400/80"></div>
-              </div>
-              <span className="text-xs font-medium text-slate-500">
-                {language === 'html' || language === 'css' || language === 'javascript' || language === 'js' ? 'Preview' : 'Console Output'}
-              </span>
-            </div>
-            
-            {/* Show iframe for web languages, console for others */}
-            {language === 'html' || language === 'css' || language === 'javascript' || language === 'js' ? (
-              <div 
-                className="bg-white dark:bg-slate-900 px-4 py-4 overflow-auto"
-                style={{ minHeight: isFullscreen ? "70vh" : "350px" }}
-              >
-                <iframe
-                  key={`preview-iframe-${language}`}
-                  srcDoc={`<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { margin: 0; padding: 10px; font-family: sans-serif; }
-    pre { white-space: pre; overflow-x: auto; tab-size: 2; }
-  </style>
-</head>
-<body>${isEditing ? editorCode : code}</body>
-</html>`}
-                  title="Code Preview"
-                  className="w-full h-full border-0"
-                  sandbox="allow-scripts"
-                  style={{ 
-                    height: isFullscreen ? 'calc(100vh - 10rem)' : '350px',
-                    background: 'white'
-                  }}
-                />
-              </div>
-            ) : (
-              <div 
-                className="bg-black text-green-400 px-4 py-4 overflow-auto font-mono text-sm"
-                style={{ minHeight: isFullscreen ? "70vh" : "350px" }}
-              >
-                <div className="flex items-center mb-2 text-white">
-                  <Terminal size={16} className="mr-2" />
-                  <span>{language === 'python' ? 'Python' : language === 'java' ? 'Java' : 'C/C++'} Output</span>
-                </div>
-                <pre style={{ margin: 0, padding: 0, whiteSpace: "pre-wrap" }}>
-                  {getSimulatedOutput().split('\n').map((line, index) => (
-                    <div key={`output-line-${index}`}>{line}</div>
-                  ))}
-                </pre>
-              </div>
-            )}
+        ) : showPreview ? (
+          <div className="p-4 font-mono text-sm whitespace-pre-wrap">
+            {getSimulatedOutput()}
           </div>
         ) : (
-          <div className="relative">
-            {/* Editor window dots UI */}
-            <div className="h-8 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center px-3">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-400/80"></div>
-                <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
-              </div>
-            </div>
-            
-            {/* Simple code display with basic syntax highlighting */}
-            <div 
-              className="bg-slate-50 dark:bg-slate-900 px-4 py-4 overflow-x-auto font-mono text-sm"
-              style={{ 
-                minHeight: isFullscreen ? "70vh" : "auto"
-              }}
-            >
-              <pre style={{ margin: 0, padding: 0, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
-                <code 
-                  className={`language-${detectedLanguage || language}`}
-                  dangerouslySetInnerHTML={{ __html: highlightedCode }}
-                />
-              </pre>
-            </div>
-          </div>
-        )}
-        
-        {/* Add a minimal syntax highlighting stylesheet */}
-        <style jsx global>{`
-          .language-html .tag { color: #22863a; }
-          .language-html .attr { color: #6f42c1; }
-          .language-html .string { color: #032f62; }
-          
-          .language-css .property { color: #005cc5; }
-          .language-css .value { color: #e36209; }
-          .language-css .selector { color: #22863a; }
-          
-          .language-javascript .keyword, .language-js .keyword { color: #d73a49; }
-          .language-javascript .string, .language-js .string { color: #032f62; }
-          .language-javascript .number, .language-js .number { color: #005cc5; }
-          .language-javascript .comment, .language-js .comment { color: #6a737d; }
-          
-          .language-python .keyword { color: #d73a49; }
-          .language-python .string { color: #032f62; }
-          .language-python .number { color: #005cc5; }
-          .language-python .comment { color: #6a737d; }
-          .language-python .builtin { color: #6f42c1; }
-          .language-python .decorator { color: #e36209; }
-          
-          .language-c .keyword, .language-cpp .keyword { color: #d73a49; }
-          .language-c .string, .language-cpp .string { color: #032f62; }
-          .language-c .number, .language-cpp .number { color: #005cc5; }
-          .language-c .comment, .language-cpp .comment { color: #6a737d; }
-          .language-c .preprocessor, .language-cpp .preprocessor { color: #e36209; }
-          .language-c .type, .language-cpp .type { color: #6f42c1; }
-          
-          .language-java .keyword { color: #d73a49; }
-          .language-java .string { color: #032f62; }
-          .language-java .number { color: #005cc5; }
-          .language-java .comment { color: #6a737d; }
-          .language-java .class { color: #6f42c1; }
-          .language-java .annotation { color: #e36209; }
-        `}</style>
-        
-        {/* Fullscreen exit button */}
-        {isFullscreen && (
-          <div className="mt-4 flex justify-end">
-            <button
-              onClick={toggleFullscreen}
-              className="px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white rounded-md flex items-center gap-2"
-            >
-              Exit Fullscreen
-            </button>
-          </div>
+          <pre className="p-4 text-sm whitespace-pre overflow-x-auto code-editor-theme">
+            <code 
+              className="language-text" 
+              dangerouslySetInnerHTML={{ __html: highlightedCode }} 
+            />
+          </pre>
         )}
       </div>
     </div>

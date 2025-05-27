@@ -62,6 +62,7 @@ import {
 import { usePathname, useSearchParams } from "next/navigation"
 import { useLearningProgress } from "@/hooks/use-learning-progress"
 import { Badge } from "@/components/ui/badge" 
+import { useSidebar } from "@/components/ui/sidebar"
 
 // User data - this could be fetched from an API in the future
 const userData = {
@@ -417,6 +418,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // Custom NavMain rendering to handle topic expansion
   const renderCustomNav = () => {
     const navItems = getNavItems();
+    const { state } = useSidebar();
+    const isCollapsed = state === "collapsed";
     
     return (
       <div className="space-y-1">
@@ -444,24 +447,26 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <div className="flex items-center gap-3">
                 {item.icon && <item.icon className="w-4 h-4" />}
-                <span className={item.isActive ? 'font-medium' : ''}>{item.title}</span>
+                {!isCollapsed && <span className={item.isActive ? 'font-medium' : ''}>{item.title}</span>}
               </div>
-              <div className="flex items-center gap-2">
-                {item.badge && (
-                  <Badge variant="outline" className="text-xs font-normal">
-                    {item.badge}
-                  </Badge>
-                )}
-                {item.items && item.items.length > 0 && item.url.startsWith('#') && (
-                  <ChevronRight className={`w-4 h-4 transition-transform ${
-                    expandedTopics.includes(item.url.substring(1)) ? 'rotate-90' : ''
-                  }`} />
-                )}
-              </div>
+              {!isCollapsed && (
+                <div className="flex items-center gap-2">
+                  {item.badge && (
+                    <Badge variant="outline" className="text-xs font-normal">
+                      {item.badge}
+                    </Badge>
+                  )}
+                  {item.items && item.items.length > 0 && item.url.startsWith('#') && (
+                    <ChevronRight className={`w-4 h-4 transition-transform ${
+                      expandedTopics.includes(item.url.substring(1)) ? 'rotate-90' : ''
+                    }`} />
+                  )}
+                </div>
+              )}
             </div>
             
-            {/* Render subitems if this is expanded or a non-topic item */}
-            {item.items && item.items.length > 0 && 
+            {/* Render subitems if this is expanded or a non-topic item and sidebar is not collapsed */}
+            {!isCollapsed && item.items && item.items.length > 0 && 
              (!item.url.startsWith('#') || expandedTopics.includes(item.url.substring(1))) && (
               <div className="ml-6 my-1 space-y-1 border-l pl-2 border-muted">
                 {item.items.map((subitem, subindex) => (
