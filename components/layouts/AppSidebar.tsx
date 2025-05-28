@@ -11,7 +11,11 @@ import {
   BarChart, 
   Briefcase,
   GraduationCap,
-  HelpCircle
+  HelpCircle,
+  BrainCircuit,
+  Server,
+  Shield,
+  Code
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -62,6 +66,31 @@ export function AppSidebar() {
           title: "Calendar",
           href: "/calendar",
           icon: Calendar,
+        },
+      ],
+    },
+    {
+      title: "Learning Tools",
+      items: [
+        {
+          title: "AI Laboratory",
+          href: "/user-ai-lab",
+          icon: BrainCircuit,
+        },
+        {
+          title: "Virtual Lab",
+          href: "/user-virtual-lab",
+          icon: Server,
+        },
+        {
+          title: "Cybersecurity Sandbox",
+          href: "/user-cybersecurity-sandbox",
+          icon: Shield,
+        },
+        {
+          title: "Practice",
+          href: "/user-practice",
+          icon: Code,
         },
       ],
     },

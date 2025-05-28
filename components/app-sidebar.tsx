@@ -20,7 +20,11 @@ import {
   Layers,
   MoreHorizontal,
   Code,
-  Globe
+  Globe,
+  Computer,
+  Shield,
+  BrainCircuit,
+  Server
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -83,6 +87,25 @@ const data = {
           title: "Practice Playground",
           url: "/user-practice",
         },
+      ],
+    },
+    {
+      title: "Learning Tools",
+      url: "/user-virtual-lab",
+      icon: Computer,
+      items: [
+        {
+          title: "AI Laboratory",
+          url: "/user-ai-lab",
+        },
+        {
+          title: "Virtual Lab",
+          url: "/user-virtual-lab",
+        },
+        {
+          title: "Cybersecurity Sandbox",
+          url: "/user-cybersecurity-sandbox",
+        }
       ],
     },
     {
