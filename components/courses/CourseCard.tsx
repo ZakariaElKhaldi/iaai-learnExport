@@ -68,13 +68,13 @@ export default function CourseCard({
       <div className="aspect-video relative overflow-hidden">
         <Link href={`/courses/${id}`}>
           {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover transition-transform hover:scale-105"
-            />
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform hover:scale-105"
+          />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-slate-100">
               <BookOpen className="h-12 w-12 text-slate-400" />

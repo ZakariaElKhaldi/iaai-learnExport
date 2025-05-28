@@ -804,6 +804,7 @@ export default function PracticePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const [problemListView, setProblemListView] = useState("grid"); // "grid" or "list"
+  const [consoleHeight, setConsoleHeight] = useState(200); // Default console height
   
   // Set default problem on initial load
   useEffect(() => {
@@ -864,10 +865,30 @@ export default function PracticePage() {
     }, 2000);
   };
   
+  // Handle console resize
+  const handleConsoleResize = (e: React.MouseEvent) => {
+    const startY = e.clientY;
+    const startHeight = consoleHeight;
+    
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      const deltaY = startY - moveEvent.clientY;
+      const newHeight = Math.max(120, Math.min(window.innerHeight * 0.6, startHeight + deltaY));
+      setConsoleHeight(newHeight);
+    };
+    
+    const handleMouseUp = () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+  
   return (
     <div className="flex flex-col h-screen max-h-screen overflow-hidden">
       {/* Header with problem info */}
-      <header className="flex items-center justify-between border-b bg-white px-4 py-2">
+      <header className="flex items-center justify-between border-b bg-white px-4 py-2 z-20 flex-shrink-0">
         <div className="flex items-center gap-2">
           {activeTab === "problems" && activeProblem ? (
             <>
@@ -974,11 +995,11 @@ export default function PracticePage() {
         </div>
       </header>
       
-      {/* Main content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      {/* Main content - fixed height, no scrolling */}
+      <div className="flex-1 flex overflow-hidden">
         {/* Tabs for navigation */}
         {!activeProblem && (
-          <div className="border-b bg-white">
+          <div className="border-b bg-white sticky top-0 z-10">
             <div className="max-w-screen-xl mx-auto">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                 <TabsList className="w-full justify-start border-b-0 rounded-none h-12 bg-transparent">
@@ -1014,11 +1035,11 @@ export default function PracticePage() {
           />
         ) : activeTab === "problems" && activeProblem ? (
           <div className="flex-1 flex overflow-hidden">
-            {/* Problem description sidebar */}
+            {/* Problem description sidebar with independent scrolling */}
             {showSidebar && (
-              <div className="w-[400px] border-r overflow-hidden flex flex-col">
+              <div className="w-[400px] border-r overflow-y-auto flex-shrink-0 h-full">
                 {/* LeetCode/HackerRank style info panel */}
-                <div className="flex items-center justify-between border-b bg-slate-50 px-4 py-2">
+                <div className="flex items-center justify-between border-b bg-slate-50 px-4 py-2 sticky top-0 z-10">
                   <span className="text-sm font-medium">Problem Description</span>
                   <div className="flex items-center gap-2">
                     <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -1034,7 +1055,7 @@ export default function PracticePage() {
                 </div>
                 
                 <Tabs defaultValue="description" className="flex-1 flex flex-col">
-                  <div className="border-b">
+                  <div className="border-b sticky top-[40px] bg-white z-10">
                     <TabsList className="h-10 w-full justify-start rounded-none bg-transparent px-4">
                       <TabsTrigger value="description" className="h-10 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
                         Description
@@ -1165,114 +1186,125 @@ export default function PracticePage() {
               </div>
             )}
             
-            {/* Code editor and results panel */}
-            <div className="flex-1 flex flex-col overflow-hidden">
-              {/* Monaco Editor */}
-              <div className="flex-1 overflow-hidden">
-                <MonacoEditor 
-                  code={code}
-                  language={language}
-                  onChange={(value) => setCode(value)}
-                  onRun={handleRunCode}
+            {/* Fixed position editor container - Contains both editor and console in fixed view */}
+            <div className="flex-1 relative">
+              <div className="absolute inset-0 flex flex-col">
+                {/* Editor section - adjusts height based on console height */}
+                <div className="flex-1" style={{ height: `calc(100% - ${consoleHeight}px)` }}>
+                  <MonacoEditor 
+                    code={code}
+                    language={language}
+                    onChange={(value) => setCode(value)}
+                    onRun={handleRunCode}
+                  />
+                </div>
+                
+                {/* Resizer handle */}
+                <div 
+                  className="h-1 bg-slate-200 hover:bg-blue-400 cursor-ns-resize"
+                  onMouseDown={handleConsoleResize}
                 />
-              </div>
-              
-              {/* Test results and console panel */}
-              <div className="h-72 border-t overflow-hidden flex flex-col">
-                <Tabs defaultValue="console" className="flex flex-col h-full">
-                  <div className="bg-slate-100 border-b px-3 py-1.5 flex items-center justify-between">
-                    <TabsList className="h-8">
-                      <TabsTrigger value="testcases" className="h-7 text-xs font-medium">
-                        Test Cases {testResults.length > 0 && (
-                          <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-xs bg-slate-200">
-                            {testResults.filter((t: any) => t.status === 'passed').length}/{testResults.length}
-                          </span>
-                        )}
-                      </TabsTrigger>
-                      <TabsTrigger value="console" className="h-7 text-xs font-medium">
-                        Console {consoleOutput && <span className="ml-1.5 h-1.5 w-1.5 rounded-full bg-green-500"></span>}
-                      </TabsTrigger>
-                    </TabsList>
+                
+                {/* Console panel with controlled height */}
+                <div 
+                  className="border-t flex flex-col bg-gray-900" 
+                  style={{ height: `${consoleHeight}px` }}
+                >
+                  <Tabs defaultValue="console" className="flex flex-col h-full">
+                    <div className="bg-slate-100 border-b px-3 py-1.5 flex items-center justify-between">
+                      <TabsList className="h-8">
+                        <TabsTrigger value="testcases" className="h-7 text-xs font-medium">
+                          Test Cases {testResults.length > 0 && (
+                            <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-xs bg-slate-200">
+                              {testResults.filter((t: any) => t.status === 'passed').length}/{testResults.length}
+                            </span>
+                          )}
+                        </TabsTrigger>
+                        <TabsTrigger value="console" className="h-7 text-xs font-medium">
+                          Console {consoleOutput && <span className="ml-1.5 h-1.5 w-1.5 rounded-full bg-green-500"></span>}
+                        </TabsTrigger>
+                      </TabsList>
+                      
+                      <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={() => {
+                        setConsoleOutput("");
+                        setTestResults([]);
+                      }}>
+                        <RefreshCw className="h-3.5 w-3.5 mr-1" />
+                        Clear
+                      </Button>
+                    </div>
                     
-                    <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={() => {
-                      setConsoleOutput("");
-                      setTestResults([]);
-                    }}>
-                      <RefreshCw className="h-3.5 w-3.5 mr-1" />
-                      Clear
-                    </Button>
-                  </div>
-                  
-                  <div className="flex-1 overflow-auto bg-white p-0">
-                    <TabsContent value="testcases" className="p-0 m-0 h-full">
-                      {testResults.length > 0 ? (
-                        <div className="divide-y">
-                          {testResults.map((result: any) => (
-                            <div key={result.id} className="flex p-3 hover:bg-slate-50 transition-colors">
-                              <div className="w-8 flex-shrink-0 flex items-start justify-center pt-0.5">
-                                {result.status === 'passed' ? (
-                                  <div className="rounded-full bg-green-100 p-1">
-                                    <CheckCircle className="text-green-600 h-4 w-4" />
-                                  </div>
-                                ) : (
-                                  <div className="rounded-full bg-red-100 p-1">
-                                    <XSquare className="text-red-600 h-4 w-4" />
-                                  </div>
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="text-sm font-medium flex items-center">
-                                  Test Case {result.id}
+                    <div className="flex-1 overflow-auto">
+                      <TabsContent value="testcases" className="p-0 m-0 h-full bg-white">
+                        {testResults.length > 0 ? (
+                          <div className="divide-y">
+                            {testResults.map((result: any) => (
+                              <div key={result.id} className="flex p-3 hover:bg-slate-50 transition-colors">
+                                <div className="w-8 flex-shrink-0 flex items-start justify-center pt-0.5">
                                   {result.status === 'passed' ? (
-                                    <span className="ml-2 text-xs px-1.5 py-0.5 rounded bg-green-100 text-green-800">Passed</span>
+                                    <div className="rounded-full bg-green-100 p-1">
+                                      <CheckCircle className="text-green-600 h-4 w-4" />
+                                    </div>
                                   ) : (
-                                    <span className="ml-2 text-xs px-1.5 py-0.5 rounded bg-red-100 text-red-800">Failed</span>
-                                  )}
-                                </div>
-                                <div className="mt-2 space-y-2">
-                                  <div className="text-xs rounded-md bg-slate-50 p-2">
-                                    <span className="font-medium text-slate-700 block mb-1">Input:</span>
-                                    <code className="text-slate-800 font-mono">{result.input}</code>
-                                  </div>
-                                  <div className="text-xs rounded-md bg-slate-50 p-2">
-                                    <span className="font-medium text-slate-700 block mb-1">Expected:</span>
-                                    <code className="text-slate-800 font-mono">{result.expected}</code>
-                                  </div>
-                                  {result.status !== 'passed' && (
-                                    <div className="text-xs rounded-md bg-red-50 p-2">
-                                      <span className="font-medium text-red-700 block mb-1">Your Output:</span>
-                                      <code className="text-red-800 font-mono">{result.output}</code>
+                                    <div className="rounded-full bg-red-100 p-1">
+                                      <XSquare className="text-red-600 h-4 w-4" />
                                     </div>
                                   )}
                                 </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="text-sm font-medium flex items-center">
+                                    Test Case {result.id}
+                                    {result.status === 'passed' ? (
+                                      <span className="ml-2 text-xs px-1.5 py-0.5 rounded bg-green-100 text-green-800">Passed</span>
+                                    ) : (
+                                      <span className="ml-2 text-xs px-1.5 py-0.5 rounded bg-red-100 text-red-800">Failed</span>
+                                    )}
+                                  </div>
+                                  <div className="mt-2 space-y-2">
+                                    <div className="text-xs rounded-md bg-slate-50 p-2">
+                                      <span className="font-medium text-slate-700 block mb-1">Input:</span>
+                                      <code className="text-slate-800 font-mono">{result.input}</code>
+                                    </div>
+                                    <div className="text-xs rounded-md bg-slate-50 p-2">
+                                      <span className="font-medium text-slate-700 block mb-1">Expected:</span>
+                                      <code className="text-slate-800 font-mono">{result.expected}</code>
+                                    </div>
+                                    {result.status !== 'passed' && (
+                                      <div className="text-xs rounded-md bg-red-50 p-2">
+                                        <span className="font-medium text-red-700 block mb-1">Your Output:</span>
+                                        <code className="text-red-800 font-mono">{result.output}</code>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
                               </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-center h-full text-muted-foreground">
+                            <div className="text-center">
+                              <div className="rounded-full bg-slate-100 p-3 mx-auto mb-3 w-fit">
+                                <AlertCircle className="h-6 w-6 text-slate-400" />
+                              </div>
+                              <p className="font-medium text-slate-600">Run your code to see test results</p>
+                              <p className="text-xs text-slate-500 mt-1">Test results will appear here after you run or submit your code</p>
                             </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="flex items-center justify-center h-full text-muted-foreground">
-                          <div className="text-center">
-                            <div className="rounded-full bg-slate-100 p-3 mx-auto mb-3 w-fit">
-                              <AlertCircle className="h-6 w-6 text-slate-400" />
-                            </div>
-                            <p className="font-medium text-slate-600">Run your code to see test results</p>
-                            <p className="text-xs text-slate-500 mt-1">Test results will appear here after you run or submit your code</p>
+                          </div>
+                        )}
+                      </TabsContent>
+                      
+                      <TabsContent value="console" className="p-0 m-0 h-full">
+                        <div className="h-full flex flex-col">
+                          <div className="flex-1 overflow-auto bg-gray-900 text-green-400 font-mono text-sm">
+                            <pre className="p-4 whitespace-pre-wrap">
+                              {consoleOutput || '> Console output will appear here\n> Run your code to see the results'}
+                            </pre>
                           </div>
                         </div>
-                      )}
-                    </TabsContent>
-                    
-                    <TabsContent value="console" className="p-0 m-0 h-full">
-                      <div className="h-full flex flex-col">
-                        <div className="flex-1 overflow-auto bg-gray-900 text-green-400 p-0 font-mono text-sm">
-                          <pre className="p-4 whitespace-pre-wrap">
-                            {consoleOutput || '> Console output will appear here\n> Run your code to see the results'}
-                          </pre>
-                        </div>
-                      </div>
-                    </TabsContent>
-                  </div>
-                </Tabs>
+                      </TabsContent>
+                    </div>
+                  </Tabs>
+                </div>
               </div>
             </div>
           </div>
