@@ -12,7 +12,7 @@ export default function UserLayout({
   return (
     <MainLayout>
       <ToastProvider>
-        <div className="p-1">
+        <div className="p-3 sm:p-4 md:p-6 pb-safe">
           {children}
         </div>
       </ToastProvider>

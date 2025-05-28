@@ -37,7 +37,7 @@ export default function LearningPathPage() {
   const currentColors = pathColors[pathLevel];
   
   return (
-    <div className="max-w-screen-xl mx-auto px-4 py-2 space-y-8">
+    <div className="max-w-screen-xl mx-auto px-4 py-6 md:py-8 space-y-8">
       {/* Header with path selector */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-2">

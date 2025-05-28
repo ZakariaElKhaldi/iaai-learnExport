@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { MonacoEditor } from "@/components/monaco-editor";
 import { 
   Code, FileCode, Filter, CheckCircle, Clock, Cpu, 
   Play, Save, Settings, ChevronLeft, ChevronRight, 
@@ -19,78 +18,71 @@ import {
   BookOpen, HelpCircle, ListChecks, Server, ArrowRight,
   Zap, Languages, ArrowUpRight, PanelLeft, PanelRight,
   LayoutGrid, List, Briefcase, Calendar as CalendarIcon,
-  Lock, Bookmark
+  Lock, Bookmark, Star, Target, Flame, Award,
+  TrendingUp, MessageSquare, ThumbsUp, Share2,
+  Download, Upload, Copy, Terminal, Maximize2,
+  Minimize2, Split, RotateCcw, Volume2, VolumeX,
+  Sun, Moon, Monitor, GitBranch, Heart, Lightbulb,
+  ChevronUp, ChevronDown, X
 } from "lucide-react";
 
-// Helper function for difficulty colors
+// Enhanced helper function for difficulty colors
 const getDifficultyColor = (difficulty: string) => {
   switch(difficulty.toLowerCase()) {
     case 'easy': return {
-      badge: 'bg-green-100 text-green-800',
-      text: 'text-green-600',
-      border: 'border-green-500'
+      badge: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+      text: 'text-emerald-600',
+      border: 'border-emerald-500',
+      bg: 'bg-emerald-50',
+      progress: 'bg-emerald-500'
     };
     case 'medium': return {
-      badge: 'bg-yellow-100 text-yellow-800',
-      text: 'text-yellow-600',
-      border: 'border-yellow-500'
+      badge: 'bg-amber-100 text-amber-800 border-amber-200',
+      text: 'text-amber-600',
+      border: 'border-amber-500',
+      bg: 'bg-amber-50',
+      progress: 'bg-amber-500'
     };
     case 'hard': return {
-      badge: 'bg-red-100 text-red-800',
-      text: 'text-red-600',
-      border: 'border-red-500'
-    };
-    case 'advanced': return {
-      badge: 'bg-purple-100 text-purple-800',
-      text: 'text-purple-600',
-      border: 'border-purple-500'
-    };
-    case 'intermediate': return {
-      badge: 'bg-blue-100 text-blue-800',
-      text: 'text-blue-600',
-      border: 'border-blue-500'
-    };
-    case 'beginner': return {
-      badge: 'bg-green-100 text-green-800',
-      text: 'text-green-600',
-      border: 'border-green-500'
-    };
-    case 'mixed': return {
-      badge: 'bg-amber-100 text-amber-800',
-      text: 'text-amber-600',
-      border: 'border-amber-500'
+      badge: 'bg-rose-100 text-rose-800 border-rose-200',
+      text: 'text-rose-600',
+      border: 'border-rose-500',
+      bg: 'bg-rose-50',
+      progress: 'bg-rose-500'
     };
     default: return {
-      badge: 'bg-slate-100 text-slate-800',
+      badge: 'bg-slate-100 text-slate-800 border-slate-200',
       text: 'text-slate-600',
-      border: 'border-slate-500'
+      border: 'border-slate-500',
+      bg: 'bg-slate-50',
+      progress: 'bg-slate-500'
     };
   }
 };
 
-// Mock code execution languages
+// Enhanced languages with icons
 const languages = [
-  { id: "javascript", name: "JavaScript", extension: "js", default: true },
-  { id: "python", name: "Python 3", extension: "py" },
-  { id: "java", name: "Java", extension: "java" },
-  { id: "cpp", name: "C++", extension: "cpp" },
-  { id: "csharp", name: "C#", extension: "cs" },
-  { id: "go", name: "Go", extension: "go" },
-  { id: "ruby", name: "Ruby", extension: "rb" },
-  { id: "typescript", name: "TypeScript", extension: "ts" },
-  { id: "rust", name: "Rust", extension: "rs" },
-  { id: "php", name: "PHP", extension: "php" },
+  { id: "javascript", name: "JavaScript", extension: "js", icon: "🟨", color: "text-yellow-600" },
+  { id: "python", name: "Python", extension: "py", icon: "🐍", color: "text-blue-600" },
+  { id: "java", name: "Java", extension: "java", icon: "☕", color: "text-orange-600" },
+  { id: "cpp", name: "C++", extension: "cpp", icon: "⚡", color: "text-blue-700" },
+  { id: "typescript", name: "TypeScript", extension: "ts", icon: "🔷", color: "text-blue-500" },
+  { id: "go", name: "Go", extension: "go", icon: "🐹", color: "text-cyan-600" },
+  { id: "rust", name: "Rust", extension: "rs", icon: "🦀", color: "text-orange-700" },
+  { id: "ruby", name: "Ruby", extension: "rb", icon: "💎", color: "text-red-600" },
 ];
 
-// Mock coding challenges
+// Enhanced mock coding challenges
 const challenges = [
   {
     id: "two-sum",
     title: "Two Sum",
     difficulty: "Easy",
-    description: `<p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
-    <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same element twice.</p>
-    <p>You can return the answer in any order.</p>`,
+    description: `Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.`,
     examples: [
       {
         input: "nums = [2,7,11,15], target = 9",
@@ -101,18 +93,18 @@ const challenges = [
         input: "nums = [3,2,4], target = 6",
         output: "[1,2]",
         explanation: "Because nums[1] + nums[2] == 6, we return [1, 2]."
-      },
-      {
-        input: "nums = [3,3], target = 6",
-        output: "[0,1]",
-        explanation: "Because nums[0] + nums[1] == 6, we return [0, 1]."
       }
     ],
     constraints: [
-      "2 <= nums.length <= 10^4",
-      "-10^9 <= nums[i] <= 10^9",
-      "-10^9 <= target <= 10^9",
+      "2 ≤ nums.length ≤ 10⁴",
+      "-10⁹ ≤ nums[i] ≤ 10⁹",
+      "-10⁹ ≤ target ≤ 10⁹",
       "Only one valid answer exists."
+    ],
+    hints: [
+      "Try using a hash map to store the complement of each number.",
+      "For each number, check if its complement exists in the hash map.",
+      "The complement of a number x with target t is t - x."
     ],
     starterCode: {
       javascript: `/**
@@ -121,49 +113,64 @@ const challenges = [
  * @return {number[]}
  */
 function twoSum(nums, target) {
-    // Write your code here
-};`,
-      python: `class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        # Write your code here
-        pass`,
+    // Your solution here
+    
+}`,
+      python: `def twoSum(nums, target):
+    """
+    :type nums: List[int]
+    :type target: int
+    :rtype: List[int]
+    """
+    # Your solution here
+    pass`,
       java: `class Solution {
     public int[] twoSum(int[] nums, int target) {
-        // Write your code here
+        // Your solution here
+        
     }
 }`
     },
     testCases: [
-      { input: "[2,7,11,15], 9", expected: "[0,1]" },
-      { input: "[3,2,4], 6", expected: "[1,2]" },
-      { input: "[3,3], 6", expected: "[0,1]" },
-      { input: "[1,5,8,10], 18", expected: "[2,3]" }
+      { input: "[2,7,11,15], 9", expected: "[0,1]", hidden: false },
+      { input: "[3,2,4], 6", expected: "[1,2]", hidden: false },
+      { input: "[3,3], 6", expected: "[0,1]", hidden: false },
+      { input: "[1,5,8,10], 18", expected: "[2,3]", hidden: true }
     ],
-    tags: ["Array", "Hash Table"],
-    companies: ["Amazon", "Google", "Apple", "Microsoft"],
+    tags: ["Array", "Hash Table", "Two Pointers"],
+    companies: ["Amazon", "Google", "Apple", "Microsoft", "Meta"],
     acceptance: 49.7,
     submissions: 13482945,
-    completedBy: 2789451
+    completedBy: 2789451,
+    likes: 45231,
+    dislikes: 1534,
+    isBookmarked: false,
+    difficulty_level: 1,
+    time_complexity: "O(n)",
+    space_complexity: "O(n)",
+    solution_approaches: ["Hash Map", "Brute Force", "Two Pointers"]
   },
   {
     id: "reverse-string",
     title: "Reverse String",
-    difficulty: "Easy",
-    description: `<p>Write a function that reverses a string. The input string is given as an array of characters <code>s</code>.</p>
-    <p>You must do this by modifying the input array <strong>in-place</strong> with O(1) extra memory.</p>`,
+    difficulty: "Easy", 
+    description: `Write a function that reverses a string. The input string is given as an array of characters s.
+
+You must do this by modifying the input array in-place with O(1) extra memory.`,
     examples: [
       {
         input: 's = ["h","e","l","l","o"]',
         output: '["o","l","l","e","h"]'
-      },
-      {
-        input: 's = ["H","a","n","n","a","h"]',
-        output: '["h","a","n","n","a","H"]'
       }
     ],
     constraints: [
-      "1 <= s.length <= 10^5",
-      "s[i] is a printable ascii character."
+      "1 ≤ s.length ≤ 10⁵",
+      "s[i] is a printable ASCII character."
+    ],
+    hints: [
+      "Use two pointers, one at the beginning and one at the end.",
+      "Swap characters and move pointers toward each other.",
+      "Stop when pointers meet in the middle."
     ],
     starterCode: {
       javascript: `/**
@@ -171,628 +178,704 @@ function twoSum(nums, target) {
  * @return {void} Do not return anything, modify s in-place instead.
  */
 function reverseString(s) {
-    // Write your code here
+    // Your solution here
+    
 };`,
-      python: `class Solution:
-    def reverseString(self, s: List[str]) -> None:
-        """
-        Do not return anything, modify s in-place instead.
-        """
-        # Write your code here
-        pass`
+      python: `def reverseString(s):
+    """
+    Do not return anything, modify s in-place instead.
+    """
+    # Your solution here
+    pass`
     },
     testCases: [
-      { input: '["h","e","l","l","o"]', expected: '["o","l","l","e","h"]' },
-      { input: '["H","a","n","n","a","h"]', expected: '["h","a","n","n","a","H"]' }
+      { input: '["h","e","l","l","o"]', expected: '["o","l","l","e","h"]', hidden: false },
+      { input: '["H","a","n","n","a","h"]', expected: '["h","a","n","n","a","H"]', hidden: false }
     ],
-    tags: ["Two Pointers", "String"],
-    companies: ["Amazon", "Apple", "Microsoft"],
+    tags: ["Two Pointers", "String", "Recursion"],
+    companies: ["Amazon", "Apple", "Microsoft", "Google"],
     acceptance: 74.2,
     submissions: 2563148,
-    completedBy: 1903249
-  }
-];
-
-// Common practice problems for the Practice Exercises tab
-const exercises = [
+    completedBy: 1903249,
+    likes: 3421,
+    dislikes: 892,
+    isBookmarked: true,
+    difficulty_level: 1,
+    time_complexity: "O(n)",
+    space_complexity: "O(1)",
+    solution_approaches: ["Two Pointers", "Recursion", "Built-in Methods"]
+  },
   {
-    id: 1,
+    id: "valid-parentheses",
     title: "Valid Parentheses",
-    description: "Determine if a string of parentheses is valid.",
     difficulty: "Easy",
-    category: "Stacks",
-    estimatedTime: "20 mins",
-    completionRate: 68,
-    tags: ["Stacks", "Strings", "Validation"],
-  },
-  {
-    id: 2,
-    title: "Merge Two Sorted Lists",
-    description: "Merge two sorted linked lists into one sorted list.",
-    difficulty: "Easy",
-    category: "Linked Lists",
-    estimatedTime: "25 mins",
-    completionRate: 62,
-    tags: ["Linked Lists", "Recursion", "Iteration"],
-  },
-  {
-    id: 3,
-    title: "Maximum Subarray",
-    description: "Find the contiguous subarray with the largest sum.",
-    difficulty: "Medium",
-    category: "Dynamic Programming",
-    estimatedTime: "30 mins",
-    completionRate: 49,
-    tags: ["Arrays", "Dynamic Programming", "Algorithms"],
-  },
-  {
-    id: 4,
-    title: "Binary Tree Level Order Traversal",
-    description: "Traverse a binary tree in level order (breadth-first).",
-    difficulty: "Medium",
-    category: "Trees",
-    estimatedTime: "35 mins",
-    completionRate: 56,
-    tags: ["Trees", "BFS", "Queue"],
-  },
-  {
-    id: 5,
-    title: "Climbing Stairs",
-    description: "Count the number of ways to climb a staircase.",
-    difficulty: "Easy",
-    category: "Dynamic Programming",
-    estimatedTime: "20 mins",
-    completionRate: 70,
-    tags: ["DP", "Recursion", "Memoization"],
-  },
-  {
-    id: 6,
-    title: "Course Schedule",
-    description: "Determine if it's possible to finish all courses given prerequisites.",
-    difficulty: "Medium",
-    category: "Graphs",
-    estimatedTime: "40 mins",
-    completionRate: 44,
-    tags: ["Graphs", "Topological Sort", "DFS"],
+    description: `Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+1. Open brackets must be closed by the same type of brackets.
+2. Open brackets must be closed in the correct order.
+3. Every close bracket has a corresponding open bracket of the same type.`,
+    examples: [
+      {
+        input: 's = "()"',
+        output: 'true'
+      },
+      {
+        input: 's = "()[]{}"',
+        output: 'true'
+      },
+      {
+        input: 's = "(]"',
+        output: 'false'
+      }
+    ],
+    constraints: [
+      "1 ≤ s.length ≤ 10⁴",
+      "s consists of parentheses only '()[]{}'."
+    ],
+    hints: [
+      "Use a stack data structure to keep track of opening brackets.",
+      "When you encounter a closing bracket, check if it matches the most recent opening bracket.",
+      "The string is valid if the stack is empty at the end."
+    ],
+    starterCode: {
+      javascript: `/**
+ * @param {string} s
+ * @return {boolean}
+ */
+function isValid(s) {
+    // Your solution here
+    
+}`,
+      python: `def isValid(s):
+    """
+    :type s: str
+    :rtype: bool
+    """
+    # Your solution here
+    pass`
+    },
+    testCases: [
+      { input: '"()"', expected: 'true', hidden: false },
+      { input: '"()[]{}"', expected: 'true', hidden: false },
+      { input: '"(]"', expected: 'false', hidden: false },
+      { input: '"([)]"', expected: 'false', hidden: true }
+    ],
+    tags: ["Stack", "String", "Data Structure"],
+    companies: ["Amazon", "Microsoft", "Google", "Meta", "Apple"],
+    acceptance: 40.1,
+    submissions: 4521032,
+    completedBy: 1812748,
+    likes: 15634,
+    dislikes: 724,
+    isBookmarked: false,
+    difficulty_level: 1,
+    time_complexity: "O(n)",
+    space_complexity: "O(n)",
+    solution_approaches: ["Stack", "Counter", "Recursion"]
   }
 ];
 
-// Coding competitions
-const competitions = [
-  {
-    id: 101,
-    title: "Weekly Coding Challenge",
-    description: "Solve 5 algorithm problems in 90 minutes",
-    participants: 8742,
-    deadline: "Starts in 2 days",
-    difficulty: "Mixed",
-    progress: 0,
-    isRegistered: false
-  },
-  {
-    id: 102,
-    title: "Frontend Hackathon",
-    description: "Build a responsive UI component based on specifications",
-    participants: 5423,
-    deadline: "Ongoing - 16 hours left",
-    difficulty: "Intermediate",
-    progress: 65,
-    isRegistered: true
-  },
-  {
-    id: 103,
-    title: "Database Challenge",
-    description: "Optimize SQL queries for performance",
-    participants: 3218,
-    deadline: "5 days left",
-    difficulty: "Advanced",
-    progress: 0,
-    isRegistered: false
-  }
-];
-
-// Problem List View Component
-function ProblemListView({ challenges, onSelectProblem, view, setView }: any) {
-  const [selectedTag, setSelectedTag] = useState<string>('All');
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string>('All');
-  
-  // Get all unique tags from challenges
-  const allTags = ['All', ...Array.from(new Set(challenges.flatMap((c: any) => c.tags || []).filter(Boolean))) as string[]];
-  const difficulties = ['All', 'Easy', 'Medium', 'Hard'];
-  
-  // Filter challenges based on selected filters
-  const filteredChallenges = challenges.filter((challenge: any) => {
-    const matchesDifficulty = selectedDifficulty === 'All' || 
-                             challenge.difficulty === selectedDifficulty;
-    const matchesTag = selectedTag === 'All' || 
-                      (challenge.tags && challenge.tags.includes(selectedTag));
-    return matchesDifficulty && matchesTag;
-  });
+// Enhanced Code Editor Component with syntax highlighting simulation
+function CodeEditor({ language, value, onChange, theme = "dark" }: any) {
+  const [isFocused, setIsFocused] = useState(false);
   
   return (
-    <div className="flex-1 overflow-y-auto">
-      {/* LeetCode/HackerRank style filter panel */}
-      <div className="bg-white border-b sticky top-0 z-10">
-        <div className="max-w-screen-xl mx-auto p-4">
-          {/* Problem solving stats */}
-          <div className="mb-4 flex flex-wrap gap-4">
-            <div className="flex-1 flex items-center gap-3 p-3 border rounded-lg">
-              <div className="p-2 bg-green-100 rounded-md">
-                <CheckCircle className="h-5 w-5 text-green-600" />
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Solved</div>
-                <div className="text-lg font-semibold">24/150</div>
-              </div>
-              <div className="ml-auto">
-                <div className="text-xs text-muted-foreground">Easy</div>
-                <div className="font-medium text-green-600">16 <span className="text-xs text-muted-foreground">/ 60</span></div>
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Medium</div>
-                <div className="font-medium text-yellow-600">7 <span className="text-xs text-muted-foreground">/ 65</span></div>
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Hard</div>
-                <div className="font-medium text-red-600">1 <span className="text-xs text-muted-foreground">/ 25</span></div>
-              </div>
-            </div>
-            
-            <div className="flex-1 p-3 border rounded-lg">
-              <div className="text-xs text-muted-foreground mb-1">Difficulty Distribution</div>
-              <div className="flex h-4 rounded-md overflow-hidden">
-                <div className="bg-green-500 h-full" style={{ width: '40%' }}></div>
-                <div className="bg-yellow-500 h-full" style={{ width: '43%' }}></div>
-                <div className="bg-red-500 h-full" style={{ width: '17%' }}></div>
-              </div>
-              <div className="flex justify-between mt-1 text-xs">
+    <div className={cn(
+      "relative h-full border rounded-lg overflow-hidden transition-all duration-200",
+      isFocused ? "border-blue-500 shadow-md" : "border-slate-300",
+      theme === "dark" ? "bg-slate-900" : "bg-white"
+    )}>
+      {/* Editor Header */}
+      <div className={cn(
+        "flex items-center justify-between px-4 py-2 border-b text-sm",
+        theme === "dark" ? "bg-slate-800 border-slate-700 text-slate-300" : "bg-slate-50 border-slate-200"
+      )}>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
+            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          </div>
+          <span className="ml-2 font-medium">main.{languages.find(l => l.id === language)?.extension}</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+            <Copy className="h-3 w-3" />
+          </Button>
+          <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+            <Download className="h-3 w-3" />
+          </Button>
+        </div>
+      </div>
+      
+      {/* Code Area */}
+      <div className="relative h-full">
+        <textarea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className={cn(
+            "w-full h-full p-4 font-mono text-sm resize-none outline-none",
+            theme === "dark" ? "bg-slate-900 text-slate-100" : "bg-white text-slate-900"
+          )}
+          placeholder="// Start coding here..."
+          spellCheck={false}
+          style={{ minHeight: "400px" }}
+        />
+        
+        {/* Enhanced features overlay */}
+        <div className="absolute top-4 right-4 flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
+          <div className={cn(
+            "text-xs px-2 py-1 rounded",
+            theme === "dark" ? "bg-slate-700 text-slate-300" : "bg-slate-100 text-slate-600"
+          )}>
+            Lines: {value.split('\n').length}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Enhanced Problem Description Component
+function ProblemDescription({ problem }: any) {
+  const [activeTab, setActiveTab] = useState("description");
+  const [showHints, setShowHints] = useState(false);
+  const diffColors = getDifficultyColor(problem.difficulty);
+  
+  return (
+    <div className="h-full flex flex-col bg-white">
+      {/* Problem Header */}
+      <div className="p-6 border-b bg-gradient-to-r from-slate-50 to-slate-100">
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900 mb-2">{problem.title}</h1>
+            <div className="flex items-center gap-3">
+              <Badge className={diffColors.badge}>{problem.difficulty}</Badge>
+              <div className="flex items-center gap-4 text-sm text-slate-600">
                 <div className="flex items-center gap-1">
-                  <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                  <span>Easy (60)</span>
+                  <ThumbsUp className="h-4 w-4" />
+                  <span>{problem.likes?.toLocaleString()}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
-                  <span>Medium (65)</span>
+                  <Users className="h-4 w-4" />
+                  <span>{problem.completedBy?.toLocaleString()} solved</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="h-2 w-2 rounded-full bg-red-500"></div>
-                  <span>Hard (25)</span>
+                  <BarChart3 className="h-4 w-4" />
+                  <span>{problem.acceptance}% acceptance</span>
                 </div>
               </div>
             </div>
           </div>
-          
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div className="flex items-center gap-2">
-              <h2 className="text-xl font-semibold">Problems</h2>
-              <Badge variant="outline" className="ml-2">{filteredChallenges.length} problems</Badge>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" className="gap-1">
+              <Heart className={problem.isBookmarked ? "h-4 w-4 fill-red-500 text-red-500" : "h-4 w-4"} />
+            </Button>
+            <Button variant="ghost" size="sm" className="gap-1">
+              <Share2 className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+        
+        {/* Companies */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {problem.companies?.slice(0, 4).map((company: string) => (
+            <Badge key={company} variant="outline" className="text-xs bg-white">
+              {company}
+            </Badge>
+          ))}
+          {problem.companies?.length > 4 && (
+            <Badge variant="outline" className="text-xs bg-white">
+              +{problem.companies.length - 4} more
+            </Badge>
+          )}
+        </div>
+        
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2">
+          {problem.tags?.map((tag: string) => (
+            <Badge key={tag} variant="secondary" className="text-xs">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      </div>
+      
+      {/* Content Tabs */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="border-b">
+          <div className="flex items-center gap-6 px-6">
+            {["description", "examples", "constraints", "hints", "discuss"].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={cn(
+                  "py-3 px-1 text-sm font-medium border-b-2 transition-colors capitalize",
+                  activeTab === tab 
+                    ? "border-blue-500 text-blue-600" 
+                    : "border-transparent text-slate-600 hover:text-slate-900"
+                )}
+              >
+                {tab}
+                {tab === "discuss" && (
+                  <Badge variant="outline" className="ml-2 text-xs">24</Badge>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+        
+        <div className="flex-1 overflow-y-auto p-6">
+          {activeTab === "description" && (
+            <div className="prose prose-slate max-w-none">
+              <div className="whitespace-pre-wrap text-slate-700 leading-relaxed">
+                {problem.description}
+              </div>
             </div>
-            
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="relative w-64">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
-                <Input type="search" placeholder="Search problems..." className="pl-9" />
+          )}
+          
+          {activeTab === "examples" && (
+            <div className="space-y-6">
+              {problem.examples?.map((example: any, index: number) => (
+                <div key={index} className="bg-slate-50 rounded-lg p-4 border">
+                  <h4 className="font-semibold text-slate-900 mb-3">Example {index + 1}:</h4>
+                  <div className="space-y-2 font-mono text-sm">
+                    <div><strong>Input:</strong> <code className="bg-slate-200 px-2 py-1 rounded">{example.input}</code></div>
+                    <div><strong>Output:</strong> <code className="bg-slate-200 px-2 py-1 rounded">{example.output}</code></div>
+                    {example.explanation && (
+                      <div className="text-slate-600 mt-2">
+                        <strong>Explanation:</strong> {example.explanation}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          {activeTab === "constraints" && (
+            <div className="space-y-3">
+              <h3 className="text-lg font-semibold text-slate-900">Constraints</h3>
+              <ul className="space-y-2">
+                {problem.constraints?.map((constraint: string, index: number) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></div>
+                    <code className="text-sm bg-slate-100 px-2 py-1 rounded text-slate-700">
+                      {constraint}
+                    </code>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          
+          {activeTab === "hints" && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-slate-900">Hints</h3>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowHints(!showHints)}
+                  className="gap-2"
+                >
+                  <Lightbulb className="h-4 w-4" />
+                  {showHints ? "Hide Hints" : "Show Hints"}
+                </Button>
               </div>
               
-              <Select defaultValue="All" onValueChange={setSelectedDifficulty}>
-                <SelectTrigger className="w-[130px]">
-                  <SelectValue placeholder="Difficulty" />
-                </SelectTrigger>
-                <SelectContent>
-                  {difficulties.map(diff => (
-                    <SelectItem key={diff} value={diff}>{diff}</SelectItem>
+              {showHints && (
+                <div className="space-y-3">
+                  {problem.hints?.map((hint: string, index: number) => (
+                    <div key={index} className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                      <div className="flex items-start gap-2">
+                        <div className="bg-blue-100 text-blue-600 rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium flex-shrink-0">
+                          {index + 1}
+                        </div>
+                        <p className="text-slate-700">{hint}</p>
+                      </div>
+                    </div>
                   ))}
-                </SelectContent>
-              </Select>
-              
-              <Select defaultValue="All" onValueChange={setSelectedTag}>
-                <SelectTrigger className="w-[130px]">
-                  <SelectValue placeholder="Tags" />
-                </SelectTrigger>
-                <SelectContent>
-                  {allTags.map(tag => (
-                    <SelectItem key={tag} value={tag}>{tag}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              
-              <div className="bg-slate-100 p-1 rounded-md flex">
-                <Button 
-                  size="icon" 
-                  variant={view === "grid" ? "default" : "ghost"} 
-                  className="h-8 w-8" 
-                  onClick={() => setView("grid")}
-                >
-                  <LayoutGrid className="h-4 w-4" />
+                </div>
+              )}
+            </div>
+          )}
+          
+          {activeTab === "discuss" && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-slate-900">Discussion</h3>
+                <Button variant="default" size="sm" className="gap-2">
+                  <MessageSquare className="h-4 w-4" />
+                  New Discussion
                 </Button>
-                <Button 
-                  size="icon" 
-                  variant={view === "list" ? "default" : "ghost"} 
-                  className="h-8 w-8" 
-                  onClick={() => setView("list")}
-                >
-                  <List className="h-4 w-4" />
-                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="border rounded-lg p-4 hover:bg-slate-50 transition-colors">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
+                        U{i}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="font-medium text-slate-900">user{i}23</span>
+                          <Badge variant="outline" className="text-xs">
+                            {i === 1 ? "Solution" : i === 2 ? "Question" : "Approach"}
+                          </Badge>
+                          <span className="text-xs text-slate-500">{i} hours ago</span>
+                        </div>
+                        <p className="text-slate-700 text-sm">
+                          {i === 1 ? "Here's an optimized O(n) solution using HashMap..." : 
+                           i === 2 ? "Can someone explain why this approach works?" :
+                           "Alternative approach using two pointers..."}
+                        </p>
+                        <div className="flex items-center gap-4 mt-3 text-xs text-slate-500">
+                          <button className="flex items-center gap-1 hover:text-blue-600">
+                            <ThumbsUp className="h-3 w-3" />
+                            {12 - i * 3}
+                          </button>
+                          <button className="flex items-center gap-1 hover:text-blue-600">
+                            <MessageSquare className="h-3 w-3" />
+                            {5 - i}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Enhanced Test Results Component
+function TestResults({ results, isVisible }: any) {
+  if (!isVisible || !results.length) return null;
+  
+  const passedTests = results.filter((r: any) => r.status === "passed").length;
+  const totalTests = results.length;
+  
+  return (
+    <div className="border-t bg-white">
+      <div className="p-4">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-slate-900">Test Results</h3>
+          <Badge 
+            variant={passedTests === totalTests ? "default" : "destructive"}
+            className="gap-1"
+          >
+            {passedTests === totalTests ? (
+              <CheckCircle className="h-3 w-3" />
+            ) : (
+              <XSquare className="h-3 w-3" />
+            )}
+            {passedTests}/{totalTests} Passed
+          </Badge>
+        </div>
+        
+        <div className="space-y-3">
+          {results.map((result: any, index: number) => (
+            <div 
+              key={index}
+              className={cn(
+                "border rounded-lg p-3 transition-all",
+                result.status === "passed" 
+                  ? "border-green-200 bg-green-50" 
+                  : "border-red-200 bg-red-50"
+              )}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  {result.status === "passed" ? (
+                    <CheckCircle className="h-4 w-4 text-green-600" />
+                  ) : (
+                    <XSquare className="h-4 w-4 text-red-600" />
+                  )}
+                  <span className="font-medium text-sm">
+                    Test Case {index + 1} {result.hidden && "(Hidden)"}
+                  </span>
+                </div>
+                <span className={cn(
+                  "text-xs px-2 py-1 rounded",
+                  result.status === "passed" 
+                    ? "bg-green-100 text-green-700" 
+                    : "bg-red-100 text-red-700"
+                )}>
+                  {result.status.toUpperCase()}
+                </span>
+              </div>
+              
+              {!result.hidden && (
+                <div className="space-y-1 text-xs font-mono">
+                  <div className="text-slate-600">
+                    <span className="font-semibold">Input:</span> {result.input}
+                  </div>
+                  <div className="text-slate-600">
+                    <span className="font-semibold">Expected:</span> {result.expected}
+                  </div>
+                  <div className={result.status === "passed" ? "text-green-700" : "text-red-700"}>
+                    <span className="font-semibold">Output:</span> {result.output}
+                  </div>
+                  {result.status === "failed" && result.error && (
+                    <div className="text-red-600 mt-2">
+                      <span className="font-semibold">Error:</span> {result.error}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Enhanced Problem List Component
+function ProblemListView({ challenges, onSelectProblem }: any) {
+  const [filters, setFilters] = useState({
+    difficulty: "All",
+    tag: "All",
+    company: "All",
+    status: "All"
+  });
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("title");
+  
+  // Get unique values for filters
+  const allTags = ["All", ...Array.from(new Set(challenges.flatMap((c: any) => c.tags || [])))];
+  const allCompanies = ["All", ...Array.from(new Set(challenges.flatMap((c: any) => c.companies || [])))];
+  const difficulties = ["All", "Easy", "Medium", "Hard"];
+  const statuses = ["All", "Solved", "Attempted", "Todo"];
+  
+  // Filter and search logic
+  const filteredChallenges = challenges.filter((challenge: any) => {
+    const matchesSearch = challenge.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         challenge.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesDifficulty = filters.difficulty === "All" || challenge.difficulty === filters.difficulty;
+    const matchesTag = filters.tag === "All" || (challenge.tags && challenge.tags.includes(filters.tag));
+    const matchesCompany = filters.company === "All" || (challenge.companies && challenge.companies.includes(filters.company));
+    
+    return matchesSearch && matchesDifficulty && matchesTag && matchesCompany;
+  });
+  
+  return (
+    <div className="flex-1 overflow-y-auto">
+      {/* Enhanced Stats Dashboard */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-700 text-white p-6">
+        <div className="max-w-screen-xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6">Your Progress</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="bg-white/10 backdrop-blur rounded-lg p-4">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <CheckCircle className="h-6 w-6" />
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">24</div>
+                  <div className="text-xs">Problems Solved</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur rounded-lg p-4">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <Target className="h-6 w-6" />
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">16%</div>
+                  <div className="text-xs">Completion Rate</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur rounded-lg p-4">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <Flame className="h-6 w-6" />
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">3</div>
+                  <div className="text-xs">Day Streak</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur rounded-lg p-4">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <Award className="h-6 w-6" />
+                </div>
+                <div>
+                  <div className="text-2xl font-bold">120</div>
+                  <div className="text-xs">Total Points</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      <div className="max-w-screen-xl mx-auto p-4 pt-6">
-        {/* Problems grid/list view */}
-        {view === "grid" ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredChallenges.map((challenge: any) => {
-              const diffColors = getDifficultyColor(challenge.difficulty);
-              return (
-                <Card 
-                  key={challenge.id} 
-                  className="hover:shadow-md transition-all cursor-pointer border"
-                  onClick={() => onSelectProblem(challenge)}
-                >
-                  <CardHeader className="pb-2">
-                    <div className="flex justify-between items-start">
-                      <Badge className={diffColors.badge}>{challenge.difficulty}</Badge>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
+      {/* Problem filtering and search */}
+      <div className="p-6 border-b">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              <Select value={filters.difficulty} onValueChange={(value) => setFilters({...filters, difficulty: value})}>
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Difficulty" />
+                </SelectTrigger>
+                <SelectContent>
+                  {difficulties.map((difficulty: string) => (
+                    <SelectItem key={difficulty} value={difficulty}>{difficulty}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              
+              <Select value={filters.tag} onValueChange={(value) => setFilters({...filters, tag: value})}>
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Tag" />
+                </SelectTrigger>
+                <SelectContent>
+                  {allTags.map((tag: any) => (
+                    <SelectItem key={tag} value={tag}>{tag}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              
+              <Select value={filters.company} onValueChange={(value) => setFilters({...filters, company: value})}>
+                <SelectTrigger className="w-[130px]">
+                  <SelectValue placeholder="Company" />
+                </SelectTrigger>
+                <SelectContent>
+                  {allCompanies.map((company: any) => (
+                    <SelectItem key={company} value={company}>{company}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="relative w-full md:w-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input 
+                type="search" 
+                placeholder="Search problems..." 
+                className="pl-10 w-full md:w-[250px]"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Problem list */}
+      <div className="p-6">
+        <div className="max-w-screen-xl mx-auto">
+          {filteredChallenges.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredChallenges.map((challenge: any) => {
+                const diffColors = getDifficultyColor(challenge.difficulty);
+                return (
+                  <Card 
+                    key={challenge.id} 
+                    className={cn(
+                      "overflow-hidden hover:shadow-md transition-all cursor-pointer border",
+                      diffColors.bg
+                    )}
+                    onClick={() => onSelectProblem(challenge)}
+                  >
+                    <CardHeader className="pb-2">
+                      <div className="flex justify-between items-start">
+                        <Badge className={diffColors.badge}>{challenge.difficulty}</Badge>
+                        {challenge.isBookmarked && (
+                          <Heart className="h-4 w-4 fill-red-500 text-red-500" />
+                        )}
+                      </div>
+                      <CardTitle className="mt-2 group-hover:text-primary transition-colors">
+                        {challenge.title}
+                      </CardTitle>
+                      <CardDescription className="line-clamp-2">
+                        {challenge.description.substring(0, 100)}...
+                      </CardDescription>
+                    </CardHeader>
+                    
+                    <CardContent className="pb-2">
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {challenge.tags?.slice(0, 3).map((tag: string, i: number) => (
+                          <Badge key={i} variant="secondary" className="text-xs font-normal">
+                            {tag}
+                          </Badge>
+                        ))}
+                        {challenge.tags?.length > 3 && (
+                          <Badge variant="outline" className="text-xs font-normal">
+                            +{challenge.tags.length - 3}
+                          </Badge>
+                        )}
+                      </div>
+                      
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-xs text-muted-foreground">
+                          <span>Acceptance Rate</span>
+                          <span>{challenge.acceptance}%</span>
+                        </div>
+                        <Progress value={challenge.acceptance} className={cn("h-1", diffColors.progress)} />
+                      </div>
+                    </CardContent>
+                    
+                    <CardFooter className="pt-2 border-t flex justify-between text-xs">
+                      <div className="flex items-center gap-1 text-muted-foreground">
                         <Users className="h-3.5 w-3.5" />
                         <span>{challenge.completedBy?.toLocaleString()} solved</span>
                       </div>
-                    </div>
-                    <CardTitle className="mt-2 text-base hover:text-blue-600 transition-colors">
-                      {challenge.title}
-                    </CardTitle>
-                    <div className="mt-1 line-clamp-2 text-sm text-muted-foreground">
-                      {challenge.description.replace(/<[^>]*>/g, '')}
-                    </div>
-                  </CardHeader>
-                  <CardContent className="pb-2">
-                    <div className="flex flex-wrap gap-1.5">
-                      {challenge.tags?.map((tag: string, i: number) => (
-                        <Badge key={i} variant="outline" className="text-xs font-normal">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                  <CardFooter className="pt-2 border-t text-xs text-muted-foreground">
-                    <div className="flex items-center gap-4 w-full">
-                      <div className="flex items-center gap-1">
-                        <CheckCircle className="h-3.5 w-3.5" />
-                        <span>Acceptance: {challenge.acceptance}%</span>
-                      </div>
-                      <div className="flex items-center gap-1 ml-auto">
+                      <div className="flex items-center gap-1 text-primary">
                         <ArrowRight className="h-3.5 w-3.5" />
-                        <span className="text-blue-600 font-medium">Solve Challenge</span>
+                        <span>Solve</span>
                       </div>
-                    </div>
-                  </CardFooter>
-                </Card>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="rounded-md border overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-slate-50">
-                <tr className="border-b">
-                  <th className="px-4 py-3 text-left text-sm font-medium">Problem</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">Difficulty</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">Acceptance</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium">Tags</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium"></th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {filteredChallenges.map((challenge: any) => {
-                  const diffColors = getDifficultyColor(challenge.difficulty);
-                  return (
-                    <tr 
-                      key={challenge.id} 
-                      className="hover:bg-slate-50 cursor-pointer"
-                      onClick={() => onSelectProblem(challenge)}
-                    >
-                      <td className="px-4 py-3">
-                        <div className="font-medium">{challenge.title}</div>
-                      </td>
-                      <td className="px-4 py-3">
-                        <Badge className={diffColors.badge}>{challenge.difficulty}</Badge>
-                      </td>
-                      <td className="px-4 py-3 text-sm">{challenge.acceptance}%</td>
-                      <td className="px-4 py-3">
-                        <div className="flex flex-wrap gap-1.5">
-                          {challenge.tags?.slice(0, 2).map((tag: string, i: number) => (
-                            <Badge key={i} variant="outline" className="text-xs font-normal">
-                              {tag}
-                            </Badge>
-                          ))}
-                          {challenge.tags?.length > 2 && (
-                            <Badge variant="outline" className="text-xs font-normal">
-                              +{challenge.tags.length - 2}
-                            </Badge>
-                          )}
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 text-right">
-                        <Button size="sm" variant="ghost" className="gap-1">
-                          <ArrowRight className="h-3.5 w-3.5" />
-                          <span>Solve</span>
-                        </Button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// Exercises Tab Component
-function ExercisesTab({ exercises }: any) {
-  return (
-    <div className="flex-1 overflow-y-auto p-4">
-      <div className="max-w-screen-xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Practice Exercises</h2>
-          <div className="flex items-center gap-2">
-            <Select defaultValue="all">
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                <SelectItem value="algorithms">Algorithms</SelectItem>
-                <SelectItem value="data-structures">Data Structures</SelectItem>
-                <SelectItem value="dynamic-programming">Dynamic Programming</SelectItem>
-                <SelectItem value="graphs">Graphs</SelectItem>
-              </SelectContent>
-            </Select>
-            <Button variant="outline" size="icon">
-              <Filter className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {exercises.map((exercise: any) => {
-            const diffColors = getDifficultyColor(exercise.difficulty);
-            return (
-              <Card key={exercise.id} className="hover:shadow-md transition-all cursor-pointer border">
-                <CardHeader className="pb-2">
-                  <div className="flex justify-between items-start">
-                    <Badge className={diffColors.badge}>{exercise.difficulty}</Badge>
-                    <Badge variant="outline">{exercise.category}</Badge>
-                  </div>
-                  <CardTitle className="mt-2 text-base hover:text-blue-600 transition-colors">
-                    {exercise.title}
-                  </CardTitle>
-                  <CardDescription className="line-clamp-2">{exercise.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {exercise.tags.map((tag: string, i: number) => (
-                      <Badge key={i} variant="outline" className="text-xs font-normal">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="flex justify-between border-t pt-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1.5">
-                    <Clock className="h-4 w-4" />
-                    <span>{exercise.estimatedTime}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle className="h-4 w-4" />
-                    <span>{exercise.completionRate}% completion rate</span>
-                  </div>
-                </CardFooter>
-              </Card>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Competitions Tab Component
-function CompetitionsTab({ competitions }: any) {
-  return (
-    <div className="flex-1 overflow-y-auto p-4">
-      <div className="max-w-screen-xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Coding Competitions</h2>
-          <Button variant="outline" size="sm" className="gap-1">
-            View all competitions
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {competitions.map((competition: any) => {
-            const diffColors = getDifficultyColor(competition.difficulty);
-            return (
-              <Card key={competition.id} className="hover:shadow-md transition-all border">
-                <CardHeader>
-                  <Badge className={`mb-2 ${diffColors.badge}`}>
-                    {competition.difficulty}
-                  </Badge>
-                  <CardTitle className="text-xl">{competition.title}</CardTitle>
-                  <CardDescription>{competition.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {competition.isRegistered && (
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span>Progress</span>
-                          <span className="font-medium">{competition.progress}%</span>
-                        </div>
-                        <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                          <div 
-                            className={`h-full ${
-                              competition.progress > 75 ? 'bg-green-500' :
-                              competition.progress > 40 ? 'bg-blue-500' :
-                              'bg-amber-500'
-                            }`}
-                            style={{ width: `${competition.progress}%` }}
-                          ></div>
-                        </div>
-                      </div>
-                    )}
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CalendarIcon className="h-4 w-4" />
-                      <span>{competition.deadline}</span>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter className="border-t pt-4">
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Users className="h-4 w-4" />
-                      <span>{competition.participants.toLocaleString()} participants</span>
-                    </div>
-                    <Button variant={competition.isRegistered ? "outline" : "default"}>
-                      {competition.isRegistered ? "Continue" : "Register"}
-                    </Button>
-                  </div>
-                </CardFooter>
-              </Card>
-            );
-          })}
-        </div>
-        
-        <Card className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100 hover:shadow-md transition-all">
-          <CardContent className="p-6">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-100 rounded-xl">
-                  <Trophy className="h-8 w-8 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Host Your Own Competition</h3>
-                  <p className="text-sm text-muted-foreground">Create custom challenges for your team or organization</p>
-                </div>
-              </div>
-              <Button className="bg-blue-600 hover:bg-blue-700">Get Started</Button>
+                    </CardFooter>
+                  </Card>
+                );
+              })}
             </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  );
-}
-
-// Playground Tab Component
-function PlaygroundTab() {
-  return (
-    <div className="flex-1 overflow-y-auto p-4">
-      <div className="max-w-screen-xl mx-auto">
-        <h2 className="text-xl font-semibold mb-6">Code Playground</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="hover:shadow-md transition-all cursor-pointer border">
-            <CardContent className="p-0">
-              <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 p-6 flex flex-col gap-4">
-                <div className="p-3 rounded-xl bg-amber-100 w-fit">
-                  <FileCode className="h-6 w-6 text-amber-600" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Web Development</h3>
-                  <p className="text-sm text-muted-foreground">HTML, CSS, and JavaScript editor with live preview</p>
-                </div>
-                <Button variant="outline" className="bg-white/80 mt-2">Launch Editor</Button>
+          ) : (
+            <div className="text-center py-12 border border-dashed rounded-lg">
+              <div className="bg-slate-100 rounded-full p-3 w-fit mx-auto mb-4">
+                <FileCode className="h-8 w-8 text-slate-400" />
               </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="hover:shadow-md transition-all cursor-pointer border">
-            <CardContent className="p-0">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 p-6 flex flex-col gap-4">
-                <div className="p-3 rounded-xl bg-blue-100 w-fit">
-                  <Code className="h-6 w-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Algorithm Playground</h3>
-                  <p className="text-sm text-muted-foreground">Test algorithms with multiple languages and test cases</p>
-                </div>
-                <Button variant="outline" className="bg-white/80 mt-2">Launch Editor</Button>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="hover:shadow-md transition-all cursor-pointer border">
-            <CardContent className="p-0">
-              <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 p-6 flex flex-col gap-4">
-                <div className="p-3 rounded-xl bg-purple-100 w-fit">
-                  <Cpu className="h-6 w-6 text-purple-600" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">Full Stack Playground</h3>
-                  <p className="text-sm text-muted-foreground">Build complete applications with multiple files</p>
-                </div>
-                <Button variant="outline" className="bg-white/80 mt-2">Launch Editor</Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Playground Sessions</CardTitle>
-            <CardDescription>Continue where you left off</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Two Sum Algorithm Solution",
-                  lastEdited: "2 hours ago",
-                  language: "JavaScript",
-                  icon: <Code className="h-4 w-4" />
-                },
-                {
-                  title: "React Todo App",
-                  lastEdited: "Yesterday",
-                  language: "TypeScript",
-                  icon: <FileCode className="h-4 w-4" />
-                },
-                {
-                  title: "Binary Search Implementation",
-                  lastEdited: "3 days ago",
-                  language: "Python",
-                  icon: <Code className="h-4 w-4" />
-                }
-              ].map((session, i) => (
-                <div 
-                  key={i}
-                  className="flex items-center justify-between p-3 hover:bg-slate-50 rounded-lg cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-slate-100 rounded-md">
-                      {session.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-medium">{session.title}</h4>
-                      <p className="text-xs text-muted-foreground">Last edited: {session.lastEdited}</p>
-                    </div>
-                  </div>
-                  <Badge variant="outline">{session.language}</Badge>
-                </div>
-              ))}
+              <h3 className="text-lg font-medium mb-1">No problems found</h3>
+              <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
+                Try adjusting your filters or search term to find what you're looking for.
+              </p>
+              <Button onClick={() => {
+                setFilters({
+                  difficulty: "All",
+                  tag: "All",
+                  company: "All",
+                  status: "All"
+                });
+                setSearchQuery("");
+              }}>
+                Clear Filters
+              </Button>
             </div>
-          </CardContent>
-        </Card>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
+// Main Practice Page Component
 export default function PracticePage() {
   const [activeTab, setActiveTab] = useState("problems");
   const [activeProblem, setActiveProblem] = useState<any>(null);
@@ -803,10 +886,9 @@ export default function PracticePage() {
   const [isRunning, setIsRunning] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
-  const [problemListView, setProblemListView] = useState("grid"); // "grid" or "list"
-  const [consoleHeight, setConsoleHeight] = useState(200); // Default console height
+  const [showConsole, setShowConsole] = useState(false);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
-  const [headerHeight, setHeaderHeight] = useState(56); // Default header height (56px)
+  const [headerHeight, setHeaderHeight] = useState(56);
   const headerRef = useRef<HTMLDivElement>(null);
   
   // Track window resize for responsiveness
@@ -825,24 +907,18 @@ export default function PracticePage() {
       if (headerRef.current) {
         setHeaderHeight(headerRef.current.offsetHeight);
       }
-      
-      // Adjust console height proportionally on window resize
-      const viewportHeight = window.innerHeight;
-      const maxConsoleHeight = viewportHeight * 0.4; // Maximum 40% of viewport
-      const newConsoleHeight = Math.min(maxConsoleHeight, consoleHeight);
-      setConsoleHeight(newConsoleHeight);
     };
     
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [consoleHeight]);
+  }, []);
   
   // Set default problem on initial load
   useEffect(() => {
     if (challenges.length > 0 && !activeProblem) {
       handleProblemSelect(challenges[0]);
     }
-  }, []);
+  }, [activeProblem]);
   
   // Update code when language changes
   useEffect(() => {
@@ -854,6 +930,11 @@ export default function PracticePage() {
   // Determine if we should show the sidebar based on screen size
   const shouldShowSidebar = () => {
     return showSidebar && (windowWidth > 768 || !activeProblem);
+  };
+  
+  // Calculate content height (viewport minus header)
+  const getContentHeight = () => {
+    return `calc(100dvh - ${headerHeight}px)`;
   };
   
   const handleProblemSelect = (problem: any) => {
@@ -877,6 +958,7 @@ export default function PracticePage() {
   const handleRunCode = () => {
     setIsRunning(true);
     setConsoleOutput("Running code...");
+    setShowConsole(true);
     
     // Simulate code execution with a delay
     setTimeout(() => {
@@ -888,6 +970,7 @@ export default function PracticePage() {
   const handleSubmit = () => {
     setIsSubmitting(true);
     setConsoleOutput("Testing solution against all test cases...");
+    setShowConsole(true);
     
     // Simulate test case validation with a delay
     setTimeout(() => {
@@ -897,7 +980,8 @@ export default function PracticePage() {
         input: test.input,
         expected: test.expected,
         output: index < 2 ? test.expected : (index === 2 ? "Incorrect output" : test.expected),
-        status: index < 2 || index === 3 ? "passed" : "failed"
+        status: index < 2 || index === 3 ? "passed" : "failed",
+        hidden: test.hidden
       }));
       
       setTestResults(mockResults);
@@ -906,494 +990,168 @@ export default function PracticePage() {
     }, 2000);
   };
   
-  // Handle console resize with height constraints
-  const handleConsoleResize = (e: React.MouseEvent) => {
-    const startY = e.clientY;
-    const startHeight = consoleHeight;
-    
-    const handleMouseMove = (moveEvent: MouseEvent) => {
-      const deltaY = startY - moveEvent.clientY;
-      // Calculate available content space (viewport height minus header)
-      const availableSpace = window.innerHeight - headerHeight;
-      // Ensure console is between 15% and 40% of available space
-      const minHeight = Math.max(120, availableSpace * 0.15);
-      const maxHeight = availableSpace * 0.4;
-      const newHeight = Math.max(minHeight, Math.min(maxHeight, startHeight + deltaY));
-      setConsoleHeight(newHeight);
-    };
-    
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
-  
-  // Calculate content area height (viewport minus header)
-  const getContentHeight = () => {
-    return `calc(100vh - ${headerHeight}px)`;
-  };
-  
-  // Calculate sidebar width based on viewport
-  const getSidebarWidth = () => {
-    if (windowWidth <= 640) return "100%";
-    if (windowWidth <= 1024) return "350px";
-    return "400px";
-  };
-  
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
-      {/* Header with problem info - with ref for height measurement */}
+    <div className="flex flex-col min-h-dvh overflow-hidden">
+      {/* Header with problem info */}
       <header 
         ref={headerRef}
-        className="flex items-center justify-between border-b bg-white px-4 py-2 z-20 flex-shrink-0"
+        className="flex items-center justify-between border-b bg-white px-4 py-3 z-20 flex-shrink-0 sticky top-0"
       >
         <div className="flex items-center gap-2">
-          {activeTab === "problems" && activeProblem ? (
+          {activeProblem ? (
             <>
               <Button variant="ghost" size="sm" onClick={() => setActiveProblem(null)} className="gap-1 mr-1">
                 <ChevronLeft className="h-4 w-4" />
                 Back
               </Button>
-              <span className="text-lg font-medium truncate max-w-md">{activeProblem.title}</span>
+              <span className="text-lg font-medium truncate max-w-xs md:max-w-md">{activeProblem.title}</span>
               <Badge className={getDifficultyColor(activeProblem.difficulty).badge}>
                 {activeProblem.difficulty}
               </Badge>
-              
-              {/* Add HackerRank/LeetCode style progress indicator */}
-              <div className="ml-4 flex items-center text-xs">
-                <div className="flex items-center gap-1 px-2 py-1 rounded-md bg-slate-100">
-                  <CheckCircle className="h-3.5 w-3.5 text-green-500" />
-                  <span className="text-slate-700">2/4 test cases</span>
-                </div>
-              </div>
             </>
           ) : (
-            <h1 className="text-xl font-semibold">Coding Practice</h1>
+            <div className="flex items-center gap-2">
+              <FileCode className="h-5 w-5 text-blue-600" />
+              <h1 className="text-xl font-semibold">Coding Practice</h1>
+            </div>
           )}
         </div>
         
-        <div className="flex items-center gap-3">
-          {activeTab === "problems" && activeProblem && (
+        <div className="flex items-center gap-2">
+          {activeProblem ? (
             <>
-              <Select value={language} onValueChange={setLanguage}>
-                <SelectTrigger className="w-[180px] hidden md:flex">
-                  <SelectValue placeholder="Select language" />
-                </SelectTrigger>
-                <SelectContent>
-                  {languages.map((lang) => (
-                    <SelectItem key={lang.id} value={lang.id}>
-                      {lang.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <Select value={language} onValueChange={setLanguage}>
+                  <SelectTrigger className="w-[140px] h-9">
+                    <SelectValue placeholder="Language" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {languages.map((lang) => (
+                      <SelectItem key={lang.id} value={lang.id}>
+                        <div className="flex items-center gap-2">
+                          <span>{lang.icon}</span>
+                          <span>{lang.name}</span>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               
-              {/* LeetCode/HackerRank style action buttons */}
               <div className="flex items-center gap-2">
                 <Button 
+                  variant="outline" 
                   size="sm" 
+                  className="gap-1"
+                  onClick={() => setShowConsole(!showConsole)}
+                >
+                  {showConsole ? (
+                    <>
+                      <ChevronUp className="h-4 w-4" />
+                      <span className="hidden sm:inline">Hide Console</span>
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="h-4 w-4" />
+                      <span className="hidden sm:inline">Show Console</span>
+                    </>
+                  )}
+                </Button>
+                
+                <Button 
                   variant="outline"
+                  size="sm" 
                   className="gap-1"
                   onClick={handleRunCode}
-                  disabled={isRunning || isSubmitting}
+                  disabled={isRunning}
                 >
-                  {isRunning ? 
-                    <RefreshCw className="h-4 w-4 animate-spin" /> : 
+                  {isRunning ? (
+                    <RefreshCw className="h-4 w-4 animate-spin" />
+                  ) : (
                     <Play className="h-4 w-4" />
-                  }
+                  )}
                   <span className="hidden sm:inline">Run</span>
                 </Button>
                 
                 <Button 
+                  variant="default" 
                   size="sm"
                   className="gap-1"
                   onClick={handleSubmit}
-                  disabled={isRunning || isSubmitting}
+                  disabled={isSubmitting}
                 >
-                  {isSubmitting ? 
-                    <RefreshCw className="h-4 w-4 animate-spin" /> : 
-                    <CheckSquare className="h-4 w-4" />
-                  }
+                  {isSubmitting ? (
+                    <RefreshCw className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <CheckCircle className="h-4 w-4" />
+                  )}
                   <span className="hidden sm:inline">Submit</span>
                 </Button>
-                
-                <div className="border-l h-6 mx-1 hidden sm:block"></div>
-                
-                <Button variant="ghost" size="sm" className="gap-1 hidden sm:flex">
-                  <HelpCircle className="h-4 w-4" />
-                  <span>Hint</span>
-                </Button>
-                
-                <Button variant="ghost" size="sm" className="gap-1 hidden sm:flex">
-                  <Eye className="h-4 w-4" />
-                  <span>Solution</span>
-                </Button>
-                
-                <Button variant="ghost" size="icon" onClick={() => setShowSidebar(!showSidebar)}>
-                  {showSidebar ? 
-                    <PanelRight className="h-4 w-4" /> : 
-                    <PanelLeft className="h-4 w-4" />
-                  }
-                </Button>
               </div>
-            </>
-          )}
-          
-          {!activeProblem && (
-            <div className="flex items-center gap-2">
-              <div className="relative w-64 hidden sm:block">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
-                <Input type="search" placeholder="Search problems..." className="pl-9" />
-              </div>
-              <Button variant="outline" size="icon">
-                <Filter className="h-4 w-4" />
+              
+              <Button variant="ghost" size="icon" onClick={() => setShowSidebar(!showSidebar)} className="ml-2">
+                {showSidebar ? 
+                  <PanelRight className="h-4 w-4" /> : 
+                  <PanelLeft className="h-4 w-4" />
+                }
               </Button>
+            </>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Input type="search" placeholder="Search..." className="w-[200px] h-9" />
             </div>
           )}
         </div>
       </header>
       
-      {/* Main content - exact height based on header */}
+      {/* Main content */}
       <div className="flex overflow-hidden" style={{ height: getContentHeight() }}>
-        {/* Always render Tabs component to maintain context */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          {/* Tab navigation bar - only visible when no problem is active */}
-          {!activeProblem && (
-            <div className="border-b bg-white sticky top-0 z-10 w-full">
-              <div className="max-w-screen-xl mx-auto">
-                <TabsList className="w-full justify-start border-b-0 rounded-none h-12 bg-transparent overflow-x-auto">
-                  <TabsTrigger value="problems" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
-                    <ListChecks className="h-4 w-4 mr-2" />
-                    <span className="hidden sm:inline">Problems</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="exercises" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
-                    <BookOpen className="h-4 w-4 mr-2" />
-                    <span className="hidden sm:inline">Exercises</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="competitions" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
-                    <Trophy className="h-4 w-4 mr-2" />
-                    <span className="hidden sm:inline">Competitions</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="playground" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
-                    <Code className="h-4 w-4 mr-2" />
-                    <span className="hidden sm:inline">Playground</span>
-                  </TabsTrigger>
-                </TabsList>
+        {/* Problem List or Code Editor */}
+        <div className="flex-1 flex overflow-hidden">
+          {!activeProblem ? (
+            <ProblemListView 
+              challenges={challenges} 
+              onSelectProblem={handleProblemSelect} 
+            />
+          ) : (
+            <div className="flex flex-col w-full overflow-hidden">
+              {/* Code editor */}
+              <div className="flex-1 min-h-0 overflow-hidden">
+                <CodeEditor
+                  language={language}
+                  value={code}
+                  onChange={setCode}
+                />
               </div>
-            </div>
-          )}
-          
-          {/* TabsContent to wrap each tab's content - maintaining the React context */}
-          <TabsContent value="problems" className="flex-1 h-full">
-            {!activeProblem ? (
-              <ProblemListView 
-                challenges={challenges} 
-                onSelectProblem={handleProblemSelect}
-                view={problemListView}
-                setView={setProblemListView}
-              />
-            ) : (
-              <div className="flex overflow-hidden w-full">
-                {/* Problem description sidebar with independent scrolling */}
-                {shouldShowSidebar() && (
-                  <div 
-                    className="border-r overflow-y-auto flex-shrink-0 h-full transition-all duration-300"
-                    style={{ width: getSidebarWidth() }}
-                  >
-                    {/* LeetCode/HackerRank style info panel */}
-                    <div className="flex items-center justify-between border-b bg-slate-50 px-4 py-2 sticky top-0 z-10">
-                      <span className="text-sm font-medium">Problem Description</span>
-                      <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                          <BookOpen className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                          <Bookmark className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                          <Save className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                    
-                    <Tabs defaultValue="description" className="flex-1 flex flex-col">
-                      <div className="border-b sticky top-[40px] bg-white z-10">
-                        <TabsList className="h-10 w-full justify-start rounded-none bg-transparent px-4">
-                          <TabsTrigger value="description" className="h-10 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
-                            Description
-                          </TabsTrigger>
-                          <TabsTrigger value="solution" className="h-10 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
-                            Solution
-                          </TabsTrigger>
-                          <TabsTrigger value="submissions" className="h-10 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
-                            Submissions
-                          </TabsTrigger>
-                        </TabsList>
-                      </div>
-                      
-                      <TabsContent value="description" className="flex-1 overflow-y-auto p-0 m-0">
-                        <div className="p-4 space-y-4">
-                          <div>
-                            <h2 className="text-xl font-bold mb-2">{activeProblem.title}</h2>
-                            <div className="flex flex-wrap items-center gap-2 mb-4">
-                              <Badge className={getDifficultyColor(activeProblem.difficulty).badge}>
-                                {activeProblem.difficulty}
-                              </Badge>
-                              <div className="text-xs text-muted-foreground">
-                                Acceptance: {activeProblem.acceptance}%
-                              </div>
-                              <div className="text-xs text-muted-foreground">
-                                Submissions: {activeProblem.submissions?.toLocaleString()}
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="prose prose-sm max-w-none">
-                            <div dangerouslySetInnerHTML={{ __html: activeProblem.description }}></div>
-                          </div>
-                          
-                          <div>
-                            <h3 className="text-sm font-semibold mb-2">Examples:</h3>
-                            <div className="space-y-3">
-                              {activeProblem.examples.map((example: any, i: number) => (
-                                <div key={i} className="rounded-md border overflow-hidden">
-                                  <div className="bg-slate-50 px-3 py-1 text-xs font-medium border-b">
-                                    Example {i + 1}
-                                  </div>
-                                  <div className="p-3 space-y-2 text-sm">
-                                    <div>
-                                      <div className="font-medium text-xs text-muted-foreground">Input:</div>
-                                      <pre className="mt-1 rounded bg-slate-100 p-2 text-xs overflow-x-auto">{example.input}</pre>
-                                    </div>
-                                    <div>
-                                      <div className="font-medium text-xs text-muted-foreground">Output:</div>
-                                      <pre className="mt-1 rounded bg-slate-100 p-2 text-xs overflow-x-auto">{example.output}</pre>
-                                    </div>
-                                    {example.explanation && (
-                                      <div>
-                                        <div className="font-medium text-xs text-muted-foreground">Explanation:</div>
-                                        <div className="mt-1 text-xs">{example.explanation}</div>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <h3 className="text-sm font-semibold mb-2">Constraints:</h3>
-                            <ul className="list-disc pl-5 text-xs space-y-1">
-                              {activeProblem.constraints.map((constraint: string, i: number) => (
-                                <li key={i}>{constraint}</li>
-                              ))}
-                            </ul>
-                          </div>
-                          
-                          {activeProblem.tags && (
-                            <div>
-                              <h3 className="text-sm font-semibold mb-2">Tags:</h3>
-                              <div className="flex flex-wrap gap-1.5">
-                                {activeProblem.tags.map((tag: string, i: number) => (
-                                  <Badge key={i} variant="outline" className="text-xs font-normal">
-                                    {tag}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                          
-                          {activeProblem.companies && (
-                            <div>
-                              <h3 className="text-sm font-semibold mb-2">Companies:</h3>
-                              <div className="flex flex-wrap gap-1.5">
-                                {activeProblem.companies.map((company: string, i: number) => (
-                                  <Badge key={i} variant="secondary" className="text-xs">
-                                    {company}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </TabsContent>
-                      
-                      <TabsContent value="solution" className="flex-1 overflow-y-auto p-0 m-0">
-                        <div className="p-4">
-                          <div className="rounded-lg border bg-amber-50 p-4">
-                            <div className="flex items-center gap-2 mb-2">
-                              <Lock className="h-5 w-5 text-amber-600" />
-                              <h3 className="font-medium">Premium Content</h3>
-                            </div>
-                            <p className="text-sm mb-3">
-                              Detailed solution with multiple approaches is available for premium members.
-                            </p>
-                            <Button size="sm" className="bg-amber-600 hover:bg-amber-700">Upgrade to Pro</Button>
-                          </div>
-                        </div>
-                      </TabsContent>
-                      
-                      <TabsContent value="submissions" className="flex-1 overflow-y-auto p-0 m-0">
-                        <div className="p-4">
-                          <div className="text-center py-8">
-                            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 mb-4">
-                              <FileCode className="h-6 w-6 text-slate-500" />
-                            </div>
-                            <h3 className="font-medium mb-1">No submissions yet</h3>
-                            <p className="text-sm text-muted-foreground">Submit your solution to see your results here</p>
-                          </div>
-                        </div>
-                      </TabsContent>
-                    </Tabs>
+              
+              {/* Console panel (expandable) */}
+              {showConsole && (
+                <div className="h-64 bg-slate-900 text-white overflow-hidden border-t border-slate-700">
+                  <div className="flex items-center justify-between p-2 bg-slate-800 border-b border-slate-700">
+                    <div className="text-xs font-medium">Console Output</div>
+                    <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => setShowConsole(false)}>
+                      <X className="h-4 w-4" />
+                    </Button>
                   </div>
-                )}
-                
-                {/* Fixed position editor container - Contains both editor and console in fixed view */}
-                <div className="flex-1 relative">
-                  <div className="absolute inset-0 flex flex-col">
-                    {/* Editor section - precise height calculation */}
-                    <div className="flex-grow flex flex-col" style={{ height: `calc(100% - ${consoleHeight}px)` }}>
-                      <div className="flex-1 w-full h-full">
-                        <MonacoEditor 
-                          code={code}
-                          language={language}
-                          onChange={(value) => setCode(value)}
-                          onRun={handleRunCode}
-                        />
-                      </div>
-                    </div>
-                    
-                    {/* Resizer handle - exact width and zero margin */}
-                    <div 
-                      className="h-1 bg-slate-200 hover:bg-blue-400 cursor-ns-resize w-full"
-                      style={{ margin: 0, padding: 0 }}
-                      onMouseDown={handleConsoleResize}
-                    />
-                    
-                    {/* Console panel with precisely controlled height */}
-                    <div 
-                      className="border-t flex flex-col bg-gray-900 overflow-hidden"
-                      style={{ height: `${consoleHeight}px`, flexShrink: 0 }}
-                    >
-                      <Tabs defaultValue="console" className="flex flex-col h-full">
-                        <div className="bg-slate-100 border-b px-3 py-1.5 flex items-center justify-between">
-                          <TabsList className="h-8">
-                            <TabsTrigger value="testcases" className="h-7 text-xs font-medium">
-                              Test Cases {testResults.length > 0 && (
-                                <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-xs bg-slate-200">
-                                  {testResults.filter((t: any) => t.status === 'passed').length}/{testResults.length}
-                                </span>
-                              )}
-                            </TabsTrigger>
-                            <TabsTrigger value="console" className="h-7 text-xs font-medium">
-                              Console {consoleOutput && <span className="ml-1.5 h-1.5 w-1.5 rounded-full bg-green-500"></span>}
-                            </TabsTrigger>
-                          </TabsList>
-                          
-                          <Button variant="ghost" size="sm" className="h-7 text-xs" onClick={() => {
-                            setConsoleOutput("");
-                            setTestResults([]);
-                          }}>
-                            <RefreshCw className="h-3.5 w-3.5 mr-1" />
-                            Clear
-                          </Button>
-                        </div>
-                        
-                        <div className="flex-1 overflow-auto">
-                          <TabsContent value="testcases" className="p-0 m-0 h-full bg-white">
-                            {testResults.length > 0 ? (
-                              <div className="divide-y">
-                                {testResults.map((result: any) => (
-                                  <div key={result.id} className="flex p-3 hover:bg-slate-50 transition-colors">
-                                    <div className="w-8 flex-shrink-0 flex items-start justify-center pt-0.5">
-                                      {result.status === 'passed' ? (
-                                        <div className="rounded-full bg-green-100 p-1">
-                                          <CheckCircle className="text-green-600 h-4 w-4" />
-                                        </div>
-                                      ) : (
-                                        <div className="rounded-full bg-red-100 p-1">
-                                          <XSquare className="text-red-600 h-4 w-4" />
-                                        </div>
-                                      )}
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                      <div className="text-sm font-medium flex items-center">
-                                        Test Case {result.id}
-                                        {result.status === 'passed' ? (
-                                          <span className="ml-2 text-xs px-1.5 py-0.5 rounded bg-green-100 text-green-800">Passed</span>
-                                        ) : (
-                                          <span className="ml-2 text-xs px-1.5 py-0.5 rounded bg-red-100 text-red-800">Failed</span>
-                                        )}
-                                      </div>
-                                      <div className="mt-2 space-y-2">
-                                        <div className="text-xs rounded-md bg-slate-50 p-2">
-                                          <span className="font-medium text-slate-700 block mb-1">Input:</span>
-                                          <code className="text-slate-800 font-mono">{result.input}</code>
-                                        </div>
-                                        <div className="text-xs rounded-md bg-slate-50 p-2">
-                                          <span className="font-medium text-slate-700 block mb-1">Expected:</span>
-                                          <code className="text-slate-800 font-mono">{result.expected}</code>
-                                        </div>
-                                        {result.status !== 'passed' && (
-                                          <div className="text-xs rounded-md bg-red-50 p-2">
-                                            <span className="font-medium text-red-700 block mb-1">Your Output:</span>
-                                            <code className="text-red-800 font-mono">{result.output}</code>
-                                          </div>
-                                        )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            ) : (
-                              <div className="flex items-center justify-center h-full text-muted-foreground">
-                                <div className="text-center">
-                                  <div className="rounded-full bg-slate-100 p-3 mx-auto mb-3 w-fit">
-                                    <AlertCircle className="h-6 w-6 text-slate-400" />
-                                  </div>
-                                  <p className="font-medium text-slate-600">Run your code to see test results</p>
-                                  <p className="text-xs text-slate-500 mt-1">Test results will appear here after you run or submit your code</p>
-                                </div>
-                              </div>
-                            )}
-                          </TabsContent>
-                          
-                          <TabsContent value="console" className="p-0 m-0 h-full">
-                            <div className="h-full flex flex-col">
-                              <div className="flex-1 overflow-auto bg-gray-900 text-green-400 font-mono text-sm">
-                                <pre className="p-4 whitespace-pre-wrap">
-                                  {consoleOutput || '> Console output will appear here\n> Run your code to see the results'}
-                                </pre>
-                              </div>
-                            </div>
-                          </TabsContent>
-                        </div>
-                      </Tabs>
-                    </div>
+                  <div className="p-3 font-mono text-sm whitespace-pre-wrap h-full overflow-y-auto">
+                    {consoleOutput || "Run your code to see the output here."}
                   </div>
                 </div>
-              </div>
-            )}
-          </TabsContent>
-          
-          <TabsContent value="exercises" className="flex-1 h-full">
-            <ExercisesTab exercises={exercises} />
-          </TabsContent>
-          
-          <TabsContent value="competitions" className="flex-1 h-full">
-            <CompetitionsTab competitions={competitions} />
-          </TabsContent>
-          
-          <TabsContent value="playground" className="flex-1 h-full">
-            <PlaygroundTab />
-          </TabsContent>
-        </Tabs>
+              )}
+              
+              {/* Test results panel */}
+              <TestResults results={testResults} isVisible={testResults.length > 0} />
+            </div>
+          )}
+        </div>
+        
+        {/* Problem description sidebar */}
+        {activeProblem && shouldShowSidebar() && (
+          <div className="border-l w-[450px] overflow-y-auto flex-shrink-0 bg-white">
+            <ProblemDescription problem={activeProblem} />
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
-// ... existing component definitions ..."

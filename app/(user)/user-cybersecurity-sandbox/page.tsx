@@ -35,7 +35,8 @@ import {
   Hammer,
   Clock,
   Users,
-  ArrowRight
+  ArrowRight,
+  Search
 } from "lucide-react";
 
 // Security challenge scenarios
@@ -217,9 +218,12 @@ export default function CybersecuritySandboxPage() {
   const [activeScenario, setActiveScenario] = useState<any>(null);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
   const [headerHeight, setHeaderHeight] = useState(56);
+  const [filterOpen, setFilterOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
   const [showSidebar, setShowSidebar] = useState(true);
-  const [filter, setFilter] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedDifficulty, setSelectedDifficulty] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   
   // Track window resize for responsiveness
   useEffect(() => {
@@ -245,7 +249,7 @@ export default function CybersecuritySandboxPage() {
   
   // Calculate content height (viewport minus header)
   const getContentHeight = () => {
-    return `calc(100vh - ${headerHeight}px)`;
+    return `calc(100dvh - ${headerHeight}px)`;
   };
   
   // Determine if we should show the sidebar based on screen size
@@ -260,11 +264,26 @@ export default function CybersecuritySandboxPage() {
     return "400px";
   };
   
+  // Filter challenges based on selected filters and search query
+  const getFilteredChallenges = () => {
+    return securityChallenges.filter(challenge => {
+      const matchesCategory = selectedCategory === "all" || challenge.category.toLowerCase().includes(selectedCategory);
+      const matchesDifficulty = selectedDifficulty === "all" || challenge.level.toLowerCase() === selectedDifficulty;
+      const matchesSearch = !searchQuery || 
+        challenge.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        challenge.description.toLowerCase().includes(searchQuery.toLowerCase());
+        
+      return matchesCategory && matchesDifficulty && matchesSearch;
+    });
+  };
+  
+  const filteredChallenges = getFilteredChallenges();
+  
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
+    <div className="flex flex-col min-h-dvh overflow-hidden">
       <header 
         ref={headerRef}
-        className="flex items-center justify-between border-b bg-white px-4 py-2 z-20 flex-shrink-0"
+        className="flex items-center justify-between border-b bg-white px-4 py-3 z-20 flex-shrink-0 sticky top-0"
       >
         <div className="flex items-center gap-2">
           {activeScenario ? (
@@ -279,23 +298,58 @@ export default function CybersecuritySandboxPage() {
               </Badge>
             </>
           ) : (
-            <h1 className="text-xl font-semibold">Cybersecurity Sandbox</h1>
+            <div className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-blue-600" />
+              <h1 className="text-xl font-semibold">Cybersecurity Sandbox</h1>
+            </div>
           )}
         </div>
         
         <div className="flex items-center gap-3">
           {!activeScenario && (
             <>
-              <div className="relative w-64 hidden sm:block">
-                <Input type="search" placeholder="Search challenges..." className="pl-9" />
+              <div className="relative sm:w-64">
+                <Input 
+                  type="search" 
+                  placeholder="Search challenges..." 
+                  className="pl-9 pr-8"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                />
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                {searchQuery && (
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="absolute right-1 top-1 h-7 w-7 p-0" 
+                    onClick={() => setSearchQuery("")}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </Button>
+                )}
               </div>
-              <Button variant="outline" size="sm" className="gap-1 hidden sm:flex">
-                <Book className="h-4 w-4 mr-1" />
-                Help
+              <Button 
+                variant={filterOpen ? "default" : "outline"} 
+                size="sm" 
+                className="gap-1"
+                onClick={() => setFilterOpen(!filterOpen)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                <span className="hidden sm:inline">Filter</span>
+                {(selectedCategory !== "all" || selectedDifficulty !== "all") && (
+                  <span className="inline-flex items-center justify-center w-5 h-5 text-xs bg-primary text-white rounded-full ml-1">
+                    {(selectedCategory !== "all" ? 1 : 0) + (selectedDifficulty !== "all" ? 1 : 0)}
+                  </span>
+                )}
               </Button>
               <Button size="sm" className="gap-1">
-                <Shield className="h-4 w-4 mr-1" />
-                New Challenge
+                <Terminal className="h-4 w-4 mr-1" />
+                <span>Start Challenge</span>
               </Button>
             </>
           )}
@@ -326,24 +380,23 @@ export default function CybersecuritySandboxPage() {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {!activeScenario && (
             <div className="w-full">
-              <div className="border-b bg-white sticky top-0 z-10">
+              <div className="border-b bg-white sticky top-headerHeight z-10">
                 <div className="max-w-screen-xl mx-auto">
                   <TabsList className="w-full justify-start border-b-0 rounded-none h-12 bg-transparent overflow-x-auto">
                     <TabsTrigger value="scenarios" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
                       <Target className="h-4 w-4 mr-2" />
                       <span className="hidden sm:inline">Training Scenarios</span>
+                      <span className="sm:hidden">Scenarios</span>
                     </TabsTrigger>
                     <TabsTrigger value="ctf" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
                       <Award className="h-4 w-4 mr-2" />
                       <span className="hidden sm:inline">Capture The Flag</span>
+                      <span className="sm:hidden">CTF</span>
                     </TabsTrigger>
                     <TabsTrigger value="environments" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
                       <Server className="h-4 w-4 mr-2" />
                       <span className="hidden sm:inline">My Environments</span>
-                    </TabsTrigger>
-                    <TabsTrigger value="tools" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
-                      <Hammer className="h-4 w-4 mr-2" />
-                      <span className="hidden sm:inline">Security Tools</span>
+                      <span className="sm:hidden">Envs</span>
                     </TabsTrigger>
                   </TabsList>
                 </div>
@@ -351,92 +404,134 @@ export default function CybersecuritySandboxPage() {
               
               <div className="p-4 overflow-y-auto">
                 <div className="max-w-screen-xl mx-auto">
+                  {/* Filter dropdown */}
+                  {filterOpen && (
+                    <Card className="mb-6 border shadow-sm">
+                      <CardContent className="p-4">
+                        <div className="flex flex-col sm:flex-row gap-4">
+                          <div className="space-y-2 flex-1">
+                            <h4 className="text-sm font-medium">Category</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {["all", "web", "network", "crypto"].map((category) => (
+                                <Button
+                                  key={category}
+                                  size="sm"
+                                  variant={selectedCategory === category ? "default" : "outline"}
+                                  className="h-8 text-xs capitalize"
+                                  onClick={() => setSelectedCategory(category)}
+                                >
+                                  {category === "all" ? "All Categories" : `${category} Security`}
+                                </Button>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="space-y-2 flex-1">
+                            <h4 className="text-sm font-medium">Difficulty</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {["all", "beginner", "intermediate", "advanced"].map((level) => (
+                                <Button
+                                  key={level}
+                                  size="sm"
+                                  variant={selectedDifficulty === level ? "default" : "outline"}
+                                  className="h-8 text-xs capitalize"
+                                  onClick={() => setSelectedDifficulty(level)}
+                                >
+                                  {level === "all" ? "All Levels" : level}
+                                </Button>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+                  
                   <TabsContent value="scenarios" className="mt-0">
                     <div className="flex justify-between items-center mb-6">
                       <h2 className="text-xl font-semibold">Training Scenarios</h2>
                       <div className="flex items-center gap-2">
-                        <Select defaultValue="all">
-                          <SelectTrigger className="w-[150px]">
-                            <SelectValue placeholder="Category" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">All Categories</SelectItem>
-                            <SelectItem value="web">Web Security</SelectItem>
-                            <SelectItem value="network">Network Security</SelectItem>
-                            <SelectItem value="crypto">Cryptography</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <Select defaultValue="all">
-                          <SelectTrigger className="w-[150px]">
-                            <SelectValue placeholder="Difficulty" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">All Levels</SelectItem>
-                            <SelectItem value="beginner">Beginner</SelectItem>
-                            <SelectItem value="intermediate">Intermediate</SelectItem>
-                            <SelectItem value="advanced">Advanced</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <div className="text-sm text-muted-foreground">
+                          {filteredChallenges.length} scenarios available
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {securityChallenges.map((challenge) => {
-                        const levelColors = getLevelColor(challenge.level);
-                        return (
-                          <Card 
-                            key={challenge.id} 
-                            className="hover:shadow-md transition-all cursor-pointer border"
-                            onClick={() => setActiveScenario(challenge)}
-                          >
-                            <CardHeader className="pb-2">
-                              <div className="flex justify-between items-start">
-                                <Badge className={levelColors.badge}>{challenge.level}</Badge>
-                                <Badge variant="outline">{challenge.category}</Badge>
-                              </div>
-                              <CardTitle className="mt-2 text-base hover:text-blue-600 transition-colors">
-                                {challenge.title}
-                              </CardTitle>
-                              <CardDescription className="line-clamp-2">
-                                {challenge.description}
-                              </CardDescription>
-                            </CardHeader>
-                            <CardContent className="pb-2">
-                              <div className="space-y-4">
-                                <div className="flex flex-wrap gap-2">
-                                  <div className="text-xs bg-slate-100 rounded-full px-2 py-1 text-slate-700 flex items-center">
-                                    <Clock className="h-3.5 w-3.5 mr-1" />
-                                    {challenge.estimatedTime}
+                    {filteredChallenges.length > 0 ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {filteredChallenges.map((challenge) => {
+                          const levelColors = getLevelColor(challenge.level);
+                          return (
+                            <Card 
+                              key={challenge.id} 
+                              className="hover:shadow-md transition-all cursor-pointer border group"
+                              onClick={() => setActiveScenario(challenge)}
+                            >
+                              <CardHeader className="pb-2">
+                                <div className="flex justify-between items-start">
+                                  <Badge className={levelColors.badge}>{challenge.level}</Badge>
+                                  <Badge variant="outline">{challenge.category}</Badge>
+                                </div>
+                                <CardTitle className="mt-2 text-base group-hover:text-blue-600 transition-colors">
+                                  {challenge.title}
+                                </CardTitle>
+                                <CardDescription className="line-clamp-2">
+                                  {challenge.description}
+                                </CardDescription>
+                              </CardHeader>
+                              <CardContent className="pb-2">
+                                <div className="space-y-4">
+                                  <div className="flex flex-wrap gap-2">
+                                    <div className="text-xs bg-slate-100 rounded-full px-2 py-1 text-slate-700 flex items-center">
+                                      <Clock className="h-3.5 w-3.5 mr-1" />
+                                      {challenge.estimatedTime}
+                                    </div>
+                                    <div className="text-xs bg-slate-100 rounded-full px-2 py-1 text-slate-700 flex items-center">
+                                      <Users className="h-3.5 w-3.5 mr-1" />
+                                      {challenge.popularity}% popularity
+                                    </div>
                                   </div>
-                                  <div className="text-xs bg-slate-100 rounded-full px-2 py-1 text-slate-700 flex items-center">
-                                    <Users className="h-3.5 w-3.5 mr-1" />
-                                    {challenge.popularity}% popularity
+                                  
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between text-xs text-muted-foreground">
+                                      <span>Completion Rate</span>
+                                      <span>{challenge.completion}%</span>
+                                    </div>
+                                    <Progress value={challenge.completion} className="h-1" />
                                   </div>
                                 </div>
-                                
-                                <div className="space-y-1">
-                                  <div className="flex justify-between text-xs text-muted-foreground">
-                                    <span>Completion Rate</span>
-                                    <span>{challenge.completion}%</span>
-                                  </div>
-                                  <Progress value={challenge.completion} className="h-1" />
+                              </CardContent>
+                              <CardFooter className="border-t pt-3 flex justify-between">
+                                <div className="text-xs text-muted-foreground flex items-center">
+                                  <Cpu className="h-3.5 w-3.5 mr-1" />
+                                  {challenge.environment}
                                 </div>
-                              </div>
-                            </CardContent>
-                            <CardFooter className="border-t pt-3 flex justify-between">
-                              <div className="text-xs text-muted-foreground flex items-center">
-                                <Cpu className="h-3.5 w-3.5 mr-1" />
-                                {challenge.environment}
-                              </div>
-                              <Button variant="ghost" size="sm" className="gap-1 text-blue-600">
-                                <ArrowRight className="h-3.5 w-3.5" />
-                                <span>Start</span>
-                              </Button>
-                            </CardFooter>
-                          </Card>
-                        );
-                      })}
-                    </div>
+                                <Button variant="ghost" size="sm" className="gap-1 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                  <ArrowRight className="h-3.5 w-3.5" />
+                                  <span>Start</span>
+                                </Button>
+                              </CardFooter>
+                            </Card>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="text-center py-12 border border-dashed rounded-lg">
+                        <div className="bg-muted/50 rounded-full p-3 w-fit mx-auto mb-4">
+                          <Target className="h-8 w-8 text-muted-foreground" />
+                        </div>
+                        <h3 className="text-lg font-medium mb-1">No scenarios found</h3>
+                        <p className="text-sm text-muted-foreground mb-4 max-w-md mx-auto">
+                          Try adjusting your filters or search term to find what you're looking for.
+                        </p>
+                        <Button onClick={() => {
+                          setSelectedCategory("all");
+                          setSelectedDifficulty("all");
+                          setSearchQuery("");
+                        }}>
+                          Clear Filters
+                        </Button>
+                      </div>
+                    )}
                   </TabsContent>
                   <TabsContent value="ctf" className="mt-0">
                     <div className="flex justify-between items-center mb-6">
