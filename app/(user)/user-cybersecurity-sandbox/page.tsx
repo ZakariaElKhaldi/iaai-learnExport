@@ -301,7 +301,7 @@ export default function CybersecuritySandboxPage() {
         ref={headerRef}
         className="flex items-center justify-between border-b bg-white px-4 py-3 z-20 flex-shrink-0 sticky top-0"
       >
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           {activeScenario ? (
             <>
               <Button variant="ghost" size="sm" onClick={() => setActiveScenario(null)} className="gap-1 mr-1">
@@ -313,13 +313,15 @@ export default function CybersecuritySandboxPage() {
                 {activeScenario.level || activeScenario.difficulty}
               </Badge>
             </>
-          ) : (
+          ) : 
+          (
             <div className="flex items-center gap-2">
               <Shield className="h-5 w-5 text-blue-600" />
               <h1 className="text-xl font-semibold">Cybersecurity Sandbox</h1>
             </div>
-          )}
-        </div>
+          )
+          }
+        </div> */}
         
         <div className="flex items-center gap-3">
           {!activeScenario && (

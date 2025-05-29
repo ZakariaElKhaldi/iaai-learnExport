@@ -1,21 +1,35 @@
-export default function EditCoursePage() {
+"use client";
+
+import { ArrowLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+
+export default function EditCoursePage({ params }: { params: { courseId: string } }) {
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
+    <div className="space-y-6">
+      {/* Portal Header */}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold">Creator Portal</h1>
+      </div>
+      
+      {/* Edit Course Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold">Edit Course</h1>
-          <p className="text-gray-500">Data Science Fundamentals</p>
+          <div className="flex items-center gap-2 mb-2">
+            <Button variant="ghost" size="sm" asChild className="flex items-center gap-1">
+              <Link href="/creator-courses">
+                <ArrowLeft className="h-4 w-4" />
+                Back to Courses
+              </Link>
+            </Button>
+          </div>
+          <h2 className="text-2xl font-bold">Edit Course</h2>
+          <p className="text-muted-foreground">Data Science Fundamentals</p>
         </div>
-        <div className="flex space-x-3">
-          <button className="border px-4 py-2 rounded">
-            Preview
-          </button>
-          <button className="border px-4 py-2 rounded">
-            Save
-          </button>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded">
-            Publish
-          </button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline">Preview</Button>
+          <Button variant="outline">Save</Button>
+          <Button>Publish</Button>
         </div>
       </div>
       

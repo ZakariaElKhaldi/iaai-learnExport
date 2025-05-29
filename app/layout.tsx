@@ -5,6 +5,7 @@ import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 import DevNavigation from "@/components/shared/DevNavigation";
 import { Providers } from "./providers";
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             {process.env.NODE_ENV === 'development' && <DevNavigation />}
           </div>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );

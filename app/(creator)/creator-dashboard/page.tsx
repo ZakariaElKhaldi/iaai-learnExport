@@ -1,27 +1,51 @@
+"use client";
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { DashboardTabs } from '@/components/creator/DashboardTabs';
+import { DashboardOverview } from '@/components/creator/DashboardOverview';
+import { DashboardRevenue } from '@/components/creator/DashboardRevenue';
+import { DashboardCourses } from '@/components/creator/DashboardCourses';
+import { DashboardEngagement } from '@/components/creator/DashboardEngagement';
+
 export default function CreatorDashboardPage() {
+  const [activeTab, setActiveTab] = useState('overview');
+  
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Creator Dashboard</h1>
-      
-      <div className="bg-white p-6 rounded shadow-sm border">
-        <h2 className="text-lg font-medium mb-4">Course Overview</h2>
-        <p className="text-gray-500">Summary of your courses and their performance will be displayed here.</p>
+    <div className="space-y-4">
+      {/* Header with action button */}
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Creator Portal</h1>
+        <Button asChild>
+          <Link href="/creator-courses/create">
+            <Plus className="mr-2 h-4 w-4" />
+            Create Course
+          </Link>
+        </Button>
       </div>
       
-      <div className="bg-white p-6 rounded shadow-sm border">
-        <h2 className="text-lg font-medium mb-4">Recent Activity</h2>
-        <p className="text-gray-500">Recent events and updates related to your courses will be displayed here.</p>
-      </div>
+      <Tabs value={activeTab} className="space-y-4">
+        <DashboardTabs activeTab={activeTab} onTabChange={setActiveTab} />
+        
+        <TabsContent value="overview" className="mt-0">
+          <DashboardOverview />
+        </TabsContent>
+        
+        <TabsContent value="courses" className="mt-0">
+          <DashboardCourses />
+        </TabsContent>
       
-      <div className="bg-white p-6 rounded shadow-sm border">
-        <h2 className="text-lg font-medium mb-4">Revenue Analytics</h2>
-        <p className="text-gray-500">Revenue metrics and analytics for your courses will be displayed here.</p>
-      </div>
-      
-      <div className="bg-white p-6 rounded shadow-sm border">
-        <h2 className="text-lg font-medium mb-4">Course Engagement</h2>
-        <p className="text-gray-500">Engagement metrics for your courses will be displayed here.</p>
-      </div>
+        <TabsContent value="revenue" className="mt-0">
+          <DashboardRevenue />
+        </TabsContent>
+        
+        <TabsContent value="engagement" className="mt-0">
+          <DashboardEngagement />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 } 

@@ -26,6 +26,7 @@ import {
   BrainCircuit,
   Server
 } from "lucide-react"
+import { LucideIcon } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
@@ -39,13 +40,27 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
+import { NavItem, NavSubItem, ProjectItem, TeamData, UserData, UserRole } from "@/types"
+
+// Interface for the application data structure
+interface AppData {
+  user: UserData;
+  teams: TeamData[];
+  navMain: NavItem[];
+  adminNav: NavItem[];
+  consultantNav: NavItem[];
+  creatorNav: NavItem[];
+  enterpriseNav: NavItem[];
+  projects: ProjectItem[];
+}
 
 // Application data
-const data = {
+const data: AppData = {
   user: {
     name: "User Name",
     email: "user@example.com",
     avatar: "/avatars/user.jpg",
+    role: "student"
   },
   teams: [
     {
@@ -126,29 +141,6 @@ const data = {
       icon: Calendar,
       items: [],
     },
-    // {
-    //   title: "Account",
-    //   url: "/user-profile",
-    //   icon: User,
-    //   items: [
-    //     {
-    //       title: "Profile",
-    //       url: "/user-profile",
-    //     },
-    //     {
-    //       title: "Settings",
-    //       url: "/user-settings",
-    //     },
-    //     {
-    //       title: "Billing",
-    //       url: "/user-billing",
-    //     },
-    //     {
-    //       title: "Subscriptions",
-    //       url: "/user-subscriptions",
-    //     },
-    //   ],
-    // },
   ],
   adminNav: [
     {
@@ -267,26 +259,36 @@ const data = {
       icon: CreditCard,
     },
   ],
+};
+
+// Function to determine user role based on path
+const getUserRole = (path: string | null): UserRole => {
+  if (!path) return 'student';
+  if (path.includes('/admin')) return 'admin';
+  if (path.includes('/consultant')) return 'consultant';
+  if (path.includes('/creator')) return 'creator';
+  if (path.includes('/enterprise')) return 'enterprise';
+  return 'student';
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const userRole = getUserRole(pathname);
   
-  // Determine which navigation to show based on the current path
-  const getNavItems = () => {
-    if (pathname?.includes('/admin')) {
-      return [...data.adminNav, ...data.navMain];
+  // Determine which navigation to show based on the user role
+  const getNavItems = (): NavItem[] => {
+    switch (userRole) {
+      case 'admin':
+        return data.adminNav;
+      case 'consultant':
+        return data.consultantNav;
+      case 'creator':
+        return data.creatorNav;
+      case 'enterprise':
+        return data.enterpriseNav;
+      default:
+        return data.navMain;
     }
-    if (pathname?.includes('/consultant')) {
-      return [...data.consultantNav, ...data.navMain];
-    }
-    if (pathname?.includes('/creator')) {
-      return [...data.creatorNav, ...data.navMain];
-    }
-    if (pathname?.includes('/enterprise')) {
-      return [...data.enterpriseNav, ...data.navMain];
-    }
-    return data.navMain;
   };
 
   return (
