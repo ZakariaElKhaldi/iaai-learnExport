@@ -394,7 +394,7 @@ export default function VirtualLabPage() {
           );
           
           if (activeVM && activeVM.id === newVM.id) {
-            setActiveVM(prev => ({ ...prev, status: "running", uptime: "0h 0m" }));
+            setActiveVM((prev: any) => ({ ...prev, status: "running", uptime: "0h 0m" }));
           }
         }, 5000);
       }, 1000);

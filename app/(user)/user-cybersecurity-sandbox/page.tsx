@@ -36,8 +36,13 @@ import {
   Clock,
   Users,
   ArrowRight,
-  Search
+  Search,
+  Calendar,
+  Bell
 } from "lucide-react";
+import { AttackSimulation } from "./components/AttackSimulation";
+import { VulnerabilityScanner } from "./components/VulnerabilityScanner";
+import { CyberRange } from "./components/CyberRange";
 
 // Security challenge scenarios
 const securityChallenges = [
@@ -224,6 +229,7 @@ export default function CybersecuritySandboxPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeFeature, setActiveFeature] = useState<string | null>(null);
   
   // Track window resize for responsiveness
   useEffect(() => {
@@ -279,8 +285,18 @@ export default function CybersecuritySandboxPage() {
   
   const filteredChallenges = getFilteredChallenges();
   
+  // Helper function to display feature demo
+  const openFeatureDemo = (feature: string) => {
+    setActiveFeature(feature);
+  };
+  
+  // Helper function to close feature demo
+  const closeFeatureDemo = () => {
+    setActiveFeature(null);
+  };
+  
   return (
-    <div className="flex flex-col min-h-dvh overflow-hidden">
+    <div className="flex flex-col h-screen bg-white">
       <header 
         ref={headerRef}
         className="flex items-center justify-between border-b bg-white px-4 py-3 z-20 flex-shrink-0 sticky top-0"
@@ -380,7 +396,7 @@ export default function CybersecuritySandboxPage() {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {!activeScenario && (
             <div className="w-full">
-              <div className="border-b bg-white sticky top-headerHeight z-10">
+              <div className="border-b bg-white sticky top-0 z-10">
                 <div className="max-w-screen-xl mx-auto">
                   <TabsList className="w-full justify-start border-b-0 rounded-none h-12 bg-transparent overflow-x-auto">
                     <TabsTrigger value="scenarios" className="h-12 rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none">
@@ -660,6 +676,194 @@ export default function CybersecuritySandboxPage() {
             </div>
           )}
         </Tabs>
+      </div>
+      
+      {/* Future Feature Demos */}
+      {activeFeature === "attack-simulation" && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <AttackSimulation onClose={closeFeatureDemo} />
+        </div>
+      )}
+      
+      {activeFeature === "vulnerability-scanner" && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <VulnerabilityScanner onClose={closeFeatureDemo} />
+        </div>
+      )}
+      
+      {activeFeature === "cyber-range" && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <CyberRange onClose={closeFeatureDemo} />
+        </div>
+      )}
+      
+      {/* Add Feature Preview Section */}
+      <div className="container mx-auto py-8 px-4">
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold mb-4">Coming Soon: Advanced Cybersecurity Training Features</h2>
+          <p className="text-slate-600 mb-6">
+            Explore interactive previews of our upcoming cybersecurity training features that will enhance your learning experience.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Attack Simulation Preview */}
+            <Card className="overflow-hidden">
+              <CardHeader className="p-4 pb-2 bg-gradient-to-r from-red-50 to-amber-50">
+                <CardTitle className="flex items-center gap-2">
+                  <ShieldAlert className="h-5 w-5 text-red-500" />
+                  Attack Simulation
+                </CardTitle>
+                <CardDescription>
+                  Simulate real-world cyber attacks in a controlled environment
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-4">
+                <div className="mb-4 text-sm text-slate-600">
+                  Experience how attackers target networks and systems to better understand defensive strategies and incident response.
+                </div>
+                <ul className="space-y-2 mb-4">
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>Multi-stage attack simulations</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>Real-time network visualization</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>Detailed attack analysis reports</span>
+                  </li>
+                </ul>
+              </CardContent>
+              <CardFooter className="px-4 py-3 bg-slate-50 flex justify-center">
+                <Button onClick={() => openFeatureDemo("attack-simulation")}>
+                  Preview Feature
+                </Button>
+              </CardFooter>
+            </Card>
+            
+            {/* Vulnerability Scanner Preview */}
+            <Card className="overflow-hidden">
+              <CardHeader className="p-4 pb-2 bg-gradient-to-r from-blue-50 to-cyan-50">
+                <CardTitle className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-blue-500" />
+                  Vulnerability Scanner
+                </CardTitle>
+                <CardDescription>
+                  Find and analyze security vulnerabilities
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-4">
+                <div className="mb-4 text-sm text-slate-600">
+                  Learn to identify security weaknesses in systems and applications using professional vulnerability scanning techniques.
+                </div>
+                <ul className="space-y-2 mb-4">
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>Comprehensive scanning tools</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>CVE database integration</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>Vulnerability remediation guidance</span>
+                  </li>
+                </ul>
+              </CardContent>
+              <CardFooter className="px-4 py-3 bg-slate-50 flex justify-center">
+                <Button onClick={() => openFeatureDemo("vulnerability-scanner")}>
+                  Preview Feature
+                </Button>
+              </CardFooter>
+            </Card>
+            
+            {/* Cyber Range Preview */}
+            <Card className="overflow-hidden">
+              <CardHeader className="p-4 pb-2 bg-gradient-to-r from-purple-50 to-indigo-50">
+                <CardTitle className="flex items-center gap-2">
+                  <Network className="h-5 w-5 text-purple-500" />
+                  Cyber Range
+                </CardTitle>
+                <CardDescription>
+                  Complete scenario-based cybersecurity challenges
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-4">
+                <div className="mb-4 text-sm text-slate-600">
+                  Engage in realistic security scenarios designed to enhance your technical skills and decision-making in cybersecurity operations.
+                </div>
+                <ul className="space-y-2 mb-4">
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>Realistic enterprise environments</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>Offensive and defensive scenarios</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm">
+                    <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span>Individual and team challenges</span>
+                  </li>
+                </ul>
+              </CardContent>
+              <CardFooter className="px-4 py-3 bg-slate-50 flex justify-center">
+                <Button onClick={() => openFeatureDemo("cyber-range")}>
+                  Preview Feature
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+        </div>
+        
+        <div className="bg-slate-50 rounded-lg p-6 border">
+          <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+            <Calendar className="h-5 w-5 text-blue-500" />
+            Feature Release Schedule
+          </h3>
+          
+          <div className="space-y-4 mt-4">
+            <div className="flex items-start gap-4">
+              <div className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">
+                Q3 2023
+              </div>
+              <div>
+                <h4 className="font-medium">Vulnerability Scanner</h4>
+                <p className="text-sm text-slate-600">Comprehensive vulnerability scanning and reporting tools</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="bg-amber-100 text-amber-800 px-2 py-1 rounded text-sm font-medium">
+                Q4 2023
+              </div>
+              <div>
+                <h4 className="font-medium">Attack Simulation Platform</h4>
+                <p className="text-sm text-slate-600">Interactive attack simulation with detailed analytics</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium">
+                Q1 2024
+              </div>
+              <div>
+                <h4 className="font-medium">Cyber Range Environments</h4>
+                <p className="text-sm text-slate-600">Realistic scenario-based training with advanced environments</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-6 pt-4 border-t">
+            <Button variant="outline" className="w-full">
+              <Bell className="mr-2 h-4 w-4" />
+              Get Notified When New Features Launch
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
