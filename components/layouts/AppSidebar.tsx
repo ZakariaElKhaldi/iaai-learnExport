@@ -15,7 +15,8 @@ import {
   BrainCircuit,
   Server,
   Shield,
-  Code
+  Code,
+  FileText
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -127,8 +128,13 @@ export function AppSidebar() {
       title: "Administration",
       items: [
         {
-          title: "User Management",
+          title: "Dashboard",
           href: "/admin-dashboard",
+          icon: Home,
+        },
+        {
+          title: "Users",
+          href: "/admin-users",
           icon: Users,
         },
         {
@@ -142,9 +148,24 @@ export function AppSidebar() {
           icon: Briefcase,
         },
         {
-          title: "Course Management",
+          title: "Courses",
           href: "/admin-courses",
           icon: GraduationCap,
+        },
+        {
+          title: "Settings",
+          href: "/admin-settings",
+          icon: Settings,
+        },
+        {
+          title: "Roles & Permissions",
+          href: "/admin-roles",
+          icon: Shield,
+        },
+        {
+          title: "Audit Logs",
+          href: "/admin-audit-logs",
+          icon: FileText,
         },
       ],
     },
