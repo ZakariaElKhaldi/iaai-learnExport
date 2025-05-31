@@ -10,11 +10,14 @@ LearnExpert is a modern e-learning platform focused on technical skills developm
 - **Community Support**: Connect with peers and mentors during your learning journey
 - **Enterprise Solutions**: Tailored learning programs for organizations
 - **Certification**: Validate your skills with recognized certifications
+- **Modern Authentication**: Enhanced user authentication experience with animations and feedback
 
 ## Tech Stack
 
 - **Frontend**: Next.js, React, TypeScript, TailwindCSS, Framer Motion
 - **Animations**: Custom animation library for engaging UI elements
+- **Form Validation**: Zod for robust form validation
+- **Icons**: Lucide React for consistent iconography
 - **Responsive Design**: Mobile-first approach for all device types
 - **Accessibility**: WCAG compliant components and interfaces
 
@@ -25,6 +28,10 @@ LearnExpert is a modern e-learning platform focused on technical skills developm
 ├── app                      # Next.js app directory
 │   ├── (admin)              # Admin section routes
 │   ├── (auth)               # Authentication routes
+│   │   ├── login            # User login page
+│   │   ├── register         # User registration page
+│   │   ├── forgot-password  # Password recovery page
+│   │   └── reset-password   # Password reset page
 │   ├── animation-demo       # Animation showcase
 │   └── page.tsx             # Landing page
 ├── components               # Reusable components
@@ -40,6 +47,9 @@ LearnExpert is a modern e-learning platform focused on technical skills developm
 │   │   ├── pricing          # Pricing section
 │   │   └── testimonials     # Testimonials section
 │   └── learning             # Learning platform components
+├── docs                     # Documentation
+│   ├── auth-libraries.md    # Authentication libraries comparison
+│   └── auth-ui-improvements.md # Auth UI/UX improvements details
 ├── public                   # Static assets
 └── styles                   # Global styles
 ```
@@ -58,6 +68,21 @@ LearnExpert is a modern e-learning platform focused on technical skills developm
 2. Install dependencies with `npm install`
 3. Run the development server with `npm run dev`
 4. Open [http://localhost:3000](http://localhost:3000) to view the application
+
+## Authentication Experience
+
+The platform features a modern, user-friendly authentication system with:
+
+- **Split-screen Layout**: Clean, modern design with branding and form sections
+- **Animated Transitions**: Smooth animations between states and pages
+- **Form Validation**: Real-time validation with helpful error messages
+- **Password Strength Meter**: Visual feedback on password security
+- **Responsive Design**: Optimized for all device sizes
+- **Accessibility**: ARIA attributes and keyboard navigation support
+- **Loading States**: Clear visual feedback during operations
+- **Success/Error States**: Animated feedback for user actions
+
+For detailed information on authentication improvements, see [Auth UI Improvements](docs/auth-ui-improvements.md).
 
 ## Animation Library
 
